@@ -37,7 +37,7 @@ Load the required stylesheet and JS:
 
 ```js
 import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'resources/libs/OwlCarousel/dist/owl.carousel';
+import 'resources/libs/OwlCarousel/docs/assets/owlcarousel/owl.carousel';
 ```
 
 #### Static HTML
@@ -110,7 +110,7 @@ To define which plugins are build into the distribution just edit `/_config.json
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md).
+Please read [CONTRIBUTING.md](../../../CONTRIBUTING.md).
 
 ## Roadmap
 
@@ -119,4 +119,4 @@ Please make sure to check out our [Roadmap Discussion](https://github.com/OwlCar
 
 ## License
 
-The code and the documentation are released under the [MIT License](LICENSE).
+The code and the documentation are released under the [MIT License](../../../LICENSE).

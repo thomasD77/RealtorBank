@@ -39,7 +39,19 @@
 <script src="{{ asset('assets/js/dashbord-mobile-menu.js') }}"></script>
 <script src="{{ asset('assets/js/forms-2.js') }}"></script>
 <script src="{{ asset('assets/js/color-switcher.js') }}"></script>
+<script src="{{ asset('assets/js/dropzone.js') }}"></script>
+<script src="{{ asset('assets/js/range-slider.js') }}"></script>
+<script src="j{{ asset('assets/s/popper.min.js') }}"></script>
 
+
+<!-- MAIN JS -->
+<script src="{{ asset('assets/js/script.js') }}"></script>
+<script>
+    $(".dropzone").dropzone({
+        dictDefaultMessage: "<i class='fa fa-cloud-upload'></i> Click here or drop files to upload",
+    });
+
+</script>
 <script>
     $(".header-user-name").on("click", function() {
         $(".header-user-menu ul").toggleClass("hu-menu-vis");
@@ -47,5 +59,5 @@
     });
 </script>
 
-<!-- MAIN JS -->
-<script src="{{ asset('assets/js/script.js') }}"></script>
+
+

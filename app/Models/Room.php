@@ -10,4 +10,9 @@ class Room extends Model
     use HasFactory;
 
     protected $fillable = ['title'];
+
+    public function basicAreas()
+    {
+        return $this->hasMany(BasicArea::class);
+    }
 }

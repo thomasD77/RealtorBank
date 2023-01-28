@@ -24,7 +24,11 @@
         <div class="container-fluid">
             <div class="row">
 
-                @include('includes.sidebar-default')
+                @if(!isset($inspection))
+                    @include('includes.sidebar-default')
+                @else
+                    @include('includes.sidebar-inspection')
+                @endif
 
                 <div class="col-lg-9 col-md-12 col-xs-12 pl-0 user-dash2">
 

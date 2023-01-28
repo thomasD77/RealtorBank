@@ -25,7 +25,7 @@
                 </a>
             </li>
             <li>
-                <a href="user-profile.html">
+                <a href="">
                     <i class="fa fa-user"></i>Profile
                 </a>
             </li>

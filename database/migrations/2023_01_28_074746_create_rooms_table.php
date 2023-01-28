@@ -31,28 +31,6 @@ return new class extends Migration
             $table->string('title');
             $table->timestamps();
         });
-
-        $rooms = [
-            'Cellar',
-            'GroundFloor',
-            'Toilet',
-            'LivingRoom',
-            'Kitchen',
-            'Bathroom',
-            'NightHall',
-            'Storage',
-            'Bedroom',
-        ];
-
-        $roomsToInsert = [];
-        foreach ($rooms as $room) {
-            $roomsToInsert[] = [
-                'title' => $room,
-                'created_at' => DB::raw('NOW()'),
-                'updated_at' => DB::raw('NOW()'),
-            ];
-        }
-        Room::insert($roomsToInsert);
     }
 
     /**

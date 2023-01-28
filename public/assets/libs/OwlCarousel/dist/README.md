@@ -37,7 +37,7 @@ Load the required stylesheet and JS:
 
 ```js
 import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'resources/libs/OwlCarousel/docs/assets/owlcarousel/owl.carousel';
+import 'resources/libs/OwlCarousel/dist/owl.carousel';
 ```
 
 #### Static HTML
@@ -110,7 +110,7 @@ To define which plugins are build into the distribution just edit `/_config.json
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md).
+Please read [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 ## Roadmap
 

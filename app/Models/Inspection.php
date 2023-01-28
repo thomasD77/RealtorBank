@@ -16,4 +16,9 @@ class Inspection extends Model
         'conform_area_id',
         'user_id'
     ];
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
 }

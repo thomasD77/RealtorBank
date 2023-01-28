@@ -3,7 +3,8 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Inspections\InspectionController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+    use App\Models\Inspection;
+    use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,16 @@ Route::get('/', function () {
 
 Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/inspection/detail/{inspection}/{room}/{area}', [DashboardController::class, 'detail'])->name('area.detail');
 
     Route::view('/inspections', 'inspections.index')
         ->name('inspections.index');
+
+    Route::get('/inspection/edit/{inspection}', function (Inspection $inspection) {
+        return view('inspections.edit', compact('inspection'));
+    });
+
+
 });
 
 Route::middleware('auth')->group(function () {
