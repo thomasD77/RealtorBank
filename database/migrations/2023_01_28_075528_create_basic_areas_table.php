@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('basic_areas', function (Blueprint $table) {
             $table->id();
-            $table->integer('area_id')->index();
+
+            $table->unsignedInteger('area_id')
+                ->index();
+
+            $table->unsignedInteger('room_id')
+                ->index();
+
             $table->string('material')->nullable();
             $table->string('color')->nullable();
             $table->string('plinth')->nullable();

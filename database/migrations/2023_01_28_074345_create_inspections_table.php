@@ -15,15 +15,16 @@ return new class extends Migration
     {
         Schema::create('inspections', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable()->default('DRAFT');
             $table->string('general')->nullable();
             $table->string('analysis')->nullable();
             $table->text('extra')->nullable();
 
-            $table->integer('user_id')->index();
-            $table->integer('room_id')->index();
-            $table->integer('basic_area_id')->index();
-            $table->integer('spec_area_id')->index();
-            $table->integer('conform_area_id')->index();
+            $table->foreignId('user_id')
+                ->index()
+                ->constrained()
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

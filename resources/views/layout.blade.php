@@ -38,10 +38,11 @@
     </section>
     <!-- END SECTION DASHBOARD -->
 
-    @include('includes.scripts')
+@include('includes.scripts')
 
 </div>
 <!-- Wrapper / End -->
+@livewireScripts
 </body>
 
 </html>

@@ -22,7 +22,9 @@ Route::get('/', function () {
 
 Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('/inspections', InspectionController::class);
+
+    Route::view('/inspections', 'inspections.index')
+        ->name('inspections.index');
 });
 
 Route::middleware('auth')->group(function () {
