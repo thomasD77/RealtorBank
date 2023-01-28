@@ -2,7 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+    use Illuminate\Support\Carbon;
+    use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -22,6 +24,15 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::table('users')->insert([
+            'name'=>'Thomas Demeulenaere',
+            'email'=>'info@innova-webcreations.be',
+            'email_verified_at'=>Carbon::now()->format('Y-m-d H:i:s'),
+            'password'=>bcrypt('@Skatemovies777'),
+            'created_at'=>Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
     }
 
     /**

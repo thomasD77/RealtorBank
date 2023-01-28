@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li>
-                <a href="my-listings.html">
+                <a href="{{ route('inspections.index') }}">
                     <i class="fa fa-list" aria-hidden="true"></i>My Properties
                 </a>
             </li>

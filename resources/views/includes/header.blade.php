@@ -18,7 +18,7 @@
             <!-- Main Navigation -->
             <nav id="navigation" class="style-1">
                 <ul id="responsive">
-                    <li><a href="#">Home</a>
+                    <li><a href="#">Floor</a>
                         <ul>
                             <li><a href="#">Home Map</a>
                                 <ul>
@@ -66,7 +66,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="#">Listing</a>
+                    <li><a href="#">Celling</a>
                         <ul>
                             <li><a href="#">Listing Grid</a>
                                 <ul>
@@ -114,7 +114,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="#">Property</a>
+                    <li><a href="#">Wall</a>
                         <ul>
                             <li><a href="single-property-1.html">Single Property 1</a></li>
                             <li><a href="single-property-2.html">Single Property 2</a></li>
