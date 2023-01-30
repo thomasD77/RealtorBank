@@ -1,8 +1,6 @@
-@extends('layout')
+@extends('inspection')
 
 @section('content')
-
-
 
     <div class="single-add-property">
         <h3>Property description and price</h3>
@@ -12,7 +10,7 @@
                     <div class="col-md-12">
                         <p>
                             <label for="title">Property Title</label>
-                            <input type="text" name="title" id="title" placeholder="Enter your property title">
+                            <input class="form-control" type="text" name="title" id="title" placeholder="Enter your property title">
                         </p>
                     </div>
                 </div>

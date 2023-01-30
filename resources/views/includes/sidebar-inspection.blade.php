@@ -20,10 +20,10 @@
                     </a>
                     <ul>
                         <li><a href="">{{ __('Basic') }}</a></li>
-                        @foreach($room->basicAreas as $area)
+                        @foreach($room->basicAreas as $item)
                             <li class="mx-3">
-                                <a href="{{ route('area.detail', [$inspection, $room, $area]) }}">
-                                    <i class="fa fa-list" aria-hidden="true"></i>{{ $area->title }}
+                                <a href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
+                                    <i class="fa fa-list" aria-hidden="true"></i>{{ $item->area->title }}
                                 </a>
                             </li>
                         @endforeach

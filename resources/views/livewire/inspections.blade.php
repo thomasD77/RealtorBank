@@ -16,7 +16,7 @@
                 @foreach($inspections as $inspection)
                     <tr>
                         <td class="image myelist">
-                            <a href="single-property-1.html"><img alt="my-properties-3" src="{{ asset('assets/images/feature-properties/fp-1.jpg') }}" class="img-fluid"></a>
+                            <a href="{{ route('inspection.edit', $inspection)  }}"><img alt="my-properties-3" src="{{ asset('assets/images/feature-properties/fp-1.jpg') }}" class="img-fluid"></a>
                         </td>
                         <td>
                             <div class="inner">

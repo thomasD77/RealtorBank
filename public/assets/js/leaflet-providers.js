@@ -1,10 +1,10 @@
 (function (root, factory) {
 	if (typeof define === 'function' && define.amd) {
 		// AMD. Register as an anonymous module.
-		define(['leaflet'], factory);
+		define(['resources/js/leaflet'], factory);
 	} else if (typeof modules === 'object' && module.exports) {
 		// define a Common JS module that relies on 'leaflet'
-		module.exports = factory(require('leaflet'));
+		module.exports = factory(require('resources/js/leaflet'));
 	} else {
 		// Assume Leaflet is loaded into global object L already
 		factory(L);
@@ -280,7 +280,7 @@
 				TonerLabels: 'toner-labels',
 				TonerLite: 'toner-lite',
 				Watercolor: {
-					url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/{variant}/{z}/{x}/{y}.{ext}', 
+					url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/{variant}/{z}/{x}/{y}.{ext}',
 					options: {
 						variant: 'watercolor',
 						minZoom: 1,
@@ -302,7 +302,7 @@
 					}
 				},
 				TopOSMRelief: {
-					url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/{variant}/{z}/{x}/{y}.{ext}', 
+					url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/{variant}/{z}/{x}/{y}.{ext}',
 					options: {
 						variant: 'toposm-color-relief',
 						ext: 'jpg',

@@ -4,7 +4,7 @@
 @include('includes.head')
 
 
-<body class="maxw1600 m0a dashboard-bd">
+<body class="inner-pages maxw1600 m0a dashboard-bd">
 
 <!-- Wrapper -->
 <div id="wrapper" class="int_main_wraapper">
@@ -26,7 +26,7 @@
         <div class="container-fluid">
             <div class="row">
 
-                    @include('includes.sidebar-default')
+                    @include('includes.sidebar-inspection')
 
                 <div class="col-lg-9 col-md-12 col-xs-12 pl-0 user-dash2">
 

@@ -28,9 +28,12 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::view('/inspections', 'inspections.index')
         ->name('inspections.index');
 
+    Route::view('/elements', 'ui-elements')
+        ->name('elements');
+
     Route::get('/inspection/edit/{inspection}', function (Inspection $inspection) {
         return view('inspections.edit', compact('inspection'));
-    });
+    })->name('inspection.edit');
 
 
 });

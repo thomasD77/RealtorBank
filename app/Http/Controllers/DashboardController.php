@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BasicArea;
+use App\Models\Area;
 use App\Models\Inspection;
 use App\Models\Room;
 use Illuminate\Http\Request;
@@ -15,11 +15,9 @@ class DashboardController extends Controller
         return view('dashboard');
     }
 
-    public function detail(Inspection $inspection, Room $room, BasicArea $area)
+    public function detail(Inspection $inspection, Room $room, Area $area)
     {
-       $blade = str_replace(' ', '-', strtolower($area->title));
-
-        return view('basic-areas.' . $blade, [
+        return view('basic-areas.' . $area->code, [
             'inspection' =>$inspection,
             'room' => $room,
             'area' => $area

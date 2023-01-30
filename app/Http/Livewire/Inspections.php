@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Area;
 use App\Models\BasicArea;
 use App\Models\Inspection;
 use App\Models\Room;
@@ -49,20 +50,14 @@ class Inspections extends Component
             ->select(['title', 'id'])
             ->get();
 
-        $areas = [
-            'Vloer',
-            'Plafond',
-            'Deur',
-            'Muur',
-            'Raam',
-            'Verwarming',
-        ];
+
+        $areas = Area::all();
 
         foreach ($rooms as $room){
             $areasToInsert = [];
             foreach ($areas as $area) {
                 $areasToInsert[] = [
-                    'title' => $area,
+                    'area_id' => $area->id,
                     'room_id' => $room->id,
                     'created_at' => DB::raw('NOW()'),
                     'updated_at' => DB::raw('NOW()'),

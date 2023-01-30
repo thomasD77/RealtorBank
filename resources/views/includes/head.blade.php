@@ -16,6 +16,7 @@
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="{{ asset('assets/css/fontawesome-all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/fontawesome-5-all.min.css') }}">
 
     <!-- ARCHIVES CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/search.css') }}">

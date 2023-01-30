@@ -41,7 +41,11 @@
 <script src="{{ asset('assets/js/color-switcher.js') }}"></script>
 <script src="{{ asset('assets/js/dropzone.js') }}"></script>
 <script src="{{ asset('assets/js/range-slider.js') }}"></script>
-<script src="j{{ asset('assets/s/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.barfiller.js') }}"></script>
+<script src="{{ asset('assets/js/barfiller.js') }}"></script>
+<script src="{{ asset('assets/js/Countdown.min.js') }}"></script>
+<script src="{{ asset('assets/js/ui-lement.js') }}"></script>
 
 
 <!-- MAIN JS -->
