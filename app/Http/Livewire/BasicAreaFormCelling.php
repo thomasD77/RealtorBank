@@ -17,12 +17,7 @@ class BasicAreaFormCelling extends Component
     public BasicArea $basicArea;
 
     public string $statusMaterial = 'active';
-    public string $statusColor = '';
     public string $statusType = '';
-    public string $statusAnalysis = '';
-    public string $statusMedia = '';
-    public string $statusExtra = '';
-    public string $extra;
 
     public function mount(Inspection $inspection, Room $room, Area $area)
     {
@@ -61,60 +56,14 @@ class BasicAreaFormCelling extends Component
         $area->update();
     }
 
-    public function selectColor($title)
-    {
-        $area = $this->basicArea;
-        $area->color = $title;
-        $this->statusExtra = '';
-        $this->statusMedia = '';
-        $this->statusAnalysis = '';
-        $this->statusType = '';
-        $this->statusColor = 'active';
-        $this->statusMaterial = '';
-        $area->update();
-    }
-
-    public function selectAnalysis($title)
-    {
-        $area = $this->basicArea;
-        $area->analysis = $title;
-        $this->statusExtra = '';
-        $this->statusMedia = '';
-        $this->statusAnalysis = 'active';
-        $this->statusType = '';
-        $this->statusColor = '';
-        $this->statusMaterial = '';
-        $area->update();
-    }
-
-    public function openExtra()
-    {
-        $this->statusExtra = 'active';
-        $this->statusMedia = '';
-        $this->statusAnalysis = '';
-        $this->statusType = '';
-        $this->statusColor = '';
-        $this->statusMaterial = '';
-    }
-
-
-
     public function render()
     {
         $materials = BasicArea::getMaterials();
-        $colors = BasicArea::getColors();
         $types = BasicArea::getTypes();
-        $analysis = Data::getAnalysis();
-
-        $area = $this->basicArea;
-        $area->extra = $this->extra;
-        $area->update();
 
         return view('livewire.basic-area-form-celling', [
             'materials' => $materials,
-            'colors' => $colors,
             'types' => $types,
-            'analysis' => $analysis,
             'area' => $this->area
         ]);
     }

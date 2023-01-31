@@ -9,6 +9,7 @@
             :Room="$room"
             :Area="$area"
         />
+    {{--    Area :: PLAFOND--}}
     @elseif($area->code == 'celling')
         <livewire:basic-area-form-celling
             :Inspection="$inspection"

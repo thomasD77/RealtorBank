@@ -1,6 +1,6 @@
 <div>
     <h5 class="uppercase">{{ __('Basis gegevens') }}</h5>
-    <h6 class="mb40">{{ $inspection->title }} | {{ $room->title }} | <strong>{{ $basicArea->area->title }}</strong></h6>
+    <h6 class="mb40">{{ $inspection->title }} > {{ $room->title }} > <strong>{{ $basicArea->area->title }}</strong></h6>
 
     <ul class="accordion accordion-1 one-open">
         <li class="{{ $statusMaterial }}">

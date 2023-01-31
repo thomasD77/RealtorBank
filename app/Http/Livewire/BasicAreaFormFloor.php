@@ -22,7 +22,7 @@ class BasicAreaFormFloor extends Component
     public string $statusAnalysis = '';
     public string $statusMedia = '';
     public string $statusExtra = '';
-    public string $extra;
+    public $extra;
 
     public function mount(Inspection $inspection, Room $room, Area $area)
     {
