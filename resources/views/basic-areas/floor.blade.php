@@ -3,25 +3,9 @@
 @section('content')
 
     <livewire:basic-area-form
+        :Inspection="$inspection"
+        :Room="$room"
         :Area="$area"
-        :Room="$room" />
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+         />
 
 @endsection

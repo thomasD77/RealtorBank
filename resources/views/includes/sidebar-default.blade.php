@@ -10,7 +10,7 @@
     <div class="detail clearfix">
         <ul class="mb-0">
             <li>
-                <a class="active" href="dashboard.html">
+                <a class="active" href="{{ route('dashboard') }}">
                     <i class="fa fa-map-marker"></i> Dashboard
                 </a>
             </li>

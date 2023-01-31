@@ -18,7 +18,7 @@ class DashboardController extends Controller
     public function detail(Inspection $inspection, Room $room, Area $area)
     {
         return view('basic-areas.' . $area->code, [
-            'inspection' =>$inspection,
+            'inspection' => $inspection,
             'room' => $room,
             'area' => $area
         ]);

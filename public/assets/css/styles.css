@@ -23262,7 +23262,6 @@ section.ui-element {
 }
 
 .ui-elements .accordion-1 .active .title {
-  background: #FF385C;
   background: #1D293D;
   color: #fff;
 }
@@ -23290,7 +23289,8 @@ section.ui-element {
 }
 
 .ui-elements .accordion-1 .active .title:hover {
-  background: #FF385C;
+  /*background: #FF385C;*/
+  background: #6ae;
 }
 
 .ui-elements ul {

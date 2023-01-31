@@ -4,18 +4,29 @@ namespace App\Http\Livewire;
 
 use App\Models\Area;
 use App\Models\BasicArea;
+use App\Models\Data;
 use App\Models\Inspection;
 use App\Models\Room;
 use Livewire\Component;
 
 class BasicAreaForm extends Component
 {
-    public Area $area;
+    public Inspection $inspection;
     public Room $room;
+    public Area $area;
     public BasicArea $basicArea;
 
-    public function mount(Area $area, Room $room)
+    public $statusMaterial = 'active';
+    public $statusColor = '';
+    public $statusPlinth = '';
+    public $statusAnalysis = '';
+    public $statusMedia = '';
+    public $statusExtra = '';
+    public $extra;
+
+    public function mount(Inspection $inspection, Room $room, Area $area)
     {
+        $this->inspection = $inspection;
         $this->area = $area;
         $this->room = $room;
         $this->basicArea = BasicArea::where('room_id', $room->id)->first();
@@ -23,31 +34,70 @@ class BasicAreaForm extends Component
 
     public function render()
     {
-        $materials = [
-            'keramische tegel',
-            'tegel',
-            'parket',
-            'laminaat',
-            'beton',
-            'OSB',
-            'epoxy',
-            'plancher',
-            'tapijt',
-            'linoleum',
-            'vinyl',
-            'ander',
-        ];
+        $materials = BasicArea::getMaterials();
+        $colors = BasicArea::getColors();
+        $plinths = BasicArea::getPlinths();
+        $analysis = Data::getAnalysis();
+
+        $area = $this->basicArea;
+        $area->extra = $this->extra;
+        $area->update();
 
         return view('livewire.basic-area-form', [
             'materials' => $materials,
+            'colors' => $colors,
+            'plinths' => $plinths,
+            'analysis' => $analysis,
             'area' => $this->area
         ]);
     }
 
-    public function select($title)
+    public function selectMaterial($title)
     {
         $area = $this->basicArea;
         $area->material = $title;
+        $this->statusMaterial = 'active';
+        $this->statusColor = '';
         $area->update();
+    }
+
+    public function selectColor($title)
+    {
+        $area = $this->basicArea;
+        $area->color = $title;
+        $this->statusColor = 'active';
+        $this->statusMaterial = '';
+        $area->update();
+    }
+
+    public function selectPlinth($title)
+    {
+        $area = $this->basicArea;
+        $area->plinth = $title;
+        $this->statusPlinth = 'active';
+        $this->statusColor = '';
+        $this->statusMaterial = '';
+        $area->update();
+    }
+
+    public function selectAnalysis($title)
+    {
+        $area = $this->basicArea;
+        $area->analysis = $title;
+        $this->statusAnalysis = 'active';
+        $this->statusPlinth = '';
+        $this->statusColor = '';
+        $this->statusMaterial = '';
+        $area->update();
+    }
+
+    public function openExtra()
+    {
+        $this->statusExtra = 'active';
+        $this->statusMedia = '';
+        $this->statusAnalysis = '';
+        $this->statusPlinth = '';
+        $this->statusColor = '';
+        $this->statusMaterial = '';
     }
 }
