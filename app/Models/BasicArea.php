@@ -74,4 +74,15 @@ class BasicArea extends Model
             'ander',
         ];
     }
+
+    public static function getTypes() :array
+    {
+        return $types = [
+            'standaard',
+            'verlaagd',
+            'spanplafond',
+            'ander',
+        ];
+    }
+
 }

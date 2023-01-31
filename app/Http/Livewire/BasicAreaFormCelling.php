@@ -9,7 +9,7 @@ use App\Models\Inspection;
 use App\Models\Room;
 use Livewire\Component;
 
-class BasicAreaFormFloor extends Component
+class BasicAreaFormCelling extends Component
 {
     public Inspection $inspection;
     public Room $room;
@@ -18,7 +18,7 @@ class BasicAreaFormFloor extends Component
 
     public string $statusMaterial = 'active';
     public string $statusColor = '';
-    public string $statusPlinth = '';
+    public string $statusType = '';
     public string $statusAnalysis = '';
     public string $statusMedia = '';
     public string $statusExtra = '';
@@ -27,17 +27,37 @@ class BasicAreaFormFloor extends Component
     public function mount(Inspection $inspection, Room $room, Area $area)
     {
         $this->inspection = $inspection;
-        $this->area = $area;
         $this->room = $room;
-        $this->basicArea = BasicArea::where('room_id', $room->id)->first();
+        $this->area = $area;
+        $this->basicArea = BasicArea::query()
+            ->where('room_id', $room->id)
+            ->where('area_id', $area->id)
+            ->first();
+    }
+
+    public function selectType($title)
+    {
+        $area = $this->basicArea;
+        $area->type = $title;
+        $this->statusExtra = '';
+        $this->statusMedia = '';
+        $this->statusAnalysis = '';
+        $this->statusType = 'active';
+        $this->statusColor = '';
+        $this->statusMaterial = '';
+        $area->update();
     }
 
     public function selectMaterial($title)
     {
         $area = $this->basicArea;
         $area->material = $title;
-        $this->statusMaterial = 'active';
+        $this->statusExtra = '';
+        $this->statusMedia = '';
+        $this->statusAnalysis = '';
+        $this->statusType = '';
         $this->statusColor = '';
+        $this->statusMaterial = 'active';
         $area->update();
     }
 
@@ -45,17 +65,11 @@ class BasicAreaFormFloor extends Component
     {
         $area = $this->basicArea;
         $area->color = $title;
+        $this->statusExtra = '';
+        $this->statusMedia = '';
+        $this->statusAnalysis = '';
+        $this->statusType = '';
         $this->statusColor = 'active';
-        $this->statusMaterial = '';
-        $area->update();
-    }
-
-    public function selectPlinth($title)
-    {
-        $area = $this->basicArea;
-        $area->plinth = $title;
-        $this->statusPlinth = 'active';
-        $this->statusColor = '';
         $this->statusMaterial = '';
         $area->update();
     }
@@ -64,8 +78,10 @@ class BasicAreaFormFloor extends Component
     {
         $area = $this->basicArea;
         $area->analysis = $title;
+        $this->statusExtra = '';
+        $this->statusMedia = '';
         $this->statusAnalysis = 'active';
-        $this->statusPlinth = '';
+        $this->statusType = '';
         $this->statusColor = '';
         $this->statusMaterial = '';
         $area->update();
@@ -76,26 +92,28 @@ class BasicAreaFormFloor extends Component
         $this->statusExtra = 'active';
         $this->statusMedia = '';
         $this->statusAnalysis = '';
-        $this->statusPlinth = '';
+        $this->statusType = '';
         $this->statusColor = '';
         $this->statusMaterial = '';
     }
+
+
 
     public function render()
     {
         $materials = BasicArea::getMaterials();
         $colors = BasicArea::getColors();
-        $plinths = BasicArea::getPlinths();
+        $types = BasicArea::getTypes();
         $analysis = Data::getAnalysis();
 
         $area = $this->basicArea;
         $area->extra = $this->extra;
         $area->update();
 
-        return view('livewire.basic-area-form-floor', [
+        return view('livewire.basic-area-form-celling', [
             'materials' => $materials,
             'colors' => $colors,
-            'plinths' => $plinths,
+            'types' => $types,
             'analysis' => $analysis,
             'area' => $this->area
         ]);
