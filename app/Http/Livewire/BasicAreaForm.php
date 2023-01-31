@@ -3,16 +3,22 @@
 namespace App\Http\Livewire;
 
 use App\Models\Area;
+use App\Models\BasicArea;
+use App\Models\Inspection;
+use App\Models\Room;
 use Livewire\Component;
 
 class BasicAreaForm extends Component
 {
     public Area $area;
-    public $selectMember = 'test';
+    public Room $room;
+    public BasicArea $basicArea;
 
-    public function mount($area)
+    public function mount(Area $area, Room $room)
     {
         $this->area = $area;
+        $this->room = $room;
+        $this->basicArea = BasicArea::where('room_id', $room->id)->first();
     }
 
     public function render()
@@ -32,16 +38,16 @@ class BasicAreaForm extends Component
             'ander',
         ];
 
-        $materials = Area::all();
-
         return view('livewire.basic-area-form', [
             'materials' => $materials,
             'area' => $this->area
         ]);
     }
 
-    public function submit()
+    public function select($title)
     {
-        dd($this->size);
+        $area = $this->basicArea;
+        $area->material = $title;
+        $area->update();
     }
 }

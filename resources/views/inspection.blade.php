@@ -4,7 +4,7 @@
 @include('includes.head')
 
 
-<body class="inner-pages maxw1600 m0a dashboard-bd">
+<body class="inner-pages maxw1600 m0a dashboard-bd ui-elements">
 
 <!-- Wrapper -->
 <div id="wrapper" class="int_main_wraapper">
