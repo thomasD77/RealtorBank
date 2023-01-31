@@ -9,7 +9,7 @@ use App\Models\Inspection;
 use App\Models\Room;
 use Livewire\Component;
 
-class BasicAreaForm extends Component
+class BasicAreaFormFloor extends Component
 {
     public Inspection $inspection;
     public Room $room;
@@ -30,26 +30,6 @@ class BasicAreaForm extends Component
         $this->area = $area;
         $this->room = $room;
         $this->basicArea = BasicArea::where('room_id', $room->id)->first();
-    }
-
-    public function render()
-    {
-        $materials = BasicArea::getMaterials();
-        $colors = BasicArea::getColors();
-        $plinths = BasicArea::getPlinths();
-        $analysis = Data::getAnalysis();
-
-        $area = $this->basicArea;
-        $area->extra = $this->extra;
-        $area->update();
-
-        return view('livewire.basic-area-form', [
-            'materials' => $materials,
-            'colors' => $colors,
-            'plinths' => $plinths,
-            'analysis' => $analysis,
-            'area' => $this->area
-        ]);
     }
 
     public function selectMaterial($title)
@@ -99,5 +79,25 @@ class BasicAreaForm extends Component
         $this->statusPlinth = '';
         $this->statusColor = '';
         $this->statusMaterial = '';
+    }
+
+    public function render()
+    {
+        $materials = BasicArea::getMaterials();
+        $colors = BasicArea::getColors();
+        $plinths = BasicArea::getPlinths();
+        $analysis = Data::getAnalysis();
+
+        $area = $this->basicArea;
+        $area->extra = $this->extra;
+        $area->update();
+
+        return view('livewire.basic-area-form-floor', [
+            'materials' => $materials,
+            'colors' => $colors,
+            'plinths' => $plinths,
+            'analysis' => $analysis,
+            'area' => $this->area
+        ]);
     }
 }
