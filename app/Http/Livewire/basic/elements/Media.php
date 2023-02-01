@@ -17,6 +17,6 @@ class Media extends Component
 
     public function render()
     {
-        return view('livewire.basic.media');
+        return view('livewire.elements.media');
     }
 }

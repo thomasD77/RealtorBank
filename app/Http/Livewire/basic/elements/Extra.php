@@ -27,6 +27,6 @@ class Extra extends Component
         $area->extra = $this->extra;
         $area->update();
 
-        return view('livewire.basic.extra');
+        return view('livewire.elements.extra');
     }
 }

@@ -35,7 +35,7 @@ class Colors extends Component
 
     public function render()
     {
-        return view('livewire.basic.dropdown' , [
+        return view('livewire.elements.dropdown' , [
             'parameters' => $this->parameters,
         ]);
     }
