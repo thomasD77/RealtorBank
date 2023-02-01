@@ -12,12 +12,13 @@ class Analysis extends Component
     public string $status = "";
     public $parameters;
 
-
+    //--> Custom
     public string $element = "analysis";
     public string $title = "Analyse";
 
     public function mount(BasicArea $basicArea)
     {
+        //--> Custom
         $this->parameters = Data::getAnalysis();
         $this->basicArea = $basicArea;
     }
@@ -34,7 +35,7 @@ class Analysis extends Component
 
     public function render()
     {
-        return view('livewire.basic.' . $this->element , [
+        return view('livewire.basic.dropdown' , [
             'parameters' => $this->parameters,
         ]);
     }
