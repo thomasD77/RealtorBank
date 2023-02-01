@@ -4,6 +4,6 @@ interface mmOptionsKeyboardnavigation {
 	/** Whether or not to enable navigating the menu with a keyboard. */
 	enable ?: boolean | 'default'
 
-	/** Whether or not to enhance the basic default keyboard navigation. */
+	/** Whether or not to enhance the elements default keyboard navigation. */
 	enhance ?: boolean
 }

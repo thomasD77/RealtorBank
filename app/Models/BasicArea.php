@@ -16,7 +16,6 @@ class BasicArea extends Model
         return $this->belongsTo(Area::class);
     }
 
-
     public static function getMaterials() :array
     {
         return $materials = [
@@ -81,6 +80,29 @@ class BasicArea extends Model
             'standaard',
             'verlaagd',
             'spanplafond',
+            'ander',
+        ];
+    }
+
+    public static function getHandles() :array
+    {
+        return $types = [
+            'aluminium',
+            'inox',
+            'koper',
+            'pvc',
+            'hout',
+            'ander',
+        ];
+    }
+
+    public static function getLists() :array
+    {
+        return $types = [
+            'hout',
+            'pvc',
+            'aluminium',
+            'staal',
             'ander',
         ];
     }

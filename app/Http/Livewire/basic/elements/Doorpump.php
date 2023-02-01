@@ -6,20 +6,20 @@ use App\Models\BasicArea;
 use App\Models\Data;
 use Livewire\Component;
 
-class Analysis extends Component
+class DoorPump extends Component
 {
     public BasicArea $basicArea;
     public string $status = "";
     public $parameters;
 
     //--> Custom
-    public string $element = "analysis";
-    public string $title = "Analyse";
+    public string $element = "doorPump";
+    public string $title = "Deur pomp";
 
     public function mount(BasicArea $basicArea)
     {
         //--> Custom
-        $this->parameters = Data::getAnalysis();
+        $this->parameters = Data::getPresent();
         $this->basicArea = $basicArea;
     }
 

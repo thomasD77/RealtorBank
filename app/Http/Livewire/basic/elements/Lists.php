@@ -3,23 +3,22 @@
 namespace App\Http\Livewire\Basic\Elements;
 
 use App\Models\BasicArea;
-use App\Models\Data;
 use Livewire\Component;
 
-class Analysis extends Component
+class Lists extends Component
 {
     public BasicArea $basicArea;
     public string $status = "";
     public $parameters;
 
     //--> Custom
-    public string $element = "analysis";
-    public string $title = "Analyse";
+    public string $element = "lists";
+    public string $title = "Lijsten";
 
     public function mount(BasicArea $basicArea)
     {
         //--> Custom
-        $this->parameters = Data::getAnalysis();
+        $this->parameters = BasicArea::getLists();
         $this->basicArea = $basicArea;
     }
 

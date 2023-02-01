@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Livewire\Basic;
+namespace App\Http\Livewire\Basic\Elements;
+
 
 use App\Models\BasicArea;
 use Livewire\Component;

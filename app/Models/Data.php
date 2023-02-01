@@ -18,4 +18,12 @@ class Data extends Model
             'zeer goed',
         ];
     }
+
+    public static function getPresent() :array
+    {
+        return $types = [
+            'aanwezig',
+            'afwezig',
+        ];
+    }
 }
