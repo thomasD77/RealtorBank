@@ -19,24 +19,85 @@
                 <a class="active" href="dashboard.html">
                     <i class="fas fa-paste"></i>{{ __('Interieur') }}
                 </a>
+                <p>
+                <ul>
+                    @foreach($inspection->rooms as $room)
+                        <li class="mx-3">
+
+                            <a data-toggle="collapse"
+                               href="#collapseRoom{{ $room->id }}"
+                               role="button" aria-expanded="false"
+                               aria-controls="collapseRoom"
+                            >
+                                <i class="fa fa-list" aria-hidden="true"></i>{{ $room->title }}
+                            </a>
+
+                            <div class="collapse" id="collapseRoom{{ $room->id }}">
+                                <ul>
+
+                                    {{--   Basic--}}
+                                    <li>
+                                        <a data-toggle="collapse"
+                                           href="#collapseBasic{{ $room->id }}"
+                                           role="button" aria-expanded="false"
+                                           aria-controls="collapseExample"
+                                        >
+                                            {{ __('Basis') }}
+                                        </a>
+                                        <div>
+                                            <ul class="collapse" id="collapseBasic{{ $room->id }}">
+                                                @foreach($room->basicAreas as $item)
+                                                    <li class="mx-3">
+                                                        <a href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
+                                                            <i class="fa fa-list" aria-hidden="true"></i>{{ $item->area->title }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    {{--  Spec--}}
+                                    <li>
+                                        <a data-toggle="collapse"
+                                           href="#collapseSpec{{ $room->id }}"
+                                           role="button" aria-expanded="false"
+                                           aria-controls="collapseExample"
+                                        >
+                                            {{ __('Specifiek') }}
+                                        </a>
+                                        <div>
+                                            <ul class="collapse" id="collapseSpec{{ $room->id }}">
+                                               <li><a href="">element 1</a></li>
+                                               <li><a href="">element 2</a></li>
+                                               <li><a href="">element 3</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    {{-- Conform--}}
+                                    <li>
+                                        <a data-toggle="collapse"
+                                           href="#collapseConform{{ $room->id }}"
+                                           role="button" aria-expanded="false"
+                                           aria-controls="collapseExample"
+                                        >
+                                            {{ __('Conformiteit') }}
+                                        </a>
+                                        <div>
+                                            <ul class="collapse" id="collapseConform{{ $room->id }}">
+                                                <li><a href="">element 1</a></li>
+                                                <li><a href="">element 2</a></li>
+                                                <li><a href="">element 3</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
             </li>
-            @foreach($inspection->rooms as $room)
-                <li class="mx-3">
-                    <a href="add-property.html">
-                        <i class="fa fa-list" aria-hidden="true"></i>{{ $room->title }}
-                    </a>
-                    <ul>
-                        <li><a href="">{{ __('Basic') }}</a></li>
-                        @foreach($room->basicAreas as $item)
-                            <li class="mx-3">
-                                <a href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
-                                    <i class="fa fa-list" aria-hidden="true"></i>{{ $item->area->title }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </li>
-            @endforeach
         </ul>
     </div>
 </div>
