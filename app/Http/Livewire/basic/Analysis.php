@@ -9,27 +9,33 @@ use Livewire\Component;
 class Analysis extends Component
 {
     public BasicArea $basicArea;
-    public $statusAnalysis = "";
+    public string $status = "";
+    public $parameters;
+
+
+    public string $element = "analysis";
+    public string $title = "Analyse";
 
     public function mount(BasicArea $basicArea)
     {
+        $this->parameters = Data::getAnalysis();
         $this->basicArea = $basicArea;
     }
 
-    public function selectAnalysis($title)
+    public function select($title)
     {
         $area = $this->basicArea;
-        $area->analysis = $title;
-        $this->statusAnalysis = 'active';
+        $el = $this->element;
+
+        $area->$el = $title;
+        $this->status = 'active';
         $area->update();
     }
 
     public function render()
     {
-        $analysis = Data::getAnalysis();
-
-        return view('livewire.basic.analysis', [
-            'analysis' => $analysis,
+        return view('livewire.basic.' . $this->element , [
+            'parameters' => $this->parameters,
         ]);
     }
 }
