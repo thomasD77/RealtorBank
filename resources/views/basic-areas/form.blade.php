@@ -8,6 +8,11 @@
         <h6 class="mb40">{{ $inspection->title }} > {{ $room->title }} > <strong>{{ $basicArea->area->title }}</strong></h6>
     </div>
 
+    <livewire:basic.add-area
+        :Inspection="$inspection"
+        :Room="$room"
+        :Area="$area"
+    />
 
     <ul class="accordion accordion-1 one-open">
 
@@ -15,6 +20,7 @@
             :Inspection="$inspection"
             :Room="$room"
             :Area="$area"
+            :basicArea="$basicArea"
         />
 
         <livewire:basic.elements.analysis

@@ -16,23 +16,12 @@ class BasicAreaForm extends Component
     public BasicArea $basicArea;
     public $status;
 
-    public function mount(Inspection $inspection, Room $room, Area $area)
+    public function mount(Inspection $inspection, Room $room, Area $area, BasicArea $basicArea)
     {
         $this->inspection = $inspection;
         $this->room = $room;
         $this->area = $area;
-        $this->basicArea = BasicArea::query()
-            ->where('room_id', $room->id)
-            ->where('area_id', $area->id)
-            ->first();
-    }
-
-    public function select($title)
-    {
-        $area = $this->basicArea;
-        $area->code = $title;
-        $this->status = 'active';
-        $area->update();
+        $this->basicArea = $basicArea;
     }
 
     public function render()
