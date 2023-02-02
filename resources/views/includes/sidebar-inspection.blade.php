@@ -34,7 +34,6 @@
 
                             <div class="collapse" id="collapseRoom{{ $room->id }}">
                                 <ul>
-
                                     {{--   Basic--}}
                                     <li>
                                         <a data-toggle="collapse"
@@ -46,7 +45,7 @@
                                         </a>
                                         <div>
                                             <ul class="collapse" id="collapseBasic{{ $room->id }}">
-                                                @foreach($room->basicAreas as $item)
+                                                @foreach($room->basicAreas->sortByDesc('title') as $item)
                                                     <li class="mx-3">
                                                         <a href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
                                                             <i class="fa fa-list" aria-hidden="true"></i>{{ $item->area->title }}

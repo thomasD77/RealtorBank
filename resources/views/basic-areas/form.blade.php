@@ -12,6 +12,7 @@
         :Inspection="$inspection"
         :Room="$room"
         :Area="$area"
+        :basicArea="$basicArea"
     />
 
     <ul class="accordion accordion-1 one-open">
