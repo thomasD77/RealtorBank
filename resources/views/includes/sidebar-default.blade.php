@@ -15,7 +15,7 @@
                 </a>
             </li>
             <li>
-                <a href="add-property.html">
+                <a href="{{ route('create.inspection') }}">
                     <i class="fa fa-list" aria-hidden="true"></i>Add Property
                 </a>
             </li>
@@ -25,33 +25,13 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="{{ route('profile') }}">
                     <i class="fa fa-user"></i>Profile
                 </a>
             </li>
             <li>
-                <a href="favorited-listings.html">
-                    <i class="fa fa-heart" aria-hidden="true"></i>Favorited Properties
-                </a>
-            </li>
-            <li>
-                <a href="payment-method.html">
-                    <i class="fas fa-credit-card"></i>Payments
-                </a>
-            </li>
-            <li>
-                <a href="invoice.html">
-                    <i class="fas fa-paste"></i>Invoices
-                </a>
-            </li>
-            <li>
-                <a href="change-password.html">
-                    <i class="fa fa-lock"></i>Change Password
-                </a>
-            </li>
-            <li>
-                <a href="index.html">
-                    <i class="fas fa-sign-out-alt"></i>Log Out
+                <a href="{{ route('update.password') }}">
+                    <i class="fa fa-lock"></i>Change Passwords
                 </a>
             </li>
         </ul>

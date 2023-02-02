@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Inspections\InspectionController;
+use App\Http\Controllers\Inspection\InspectionController;
 use App\Http\Controllers\ProfileController;
-    use App\Models\Inspection;
-    use Illuminate\Support\Facades\Route;
+use App\Models\Inspection;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +25,16 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/inspection/detail/{inspection}/{room}/{area}', [DashboardController::class, 'detail'])->name('area.detail');
 
+    Route::get('/create/inspection', [InspectionController::class, 'create'])->name('create.inspection');
+
     Route::view('/inspections', 'inspections.index')
         ->name('inspections.index');
+
+    Route::view('/profile/overview', 'profile.index')
+        ->name('profile');
+
+    Route::view('/update', 'profile.update')
+        ->name('update.password');
 
     Route::view('/elements', 'ui-elements')
         ->name('elements');
