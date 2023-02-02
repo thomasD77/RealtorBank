@@ -6,15 +6,15 @@ use App\Models\BasicArea;
 use App\Models\Data;
 use Livewire\Component;
 
-class Doorpump extends Component
+class Ventilationgrille extends Component
 {
     public BasicArea $basicArea;
     public string $status = "";
     public $parameters;
 
     //--> Custom
-    public string $element = "doorPump";
-    public string $title = "Deur pomp";
+    public string $element = "ventilationGrille";
+    public string $title = "Ventilatie rooster";
 
     public function mount(BasicArea $basicArea)
     {

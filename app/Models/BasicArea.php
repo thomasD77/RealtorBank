@@ -107,4 +107,97 @@ class BasicArea extends Model
         ];
     }
 
+    public static function getPlasters() :array
+    {
+        return $types = [
+            'bepleisterd',
+            'niet bepleisterd',
+        ];
+    }
+
+    public static function getFinishes() :array
+    {
+        return $types = [
+            'geschilderd',
+            'behangen',
+            'betegeld',
+            'bekleed',
+            'ander',
+        ];
+    }
+
+    public static function getGlazings() :array
+    {
+        return $types = [
+            'enkel',
+            'dubbel',
+            'driedubbel',
+            'ander',
+        ];
+    }
+
+    public static function getWindowsills() :array
+    {
+        return $types = [
+            'hout',
+            'pvc',
+            'tegel',
+            'bepleisterd',
+            'baksteen',
+            'natuursteen',
+            'ander',
+        ];
+    }
+
+    public static function getRollShutters() :array
+    {
+        return $types = [
+            'hout',
+            'pvc',
+            'aluminium',
+            'ander',
+        ];
+    }
+
+    public static function getWindowDecorations() :array
+    {
+        return $types = [
+            'gordijnen',
+            'lamellen',
+            'stickers',
+            'ander',
+        ];
+    }
+
+    public static function getHors() :array
+    {
+        return $types = [
+            'op kader',
+            'ingebouwd',
+            'ander',
+        ];
+    }
+
+    public static function getFallProtections() :array
+    {
+        return $types = [
+            'metaal',
+            'glas',
+            'ander',
+        ];
+    }
+
+    public static function getEnergies() :array
+    {
+        return $types = [
+            'CV',
+            'elektriciteit',
+            'kolen',
+            'hout',
+            'gas',
+            'pallets',
+            'ander',
+        ];
+    }
+
 }

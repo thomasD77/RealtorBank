@@ -1,3 +1,17 @@
-<div>
-    {{-- Nothing in the world is as soft and yielding as water. --}}
-</div>
+<livewire:basic.elements.materials
+    :BasicArea="$basicArea"
+/>
+
+<livewire:basic.elements.plaster
+    :BasicArea="$basicArea"
+/>
+
+<livewire:basic.elements.finish
+    :BasicArea="$basicArea"
+/>
+
+<livewire:basic.elements.colors
+    :BasicArea="$basicArea"
+/>
+
+

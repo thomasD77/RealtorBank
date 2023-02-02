@@ -14,6 +14,7 @@ class BasicAreaForm extends Component
     public Room $room;
     public Area $area;
     public BasicArea $basicArea;
+    public $status;
 
     public function mount(Inspection $inspection, Room $room, Area $area)
     {
@@ -24,6 +25,14 @@ class BasicAreaForm extends Component
             ->where('room_id', $room->id)
             ->where('area_id', $area->id)
             ->first();
+    }
+
+    public function select($title)
+    {
+        $area = $this->basicArea;
+        $area->code = $title;
+        $this->status = 'active';
+        $area->update();
     }
 
     public function render()

@@ -3,23 +3,22 @@
 namespace App\Http\Livewire\Basic\Elements;
 
 use App\Models\BasicArea;
-use App\Models\Data;
 use Livewire\Component;
 
-class Doorpump extends Component
+class Windowdecoration extends Component
 {
     public BasicArea $basicArea;
     public string $status = "";
     public $parameters;
 
     //--> Custom
-    public string $element = "doorPump";
-    public string $title = "Deur pomp";
+    public string $element = "windowDecoration";
+    public string $title = "Raamdecoratie";
 
     public function mount(BasicArea $basicArea)
     {
         //--> Custom
-        $this->parameters = Data::getPresent();
+        $this->parameters = BasicArea::getWindowDecorations();
         $this->basicArea = $basicArea;
     }
 
