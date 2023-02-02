@@ -11,13 +11,13 @@
     <div class="detail clearfix">
         <ul class="mb-0">
             <li>
-                <a class="active" href="dashboard.html">
-                    <i class="fa fa-map-marker"></i> {{ $inspection->title }}
+                <a class="active" href="{{ route('inspection.edit', $inspection) }}">
+                    <i class="fa fa-house-flag"></i> {{ $inspection->title }}
                 </a>
             </li>
             <li>
                 <a class="active" href="dashboard.html">
-                    <i class="fas fa-paste"></i>{{ __('Interieur') }}
+                    <i class="fa fa-folder"></i>{{ __('Interieur') }}
                 </a>
                 <p>
                 <ul>
@@ -34,6 +34,11 @@
 
                             <div class="collapse" id="collapseRoom{{ $room->id }}">
                                 <ul>
+                                    <li>
+                                        <a href="">
+                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                        </a>
+                                    </li>
                                     {{--   Basic--}}
                                     <li>
                                         <a data-toggle="collapse"
@@ -41,14 +46,14 @@
                                            role="button" aria-expanded="false"
                                            aria-controls="collapseExample"
                                         >
-                                            {{ __('Basis') }}
+                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Basis') }}
                                         </a>
                                         <div>
                                             <ul class="collapse" id="collapseBasic{{ $room->id }}">
                                                 @foreach($room->basicAreas->sortByDesc('title') as $item)
                                                     <li class="mx-3">
                                                         <a href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
-                                                            <i class="fa fa-list" aria-hidden="true"></i>{{ $item->area->title }}
+                                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->area->title }}
                                                         </a>
                                                     </li>
                                                 @endforeach
@@ -63,7 +68,7 @@
                                            role="button" aria-expanded="false"
                                            aria-controls="collapseExample"
                                         >
-                                            {{ __('Specifiek') }}
+                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Specifiek') }}
                                         </a>
                                         <div>
                                             <ul class="collapse" id="collapseSpec{{ $room->id }}">
@@ -81,7 +86,7 @@
                                            role="button" aria-expanded="false"
                                            aria-controls="collapseExample"
                                         >
-                                            {{ __('Conformiteit') }}
+                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Conformiteit') }}
                                         </a>
                                         <div>
                                             <ul class="collapse" id="collapseConform{{ $room->id }}">
