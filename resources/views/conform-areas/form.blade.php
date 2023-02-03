@@ -10,11 +10,12 @@
 
         <ul class="accordion accordion-1 one-open">
 
-{{--            <livewire:conform.conform-area-form--}}
-{{--                :Inspection="$inspection"--}}
-{{--                :Room="$room"--}}
-{{--                :conformArea="$conformArea"--}}
-{{--            />--}}
+            <livewire:conform.conform-area-form
+                :Inspection="$inspection"
+                :Room="$room"
+                :conform="$conform"
+                :conformArea="$conformArea"
+            />
 
             <livewire:conform.elements.analysis
                 :conformArea="$conformArea"

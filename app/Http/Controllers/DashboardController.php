@@ -44,6 +44,7 @@ class DashboardController extends Controller
         return view('conform-areas.form', [
             'inspection' => $inspection,
             'room' => $room,
+            'conform' => $conform,
             'conform-areas' => $conform,
             'conformArea' => $conformArea
         ]);
