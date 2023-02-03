@@ -26,4 +26,25 @@ class Data extends Model
             'afwezig',
         ];
     }
+
+    public static function getAnswer() :array
+    {
+        return $data = [
+            'ja',
+            'nee',
+        ];
+    }
+
+    public static function getNumbers() :array
+    {
+        return $data = [
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            'ander',
+        ];
+    }
 }

@@ -15,4 +15,9 @@ class Room extends Model
     {
         return $this->hasMany(BasicArea::class);
     }
+
+    public function conformAreas()
+    {
+        return $this->hasMany(ConformArea::class);
+    }
 }

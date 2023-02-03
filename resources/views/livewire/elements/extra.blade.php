@@ -1,5 +1,5 @@
 <div>
-    <li class="{{ $statusExtra }}" wire:click="openExtra">
+    <li class="{{ $status }}" wire:click="openExtra">
         <div class="title">
             <span>{{ __('Extra') }}</span>
         </div>

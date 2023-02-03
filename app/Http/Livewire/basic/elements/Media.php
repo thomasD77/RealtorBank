@@ -9,7 +9,7 @@ use Livewire\Component;
 class Media extends Component
 {
     public BasicArea $basicArea;
-    public $statusMedia = "";
+    public $status = "";
 
     public function mount(BasicArea $basicArea)
     {

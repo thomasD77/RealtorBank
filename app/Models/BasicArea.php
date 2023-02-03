@@ -86,7 +86,7 @@ class BasicArea extends Model
 
     public static function getHandles() :array
     {
-        return $types = [
+        return $handles = [
             'aluminium',
             'inox',
             'koper',
@@ -98,7 +98,7 @@ class BasicArea extends Model
 
     public static function getLists() :array
     {
-        return $types = [
+        return $lists = [
             'hout',
             'pvc',
             'aluminium',
@@ -109,7 +109,7 @@ class BasicArea extends Model
 
     public static function getPlasters() :array
     {
-        return $types = [
+        return $plasters = [
             'bepleisterd',
             'niet bepleisterd',
         ];
@@ -117,7 +117,7 @@ class BasicArea extends Model
 
     public static function getFinishes() :array
     {
-        return $types = [
+        return $finishes = [
             'geschilderd',
             'behangen',
             'betegeld',
@@ -128,7 +128,7 @@ class BasicArea extends Model
 
     public static function getGlazings() :array
     {
-        return $types = [
+        return $glazings = [
             'enkel',
             'dubbel',
             'driedubbel',
@@ -138,7 +138,7 @@ class BasicArea extends Model
 
     public static function getWindowsills() :array
     {
-        return $types = [
+        return $windowsills = [
             'hout',
             'pvc',
             'tegel',
@@ -151,7 +151,7 @@ class BasicArea extends Model
 
     public static function getRollShutters() :array
     {
-        return $types = [
+        return $rollShutters = [
             'hout',
             'pvc',
             'aluminium',
@@ -161,7 +161,7 @@ class BasicArea extends Model
 
     public static function getWindowDecorations() :array
     {
-        return $types = [
+        return $windowDecorations = [
             'gordijnen',
             'lamellen',
             'stickers',
@@ -171,7 +171,7 @@ class BasicArea extends Model
 
     public static function getHors() :array
     {
-        return $types = [
+        return $Hors = [
             'op kader',
             'ingebouwd',
             'ander',
@@ -180,7 +180,7 @@ class BasicArea extends Model
 
     public static function getFallProtections() :array
     {
-        return $types = [
+        return $fallProtections = [
             'metaal',
             'glas',
             'ander',
@@ -189,7 +189,7 @@ class BasicArea extends Model
 
     public static function getEnergies() :array
     {
-        return $types = [
+        return $energies = [
             'CV',
             'elektriciteit',
             'kolen',

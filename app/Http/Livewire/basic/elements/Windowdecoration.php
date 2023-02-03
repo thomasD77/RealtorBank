@@ -34,7 +34,7 @@ class Windowdecoration extends Component
 
     public function render()
     {
-        return view('livewire.elements.dropdown' , [
+        return view('livewire.elements.basic.dropdown' , [
             'parameters' => $this->parameters,
         ]);
     }

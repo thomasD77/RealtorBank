@@ -1,5 +1,5 @@
 <div>
-    <li class="{{ $statusMedia }}">
+    <li class="{{ $status }}">
         <div class="title">
             <span>{{ __('Media') }}</span>
         </div>

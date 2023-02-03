@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Area;
 use App\Models\BasicArea;
+use App\Models\Conform;
+use App\Models\ConformArea;
 use App\Models\Inspection;
 use App\Models\Room;
 use Illuminate\Http\Request;
@@ -29,6 +31,21 @@ class DashboardController extends Controller
             'room' => $room,
             'area' => $area,
             'basicArea' => $basicArea
+        ]);
+    }
+
+    public function conform(Inspection $inspection, Room $room, Conform $conform): View
+    {
+        $conformArea = ConformArea::query()
+            ->where('room_id', $room->id)
+            ->where('conform_id', $conform->id)
+            ->first();
+
+        return view('conform-areas.form', [
+            'inspection' => $inspection,
+            'room' => $room,
+            'conform-areas' => $conform,
+            'conformArea' => $conformArea
         ]);
     }
 }

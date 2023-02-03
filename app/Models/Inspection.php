@@ -21,10 +21,19 @@ class Inspection extends Model
 
     public static function createInspection()
     {
+        /**
+         * Inspection
+         *
+         */
         $inspection = Inspection::create([
             'user_id' => Auth::id(),
         ]);
 
+
+        /**
+         * Rooms
+         *
+         */
         $rooms = [
             'Kelder',
             'Gelijkvloers',
@@ -36,7 +45,6 @@ class Inspection extends Model
             'Berging',
             'Slaapkamer',
         ];
-
         $roomsToInsert = [];
         foreach ($rooms as $room) {
             $roomsToInsert[] = [
@@ -49,16 +57,17 @@ class Inspection extends Model
         Room::insert($roomsToInsert);
 
 
-
+        /**
+         * BasicArea
+         *
+         */
         //Basic Areas
         $rooms = Room::query()
             ->where('inspection_id', $inspection->id)
             ->select(['title', 'id'])
             ->get();
 
-
         $areas = Area::all();
-
         foreach ($rooms as $room){
             $areasToInsert = [];
             foreach ($areas as $area) {
@@ -71,6 +80,26 @@ class Inspection extends Model
             }
             BasicArea::insert($areasToInsert);
         }
+
+
+        /**
+         * Conforms
+         *
+         */
+        $conforms = Conform::all();
+        foreach ($rooms as $room){
+            $conformsToInsert = [];
+            foreach ($conforms as $conform) {
+                $conformsToInsert[] = [
+                    'conform_id' => $conform->id,
+                    'room_id' => $room->id,
+                    'created_at' => DB::raw('NOW()'),
+                    'updated_at' => DB::raw('NOW()'),
+                ];
+            }
+            ConformArea::insert($conformsToInsert);
+        }
+
 
         return $inspection;
     }

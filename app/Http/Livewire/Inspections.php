@@ -22,6 +22,7 @@ class Inspections extends Component
     {
         $inspections = Inspection::query()
             ->where('user_id', Auth::id())
+            ->latest()
             ->get();
 
         return view('livewire.inspections', [

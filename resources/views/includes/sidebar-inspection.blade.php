@@ -90,9 +90,13 @@
                                         </a>
                                         <div>
                                             <ul class="collapse" id="collapseConform{{ $room->id }}">
-                                                <li><a href="">element 1</a></li>
-                                                <li><a href="">element 2</a></li>
-                                                <li><a href="">element 3</a></li>
+                                                @foreach($room->conformAreas as $item)
+                                                    <li class="mx-3">
+                                                        <a href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
+                                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->conform->title }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     </li>

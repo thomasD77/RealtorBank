@@ -9,7 +9,7 @@ use Livewire\Component;
 class Extra extends Component
 {
     public BasicArea $basicArea;
-    public $statusExtra = "";
+    public $status = "";
     public $extra;
 
     public function mount(BasicArea $basicArea)
@@ -19,7 +19,7 @@ class Extra extends Component
 
     public function openExtra()
     {
-        $this->statusExtra = 'active';
+        $this->status = 'active';
     }
 
     public function render()
