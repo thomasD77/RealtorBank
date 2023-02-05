@@ -58,7 +58,7 @@ return new class extends Migration
             'kastje',
             'Zeephouder',
             'Kapstok',
-            'Trap',
+            'trap'
         ];
 
         $specificsToInsert = [];
@@ -66,6 +66,7 @@ return new class extends Migration
         foreach ($specifics as $specific) {
             $specificsToInsert[] = [
                 'title' => $specific,
+//                'code' => $specific[1],
                 'created_at' => DB::raw('NOW()'),
                 'updated_at' => DB::raw('NOW()'),
             ];

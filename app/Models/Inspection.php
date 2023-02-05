@@ -29,7 +29,6 @@ class Inspection extends Model
             'user_id' => Auth::id(),
         ]);
 
-
         /**
          * Rooms
          *

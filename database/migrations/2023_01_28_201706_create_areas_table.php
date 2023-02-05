@@ -23,25 +23,27 @@ return new class extends Migration
         });
 
         $areas = [
-            'Vloer',
-            'Plafond',
-            'Deur',
-            'Muur',
-            'Raam',
-            'Verwarming',
+            ['Vloer', 'floor'],
+            ['Plafond', 'celling'],
+            ['Deur', 'door'],
+            ['Muur', 'wall'],
+            ['Raam', 'window'],
+            ['Verwarming', 'heating'],
         ];
 
         $areasToInsert = [];
 
         foreach ($areas as $area) {
             $areasToInsert[] = [
-                'title' => $area,
+                'title' => $area[0],
+                'code' => $area[1],
                 'created_at' => DB::raw('NOW()'),
                 'updated_at' => DB::raw('NOW()'),
             ];
         }
 
         Area::insert($areasToInsert);
+
     }
 
     /**

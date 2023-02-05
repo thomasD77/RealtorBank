@@ -23,20 +23,21 @@ return new class extends Migration
         });
 
         $conforms = [
-            'Ventilatierooster',
-            'Rookmelder',
-            'Stopcontacten',
-            'Schakelaars',
-            'Aansluitingen',
-            'Verlichting',
-            'Ventilater',
+            ['Ventilatierooster', 'ventilalationGrid'],
+            ['Rookmelder', 'smokeDetector'],
+            ['Stopcontacten', 'socket'],
+            ['Schakelaars', 'switches'],
+            ['Aansluitingen', 'connection'],
+            ['Verlichting', 'lighting'],
+            ['Ventilater', 'ventillater'],
         ];
 
         $conformsToInsert = [];
 
         foreach ($conforms as $conform) {
             $conformsToInsert[] = [
-                'title' => $conform,
+                'title' => $conform[0],
+                'code' => $conform[1],
                 'created_at' => DB::raw('NOW()'),
                 'updated_at' => DB::raw('NOW()'),
             ];
