@@ -19,6 +19,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('code')->nullable();
+            $table->string('room_key')->nullable();
+
             $table->timestamps();
         });
 
@@ -33,7 +35,6 @@ return new class extends Migration
             'Spiegel',
             'Wc-rolhouder',
             'kastje',
-            'Wastafel',
             'Toiletborstel',
             'Toiletpot',
             'Handdoekhouder',

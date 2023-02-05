@@ -110,20 +110,17 @@ class Inspection extends Model
         foreach ($rooms as $room){
             $specificsToInsert = [];
             foreach ($specifics as $specific) {
-                $specificsToInsert[] = [
-                    'specific_id' => $specific->id,
-                    'room_id' => $room->id,
-                    'created_at' => DB::raw('NOW()'),
-                    'updated_at' => DB::raw('NOW()'),
-                ];
+                if($specific->room_key == $room->title){
+                    $specificsToInsert[] = [
+                        'specific_id' => $specific->id,
+                        'room_id' => $room->id,
+                        'created_at' => DB::raw('NOW()'),
+                        'updated_at' => DB::raw('NOW()'),
+                    ];
+                }
             }
             SpecificArea::insert($specificsToInsert);
         }
-
-
-
-
-
 
         return $inspection;
     }

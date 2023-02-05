@@ -72,7 +72,7 @@
                                         </a>
                                         <div>
                                             <ul class="collapse" id="collapseSpec{{ $room->id }}">
-                                                @foreach($room->specificAreas->sortByDesc('title') as $item)
+                                                @foreach($room->specificAreas->where('room_id', $room->id) as $item)
                                                     <li class="mx-3">
                                                         <a href="{{ route('area.specific', [$inspection, $room, $item->specific]) }}">
                                                             <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->specific->title }}
