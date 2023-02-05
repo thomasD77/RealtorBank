@@ -6,5 +6,4 @@
     <livewire:conform.elements.colors
         :conformArea="$conformArea"
     />
-
 </div>
