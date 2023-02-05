@@ -8,6 +8,8 @@ use App\Models\Conform;
 use App\Models\ConformArea;
 use App\Models\Inspection;
 use App\Models\Room;
+use App\Models\Specific;
+use App\Models\SpecificArea;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -45,8 +47,22 @@ class DashboardController extends Controller
             'inspection' => $inspection,
             'room' => $room,
             'conform' => $conform,
-            'conform-areas' => $conform,
             'conformArea' => $conformArea
+        ]);
+    }
+
+    public function specific(Inspection $inspection, Room $room, Specific $specific): View
+    {
+        $specificArea = SpecificArea::query()
+            ->where('room_id', $room->id)
+            ->where('specific_id', $specific->id)
+            ->first();
+
+        return view('specific-areas.form', [
+            'inspection' => $inspection,
+            'room' => $room,
+            'specific' => $specific,
+            'specificArea' => $specificArea
         ]);
     }
 }

@@ -72,9 +72,13 @@
                                         </a>
                                         <div>
                                             <ul class="collapse" id="collapseSpec{{ $room->id }}">
-                                               <li><a href="">element 1</a></li>
-                                               <li><a href="">element 2</a></li>
-                                               <li><a href="">element 3</a></li>
+                                                @foreach($room->specificAreas->sortByDesc('title') as $item)
+                                                    <li class="mx-3">
+                                                        <a href="{{ route('area.specific', [$inspection, $room, $item->specific]) }}">
+                                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->specific->title }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     </li>
