@@ -27,6 +27,9 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/inspection/conform/{inspection}/{room}/{conform}', [DashboardController::class, 'conform'])->name('area.conform');
     Route::get('/inspection/specific/{inspection}/{room}/{specific}', [DashboardController::class, 'specific'])->name('area.specific');
 
+    Route::get('/inspection/general/{inspection}/{room}/', [DashboardController::class, 'general'])->name('general.detail');
+
+
     Route::get('/create/inspection', [InspectionController::class, 'create'])->name('create.inspection');
 
     Route::view('/inspections', 'inspections.index')

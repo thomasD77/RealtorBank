@@ -65,4 +65,12 @@ class DashboardController extends Controller
             'specificArea' => $specificArea
         ]);
     }
+
+    public function general(Inspection $inspection, Room $room): View
+    {
+        return view('general.general', [
+            'inspection' => $inspection,
+            'room' => $room,
+        ]);
+    }
 }
