@@ -1,7 +1,7 @@
 /* Documentation For Radium HTML5 Agency Template */
 
 
-/*** 
+/***
 
 ====================================================================
 	Fonts
@@ -15,7 +15,7 @@
 
 @import url('font-awesome.css');
 
-/*** 
+/***
 
 ====================================================================
 	Reset
@@ -29,7 +29,7 @@
 	outline:none;
 }
 
-/*** 
+/***
 
 ====================================================================
 	Global Settings
@@ -50,7 +50,7 @@ body {
 a{
 	text-decoration:none;
 	cursor:pointer;
-	color:#274abb;	
+	color:#274abb;
 }
 
 a:hover,a:focus,a:visited{
@@ -78,12 +78,12 @@ h3 {
 
 p{
 	font-size:14px;
-	line-height:1.6em;	
+	line-height:1.6em;
 }
 
 
 
-/*** 
+/***
 
 ====================================================================
 	Sidebar
@@ -103,11 +103,11 @@ p{
 }
 
 #sidebar .mCSB_inside > .mCSB_container{
-	margin-right:12px !important;	
+	margin-right:12px !important;
 }
 
 #sidebar .mCS_no_scrollbar .mCSB_container{
-	margin-right:0px !important;	
+	margin-right:0px !important;
 }
 
 #sidebar .menu-box{
@@ -138,11 +138,11 @@ p{
 #sidebar .menu-box .logo img{
 	position:relative;
 	display:inline-block;
-	max-width:100%;	
+	max-width:100%;
 }
 
 #sidebar .menu-box .sticky-menu{
-	position:relative;	
+	position:relative;
 }
 
 #sidebar .menu-box .sticky-menu > ul{
@@ -150,7 +150,7 @@ p{
 	display:block;
 	margin:0px;
 	padding:0px;
-	border-top:1px solid rgba(255,255,255,0.20);	
+	border-top:1px solid rgba(255,255,255,0.20);
 }
 
 #sidebar .menu-box .sticky-menu > ul > li{
@@ -200,13 +200,13 @@ p{
 #sidebar .menu-box .sticky-menu > ul > li.current a .fa,
 #sidebar .menu-box .sticky-menu > ul > li:hover a .fa{
 	right:6px;
-	opacity:1;	
+	opacity:1;
 }
 
 #sidebar .menu-box .sticky-menu > ul > li > a:hover,
 #sidebar .menu-box .sticky-menu > ul > li.current > a,
 #sidebar .menu-box .sticky-menu > ul > li.current-menu-item > a{
-	color:#274abb;	
+	color:#274abb;
 }
 
 #sidebar .copyright{
@@ -218,10 +218,10 @@ p{
 	font-size:13px;
 	color:#ffffff;
 	line-height:30px;
-	text-align:center;	
+	text-align:center;
 }
 
-/*** 
+/***
 
 ====================================================================
 	Content Section
@@ -241,7 +241,7 @@ p{
 #content-section .section{
 	position:relative;
 	min-height:200px;
-	margin-bottom:50px;	
+	margin-bottom:50px;
 }
 
 #content-section .sec-title{
@@ -305,7 +305,7 @@ p{
 	margin-bottom:10px;
 	font-weight:600;
 	font-family: 'Open Sans Condensed', sans-serif;
-	color:#274abb;	
+	color:#274abb;
 }
 
 .introduction .sec-content h3{
@@ -340,21 +340,21 @@ p{
 }
 
 .javascript ul li{
-	list-style:none;	
+	list-style:none;
 }
 
 .sources-credits p{
-	margin-bottom:2px;	
+	margin-bottom:2px;
 }
 
 #content-section img{
 	display:inline-block;
 	max-width:100%;
-	height:auto;	
+	height:auto;
 }
 
 #content-section .image-box{
 	position:relative;
 	padding:0px;
-	margin:30px 0px;	
+	margin:30px 0px;
 }

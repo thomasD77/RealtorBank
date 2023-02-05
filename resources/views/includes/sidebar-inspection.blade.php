@@ -9,108 +9,49 @@
     <div class="user-profile-box mb-0">
     <div class="sidebar-header"><a href="{{ route('dashboard') }}"><img src="{{ asset('assets/images/logo-blue.svg') }}" alt="header-logo2.png"></a></div>
     <div class="detail clearfix">
-        <ul class="mb-0">
-            <li>
-                <a class="active" href="{{ route('inspection.edit', $inspection) }}">
-                    <i class="fa fa-house-flag"></i> {{ $inspection->title }}
-                </a>
-            </li>
-            <li>
-                <a class="active" href="dashboard.html">
-                    <i class="fa fa-folder"></i>{{ __('Interieur') }}
-                </a>
-                <p>
-                <ul>
-                    @foreach($inspection->rooms as $room)
-                        <li class="mx-2">
+        <div>
+            <ul class="mb-0">
+                <li>
+                    <a class="active" href="{{ route('inspection.edit', $inspection) }}">
+                        <i class="fa fa-house-flag"></i> {{ $inspection->title }}
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="collapse"
+                       href="#collapseInterior"
+                       role="button"
+                       aria-expanded="true"
+                       aria-controls="collapseInterior"
+                    >
+                        <i class="fa fa-folder"></i>{{ __('Interieur') }}
+                    </a>
+                    <div class="collapse show" id="collapseInterior">
 
-                            <a data-toggle="collapse"
-                               href="#collapseRoom{{ $room->id }}"
-                               role="button" aria-expanded="false"
-                               aria-controls="collapseRoom"
-                            >
-                                <i class="fa fa-list" aria-hidden="true"></i>{{ $room->title }}
-                            </a>
+                        <livewire:sidebar
+                            :Inspection="$inspection"
+                        />
 
-                            <div class="collapse" id="collapseRoom{{ $room->id }}">
-                                <ul>
-                                    <li>
-                                        <a href="">
-                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
-                                        </a>
-                                    </li>
-                                    {{--   Basic--}}
-                                    <li>
-                                        <a data-toggle="collapse"
-                                           href="#collapseBasic{{ $room->id }}"
-                                           role="button" aria-expanded="false"
-                                           aria-controls="collapseExample"
-                                        >
-                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Basis') }}
-                                        </a>
-                                        <div>
-                                            <ul class="collapse" id="collapseBasic{{ $room->id }}">
-                                                @foreach($room->basicAreas->sortByDesc('title') as $item)
-                                                    <li class="mx-3">
-                                                        <a href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
-                                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->area->title }}
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </li>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse"
+                       href="#collapseExterieur"
+                       role="button"
+                       aria-expanded="false"
+                       aria-controls="collapseExterieur"
+                    >
+                        <i class="fa fa-folder"></i>{{ __('Exterieur') }}
+                    </a>
+                    <div class="collapse" id="collapseExterieur">
 
-                                    {{--  Spec--}}
-                                    <li>
-                                        <a data-toggle="collapse"
-                                           href="#collapseSpec{{ $room->id }}"
-                                           role="button" aria-expanded="false"
-                                           aria-controls="collapseExample"
-                                        >
-                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Specifiek') }}
-                                        </a>
-                                        <div>
-                                            <ul class="collapse" id="collapseSpec{{ $room->id }}">
-                                                @foreach($room->specificAreas->where('room_id', $room->id) as $item)
-                                                    <li class="mx-3">
-                                                        <a href="{{ route('area.specific', [$inspection, $room, $item->specific]) }}">
-                                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->specific->title }}
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </li>
+                        <livewire:sidebar
+                            :Inspection="$inspection"
+                        />
 
-                                    {{-- Conform--}}
-                                    <li>
-                                        <a data-toggle="collapse"
-                                           href="#collapseConform{{ $room->id }}"
-                                           role="button" aria-expanded="false"
-                                           aria-controls="collapseExample"
-                                        >
-                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Conformiteit') }}
-                                        </a>
-                                        <div>
-                                            <ul class="collapse" id="collapseConform{{ $room->id }}">
-                                                @foreach($room->conformAreas as $item)
-                                                    <li class="mx-3">
-                                                        <a href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
-                                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->conform->title }}
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
-            </li>
-        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 </div>
