@@ -22,7 +22,7 @@
                 <p>
                 <ul>
                     @foreach($inspection->rooms as $room)
-                        <li class="mx-3">
+                        <li class="mx-2">
 
                             <a data-toggle="collapse"
                                href="#collapseRoom{{ $room->id }}"
