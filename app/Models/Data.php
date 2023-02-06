@@ -47,4 +47,12 @@ class Data extends Model
             'ander',
         ];
     }
+
+    public static function getStatus() :array
+    {
+        return $data = [
+            'OK',
+            'niet OK',
+        ];
+    }
 }

@@ -121,6 +121,21 @@ class Inspection extends Model
             SpecificArea::insert($specificsToInsert);
         }
 
+        /**
+         * General forms
+         *
+         */
+        $generalToInsert = [];
+        foreach ($rooms as $room){
+            $generalToInsert[] = [
+                'inspection_id' => $inspection->id,
+                'room_id' => $room->id,
+                'created_at' => DB::raw('NOW()'),
+                'updated_at' => DB::raw('NOW()'),
+            ];
+        }
+        General::insert($generalToInsert);
+
         return $inspection;
     }
 

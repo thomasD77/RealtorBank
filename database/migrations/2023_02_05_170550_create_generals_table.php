@@ -17,11 +17,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('inspection_id')
                 ->index();
-            $table->unsignedInteger('room_id')
+            $table->unsignedInteger('room_id')->nullable()
                 ->index();
-            $table->unsignedInteger('area_id')
-                ->index();
-            $table->unsignedInteger('floor_id')
+            $table->unsignedInteger('floor_id')->nullable()
                 ->index();
 
             $table->string('order')->nullable();
