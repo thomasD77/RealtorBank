@@ -15,6 +15,7 @@ class Extra extends Component
     public function mount(BasicArea $basicArea)
     {
         $this->basicArea = $basicArea;
+        $this->extra = $basicArea->extra;
     }
 
     public function openExtra()
@@ -22,12 +23,16 @@ class Extra extends Component
         $this->status = 'active';
     }
 
-    public function render()
+    public function submit()
     {
         $area = $this->basicArea;
         $area->extra = $this->extra;
         $area->update();
+        session()->flash('success', 'success!');
+    }
 
+    public function render()
+    {
         return view('livewire.elements.extra');
     }
 }
