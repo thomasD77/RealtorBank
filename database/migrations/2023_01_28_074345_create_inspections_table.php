@@ -16,25 +16,25 @@ return new class extends Migration
         Schema::create('inspections', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable()->default('DRAFT');
-            $table->string('situation')->nullable();
             $table->string('address')->nullable();
             $table->string('postBus')->nullable();
             $table->string('zip')->nullable();
             $table->string('city')->nullable();
             $table->string('country')->nullable();
 
+            $table->string('owner_present')->nullable();
+            $table->string('tenant_present')->nullable();
+            $table->string('new_building')->nullable();
+            $table->string('inhabited')->nullable();
+            $table->string('furnished')->nullable();
+            $table->string('first_resident')->nullable();
+
+            $table->text('extra')->nullable();
+
             $table->foreignId('user_id')
                 ->index()
                 ->constrained()
                 ->onDelete('cascade');
-
-            $table->unsignedInteger('tenant_id')
-                ->nullable()
-                ->index();
-
-            $table->unsignedInteger('owner_id')
-                ->nullable()
-                ->index();
 
             $table->timestamps();
         });

@@ -11,13 +11,7 @@ class Inspection extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'room_id',
-        'basic_area_id',
-        'spec_area_id',
-        'conform_area_id',
-        'user_id'
-    ];
+    protected $guarded = [];
 
     public static function createInspection()
     {
