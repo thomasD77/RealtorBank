@@ -23,7 +23,7 @@
                     <div class="col-12">
                         <button type="submit" class="btn btn-dark">save</button>
                         @if (session()->has('success'))
-                            <div class="btn btn-success">
+                            <div class="btn btn-success flash_message">
                                 {{ session('success') }}
                             </div>
                         @endif
@@ -78,7 +78,7 @@
                     <div class="col-12 mt-5">
                         <button type="submit" class="btn btn-dark">save</button>
                         @if (session()->has('success'))
-                            <div class="btn btn-success">
+                            <div class="btn btn-success flash_message">
                                 {{ session('success') }}
                             </div>
                         @endif
@@ -161,8 +161,24 @@
         <div class="property-form-group">
             <div class="row">
                 <div class="col-md-12">
-                    <form action="/file-upload" class="dropzone"></form>
+                    <form wire:submit.prevent="saveMedia">
+                        <div class="dropzone--custom">
+                            <input class="py-5 w-100 file--button" type="file" wire:model="media">
+                            <p class="mx-5">Klik hier om bestanden toe te voegen.</p>
+                        </div>
+                        <button class="btn btn-dark my-4" type="submit">Save Photo</button>
+                    </form>
                 </div>
+            </div>
+            <div class="row">
+                @foreach($files as $file)
+                    <div class="col-md-3">
+                        <div class="img-wrapper">
+                            <button wire:click="deleteMedia({{ $file->id }})" class="btn btn-danger delete">X</button>
+                            <img class="img-fluid" wire:key="{{ $file->id }}" src="{{ asset('assets/images/inspections/crop' . '/' . $file->file_crop) }}" alt="picture">
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

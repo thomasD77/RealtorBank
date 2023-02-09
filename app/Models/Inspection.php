@@ -13,6 +13,11 @@ class Inspection extends Model
 
     protected $guarded = [];
 
+    public function medias()
+    {
+        return $this->hasMany(MediaInspection::class);
+    }
+
     public static function createInspection()
     {
         /**

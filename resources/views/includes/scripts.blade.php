@@ -9,6 +9,12 @@
 </div>
 <!-- END PRELOADER -->
 
+<script>
+    setTimeout(function() {
+        $('.flash_message').fadeOut('fast');
+    }, 2000); // <-- time in milliseconds
+</script>
+
 <!-- ARCHIVES JS -->
 <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery-ui.js') }}"></script>
@@ -62,6 +68,7 @@
         $(this).toggleClass("hu-menu-visdec");
     });
 </script>
+
 
 
 

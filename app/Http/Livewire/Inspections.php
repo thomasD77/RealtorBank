@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Area;
 use App\Models\BasicArea;
 use App\Models\Inspection;
+use App\Models\MediaInspection;
 use App\Models\Room;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +27,7 @@ class Inspections extends Component
             ->get();
 
         return view('livewire.inspections', [
-            'inspections' => $inspections
+            'inspections' => $inspections,
         ]);
     }
 }
