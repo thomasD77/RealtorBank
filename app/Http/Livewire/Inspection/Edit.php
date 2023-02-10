@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Inspection;
 
 use App\Models\Inspection;
 use App\Models\MediaInspection;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use Livewire\Component;

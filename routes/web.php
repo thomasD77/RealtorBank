@@ -31,6 +31,7 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
 
 
     Route::get('/create/inspection', [InspectionController::class, 'create'])->name('create.inspection');
+    Route::get('/generate/inspection/{inspection}', [InspectionController::class, 'genereatePDF'])->name('generate.inspection');
 
     Route::view('/inspections', 'inspections.index')
         ->name('inspections.index');
