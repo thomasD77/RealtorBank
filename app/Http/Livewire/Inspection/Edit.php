@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Inspection;
 
 use App\Models\Inspection;
 use App\Models\MediaInspection;
+use App\Models\Owner;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
@@ -15,12 +16,10 @@ class Edit extends Component
     use WithFileUploads;
 
     public Inspection $inspection;
+    public Owner $owner;
+
     public $title;
-    public $address;
-    public $postBus;
-    public $zip;
-    public $city;
-    public $country;
+    public $description;
 
     public $tenant_present;
     public $owner_present;
@@ -29,7 +28,15 @@ class Edit extends Component
     public $furnished;
     public $first_resident;
 
-    public $description;
+    public $name;
+    public $email;
+    public $phone;
+    public $address;
+    public $postBus;
+    public $zip;
+    public $city;
+    public $country;
+
     public $media;
     public $files;
 
@@ -38,11 +45,6 @@ class Edit extends Component
         $this->inspection = $inspection;
         $this->title = $inspection->title;
         $this->description = $inspection->extra;
-        $this->address = $inspection->address;
-        $this->postBus = $inspection->postBus;
-        $this->zip = $inspection->zip;
-        $this->city = $inspection->city;
-        $this->country = $inspection->country;
 
         $this->tenant_present = $inspection->tenant_present;
         $this->owner_present = $inspection->owner_present;
@@ -50,6 +52,18 @@ class Edit extends Component
         $this->inhabited = $inspection->inhabited;
         $this->furnished = $inspection->furnished;
         $this->first_resident = $inspection->first_resident;
+
+        $owner = Owner::find($this->inspection->id);
+
+        $this->owner = $owner;
+        $this->postBus = $owner->postBus;
+        $this->address = $owner->address;
+        $this->zip = $owner->zip;
+        $this->city = $owner->city;
+        $this->country = $owner->country;
+        $this->name = $owner->name;
+        $this->email = $owner->email;
+        $this->phone = $owner->phone;
 
         $files = MediaInspection::where('inspection_id', $this->inspection->id)->get();
         $this->files = $files;
@@ -65,12 +79,15 @@ class Edit extends Component
 
     public function locationSubmit()
     {
-        $this->inspection->address = $this->address;
-        $this->inspection->postBus = $this->postBus;
-        $this->inspection->zip = $this->zip;
-        $this->inspection->city = $this->city;
-        $this->inspection->country = $this->country;
-        $this->inspection->update();
+        $this->owner->name = $this->name;
+        $this->owner->email = $this->email;
+        $this->owner->phone = $this->phone;
+        $this->owner->address = $this->address;
+        $this->owner->postBus = $this->postBus;
+        $this->owner->zip = $this->zip;
+        $this->owner->city = $this->city;
+        $this->owner->country = $this->country;
+        $this->owner->update();
         session()->flash('success', 'success!');
     }
 

@@ -13,9 +13,14 @@
             <ul class="mb-0">
                 <li>
                     <a class="active" href="{{ route('inspection.edit', $inspection) }}">
-                        <i class="fa fa-house-flag"></i> {{ $inspection->title }}
+                        <i class="fa fa-user"></i>{{ $inspection->title }}
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('situation.index', $inspection) }}">
+                        <i class="fa fa-folder"></i>{{ __('In/uittrede') }}
+                    </a>
+                <li>
                 <li>
                     <a data-toggle="collapse"
                        href="#collapseInterior"

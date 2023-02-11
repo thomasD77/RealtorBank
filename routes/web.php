@@ -4,7 +4,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Inspection\InspectionController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Inspection;
-use Illuminate\Support\Facades\Route;
+    use App\Models\Situation;
+    use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +50,13 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
         return view('inspections.edit', compact('inspection'));
     })->name('inspection.edit');
 
+    Route::get('/situation/inspection/{inspection}', function (Inspection $inspection) {
+        return view('situation.index', compact('inspection'));
+    })->name('situation.index');
 
+    Route::get('/situation/inspection/edit/{inspection}/{situation}', function (Inspection $inspection, Situation $situation) {
+        return view('situation.edit', compact('inspection', 'situation'));
+    })->name('situation.edit');
 });
 
 Route::middleware('auth')->group(function () {

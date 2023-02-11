@@ -16,11 +16,6 @@ return new class extends Migration
         Schema::create('inspections', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable()->default('DRAFT');
-            $table->string('address')->nullable();
-            $table->string('postBus')->nullable();
-            $table->string('zip')->nullable();
-            $table->string('city')->nullable();
-            $table->string('country')->nullable();
 
             $table->string('owner_present')->nullable();
             $table->string('tenant_present')->nullable();
@@ -31,10 +26,11 @@ return new class extends Migration
 
             $table->text('extra')->nullable();
 
-            $table->foreignId('user_id')
-                ->index()
-                ->constrained()
-                ->onDelete('cascade');
+            $table->unsignedInteger('owner_id')
+                ->index();
+
+            $table->unsignedInteger('user_id')
+                ->index();
 
             $table->timestamps();
         });

@@ -18,14 +18,28 @@ class Inspection extends Model
         return $this->hasMany(MediaInspection::class);
     }
 
+    public function owner()
+    {
+        return $this->belongsTo(Owner::class, 'owner_id');
+    }
+
     public static function createInspection()
     {
+        /**
+         * Owner
+         *
+         */
+        $owner = Owner::create([
+            'country' => 'Belgium'
+        ]);
+
         /**
          * Inspection
          *
          */
         $inspection = Inspection::create([
             'user_id' => Auth::id(),
+            'owner_id' => $owner->id,
         ]);
 
         /**
