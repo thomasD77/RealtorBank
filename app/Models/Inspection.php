@@ -48,7 +48,7 @@ class Inspection extends Model
          */
         $rooms = [
             'Kelder',
-            'Gelijkvloers',
+            'Inkomhal',
             'Toilet',
             'Woonkamer',
             'Keuken',
