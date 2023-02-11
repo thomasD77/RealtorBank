@@ -18,6 +18,11 @@ class Inspection extends Model
         return $this->hasMany(MediaInspection::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function owner()
     {
         return $this->belongsTo(Owner::class, 'owner_id');
