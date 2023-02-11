@@ -20,7 +20,7 @@
                                 <td>{{ $inspection->owner->email ?? "" }}</td>
                                 <td>{{ $inspection->owner->phone ?? "" }}</td>
                                 <td>
-                                    <a href="{{ route('inspection.edit', $inspection->id) }}" class="edit text-success"><i class="fa fa-pencil"></i></a>
+                                    <a href="{{ route('inspection.edit', $inspection) }}" class="edit text-success"><i class="fa fa-pencil"></i></a>
                                 </td>
                             </tr>
                         @endif
@@ -55,7 +55,7 @@
                                 <td>{{ $current_situation->tenant->email ?? "" }}</td>
                                 <td>{{ $current_situation->tenant->phone ?? "" }}</td>
                                 <td>
-                                    <a href="{{ route('inspection.edit', $inspection->id) }}" class="edit text-success"><i class="fa fa-pencil"></i></a>
+                                    <a href="{{ route('situation.edit', [ $inspection, $current_situation ]) }}" class="edit text-success"><i class="fa fa-pencil"></i></a>
                                 </td>
                             </tr>
                         @endif
@@ -90,7 +90,7 @@
                                 <td>{{ $current_situation_out->tenant->email ?? "" }}</td>
                                 <td>{{ $current_situation_out->tenant->phone ?? "" }}</td>
                                 <td>
-                                    <a href="{{ route('inspection.edit', $inspection->id) }}" class="edit text-success"><i class="fa fa-pencil"></i></a>
+                                    <a href="{{ route('situation.edit', [ $inspection, $current_situation_out ]) }}" class="edit text-success"><i class="fa fa-pencil"></i></a>
                                 </td>
                             </tr>
                         @endif
@@ -128,7 +128,7 @@
                                 <td>{{ $situation->tenant->email ?? "" }}</td>
                                 <td>{{ $situation->tenant->phone ?? "" }}</td>
                                 <td>
-                                    <a href="{{ route('inspection.edit', $inspection->id) }}" class="edit text-success"><i class="fa fa-pencil"></i></a>
+                                    <a href="{{ route('situation.edit', [ $inspection, $situation ]) }}" class="edit text-success"><i class="fa fa-pencil"></i></a>
                                 </td>
                                 </tr>
                             @endforeach

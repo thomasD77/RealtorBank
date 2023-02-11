@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('extra')->nullable();
 
             $table->unsignedInteger('tenant_id')
+                ->nullable()
                 ->index();
 
             $table->unsignedInteger('inspection_id')

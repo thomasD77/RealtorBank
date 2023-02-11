@@ -17,20 +17,20 @@ class Index extends Component
     {
         $this->inspection = $inspection;
         $this->situations = Situation::query()
-            ->orderByDesc('date')
+            ->orderBy('date')
             ->where('inspection_id', $this->inspection->id)
             ->get();
 
         $this->current_situation = Situation::query()
-            ->orderByDesc('date')
+            ->orderBy('date')
             ->where('inspection_id', $this->inspection->id)
             ->whereNotNull('intrede')
             ->first();
 
         $this->current_situation_out = Situation::query()
-            ->orderByDesc('date')
+            ->orderBy('date')
             ->where('inspection_id', $this->inspection->id)
-            ->whereNull('intrede')
+            ->where('intrede', '=' ,0)
             ->first();
     }
 

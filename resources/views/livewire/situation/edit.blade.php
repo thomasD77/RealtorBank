@@ -9,7 +9,7 @@
                         <li class="fl-wrap filter-tags clearfix">
                             <div class="checkboxes float-left">
                                 <div class="filter-tags-wrap">
-                                    <input id="check-a" type="checkbox" wire:click="present">
+                                    <input id="check-a" type="checkbox" wire:click="intredeSubmit({{1}})"  @if($intrede) checked @endif>
                                     <label for="check-a">{{ __('Intrede') }}</label>
                                 </div>
                             </div>
@@ -21,7 +21,7 @@
                         <li class="fl-wrap filter-tags clearfix">
                             <div class="checkboxes float-left">
                                 <div class="filter-tags-wrap">
-                                    <input id="check-c" type="checkbox" wire:click="present">
+                                    <input id="check-c" type="checkbox" wire:click="intredeSubmit({{0}})" @if($intrede === 0) checked @endif>
                                     <label for="check-c">{{ __('Uittrede') }}</label>
                                 </div>
                             </div>
@@ -91,9 +91,9 @@
                 <div class="row">
                     <div class="col-12 mt-5">
                         <button type="submit" class="btn btn-dark">save</button>
-                        @if (session()->has('success'))
+                        @if (session()->has('successExtra'))
                             <div class="btn btn-success flash_message">
-                                {{ session('success') }}
+                                {{ session('successExtra') }}
                             </div>
                         @endif
                     </div>

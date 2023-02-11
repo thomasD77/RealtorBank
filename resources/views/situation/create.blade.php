@@ -2,9 +2,8 @@
 
 @section('content')
 
-    <livewire:situation.edit
+    <livewire:situation.create
         :inspection="$inspection"
-        :situation="$situation"
     />
 
 @endsection

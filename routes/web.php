@@ -3,9 +3,10 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Inspection\InspectionController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Inspection;
-    use App\Models\Situation;
-    use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\Situation\SituationController;
+    use App\Models\Inspection;
+use App\Models\Situation;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
 
     Route::get('/create/inspection', [InspectionController::class, 'create'])->name('create.inspection');
     Route::get('/generate/inspection/{inspection}', [InspectionController::class, 'genereatePDF'])->name('generate.inspection');
+    Route::get('/create/situation/{inspection}', [SituationController::class, 'create'])->name('create.situation');
 
     Route::view('/inspections', 'inspections.index')
         ->name('inspections.index');

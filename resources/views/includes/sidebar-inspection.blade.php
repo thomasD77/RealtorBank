@@ -17,10 +17,29 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('situation.index', $inspection) }}">
+                    <a data-toggle="collapse"
+                       href="#collapseSituation"
+                       role="button"
+                       aria-expanded="false"
+                       aria-controls="collapseSituation"
+                    >
                         <i class="fa fa-folder"></i>{{ __('In/uittrede') }}
                     </a>
-                <li>
+                    <div class="collapse" id="collapseSituation">
+
+                        <ul>
+                            <li class="mx-3">
+                                <a href="{{ route('situation.index', $inspection) }}">
+                                    <i class="fa fa-list"></i>{{ __('Lijst') }}
+                                </a>
+                                <a href="{{ route('create.situation', $inspection) }}">
+                                    <i class="fa fa-plus"></i>{{ __('Toevoegen') }}
+                                </a>
+                            <li>
+                        </ul>
+
+                    </div>
+                </li>
                 <li>
                     <a data-toggle="collapse"
                        href="#collapseInterior"
