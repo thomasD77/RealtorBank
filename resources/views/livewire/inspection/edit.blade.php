@@ -204,7 +204,7 @@
     <div class="single-add-property">
         <h3>{{ __('PDF genereren')  }}</h3>
         <div class="property-form-group">
-            <a href="{{ route('generate.inspection', $inspection) }}"  class="btn btn-dark mb-3"><i class="fa fa-file-pdf m-2"></i>{{ __('PDF') }}</a>
+            <a href="{{ route('generate.inspection', $inspection) }}"  class="btn btn-dark mb-3"><i class="fa fa-file-pdf mr-2"></i>{{ __('PDF') }}</a>
         </div>
     </div>
 </div>
