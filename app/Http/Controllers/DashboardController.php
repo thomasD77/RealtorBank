@@ -58,7 +58,7 @@ class DashboardController extends Controller
             ->where('specific_id', $specific->id)
             ->first();
 
-        return view('specific-areas.form', [
+        return view('specific-areas.template', [
             'inspection' => $inspection,
             'room' => $room,
             'specific' => $specific,

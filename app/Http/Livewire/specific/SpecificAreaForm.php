@@ -26,6 +26,6 @@ class SpecificAreaForm extends Component
 
     public function render()
     {
-        return view('livewire.specific.specific-area-' . $this->specific->code);
+        return view('livewire.specific.specific-area-form');
     }
 }
