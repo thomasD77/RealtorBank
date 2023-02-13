@@ -51,7 +51,7 @@
                     </a>
                     <div class="collapse show" id="collapseInterior">
 
-                        <livewire:sidebar
+                        <livewire:sidebar.sidebar
                             :Inspection="$inspection"
                         />
 
@@ -68,10 +68,30 @@
                     </a>
                     <div class="collapse" id="collapseExterieur">
 
-                        <livewire:sidebar
+                        <livewire:sidebar.sidebar
                             :Inspection="$inspection"
                         />
 
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse"
+                       href="#collapseTechnique"
+                       role="button" aria-expanded="false"
+                       aria-controls="collapseTechnique"
+                    >
+                        <i class="fa fa-folder" aria-hidden="true"></i>{{ __('Technieken') }}
+                    </a>
+                    <div>
+                        <ul class="collapse" id="collapseTechnique">
+                            @foreach($inspection->techniques as $item)
+                                <li class="mx-3">
+                                    <a href="{{ route('area.technique', [$inspection, $item->technique]) }}">
+                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->technique->title }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </li>
             </ul>

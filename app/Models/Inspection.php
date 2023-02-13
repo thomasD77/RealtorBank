@@ -28,6 +28,16 @@ class Inspection extends Model
         return $this->belongsTo(Owner::class, 'owner_id');
     }
 
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
+
+    public function techniques()
+    {
+        return $this->hasMany(TechniqueArea::class, 'inspection_id');
+    }
+
     public static function createInspection()
     {
         /**
@@ -141,6 +151,24 @@ class Inspection extends Model
         }
 
         /**
+         * Techniques
+         *
+         */
+        $techniques = Technique::all();
+
+        $techniquesToInsert = [];
+        foreach ($techniques as $technique) {
+            $techniquesToInsert[] = [
+                'technique_id' => $technique->id,
+                'inspection_id' => $inspection->id,
+                'created_at' => DB::raw('NOW()'),
+                'updated_at' => DB::raw('NOW()'),
+            ];
+        }
+        TechniqueArea::insert($techniquesToInsert);
+
+
+        /**
          * General forms
          *
          */
@@ -158,8 +186,5 @@ class Inspection extends Model
         return $inspection;
     }
 
-    public function rooms()
-    {
-        return $this->hasMany(Room::class);
-    }
+
 }

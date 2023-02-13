@@ -10,6 +10,8 @@ use App\Models\Inspection;
 use App\Models\Room;
 use App\Models\Specific;
 use App\Models\SpecificArea;
+use App\Models\Technique;
+use App\Models\TechniqueArea;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -63,6 +65,20 @@ class DashboardController extends Controller
             'room' => $room,
             'specific' => $specific,
             'specificArea' => $specificArea
+        ]);
+    }
+
+    public function technique(Inspection $inspection, Technique $technique): View
+    {
+        $techniqueArea = TechniqueArea::query()
+            ->where('inspection_id', $inspection->id)
+            ->where('technique_id', $technique->id)
+            ->first();
+
+        return view('technique-areas.template', [
+            'inspection' => $inspection,
+            'technique' => $technique,
+            'techniqueArea' => $techniqueArea
         ]);
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Sidebar;
 
 use App\Models\Inspection;
 use Livewire\Component;
@@ -30,6 +30,6 @@ class Sidebar extends Component
 
     public function render()
     {
-        return view('livewire.sidebar');
+        return view('livewire.sidebar.sidebar');
     }
 }
