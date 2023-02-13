@@ -26,6 +26,10 @@ return new class extends Migration
             ['Kelderverdieping', 'basementFloor'],
             ['Gelijkvloers', 'groundFloor'],
             ['Bovenverdieping', 'upperFloor'],
+            ['Zolder', 'attic'],
+            ['Garage', 'garage'],
+            ['Gebouw', 'building'],
+            ['Aanleg', 'driveWay'],
         ];
 
         $floorsToInsert = [];

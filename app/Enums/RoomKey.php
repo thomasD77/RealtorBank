@@ -4,13 +4,13 @@ namespace App\Enums;
 
 enum RoomKey : string
 {
-    case Kelder = 'basement';
-    case Inkomhal = 'entranceHall';
+    case Basement = 'basement';
+    case EntranceHall = 'entranceHall';
     case Toilet = 'toilet';
-    case Woonkamer = 'livingRoom';
-    case Keuken = 'kitchen';
-    case Badkamer = 'bathroom';
-    case Nachthal = 'nightHall';
-    case Berging = 'storage';
-    case Slaapkamer = 'bedroom';
+    case LivingRoom = 'livingRoom';
+    case Kitchen = 'kitchen';
+    case Bathroom = 'bathroom';
+    case NightHall = 'nightHall';
+    case Storage = 'storage';
+    case Bedroom = 'bedroom';
 }

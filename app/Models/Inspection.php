@@ -60,7 +60,7 @@ class Inspection extends Model
             ['Badkamer', 'bathroom'],
             ['Nachthal', 'nightHall'],
             ['Berging', 'storage'],
-            ['Slaapkamer', ''],
+            ['Slaapkamer', 'bedroom'],
         ];
         $roomsToInsert = [];
         foreach ($rooms as $room) {
