@@ -23,7 +23,7 @@ return new class extends Migration
         });
 
         $floors = [
-            ['Kelderverdieping', 'basement'],
+            ['Kelderverdieping', 'basementFloor'],
             ['Gelijkvloers', 'groundFloor'],
             ['Bovenverdieping', 'upperFloor'],
         ];

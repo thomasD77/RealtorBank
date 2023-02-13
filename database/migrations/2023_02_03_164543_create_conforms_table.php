@@ -23,13 +23,13 @@ return new class extends Migration
         });
 
         $conforms = [
-            ['Ventilatierooster', 'ventilalationGrid'],
+            ['Ventilatierooster', 'ventilationGrid'],
             ['Rookmelder', 'smokeDetector'],
             ['Stopcontacten', 'socket'],
             ['Schakelaars', 'switches'],
             ['Aansluitingen', 'connection'],
             ['Verlichting', 'lighting'],
-            ['Ventilater', 'ventillater'],
+            ['Ventilater', 'ventilator'],
         ];
 
         $conformsToInsert = [];

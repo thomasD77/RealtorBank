@@ -28,7 +28,7 @@ class DashboardController extends Controller
             ->where('area_id', $area->id)
             ->first();
 
-        return view('basic-areas.form', [
+        return view('basic-areas.template', [
             'inspection' => $inspection,
             'room' => $room,
             'area' => $area,
@@ -43,7 +43,7 @@ class DashboardController extends Controller
             ->where('conform_id', $conform->id)
             ->first();
 
-        return view('conform-areas.form', [
+        return view('conform-areas.template', [
             'inspection' => $inspection,
             'room' => $room,
             'conform' => $conform,

@@ -29,6 +29,6 @@ class ConformAreaForm extends Component
 
     public function render()
     {
-        return view('livewire.conform.conform-area-' . $this->conform->code);
+        return view('livewire.conform.conform-area-form');
     }
 }
