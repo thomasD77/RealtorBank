@@ -26,7 +26,7 @@ class BasicAreaForm extends Component
 
     public function render()
     {
-        return view('livewire.basic.basic-area-form-' . $this->area->code, [
+        return view('livewire.basic.basic-area-form', [
             'area' => $this->area
         ]);
     }

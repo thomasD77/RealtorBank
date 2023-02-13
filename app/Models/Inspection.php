@@ -52,20 +52,21 @@ class Inspection extends Model
          *
          */
         $rooms = [
-            'Kelder',
-            'Inkomhal',
-            'Toilet',
-            'Woonkamer',
-            'Keuken',
-            'Badkamer',
-            'Nachthal',
-            'Berging',
-            'Slaapkamer',
+            ['Kelder', 'basement'],
+            ['Inkomhal', 'entranceHall'],
+            ['Toilet', 'toilet'],
+            ['Woonkamer', 'livingRoom'],
+            ['Keuken', 'kitchen'],
+            ['Badkamer', 'bathroom'],
+            ['Nachthal', 'nightHall'],
+            ['Berging', 'storage'],
+            ['Slaapkamer', ''],
         ];
         $roomsToInsert = [];
         foreach ($rooms as $room) {
             $roomsToInsert[] = [
-                'title' => $room,
+                'title' => $room[0],
+                'code' => $room[1],
                 'inspection_id' => $inspection->id,
                 'created_at' => DB::raw('NOW()'),
                 'updated_at' => DB::raw('NOW()'),

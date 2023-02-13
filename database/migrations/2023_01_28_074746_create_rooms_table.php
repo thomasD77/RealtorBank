@@ -17,6 +17,8 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('code');
             $table->string('general')->nullable();
             $table->string('analysis')->nullable();
             $table->text('extra')->nullable();
@@ -27,7 +29,7 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('cascade');
 
-            $table->string('title');
+
             $table->timestamps();
         });
     }
