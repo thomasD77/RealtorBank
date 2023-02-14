@@ -1,8 +1,6 @@
-<div>
-    <div class="d-flex justify-content-between">
-        <h5 class="uppercase">{{ __('Algemene gegevens') }}</h5>
-        <h6 class="mb40">{{ $inspection->title }} > {{ $room->title }}</h6>
-    </div>
+<div class="single-add-property">
+    <h6 class="mb20 text-md-right">{{ $inspection->title }} > {{ $room->title }}</strong></h6>
+    <h3 class="uppercase">{{ __('Algemene gegevens') }}</h3>
 
     <ul class="accordion accordion-1 one-open">
 
