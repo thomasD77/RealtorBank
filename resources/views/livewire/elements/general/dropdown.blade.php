@@ -4,14 +4,14 @@
             <span>{{ __($title) }}</span>
         </div>
         <div class="content">
-            <div class="row mx-2">
+            <div class="row my-4 mx-2">
                 @foreach($parameters as $parameter)
                     <div class="col-md-3 col-lg-2">
-                        <div class="d-flex">
-                            <input type="checkbox"
+                        <div class="checkboxes">
+                            <input id="{{ $parameter }}" type="checkbox"
                                    @if($general->$element == $parameter) checked @endif
                                    wire:click="select('{{ $parameter }}')">
-                            <p>{{ $parameter }}</p>
+                            <label for="{{ $parameter }}">{{ $parameter }}</label>
                         </div>
                     </div>
                 @endforeach
