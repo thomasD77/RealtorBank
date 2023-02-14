@@ -29,7 +29,6 @@ class Extra extends Component
         $technique = $this->techniqueArea;
         $technique->extra = $this->extra;
         $technique->update();
-        session()->flash('success', 'success!');
     }
 
     public function render()

@@ -11,6 +11,7 @@ class Count extends Component
     public TechniqueArea $techniqueArea;
     public string $status = "";
     public $parameters;
+    public $dynamic;
 
     //--> Custom
     public string $element = "count";
@@ -21,16 +22,36 @@ class Count extends Component
         //--> Custom
         $this->parameters = Data::getNumbers();
         $this->techniqueArea = $techniqueArea;
+        $el = $this->element;
+
+        if(in_array($this->techniqueArea->$el, $this->parameters)){
+            $this->dynamic = null;
+        }else {
+            $this->dynamic = $this->techniqueArea->$el;
+        }
     }
 
     public function select($title)
     {
         $technique = $this->techniqueArea;
         $el = $this->element;
-
         $technique->$el = $title;
-        $this->status = 'active';
         $technique->update();
+
+        //Render
+        $this->status = 'active';
+        $this->dynamic = null;
+    }
+
+    public function submitDynamic()
+    {
+        $technique = $this->techniqueArea;
+        $el = $this->element;
+        $technique->$el = $this->dynamic;
+        $technique->update();
+
+        //Render
+        $this->techniqueArea = $technique;
     }
 
     public function render()

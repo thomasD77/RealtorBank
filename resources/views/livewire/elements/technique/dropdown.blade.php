@@ -1,19 +1,32 @@
-<div>
-    <li class="{{ $status }}">
+<div class="mb-3">
+    <li class="{{ $status }}" wire:ignore.self>
         <div class="title">
             <span>{{ __($title) }}</span>
         </div>
         <div class="content">
-            <div class="row my-4 mx-2">
+            <div class="row m-3">
                 @foreach($parameters as $parameter)
-                    <div class="col-md-3 col-lg-2">
-                        <div class="checkboxes">
-                            <input id="{{ $parameter }}" type="checkbox"
-                                   @if($techniqueArea->$element == $parameter) checked @endif
-                                   wire:click="select('{{ $parameter }}')">
-                            <label for="{{ $parameter }}">{{ $parameter }}</label>
+                    @if($parameter != \App\Enums\DynamicKey::Dynamic->value)
+                        <div class="col-md-3 col-lg-2">
+                            <div class="checkboxes my-2">
+                                <input id="{{ $parameter }}"
+                                       type="checkbox"
+                                       @if($techniqueArea->$element == $parameter) checked @endif
+                                       wire:click="select('{{ $parameter }}')"
+                                >
+                                <label for="{{ $parameter }}">{{ $parameter }}</label>
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="col-md-4">
+                            <input type="text"
+                                   class="my-2"
+                                   placeholder="andere..."
+                                   wire:change="submitDynamic"
+                                   wire:model="dynamic"
+                            >
+                        </div>
+                    @endif
                 @endforeach
             </div>
         </div>
