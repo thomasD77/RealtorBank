@@ -27,7 +27,6 @@ class Extra extends Component
         $specific = $this->specificArea;
         $specific->extra = $this->extra;
         $specific->update();
-        session()->flash('success', 'success!');
     }
 
     public function render()

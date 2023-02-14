@@ -28,7 +28,6 @@ class Extra extends Component
         $conform = $this->conformArea;
         $conform->extra = $this->extra;
         $conform->update();
-        session()->flash('success', 'success!');
     }
 
     public function render()
