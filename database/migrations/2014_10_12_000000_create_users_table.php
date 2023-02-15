@@ -24,8 +24,12 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
 
+            //This is for the sidebar toggle
             $table->unsignedInteger('category_id')
                 ->index()->nullable();
+            $table->unsignedInteger('room_id')
+                ->index()->nullable();
+            $table->string('template')->nullable();
         });
 
         DB::table('users')->insert([
