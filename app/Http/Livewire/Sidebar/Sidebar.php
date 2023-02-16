@@ -13,6 +13,7 @@ use Livewire\Component;
 class Sidebar extends Component
 {
     public Inspection $inspection;
+    public $responsive;
 
     public $activeCat;
     public $activeRoom;
@@ -27,8 +28,11 @@ class Sidebar extends Component
     public $specific = 'specific';
     public $conform = 'conform';
 
-    public function mount(Inspection $inspection)
+    public function mount(Inspection $inspection, $responsive)
     {
+        if($responsive == true){
+            $this->responsive = 'responsive';
+        }
         $this->inspection = $inspection;
         $this->activeTemplate = Auth()->user()->template;
 

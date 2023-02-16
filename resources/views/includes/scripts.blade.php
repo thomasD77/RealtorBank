@@ -14,6 +14,16 @@
         $('.flash_message').fadeOut('fast');
     }, 2000); // <-- time in milliseconds
 </script>
+<script>
+    function getSidebar() {
+        var filter = document.getElementById("sidebarResp");
+        filter.classList.add("d-md-block");
+    }
+    function closeSidebar() {
+        var filter = document.getElementById("sidebarResp");
+        filter.classList.remove("d-md-block");
+    }
+</script>
 
 <!-- ARCHIVES JS -->
 <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>

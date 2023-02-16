@@ -100,6 +100,35 @@ Version      : 1.2
 .file--button {
     opacity: 0;
 }
+.overlay {
+    z-index: 10;
+    width: 300px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #24324a;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+.overlay a{
+    color: #aeb7c2;
+    padding: 1rem;
+}
+.overlay ul li {
+    padding: 0.50rem;
+}
+.overlay i {
+    padding-right: 0.25rem;
+}
+.btn-close {
+    color: #aeb7c2;
+    background-color: transparent;
+    border: 1px solid #aeb7c2;
+    margin-right: 2rem;
+}
 
 /*-----------------------------------*/
 /*------ 1. TYPOGRAPHY ------*/

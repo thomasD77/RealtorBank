@@ -1,4 +1,4 @@
-<ul>
+<ul id="{{ $responsive }}">
     <li>
         <a class="active" href="{{ route('inspection.edit', $inspection) }}">
             <i class="fa fa-user"></i>{{ $inspection->title }}

@@ -7,52 +7,53 @@
             <div id="logo">
                 <a href="index.html"><img src="{{ asset('assets/images/logo.svg') }}" alt="logo"></a>
             </div>
-            <!-- Mobile Navigation -->
-            <div class="mmenu-trigger">
-                <button class="hamburger hamburger--collapse" type="button">
+
+            <!-- Mobile Navigation Mobile -->
+            <div class="d-md-none">
+                <div class="mmenu-trigger">
+                    <button class="hamburger hamburger--collapse" type="button">
                                     <span class="hamburger-box">
 							<span class="hamburger-inner"></span>
                                     </span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation MD -->
+            <div class="d-none d-md-block d-lg-none">
+                <button onclick="getSidebar()"
+                        class="hamburger hamburger--collapse"
+                        type="button"
+                >
+                <span class="hamburger-box"><span class="hamburger-inner"></span></span>
                 </button>
             </div>
-            <style>
-                .overlay {
-                    z-index: 10;
-                    width: 250px;
-                    position: fixed;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
-                    background-color: #24324a;
-                    display: flex;
-                    flex-direction: column;
-                    overflow-y: auto;
-                }
-                .overlay a{
-                    color: #aeb7c2;
-                    padding: 1rem;
-                }
-                .overlay ul li {
-                    padding: 0.5rem;
-                }
-                .overlay i {
-                    padding-right: 0.5rem;
-                }
-            </style>
-            <div class="overlay d-none d-md-block d-xl-none">
-                <livewire:sidebar.sidebar
-                    :Inspection="$inspection"
-                />
-            </div>
-            <!-- Main Navigation -->
-            <nav id="navigation" class="style-1">
-                @if(isset($inspection))
+
+            <!-- Custom Sidebar Tablet M  -->
+            @if(isset($inspection))
+                <div id="sidebarResp" class="overlay d-none d-xl-none pt-3">
+                    <div class="text-right">
+                        <button onclick="closeSidebar()" class="p-2 btn-close">X</button>
+                    </div>
                     <livewire:sidebar.sidebar
                         :Inspection="$inspection"
+                        :Responsive="false"
                     />
-                @endif
-            </nav>
+                </div>
+            @endif
+
+            <!-- Sidebar Mobile  -->
+            @if(isset($inspection))
+                <div class="d-md-none">
+                    <!-- Main Navigation -->
+                    <nav id="navigation" class="style-1">
+                        <livewire:sidebar.sidebar
+                            :Inspection="$inspection"
+                            :Responsive="true"
+                        />
+                    </nav>
+                </div>
+            @endif
             <div class="clearfix"></div>
             <!-- Main Navigation / End -->
         </div>
