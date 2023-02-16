@@ -65,9 +65,9 @@
                 <div class="row">
                     <div class="col-12 mt-5">
                         <button type="submit" class="btn btn-dark">save</button>
-                        @if (session()->has('success'))
+                        @if (session()->has('successLocation'))
                             <div class="btn btn-success flash_message">
-                                {{ session('success') }}
+                                {{ session('successLocation') }}
                             </div>
                         @endif
                     </div>

@@ -50,7 +50,7 @@ class Edit extends Component
 
         $this->situation->date = $this->date;
         $this->situation->update();
-        session()->flash('success', 'success!');
+        session()->flash('successLocation', 'success!');
     }
 
     public function extraSubmit()

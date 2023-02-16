@@ -103,6 +103,10 @@ class Edit extends Component
 
     public function saveMedia()
     {
+        $this->validate([
+            'media' => 'image|max:1024', // 1MB Max
+        ]);
+
         $mediaStore = new MediaInspection();
         $mediaStore->inspection_id = $this->inspection->id;
 
