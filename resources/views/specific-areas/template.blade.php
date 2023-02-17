@@ -12,11 +12,11 @@
                 :Inspection="$inspection"
                 :Room="$room"
                 :specific="$specific"
-                :specificArea="$specificArea"
+                :dynamicArea="$specificArea"
             />
 
             <livewire:specific.elements.analysis
-                :specificArea="$specificArea"
+                :dynamicArea="$specificArea"
             />
 
             <livewire:conform.elements.media
