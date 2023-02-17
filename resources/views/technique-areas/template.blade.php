@@ -17,7 +17,7 @@
             <livewire:technique.elements.analysis
                 :Inspection="$inspection"
                 :technique="$technique"
-                :techniqueArea="$techniqueArea"
+                :dynamicArea="$techniqueArea"
             />
 
             <livewire:technique.elements.media

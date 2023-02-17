@@ -11,7 +11,7 @@
                             <div class="checkboxes my-2">
                                 <input id="{{ $parameter }}"
                                        type="checkbox"
-                                       @if($techniqueArea->$element == $parameter) checked @endif
+                                       @if($this->dynamicArea->$element == $parameter) checked @endif
                                        wire:click="select('{{ $parameter }}')"
                                 >
                                 <label for="{{ $parameter }}">{{ $parameter }}</label>

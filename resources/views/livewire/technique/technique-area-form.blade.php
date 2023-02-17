@@ -3,67 +3,67 @@
 
         @case(\App\Enums\TechniqueKey::FuseBox->value)
             <livewire:technique.elements.types
-                :techniqueArea="$techniqueArea"
+                :dynamicArea="$techniqueArea"
             />
         @break
 
         @case(\App\Enums\TechniqueKey::cvDevice->value)
             <livewire:technique.elements.fuel
-                :techniqueArea="$techniqueArea"
+                :dynamicArea="$techniqueArea"
             />
             <livewire:technique.elements.brand
-                :techniqueArea="$techniqueArea"
+                :dynamicArea="$techniqueArea"
             />
         @break
 
         @case(\App\Enums\TechniqueKey::Boiler->value)
             <livewire:technique.elements.model
-                :techniqueArea="$techniqueArea"
+                :dynamicArea="$techniqueArea"
             />
             <livewire:technique.elements.fuel
-                :techniqueArea="$techniqueArea"
+                :dynamicArea="$techniqueArea"
             />
             <livewire:technique.elements.brand
-                :techniqueArea="$techniqueArea"
+                :dynamicArea="$techniqueArea"
             />
         @break
 
         @case(\App\Enums\TechniqueKey::WaterSoftener->value)
             <livewire:technique.elements.brand
-                :techniqueArea="$techniqueArea"
+                :dynamicArea="$techniqueArea"
             />
         @break
 
         @case(\App\Enums\TechniqueKey::WaterPump->value)
             <livewire:technique.elements.types
-                :techniqueArea="$techniqueArea"
+                :dynamicArea="$techniqueArea"
             />
             <livewire:technique.elements.brand
-                :techniqueArea="$techniqueArea"
+                :dynamicArea="$techniqueArea"
             />
         @break
 
         @case(\App\Enums\TechniqueKey::Airco->value)
             <livewire:technique.elements.brand
-                :techniqueArea="$techniqueArea"
+                :dynamicArea="$techniqueArea"
             />
         @break
 
         @case(\App\Enums\TechniqueKey::VentilationGroup->value)
             <livewire:technique.elements.brand
-                :techniqueArea="$techniqueArea"
+                :dynamicArea="$techniqueArea"
             />
         @break
 
         @case(\App\Enums\TechniqueKey::SolarPanels->value)
             <livewire:technique.elements.count
-                :techniqueArea="$techniqueArea"
+                :dynamicArea="$techniqueArea"
             />
         @break
 
         @case(\App\Enums\TechniqueKey::Converter->value)
             <livewire:technique.elements.brand
-                :techniqueArea="$techniqueArea"
+                :dynamicArea="$techniqueArea"
             />
         @break
 
