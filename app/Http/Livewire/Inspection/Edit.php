@@ -39,6 +39,7 @@ class Edit extends Component
 
     public $media;
     public $files;
+    public $file_name;
 
     public function mount(Inspection $inspection)
     {
@@ -125,6 +126,7 @@ class Edit extends Component
 
         $files = MediaInspection::where('inspection_id', $this->inspection->id)->get();
         $this->files = $files;
+        $this->media = "";
     }
 
     public function deleteMedia($file)
@@ -136,6 +138,11 @@ class Edit extends Component
 
         $files = MediaInspection::where('inspection_id', $this->inspection->id)->get();
         $this->files = $files;
+    }
+
+    public function render()
+    {
+        return view('livewire.inspection.edit');
     }
 
 }

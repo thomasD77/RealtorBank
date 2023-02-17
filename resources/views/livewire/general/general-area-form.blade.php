@@ -20,12 +20,12 @@
             :dynamicArea="$general"
         />
 
-        <livewire:general.elements.media
+        <livewire:general.elements.extra
             :dynamicArea="$general"
         />
 
-        <livewire:general.elements.extra
-            :dynamicArea="$general"
+        <livewire:general.elements.media
+            :general="$general"
         />
 
     </ul>

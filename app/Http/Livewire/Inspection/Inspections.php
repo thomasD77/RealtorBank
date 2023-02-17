@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Inspection;
 
 use App\Models\Area;
 use App\Models\BasicArea;
@@ -26,7 +26,7 @@ class Inspections extends Component
             ->latest()
             ->get();
 
-        return view('livewire.inspections', [
+        return view('livewire.inspection.inspections', [
             'inspections' => $inspections,
         ]);
     }

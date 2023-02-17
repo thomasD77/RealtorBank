@@ -2,6 +2,6 @@
 
 @section('content')
 
-    <livewire:inspections />
+    <livewire:inspection.inspections />
 
 @endsection

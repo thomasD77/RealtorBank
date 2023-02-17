@@ -185,6 +185,9 @@
                             <p class="mx-5">Klik hier om bestanden toe te voegen.</p>
                         </div>
                         <button class="btn btn-dark my-4" type="submit">Save Photo</button>
+                        @if($media)
+                            <div class="btn  btn-success text-white">media ready!</div>
+                        @endif
                     </form>
                 </div>
             </div>
