@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire\Basic\Elements;
 
+use App\Http\Livewire\MainDropdownComponent;
 use App\Models\BasicArea;
 use Livewire\Component;
 
-class Plinths extends Component
+class Plinths extends MainDropdownComponent
 {
     public BasicArea $basicArea;
     public string $status = "";

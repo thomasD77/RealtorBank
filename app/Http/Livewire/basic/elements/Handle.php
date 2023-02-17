@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire\Basic\Elements;
 
+use App\Http\Livewire\MainDropdownComponent;
 use App\Models\BasicArea;
 use Livewire\Component;
 
-class Handle extends Component
+class Handle extends MainDropdownComponent
 {
     public BasicArea $basicArea;
     public string $status = "";
