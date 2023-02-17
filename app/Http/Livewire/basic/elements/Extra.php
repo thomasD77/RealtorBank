@@ -2,36 +2,14 @@
 
 namespace App\Http\Livewire\Basic\Elements;
 
-
-use App\Models\BasicArea;
+use App\Http\Livewire\MainExtraComponent;
 use Livewire\Component;
 
-class Extra extends Component
+class Extra extends MainExtraComponent
 {
-    public BasicArea $basicArea;
-    public $status = "";
-    public $extra;
-
-    public function mount(BasicArea $basicArea)
+    public function mount($dynamicArea)
     {
-        $this->basicArea = $basicArea;
-        $this->extra = $basicArea->extra;
-    }
-
-    public function openExtra()
-    {
-        $this->status = 'active';
-    }
-
-    public function submit()
-    {
-        $area = $this->basicArea;
-        $area->extra = $this->extra;
-        $area->update();
-    }
-
-    public function render()
-    {
-        return view('livewire.elements.extra');
+        $this->dynamicArea = $dynamicArea;
+        $this->extra = $dynamicArea->extra;
     }
 }

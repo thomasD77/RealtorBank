@@ -2,35 +2,14 @@
 
 namespace App\Http\Livewire\Specific\Elements;
 
-use App\Models\SpecificArea;
+use App\Http\Livewire\MainExtraComponent;
 use Livewire\Component;
 
-class Extra extends Component
+class Extra extends MainExtraComponent
 {
-    public $status = "";
-    public $extra;
-    public SpecificArea $specificArea;
-
-    public function mount(SpecificArea $specificArea)
+    public function mount($dynamicArea)
     {
-        $this->specificArea = $specificArea;
-        $this->extra = $specificArea->extra;
-    }
-
-    public function openExtra()
-    {
-        $this->status = 'active';
-    }
-
-    public function submit()
-    {
-        $specific = $this->specificArea;
-        $specific->extra = $this->extra;
-        $specific->update();
-    }
-
-    public function render()
-    {
-        return view('livewire.elements.extra');
+        $this->dynamicArea = $dynamicArea;
+        $this->extra = $dynamicArea->extra;
     }
 }

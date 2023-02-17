@@ -2,36 +2,14 @@
 
 namespace App\Http\Livewire\Conform\Elements;
 
-use App\Models\Conform;
-use App\Models\ConformArea;
+use App\Http\Livewire\MainExtraComponent;
 use Livewire\Component;
 
-class Extra extends Component
+class Extra extends MainExtraComponent
 {
-    public ConformArea $conformArea;
-    public $status = "";
-    public $extra;
-
-    public function mount(ConformArea $conformArea)
+    public function mount($dynamicArea)
     {
-        $this->conformArea = $conformArea;
-        $this->extra = $conformArea->extra;
-    }
-
-    public function openExtra()
-    {
-        $this->status = 'active';
-    }
-
-    public function submit()
-    {
-        $conform = $this->conformArea;
-        $conform->extra = $this->extra;
-        $conform->update();
-    }
-
-    public function render()
-    {
-        return view('livewire.elements.extra');
+        $this->dynamicArea = $dynamicArea;
+        $this->extra = $dynamicArea->extra;
     }
 }

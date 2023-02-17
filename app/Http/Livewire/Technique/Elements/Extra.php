@@ -2,37 +2,14 @@
 
 namespace App\Http\Livewire\Technique\Elements;
 
-use App\Models\ConformArea;
-use App\Models\Data;
-use App\Models\TechniqueArea;
+use App\Http\Livewire\MainExtraComponent;
 use Livewire\Component;
 
-class Extra extends Component
+class Extra extends MainExtraComponent
 {
-    public TechniqueArea $techniqueArea;
-    public $status = "";
-    public $extra;
-
-    public function mount(TechniqueArea $techniqueArea)
+    public function mount($dynamicArea)
     {
-        $this->techniqueArea = $techniqueArea;
-        $this->extra = $techniqueArea->extra;
-    }
-
-    public function openExtra()
-    {
-        $this->status = 'active';
-    }
-
-    public function submit()
-    {
-        $technique = $this->techniqueArea;
-        $technique->extra = $this->extra;
-        $technique->update();
-    }
-
-    public function render()
-    {
-        return view('livewire.elements.extra');
+        $this->dynamicArea = $dynamicArea;
+        $this->extra = $dynamicArea->extra;
     }
 }

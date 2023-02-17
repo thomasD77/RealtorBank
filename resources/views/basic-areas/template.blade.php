@@ -31,7 +31,7 @@
         />
 
         <livewire:basic.elements.extra
-            :BasicArea="$basicArea"
+            :dynamicArea="$basicArea"
         />
 
     </ul>

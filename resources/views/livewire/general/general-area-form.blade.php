@@ -5,27 +5,27 @@
     <ul class="accordion accordion-1 one-open">
 
         <livewire:general.elements.order
-            :general="$general"
+            :dynamicArea="$general"
         />
 
         <livewire:general.elements.cleanliness
-            :general="$general"
+            :dynamicArea="$general"
         />
 
         <livewire:general.elements.painting
-            :general="$general"
+            :dynamicArea="$general"
         />
 
         <livewire:general.elements.analysis
-            :general="$general"
+            :dynamicArea="$general"
         />
 
         <livewire:general.elements.media
-            :general="$general"
+            :dynamicArea="$general"
         />
 
         <livewire:general.elements.extra
-            :general="$general"
+            :dynamicArea="$general"
         />
 
     </ul>
