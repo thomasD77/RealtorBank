@@ -2,40 +2,20 @@
 
 namespace App\Http\Livewire\Specific\Elements;
 
+use App\Http\Livewire\MainDropdownComponent;
 use App\Models\Data;
 use App\Models\SpecificArea;
 use Livewire\Component;
 
-class Shelves extends Component
+class Shelves extends MainDropdownComponent
 {
-    public string $status = "";
-    public $parameters;
-
     //--> Custom
     public string $element = "shelves";
     public string $title = "Legplanken";
 
-    public function mount(SpecificArea $specificArea)
+    public function mount($dynamicArea)
     {
         //--> Custom
         $this->parameters = Data::getNumbers();
-        $this->specificArea = $specificArea;
-    }
-
-    public function select($title)
-    {
-        $specific = $this->specificArea;
-        $el = $this->element;
-
-        $specific->$el = $title;
-        $this->status = 'active';
-        $specific->update();
-    }
-
-    public function render()
-    {
-        return view('livewire.elements.specific.dropdown' , [
-            'parameters' => $this->parameters,
-        ]);
     }
 }
