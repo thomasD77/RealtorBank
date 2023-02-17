@@ -16,7 +16,7 @@ class Media extends Component
 {
     public General $general;
 
-    public $media;
+    public $media = [];
     public $files;
     public $folder = 'general';
     public $relation_id = 'general_id';
@@ -36,11 +36,13 @@ class Media extends Component
             'media.*' => 'image|max:1024',
         ]);
 
-        //Set up params
+        //Set up model
         $mediaStore = new MediaGeneral;
 
         //Save and store
-        MediaStore::createAndStoreMedia($mediaStore, $this->general, $this->media, $this->folder, $this->relation_id);
+        if( $this->media != [] && $this->media != ""){
+            MediaStore::createAndStoreMedia($mediaStore, $this->general, $this->media, $this->folder, $this->relation_id);
+        }
 
         //Render
         $this->files = MediaGeneral::where('general_id', $this->general->id)->get();

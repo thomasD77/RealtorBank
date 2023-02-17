@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Inspection;
 
 use App\Models\Inspection;
 use App\Models\MediaInspection;
+use App\Models\MediaStore;
 use App\Models\Owner;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\File;
@@ -37,9 +38,11 @@ class Edit extends Component
     public $city;
     public $country;
 
-    public $media;
+    public $media = [];
     public $files;
-    public $file_name;
+
+    public $folder = 'inspections';
+    public $relation_id = 'inspection_id';
 
     public function mount(Inspection $inspection)
     {
@@ -105,39 +108,30 @@ class Edit extends Component
     public function saveMedia()
     {
         $this->validate([
-            'media' => 'image|max:1024', // 1MB Max
+            'media.*' => 'image|max:1024',
         ]);
 
+        //Set up model
         $mediaStore = new MediaInspection();
-        $mediaStore->inspection_id = $this->inspection->id;
 
-        //Save original image
-        $name = time(). $this->media->getClientOriginalName();
-        $media = $this->media->storeAs('assets/images/inspections', $name);
-        $mediaStore->file_original = $name;
+        //Save and store
+        if( $this->media != [] && $this->media != "") {
+            MediaStore::createAndStoreMedia($mediaStore, $this->inspection, $this->media, $this->folder, $this->relation_id);
+        }
 
-        //Save crop version image
-        $crop = time(). $this->media->getClientOriginalName();
-        $imgCrop = Image::make($media);
-        $imgCrop->crop(550, 350)->save(public_path('assets/images/inspections/crop').'/'.$crop);
-        $mediaStore->file_crop = $crop;
-
-        $mediaStore->save();
-
-        $files = MediaInspection::where('inspection_id', $this->inspection->id)->get();
-        $this->files = $files;
+        //Render
+        $this->files = MediaInspection::where('inspection_id', $this->inspection->id)->get();
         $this->media = "";
     }
 
     public function deleteMedia($file)
     {
+        //Do the work
         $mediaStore = MediaInspection::find($file);
-        File::delete('assets/images/inspections/' . $mediaStore->file_original);
-        File::delete('assets/images/inspections/crop/' . $mediaStore->file_crop);
-        $mediaStore->delete();
+        MediaStore::deleteMedia($mediaStore, $this->folder);
 
-        $files = MediaInspection::where('inspection_id', $this->inspection->id)->get();
-        $this->files = $files;
+        //Render
+        $this->files = MediaInspection::where('inspection_id', $this->inspection->id)->get();
     }
 
     public function render()

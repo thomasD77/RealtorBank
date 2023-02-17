@@ -181,7 +181,7 @@
                 <div class="col-md-12">
                     <form wire:submit.prevent="saveMedia">
                         <div class="dropzone--custom">
-                            <input class="py-5 w-100 file--button" type="file" wire:model="media">
+                            <input class="py-5 w-100 file--button" type="file" wire:model="media" multiple>
                             <p class="mx-5">Klik hier om bestanden toe te voegen.</p>
                         </div>
                         <button class="btn btn-dark my-4" type="submit">Save Photo</button>
