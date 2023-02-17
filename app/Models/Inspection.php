@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\RoomKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -62,15 +63,15 @@ class Inspection extends Model
          *
          */
         $rooms = [
-            ['Kelder', 'basement'],
-            ['Inkomhal', 'entranceHall'],
-            ['Toilet', 'toilet'],
-            ['Woonkamer', 'livingRoom'],
-            ['Keuken', 'kitchen'],
-            ['Badkamer', 'bathroom'],
-            ['Nachthal', 'nightHall'],
-            ['Berging', 'storage'],
-            ['Slaapkamer', 'bedroom'],
+            ['Kelder', RoomKey::Basement],
+            ['Inkomhal', RoomKey::EntranceHall],
+            ['Toilet', RoomKey::Toilet],
+            ['Woonkamer', RoomKey::LivingRoom],
+            ['Keuken', RoomKey::Kitchen],
+            ['Badkamer', RoomKey::Bathroom],
+            ['Nachthal', RoomKey::NightHall],
+            ['Berging', RoomKey::Storage],
+            ['Slaapkamer', RoomKey::Bedroom],
         ];
         $roomsToInsert = [];
         foreach ($rooms as $room) {
@@ -92,7 +93,7 @@ class Inspection extends Model
         //Basic Areas
         $rooms = Room::query()
             ->where('inspection_id', $inspection->id)
-            ->select(['title', 'id'])
+            ->select(['title', 'code', 'id'])
             ->get();
 
         $areas = Area::all();
@@ -138,7 +139,7 @@ class Inspection extends Model
         foreach ($rooms as $room){
             $specificsToInsert = [];
             foreach ($specifics as $specific) {
-                if($specific->room_key == $room->title){
+                if($specific->room_key == $room->code){
                     $specificsToInsert[] = [
                         'specific_id' => $specific->id,
                         'room_id' => $room->id,

@@ -1,10 +1,11 @@
 <?php
 
-    use App\Models\Specific;
-    use Illuminate\Database\Migrations\Migration;
+use App\Models\Specific;
+use App\Enums\RoomKey;
+use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-    use Illuminate\Support\Facades\DB;
-    use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -25,8 +26,8 @@ return new class extends Migration
         });
 
         $specifics = [
-            [ 'Trap', 'trap', 'kelder'],
-            [ 'Wandrek', 'wallRack', 'inkomhal'],
+            [ 'Trap', 'trap', RoomKey::Basement],
+            [ 'Wandrek', 'wallRack', RoomKey::Basement],
             [ 'Buitendeur', 'doorOutside', 'inkomhal'],
             [ 'Bedieningspaneel alarm', 'alarm', 'inkomhal'],
             [ 'Videofoon/parlofoon', 'videoPhone', 'inkomhal'],
