@@ -10,11 +10,9 @@
 
     @include('inspections.sections.css')
 
-
-{{--    @include('inspections.sections.inspection-information')--}}
+    @include('inspections.sections.inspection-information')
 
     @include('inspections.sections.techniques')
-
 
 </body>
 </html>
