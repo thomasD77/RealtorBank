@@ -27,7 +27,7 @@ class MainDropdownComponent extends Component
 //        }
     }
 
-    public function select($title, $test)
+    public function select($title)
     {
         $object = $this->dynamicArea;
         $el = $this->element;

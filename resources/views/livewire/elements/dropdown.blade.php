@@ -5,16 +5,16 @@
         </div>
         <div class="content">
             <div class="row m-3">
-                @foreach($parameters as $parameter)
+                @foreach($parameters as $i => $parameter)
                     @if($parameter != \App\Enums\DynamicKey::Dynamic->value)
                         <div class="col-md-3 col-lg-2">
-                            <div class="checkboxes my-2">
-                                <input id="{{ $parameter }}"
+                            <div class="my-2">
+                                <input id="{{ $parameter . $i }}"
                                        type="checkbox"
                                        @if($this->dynamicArea->$element == $parameter) checked @endif
-                                       wire:click="select('{{ $parameter }}', '{{ $parameter  }}')"
+                                       wire:click="select('{{ $parameter }}')"
                                 >
-                                <label for="{{ $parameter }}">{{ $parameter }}</label>
+                                <label for="{{ $parameter . $i }}">{{ $parameter }}</label>
                             </div>
                         </div>
                     @else
