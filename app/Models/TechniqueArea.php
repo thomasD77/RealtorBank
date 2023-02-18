@@ -16,6 +16,11 @@ class TechniqueArea extends Model
         return $this->belongsTo(Technique::class);
     }
 
+    public function media()
+    {
+        return $this->hasMany(MediaTechnique::class, 'technique_id');
+    }
+
     public static function getFuels() :array
     {
         return $data = [

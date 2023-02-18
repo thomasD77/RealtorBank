@@ -92,7 +92,7 @@ Version      : 1.2
 .delete {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
 }
 .dropzone--custom {
     border: 2px dashed #1ABC9C;

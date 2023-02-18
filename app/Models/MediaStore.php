@@ -24,8 +24,21 @@ class MediaStore extends Model
 
             //Save crop version image
             $crop = time(). $media->getClientOriginalName();
+
             $imgCrop = Image::make($newMedia);
-            $imgCrop->crop(550, 350)->save(public_path('assets/images/' . $folder . '/' . 'crop').'/'.$crop);
+            $width = Image::make($newMedia)->width();
+            $height = Image::make($newMedia)->height();
+
+            if($width > $height){
+                $imgCrop->resize( 450, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save(public_path('assets/images/' . $folder . '/' . 'crop').'/'.$crop);
+            }else {
+                $imgCrop->resize( null, 300, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save(public_path('assets/images/' . $folder . '/' . 'crop').'/'.$crop);
+            }
+
             $mediaStore->file_crop = $crop;
 
             $mediaStore->$relation_id = $template->id;

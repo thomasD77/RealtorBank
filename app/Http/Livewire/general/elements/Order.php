@@ -10,7 +10,7 @@ class Order extends MainDropdownComponent
 {
     //--> Custom
     public string $element = "order";
-    public string $title = "Order";
+    public string $title = "Orde";
 
     public function mount($dynamicArea)
     {

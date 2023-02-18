@@ -18,7 +18,7 @@
             </div>
             <div class="row">
                 @foreach($files as $file)
-                    <div class="col-md-3">
+                    <div class="col-md-3 mt-4">
                         <div class="img-wrapper">
                             <button wire:click="deleteMedia({{ $file->id }})" class="btn btn-danger delete">X</button>
                             <a data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
