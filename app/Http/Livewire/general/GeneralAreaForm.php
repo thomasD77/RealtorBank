@@ -18,12 +18,12 @@ class GeneralAreaForm extends Component
         $this->inspection = $inspection;
         $this->room = $room;
 
-        $general = General::query()
+        $this->general = General::query()
             ->where('inspection_id', $inspection->id)
             ->where('room_id', $room->id)
             ->first();
 
-        $this->general = $general;
+
     }
 
     public function render()

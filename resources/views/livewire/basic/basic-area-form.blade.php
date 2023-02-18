@@ -1,138 +1,138 @@
 <div>
     @switch($area->code)
-        @case(\App\Enums\AreaKey::Floor)
+        @case(\App\Enums\AreaKey::Floor->value)
             <livewire:basic.elements.materials
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.colors
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.plinths
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
         @break
 
-       @case(\App\Enums\AreaKey::Celling)
+       @case(\App\Enums\AreaKey::Celling->value)
             <livewire:basic.elements.materials
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.types
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.colors
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
         @break
 
-        @case(\App\Enums\AreaKey::Door)
+        @case(\App\Enums\AreaKey::Door->value)
             <livewire:basic.elements.materials
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.colors
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.handle
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.lists
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.key
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.doorpump
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.doorstop
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
         @break
 
-        @case(\App\Enums\AreaKey::Heating)
+        @case(\App\Enums\AreaKey::Heating->value)
             <livewire:basic.elements.materials
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.types
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.energy
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
         @break
 
-        @case(\App\Enums\AreaKey::Wall)
+        @case(\App\Enums\AreaKey::Wall->value)
             <livewire:basic.elements.materials
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.plaster
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.finish
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.colors
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
         @break
 
-        @case(\App\Enums\AreaKey::Window)
+        @case(\App\Enums\AreaKey::Window->value)
             <livewire:basic.elements.materials
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.types
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.colors
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.ventilationgrille
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.glazing
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.handle
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.windowsill
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.rollershutter
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.windowdecoration
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.hor
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
             <livewire:basic.elements.fallprotection
-                :BasicArea="$basicArea"
+                :dynamicArea="$basicArea"
             />
 
     @endswitch

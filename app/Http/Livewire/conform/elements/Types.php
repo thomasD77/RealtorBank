@@ -16,5 +16,6 @@ class Types extends MainDropdownComponent
     {
         //--> Custom
         $this->parameters = ConformArea::getTypes();
+        $this->dynamicArea = $dynamicArea;
     }
 }

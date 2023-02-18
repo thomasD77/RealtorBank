@@ -12,7 +12,7 @@
                                 <input id="{{ $parameter }}"
                                        type="checkbox"
                                        @if($this->dynamicArea->$element == $parameter) checked @endif
-                                       wire:click="select('{{ $parameter }}')"
+                                       wire:click="select('{{ $parameter }}', '{{ $parameter  }}')"
                                 >
                                 <label for="{{ $parameter }}">{{ $parameter }}</label>
                             </div>

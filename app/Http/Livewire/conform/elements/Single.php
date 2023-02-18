@@ -16,5 +16,6 @@ class Single extends MainDropdownComponent
     {
         //--> Custom
         $this->parameters = Data::getNumbers();
+        $this->dynamicArea = $dynamicArea;
     }
 }

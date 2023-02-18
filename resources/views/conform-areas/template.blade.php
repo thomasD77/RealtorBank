@@ -12,7 +12,7 @@
                 :Inspection="$inspection"
                 :Room="$room"
                 :conform="$conform"
-                :dynamicArea="$conformArea"
+                :ConformArea="$conformArea"
             />
 
             <livewire:conform.elements.analysis

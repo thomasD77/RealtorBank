@@ -8,9 +8,6 @@ use Livewire\Component;
 
 class Electronics extends MainDropdownComponent
 {
-    public string $status = "";
-    public $parameters;
-
     //--> Custom
     public string $element = "electronics";
     public string $title = "TV/radio";
@@ -19,5 +16,6 @@ class Electronics extends MainDropdownComponent
     {
         //--> Custom
         $this->parameters = Data::getNumbers();
+        $this->dynamicArea = $dynamicArea;
     }
 }

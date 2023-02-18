@@ -16,5 +16,6 @@ class Present extends MainDropdownComponent
     {
         //--> Custom
         $this->parameters = Data::getPresent();
+        $this->dynamicArea = $dynamicArea;
     }
 }

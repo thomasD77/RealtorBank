@@ -28,6 +28,8 @@ class Sidebar extends Component
     public $specific = 'specific';
     public $conform = 'conform';
 
+    protected $listeners = ['renderNewArea' => 'render'];
+
     public function mount(Inspection $inspection, $responsive)
     {
         if($responsive == true){

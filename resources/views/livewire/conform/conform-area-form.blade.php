@@ -1,100 +1,100 @@
 <div>
     @switch($conform->code)
-        @case(\App\Enums\ConformKey::Connection)
+        @case(\App\Enums\ConformKey::Connection->value)
             <livewire:conform.elements.electronics
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
 
             <livewire:conform.elements.phone
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
 
             <livewire:conform.elements.internet
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
 
             <livewire:conform.elements.audio
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
         @break
 
-        @case(\App\Enums\ConformKey::Lighting)
+        @case(\App\Enums\ConformKey::Lighting->value)
             <livewire:conform.elements.types
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
 
             <livewire:conform.elements.count
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
         @break
 
-        @case(\App\Enums\ConformKey::SmokeDetector)
+        @case(\App\Enums\ConformKey::SmokeDetector->value)
             <livewire:conform.elements.present
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
         @break
 
-        @case(\App\Enums\ConformKey::Socket)
+        @case(\App\Enums\ConformKey::Socket->value)
             <livewire:conform.elements.materials
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
 
             <livewire:conform.elements.colors
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
 
             <livewire:conform.elements.single
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
 
             <livewire:conform.elements.multiple
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
 
             <livewire:conform.elements.brand
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
         @break
 
-        @case(\App\Enums\ConformKey::Switches)
+        @case(\App\Enums\ConformKey::Switches->value)
             <livewire:conform.elements.materials
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
 
             <livewire:conform.elements.colors
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
 
             <livewire:conform.elements.single
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
 
             <livewire:conform.elements.multiple
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
 
             <livewire:conform.elements.brand
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
         @break
 
-        @case(\App\Enums\ConformKey::Ventilator)
+        @case(\App\Enums\ConformKey::Ventilator->value)
             <livewire:conform.elements.materials
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
 
             <livewire:conform.elements.colors
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
         @break
 
-        @case(\App\Enums\ConformKey::VentilationGrid)
+        @case(\App\Enums\ConformKey::VentilationGrid->value)
             <livewire:conform.elements.materials
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
 
             <livewire:conform.elements.colors
-                :conformArea="$conformArea"
+                :dynamicArea="$conformArea"
             />
         @break
 

@@ -16,5 +16,6 @@ class Multiple extends MainDropdownComponent
     {
         //--> Custom
         $this->parameters = Data::getNumbers();
+        $this->dynamicArea = $dynamicArea;
     }
 }

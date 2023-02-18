@@ -16,5 +16,6 @@ class Colors extends MainDropdownComponent
     {
         //--> Custom
         $this->parameters = ConformArea::getColors();
+        $this->dynamicArea = $dynamicArea;
     }
 }

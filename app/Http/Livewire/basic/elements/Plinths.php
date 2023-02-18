@@ -12,7 +12,7 @@ class Plinths extends MainDropdownComponent
     public string $element = "plinth";
     public string $title = "Plinten";
 
-    public function mount($dynamicArea )
+    public function mount($dynamicArea)
     {
         //--> Custom
         $this->parameters = BasicArea::getPlinths();

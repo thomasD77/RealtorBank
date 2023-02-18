@@ -16,5 +16,6 @@ class Materials extends MainDropdownComponent
     {
         //--> Custom
         $this->parameters = ConformArea::getMaterials();
+        $this->dynamicArea = $dynamicArea;
     }
 }

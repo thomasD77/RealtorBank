@@ -1,22 +1,22 @@
 <div>
     @switch($specific->code)
-        @case(\App\Enums\SpecificKey::Trap)
+        @case(\App\Enums\SpecificKey::Trap->value)
             <livewire:specific.elements.material
-                :conformArea="$conformArea"
+                :dynamicArea="$specificArea"
             />
 
             <livewire:specific.elements.handrail
-                :conformArea="$conformArea"
+                :dynamicArea="$specificArea"
             />
         @break
 
-        @case(\App\Enums\SpecificKey::WallRack)
+        @case(\App\Enums\SpecificKey::WallRack->value)
             <livewire:specific.elements.material
-                :specificArea="$specificArea"
+                :dynamicArea="$specificArea"
             />
 
             <livewire:specific.elements.shelves
-                :specificArea="$specificArea"
+                :dynamicArea="$specificArea"
             />
         @break
     @endswitch

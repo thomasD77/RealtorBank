@@ -19,7 +19,7 @@
             :Inspection="$inspection"
             :Room="$room"
             :Area="$area"
-            :dynamicArea="$basicArea"
+            :basicArea="$basicArea"
         />
 
         <livewire:basic.elements.analysis

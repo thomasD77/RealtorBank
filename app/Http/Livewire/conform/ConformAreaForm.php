@@ -24,7 +24,7 @@ class ConformAreaForm extends Component
         $this->room = $room;
         $this->area = $area;
         $this->conform = $conform;
-        $this->conformAree = $conformArea;
+        $this->conformArea = $conformArea;
     }
 
     public function render()

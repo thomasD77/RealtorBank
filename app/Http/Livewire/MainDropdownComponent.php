@@ -18,15 +18,16 @@ class MainDropdownComponent extends Component
     public function mount($dynamicArea)
     {
         $this->dynamicArea = $dynamicArea;
-        $el = $this->element;
-        if(in_array($this->dynamicArea->$el, $this->parameters)){
-            $this->dynamic = null;
-        }else {
-            $this->dynamic = $this->dynamicArea->$el;
-        }
+//        $el = $this->element;
+//
+//        if(in_array($this->dynamicArea->$el, $this->parameters)){
+//            $this->dynamic = null;
+//        }else {
+//            $this->dynamic = $this->dynamicArea->$el;
+//        }
     }
 
-    public function select($title)
+    public function select($title, $test)
     {
         $object = $this->dynamicArea;
         $el = $this->element;

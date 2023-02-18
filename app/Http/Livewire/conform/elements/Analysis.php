@@ -16,5 +16,6 @@ class Analysis extends MainDropdownComponent
     {
         //--> Custom
         $this->parameters = Data::getAnalysis();
+        $this->dynamicArea = $dynamicArea;
     }
 }

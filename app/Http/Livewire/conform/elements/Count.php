@@ -16,5 +16,6 @@ class Count extends MainDropdownComponent
     {
         //--> Custom
         $this->parameters = Data::getNumbers();
+        $this->dynamicArea = $dynamicArea;
     }
 }

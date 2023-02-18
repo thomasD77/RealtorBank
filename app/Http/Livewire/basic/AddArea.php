@@ -25,15 +25,23 @@ class AddArea extends Component
     }
 
     public function addArea(){
+        $newArea = new Area();
+        $newArea->title = $this->area->title;
+        $newArea->code = $this->area->code;
+        $newArea->created_at = now();
+        $newArea->updated_at = now();
+        $newArea->save();
+
         $extraArea = new BasicArea();
         $extraArea->room_id = $this->room->id;
-        $extraArea->area_id = $this->area->id;
+        $extraArea->area_id = $newArea->id;
         $extraArea->code = 'BASIC';
 
         $extraArea->created_at = now();
         $extraArea->updated_at = now();
 
         $extraArea->save();
+        $this->emit('renderNewArea');
     }
 
     public function render()
