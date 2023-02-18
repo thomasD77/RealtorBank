@@ -21,7 +21,9 @@
                     <div class="col-md-3">
                         <div class="img-wrapper">
                             <button wire:click="deleteMedia({{ $file->id }})" class="btn btn-danger delete">X</button>
-                            <img class="img-fluid" wire:key="{{ $file->id }}" src="{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}" alt="picture">
+                            <a data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
+                                <img class="img-fluid" wire:key="{{ $file->id }}" src="{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}" alt="picture">
+                            </a>
                         </div>
                     </div>
                 @endforeach

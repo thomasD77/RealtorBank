@@ -18,6 +18,7 @@ class MediaStore extends Model
             $mediaStore = new $mediaStore;
 
             $name = time(). $media->getClientOriginalName();
+            $name = MediaStore::getValidFilename($name);
             $newMedia = $media->storeAs('assets/images/' . $folder . '/', $name);
             $mediaStore->file_original = $name;
 
@@ -37,5 +38,33 @@ class MediaStore extends Model
         File::delete('assets/images/' . $folder . '/' . $mediaStore->file_original);
         File::delete('assets/images/' . $folder . '/crop/' . $mediaStore->file_crop);
         $mediaStore->delete();
+    }
+
+    public static function getValidFilename($name)
+    {
+        $new = str_replace('#', '_', $name);
+        $new = str_replace('%', '_', $new);
+        $new = str_replace('&', '_', $new);
+        $new = str_replace('{', '_', $new);
+        $new = str_replace('}', '_', $new);
+        $new = str_replace('\\', '_', $new);
+        $new = str_replace('<', '_', $new);
+        $new = str_replace('>', '_', $new);
+        $new = str_replace('*', '_', $new);
+        $new = str_replace('?', '_', $new);
+        $new = str_replace(' ', '_', $new);
+        $new = str_replace('$', '_', $new);
+        $new = str_replace('!', '_', $new);
+        $new = str_replace("'", '_', $new);
+        $new = str_replace('"', '_', $new);
+        $new = str_replace(':', '_', $new);
+        $new = str_replace('@', '_', $new);
+        $new = str_replace('+', '_', $new);
+        $new = str_replace('`', '_', $new);
+        $new = str_replace('|', '_', $new);
+        $new = str_replace(',', '_', $new);
+        $new = str_replace('(', '_', $new);
+        $new = str_replace(')', '_', $new);
+        return str_replace('=', '_', $new);
     }
 }

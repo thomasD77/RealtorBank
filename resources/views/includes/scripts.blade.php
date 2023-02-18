@@ -25,6 +25,16 @@
     }
 </script>
 
+<script>
+    Fancybox.bind("[data-fancybox]", {
+        // options
+        Image: {
+            zoom: false,
+        },
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
 <!-- ARCHIVES JS -->
 <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery-ui.js') }}"></script>

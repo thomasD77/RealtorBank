@@ -33,7 +33,7 @@ class Media extends Component
     {
         //Validate
         $this->validate([
-            'media.*' => 'image|max:1024',
+            'media.*' => 'image|max:2024',
         ]);
 
         //Set up model
