@@ -19,11 +19,11 @@
                 :dynamicArea="$specificArea"
             />
 
-            <livewire:conform.elements.media
-                :specificArea="$specificArea"
+            <livewire:specific.elements.extra
+                :dynamicArea="$specificArea"
             />
 
-            <livewire:conform.elements.extra
+            <livewire:specific.elements.media
                 :specificArea="$specificArea"
             />
 

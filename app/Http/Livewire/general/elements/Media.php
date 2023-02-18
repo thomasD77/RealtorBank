@@ -5,7 +5,6 @@ namespace App\Http\Livewire\General\Elements;
 use App\Models\General;
 use App\Models\MediaGeneral;
 use App\Models\MediaInspection;
-use App\Models\MediaRoom;
 use App\Models\MediaStore;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
@@ -26,7 +25,7 @@ class Media extends Component
     public function mount(General $general)
     {
         $this->general = $general;
-        $this->files = MediaGeneral::where('general_id', $this->general->id)->get();
+        $this->files = MediaGeneral::where($this->relation_id, $this->general->id)->get();
     }
 
     public function saveMedia()
@@ -45,7 +44,7 @@ class Media extends Component
         }
 
         //Render
-        $this->files = MediaGeneral::where('general_id', $this->general->id)->get();
+        $this->files = MediaGeneral::where($this->relation_id, $this->general->id)->get();
         $this->media = "";
     }
 
@@ -56,7 +55,7 @@ class Media extends Component
         MediaStore::deleteMedia($mediaStore, $this->folder);
 
         //Render
-        $this->files = MediaGeneral::where('general_id', $this->general->id)->get();
+        $this->files = MediaGeneral::where($this->relation_id, $this->general->id)->get();
     }
 
     public function render()

@@ -20,13 +20,13 @@
                 :dynamicArea="$techniqueArea"
             />
 
-            <livewire:technique.elements.media
+            <livewire:technique.elements.extra
                 :Inspection="$inspection"
                 :technique="$technique"
-                :techniqueArea="$techniqueArea"
+                :dynamicArea="$techniqueArea"
             />
 
-            <livewire:technique.elements.extra
+            <livewire:technique.elements.media
                 :Inspection="$inspection"
                 :technique="$technique"
                 :techniqueArea="$techniqueArea"

@@ -26,12 +26,12 @@
             :dynamicArea="$basicArea"
         />
 
-        <livewire:basic.elements.media
-            :BasicArea="$basicArea"
-        />
-
         <livewire:basic.elements.extra
             :dynamicArea="$basicArea"
+        />
+
+        <livewire:basic.elements.media
+            :BasicArea="$basicArea"
         />
 
     </ul>
