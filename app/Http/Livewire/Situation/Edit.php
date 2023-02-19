@@ -61,4 +61,12 @@ class Edit extends Component
         session()->flash('successExtra', 'success!');
     }
 
+    public function deleteSituation()
+    {
+        $situation = $this->situation;
+        $situation->delete();
+
+        return redirect()->route('situation.index', $this->inspection);
+    }
+
 }
