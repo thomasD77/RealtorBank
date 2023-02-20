@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Inspection;
 
 use App\Http\Controllers\Controller;
+use App\Models\BasicArea;
 use App\Models\Inspection;
 use App\Models\MediaInspection;
 use App\Models\TechniqueArea;
@@ -22,11 +23,13 @@ class InspectionController extends Controller
     {
         $files = MediaInspection::where('inspection_id', $inspection->id)->get();
         $techniqueArea = TechniqueArea::where('inspection_id', $inspection->id)->get();
+        $basicArea = BasicArea::where('inspection_id', $inspection->id)->get();
 
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $inspection,
             'files' => $files,
-            'techniqueArea' => $techniqueArea
+            'techniqueArea' => $techniqueArea,
+            'basicArea' => $basicArea
         ]);
 
         return $pdf->stream('plaatsbeschrijving-' . '#' . $inspection->id . '.pdf');

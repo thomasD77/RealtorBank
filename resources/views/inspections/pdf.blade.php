@@ -12,6 +12,8 @@
 
     @include('inspections.sections.inspection-information')
 
+    @include('inspections.sections.basicArea')
+
     @include('inspections.sections.techniques')
 
 </body>
