@@ -107,7 +107,7 @@
             <h3>{{ __('Verwijderen') }}</h3>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
-                {{ __('Delete') }}<i class="fa fa-trash mx-2"></i>
+               <i class="fa fa-trash mx-2"></i> {{ __('Delete') }}
             </button>
 
             <!-- Modal -->

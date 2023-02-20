@@ -134,6 +134,14 @@ class Edit extends Component
         $this->files = MediaInspection::where('inspection_id', $this->inspection->id)->get();
     }
 
+    public function deleteInspection()
+    {
+        $situation = $this->inspection;
+        $situation->delete();
+
+        return redirect()->route('inspections.index');
+    }
+
     public function render()
     {
         return view('livewire.inspection.edit');
