@@ -23,7 +23,31 @@ class InspectionController extends Controller
     {
         $files = MediaInspection::where('inspection_id', $inspection->id)->get();
         $techniqueArea = TechniqueArea::where('inspection_id', $inspection->id)->get();
-        $basicArea = BasicArea::where('inspection_id', $inspection->id)->get();
+
+        $basicArea = BasicArea::query()
+            ->whereNotNull('material')
+            ->orWhereNotNull('color')
+            ->orWhereNotNull('plinth')
+            ->orWhereNotNull('analysis')
+            ->orWhereNotNull('type')
+            ->orWhereNotNull('handle')
+            ->orWhereNotNull('lists')
+            ->orWhereNotNull('key')
+            ->orWhereNotNull('doorPump')
+            ->orWhereNotNull('doorStop')
+            ->orWhereNotNull('plaster')
+            ->orWhereNotNull('finish')
+            ->orWhereNotNull('ventilationGrille')
+            ->orWhereNotNull('glazing')
+            ->orWhereNotNull('windowsill')
+            ->orWhereNotNull('rollerShutter')
+            ->orWhereNotNull('windowDecoration')
+            ->orWhereNotNull('hor')
+            ->orWhereNotNull('fallProtection')
+            ->orWhereNotNull('energy')
+            ->orWhereNotNull('extra')
+            ->where('inspection_id', $inspection->id)
+            ->get();
 
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $inspection,
