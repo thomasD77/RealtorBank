@@ -29,6 +29,8 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('cascade');
 
+            $table->unsignedInteger('floor_id')
+                ->index()->nullable();
 
             $table->timestamps();
         });

@@ -12,8 +12,12 @@
         padding-right: 8px;
         font-weight: bold;
     }
-    h1, h2 {
+    h1, h2, h3 {
         font-family: Arial, Helvetica, sans-serif;
+    }
+    h3 {
+        font-size: 0.7rem;
+        text-transform: uppercase;
     }
     .table {
         font-family: Arial, Helvetica, sans-serif;

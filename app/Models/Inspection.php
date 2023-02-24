@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\FloorKey;
 use App\Enums\RoomKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -65,21 +66,32 @@ class Inspection extends Model
          *
          */
         $rooms = [
-            ['Kelder', RoomKey::Basement],
-            ['Inkomhal', RoomKey::EntranceHall],
-            ['Toilet', RoomKey::Toilet],
-            ['Woonkamer', RoomKey::LivingRoom],
-            ['Keuken', RoomKey::Kitchen],
-            ['Badkamer', RoomKey::Bathroom],
-            ['Nachthal', RoomKey::NightHall],
-            ['Berging', RoomKey::Storage],
-            ['Slaapkamer', RoomKey::Bedroom],
+            ['Kelder', RoomKey::Basement, Floor::where('code', FloorKey::BasementFloor )->first()->id],
+
+            ['Inkomhal', RoomKey::EntranceHall->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
+            ['Toilet', RoomKey::Toilet->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
+            ['Woonkamer', RoomKey::LivingRoom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
+            ['Keuken', RoomKey::Kitchen->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
+            ['Badkamer', RoomKey::Bathroom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
+            ['Nachthal', RoomKey::NightHall->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
+            ['Berging', RoomKey::Storage->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
+            ['Slaapkamer', RoomKey::Bedroom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
+
+            ['Nachthal', RoomKey::NightHall->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
+            ['Badkamer', RoomKey::Bathroom->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
+            ['Slaapkamer', RoomKey::Bedroom->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
+
+            ['Zolder', RoomKey::Attic->value, Floor::where('code', FloorKey::Attic)->first()->id],
+
+            ['Garage', RoomKey::Garage->value, Floor::where('code', FloorKey::Garage)->first()->id],
         ];
+
         $roomsToInsert = [];
         foreach ($rooms as $room) {
             $roomsToInsert[] = [
                 'title' => $room[0],
                 'code' => $room[1],
+                'floor_id' => $room[2],
                 'inspection_id' => $inspection->id,
                 'created_at' => DB::raw('NOW()'),
                 'updated_at' => DB::raw('NOW()'),
@@ -95,8 +107,12 @@ class Inspection extends Model
         //Basic Areas
         $rooms = Room::query()
             ->where('inspection_id', $inspection->id)
-            ->select(['title', 'code', 'id'])
-            ->get();
+            ->select([
+                'title',
+                'code',
+                'floor_id',
+                'id'
+            ])->get();
 
         $areas = Area::all();
         foreach ($rooms as $room){
@@ -105,6 +121,7 @@ class Inspection extends Model
                 $areasToInsert[] = [
                     'area_id' => $area->id,
                     'room_id' => $room->id,
+                    'floor_id' => $room->floor_id,
                     'inspection_id' => $inspection->id,
                     'created_at' => DB::raw('NOW()'),
                     'updated_at' => DB::raw('NOW()'),

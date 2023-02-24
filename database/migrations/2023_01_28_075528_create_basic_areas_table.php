@@ -18,6 +18,9 @@ return new class extends Migration
             $table->unsignedInteger('inspection_id')
                 ->index();
 
+            $table->unsignedInteger('floor_id')
+                ->index();
+
             $table->unsignedInteger('room_id')
                 ->index();
 

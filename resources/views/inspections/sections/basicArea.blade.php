@@ -4,15 +4,11 @@
         <h2>{{ __('Interieur') }}</h2>
 
         @foreach($inspection->rooms as $room)
-
-            <h2>{{ $room->title }}</h2>
-
             @foreach($room->basicAreas as $item)
-
                 @if($item->material || $item->color || $item->plinth || $item->analysis || $item->type || $item->handle || $item->lists || $item->key || $item->doorPump || $item->doorStop || $item->plaster || $item->finish || $item->ventilationGrille || $item->glazing || $item->windowsill || $item->rollerShutter || $item->windowDecoration || $item->hor || $item->fallProtection || $item->energy || $item->extra)
                     <table class="table">
                         <tr class="row--head--list">
-                            <th>{{  $item->area->title }}</th>
+                            <th>{{ $room->title }} | {{  $item->area->title }}</th>
                             <th></th>
                         </tr>
                         @if($item->material)

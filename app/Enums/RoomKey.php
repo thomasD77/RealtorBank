@@ -13,4 +13,6 @@ enum RoomKey : string
     case NightHall = 'nightHall';
     case Storage = 'storage';
     case Bedroom = 'bedroom';
+    case Attic = 'attic';
+    case Garage = 'garage';
 }

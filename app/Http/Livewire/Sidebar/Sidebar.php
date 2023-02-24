@@ -3,8 +3,10 @@
 namespace App\Http\Livewire\Sidebar;
 
 use App\Enums\CategoryKey;
+use App\Enums\FloorKey;
 use App\Enums\RoomKey;
 use App\Models\Category;
+use App\Models\Floor;
 use App\Models\Inspection;
 use App\Models\Room;
 use App\Models\SidebarToggle;
@@ -19,10 +21,14 @@ class Sidebar extends Component
     public $activeRoom;
     public $activeTemplate;
 
+    //Empty collapses
     public $situation;
     public $interior;
     public $exterior;
     public $techniques;
+
+    //Models
+    public $basement;
 
     public $basic = 'basic';
     public $specific = 'specific';
@@ -49,6 +55,17 @@ class Sidebar extends Component
         $this->interior = Category::where('title', CategoryKey::Interior)->pluck('id')->first();
         $this->exterior = Category::where('title', CategoryKey::Exterior)->pluck('id')->first();
         $this->techniques = Category::where('title', CategoryKey::Techniques)->pluck('id')->first();
+
+
+        $this->basement = Room::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::BasementFloor)->first()->id)
+            ->get();
+
+        $this->groundFloor = Room::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::GroundFloor)->first()->id)
+            ->get();
     }
 
     public function toggleCategory($value)
