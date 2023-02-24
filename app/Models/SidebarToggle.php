@@ -59,4 +59,21 @@ class SidebarToggle extends Model
 
         $user->update();
     }
+
+    public static function sidebarFloor($value)
+    {
+        $user = Auth()->user();
+
+        if(isset($user->floor_id)){
+            if($user->floor_id == $value){
+                $user->floor_id = null;
+            }else {
+                $user->floor_id = $value;
+            }
+        }else {
+            $user->floor_id = $value;
+        }
+
+        $user->update();
+    }
 }

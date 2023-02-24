@@ -29,6 +29,8 @@ return new class extends Migration
                 ->index()->nullable();
             $table->unsignedInteger('room_id')
                 ->index()->nullable();
+            $table->unsignedInteger('floor_id')
+                ->index()->nullable();
             $table->string('template')->nullable();
         });
 

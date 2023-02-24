@@ -26,9 +26,10 @@ class Sidebar extends Component
     public $interior;
     public $exterior;
     public $techniques;
+    public $basement;
 
     //Models
-    public $basement;
+    public $basementParam;
 
     public $basic = 'basic';
     public $specific = 'specific';
@@ -56,8 +57,9 @@ class Sidebar extends Component
         $this->exterior = Category::where('title', CategoryKey::Exterior)->pluck('id')->first();
         $this->techniques = Category::where('title', CategoryKey::Techniques)->pluck('id')->first();
 
+        $this->basement = FloorKey::BasementFloor->value;
 
-        $this->basement = Room::query()
+        $this->basementParam = Room::query()
             ->where('inspection_id', $this->inspection->id)
             ->where('floor_id', Floor::where('code', FloorKey::BasementFloor)->first()->id)
             ->get();
@@ -81,6 +83,11 @@ class Sidebar extends Component
     public function toggleTemplate($value)
     {
       SidebarToggle::sidebarTemplate($value);
+    }
+
+    public function toggleFloor($value)
+    {
+        SidebarToggle::sidebarFloor($value);
     }
 
     public function toggleCollapse()
