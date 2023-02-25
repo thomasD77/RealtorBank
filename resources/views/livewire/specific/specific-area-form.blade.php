@@ -210,6 +210,37 @@
         />
         @break
 
+        @case(\App\Enums\SpecificKey::FirePlace->value)
+        <livewire:specific.elements.fireplacetypes
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.fireplacematerial
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.fireplaceenergy
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::DecorativeFirePlace->value)
+        <livewire:specific.elements.decorativefireplacematerial
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::Thermostat->value)
+        <livewire:specific.elements.types
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.model
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.thermostatbrand
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+
 
     @endswitch
 </div>

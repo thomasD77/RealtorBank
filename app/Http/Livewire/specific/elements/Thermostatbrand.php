@@ -3,10 +3,10 @@
 namespace App\Http\Livewire\Specific\Elements;
 
 use App\Http\Livewire\MainDropdownComponent;
-use App\Models\Data;
+use App\Models\SpecificArea;
 use Livewire\Component;
 
-class Brand extends MainDropdownComponent
+class Thermostatbrand extends MainDropdownComponent
 {
     //--> Custom
     public string $element = "brand";
@@ -15,6 +15,6 @@ class Brand extends MainDropdownComponent
     public function mount($dynamicArea)
     {
         //--> Custom
-        $this->parameters = Data::getAnalysis();
+        $this->parameters = SpecificArea::getHeatingBrands();
     }
 }

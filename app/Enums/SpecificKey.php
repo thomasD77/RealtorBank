@@ -19,4 +19,26 @@ enum SpecificKey : string
     case ToiletBrush = 'toiletBrush';
     case Toilet = 'toilet';
     case TowelRail = 'towelRail';
+    case FirePlace = 'firePlace';
+    case DecorativeFirePlace = 'decorativeFirePlace';
+    case Thermostat = 'thermostat';
+    case KitchenCloset = 'kitchenCloset';
+    case WorkTop = 'workTop';
+    case Sink = 'sink';
+    case SplashBack = 'splashBack';
+    case Suction = 'suction';
+    case Cooker = 'cooker';
+    case Oven = 'oven';
+    case Fridge = 'fridge';
+    case Dishwasher = 'dishwasher';
+    case DischargePoint = 'dischargePoint';
+    case Crane = 'crane';
+    case BathroomFurniture = 'bathroomFurniture';
+    case CoatRack = 'coatRack';
+    case SoapHolder = 'soapHolder';
+    case CupHolder = 'cupHolder';
+    case Shower = 'shower';
+    case Bath = 'bath';
+    case Isolation = 'isolation';
+    case GarageDoor = 'garageDoor';
 }
