@@ -43,6 +43,23 @@ class SidebarToggle extends Model
         $user->update();
     }
 
+    public static function sidebarFloor($value)
+    {
+        $user = Auth()->user();
+
+        if(isset($user->floor)){
+            if($user->floor->id == $value){
+                $user->floor_id = null;
+            }else {
+                $user->floor_id = $value;
+            }
+        }else {
+            $user->floor_id = $value;
+        }
+
+        $user->update();
+    }
+
     public static function sidebarTemplate($value)
     {
         $user = Auth()->user();
@@ -55,23 +72,6 @@ class SidebarToggle extends Model
             }
         }else {
             $user->template = $value;
-        }
-
-        $user->update();
-    }
-
-    public static function sidebarFloor($value)
-    {
-        $user = Auth()->user();
-
-        if(isset($user->floor_id)){
-            if($user->floor_id == $value){
-                $user->floor_id = null;
-            }else {
-                $user->floor_id = $value;
-            }
-        }else {
-            $user->floor_id = $value;
         }
 
         $user->update();

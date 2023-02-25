@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Room::class);
     }
+
+    public function floor()
+    {
+        return $this->belongsTo(Floor::class);
+    }
 }

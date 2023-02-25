@@ -86,6 +86,10 @@ Version      : 1.2
 /*------ 1. CUSTOM  ------*/
 /*-----------------------------------*/
 
+.custom-sidebar-padding {
+    padding-left: 2rem !important;
+}
+
 .img-wrapper {
     position: relative;
 }

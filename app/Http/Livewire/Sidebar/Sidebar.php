@@ -18,6 +18,7 @@ class Sidebar extends Component
     public $responsive;
 
     public $activeCat;
+    public $activeFloor;
     public $activeRoom;
     public $activeTemplate;
 
@@ -27,9 +28,17 @@ class Sidebar extends Component
     public $exterior;
     public $techniques;
     public $basement;
+    public $groundFloor;
+    public $upperFloor;
+    public $attic;
+    public $garage;
 
     //Models
     public $basementParam;
+    public $groundFloorParam;
+    public $upperFloorParam;
+    public $atticParam;
+    public $garageParam;
 
     public $basic = 'basic';
     public $specific = 'specific';
@@ -51,28 +60,52 @@ class Sidebar extends Component
         if(Auth()->user()->room){
             $this->activeRoom = Auth()->user()->room->id;
         }
+        if(Auth()->user()->floor){
+            $this->activeFloor = Auth()->user()->floor->id;
+        }
 
         $this->situation = Category::where('title', CategoryKey::Situation)->pluck('id')->first();
         $this->interior = Category::where('title', CategoryKey::Interior)->pluck('id')->first();
         $this->exterior = Category::where('title', CategoryKey::Exterior)->pluck('id')->first();
         $this->techniques = Category::where('title', CategoryKey::Techniques)->pluck('id')->first();
 
-        $this->basement = FloorKey::BasementFloor->value;
+        $this->basement = Floor::where('code', FloorKey::BasementFloor)->pluck('id')->first();
+        $this->groundFloor = Floor::where('code', FloorKey::GroundFloor)->pluck('id')->first();
+        $this->upperFloor = Floor::where('code', FloorKey::UpperFloor)->pluck('id')->first();
+        $this->attic = Floor::where('code', FloorKey::Attic)->pluck('id')->first();
+        $this->garage = Floor::where('code', FloorKey::Garage)->pluck('id')->first();
 
         $this->basementParam = Room::query()
             ->where('inspection_id', $this->inspection->id)
             ->where('floor_id', Floor::where('code', FloorKey::BasementFloor)->first()->id)
             ->get();
 
-        $this->groundFloor = Room::query()
+        $this->groundFloorParam = Room::query()
             ->where('inspection_id', $this->inspection->id)
             ->where('floor_id', Floor::where('code', FloorKey::GroundFloor)->first()->id)
+            ->get();
+
+        $this->upperFloorParam = Room::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::UpperFloor)->first()->id)
+            ->get();
+
+        $this->atticParam = Room::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::Attic)->first()->id)
+            ->get();
+
+        $this->garageParam = Room::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::Garage)->first()->id)
             ->get();
     }
 
     public function toggleCategory($value)
     {
         SidebarToggle::sidebarCategory($value);
+        //Render
+        $this->activeCat = $value;
     }
 
     public function toggleRoom($value)
