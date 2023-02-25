@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Inspection;
 
 use App\Http\Controllers\Controller;
 use App\Models\BasicArea;
+use App\Models\Document;
 use App\Models\Inspection;
 use App\Models\MediaInspection;
 use App\Models\TechniqueArea;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
 class InspectionController extends Controller
 {
@@ -17,6 +19,16 @@ class InspectionController extends Controller
     {
         $inspection = Inspection::createInspection();
         return to_route('inspection.edit', $inspection);
+    }
+
+    public function createDocument(Inspection $inspection)
+    {
+        $document = Document::create([
+            'inspection_id' => $inspection->id,
+            'title' => 'DRAFT',
+            'date' => now(),
+        ]);
+        return to_route('document.edit', [ $inspection, $document ]);
     }
 
     public function genereatePDF(Inspection $inspection)

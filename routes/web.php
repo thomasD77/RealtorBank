@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Inspection\InspectionController;
 use App\Http\Controllers\ProfileController;
     use App\Http\Controllers\Situation\SituationController;
+    use App\Models\Document;
     use App\Models\Inspection;
 use App\Models\Situation;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,7 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/create/inspection', [InspectionController::class, 'create'])->name('create.inspection');
     Route::get('/generate/inspection/{inspection}', [InspectionController::class, 'genereatePDF'])->name('generate.inspection');
     Route::get('/create/situation/{inspection}', [SituationController::class, 'create'])->name('create.situation');
+    Route::get('/create/document/{inspection}', [InspectionController::class, 'createDocument'])->name('create.document');
 
     Route::view('/inspections', 'inspections.index')
         ->name('inspections.index');
@@ -57,13 +59,17 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
         return view('situation.index', compact('inspection'));
     })->name('situation.index');
 
+    Route::get('/situation/inspection/edit/{inspection}/{situation}', function (Inspection $inspection, Situation $situation) {
+        return view('situation.edit', compact('inspection', 'situation'));
+    })->name('situation.edit');
+
     Route::get('/inspection/documents/{inspection}', function (Inspection $inspection) {
         return view('documents.index', compact('inspection'));
     })->name('documents.index');
 
-    Route::get('/situation/inspection/edit/{inspection}/{situation}', function (Inspection $inspection, Situation $situation) {
-        return view('situation.edit', compact('inspection', 'situation'));
-    })->name('situation.edit');
+    Route::get('/document/edit/{inspection}/{document}', function (Inspection $inspection, Document $document) {
+        return view('documents.edit', compact('inspection','document'));
+    })->name('document.edit');
 });
 
 Route::middleware('auth')->group(function () {

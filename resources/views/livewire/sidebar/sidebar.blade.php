@@ -706,6 +706,9 @@
                     <a href="{{ route('documents.index', $inspection) }}">
                         <i class="fa fa-list"></i>{{ __('Lijst') }}
                     </a>
+                    <a href="{{ route('create.document', $inspection) }}">
+                        <i class="fa fa-plus"></i>{{ __('Toevoegen') }}
+                    </a>
                 <li>
             </ul>
         </div>

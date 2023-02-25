@@ -2,8 +2,9 @@
 
 @section('content')
 
-    <livewire:documents.index
+    <livewire:documents.edit
         :inspection="$inspection"
+        :document="$document"
     />
 
 @endsection
