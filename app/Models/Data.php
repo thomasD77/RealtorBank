@@ -55,4 +55,29 @@ class Data extends Model
             'niet OK',
         ];
     }
+
+    public static function getDirection() :array
+    {
+        return $data = [
+            'links',
+            'rechts',
+            'boven',
+            'onder',
+        ];
+    }
+
+    public static function getButtons() :array
+    {
+        return $data = [
+            'drukknop',
+            'ander',
+        ];
+    }
+
+    public static function getOnlyDynamic() :array
+    {
+        return $data = [
+            'ander',
+        ];
+    }
 }

@@ -25,10 +25,11 @@ return new class extends Migration
                 ->index();
 
             $table->string('code')->default('SPECIFIC');
-            $table->string('material')->nullable();
-            $table->string('color')->nullable();
             $table->string('handrail')->nullable();
+            $table->string('material')->nullable();
             $table->string('shelves')->nullable();
+
+            $table->string('color')->nullable();
             $table->string('glassInlay')->nullable();
             $table->string('handle')->nullable();
             $table->string('mailbox')->nullable();
