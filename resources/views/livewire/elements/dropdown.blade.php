@@ -8,13 +8,12 @@
                 @foreach($parameters as $i => $parameter)
                     @if($parameter != \App\Enums\DynamicKey::Dynamic->value)
                         <div class="col-md-3 col-lg-2">
-                            <div class="my-2">
-                                <input id="{{ $parameter . $i }}"
-                                       type="checkbox"
+                            <div class="m-2">
+                                <input type="checkbox"
                                        @if($this->dynamicArea->$element == $parameter) checked @endif
                                        wire:click="select('{{ $parameter }}')"
                                 >
-                                <label for="{{ $parameter . $i }}">{{ $parameter }}</label>
+                                <label class="mx-2">{{ $parameter }}</label>
                             </div>
                         </div>
                     @else
