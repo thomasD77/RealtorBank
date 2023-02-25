@@ -253,6 +253,20 @@ class SpecificArea extends Model
         ];
     }
 
+    public static function getCookerBrands() :array
+    {
+        return $data = [
+            'Bosh',
+            'Honeywell',
+            'Junkers',
+            'Nest',
+            'Siemens',
+            'Vaillant',
+            'Viessman',
+            'ander',
+        ];
+    }
+
     public static function getSuctionTypes() :array
     {
         return $data = [
@@ -261,15 +275,16 @@ class SpecificArea extends Model
         ];
     }
 
-    public static function getSuctionPosition() :array
+    public static function getAppliancePosition() :array
     {
         return $data = [
             'inbouw',
             'opbouw',
+            'vrijstaand',
         ];
     }
 
-    public static function getSuctionBrands() :array
+    public static function getBrands() :array
     {
         return $data = [
             'AEG',

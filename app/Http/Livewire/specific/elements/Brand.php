@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Specific\Elements;
 
 use App\Http\Livewire\MainDropdownComponent;
 use App\Models\Data;
+use App\Models\SpecificArea;
 use Livewire\Component;
 
 class Brand extends MainDropdownComponent
@@ -15,6 +16,6 @@ class Brand extends MainDropdownComponent
     public function mount($dynamicArea)
     {
         //--> Custom
-        $this->parameters = Data::getAnalysis();
+        $this->parameters = SpecificArea::getBrands();
     }
 }

@@ -292,8 +292,160 @@
         <livewire:specific.elements.handlecount
             :dynamicArea="$specificArea"
         />
+        @break
 
+        @case(\App\Enums\SpecificKey::WorkTop->value)
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.colors
+            :dynamicArea="$specificArea"
+        />
+        @break
 
+        @case(\App\Enums\SpecificKey::Sink->value)
+        <livewire:specific.elements.typecount
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.sinkmodel
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.colors
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.crane
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.stop
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.siphon
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.anglecrane
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::SplashBack->value)
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.colors
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::Suction->value)
+        <livewire:specific.elements.suctiontypes
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.suctionmodel
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.brand
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.suctionfilter
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.suctionlighting
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.manual
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::Cooker->value)
+        <livewire:specific.elements.cookertypes
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.zones
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.brand
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.manual
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::Oven->value)
+        <livewire:specific.elements.oventypes
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.appliancemodel
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.energy
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.brand
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.rooster
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.rooster
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.bakingtray
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.manual
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::Fridge->value)
+        <livewire:specific.elements.reftypes
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.appliancemodel
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.brand
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.rooster
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.shelf
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.vegetabletray
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.doorbins
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.manual
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::Dishwasher->value)
+
+        <livewire:specific.elements.appliancemodel
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.brand
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.cutlerybasket
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.manual
+            :dynamicArea="$specificArea"
+        />
         @break
 
 

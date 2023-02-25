@@ -9,12 +9,12 @@ use Livewire\Component;
 class Manual extends MainDropdownComponent
 {
     //--> Custom
-    public string $element = "analysis";
-    public string $title = "Analyse";
+    public string $element = "manual";
+    public string $title = "Handleiding";
 
     public function mount($dynamicArea)
     {
         //--> Custom
-        $this->parameters = Data::getAnalysis();
+        $this->parameters = Data::getPresent();
     }
 }
