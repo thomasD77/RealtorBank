@@ -4,7 +4,6 @@
             <livewire:specific.elements.material
                 :dynamicArea="$specificArea"
             />
-
             <livewire:specific.elements.handrail
                 :dynamicArea="$specificArea"
             />
@@ -14,10 +13,106 @@
             <livewire:specific.elements.material
                 :dynamicArea="$specificArea"
             />
-
             <livewire:specific.elements.shelves
                 :dynamicArea="$specificArea"
             />
         @break
+
+        @case(\App\Enums\SpecificKey::DoorOutside->value)
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.colors
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.glassinlay
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.peephole
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.window
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.doorbell
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.dorpel
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::Alarm->value)
+        <livewire:specific.elements.dynamicbrand
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.colors
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::VideoPhone->value)
+        <livewire:specific.elements.dynamicbrand
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.colors
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::DoorBell->value)
+        <livewire:specific.elements.types
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.model
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::BuildInCupboard->value)
+        <livewire:specific.elements.cupboardtypes
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.shelves
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.doors
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.drawers
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.rod
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.handlecount
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::AtticHatch->value)
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.finish
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.colors
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.trap
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::Trap->value)
+        <livewire:specific.elements.materials
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.handle
+            :dynamicArea="$specificArea"
+        />
+        @break
+
     @endswitch
 </div>

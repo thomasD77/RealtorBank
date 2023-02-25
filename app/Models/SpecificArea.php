@@ -58,7 +58,7 @@ class SpecificArea extends Model
         ];
     }
 
-    public static function getPostbox() :array
+    public static function getMailbox() :array
     {
         return $data = [
             'gleuf',
