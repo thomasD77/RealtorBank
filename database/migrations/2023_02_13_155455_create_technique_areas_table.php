@@ -20,7 +20,6 @@ return new class extends Migration
             $table->unsignedInteger('technique_id')
                 ->index();
 
-            $table->string('code')->default('TECHNIQUE');
             $table->string('type')->nullable();
             $table->string('analysis')->nullable();
             $table->string('fuel')->nullable();

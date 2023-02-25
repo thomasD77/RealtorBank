@@ -27,7 +27,6 @@ return new class extends Migration
             $table->unsignedInteger('area_id')
                 ->index();
 
-            $table->string('code')->default('BASIC');
             $table->string('material')->nullable();
             $table->string('color')->nullable();
             $table->string('plinth')->nullable();

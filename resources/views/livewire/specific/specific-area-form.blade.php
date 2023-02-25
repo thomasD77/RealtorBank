@@ -460,7 +460,137 @@
         />
         @break
 
+        @case(\App\Enums\SpecificKey::BathroomFurniture->value)
+        <livewire:specific.elements.toilettype
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.cupboardtypes
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.lightingcount
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.shelves
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.doors
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.drawers
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.handle
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.mirror
+            :dynamicArea="$specificArea"
+        />
+        @break
 
+        @case(\App\Enums\SpecificKey::SoapHolder->value)
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::CoatRack->value)
+        <livewire:specific.elements.coatracktypes
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::TowelRail->value)
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::CupHolder->value)
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::Mirror->value)
+        <livewire:specific.elements.mirror
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.lighting
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::Shower->value)
+        <livewire:specific.elements.showertypes
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.showerfloor
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.showerwalls
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.crane
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.showermodel
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.showerprotection
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.stop
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::Bath->value)
+        <livewire:specific.elements.bathtypes
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.crane
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.stop
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.bathhose
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.bathcase
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::Isolation->value)
+        <livewire:specific.elements.isolationmaterial
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.isolationposition
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.vaporbarrier
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::GarageDoor->value)
+        <livewire:specific.elements.garagedoors
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.service
+            :dynamicArea="$specificArea"
+        />
+        @break
 
 
     @endswitch

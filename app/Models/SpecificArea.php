@@ -76,6 +76,17 @@ class SpecificArea extends Model
         ];
     }
 
+    public static function getPosition() :array
+    {
+        return $data = [
+            'staand',
+            'aan muur',
+            'ander',
+        ];
+    }
+
+
+
     public static function getDorpels() :array
     {
         return $data = [
@@ -147,6 +158,8 @@ class SpecificArea extends Model
             'ander',
         ];
     }
+
+
 
     public static function getSinkModels() :array
     {
@@ -385,6 +398,15 @@ class SpecificArea extends Model
             'ligbad',
             'zitbad',
             'jacuzzi',
+        ];
+    }
+
+    public static function getHoses() :array
+    {
+        return $data = [
+            'met slang',
+            'vast',
+            'regendouche',
         ];
     }
 

@@ -24,7 +24,6 @@ return new class extends Migration
             $table->unsignedInteger('conform_id')
                 ->index();
 
-            $table->string('code')->default('CONFORM');
             $table->string('material')->nullable();
             $table->string('color')->nullable();
             $table->string('present')->nullable();

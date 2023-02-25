@@ -73,7 +73,7 @@ class Inspection extends Model
             ['Woonkamer', RoomKey::LivingRoom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
             ['Keuken', RoomKey::Kitchen->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
             ['Badkamer', RoomKey::Bathroom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
-            ['Nachthal', RoomKey::NightHall->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
+            ['Gang', RoomKey::NightHall->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
             ['Berging', RoomKey::Storage->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
             ['Slaapkamer', RoomKey::Bedroom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
 

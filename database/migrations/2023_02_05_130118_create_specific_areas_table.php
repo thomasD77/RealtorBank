@@ -24,7 +24,6 @@ return new class extends Migration
             $table->unsignedInteger('specific_id')
                 ->index();
 
-            $table->string('code')->default('SPECIFIC');
             $table->string('handrail')->nullable();
             $table->string('material')->nullable();
             $table->string('shelves')->nullable();
@@ -85,6 +84,15 @@ return new class extends Migration
             $table->string('vegetableTray')->nullable();
             $table->string('doorBins')->nullable();
             $table->string('cutleryBasket')->nullable();
+
+            $table->string('floor')->nullable();
+            $table->string('walls')->nullable();
+            $table->string('shower')->nullable();
+            $table->string('protection')->nullable();
+            $table->string('casing')->nullable();
+            $table->string('position')->nullable();
+            $table->string('vaporBarrier')->nullable();
+            $table->string('service')->nullable();
 
             $table->string('analysis')->nullable();
             $table->text('extra')->nullable();
