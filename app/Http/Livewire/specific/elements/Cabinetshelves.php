@@ -6,11 +6,11 @@ use App\Http\Livewire\MainDropdownComponent;
 use App\Models\Data;
 use Livewire\Component;
 
-class Cablow extends MainDropdownComponent
+class Cabinetshelves extends MainDropdownComponent
 {
     //--> Custom
-    public string $element = "cabLow";
-    public string $title = "Lage kasten";
+    public string $element = "cabinetShelves";
+    public string $title = "Bovenkasten - legplanken";
 
     public function mount($dynamicArea)
     {

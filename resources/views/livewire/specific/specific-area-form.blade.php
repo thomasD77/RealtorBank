@@ -240,6 +240,62 @@
         />
         @break
 
+        @case(\App\Enums\SpecificKey::KitchenCloset->value)
+        <livewire:specific.elements.colors
+            :dynamicArea="$specificArea"
+        />
+
+
+        <livewire:specific.elements.cablow
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.cablowdoors
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.cablowdrawers
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.cablowshelves
+            :dynamicArea="$specificArea"
+        />
+
+        <livewire:specific.elements.cabhigh
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.cabhighdoors
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.cabhighdrawers
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.cabhighshelves
+            :dynamicArea="$specificArea"
+        />
+
+        <livewire:specific.elements.cabinet
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.cabinetdoors
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.cabinetdrawers
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.cabinetshelves
+            :dynamicArea="$specificArea"
+        />
+
+        <livewire:specific.elements.cutlerydrawer
+            :dynamicArea="$specificArea"
+        />
+
+        <livewire:specific.elements.handlecount
+            :dynamicArea="$specificArea"
+        />
+
+
+        @break
+
 
 
     @endswitch

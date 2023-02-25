@@ -9,12 +9,12 @@ use Livewire\Component;
 class Cutlerydrawer extends MainDropdownComponent
 {
     //--> Custom
-    public string $element = "analysis";
-    public string $title = "Analyse";
+    public string $element = "cutleryDrawer";
+    public string $title = "Besteklade";
 
     public function mount($dynamicArea)
     {
         //--> Custom
-        $this->parameters = Data::getAnalysis();
+        $this->parameters = Data::getNumbers();
     }
 }

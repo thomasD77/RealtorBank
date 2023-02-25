@@ -57,12 +57,22 @@ return new class extends Migration
             $table->string('rinse')->nullable();
             $table->string('seat')->nullable();
             $table->string('energy')->nullable();
+
             $table->string('cabLow')->nullable();
             $table->string('cabLowDoors')->nullable();
+            $table->string('cabLowDrawers')->nullable();
             $table->string('cabLowShelves')->nullable();
+
             $table->string('cabHigh')->nullable();
             $table->string('cabHighDoors')->nullable();
+            $table->string('cabHighDrawers')->nullable();
             $table->string('cabHighShelves')->nullable();
+
+            $table->string('cabinet')->nullable();
+            $table->string('cabinetDoors')->nullable();
+            $table->string('cabinetDrawers')->nullable();
+            $table->string('cabinetShelves')->nullable();
+
             $table->string('cutleryDrawer')->nullable();
             $table->string('kitchenHandle')->nullable();
             $table->string('filter')->nullable();

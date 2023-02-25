@@ -9,12 +9,12 @@ use Livewire\Component;
 class Cabhighdoors extends MainDropdownComponent
 {
     //--> Custom
-    public string $element = "analysis";
-    public string $title = "Analyse";
+    public string $element = "cabHighDoors";
+    public string $title = "Hoge kasten - deuren";
 
     public function mount($dynamicArea)
     {
         //--> Custom
-        $this->parameters = Data::getAnalysis();
+        $this->parameters = Data::getNumbers();
     }
 }
