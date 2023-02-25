@@ -686,6 +686,31 @@
 {{--        </div>--}}
 {{--    </li>--}}
 
+    <li>
+        <a data-toggle="collapse"
+           href="#collapseDocument"
+           role="button"
+           aria-expanded="false"
+           aria-controls="collapseDocument"
+           wire:click="toggleCategory({{ $documents }})"
+           class="custom-sidebar-padding @if($documents == $activeCat) active @endif"
+        >
+            <i class="fa fa-folder"></i>{{ __('Documenten') }}
+        </a>
+        <div class="collapse @if($documents == $activeCat) show @endif"
+             wire:ignore.self
+             id="collapseDocument"
+        >
+            <ul>
+                <li class="mx-3">
+                    <a href="{{ route('documents.index', $inspection) }}">
+                        <i class="fa fa-list"></i>{{ __('Lijst') }}
+                    </a>
+                <li>
+            </ul>
+        </div>
+    </li>
+
 
 </ul>
 

@@ -42,6 +42,11 @@ class Inspection extends Model
         return $this->hasMany(TechniqueArea::class, 'inspection_id');
     }
 
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+
     public static function createInspection()
     {
         /**

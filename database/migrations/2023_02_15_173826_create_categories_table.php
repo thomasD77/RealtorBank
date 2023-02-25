@@ -23,10 +23,10 @@ return new class extends Migration
 
         $categories = [
             'situation',
-            'interiour',
             'interior',
             'exterior',
             'techniques',
+            'documents',
         ];
 
         $categoriesToInsert = [];

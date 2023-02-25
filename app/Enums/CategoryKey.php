@@ -8,4 +8,5 @@ enum CategoryKey : string
     case Interior = 'interior';
     case Exterior = 'exterior';
     case Techniques = 'techniques';
+    case Documents = 'documents';
 }

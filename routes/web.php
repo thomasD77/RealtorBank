@@ -57,6 +57,10 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
         return view('situation.index', compact('inspection'));
     })->name('situation.index');
 
+    Route::get('/inspection/documents/{inspection}', function (Inspection $inspection) {
+        return view('documents.index', compact('inspection'));
+    })->name('documents.index');
+
     Route::get('/situation/inspection/edit/{inspection}/{situation}', function (Inspection $inspection, Situation $situation) {
         return view('situation.edit', compact('inspection', 'situation'));
     })->name('situation.edit');
