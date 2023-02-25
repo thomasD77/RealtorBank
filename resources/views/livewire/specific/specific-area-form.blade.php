@@ -448,6 +448,19 @@
         />
         @break
 
+        @case(\App\Enums\SpecificKey::DischargePoint->value)
+        <livewire:specific.elements.distypes
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::Crane->value)
+        <livewire:specific.elements.crane
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+
 
 
     @endswitch
