@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Specific\Elements;
 
 use App\Http\Livewire\MainDropdownComponent;
 use App\Models\Data;
-use App\Models\SpecificArea;
 use Livewire\Component;
 
 class Anglecrane extends MainDropdownComponent
@@ -16,6 +15,6 @@ class Anglecrane extends MainDropdownComponent
     public function mount($dynamicArea)
     {
         //--> Custom
-        $this->parameters = SpecificArea::getCranes();
+        $this->parameters = Data::getNumbers();
     }
 }

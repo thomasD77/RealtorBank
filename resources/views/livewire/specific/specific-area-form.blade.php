@@ -106,13 +106,110 @@
         @break
 
         @case(\App\Enums\SpecificKey::Trap->value)
-        <livewire:specific.elements.materials
+        <livewire:specific.elements.material
             :dynamicArea="$specificArea"
         />
         <livewire:specific.elements.handle
             :dynamicArea="$specificArea"
         />
         @break
+
+        @case(\App\Enums\SpecificKey::Mirror->value)
+        <livewire:specific.elements.present
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.lighting
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::ToiletPaperHolder->value)
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::Closet->value)
+        <livewire:specific.elements.cupboardtypes
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.shelves
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.doors
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.drawers
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.rod
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.handlecount
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::WashingSink->value)
+        <livewire:specific.elements.typecount
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.sinkmodel
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.colors
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.crane
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.stop
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.siphon
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.anglecrane
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::ToiletBrush->value)
+        <livewire:specific.elements.model
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::Toilet->value)
+        <livewire:specific.elements.toilettype
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.colors
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.rinse
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.seat
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.anglecrane
+            :dynamicArea="$specificArea"
+        />
+        @break
+
+        @case(\App\Enums\SpecificKey::TowelRail->value)
+        <livewire:specific.elements.material
+            :dynamicArea="$specificArea"
+        />
+        @break
+
 
     @endswitch
 </div>

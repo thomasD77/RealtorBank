@@ -412,4 +412,12 @@ class SpecificArea extends Model
         ];
     }
 
+    public static function getTypeCounts() :array
+    {
+        return $data = [
+            'enkel',
+            'dubbel',
+        ];
+    }
+
 }
