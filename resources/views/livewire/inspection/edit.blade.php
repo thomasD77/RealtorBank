@@ -214,8 +214,9 @@
     </div>
 
     <div class="single-add-property">
+        <h3>{{ __('Verwijderen') }}</h3>
         <div class="property-form-group">
-            <h3>{{ __('Verwijderen') }}</h3>
+
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
                <i class="fa fa-trash mx-2"></i> {{ __('Delete') }}
