@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('media_documents', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('reference')->nullable();
-            $table->date('date')->nullable();
+            $table->string('file_original');
+            $table->string('file_crop');
 
-            $table->unsignedInteger('inspection_id')
+            $table->unsignedInteger('document_id')
                 ->index();
             $table->timestamps();
         });
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('media_documents');
     }
 };

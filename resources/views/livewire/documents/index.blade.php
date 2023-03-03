@@ -19,7 +19,7 @@
                                 <td>{{ $document->title }}</td>
                                 <td>{{ $document->reference }}</td>
                                 <td>{{ $document->date }}</td>
-                                <td class="rating"><span>5</span></td>
+                                <td class="rating"><span>{{ $document->media->count() }}</span></td>
                                 <td class="edit"><a href="{{ route('document.edit', [ $inspection, $document ]) }}"><i class="fa fa-pencil text-success"></i></a></td>
                             </tr>
                         @endforeach

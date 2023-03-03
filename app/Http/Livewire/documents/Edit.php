@@ -4,6 +4,9 @@ namespace App\Http\Livewire\Documents;
 
 use App\Models\Document;
 use App\Models\Inspection;
+use App\Models\MediaBasic;
+use App\Models\MediaDocument;
+use App\Models\MediaStore;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -22,7 +25,7 @@ class Edit extends Component
     public $files;
 
     public $folder = 'documents';
-    public $relation_id = 'inspection_id';
+    public $relation_id = 'document_id';
 
     public function mount(Inspection $inspection, Document $document)
     {
@@ -33,11 +36,7 @@ class Edit extends Component
         $this->reference = $document->reference;
         $this->date = $document->date;
 
-        $files = Document::query()
-            ->where('title', $this->document->title)
-            ->where('inspection_id', $this->inspection->id)
-            ->get();
-        $this->files = $files;
+        $this->files = MediaDocument::where($this->relation_id, $this->document->id)->get();
     }
 
     public function documentSubmit()
@@ -47,6 +46,36 @@ class Edit extends Component
         $this->document->date = $this->date;
         $this->document->update();
         session()->flash('success', 'success!');
+    }
+
+    public function saveMedia()
+    {
+        //Validate
+//        $this->validate([
+//            'media.*' => 'image|max:2024',
+//        ]);
+
+        //Set up model
+        $mediaStore = new MediaDocument();
+
+        //Save and store
+        if( $this->media != [] && $this->media != ""){
+            MediaStore::createAndStoreMedia($mediaStore, $this->document, $this->media, $this->folder, $this->relation_id);
+        }
+
+        //Render
+        $this->files = MediaDocument::where($this->relation_id, $this->document->id)->get();
+        $this->media = "";
+    }
+
+    public function deleteMedia($file)
+    {
+        //Do the work
+        $mediaStore = MediaDocument::find($file);
+        MediaStore::deleteMedia($mediaStore, $this->folder);
+
+        //Render
+        $this->files = MediaDocument::where($this->relation_id, $this->document->id)->get();
     }
 
     public function render()

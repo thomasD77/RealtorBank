@@ -16,6 +16,7 @@ class Index extends Component
         $this->inspection = $inspection;
         $this->documents = Document::query()
             ->where('inspection_id', $inspection->id)
+            ->latest()
             ->get();
     }
 }
