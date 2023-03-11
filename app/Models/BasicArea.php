@@ -74,16 +74,6 @@ class BasicArea extends Model
         ];
     }
 
-    public static function getTypes() :array
-    {
-        return $types = [
-            'standaard',
-            'verlaagd',
-            'spanplafond',
-            'ander',
-        ];
-    }
-
     public static function getHandles() :array
     {
         return $handles = [

@@ -15,4 +15,13 @@ enum RoomKey : string
     case Bedroom = 'bedroom';
     case Attic = 'attic';
     case Garage = 'garage';
+
+    case Building = 'building';
+    case DriveWay = 'driveWay';
+    case FrontYard = 'frontYard';
+    case Yard = 'yard';
+    case Terrace = 'terrace';
+
+    case OuthouseIn = 'outhouseIn';
+    case OuthouseEx = 'outhouseEx';
 }

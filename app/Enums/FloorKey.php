@@ -9,6 +9,7 @@ enum FloorKey : string
     case UpperFloor = 'upperFloor';
     case Attic = 'attic';
     case Garage = 'garage';
+
     case Building = 'building';
     case DriveWay = 'driveWay';
 }

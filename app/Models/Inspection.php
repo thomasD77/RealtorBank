@@ -73,8 +73,8 @@ class Inspection extends Model
          *
          */
         $rooms = [
+            //Interieur
             ['Kelder', RoomKey::Basement, Floor::where('code', FloorKey::BasementFloor )->first()->id],
-
             ['Inkomhal', RoomKey::EntranceHall->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
             ['Toilet', RoomKey::Toilet->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
             ['Woonkamer', RoomKey::LivingRoom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
@@ -83,14 +83,20 @@ class Inspection extends Model
             ['Gang', RoomKey::NightHall->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
             ['Berging', RoomKey::Storage->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
             ['Slaapkamer', RoomKey::Bedroom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
-
             ['Nachthal', RoomKey::NightHall->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
             ['Badkamer', RoomKey::Bathroom->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
             ['Slaapkamer', RoomKey::Bedroom->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
-
             ['Zolder', RoomKey::Attic->value, Floor::where('code', FloorKey::Attic)->first()->id],
-
             ['Garage', RoomKey::Garage->value, Floor::where('code', FloorKey::Garage)->first()->id],
+
+            //Exterieur
+            ['Gebouw', RoomKey::Building, Floor::where('code', FloorKey::Building )->first()->id],
+            ['Aanleg', RoomKey::DriveWay, Floor::where('code', FloorKey::DriveWay )->first()->id],
+            ['Voortuin', RoomKey::FrontYard, Floor::where('code', FloorKey::DriveWay )->first()->id],
+            ['Tuin', RoomKey::Yard, Floor::where('code', FloorKey::DriveWay )->first()->id],
+            ['Terras', RoomKey::Terrace, Floor::where('code', FloorKey::DriveWay )->first()->id],
+            ['Bijgebouw binnen', RoomKey::OuthouseIn, Floor::where('code', FloorKey::DriveWay )->first()->id],
+            ['Bijgebouw buiten', RoomKey::OuthouseEx, Floor::where('code', FloorKey::DriveWay )->first()->id],
         ];
 
         $roomsToInsert = [];
@@ -199,6 +205,32 @@ class Inspection extends Model
 
 
         /**
+         * OutdoorArea
+         *
+         */
+
+        $outdoors = Outdoor::all();
+
+        foreach ($rooms as $room){
+            $outdoorsToInsert = [];
+            foreach ($outdoors as $outdoor) {
+                if($outdoor->room_key == $room->code){
+                    $outdoorsToInsert[] = [
+                        'outdoor_id' => $outdoor->id,
+                        'room_id' => $room->id,
+                        'inspection_id' => $inspection->id,
+                        'created_at' => DB::raw('NOW()'),
+                        'updated_at' => DB::raw('NOW()'),
+                    ];
+                }
+            }
+            OutdoorArea::insert($outdoorsToInsert);
+        }
+
+
+
+
+        /**
          * General forms
          *
          */
@@ -269,6 +301,5 @@ class Inspection extends Model
 
         return $inspection;
     }
-
 
 }
