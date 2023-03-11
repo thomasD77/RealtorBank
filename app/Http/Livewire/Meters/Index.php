@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Http\Livewire\Keys;
+namespace App\Http\Livewire\Meters;
 
 use App\Models\Inspection;
-use App\Models\Key;
+use App\Models\Meter;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 
 class Index extends Component
 {
     public Inspection $inspection;
-    public $keys;
+    public $meters;
 
     public function mount(Inspection $inspection)
     {
         $this->inspection = $inspection;
-        $this->keys = Key::where('inspection_id', $this->inspection->id)->get();
+        $this->meters = Meter::where('inspection_id', $this->inspection->id)->get();
     }
 
     public function render()
     {
-        return view('livewire.keys.index');
+        return view('livewire.meters.index');
     }
 }

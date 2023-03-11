@@ -716,6 +716,31 @@
 
     <li>
         <a data-toggle="collapse"
+           href="#collapseMeter"
+           role="button"
+           aria-expanded="false"
+           aria-controls="collapseMeter"
+           wire:click="toggleCategory({{ $meters }})"
+           class="custom-sidebar-padding @if($meters == $activeCat) active @endif"
+        >
+            <i class="fa fa-folder"></i>{{ __('Meters') }}
+        </a>
+        <div class="collapse @if($meters == $activeCat) show @endif"
+             wire:ignore.self
+             id="collapseMeter"
+        >
+            <ul>
+                <li class="mx-3">
+                    <a href="{{ route('meters.index', $inspection) }}">
+                        <i class="fa fa-list"></i>{{ __('Lijst') }}
+                    </a>
+                <li>
+            </ul>
+        </div>
+    </li>
+
+    <li>
+        <a data-toggle="collapse"
            href="#collapseKey"
            role="button"
            aria-expanded="false"

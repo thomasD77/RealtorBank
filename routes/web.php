@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
     use App\Models\Document;
     use App\Models\Inspection;
     use App\Models\Key;
+    use App\Models\Meter;
     use App\Models\Situation;
 use Illuminate\Support\Facades\Route;
 
@@ -79,6 +80,14 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/key/edit/{inspection}/{key}', function (Inspection $inspection, Key $key) {
         return view('keys.edit', compact('inspection','key'));
     })->name('key.edit');
+
+    Route::get('/inspection/meters/{inspection}', function (Inspection $inspection) {
+        return view('meters.index', compact('inspection'));
+    })->name('meters.index');
+
+    Route::get('/meter/edit/{inspection}/{meter}', function (Inspection $inspection, Meter $meter) {
+        return view('meters.edit', compact('inspection','meter'));
+    })->name('meter.edit');
 });
 
 Route::middleware('auth')->group(function () {

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\FloorKey;
 use App\Enums\Keys;
+use App\Enums\MeterKey;
 use App\Enums\RoomKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -234,7 +235,37 @@ class Inspection extends Model
                 'updated_at' => DB::raw('NOW()'),
             ];
         }
-        $key = Key::insert($keysToInsert);
+        Key::insert($keysToInsert);
+
+        /**
+         * Meters
+         *
+         */
+        $meters = [
+            MeterKey::Single->value,
+            MeterKey::DoubleDay->value,
+            MeterKey::DoubleNight->value,
+            MeterKey::ExclusiveNight->value,
+            MeterKey::DigitalDay->value,
+            MeterKey::DigitalNight->value,
+            MeterKey::DigitalInjectionDay->value,
+            MeterKey::DigitalInjectionNight->value,
+            MeterKey::Water->value,
+            MeterKey::Gas->value,
+            MeterKey::Oil->value,
+            MeterKey::Extra->value,
+        ];
+
+        $metersToInsert = [];
+        foreach ($meters as $meter) {
+            $metersToInsert[] = [
+                'title' => $meter,
+                'inspection_id' => $inspection->id,
+                'created_at' => DB::raw('NOW()'),
+                'updated_at' => DB::raw('NOW()'),
+            ];
+        }
+        Meter::insert($metersToInsert);
 
         return $inspection;
     }
