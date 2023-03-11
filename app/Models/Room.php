@@ -26,6 +26,11 @@ class Room extends Model
         return $this->hasMany(SpecificArea::class);
     }
 
+    public function outdoorAreas()
+    {
+        return $this->hasMany(OutdoorArea::class);
+    }
+
     public function floor()
     {
         return $this->hasOne(Floor::class);

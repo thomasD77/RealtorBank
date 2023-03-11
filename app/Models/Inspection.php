@@ -95,8 +95,8 @@ class Inspection extends Model
             ['Voortuin', RoomKey::FrontYard, Floor::where('code', FloorKey::DriveWay )->first()->id],
             ['Tuin', RoomKey::Yard, Floor::where('code', FloorKey::DriveWay )->first()->id],
             ['Terras', RoomKey::Terrace, Floor::where('code', FloorKey::DriveWay )->first()->id],
-            ['Bijgebouw binnen', RoomKey::OuthouseIn, Floor::where('code', FloorKey::DriveWay )->first()->id],
-            ['Bijgebouw buiten', RoomKey::OuthouseEx, Floor::where('code', FloorKey::DriveWay )->first()->id],
+//            ['Bijgebouw binnen', RoomKey::OuthouseIn, Floor::where('code', FloorKey::DriveWay )->first()->id],
+//            ['Bijgebouw buiten', RoomKey::OuthouseEx, Floor::where('code', FloorKey::DriveWay )->first()->id],
         ];
 
         $roomsToInsert = [];

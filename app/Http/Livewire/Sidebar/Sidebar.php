@@ -35,6 +35,8 @@ class Sidebar extends Component
     public $documents;
     public $keys;
     public $meters;
+    public $building;
+    public $driveWay;
 
     //Models
     public $basementParam;
@@ -42,6 +44,8 @@ class Sidebar extends Component
     public $upperFloorParam;
     public $atticParam;
     public $garageParam;
+    public $buildingParam;
+    public $driveWayParam;
 
     public $basic = 'basic';
     public $specific = 'specific';
@@ -80,6 +84,8 @@ class Sidebar extends Component
         $this->upperFloor = Floor::where('code', FloorKey::UpperFloor)->pluck('id')->first();
         $this->attic = Floor::where('code', FloorKey::Attic)->pluck('id')->first();
         $this->garage = Floor::where('code', FloorKey::Garage)->pluck('id')->first();
+        $this->building = Floor::where('code', FloorKey::Building)->pluck('id')->first();
+        $this->driveWay = Floor::where('code', FloorKey::DriveWay)->pluck('id')->first();
 
         $this->basementParam = Room::query()
             ->where('inspection_id', $this->inspection->id)
@@ -104,6 +110,16 @@ class Sidebar extends Component
         $this->garageParam = Room::query()
             ->where('inspection_id', $this->inspection->id)
             ->where('floor_id', Floor::where('code', FloorKey::Garage)->first()->id)
+            ->get();
+
+        $this->buildingParam = Room::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::Building)->first()->id)
+            ->get();
+
+        $this->driveWayParam = Room::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::DriveWay)->first()->id)
             ->get();
     }
 

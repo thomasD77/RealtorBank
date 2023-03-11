@@ -7,6 +7,8 @@ use App\Models\BasicArea;
 use App\Models\Conform;
 use App\Models\ConformArea;
 use App\Models\Inspection;
+use App\Models\Outdoor;
+use App\Models\OutdoorArea;
 use App\Models\Room;
 use App\Models\Specific;
 use App\Models\SpecificArea;
@@ -79,6 +81,20 @@ class DashboardController extends Controller
             'inspection' => $inspection,
             'technique' => $technique,
             'techniqueArea' => $techniqueArea
+        ]);
+    }
+
+    public function outdoor(Inspection $inspection, Outdoor $outdoor): View
+    {
+        $outDoorArea = OutdoorArea::query()
+            ->where('inspection_id', $inspection->id)
+            ->where('outdoor_id', $outdoor->id)
+            ->first();
+
+        return view('outdoor-areas.template', [
+            'inspection' => $inspection,
+            'outdoor' => $outdoor,
+            'outDoorArea' => $outDoorArea
         ]);
     }
 
