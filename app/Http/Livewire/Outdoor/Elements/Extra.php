@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Specific\Elements;
+namespace App\Http\Livewire\Outdoor\Elements;
 
 use App\Http\Livewire\MainExtraComponent;
 

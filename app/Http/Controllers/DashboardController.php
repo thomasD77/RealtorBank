@@ -86,7 +86,7 @@ class DashboardController extends Controller
 
     public function outdoor(Inspection $inspection, Outdoor $outdoor): View
     {
-        $outDoorArea = OutdoorArea::query()
+        $outdoorArea = OutdoorArea::query()
             ->where('inspection_id', $inspection->id)
             ->where('outdoor_id', $outdoor->id)
             ->first();
@@ -94,7 +94,7 @@ class DashboardController extends Controller
         return view('outdoor-areas.template', [
             'inspection' => $inspection,
             'outdoor' => $outdoor,
-            'outDoorArea' => $outDoorArea
+            'outdoorArea' => $outdoorArea
         ]);
     }
 

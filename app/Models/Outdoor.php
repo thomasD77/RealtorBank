@@ -13,4 +13,9 @@ class Outdoor extends Model
         'title',
         'code'
     ];
+
+    public function media()
+    {
+        return $this->hasMany(MediaOutdoor::class);
+    }
 }

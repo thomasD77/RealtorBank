@@ -3,34 +3,34 @@
 @section('content')
 
     <div class="single-add-property">
-        <h6 class="mb20 text-md-right">{{ $inspection->title }} | {{ __('Exterieur') }} | <strong>{{ $outDoorArea->outdoor->title }}</strong></h6>
+        <h6 class="mb20 text-md-right">{{ $inspection->title }} | {{ __('Exterieur') }} | <strong>{{ $outdoorArea->outdoor->title }}</strong></h6>
         <h3 class="uppercase">{{ __('Exterieur') }}</h3>
 
         <ul class="accordion accordion-1 one-open">
 
-{{--            <livewire:technique.technique-area-form--}}
-{{--                :Inspection="$inspection"--}}
-{{--                :technique="$technique"--}}
-{{--                :techniqueArea="$techniqueArea"--}}
-{{--            />--}}
+            <livewire:outdoor.outdoor-area-form
+                :Inspection="$inspection"
+                :outdoor="$outdoor"
+                :outdoorArea="$outdoorArea"
+            />
 
-{{--            <livewire:technique.elements.analysis--}}
-{{--                :Inspection="$inspection"--}}
-{{--                :technique="$technique"--}}
-{{--                :dynamicArea="$techniqueArea"--}}
-{{--            />--}}
+            <livewire:outdoor.elements.analysis
+                :Inspection="$inspection"
+                :outdoor="$outdoor"
+                :dynamicArea="$outdoorArea"
+            />
 
-{{--            <livewire:technique.elements.extra--}}
-{{--                :Inspection="$inspection"--}}
-{{--                :technique="$technique"--}}
-{{--                :dynamicArea="$techniqueArea"--}}
-{{--            />--}}
+            <livewire:outdoor.elements.extra
+                :Inspection="$inspection"
+                :outdoor="$outdoor"
+                :dynamicArea="$outdoorArea"
+            />
 
-{{--            <livewire:technique.elements.media--}}
-{{--                :Inspection="$inspection"--}}
-{{--                :technique="$technique"--}}
-{{--                :techniqueArea="$techniqueArea"--}}
-{{--            />--}}
+            <livewire:outdoor.elements.media
+                :Inspection="$inspection"
+                :outdoor="$outdoor"
+                :outdoorArea="$outdoorArea"
+            />
 
         </ul>
     </div>
