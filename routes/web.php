@@ -6,7 +6,8 @@ use App\Http\Controllers\ProfileController;
     use App\Http\Controllers\Situation\SituationController;
     use App\Models\Document;
     use App\Models\Inspection;
-use App\Models\Situation;
+    use App\Models\Key;
+    use App\Models\Situation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,6 +71,14 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/document/edit/{inspection}/{document}', function (Inspection $inspection, Document $document) {
         return view('documents.edit', compact('inspection','document'));
     })->name('document.edit');
+
+    Route::get('/inspection/keys/{inspection}', function (Inspection $inspection) {
+        return view('keys.index', compact('inspection'));
+    })->name('keys.index');
+
+    Route::get('/key/edit/{inspection}/{key}', function (Inspection $inspection, Key $key) {
+        return view('keys.edit', compact('inspection','key'));
+    })->name('key.edit');
 });
 
 Route::middleware('auth')->group(function () {

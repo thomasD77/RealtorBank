@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Inspection;
 
+use App\Enums\Keys;
 use App\Http\Controllers\Controller;
 use App\Models\BasicArea;
 use App\Models\Document;
 use App\Models\Inspection;
+use App\Models\Key;
 use App\Models\MediaInspection;
 use App\Models\TechniqueArea;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\DB;
 
 class InspectionController extends Controller
 {

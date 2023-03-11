@@ -18,6 +18,13 @@ class MediaStore extends Model
             $mediaStore = new $mediaStore;
 
             $name = time(). $media->getClientOriginalName();
+
+            //Make sure there is a directory to save the images
+            $path = public_path('assets/images/' . $folder);
+            if(!File::isDirectory($path)){
+                File::makeDirectory($path, 0777, true, true);
+            }
+
             $name = MediaStore::getValidFilename($name);
             $newMedia = $media->storeAs('assets/images/' . $folder . '/', $name);
             $mediaStore->file_original = $name;
@@ -28,6 +35,12 @@ class MediaStore extends Model
             $imgCrop = Image::make($newMedia);
             $width = Image::make($newMedia)->width();
             $height = Image::make($newMedia)->height();
+
+            //Make sure there is a directory to save the images
+            $path = public_path('assets/images/' . $folder . '/crop');
+            if(!File::isDirectory($path)){
+                File::makeDirectory($path, 0777, true, true);
+            }
 
             if($width > $height){
                 $imgCrop->resize( 450, null, function ($constraint) {

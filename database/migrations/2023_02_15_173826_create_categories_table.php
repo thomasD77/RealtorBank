@@ -27,6 +27,7 @@ return new class extends Migration
             'exterior',
             'techniques',
             'documents',
+            'keys',
         ];
 
         $categoriesToInsert = [];

@@ -714,6 +714,31 @@
         </div>
     </li>
 
+    <li>
+        <a data-toggle="collapse"
+           href="#collapseKey"
+           role="button"
+           aria-expanded="false"
+           aria-controls="collapseKey"
+           wire:click="toggleCategory({{ $keys }})"
+           class="custom-sidebar-padding @if($keys == $activeCat) active @endif"
+        >
+            <i class="fa fa-folder"></i>{{ __('Sleutels') }}
+        </a>
+        <div class="collapse @if($keys == $activeCat) show @endif"
+             wire:ignore.self
+             id="collapseKey"
+        >
+            <ul>
+                <li class="mx-3">
+                    <a href="{{ route('keys.index', $inspection) }}">
+                        <i class="fa fa-list"></i>{{ __('Lijst') }}
+                    </a>
+                <li>
+            </ul>
+        </div>
+    </li>
+
 
 </ul>
 

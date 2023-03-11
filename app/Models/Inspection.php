@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\FloorKey;
+use App\Enums\Keys;
 use App\Enums\RoomKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -210,6 +211,30 @@ class Inspection extends Model
             ];
         }
         General::insert($generalToInsert);
+
+
+        /**
+         * Keys
+         *
+         */
+        $keys = [
+            Keys::FrontDoor->value,
+            Keys::BackDoor->value,
+            Keys::Garage->value,
+            Keys::Mailbox->value,
+            Keys::Doors->value,
+        ];
+
+        $keysToInsert = [];
+        foreach ($keys as $key) {
+            $keysToInsert[] = [
+                'title' => $key,
+                'inspection_id' => $inspection->id,
+                'created_at' => DB::raw('NOW()'),
+                'updated_at' => DB::raw('NOW()'),
+            ];
+        }
+        $key = Key::insert($keysToInsert);
 
         return $inspection;
     }

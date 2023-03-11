@@ -33,6 +33,7 @@ class Sidebar extends Component
     public $attic;
     public $garage;
     public $documents;
+    public $keys;
 
     //Models
     public $basementParam;
@@ -70,6 +71,7 @@ class Sidebar extends Component
         $this->exterior = Category::where('title', CategoryKey::Exterior)->pluck('id')->first();
         $this->techniques = Category::where('title', CategoryKey::Techniques)->pluck('id')->first();
         $this->documents = Category::where('title', CategoryKey::Documents)->pluck('id')->first();
+        $this->keys = Category::where('title', CategoryKey::Keys)->pluck('id')->first();
 
         $this->basement = Floor::where('code', FloorKey::BasementFloor)->pluck('id')->first();
         $this->groundFloor = Floor::where('code', FloorKey::GroundFloor)->pluck('id')->first();
