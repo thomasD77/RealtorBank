@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('color')->nullable();
             $table->string('windowsill')->nullable();
             $table->string('type')->nullable();
+            $table->string('footh')->nullable();
             $table->string('cover')->nullable();
             $table->string('chimney')->nullable();
             $table->string('solar')->nullable();

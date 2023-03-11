@@ -702,7 +702,7 @@
 
                                     @foreach($room->outdoorAreas->where('room_id', $room->id) as $item)
                                         <li class="mx-3">
-                                            <a href="{{ route('area.outdoor', [$inspection, $room, $item->outdoor]) }}">
+                                            <a href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}
                                             </a>
                                         </li>
@@ -722,7 +722,7 @@
                    aria-controls="collapseDriveWay"
                    wire:click="toggleFloor({{ $driveWay }})"
                 >
-                    <i class="fa fa-bookmark"></i>{{ __('Aanleg') }}
+                    <i class="fa fa-bookmark"></i>{{ __('Algemeen aanleg') }}
                 </a>
                 <div class="collapse @if($driveWay == $activeFloor) show @endif"
                      wire:ignore.self
@@ -754,7 +754,7 @@
 
                                     @foreach($room->outdoorAreas->where('room_id', $room->id) as $item)
                                         <li class="mx-3">
-                                            <a href="{{ route('area.outdoor', [$inspection, $room, $item->outdoor]) }}">
+                                            <a href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}
                                             </a>
                                         </li>

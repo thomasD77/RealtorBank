@@ -31,7 +31,7 @@ return new class extends Migration
             [ 'Dak', 'roof', RoomKey::Building],
             [ 'Brievenbus', 'mailbox', RoomKey::Building],
             [ 'Buitentrap', 'outdoorTrap', RoomKey::Building],
-            [ 'balkon', 'balcony', RoomKey::Building],
+            [ 'Balkon', 'balcony', RoomKey::Building],
 
             [ 'Verharding oprit', 'driveWayMaterial', RoomKey::DriveWay],
             [ 'Verharding voetpad', 'footPathMaterial', RoomKey::DriveWay],

@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Livewire\Technique\Elements;
+namespace App\Http\Livewire\Outdoor\Elements;
 
 use App\Http\Livewire\MainDropdownComponent;
-use App\Models\TechniqueArea;
-use Livewire\Component;
+use App\Models\OutdoorArea;
 
 class Types extends MainDropdownComponent
 {
     //--> Custom
     public string $element = "type";
-    public string $title = "Roof";
+    public string $title = "Type";
 
     public function mount($dynamicArea)
     {
         //--> Custom
-        $this->parameters = TechniqueArea::getTypes();
+        $this->parameters = OutdoorArea::getPositions();
     }
 }
