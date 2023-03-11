@@ -159,6 +159,27 @@ class OutdoorArea extends Model
         ];
     }
 
+    public static function getCranes() :array
+    {
+        return $data = [
+            'enkelvoudig',
+            'mengkraan',
+            'thermostatisch',
+            'ander',
+        ];
+    }
+
+    public static function getBrands() :array
+    {
+        return $data = [
+            'Niko',
+            'Bticino',
+            'Legrand',
+            'merkloos',
+            'ander',
+        ];
+    }
+
 
 
 

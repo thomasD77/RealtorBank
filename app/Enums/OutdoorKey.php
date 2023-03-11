@@ -18,6 +18,7 @@ enum OutdoorKey : string
     case OutdoorLight = 'outdoorLight';
     case Planting = 'planting';
     case ExtraFrontYard = 'extraFrontYard';
+    case TerraceMaterial = 'terraceMaterial';
     case Crane = 'crane';
     case Sockets = 'sockets';
 }

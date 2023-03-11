@@ -45,8 +45,8 @@ return new class extends Migration
             $table->string('single')->nullable();
             $table->string('double')->nullable();
             $table->string('brand')->nullable();
+            $table->string('crane')->nullable();
 
-//            $table->string('crane')->nullable();
 //            $table->string('glassInlay')->nullable();
 //            $table->string('handle')->nullable();
 //            $table->string('mailbox')->nullable();
