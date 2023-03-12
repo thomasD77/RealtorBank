@@ -33,6 +33,11 @@ class DashboardController extends Controller
             ->where('area_id', $area->id)
             ->first();
 
+        //Set value for selected area in sidebar
+        $user = Auth()->user();
+        $user->area_id = $area->id;
+        $user->update();
+
         return view('basic-areas.template', [
             'inspection' => $inspection,
             'room' => $room,
@@ -48,6 +53,12 @@ class DashboardController extends Controller
             ->where('room_id', $room->id)
             ->where('conform_id', $conform->id)
             ->first();
+
+        //Set value for selected area in sidebar
+        $user = Auth()->user();
+        $user->area_id = $conform->id;
+        $user->update();
+
 
         return view('conform-areas.template', [
             'inspection' => $inspection,
@@ -65,6 +76,12 @@ class DashboardController extends Controller
             ->where('specific_id', $specific->id)
             ->first();
 
+        //Set value for selected area in sidebar
+        $user = Auth()->user();
+        $user->area_id = $specific->id;
+        $user->update();
+
+
         return view('specific-areas.template', [
             'inspection' => $inspection,
             'room' => $room,
@@ -81,6 +98,12 @@ class DashboardController extends Controller
             ->where('technique_id', $technique->id)
             ->first();
 
+        //Set value for selected area in sidebar
+        $user = Auth()->user();
+        $user->area_id = $technique->id;
+        $user->update();
+
+
         return view('technique-areas.template', [
             'inspection' => $inspection,
             'technique' => $technique,
@@ -95,6 +118,12 @@ class DashboardController extends Controller
             ->where('inspection_id', $inspection->id)
             ->where('outdoor_id', $outdoor->id)
             ->first();
+
+        //Set value for selected area in sidebar
+        $user = Auth()->user();
+        $user->area_id = $outdoor->id;
+        $user->update();
+
 
         return view('outdoor-areas.template', [
             'inspection' => $inspection,

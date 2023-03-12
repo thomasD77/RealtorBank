@@ -33,6 +33,7 @@
             />
 
         </ul>
+        <h6 class="mb20 text-md-right">{{ $inspection->title }} | {{ __('Technieken') }} | <strong>{{ $techniqueArea->technique->title }}</strong></h6>
     </div>
 
 @endsection

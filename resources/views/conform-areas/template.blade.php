@@ -28,6 +28,8 @@
             />
 
         </ul>
+
+        <h6 class="mb20 text-md-right">{{ $inspection->title }} > {{ $room->title }} > <strong>{{ $conformArea->conform->title }}</strong></h6>
     </div>
 
 @endsection

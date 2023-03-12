@@ -87,6 +87,13 @@ Version      : 1.2
 /*-----------------------------------*/
 
 
+.activeLink {
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    color: white !important;
+}
+
+
 .pagination .relative {
     background-color: #FF385C !important;
     color: white;

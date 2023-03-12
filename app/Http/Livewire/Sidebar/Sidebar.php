@@ -24,6 +24,7 @@ class Sidebar extends Component
     public $activeFloor;
     public $activeRoom;
     public $activeTemplate;
+    public $activeArea;
 
     //Empty collapses
     public $situation;
@@ -78,6 +79,9 @@ class Sidebar extends Component
         }
         if(Auth()->user()->floor){
             $this->activeFloor = Auth()->user()->floor->id;
+        }
+        if(Auth()->user()->area){
+            $this->activeArea = Auth()->user()->area->id;
         }
 
         $this->situation = Category::where('title', CategoryKey::Situation)->pluck('id')->first();
@@ -189,6 +193,7 @@ class Sidebar extends Component
         SidebarToggle::sidebarCategory($value);
         //Render
         $this->activeCat = $value;
+        $this->activeArea = null;
     }
 
     public function toggleRoom($value)

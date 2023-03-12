@@ -51,7 +51,7 @@
              id="collapseInterior"
         >
             <ul>
-                {{--                BasementFloor--}}
+                {{-- BasementFloor--}}
                 <a data-toggle="collapse"
                    href="#collapseBasement"
                    role="button"
@@ -88,7 +88,7 @@
                                             <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
                                         </a>
                                     </li>
-                                    Basic
+                                    {{-- Basic--}}
                                     <li>
                                         <a data-toggle="collapse"
                                            href="#collapseBasic{{ $room->id }}"
@@ -105,7 +105,7 @@
                                             >
                                                 @foreach($room->basicAreas->sortByDesc('title') as $item)
                                                     <li class="mx-3">
-                                                        <a href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
+                                                        <a class="@if($activeArea == $item->area->id) activeLink @endif" href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
                                                             <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->area->title }}
                                                         </a>
                                                     </li>
@@ -114,7 +114,7 @@
                                         </div>
                                     </li>
 
-                                    {{--                                  Spec--}}
+                                    {{--  Spec--}}
                                     <li>
                                         <a data-toggle="collapse"
                                            href="#collapseSpec{{ $room->id }}"
@@ -131,7 +131,7 @@
                                             >
                                                 @foreach($room->specificAreas->where('room_id', $room->id) as $item)
                                                     <li class="mx-3">
-                                                        <a href="{{ route('area.specific', [$inspection, $room, $item->specific]) }}">
+                                                        <a class="@if($activeArea == $item->specific->id) activeLink @endif" href="{{ route('area.specific', [$inspection, $room, $item->specific]) }}">
                                                             <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->specific->title }}
                                                         </a>
                                                     </li>
@@ -140,7 +140,7 @@
                                         </div>
                                     </li>
 
-                                    {{--                                 Conform--}}
+                                    {{-- Conform--}}
                                     <li>
                                         <a data-toggle="collapse"
                                            href="#collapseConform{{ $room->id }}"
@@ -156,7 +156,7 @@
                                                 id="collapseConform{{ $room->id }}">
                                                 @foreach($room->conformAreas as $item)
                                                     <li class="mx-3">
-                                                        <a href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
+                                                        <a class="@if($activeArea == $item->conform->id) activeLink @endif" href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
                                                             <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->conform->title }}
                                                         </a>
                                                     </li>
@@ -171,7 +171,7 @@
                     @endif
                 </div>
 
-                {{--                groundFloor--}}
+                {{-- groundFloor--}}
                 <a data-toggle="collapse"
                    href="#collapseGroundFloor"
                    role="button"
@@ -208,7 +208,7 @@
                                                 <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
                                             </a>
                                         </li>
-                                        {{--                                       Basic--}}
+                                        {{-- Basic--}}
                                         <li>
                                             <a data-toggle="collapse"
                                                href="#collapseBasic{{ $room->id }}"
@@ -225,7 +225,7 @@
                                                 >
                                                     @foreach($room->basicAreas->sortByDesc('title') as $item)
                                                         <li class="mx-3">
-                                                            <a href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
+                                                            <a class="@if($activeArea == $item->area->id) activeLink @endif" href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->area->title }}
                                                             </a>
                                                         </li>
@@ -234,7 +234,7 @@
                                             </div>
                                         </li>
 
-                                        {{--                                      Spec--}}
+                                        {{-- Spec--}}
                                         <li>
                                             <a data-toggle="collapse"
                                                href="#collapseSpec{{ $room->id }}"
@@ -251,7 +251,7 @@
                                                 >
                                                     @foreach($room->specificAreas->where('room_id', $room->id) as $item)
                                                         <li class="mx-3">
-                                                            <a href="{{ route('area.specific', [$inspection, $room, $item->specific]) }}">
+                                                            <a class="@if($activeArea == $item->specific->id) activeLink @endif" href="{{ route('area.specific', [$inspection, $room, $item->specific]) }}">
                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->specific->title }}
                                                             </a>
                                                         </li>
@@ -260,7 +260,7 @@
                                             </div>
                                         </li>
 
-                                        {{--                                     Conform--}}
+                                        {{-- Conform--}}
                                         <li>
                                             <a data-toggle="collapse"
                                                href="#collapseConform{{ $room->id }}"
@@ -276,7 +276,7 @@
                                                     id="collapseConform{{ $room->id }}">
                                                     @foreach($room->conformAreas as $item)
                                                         <li class="mx-3">
-                                                            <a href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
+                                                            <a class="@if($activeArea == $item->conform->id) activeLink @endif" href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->conform->title }}
                                                             </a>
                                                         </li>
@@ -291,7 +291,7 @@
                     @endif
                 </div>
 
-                {{--                upperFloor--}}
+                {{--  upperFloor--}}
                 <a data-toggle="collapse"
                    href="#collapseUpperFloor"
                    role="button"
@@ -328,7 +328,7 @@
                                                 <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
                                             </a>
                                         </li>
-                                        {{--                                       Basic--}}
+                                        {{--  Basic--}}
                                         <li>
                                             <a data-toggle="collapse"
                                                href="#collapseBasic{{ $room->id }}"
@@ -345,7 +345,7 @@
                                                 >
                                                     @foreach($room->basicAreas->sortByDesc('title') as $item)
                                                         <li class="mx-3">
-                                                            <a href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
+                                                            <a class="@if($activeArea == $item->area->id) activeLink @endif" href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->area->title }}
                                                             </a>
                                                         </li>
@@ -354,7 +354,7 @@
                                             </div>
                                         </li>
 
-                                        {{--                                      Spec--}}
+                                        {{-- Spec--}}
                                         <li>
                                             <a data-toggle="collapse"
                                                href="#collapseSpec{{ $room->id }}"
@@ -371,7 +371,7 @@
                                                 >
                                                     @foreach($room->specificAreas->where('room_id', $room->id) as $item)
                                                         <li class="mx-3">
-                                                            <a href="{{ route('area.specific', [$inspection, $room, $item->specific]) }}">
+                                                            <a class="@if($activeArea == $item->specific->id) activeLink @endif" href="{{ route('area.specific', [$inspection, $room, $item->specific]) }}">
                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->specific->title }}
                                                             </a>
                                                         </li>
@@ -380,7 +380,7 @@
                                             </div>
                                         </li>
 
-                                        {{--                                     Conform--}}
+                                        {{--  Conform--}}
                                         <li>
                                             <a data-toggle="collapse"
                                                href="#collapseConform{{ $room->id }}"
@@ -396,7 +396,7 @@
                                                     id="collapseConform{{ $room->id }}">
                                                     @foreach($room->conformAreas as $item)
                                                         <li class="mx-3">
-                                                            <a href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
+                                                            <a class="@if($activeArea == $item->conform->id) activeLink @endif" href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->conform->title }}
                                                             </a>
                                                         </li>
@@ -411,7 +411,7 @@
                     @endif
                 </div>
 
-                {{--                attic--}}
+                {{--  attic--}}
                 <a data-toggle="collapse"
                    href="#collapseAttic"
                    role="button"
@@ -448,7 +448,7 @@
                                                 <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
                                             </a>
                                         </li>
-                                        {{--                                       Basic--}}
+                                        {{-- Basic--}}
                                         <li>
                                             <a data-toggle="collapse"
                                                href="#collapseBasic{{ $room->id }}"
@@ -465,7 +465,7 @@
                                                 >
                                                     @foreach($room->basicAreas->sortByDesc('title') as $item)
                                                         <li class="mx-3">
-                                                            <a href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
+                                                            <a class="@if($activeArea == $item->area->id) activeLink @endif" href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->area->title }}
                                                             </a>
                                                         </li>
@@ -474,7 +474,7 @@
                                             </div>
                                         </li>
 
-                                        {{--                                      Spec--}}
+                                        {{-- Spec--}}
                                         <li>
                                             <a data-toggle="collapse"
                                                href="#collapseSpec{{ $room->id }}"
@@ -491,7 +491,7 @@
                                                 >
                                                     @foreach($room->specificAreas->where('room_id', $room->id) as $item)
                                                         <li class="mx-3">
-                                                            <a href="{{ route('area.specific', [$inspection, $room, $item->specific]) }}">
+                                                            <a class="@if($activeArea == $item->specific->id) activeLink @endif" href="{{ route('area.specific', [$inspection, $room, $item->specific]) }}">
                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->specific->title }}
                                                             </a>
                                                         </li>
@@ -500,7 +500,7 @@
                                             </div>
                                         </li>
 
-                                        {{--                                     Conform--}}
+                                        {{-- Conform--}}
                                         <li>
                                             <a data-toggle="collapse"
                                                href="#collapseConform{{ $room->id }}"
@@ -516,7 +516,7 @@
                                                     id="collapseConform{{ $room->id }}">
                                                     @foreach($room->conformAreas as $item)
                                                         <li class="mx-3">
-                                                            <a href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
+                                                            <a class="@if($activeArea == $item->conform->id) activeLink @endif" href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->conform->title }}
                                                             </a>
                                                         </li>
@@ -532,7 +532,7 @@
 
                 </div>
 
-                {{--                Garage--}}
+                {{-- Garage--}}
                 <a data-toggle="collapse"
                    href="#collapseGarage"
                    role="button"
@@ -569,7 +569,7 @@
                                                 <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
                                             </a>
                                         </li>
-                                        {{--                                       Basic--}}
+                                        {{-- Basic--}}
                                         <li>
                                             <a data-toggle="collapse"
                                                href="#collapseBasic{{ $room->id }}"
@@ -586,7 +586,7 @@
                                                 >
                                                     @foreach($room->basicAreas->sortByDesc('title') as $item)
                                                         <li class="mx-3">
-                                                            <a href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
+                                                            <a class="@if($activeArea == $item->area->id) activeLink @endif" href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->area->title }}
                                                             </a>
                                                         </li>
@@ -595,7 +595,7 @@
                                             </div>
                                         </li>
 
-                                        {{--                                      Spec--}}
+                                        {{-- Spec--}}
                                         <li>
                                             <a data-toggle="collapse"
                                                href="#collapseSpec{{ $room->id }}"
@@ -612,7 +612,7 @@
                                                 >
                                                     @foreach($room->specificAreas->where('room_id', $room->id) as $item)
                                                         <li class="mx-3">
-                                                            <a href="{{ route('area.specific', [$inspection, $room, $item->specific]) }}">
+                                                            <a class="@if($activeArea == $item->specific->id) activeLink @endif" href="{{ route('area.specific', [$inspection, $room, $item->specific]) }}">
                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->specific->title }}
                                                             </a>
                                                         </li>
@@ -621,7 +621,7 @@
                                             </div>
                                         </li>
 
-                                        {{--                                     Conform--}}
+                                        {{--  Conform--}}
                                         <li>
                                             <a data-toggle="collapse"
                                                href="#collapseConform{{ $room->id }}"
@@ -637,7 +637,7 @@
                                                     id="collapseConform{{ $room->id }}">
                                                     @foreach($room->conformAreas as $item)
                                                         <li class="mx-3">
-                                                            <a href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
+                                                            <a class="@if($activeArea == $item->conform->id) activeLink @endif" href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->conform->title }}
                                                             </a>
                                                         </li>
@@ -716,7 +716,7 @@
 
                                         @foreach($building->outdoorAreas as $item)
                                             <li class="mx-3">
-                                                <a href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
+                                                <a class="@if($activeArea == $item->outdoor->id) activeLink @endif" href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
                                                     <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}
                                                 </a>
                                             </li>
@@ -769,7 +769,7 @@
 
                                         @foreach($room->outdoorAreas->where('room_id', $room->id) as $item)
                                             <li class="mx-3">
-                                                <a href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
+                                                <a class="@if($activeArea == $item->outdoor->id) activeLink @endif" href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
                                                     <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}
                                                 </a>
                                             </li>
@@ -804,7 +804,7 @@
                 @if($techniqueParam)
                     @foreach($techniqueParam as $item)
                         <li class="mx-3">
-                            <a href="{{ route('area.technique', [$inspection, $item]) }}">
+                            <a class="@if($activeArea == $item->id) activeLink @endif" href="{{ route('area.technique', [$inspection, $item]) }}">
                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->title }}
                             </a>
                         </li>

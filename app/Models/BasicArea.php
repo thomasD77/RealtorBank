@@ -18,7 +18,7 @@ class BasicArea extends Model
 
     public static function getMaterials() :array
     {
-        return $materials = [
+        return [
             'keramische tegel',
             'tegel',
             'parket',
@@ -53,7 +53,7 @@ class BasicArea extends Model
 
     public static function getColors() :array
     {
-        return $colors = [
+        return [
             'zwart',
             'grijs',
             'wit',
@@ -66,7 +66,7 @@ class BasicArea extends Model
 
     public static function getPlinths() :array
     {
-        return $plinths = [
+        return [
             'idem vloer',
             'zwart',
             'hout',
@@ -76,7 +76,7 @@ class BasicArea extends Model
 
     public static function getHandles() :array
     {
-        return $handles = [
+        return [
             'aluminium',
             'inox',
             'koper',
@@ -88,7 +88,7 @@ class BasicArea extends Model
 
     public static function getLists() :array
     {
-        return $lists = [
+        return [
             'hout',
             'pvc',
             'aluminium',
@@ -99,7 +99,7 @@ class BasicArea extends Model
 
     public static function getPlasters() :array
     {
-        return $plasters = [
+        return [
             'bepleisterd',
             'niet bepleisterd',
         ];
@@ -107,7 +107,7 @@ class BasicArea extends Model
 
     public static function getFinishes() :array
     {
-        return $finishes = [
+        return [
             'geschilderd',
             'behangen',
             'betegeld',
@@ -118,7 +118,7 @@ class BasicArea extends Model
 
     public static function getGlazings() :array
     {
-        return $glazings = [
+        return [
             'enkel',
             'dubbel',
             'driedubbel',
@@ -128,7 +128,7 @@ class BasicArea extends Model
 
     public static function getWindowsills() :array
     {
-        return $windowsills = [
+        return [
             'hout',
             'pvc',
             'tegel',
@@ -141,7 +141,7 @@ class BasicArea extends Model
 
     public static function getRollShutters() :array
     {
-        return $rollShutters = [
+        return [
             'hout',
             'pvc',
             'aluminium',
@@ -151,7 +151,7 @@ class BasicArea extends Model
 
     public static function getWindowDecorations() :array
     {
-        return $windowDecorations = [
+        return [
             'gordijnen',
             'lamellen',
             'stickers',
@@ -161,7 +161,7 @@ class BasicArea extends Model
 
     public static function getHors() :array
     {
-        return $Hors = [
+        return [
             'op kader',
             'ingebouwd',
             'ander',
@@ -170,7 +170,7 @@ class BasicArea extends Model
 
     public static function getFallProtections() :array
     {
-        return $fallProtections = [
+        return [
             'metaal',
             'glas',
             'ander',
@@ -179,13 +179,23 @@ class BasicArea extends Model
 
     public static function getEnergies() :array
     {
-        return $energies = [
+        return [
             'CV',
             'elektriciteit',
             'kolen',
             'hout',
             'gas',
             'pallets',
+            'ander',
+        ];
+    }
+
+    public static function getTypes() :array
+    {
+        return [
+            'standaard',
+            'verlaagd',
+            'spanplafond',
             'ander',
         ];
     }

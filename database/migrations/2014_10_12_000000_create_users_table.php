@@ -31,6 +31,8 @@ return new class extends Migration
                 ->index()->nullable();
             $table->unsignedInteger('floor_id')
                 ->index()->nullable();
+            $table->unsignedInteger('area_id')
+                ->index()->nullable();
             $table->string('template')->nullable();
         });
 
