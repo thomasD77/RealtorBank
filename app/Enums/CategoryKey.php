@@ -11,4 +11,5 @@ enum CategoryKey : string
     case Documents = 'documents';
     case Keys = 'keys';
     case Meters = 'meters';
+    case OutHouse = 'outHouse';
 }

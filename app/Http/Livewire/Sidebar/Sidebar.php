@@ -40,6 +40,9 @@ class Sidebar extends Component
     public $meters;
     public $building;
     public $driveWay;
+    public $outHouse;
+    public $outHouseIn;
+    public $outHouseEx;
 
     //Models
     public $basementParam;
@@ -50,6 +53,7 @@ class Sidebar extends Component
     public $buildingParam;
     public $driveWayParam;
     public $techniqueParam;
+    public $outHouseInParam;
 
     public $basic = 'basic';
     public $specific = 'specific';
@@ -82,6 +86,7 @@ class Sidebar extends Component
         $this->documents = Category::where('title', CategoryKey::Documents)->pluck('id')->first();
         $this->keys = Category::where('title', CategoryKey::Keys)->pluck('id')->first();
         $this->meters = Category::where('title', CategoryKey::Meters)->pluck('id')->first();
+        $this->outHouse = Category::where('title', CategoryKey::OutHouse)->pluck('id')->first();
 
         $this->basement = Floor::where('code', FloorKey::BasementFloor)->pluck('id')->first();
         $this->groundFloor = Floor::where('code', FloorKey::GroundFloor)->pluck('id')->first();
@@ -90,6 +95,8 @@ class Sidebar extends Component
         $this->garage = Floor::where('code', FloorKey::Garage)->pluck('id')->first();
         $this->building = Floor::where('code', FloorKey::Building)->pluck('id')->first();
         $this->driveWay = Floor::where('code', FloorKey::DriveWay)->pluck('id')->first();
+        $this->outHouseIn = Floor::where('code', FloorKey::OutHouseIn)->pluck('id')->first();
+        $this->outHouseEx = Floor::where('code', FloorKey::OutHouseEx)->pluck('id')->first();
 
         $this->basementParam = Room::with([
             'basicAreas',
@@ -139,6 +146,16 @@ class Sidebar extends Component
             'conformAreas.conform'
             ])->where('inspection_id', $this->inspection->id)
             ->where('floor_id', Floor::where('code', FloorKey::Garage)->first()->id)
+            ->get();
+
+        $this->outHouseInParam =  Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::OutHouseIn)->first()->id)
             ->get();
 
         $this->buildingParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])
