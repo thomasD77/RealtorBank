@@ -101,11 +101,11 @@ return new class extends Migration
             [ 'Kraanwerk', 'crane', RoomKey::Garage],
             [ 'Buitendeur', 'doorOutside', RoomKey::Garage],
 
-            [ 'Garagepoort', 'garageDoor', RoomKey::OuthouseIn],
-            [ 'Wandrek', 'wallRack', RoomKey::OuthouseIn],
-            [ 'Gootsteen', 'sink', RoomKey::OuthouseIn],
-            [ 'Kraanwerk', 'crane', RoomKey::OuthouseIn],
-            [ 'Buitendeur', 'doorOutside', RoomKey::OuthouseIn],
+            [ 'Garagepoort', 'garageDoor', RoomKey::OutHouseIn],
+            [ 'Wandrek', 'wallRack', RoomKey::OutHouseIn],
+            [ 'Gootsteen', 'sink', RoomKey::OutHouseIn],
+            [ 'Kraanwerk', 'crane', RoomKey::OutHouseIn],
+            [ 'Buitendeur', 'doorOutside', RoomKey::OutHouseIn],
 
         ];
 

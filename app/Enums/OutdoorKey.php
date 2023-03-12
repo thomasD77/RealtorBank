@@ -21,4 +21,5 @@ enum OutdoorKey : string
     case TerraceMaterial = 'terraceMaterial';
     case Crane = 'crane';
     case Sockets = 'sockets';
+    case OutsideDoor = 'outsideDoor';
 }

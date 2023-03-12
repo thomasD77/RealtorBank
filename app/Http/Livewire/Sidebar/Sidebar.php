@@ -54,6 +54,7 @@ class Sidebar extends Component
     public $driveWayParam;
     public $techniqueParam;
     public $outHouseInParam;
+    public $outHouseExParam;
 
     public $basic = 'basic';
     public $specific = 'specific';
@@ -95,8 +96,8 @@ class Sidebar extends Component
         $this->garage = Floor::where('code', FloorKey::Garage)->pluck('id')->first();
         $this->building = Floor::where('code', FloorKey::Building)->pluck('id')->first();
         $this->driveWay = Floor::where('code', FloorKey::DriveWay)->pluck('id')->first();
-        $this->outHouseIn = Floor::where('code', FloorKey::OutHouseIn)->pluck('id')->first();
-        $this->outHouseEx = Floor::where('code', FloorKey::OutHouseEx)->pluck('id')->first();
+        $this->outHouseIn = Floor::where('code', FloorKey::OutHouse)->pluck('id')->first();
+        $this->outHouseEx = Floor::where('code', FloorKey::OutHouse)->pluck('id')->first();
 
         $this->basementParam = Room::with([
             'basicAreas',
@@ -155,7 +156,17 @@ class Sidebar extends Component
             'conformAreas',
             'conformAreas.conform'
             ])->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::OutHouseIn)->first()->id)
+            ->where('floor_id', Floor::where('code', FloorKey::OutHouse)->first()->id)
+            ->get();
+
+        $this->outHouseExParam =  Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::OutHouse)->first()->id)
             ->get();
 
         $this->buildingParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])

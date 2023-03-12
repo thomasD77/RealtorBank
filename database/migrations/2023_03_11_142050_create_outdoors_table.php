@@ -59,6 +59,11 @@ return new class extends Migration
             [ 'Kraanwerk', 'crane', RoomKey::Terrace],
             [ 'Buitenverlichting', 'outdoorLight', RoomKey::Terrace],
             [ 'Stopcontacten', 'sockets', RoomKey::Terrace],
+
+            [ 'Muren', 'walls', RoomKey::OutHouseEx],
+            [ 'Ramen', 'windows', RoomKey::OutHouseEx],
+            [ 'Dak', 'roof', RoomKey::OutHouseEx],
+            [ 'Buitendeur', 'outsideDoor', RoomKey::OutHouseEx],
         ];
 
         $outdoorsToInsert = [];

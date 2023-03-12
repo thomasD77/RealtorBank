@@ -30,8 +30,7 @@ return new class extends Migration
             ['Garage', 'garage'],
             ['Gebouw', 'building'],
             ['Aanleg', 'driveWay'],
-            ['Bijgebouw binnenkant', 'outHouseIn'],
-            ['Bijgebouw buitenkant', 'outHouseEx'],
+            ['Bijgebouw', 'outHouse'],
         ];
 
         $floorsToInsert = [];

@@ -47,18 +47,13 @@ return new class extends Migration
             $table->string('brand')->nullable();
             $table->string('crane')->nullable();
 
-//            $table->string('glassInlay')->nullable();
-//            $table->string('handle')->nullable();
-//            $table->string('mailbox')->nullable();
-//            $table->string('peephole')->nullable();
-//            $table->string('window')->nullable();
-//            $table->string('doorBel')->nullable();
-//            $table->string('dorpel')->nullable();
-//            $table->string('shelves')->nullable();
-//            $table->string('manual')->nullable();
-//            $table->string('stop')->nullable();
-//            $table->string('siphon')->nullable();
-//            $table->string('angleCrane')->nullable();
+            $table->string('glassInlay')->nullable();
+            $table->string('handle')->nullable();
+            $table->string('mailbox')->nullable();
+            $table->string('peephole')->nullable();
+            $table->string('window')->nullable();
+            $table->string('doorBel')->nullable();
+            $table->string('dorpel')->nullable();
 
             $table->string('analysis')->nullable();
             $table->text('extra')->nullable();

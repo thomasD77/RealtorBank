@@ -205,5 +205,35 @@
             />
         @break
 
+        @case(\App\Enums\OutdoorKey::OutsideDoor->value)
+            <livewire:outdoor.elements.material
+                :dynamicArea="$outdoorArea"
+            />
+            <livewire:outdoor.elements.colors
+                :dynamicArea="$outdoorArea"
+            />
+            <livewire:outdoor.elements.glassinlay
+                :dynamicArea="$outdoorArea"
+            />
+            <livewire:outdoor.elements.handle
+                :dynamicArea="$outdoorArea"
+            />
+            <livewire:outdoor.elements.mailbox
+                :dynamicArea="$outdoorArea"
+            />
+            <livewire:outdoor.elements.peephole
+                :dynamicArea="$outdoorArea"
+            />
+            <livewire:outdoor.elements.window
+                :dynamicArea="$outdoorArea"
+            />
+            <livewire:outdoor.elements.doorbell
+                :dynamicArea="$outdoorArea"
+            />
+            <livewire:outdoor.elements.dorpel
+                :dynamicArea="$outdoorArea"
+            />
+        @break
+
     @endswitch
 </div>
