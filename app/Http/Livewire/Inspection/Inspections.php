@@ -23,6 +23,7 @@ class Inspections extends Component
     {
         $inspections = Inspection::query()
             ->where('user_id', Auth::id())
+            ->with('medias')
             ->latest()
             ->get();
 

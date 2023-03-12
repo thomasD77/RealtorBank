@@ -8,6 +8,7 @@ use App\Enums\RoomKey;
 use App\Models\Category;
 use App\Models\Floor;
 use App\Models\Inspection;
+use App\Models\OutdoorArea;
 use App\Models\Room;
 use App\Models\SidebarToggle;
 use App\Models\Technique;
@@ -90,38 +91,62 @@ class Sidebar extends Component
         $this->building = Floor::where('code', FloorKey::Building)->pluck('id')->first();
         $this->driveWay = Floor::where('code', FloorKey::DriveWay)->pluck('id')->first();
 
-        $this->basementParam = Room::query()
-            ->where('inspection_id', $this->inspection->id)
+        $this->basementParam = Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
             ->where('floor_id', Floor::where('code', FloorKey::BasementFloor)->first()->id)
             ->get();
 
-        $this->groundFloorParam = Room::query()
-            ->where('inspection_id', $this->inspection->id)
+        $this->groundFloorParam = Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
             ->where('floor_id', Floor::where('code', FloorKey::GroundFloor)->first()->id)
             ->get();
 
-        $this->upperFloorParam = Room::query()
-            ->where('inspection_id', $this->inspection->id)
+        $this->upperFloorParam = Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
             ->where('floor_id', Floor::where('code', FloorKey::UpperFloor)->first()->id)
             ->get();
 
-        $this->atticParam = Room::query()
-            ->where('inspection_id', $this->inspection->id)
+        $this->atticParam = Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
             ->where('floor_id', Floor::where('code', FloorKey::Attic)->first()->id)
             ->get();
 
-        $this->garageParam = Room::query()
-            ->where('inspection_id', $this->inspection->id)
+        $this->garageParam =  Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
             ->where('floor_id', Floor::where('code', FloorKey::Garage)->first()->id)
             ->get();
 
-        $this->buildingParam = Room::query()
+        $this->buildingParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])
             ->where('inspection_id', $this->inspection->id)
             ->where('floor_id', Floor::where('code', FloorKey::Building)->first()->id)
-            ->with('outdoorAreas')
             ->get();
 
-        $this->driveWayParam = Room::query()
+        $this->driveWayParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])
             ->where('inspection_id', $this->inspection->id)
             ->where('floor_id', Floor::where('code', FloorKey::DriveWay)->first()->id)
             ->get();
@@ -151,18 +176,6 @@ class Sidebar extends Component
     public function toggleFloor($value)
     {
         SidebarToggle::sidebarFloor($value);
-    }
-
-    public function toggleCollapse()
-    {
-        //
-        if($this->ariaExpanded != false){
-            $this->ariaExpanded = 'false';
-            $this->show = '';
-        }else {
-            $this->ariaExpanded = 'true';
-            $this->show = 'show';
-        }
     }
 
     public function render()

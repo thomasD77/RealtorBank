@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Situation;
 
+use App\Models\Category;
 use App\Models\Inspection;
 use App\Models\Situation;
 use App\Models\Tenant;

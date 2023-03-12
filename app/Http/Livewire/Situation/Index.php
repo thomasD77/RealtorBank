@@ -19,18 +19,21 @@ class Index extends Component
         $this->situations = Situation::query()
             ->orderBy('date')
             ->where('inspection_id', $this->inspection->id)
+            ->with('tenant')
             ->get();
 
         $this->current_situation = Situation::query()
             ->orderBy('date')
             ->where('inspection_id', $this->inspection->id)
             ->whereNotNull('intrede')
+            ->with('tenant')
             ->first();
 
         $this->current_situation_out = Situation::query()
             ->orderBy('date')
             ->where('inspection_id', $this->inspection->id)
             ->where('intrede', '=' ,0)
+            ->with('tenant')
             ->first();
     }
 
