@@ -10,9 +10,11 @@ use App\Models\Room;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Inspections extends Component
 {
+    use WithPagination;
 
     public function addInspection()
     {
@@ -25,7 +27,7 @@ class Inspections extends Component
             ->where('user_id', Auth::id())
             ->with('medias')
             ->latest()
-            ->get();
+            ->simplePaginate(9);
 
         return view('livewire.inspection.inspections', [
             'inspections' => $inspections,

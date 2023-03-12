@@ -133,9 +133,19 @@
                                 </tr>
                             @endforeach
                         @endif
+
                         </tbody>
                     </table>
                     <!--end of table-->
+
+                    <!--pagination-->
+                    <div class="pagination-container">
+                        <nav>
+                            <ul class="pagination d-flex justify-content-center">
+                                {{ $situations->links() }}
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>

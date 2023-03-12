@@ -86,6 +86,14 @@ Version      : 1.2
 /*------ 1. CUSTOM  ------*/
 /*-----------------------------------*/
 
+
+.pagination .relative {
+    background-color: #FF385C !important;
+    color: white;
+    border-radius: 5px;
+    outline-color: #1d293e;
+}
+
 input[type=checkbox]{
     accent-color: #FF385C;
     transform: scale(1.55);

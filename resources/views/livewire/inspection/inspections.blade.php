@@ -1,6 +1,8 @@
 <div>
     <div class="my-properties">
-        <button wire:click="addInspection" class="btn btn-secondary mb-3"><i class="fa fa-plus"></i>{{ __('Inspectie') }}</button>
+        <div class="text-right">
+            <button wire:click="addInspection" class="btn btn-dark mb-3"><i class="fa fa-plus mr-2"></i>{{ __('Inspectie') }}</button>
+        </div>
         <table class="table-responsive">
             <thead>
             <tr>
@@ -48,14 +50,12 @@
             @endif
             </tbody>
         </table>
+
+
         <div class="pagination-container">
             <nav>
-                <ul class="pagination">
-                    <li class="page-item"><a class="btn btn-common" href="#"><i class="lni-chevron-left"></i> Previous </a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="btn btn-common" href="#">Next <i class="lni-chevron-right"></i></a></li>
+                <ul class="pagination d-flex justify-content-center">
+                    {{ $inspections->links() }}
                 </ul>
             </nav>
         </div>

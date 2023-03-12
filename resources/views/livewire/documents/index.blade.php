@@ -26,6 +26,15 @@
                     @endif
                 </tbody>
             </table>
+
+            <!--pagination-->
+            <div class="pagination-container">
+                <nav>
+                    <ul class="pagination d-flex justify-content-center">
+                        {{ $documents->links() }}
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
 </div>
