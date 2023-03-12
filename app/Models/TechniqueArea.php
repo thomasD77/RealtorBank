@@ -13,7 +13,7 @@ class TechniqueArea extends Model
 
     public function technique()
     {
-        return $this->belongsTo(Technique::class);
+        return $this->belongsTo(Technique::class, 'technique_id');
     }
 
     public function media()

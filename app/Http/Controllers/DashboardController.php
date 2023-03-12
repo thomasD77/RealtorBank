@@ -28,6 +28,7 @@ class DashboardController extends Controller
     public function detail(Inspection $inspection, Room $room, Area $area): View
     {
         $basicArea = BasicArea::query()
+            ->with('area')
             ->where('room_id', $room->id)
             ->where('area_id', $area->id)
             ->first();
@@ -43,6 +44,7 @@ class DashboardController extends Controller
     public function conform(Inspection $inspection, Room $room, Conform $conform): View
     {
         $conformArea = ConformArea::query()
+            ->with('conform')
             ->where('room_id', $room->id)
             ->where('conform_id', $conform->id)
             ->first();
@@ -58,6 +60,7 @@ class DashboardController extends Controller
     public function specific(Inspection $inspection, Room $room, Specific $specific): View
     {
         $specificArea = SpecificArea::query()
+            ->with('specific')
             ->where('room_id', $room->id)
             ->where('specific_id', $specific->id)
             ->first();
@@ -73,6 +76,7 @@ class DashboardController extends Controller
     public function technique(Inspection $inspection, Technique $technique): View
     {
         $techniqueArea = TechniqueArea::query()
+            ->with('technique')
             ->where('inspection_id', $inspection->id)
             ->where('technique_id', $technique->id)
             ->first();
@@ -87,6 +91,7 @@ class DashboardController extends Controller
     public function outdoor(Inspection $inspection, Outdoor $outdoor): View
     {
         $outdoorArea = OutdoorArea::query()
+            ->with('outdoor')
             ->where('inspection_id', $inspection->id)
             ->where('outdoor_id', $outdoor->id)
             ->first();

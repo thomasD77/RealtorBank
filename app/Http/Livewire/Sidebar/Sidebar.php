@@ -10,6 +10,8 @@ use App\Models\Floor;
 use App\Models\Inspection;
 use App\Models\Room;
 use App\Models\SidebarToggle;
+use App\Models\Technique;
+use App\Models\TechniqueArea;
 use Livewire\Component;
 
 class Sidebar extends Component
@@ -46,6 +48,7 @@ class Sidebar extends Component
     public $garageParam;
     public $buildingParam;
     public $driveWayParam;
+    public $techniqueParam;
 
     public $basic = 'basic';
     public $specific = 'specific';
@@ -115,11 +118,16 @@ class Sidebar extends Component
         $this->buildingParam = Room::query()
             ->where('inspection_id', $this->inspection->id)
             ->where('floor_id', Floor::where('code', FloorKey::Building)->first()->id)
+            ->with('outdoorAreas')
             ->get();
 
         $this->driveWayParam = Room::query()
             ->where('inspection_id', $this->inspection->id)
             ->where('floor_id', Floor::where('code', FloorKey::DriveWay)->first()->id)
+            ->get();
+
+        $this->techniqueParam = Technique::query()
+            ->select('id', 'title')
             ->get();
     }
 

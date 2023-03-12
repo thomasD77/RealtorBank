@@ -15,7 +15,10 @@ class Index extends Component
     public function mount(Inspection $inspection)
     {
         $this->inspection = $inspection;
-        $this->keys = Key::where('inspection_id', $this->inspection->id)->get();
+        $this->keys = Key::query()
+            ->with('media')
+            ->where('inspection_id', $this->inspection->id)
+            ->get();
     }
 
     public function render()

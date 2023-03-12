@@ -51,7 +51,7 @@
              id="collapseInterior"
         >
             <ul>
-                {{--BasementFloor--}}
+                {{--                BasementFloor--}}
                 <a data-toggle="collapse"
                    href="#collapseBasement"
                    role="button"
@@ -87,7 +87,7 @@
                                         <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
                                     </a>
                                 </li>
-                                {{--   Basic--}}
+                                   Basic
                                 <li>
                                     <a data-toggle="collapse"
                                        href="#collapseBasic{{ $room->id }}"
@@ -113,7 +113,7 @@
                                     </div>
                                 </li>
 
-                                {{--  Spec--}}
+                                {{--                                  Spec--}}
                                 <li>
                                     <a data-toggle="collapse"
                                        href="#collapseSpec{{ $room->id }}"
@@ -139,7 +139,7 @@
                                     </div>
                                 </li>
 
-                                {{-- Conform--}}
+                                {{--                                 Conform--}}
                                 <li>
                                     <a data-toggle="collapse"
                                        href="#collapseConform{{ $room->id }}"
@@ -169,7 +169,7 @@
                 @endforeach
                 </div>
 
-                {{--groundFloor--}}
+                {{--                groundFloor--}}
                 <a data-toggle="collapse"
                    href="#collapseGroundFloor"
                    role="button"
@@ -205,7 +205,7 @@
                                             <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
                                         </a>
                                     </li>
-                                    {{--   Basic--}}
+                                    {{--                                       Basic--}}
                                     <li>
                                         <a data-toggle="collapse"
                                            href="#collapseBasic{{ $room->id }}"
@@ -231,7 +231,7 @@
                                         </div>
                                     </li>
 
-                                    {{--  Spec--}}
+                                    {{--                                      Spec--}}
                                     <li>
                                         <a data-toggle="collapse"
                                            href="#collapseSpec{{ $room->id }}"
@@ -257,7 +257,7 @@
                                         </div>
                                     </li>
 
-                                    {{-- Conform--}}
+                                    {{--                                     Conform--}}
                                     <li>
                                         <a data-toggle="collapse"
                                            href="#collapseConform{{ $room->id }}"
@@ -287,7 +287,7 @@
                     @endforeach
                 </div>
 
-                {{--upperFloor--}}
+                {{--                upperFloor--}}
                 <a data-toggle="collapse"
                    href="#collapseUpperFloor"
                    role="button"
@@ -323,7 +323,7 @@
                                             <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
                                         </a>
                                     </li>
-                                    {{--   Basic--}}
+                                    {{--                                       Basic--}}
                                     <li>
                                         <a data-toggle="collapse"
                                            href="#collapseBasic{{ $room->id }}"
@@ -349,7 +349,7 @@
                                         </div>
                                     </li>
 
-                                    {{--  Spec--}}
+                                    {{--                                      Spec--}}
                                     <li>
                                         <a data-toggle="collapse"
                                            href="#collapseSpec{{ $room->id }}"
@@ -375,7 +375,7 @@
                                         </div>
                                     </li>
 
-                                    {{-- Conform--}}
+                                    {{--                                     Conform--}}
                                     <li>
                                         <a data-toggle="collapse"
                                            href="#collapseConform{{ $room->id }}"
@@ -405,7 +405,7 @@
                     @endforeach
                 </div>
 
-                {{--attic--}}
+                {{--                attic--}}
                 <a data-toggle="collapse"
                    href="#collapseAttic"
                    role="button"
@@ -441,7 +441,7 @@
                                             <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
                                         </a>
                                     </li>
-                                    {{--   Basic--}}
+                                    {{--                                       Basic--}}
                                     <li>
                                         <a data-toggle="collapse"
                                            href="#collapseBasic{{ $room->id }}"
@@ -467,7 +467,7 @@
                                         </div>
                                     </li>
 
-                                    {{--  Spec--}}
+                                    {{--                                      Spec--}}
                                     <li>
                                         <a data-toggle="collapse"
                                            href="#collapseSpec{{ $room->id }}"
@@ -493,7 +493,7 @@
                                         </div>
                                     </li>
 
-                                    {{-- Conform--}}
+                                    {{--                                     Conform--}}
                                     <li>
                                         <a data-toggle="collapse"
                                            href="#collapseConform{{ $room->id }}"
@@ -523,7 +523,7 @@
                     @endforeach
                 </div>
 
-                {{--Garage--}}
+                {{--                Garage--}}
                 <a data-toggle="collapse"
                    href="#collapseGarage"
                    role="button"
@@ -559,7 +559,7 @@
                                             <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
                                         </a>
                                     </li>
-                                    {{--   Basic--}}
+                                    {{--                                       Basic--}}
                                     <li>
                                         <a data-toggle="collapse"
                                            href="#collapseBasic{{ $room->id }}"
@@ -585,7 +585,7 @@
                                         </div>
                                     </li>
 
-                                    {{--  Spec--}}
+                                    {{--                                      Spec--}}
                                     <li>
                                         <a data-toggle="collapse"
                                            href="#collapseSpec{{ $room->id }}"
@@ -611,7 +611,7 @@
                                         </div>
                                     </li>
 
-                                    {{-- Conform--}}
+                                    {{--                                     Conform--}}
                                     <li>
                                         <a data-toggle="collapse"
                                            href="#collapseConform{{ $room->id }}"
@@ -662,7 +662,7 @@
         >
             <ul>
 
-                {{-- Building --}}
+{{--                 Building--}}
                 <a data-toggle="collapse"
                    href="#collapseBuilding"
                    role="button"
@@ -677,30 +677,30 @@
                      id="collapseBuilding"
                 >
 
-                    @foreach($buildingParam as $room)
+                    @foreach($buildingParam as $building)
                         <li class="mx-2">
 
                             <a data-toggle="collapse"
-                               href="#collapseRoom{{ $room->id }}"
+                               href="#collapseRoom{{ $building->id }}"
                                role="button" aria-expanded="false"
                                aria-controls="collapseRoom"
-                               wire:click="toggleRoom({{ $room->id }})"
+                               wire:click="toggleRoom({{ $building->id }})"
                             >
-                                <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $room->title }}</span>
+                                <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $building->title }}</span>
                             </a>
 
-                            <div class="collapse @if($room->id == $activeRoom) show @endif"
+                            <div class="collapse @if($building->id == $activeRoom) show @endif"
                                  wire:ignore.self
-                                 id="collapseRoom{{ $room->id }}"
+                                 id="collapseRoom{{ $building->id }}"
                             >
                                 <ul>
                                     <li>
-                                        <a href="{{ route('general.detail',  [$inspection, $room]) }}">
+                                        <a href="{{ route('general.detail',  [$inspection, $building]) }}">
                                             <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
                                         </a>
                                     </li>
 
-                                    @foreach($room->outdoorAreas->where('room_id', $room->id) as $item)
+                                    @foreach($building->outdoorAreas->where('room_id', $building->id) as $item)
                                         <li class="mx-3">
                                             <a href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}
@@ -714,168 +714,168 @@
                     @endforeach
                 </div>
 
-                {{-- Driveway --}}
-                <a data-toggle="collapse"
-                   href="#collapseDriveWay"
-                   role="button"
-                   aria-expanded="false"
-                   aria-controls="collapseDriveWay"
-                   wire:click="toggleFloor({{ $driveWay }})"
-                >
-                    <i class="fa fa-bookmark"></i>{{ __('Algemeen aanleg') }}
-                </a>
-                <div class="collapse @if($driveWay == $activeFloor) show @endif"
-                     wire:ignore.self
-                     id="collapseDriveWay"
-                >
+{{--                 Driveway--}}
+{{--                <a data-toggle="collapse"--}}
+{{--                   href="#collapseDriveWay"--}}
+{{--                   role="button"--}}
+{{--                   aria-expanded="false"--}}
+{{--                   aria-controls="collapseDriveWay"--}}
+{{--                   wire:click="toggleFloor({{ $driveWay }})"--}}
+{{--                >--}}
+{{--                    <i class="fa fa-bookmark"></i>{{ __('Algemeen aanleg') }}--}}
+{{--                </a>--}}
+{{--                <div class="collapse @if($driveWay == $activeFloor) show @endif"--}}
+{{--                     wire:ignore.self--}}
+{{--                     id="collapseDriveWay"--}}
+{{--                >--}}
 
-                    @foreach($driveWayParam as $room)
-                        <li class="mx-2">
+{{--                    @foreach($driveWayParam as $room)--}}
+{{--                        <li class="mx-2">--}}
 
-                            <a data-toggle="collapse"
-                               href="#collapseRoom{{ $room->id }}"
-                               role="button" aria-expanded="false"
-                               aria-controls="collapseRoom"
-                               wire:click="toggleRoom({{ $room->id }})"
-                            >
-                                <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $room->title }}</span>
-                            </a>
+{{--                            <a data-toggle="collapse"--}}
+{{--                               href="#collapseRoom{{ $room->id }}"--}}
+{{--                               role="button" aria-expanded="false"--}}
+{{--                               aria-controls="collapseRoom"--}}
+{{--                               wire:click="toggleRoom({{ $room->id }})"--}}
+{{--                            >--}}
+{{--                                <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $room->title }}</span>--}}
+{{--                            </a>--}}
 
-                            <div class="collapse @if($room->id == $activeRoom) show @endif"
-                                 wire:ignore.self
-                                 id="collapseRoom{{ $room->id }}"
-                            >
-                                <ul>
-                                    <li>
-                                        <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
-                                        </a>
-                                    </li>
+{{--                            <div class="collapse @if($room->id == $activeRoom) show @endif"--}}
+{{--                                 wire:ignore.self--}}
+{{--                                 id="collapseRoom{{ $room->id }}"--}}
+{{--                            >--}}
+{{--                                <ul>--}}
+{{--                                    <li>--}}
+{{--                                        <a href="{{ route('general.detail',  [$inspection, $room]) }}">--}}
+{{--                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
 
-                                    @foreach($room->outdoorAreas->where('room_id', $room->id) as $item)
-                                        <li class="mx-3">
-                                            <a href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
-                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}
-                                            </a>
-                                        </li>
-                                    @endforeach
+{{--                                    @foreach($room->outdoorAreas->where('room_id', $room->id) as $item)--}}
+{{--                                        <li class="mx-3">--}}
+{{--                                            <a href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">--}}
+{{--                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}--}}
+{{--                                            </a>--}}
+{{--                                        </li>--}}
+{{--                                    @endforeach--}}
 
-                                </ul>
-                            </div>
-                        </li>
-                    @endforeach
-                </div>
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </li>--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
             </ul>
         </div>
     </li>
 
     {{--Technieken--}}
-{{--    <li>--}}
-{{--        <a data-toggle="collapse"--}}
-{{--           href="#collapseTechnique"--}}
-{{--           role="button" aria-expanded="false"--}}
-{{--           aria-controls="collapseTechnique"--}}
-{{--           wire:click="toggleCategory({{ $techniques }})"--}}
-{{--           class="custom-sidebar-padding @if($techniques == $activeCat) active @endif"--}}
-{{--        >--}}
-{{--            <i class="fa fa-folder" aria-hidden="true"></i>{{ __('Technieken') }}--}}
-{{--        </a>--}}
-{{--        <div>--}}
-{{--            <ul class="collapse @if($techniques == $activeCat) show @endif"--}}
-{{--                wire:ignore.self--}}
-{{--                id="collapseTechnique"--}}
-{{--            >--}}
-{{--                @foreach($inspection->techniques as $item)--}}
-{{--                    <li class="mx-3">--}}
-{{--                        <a href="{{ route('area.technique', [$inspection, $item->technique]) }}">--}}
-{{--                            <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->technique->title }}--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                @endforeach--}}
-{{--            </ul>--}}
-{{--        </div>--}}
-{{--    </li>--}}
+    <li>
+        <a data-toggle="collapse"
+           href="#collapseTechnique"
+           role="button" aria-expanded="false"
+           aria-controls="collapseTechnique"
+           wire:click="toggleCategory({{ $techniques }})"
+           class="custom-sidebar-padding @if($techniques == $activeCat) active @endif"
+        >
+            <i class="fa fa-folder" aria-hidden="true"></i>{{ __('Technieken') }}
+        </a>
+        <div>
+            <ul class="collapse @if($techniques == $activeCat) show @endif"
+                wire:ignore.self
+                id="collapseTechnique"
+            >
+                @foreach($techniqueParam as $item)
+                    <li class="mx-3">
+                        <a href="{{ route('area.technique', [$inspection, $item]) }}">
+                            <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->title }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </li>
 
     {{--Documenten--}}
-{{--    <li>--}}
-{{--        <a data-toggle="collapse"--}}
-{{--           href="#collapseDocument"--}}
-{{--           role="button"--}}
-{{--           aria-expanded="false"--}}
-{{--           aria-controls="collapseDocument"--}}
-{{--           wire:click="toggleCategory({{ $documents }})"--}}
-{{--           class="custom-sidebar-padding @if($documents == $activeCat) active @endif"--}}
-{{--        >--}}
-{{--            <i class="fa fa-folder"></i>{{ __('Documenten') }}--}}
-{{--        </a>--}}
-{{--        <div class="collapse @if($documents == $activeCat) show @endif"--}}
-{{--             wire:ignore.self--}}
-{{--             id="collapseDocument"--}}
-{{--        >--}}
-{{--            <ul>--}}
-{{--                <li class="mx-3">--}}
-{{--                    <a href="{{ route('documents.index', $inspection) }}">--}}
-{{--                        <i class="fa fa-list"></i>{{ __('Lijst') }}--}}
-{{--                    </a>--}}
-{{--                    <a href="{{ route('create.document', $inspection) }}">--}}
-{{--                        <i class="fa fa-plus"></i>{{ __('Toevoegen') }}--}}
-{{--                    </a>--}}
-{{--                <li>--}}
-{{--            </ul>--}}
-{{--        </div>--}}
-{{--    </li>--}}
+    <li>
+        <a data-toggle="collapse"
+           href="#collapseDocument"
+           role="button"
+           aria-expanded="false"
+           aria-controls="collapseDocument"
+           wire:click="toggleCategory({{ $documents }})"
+           class="custom-sidebar-padding @if($documents == $activeCat) active @endif"
+        >
+            <i class="fa fa-folder"></i>{{ __('Documenten') }}
+        </a>
+        <div class="collapse @if($documents == $activeCat) show @endif"
+             wire:ignore.self
+             id="collapseDocument"
+        >
+            <ul>
+                <li class="mx-3">
+                    <a href="{{ route('documents.index', $inspection) }}">
+                        <i class="fa fa-list"></i>{{ __('Lijst') }}
+                    </a>
+                    <a href="{{ route('create.document', $inspection) }}">
+                        <i class="fa fa-plus"></i>{{ __('Toevoegen') }}
+                    </a>
+                <li>
+            </ul>
+        </div>
+    </li>
 
     {{--Meters--}}
-{{--    <li>--}}
-{{--        <a data-toggle="collapse"--}}
-{{--           href="#collapseMeter"--}}
-{{--           role="button"--}}
-{{--           aria-expanded="false"--}}
-{{--           aria-controls="collapseMeter"--}}
-{{--           wire:click="toggleCategory({{ $meters }})"--}}
-{{--           class="custom-sidebar-padding @if($meters == $activeCat) active @endif"--}}
-{{--        >--}}
-{{--            <i class="fa fa-folder"></i>{{ __('Meters') }}--}}
-{{--        </a>--}}
-{{--        <div class="collapse @if($meters == $activeCat) show @endif"--}}
-{{--             wire:ignore.self--}}
-{{--             id="collapseMeter"--}}
-{{--        >--}}
-{{--            <ul>--}}
-{{--                <li class="mx-3">--}}
-{{--                    <a href="{{ route('meters.index', $inspection) }}">--}}
-{{--                        <i class="fa fa-list"></i>{{ __('Lijst') }}--}}
-{{--                    </a>--}}
-{{--                <li>--}}
-{{--            </ul>--}}
-{{--        </div>--}}
-{{--    </li>--}}
+    <li>
+        <a data-toggle="collapse"
+           href="#collapseMeter"
+           role="button"
+           aria-expanded="false"
+           aria-controls="collapseMeter"
+           wire:click="toggleCategory({{ $meters }})"
+           class="custom-sidebar-padding @if($meters == $activeCat) active @endif"
+        >
+            <i class="fa fa-folder"></i>{{ __('Meters') }}
+        </a>
+        <div class="collapse @if($meters == $activeCat) show @endif"
+             wire:ignore.self
+             id="collapseMeter"
+        >
+            <ul>
+                <li class="mx-3">
+                    <a href="{{ route('meters.index', $inspection) }}">
+                        <i class="fa fa-list"></i>{{ __('Lijst') }}
+                    </a>
+                <li>
+            </ul>
+        </div>
+    </li>
 
     {{--Sleutels--}}
-{{--    <li>--}}
-{{--        <a data-toggle="collapse"--}}
-{{--           href="#collapseKey"--}}
-{{--           role="button"--}}
-{{--           aria-expanded="false"--}}
-{{--           aria-controls="collapseKey"--}}
-{{--           wire:click="toggleCategory({{ $keys }})"--}}
-{{--           class="custom-sidebar-padding @if($keys == $activeCat) active @endif"--}}
-{{--        >--}}
-{{--            <i class="fa fa-folder"></i>{{ __('Sleutels') }}--}}
-{{--        </a>--}}
-{{--        <div class="collapse @if($keys == $activeCat) show @endif"--}}
-{{--             wire:ignore.self--}}
-{{--             id="collapseKey"--}}
-{{--        >--}}
-{{--            <ul>--}}
-{{--                <li class="mx-3">--}}
-{{--                    <a href="{{ route('keys.index', $inspection) }}">--}}
-{{--                        <i class="fa fa-list"></i>{{ __('Lijst') }}--}}
-{{--                    </a>--}}
-{{--                <li>--}}
-{{--            </ul>--}}
-{{--        </div>--}}
-{{--    </li>--}}
+    <li>
+        <a data-toggle="collapse"
+           href="#collapseKey"
+           role="button"
+           aria-expanded="false"
+           aria-controls="collapseKey"
+           wire:click="toggleCategory({{ $keys }})"
+           class="custom-sidebar-padding @if($keys == $activeCat) active @endif"
+        >
+            <i class="fa fa-folder"></i>{{ __('Sleutels') }}
+        </a>
+        <div class="collapse @if($keys == $activeCat) show @endif"
+             wire:ignore.self
+             id="collapseKey"
+        >
+            <ul>
+                <li class="mx-3">
+                    <a href="{{ route('keys.index', $inspection) }}">
+                        <i class="fa fa-list"></i>{{ __('Lijst') }}
+                    </a>
+                <li>
+            </ul>
+        </div>
+    </li>
 
 </ul>
 

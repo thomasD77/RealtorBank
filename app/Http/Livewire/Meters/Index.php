@@ -14,7 +14,10 @@ class Index extends Component
     public function mount(Inspection $inspection)
     {
         $this->inspection = $inspection;
-        $this->meters = Meter::where('inspection_id', $this->inspection->id)->get();
+        $this->meters = Meter::query()
+            ->with('media')
+            ->where('inspection_id', $this->inspection->id)
+            ->get();
     }
 
     public function render()
