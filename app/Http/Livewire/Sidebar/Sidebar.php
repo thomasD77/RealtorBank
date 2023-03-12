@@ -156,7 +156,7 @@ class Sidebar extends Component
             'conformAreas',
             'conformAreas.conform'
             ])->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::OutHouse)->first()->id)
+            ->where('floor_id', Floor::where('code', FloorKey::DriveWay)->first()->id)
             ->get();
 
         $this->outHouseExParam =  Room::with([

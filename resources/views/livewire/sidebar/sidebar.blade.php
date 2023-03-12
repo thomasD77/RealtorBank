@@ -1013,39 +1013,39 @@
                 </div>
 
                 {{-- OutHouseEx--}}
-{{--                @if($outHouseExParam)--}}
-{{--                    @foreach($outHouseExParam as $room)--}}
-{{--                        <a data-toggle="collapse"--}}
-{{--                           href="#collapseRoom{{ $room->id }}"--}}
-{{--                           role="button" aria-expanded="false"--}}
-{{--                           aria-controls="collapseRoom"--}}
-{{--                           wire:click="toggleRoom({{ $room->id }})"--}}
-{{--                        >--}}
-{{--                            <i class="fa fa-bookmark"></i>{{ __('Bijgebouw buiten') }}--}}
-{{--                        </a>--}}
-{{--                        <div class="collapse @if($room->id == $activeRoom) show @endif"--}}
-{{--                             wire:ignore.self--}}
-{{--                             id="collapseRoom{{ $room->id }}"--}}
-{{--                        >--}}
-{{--                            <ul>--}}
-{{--                                <li>--}}
-{{--                                    <a href="{{ route('general.detail',  [$inspection, $room]) }}">--}}
-{{--                                        <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}--}}
-{{--                                    </a>--}}
-{{--                                </li>--}}
+                @if($outHouseExParam)
+                    @foreach($outHouseExParam as $room)
+                        <a data-toggle="collapse"
+                           href="#collapseRoom{{ $room->id }}"
+                           role="button" aria-expanded="false"
+                           aria-controls="collapseRoom"
+                           wire:click="toggleRoom({{ $room->id }})"
+                        >
+                            <i class="fa fa-bookmark"></i>{{ __('Bijgebouw buiten') }}
+                        </a>
+                        <div class="collapse @if($room->id == $activeRoom) show @endif"
+                             wire:ignore.self
+                             id="collapseRoom{{ $room->id }}"
+                        >
+                            <ul>
+                                <li>
+                                    <a href="{{ route('general.detail',  [$inspection, $room]) }}">
+                                        <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                    </a>
+                                </li>
 
-{{--                                @foreach($room->outdoorAreas as $item)--}}
-{{--                                    <li class="mx-3">--}}
-{{--                                        <a href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">--}}
-{{--                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                @endforeach--}}
+                                @foreach($room->outdoorAreas as $item)
+                                    <li class="mx-3">
+                                        <a href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
+                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}
+                                        </a>
+                                    </li>
+                                @endforeach
 
-{{--                            </ul>--}}
-{{--                        </div>--}}
-{{--                    @endforeach--}}
-{{--                @endif--}}
+                            </ul>
+                        </div>
+                    @endforeach
+                @endif
 
             </ul>
         </div>
