@@ -43,11 +43,11 @@ class MediaStore extends Model
             }
 
             if($width > $height){
-                $imgCrop->resize( 450, null, function ($constraint) {
+                $imgCrop->resize( 450, 350, function ($constraint) {
                     $constraint->aspectRatio();
                 })->save(public_path('assets/images/' . $folder . '/' . 'crop').'/'.$crop);
             }else {
-                $imgCrop->resize( null, 300, function ($constraint) {
+                $imgCrop->resize( 450, 350, function ($constraint) {
                     $constraint->aspectRatio();
                 })->save(public_path('assets/images/' . $folder . '/' . 'crop').'/'.$crop);
             }

@@ -9,6 +9,7 @@ use App\Models\Document;
 use App\Models\Inspection;
 use App\Models\Key;
 use App\Models\MediaInspection;
+use App\Models\Meter;
 use App\Models\TechniqueArea;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -38,6 +39,7 @@ class InspectionController extends Controller
     {
         $files = MediaInspection::where('inspection_id', $inspection->id)->get();
         $techniqueArea = TechniqueArea::where('inspection_id', $inspection->id)->get();
+        $meters = Meter::where('inspection_id', $inspection->id)->get();
 
         $basicArea = BasicArea::query()
             ->whereNotNull('material')
@@ -67,6 +69,7 @@ class InspectionController extends Controller
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $inspection,
             'files' => $files,
+            'meters' => $meters,
             'techniqueArea' => $techniqueArea,
             'basicArea' => $basicArea
         ]);

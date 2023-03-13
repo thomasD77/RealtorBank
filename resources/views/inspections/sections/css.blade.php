@@ -96,7 +96,7 @@
 
     .column {
         float: left;
-        width: 50%;
+        width: 33%;
         margin-bottom: 2px;
     }
 
