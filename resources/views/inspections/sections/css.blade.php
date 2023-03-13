@@ -93,15 +93,14 @@
         background-color: transparent;
         border: none;
     }
+    .img--cover {
+        aspect-ratio: 3/2;
+    }
 
     .column {
         float: left;
         width: 33%;
-        margin-bottom: 2px;
-    }
-
-    .column img {
-        max-width: 95%;
+        margin-right: 5px;
     }
 
     /* Clear floats after the columns */
@@ -109,7 +108,7 @@
         content: "";
         display: table;
         clear: both;
-        padding-bottom: 2rem;
+        padding-bottom: 5px;
     }
 
 </style>
