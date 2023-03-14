@@ -174,6 +174,8 @@
         </div>
     </div>
 
+
+
     <div class="single-add-property">
         <h3>{{ __('Media') }}</h3>
         <div class="property-form-group">
@@ -193,11 +195,15 @@
             </div>
             <div class="row">
                 @foreach($files as $file)
-                    <div class="col-md-3">
+                    <div class="col-md-3 mt-4">
                         <div class="img-wrapper">
                             <button wire:click="deleteMedia({{ $file->id }})" class="btn btn-danger delete">X</button>
-                            <a data-fancybox="gallery" href="{{ asset('assets/images/inspections/' . $file->file_original) }}">
-                                <img class="img-fluid" wire:key="{{ $file->id }}" src="{{ asset('assets/images/inspections/crop' . '/' . $file->file_crop) }}" alt="picture">
+                            <a data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
+                                <div class="img--cover"
+                                     style="background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}');
+                                         background-position: center;
+                                         background-size: cover;">
+                                </div>
                             </a>
                         </div>
                     </div>

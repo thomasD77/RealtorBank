@@ -66,6 +66,15 @@ class InspectionController extends Controller
             ->where('inspection_id', $inspection->id)
             ->get();
 
+        $keys = Key::query()
+            ->whereNotNull('title')
+            ->orWhereNotNull('type')
+            ->orWhereNotNull('count')
+            ->orWhereNotNull('extra')
+            ->orHas('media', '>', 0)
+            ->where('inspection_id', $inspection->id)
+            ->get();
+
         $basicArea = BasicArea::query()
             ->whereNotNull('material')
             ->orWhereNotNull('color')
@@ -95,6 +104,7 @@ class InspectionController extends Controller
             'inspection' => $inspection,
             'meters' => $meters,
             'documents' => $documents,
+            'keys' => $keys,
             'techniqueArea' => $techniqueArea,
             'basicArea' => $basicArea
         ]);

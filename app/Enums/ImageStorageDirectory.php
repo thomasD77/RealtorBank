@@ -8,4 +8,5 @@ enum ImageStorageDirectory : string
     case Inspections = 'inspections';
     case Documents = 'documents';
     case Techniques = 'technique';
+    case Keys = 'keys';
 }
