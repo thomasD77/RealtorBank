@@ -18,5 +18,7 @@
 
     @include('inspections.sections.meters')
 
+    @include('inspections.sections.documents')
+
 </body>
 </html>

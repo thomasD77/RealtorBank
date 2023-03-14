@@ -12,6 +12,7 @@ use App\Models\MediaInspection;
 use App\Models\Meter;
 use App\Models\TechniqueArea;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +40,22 @@ class InspectionController extends Controller
     {
         $files = MediaInspection::where('inspection_id', $inspection->id)->get();
         $techniqueArea = TechniqueArea::where('inspection_id', $inspection->id)->get();
-        $meters = Meter::where('inspection_id', $inspection->id)->get();
+
+        $documents = Document::query()
+            ->whereNotNull('title')
+            ->orWhereNotNull('reference')
+            ->orWhereNotNull('date')
+            ->orHas('media', '>', 0)
+            ->where('inspection_id', $inspection->id)
+            ->get();
+
+        $meters = Meter::query()
+            ->whereNotNull('reference')
+            ->orWhereNotNull('EAN')
+            ->orWhereNotNull('date')
+            ->orHas('media', '>', 0)
+            ->where('inspection_id', $inspection->id)
+            ->get();
 
         $basicArea = BasicArea::query()
             ->whereNotNull('material')
@@ -70,6 +86,7 @@ class InspectionController extends Controller
             'inspection' => $inspection,
             'files' => $files,
             'meters' => $meters,
+            'documents' => $documents,
             'techniqueArea' => $techniqueArea,
             'basicArea' => $basicArea
         ]);
