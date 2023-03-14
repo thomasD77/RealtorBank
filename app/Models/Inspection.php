@@ -19,7 +19,7 @@ class Inspection extends Model
 
     protected $guarded = [];
 
-    public function medias()
+    public function media()
     {
         return $this->hasMany(MediaInspection::class);
     }

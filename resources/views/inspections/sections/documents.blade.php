@@ -4,7 +4,7 @@
         <h2>{{ __('Documents') }}</h2>
 
         @foreach($documents as $item)
-            @if($item->title || $item->reference || $item->date)
+            @if($item->title || $item->reference || $item->date || $item->media->count() > 0)
                 <table class="table">
                     <tr class="row--head--list">
                         <th>{{ $item->title }}</th>

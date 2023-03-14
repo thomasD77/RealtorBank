@@ -38,8 +38,17 @@ class InspectionController extends Controller
 
     public function genereatePDF(Inspection $inspection)
     {
-        $files = MediaInspection::where('inspection_id', $inspection->id)->get();
-        $techniqueArea = TechniqueArea::where('inspection_id', $inspection->id)->get();
+        $techniqueArea = TechniqueArea::query()
+        ->whereNotNull('type')
+        ->orWhereNotNull('analysis')
+        ->orWhereNotNull('fuel')
+        ->orWhereNotNull('brand')
+        ->orWhereNotNull('model')
+        ->orWhereNotNull('count')
+        ->orWhereNotNull('extra')
+        ->orHas('media', '>', 0)
+        ->where('inspection_id', $inspection->id)
+        ->get();
 
         $documents = Document::query()
             ->whereNotNull('title')
@@ -84,7 +93,6 @@ class InspectionController extends Controller
 
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $inspection,
-            'files' => $files,
             'meters' => $meters,
             'documents' => $documents,
             'techniqueArea' => $techniqueArea,

@@ -1,26 +1,33 @@
 <style>
-    .img-fluid img {
-        max-width: 100%;
-        height: auto;
-    }
-    p {
-        margin: 5px;
-        font-weight: normal;
-    }
-    strong {
-        margin-bottom: 0;
-        padding-right: 8px;
-        font-weight: bold;
-    }
     h1, h2, h3 {
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: Montserrat, sans-serif;
+    }
+    h1, h2 {
+        margin-bottom: 3px;
     }
     h3 {
         font-size: 0.7rem;
         text-transform: uppercase;
     }
+    p {
+        font-family: Montserrat, sans-serif;
+        font-size: 14px;
+        margin: 5px;
+        font-weight: normal;
+    }
+    .img-fluid img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    strong {
+        margin-bottom: 0;
+        padding-right: 8px;
+        font-weight: bold;
+    }
+
     .table {
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: Montserrat, sans-serif;
         border-collapse: collapse;
         width: 100%;
     }
@@ -36,8 +43,6 @@
     .table tr:nth-child(even){background-color: #f2f2f2;}
 
     .table th {
-        padding-top: 12px;
-        padding-bottom: 12px;
         text-align: left;
         color: white;
         background-color:  #f2f2f2;
@@ -46,17 +51,21 @@
         font-weight: normal;
     }
     .row--head th {
-        background-color: #31c77f !important;
+        background-color: rgba(36, 50, 74, 0.7); !important;
+        text-transform: uppercase;
     }
     .row--head--list tr {
         padding: 2rem;
-
     }
     .row--head--list th {
         background-color: rgba(36, 50, 74, 0.7); !important;
         opacity: 0.8;
         padding: 0.2rem;
     }
+    .row--head--list th:first-child {
+        width: 65%;
+    }
+
     .row--text th {
         background-color: transparent;
         color: black;
@@ -78,7 +87,6 @@
     .date-title {
         font-size: 13px;
         margin-bottom: 5px;
-        font-style: italic;
     }
     .textareaExtra th {
         max-width: 200px;
@@ -99,7 +107,7 @@
 
     .column {
         float: left;
-        width: 33%;
+        width: 32.775%;
         margin-right: 5px;
     }
 

@@ -1,16 +1,17 @@
 <section class="inspection-information">
     <h1>{{ $inspection->title ?? 'DRAFT' }}</h1>
     <p class="date-title">{{ __('Datum opgemaakt') }} | {{ $inspection->created_at }}</p>
+
+    <br>
+
     @if($inspection->extra)
         <p>{{ $inspection->extra }}</p>
     @endif
 
     <br>
-    <br>
 
     <hr>
 
-    <br>
     <br>
 
     <p>
@@ -40,11 +41,9 @@
     </p>
 
     <br>
-    <br>
 
     <hr>
 
-    <br>
     <br>
 
     <h2>{{ __('Persoon van afname plaatsbeschrijving') }}</h2>
@@ -59,7 +58,6 @@
         </tr>
     </table>
 
-    <br>
     <br>
 
     @if($inspection->owner->name || $inspection->owner->email || $inspection->owner->phone || $inspection->owner->address || $inspection->owner->postBus || $inspection->owner->zip || $inspection->owner->city || $inspection->owner->country)
@@ -163,14 +161,6 @@
     <br>
     <br>
 
-    @if(!$files->isEmpty())
-        <h2>{{ __('Media') }}</h2>
-        <div class="row">
-            @foreach($files as $file)
-                <div class="column">
-                    <img class="img-fluid" src="{{ asset('assets/images/inspections/crop' . '/' . $file->file_crop) }}" alt="picture">
-                </div>
-            @endforeach
-        </div>
-    @endif
+    @include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::Inspections->value, 'item' => $inspection ])
+
 </section>

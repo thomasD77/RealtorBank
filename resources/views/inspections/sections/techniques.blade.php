@@ -2,7 +2,7 @@
     <h2>{{ __('Technieken') }}</h2>
     @if($techniqueArea)
         @foreach($techniqueArea as $item)
-            @if($item->type || $item->analysis || $item->fuel || $item->brand || $item->model || $item->type || $item->count || $item->extra)
+            @if($item->type || $item->analysis || $item->fuel || $item->brand || $item->model || $item->count || $item->extra || $item->media->count() > 0)
                 <table class="table">
                     <tr class="row--head--list">
                         <th>{{  $item->technique->title }}</th>

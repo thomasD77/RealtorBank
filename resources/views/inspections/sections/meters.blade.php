@@ -4,7 +4,7 @@
         <h2>{{ __('Meters') }}</h2>
 
         @foreach($meters as $item)
-            @if($item->reference || $item->EAN || $item->date)
+            @if($item->reference || $item->EAN || $item->date || $item->media->count() > 0)
                 <table class="table">
                     <tr class="row--head--list">
                         <th>{{ $item->title }}</th>
