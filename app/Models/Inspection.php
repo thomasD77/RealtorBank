@@ -157,6 +157,7 @@ class Inspection extends Model
                 $conformsToInsert[] = [
                     'conform_id' => $conform->id,
                     'room_id' => $room->id,
+                    'floor_id' => $room->floor_id,
                     'inspection_id' => $inspection->id,
                     'created_at' => DB::raw('NOW()'),
                     'updated_at' => DB::raw('NOW()'),
@@ -179,6 +180,7 @@ class Inspection extends Model
                     $specificsToInsert[] = [
                         'specific_id' => $specific->id,
                         'room_id' => $room->id,
+                        'floor_id' => $room->floor_id,
                         'inspection_id' => $inspection->id,
                         'created_at' => DB::raw('NOW()'),
                         'updated_at' => DB::raw('NOW()'),
