@@ -38,18 +38,6 @@ class InspectionController extends Controller
 
     public function genereatePDF(Inspection $inspection)
     {
-        $techniqueArea = TechniqueArea::query()
-        ->whereNotNull('type')
-        ->orWhereNotNull('analysis')
-        ->orWhereNotNull('fuel')
-        ->orWhereNotNull('brand')
-        ->orWhereNotNull('model')
-        ->orWhereNotNull('count')
-        ->orWhereNotNull('extra')
-        ->orHas('media', '>', 0)
-        ->where('inspection_id', $inspection->id)
-        ->get();
-
         $documents = Document::query()
             ->whereNotNull('title')
             ->orWhereNotNull('reference')
@@ -67,7 +55,6 @@ class InspectionController extends Controller
             ->get();
 
         $keys = Key::query()
-            ->whereNotNull('title')
             ->orWhereNotNull('type')
             ->orWhereNotNull('count')
             ->orWhereNotNull('extra')
@@ -97,16 +84,29 @@ class InspectionController extends Controller
             ->orWhereNotNull('fallProtection')
             ->orWhereNotNull('energy')
             ->orWhereNotNull('extra')
+            ->orHas('media', '>', 0)
+            ->where('inspection_id', $inspection->id)
+            ->get();
+
+        $techniqueArea = TechniqueArea::query()
+            ->whereNotNull('type')
+            ->orWhereNotNull('analysis')
+            ->orWhereNotNull('fuel')
+            ->orWhereNotNull('brand')
+            ->orWhereNotNull('model')
+            ->orWhereNotNull('count')
+            ->orWhereNotNull('extra')
+            ->orHas('media', '>', 0)
             ->where('inspection_id', $inspection->id)
             ->get();
 
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $inspection,
+            'basicArea' => $basicArea,
+            'techniqueArea' => $techniqueArea,
             'meters' => $meters,
             'documents' => $documents,
             'keys' => $keys,
-            'techniqueArea' => $techniqueArea,
-            'basicArea' => $basicArea
         ]);
 
         return $pdf->stream('plaatsbeschrijving-' . '#' . $inspection->id . '.pdf');

@@ -16,6 +16,16 @@ class BasicArea extends Model
         return $this->belongsTo(Area::class);
     }
 
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
+
+    public function media()
+    {
+        return $this->hasMany(MediaBasic::class, 'basic_id');
+    }
+
     public static function getMaterials() :array
     {
         return [

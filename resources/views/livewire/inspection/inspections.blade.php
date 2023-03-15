@@ -19,7 +19,7 @@
                     <tr>
                         <td class="image myelist">
                             <a href="{{ route('inspection.edit', $inspection)  }}">
-                                <img class="img-fluid" src="{{ $inspection->medias->first() ? asset('assets/images/inspections/crop' . '/' . $inspection->medias->first()->file_crop) : "https://via.placeholder.com/150x100" }}" alt="picture">
+                                <img class="img-fluid" src="{{ $inspection->media->first() ? asset('assets/images/inspections/crop' . '/' . $inspection->media->first()->file_crop) : "https://via.placeholder.com/150x100" }}" alt="picture">
                             </a>
                         </td>
                         <td>
