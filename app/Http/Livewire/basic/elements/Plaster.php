@@ -10,7 +10,7 @@ class Plaster extends MainDropdownComponent
 {
     //--> Custom
     public string $element = "plaster";
-    public string $title = "Plaster";
+    public string $title = "Pleisterwerk";
 
     public function mount($dynamicArea)
     {

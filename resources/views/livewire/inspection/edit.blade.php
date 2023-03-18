@@ -124,7 +124,7 @@
                             <div class="checkboxes float-left">
                                 <div class="filter-tags-wrap">
                                     <input id="check-b" type="checkbox" wire:click="present('{{ 'owner_present' }}')" @if($owner_present) checked @endif>
-                                    <label for="check-b">{{ __('Verhuurder aanwezig') }}</label>
+                                    <label for="check-b">{{ __('Eigenaar aanwezig') }}</label>
                                 </div>
                             </div>
                         </li>

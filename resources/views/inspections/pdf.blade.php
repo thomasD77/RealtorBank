@@ -14,23 +14,23 @@
 
         @foreach($rooms as $room)
 
-{{--            @include('inspections.sections.general')--}}
+            @include('inspections.sections.general')
 
             @include('inspections.sections.basicArea')
 
-{{--            @include('inspections.sections.specificArea')--}}
+            @include('inspections.sections.specificArea')
 
-{{--            @include('inspections.sections.conformArea')--}}
+            @include('inspections.sections.conformArea')
 
         @endforeach
 
-{{--        @include('inspections.sections.techniques')--}}
+        @include('inspections.sections.techniques')
 
-{{--        @include('inspections.sections.keys')--}}
+        @include('inspections.sections.keys')
 
-{{--        @include('inspections.sections.meters')--}}
+        @include('inspections.sections.meters')
 
-{{--        @include('inspections.sections.documents')--}}
+        @include('inspections.sections.documents')
 
 </body>
 </html>

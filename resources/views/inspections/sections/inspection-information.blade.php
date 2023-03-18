@@ -122,7 +122,7 @@
 
         @if($inspection->tenant_present)
             <tr class="row--text">
-                <th>{{ __('Eigenaar aanwezig') }}</th>
+                <th>{{ __('Huurder aanwezig') }}</th>
                 <th><img alt="icon" class="img-fluid icon" src="{{ asset('assets/images/icons/checkbox.png') }}"></th>
             </tr>
         @endif
@@ -150,7 +150,7 @@
 
         @if($inspection->first_resident)
             <tr class="row--text">
-                <th>{{ __('Bemeubeld') }}</th>
+                <th>{{ __('Eerste bewoner') }}</th>
                 <th><img alt="icon" class="img-fluid icon" src="{{ asset('assets/images/icons/checkbox.png') }}"></th>
             </tr>
         @endif

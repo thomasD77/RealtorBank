@@ -30,6 +30,7 @@
         font-family: Montserrat, sans-serif;
         border-collapse: collapse;
         width: 100%;
+        padding-top: 15px;
     }
     section {
         page-break-inside: avoid;
