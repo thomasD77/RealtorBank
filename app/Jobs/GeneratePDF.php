@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Enums\Status;
 use App\Models\BasicArea;
 use App\Models\Document;
 use App\Models\Inspection;
@@ -24,16 +25,20 @@ class GeneratePDF implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public Inspection $inspection;
+    public string $fileName;
+    public \App\Models\PDF $pdfStore;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($inspection)
+    public function __construct($inspection, $fileName, $pdfStore)
     {
         //
         $this->inspection = $inspection;
+        $this->fileName = $fileName;
+        $this->pdfStore = $pdfStore;
     }
 
     /**
@@ -68,32 +73,6 @@ class GeneratePDF implements ShouldQueue
             ->where('inspection_id', $this->inspection->id)
             ->get();
 
-        $basicArea = BasicArea::query()
-            ->whereNotNull('material')
-            ->orWhereNotNull('color')
-            ->orWhereNotNull('plinth')
-            ->orWhereNotNull('analysis')
-            ->orWhereNotNull('type')
-            ->orWhereNotNull('handle')
-            ->orWhereNotNull('lists')
-            ->orWhereNotNull('key')
-            ->orWhereNotNull('doorPump')
-            ->orWhereNotNull('doorStop')
-            ->orWhereNotNull('plaster')
-            ->orWhereNotNull('finish')
-            ->orWhereNotNull('ventilationGrille')
-            ->orWhereNotNull('glazing')
-            ->orWhereNotNull('windowsill')
-            ->orWhereNotNull('rollerShutter')
-            ->orWhereNotNull('windowDecoration')
-            ->orWhereNotNull('hor')
-            ->orWhereNotNull('fallProtection')
-            ->orWhereNotNull('energy')
-            ->orWhereNotNull('extra')
-            ->orHas('media', '>', 0)
-            ->where('inspection_id', $this->inspection->id)
-            ->get();
-
         $techniqueArea = TechniqueArea::query()
             ->whereNotNull('type')
             ->orWhereNotNull('analysis')
@@ -112,7 +91,6 @@ class GeneratePDF implements ShouldQueue
 
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $this->inspection,
-            'basicArea' => $basicArea,
             'rooms' => $rooms,
             'techniqueArea' => $techniqueArea,
             'meters' => $meters,
@@ -120,20 +98,14 @@ class GeneratePDF implements ShouldQueue
             'keys' => $keys,
         ]);
 
-        //return $pdf->stream('plaatsbeschrijving-' . '#' . $this->inspection->id . '.pdf');
-
-        $path = public_path('assets/pdf/');
+        $path = public_path('assets/inspections/pdf/');
         if(!File::isDirectory($path)){
             File::makeDirectory($path, 0777, true, true);
         }
-        $fileName = '-plaatsbeschrijving-' . 'INSP#' . $this->inspection->id . '.pdf';
 
-        $pdf->save($path  . $fileName);
+        $pdf->save($path  . $this->fileName);
 
-        $pdfStore = new PDF();
-        $pdfStore->inspection_id = $this->inspection->id;
-        $pdfStore->title = 'Plaatsbeschrijving';
-        $pdfStore->file_original = $fileName;
-        $pdfStore->save();
+        $this->pdfStore->status = Status::Rendered->value;
+        $this->pdfStore->update();
     }
 }

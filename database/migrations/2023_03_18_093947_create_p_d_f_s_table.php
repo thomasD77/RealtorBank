@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('p_d_f_s', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('status');
             $table->string('file_original');
 
             $table->unsignedInteger('inspection_id')

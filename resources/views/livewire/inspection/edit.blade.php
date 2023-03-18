@@ -225,7 +225,6 @@
                         <tr>
                             <th>{{ __('Titel') }}</th>
                             <th>{{ __('File') }}</th>
-                            <th>{{ __('Status') }}</th>
                             <th>{{ __('Datum') }}</th>
                             <th>{{ __('Actie') }}</th>
                         </tr>
@@ -234,8 +233,13 @@
                             @foreach($inspection->pdf as $pdf)
                                 <tr>
                                     <td>{{ $pdf->title }} {{ $pdf->id }}</td>
-                                    <td><a href="{{ asset('assets/inspections/pdf/' . $pdf->file_original) }}"><i class="fa fa-file-pdf text-dark"></i></a></td>
-                                    <td>{{ $pdf->status ? $pdf->status : 'pending' }}</td>
+                                    <td>
+                                        @if($pdf->status == \App\Enums\Status::Pending->value)
+                                            <span class="badge badge-pill bg-warning px-3 py-2 text-white">{{ $pdf->status }}</span>
+                                        @else
+                                            <a href="{{ asset('assets/inspections/pdf/' . $pdf->file_original) }}"><i class="fa fa-file-pdf text-dark"></i></a>
+                                        @endif
+                                    </td>
                                     <td>{{ $pdf->created_at->format('d-m-Y') }}</td>
                                     <td class="edit">
                                         <form wire:submit.prevent="deletePDF({{ $pdf->id }})">

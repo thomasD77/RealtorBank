@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Inspection;
 
 use App\Enums\Keys;
+use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Jobs\GeneratePDF;
 use App\Models\BasicArea;
@@ -11,6 +12,7 @@ use App\Models\Floor;
 use App\Models\Inspection;
 use App\Models\Key;
 use App\Models\MediaInspection;
+use App\Models\MediaStore;
 use App\Models\Meter;
 use App\Models\Room;
 use App\Models\TechniqueArea;
@@ -43,98 +45,18 @@ class InspectionController extends Controller
 
     public function genereatePDF(Inspection $inspection)
     {
-        //$this->dispatch(new GeneratePDF($inspection));
-
-        $documents = Document::query()
-            ->whereNotNull('title')
-            ->orWhereNotNull('reference')
-            ->orWhereNotNull('date')
-            ->orHas('media', '>', 0)
-            ->where('inspection_id', $inspection->id)
-            ->get();
-
-        $meters = Meter::query()
-            ->whereNotNull('reference')
-            ->orWhereNotNull('EAN')
-            ->orWhereNotNull('date')
-            ->orHas('media', '>', 0)
-            ->where('inspection_id', $inspection->id)
-            ->get();
-
-        $keys = Key::query()
-            ->orWhereNotNull('type')
-            ->orWhereNotNull('count')
-            ->orWhereNotNull('extra')
-            ->orHas('media', '>', 0)
-            ->where('inspection_id', $inspection->id)
-            ->get();
-
-        $basicArea = BasicArea::query()
-            ->whereNotNull('material')
-            ->orWhereNotNull('color')
-            ->orWhereNotNull('plinth')
-            ->orWhereNotNull('analysis')
-            ->orWhereNotNull('type')
-            ->orWhereNotNull('handle')
-            ->orWhereNotNull('lists')
-            ->orWhereNotNull('key')
-            ->orWhereNotNull('doorPump')
-            ->orWhereNotNull('doorStop')
-            ->orWhereNotNull('plaster')
-            ->orWhereNotNull('finish')
-            ->orWhereNotNull('ventilationGrille')
-            ->orWhereNotNull('glazing')
-            ->orWhereNotNull('windowsill')
-            ->orWhereNotNull('rollerShutter')
-            ->orWhereNotNull('windowDecoration')
-            ->orWhereNotNull('hor')
-            ->orWhereNotNull('fallProtection')
-            ->orWhereNotNull('energy')
-            ->orWhereNotNull('extra')
-            ->orHas('media', '>', 0)
-            ->where('inspection_id', $inspection->id)
-            ->get();
-
-        $techniqueArea = TechniqueArea::query()
-            ->whereNotNull('type')
-            ->orWhereNotNull('analysis')
-            ->orWhereNotNull('fuel')
-            ->orWhereNotNull('brand')
-            ->orWhereNotNull('model')
-            ->orWhereNotNull('count')
-            ->orWhereNotNull('extra')
-            ->orHas('media', '>', 0)
-            ->where('inspection_id', $inspection->id)
-            ->get();
-
-        $rooms = Room::query()
-            ->where('inspection_id', $inspection->id)
-            ->get();
-
-        $pdf = Pdf::loadView('inspections.pdf', [
-            'inspection' => $inspection,
-            'basicArea' => $basicArea,
-            'rooms' => $rooms,
-            'techniqueArea' => $techniqueArea,
-            'meters' => $meters,
-            'documents' => $documents,
-            'keys' => $keys,
-        ]);
-
-        //return $pdf->stream('plaatsbeschrijving-' . '#' . $inspection->id . '.pdf');
-
-        $path = public_path('assets/inspections/pdf/');
-        if(!File::isDirectory($path)){
-            File::makeDirectory($path, 0777, true, true);
-        }
-        $fileName = 'INSP-' . $inspection->id . '-plaatsbeschrijving.pdf';
-
-        $pdf->save($path  . $fileName);
+        $rawFileName = time(). 'INSP-' . $inspection->id . '-plaatsbeschrijving.pdf';
+        $fileName = MediaStore::getValidFilename($rawFileName);
 
         $pdfStore = new \App\Models\PDF();
         $pdfStore->inspection_id = $inspection->id;
         $pdfStore->title = 'Plaatsbeschrijving';
         $pdfStore->file_original = $fileName;
+        $pdfStore->status = Status::Pending->value;
         $pdfStore->save();
+
+        $this->dispatch(new GeneratePDF($inspection, $fileName, $pdfStore));
+
+        return redirect()->back();
     }
 }
