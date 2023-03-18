@@ -13,6 +13,7 @@
                         @if($media)
                             <div class="btn  btn-success text-white">media ready!</div>
                         @endif
+                        @error('media.*') <span class="text-danger">{{ $message }}</span> @enderror
                     </form>
                 </div>
             </div>

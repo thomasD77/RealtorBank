@@ -190,6 +190,7 @@
                         @if($media)
                             <div class="btn  btn-success text-white">media ready!</div>
                         @endif
+                        @error('media.*') <span class="text-danger">{{ $message }}</span> @enderror
                     </form>
                 </div>
             </div>
@@ -217,7 +218,7 @@
 
         <a href="{{ route('generate.inspection', $inspection) }}"  class="btn btn-dark mb-3"><i class="fa fa-file-pdf mr-2"></i>{{ __('PDF SYNC') }}</a>
 
-        @if($inspection->pdf->isNotEmpty())
+        @if($pdfs->isNotEmpty())
             <div class="section-body listing-table">
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -237,10 +238,10 @@
                                         @if($pdf->status == \App\Enums\Status::Pending->value)
                                             <span class="badge badge-pill bg-warning px-3 py-2 text-white">{{ $pdf->status }}</span>
                                         @else
-                                            <a target="_blank" href="{{ asset('assets/inspections/pdf/' . $pdf->file_original) }}"><i class="fa fa-file-pdf text-dark"></i></a>
+                                            <a class="mx-4" target="_blank" href="{{ asset('assets/inspections/pdf/' . $pdf->file_original) }}"><i class="fa fa-file-pdf text-dark"></i></a>
                                         @endif
                                     </td>
-                                    <td>{{ $pdf->created_at->format('d-m-Y') }}</td>
+                                    <td>{{ $pdf->created_at->format('d-m-Y -  H:i:s') }}</td>
                                     <td class="edit">
                                         <form wire:submit.prevent="deletePDF({{ $pdf->id }})">
                                             <button class="btn_trash" type="submit"><i class="fa fa-trash text-danger"></i></button>
@@ -252,19 +253,23 @@
                     </table>
                 </div>
             </div>
-        @endif
 
-        <p class="pt-5">*refresh regelmatig deze pagina om de status van de PDF te updaten.</p>
+            <p class="pt-5">*refresh regelmatig deze pagina om de status van de PDF te updaten.</p>
+        @endif
+        
     </div>
 
     <div class="single-add-property">
         <h3>{{ __('Verwijderen') }}</h3>
-        <div class="property-form-group text-right">
+        <div class="property-form-group">
 
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
-               <i class="fa fa-trash mx-2"></i> {{ __('Delete') }}
-            </button>
+            <div class="text-right">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fa fa-trash mx-2"></i> {{ __('Delete') }}
+                </button>
+            </div>
+
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -280,7 +285,7 @@
                             <p>{{ __('Ben je zeker om deze plaatsbeschrijving wil verwijderen?') }}</p>
                             <form wire:submit.prevent="deleteInspection">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 text-right">
                                         <button type="submit" class="btn btn-dark">Verwijderen</button>
                                     </div>
                                 </div>
