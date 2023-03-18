@@ -24,6 +24,11 @@ class Inspection extends Model
         return $this->hasMany(MediaInspection::class);
     }
 
+    public function pdf()
+    {
+        return $this->hasMany(PDF::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

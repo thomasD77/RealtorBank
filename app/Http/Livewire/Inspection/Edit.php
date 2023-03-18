@@ -134,6 +134,17 @@ class Edit extends Component
         $this->files = MediaInspection::where('inspection_id', $this->inspection->id)->get();
     }
 
+    public function deletePDF($pdf)
+    {
+        $pdf = \App\Models\PDF::find($pdf);
+        File::delete('assets/inspections/pdf/' . $pdf->file_original);
+        $pdf->delete();
+
+        //Render
+        $inspectionRender = Inspection::find($this->inspection->id);
+        $this->inspection = $inspectionRender;
+    }
+
     public function deleteInspection()
     {
         $situation = $this->inspection;

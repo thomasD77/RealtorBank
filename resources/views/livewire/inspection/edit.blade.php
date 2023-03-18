@@ -214,14 +214,46 @@
 
     <div class="single-add-property">
         <h3>{{ __('PDF genereren')  }}</h3>
-        <div class="property-form-group">
-            <a href="{{ route('generate.inspection', $inspection) }}"  class="btn btn-dark mb-3"><i class="fa fa-file-pdf mr-2"></i>{{ __('PDF') }}</a>
-        </div>
+
+        <a href="{{ route('generate.inspection', $inspection) }}"  class="btn btn-dark mb-3"><i class="fa fa-file-pdf mr-2"></i>{{ __('PDF SYNC') }}</a>
+
+        @if($inspection->pdf->isNotEmpty())
+            <div class="section-body listing-table">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>{{ __('Titel') }}</th>
+                            <th>{{ __('File') }}</th>
+                            <th>{{ __('Status') }}</th>
+                            <th>{{ __('Datum') }}</th>
+                            <th>{{ __('Actie') }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($inspection->pdf as $pdf)
+                                <tr>
+                                    <td>{{ $pdf->title }} {{ $pdf->id }}</td>
+                                    <td><a href="{{ asset('assets/inspections/pdf/' . $pdf->file_original) }}"><i class="fa fa-file-pdf text-dark"></i></a></td>
+                                    <td>{{ $pdf->status ? $pdf->status : 'pending' }}</td>
+                                    <td>{{ $pdf->created_at->format('d-m-Y') }}</td>
+                                    <td class="edit">
+                                        <form wire:submit.prevent="deletePDF({{ $pdf->id }})">
+                                            <button class="btn_trash" type="submit"><i class="fa fa-trash text-danger"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        @endif
     </div>
 
     <div class="single-add-property">
         <h3>{{ __('Verwijderen') }}</h3>
-        <div class="property-form-group">
+        <div class="property-form-group text-right">
 
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">

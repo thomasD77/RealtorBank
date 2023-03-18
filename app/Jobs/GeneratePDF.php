@@ -1,56 +1,55 @@
 <?php
 
-namespace App\Http\Controllers\Inspection;
+namespace App\Jobs;
 
-use App\Enums\Keys;
-use App\Http\Controllers\Controller;
-use App\Jobs\GeneratePDF;
 use App\Models\BasicArea;
 use App\Models\Document;
-use App\Models\Floor;
 use App\Models\Inspection;
 use App\Models\Key;
-use App\Models\MediaInspection;
 use App\Models\Meter;
 use App\Models\Room;
 use App\Models\TechniqueArea;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
-class InspectionController extends Controller
+class GeneratePDF implements ShouldQueue
 {
-    //
-    public function create()
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    public Inspection $inspection;
+
+    /**
+     * Create a new job instance.
+     *
+     * @return void
+     */
+    public function __construct($inspection)
     {
-        $inspection = Inspection::createInspection();
-        return to_route('inspection.edit', $inspection);
+        //
+        $this->inspection = $inspection;
     }
 
-    public function createDocument(Inspection $inspection)
+    /**
+     * Execute the job.
+     *
+     *
+     */
+    public function handle()
     {
-        $document = Document::create([
-            'inspection_id' => $inspection->id,
-            'title' => 'DRAFT',
-            'date' => now(),
-        ]);
-        return to_route('document.edit', [ $inspection, $document ]);
-    }
-
-    public function genereatePDF(Inspection $inspection)
-    {
-        //$this->dispatch(new GeneratePDF($inspection));
-
+        //
         $documents = Document::query()
             ->whereNotNull('title')
             ->orWhereNotNull('reference')
             ->orWhereNotNull('date')
             ->orHas('media', '>', 0)
-            ->where('inspection_id', $inspection->id)
+            ->where('inspection_id', $this->inspection->id)
             ->get();
 
         $meters = Meter::query()
@@ -58,7 +57,7 @@ class InspectionController extends Controller
             ->orWhereNotNull('EAN')
             ->orWhereNotNull('date')
             ->orHas('media', '>', 0)
-            ->where('inspection_id', $inspection->id)
+            ->where('inspection_id', $this->inspection->id)
             ->get();
 
         $keys = Key::query()
@@ -66,7 +65,7 @@ class InspectionController extends Controller
             ->orWhereNotNull('count')
             ->orWhereNotNull('extra')
             ->orHas('media', '>', 0)
-            ->where('inspection_id', $inspection->id)
+            ->where('inspection_id', $this->inspection->id)
             ->get();
 
         $basicArea = BasicArea::query()
@@ -92,7 +91,7 @@ class InspectionController extends Controller
             ->orWhereNotNull('energy')
             ->orWhereNotNull('extra')
             ->orHas('media', '>', 0)
-            ->where('inspection_id', $inspection->id)
+            ->where('inspection_id', $this->inspection->id)
             ->get();
 
         $techniqueArea = TechniqueArea::query()
@@ -104,15 +103,15 @@ class InspectionController extends Controller
             ->orWhereNotNull('count')
             ->orWhereNotNull('extra')
             ->orHas('media', '>', 0)
-            ->where('inspection_id', $inspection->id)
+            ->where('inspection_id', $this->inspection->id)
             ->get();
 
         $rooms = Room::query()
-            ->where('inspection_id', $inspection->id)
+            ->where('inspection_id', $this->inspection->id)
             ->get();
 
         $pdf = Pdf::loadView('inspections.pdf', [
-            'inspection' => $inspection,
+            'inspection' => $this->inspection,
             'basicArea' => $basicArea,
             'rooms' => $rooms,
             'techniqueArea' => $techniqueArea,
@@ -121,18 +120,18 @@ class InspectionController extends Controller
             'keys' => $keys,
         ]);
 
-        //return $pdf->stream('plaatsbeschrijving-' . '#' . $inspection->id . '.pdf');
+        //return $pdf->stream('plaatsbeschrijving-' . '#' . $this->inspection->id . '.pdf');
 
-        $path = public_path('assets/inspections/pdf/');
+        $path = public_path('assets/pdf/');
         if(!File::isDirectory($path)){
             File::makeDirectory($path, 0777, true, true);
         }
-        $fileName = 'INSP-' . $inspection->id . '-plaatsbeschrijving.pdf';
+        $fileName = '-plaatsbeschrijving-' . 'INSP#' . $this->inspection->id . '.pdf';
 
         $pdf->save($path  . $fileName);
 
-        $pdfStore = new \App\Models\PDF();
-        $pdfStore->inspection_id = $inspection->id;
+        $pdfStore = new PDF();
+        $pdfStore->inspection_id = $this->inspection->id;
         $pdfStore->title = 'Plaatsbeschrijving';
         $pdfStore->file_original = $fileName;
         $pdfStore->save();
