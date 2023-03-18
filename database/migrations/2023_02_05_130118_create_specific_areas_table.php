@@ -30,8 +30,8 @@ return new class extends Migration
             $table->string('handrail')->nullable();
             $table->string('material')->nullable();
             $table->string('shelves')->nullable();
-
             $table->string('color')->nullable();
+
             $table->string('present')->nullable();
             $table->string('finish')->nullable();
             $table->string('dorpel')->nullable();
@@ -41,7 +41,7 @@ return new class extends Migration
             $table->string('peephole')->nullable();
             $table->string('window')->nullable();
             $table->string('doorBel')->nullable();
-            $table->string('threshHold')->nullable();
+
             $table->string('brand')->nullable();
             $table->string('type')->nullable();
             $table->string('model')->nullable();
