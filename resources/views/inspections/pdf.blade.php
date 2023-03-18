@@ -9,7 +9,6 @@
     @include('inspections.sections.css')
 </head>
 <body>
-
         @include('inspections.sections.inspection-information')
 
         @foreach($rooms as $room)

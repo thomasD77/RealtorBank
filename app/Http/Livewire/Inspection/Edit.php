@@ -40,6 +40,7 @@ class Edit extends Component
 
     public $media = [];
     public $files;
+    public $pdfs;
 
     public $folder = 'inspections';
     public $relation_id = 'inspection_id';
@@ -71,6 +72,12 @@ class Edit extends Component
 
         $files = MediaInspection::where('inspection_id', $this->inspection->id)->get();
         $this->files = $files;
+
+        $pdfs = \App\Models\PDF::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->latest()
+            ->get();
+        $this->pdfs = $pdfs;
     }
 
     public function submitGeneral()
@@ -141,8 +148,11 @@ class Edit extends Component
         $pdf->delete();
 
         //Render
-        $inspectionRender = Inspection::find($this->inspection->id);
-        $this->inspection = $inspectionRender;
+        $pdfs = \App\Models\PDF::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->latest()
+            ->get();
+        $this->pdfs = $pdfs;
     }
 
     public function deleteInspection()

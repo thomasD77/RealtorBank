@@ -230,14 +230,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach($inspection->pdf as $pdf)
+                            @foreach($pdfs as $pdf)
                                 <tr>
                                     <td>{{ $pdf->title }} {{ $pdf->id }}</td>
                                     <td>
                                         @if($pdf->status == \App\Enums\Status::Pending->value)
                                             <span class="badge badge-pill bg-warning px-3 py-2 text-white">{{ $pdf->status }}</span>
                                         @else
-                                            <a href="{{ asset('assets/inspections/pdf/' . $pdf->file_original) }}"><i class="fa fa-file-pdf text-dark"></i></a>
+                                            <a target="_blank" href="{{ asset('assets/inspections/pdf/' . $pdf->file_original) }}"><i class="fa fa-file-pdf text-dark"></i></a>
                                         @endif
                                     </td>
                                     <td>{{ $pdf->created_at->format('d-m-Y') }}</td>
@@ -253,6 +253,8 @@
                 </div>
             </div>
         @endif
+
+        <p class="pt-5">*refresh regelmatig deze pagina om de status van de PDF te updaten.</p>
     </div>
 
     <div class="single-add-property">

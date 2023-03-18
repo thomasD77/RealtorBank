@@ -89,8 +89,10 @@ class GeneratePDF implements ShouldQueue
             ->where('inspection_id', $this->inspection->id)
             ->get();
 
+        $inspection = Inspection::find($this->inspection->id);
+
         $pdf = Pdf::loadView('inspections.pdf', [
-            'inspection' => $this->inspection,
+            'inspection' => $inspection,
             'rooms' => $rooms,
             'techniqueArea' => $techniqueArea,
             'meters' => $meters,
