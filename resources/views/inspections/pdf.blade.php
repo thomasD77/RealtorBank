@@ -10,31 +10,27 @@
 </head>
 <body>
 
-        {{--  @include('inspections.sections.inspection-information')--}}
+{{--        @include('inspections.sections.inspection-information')--}}
 
         @foreach($rooms as $room)
 
-            @include('inspections.sections.general')
+{{--            @include('inspections.sections.general')--}}
 
             @include('inspections.sections.basicArea')
 
-{{--            @foreach($room->specificAreas as $item)--}}
-{{--                <p>{{ $item->specific->title }}</p>--}}
-{{--                <p>  {{ $item->specific->color }}</p>--}}
-{{--            @endforeach--}}
+{{--            @include('inspections.sections.specificArea')--}}
+
+{{--            @include('inspections.sections.conformArea')--}}
+
         @endforeach
 
+{{--        @include('inspections.sections.techniques')--}}
 
+{{--        @include('inspections.sections.keys')--}}
 
+{{--        @include('inspections.sections.meters')--}}
 
-
-{{--    @include('inspections.sections.techniques')--}}
-
-{{--    @include('inspections.sections.keys')--}}
-
-{{--    @include('inspections.sections.meters')--}}
-
-{{--    @include('inspections.sections.documents')--}}
+{{--        @include('inspections.sections.documents')--}}
 
 </body>
 </html>
