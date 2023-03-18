@@ -5,7 +5,7 @@
         <img src="{{ asset('assets/images/testimonials/ts-1.jpg') }}" alt="avatar" class="img-fluid profile-img">
     </div>
     <div class="active-user">
-        <h2>{{ Auth()->user()->name }}</h2>
+        <h2>{{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }}</h2>
     </div>
     <div class="detail clearfix">
         <ul class="mb-0">

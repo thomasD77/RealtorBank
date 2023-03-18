@@ -62,13 +62,12 @@
         <div class="header-user-menu user-menu">
             <div class="header-user-name">
                 <span><img src="{{ asset('assets/images/testimonials/ts-1.jpg') }}" alt="logo"></span>
-                {{ __('Hi,') }} {{ Auth()->user()->name }}
+                {{ __('Hi,') }} {{ Auth()->user()->firstName }}
             </div>
             <ul>
-                <li><a href="user-profile.html"> Edit profile</a></li>
-                <li><a href="add-property.html"> Add Property</a></li>
-                <li><a href="payment-method.html">  Payments</a></li>
-                <li><a href="change-password.html"> Change Password</a></li>
+                <li><a href="{{ route('profile') }}">{{ __('Mijn profiel') }}</a></li>
+                <li><a href="{{ route('inspections.index') }}">{{ __('Inspecties') }}</a></li>
+                <li><a href="{{ route('update.password') }}">{{ __('Wachtwoord') }}</a></li>
                 <li>
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
