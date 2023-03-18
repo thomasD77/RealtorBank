@@ -35,7 +35,7 @@
             </div>
 
         </div>
-        <button type="submit" class="btn btn-dark btn">Submit</button>
+        <button type="submit" class="btn-common btn">Submit</button>
         @if (session()->has('success'))
             <div class="btn btn-success flash_message">
                 {{ session('success') }}

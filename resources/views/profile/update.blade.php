@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="col-lg-7 col-md-6 col-xs-6 pl-3 offset-lg-1 offset-md-3">
+
         <div class="my-address">
             <h3 class="heading pt-0">Change Password</h3>
             <form>
@@ -32,7 +32,7 @@
                 </div>
             </form>
         </div>
-    </div>
+
 @endsection
 
 

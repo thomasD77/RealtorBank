@@ -23,7 +23,7 @@ class DashboardController extends Controller
     //
     public function index(): View
     {
-        $inspections = Inspection::count();
+        $inspectionsCount = Inspection::count();
         $situations = Situation::count();
 
         $pdfs = \App\Models\PDF::query()
@@ -31,8 +31,14 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
+        $inspections = Inspection::query()
+            ->latest()
+            ->take(5)
+            ->get();
+
         return view('dashboard', [
-            'inspections' => $inspections,
+            'inspections' =>  $inspections,
+            'inspectionsCount' => $inspectionsCount,
             'situations' => $situations,
             'pdfs' => $pdfs
         ]);
