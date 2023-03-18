@@ -17,7 +17,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('firstName')->nullable();;
+            $table->string('lastName')->nullable();;
+            $table->string('phone')->nullable();;
+            $table->text('about')->nullable();;
+
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -37,7 +41,8 @@ return new class extends Migration
         });
 
         DB::table('users')->insert([
-            'name'=>'Thomas Demeulenaere',
+            'firstName'=>'Thomas',
+            'lastName'=>'Demeulenaere',
             'email'=>'info@innova-webcreations.be',
             'email_verified_at'=>Carbon::now()->format('Y-m-d H:i:s'),
             'password'=>bcrypt('@Skatemovies777'),

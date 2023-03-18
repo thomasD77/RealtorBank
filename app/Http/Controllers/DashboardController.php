@@ -10,6 +10,7 @@ use App\Models\Inspection;
 use App\Models\Outdoor;
 use App\Models\OutdoorArea;
 use App\Models\Room;
+use App\Models\Situation;
 use App\Models\Specific;
 use App\Models\SpecificArea;
 use App\Models\Technique;
@@ -22,7 +23,19 @@ class DashboardController extends Controller
     //
     public function index(): View
     {
-        return view('dashboard');
+        $inspections = Inspection::count();
+        $situations = Situation::count();
+
+        $pdfs = \App\Models\PDF::query()
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('dashboard', [
+            'inspections' => $inspections,
+            'situations' => $situations,
+            'pdfs' => $pdfs
+        ]);
     }
 
     public function detail(Inspection $inspection, Room $room, Area $area): View

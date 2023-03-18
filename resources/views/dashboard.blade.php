@@ -21,39 +21,41 @@
 @section('content')
 
     <div class="dashborad-box stat bg-white">
-        <h4 class="title">Manage Dashboard</h4>
+        <h4 class="title">{{ __('Dashboard') }}</h4>
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-xs-12 dar pro mr-3">
-                    <div class="item">
-                        <div class="icon">
-                            <i class="fa fa-list" aria-hidden="true"></i>
+                    <a href="{{ route('inspections.index') }}">
+                        <div class="item">
+                            <div class="icon">
+                                <i class="fa fa-list" aria-hidden="true"></i>
+                            </div>
+                            <div class="info">
+                                <h6 class="number">{{ $inspections }}</h6>
+                                <p class="type ml-1">{{ __('Inspectie(s)') }}</p>
+                            </div>
                         </div>
-                        <div class="info">
-                            <h6 class="number">345</h6>
-                            <p class="type ml-1">Published Property</p>
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-lg-3 col-md-6 col-xs-12 dar rev mr-3">
                     <div class="item">
                         <div class="icon">
-                            <i class="fas fa-star"></i>
+                            <i class="fa fa-file-pdf text-white"></i>
                         </div>
                         <div class="info">
-                            <h6 class="number">116</h6>
-                            <p class="type ml-1">Total Reviews</p>
+                            <h6 class="number">{{ $pdfs->count() }}</h6>
+                            <p class="type ml-1">{{ __('Aantal PDF\'s') }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 dar com mr-3">
                     <div class="item mb-0">
                         <div class="icon">
-                            <i class="fas fa-comments"></i>
+                            <i class="fa fa-bookmark text-white"></i>
                         </div>
                         <div class="info">
-                            <h6 class="number">223</h6>
-                            <p class="type ml-1">Messages</p>
+                            <h6 class="number">{{ $situations }}</h6>
+                            <p class="type ml-1">{{ __('Totale aantal in/uitredes') }}</p>
                         </div>
                     </div>
                 </div>
@@ -72,52 +74,44 @@
         </div>
     </div>
     <div class="dashborad-box">
-        <h4 class="title">Listing</h4>
-        <div class="section-body listing-table">
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Listing Name</th>
-                        <th>Date</th>
-                        <th>Rating</th>
-                        <th>Status</th>
-                        <th>Edit</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Luxury Restaurant</td>
-                        <td>23 Jan 2020</td>
-                        <td class="rating"><span>5.0</span></td>
-                        <td class="status"><span class=" active">Active</span></td>
-                        <td class="edit"><a href="#"><i class="fa fa-pencil"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>Gym in Town</td>
-                        <td>11 Feb 2020</td>
-                        <td class="rating"><span>4.5</span></td>
-                        <td class="status"><span class="active">Active</span></td>
-                        <td class="edit"><a href="#"><i class="fa fa-pencil"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>Cafe in Boston</td>
-                        <td>09 Jan 2020</td>
-                        <td class="rating"><span>5.0</span></td>
-                        <td class="status"><span class="non-active">Non-Active</span></td>
-                        <td class="edit"><a href="#"><i class="fa fa-pencil"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td class="pb-0">Car Dealer in New York</td>
-                        <td class="pb-0">24 Feb 2018</td>
-                        <td class="rating pb-0"><span>4.5</span></td>
-                        <td class="status pb-0"><span class="active">Active</span></td>
-                        <td class="edit pb-0"><a href="#"><i class="fa fa-pencil"></i></a></td>
-                    </tr>
-                    </tbody>
-                </table>
+        <h4 class="title">{{ __('Recente PDF') }}</h4>
+        @if($pdfs->isNotEmpty())
+            <div class="section-body listing-table">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>{{ __('Titel') }}</th>
+                            <th>{{ __('File') }}</th>
+                            <th>{{ __('Datum') }}</th>
+                            <th>{{ __('Actie') }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($pdfs as $pdf)
+                            <tr>
+                                <td>{{ $pdf->title }} {{ $pdf->id }}</td>
+                                <td>
+                                    @if($pdf->status == \App\Enums\Status::Pending->value)
+                                        <span class="badge badge-pill bg-warning px-3 py-2 text-white">{{ $pdf->status }}</span>
+                                    @else
+                                        <a class="mx-4" target="_blank" href="{{ asset('assets/inspections/pdf/' . $pdf->file_original) }}"><i class="fa fa-file-pdf text-dark"></i></a>
+                                    @endif
+                                </td>
+                                <td>{{ $pdf->created_at->format('d-m-Y -  H:i:s') }}</td>
+                                <td class="edit">
+                                    <form wire:submit.prevent="deletePDF({{ $pdf->id }})">
+                                        <button class="btn_trash" type="submit"><i class="fa fa-trash text-danger"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        @endif
+
     </div>
     <div class="dashborad-box">
         <h4 class="title">Message</h4>
@@ -273,69 +267,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="dashborad-box mb-0">
-                        <h4 class="heading pt-0">Personal Information</h4>
-                        <div class="section-inforamation">
-                            <form>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>First Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter your First name">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Last Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter your Last name">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Email Address</label>
-                                            <input type="text" class="form-control" placeholder="Ex: example@domain.com">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Phone Number</label>
-                                            <input type="text" class="form-control" placeholder="Ex: +1-800-7700-00">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label>Address</label>
-                                            <textarea name="address" class="form-control" placeholder="Write your address here"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label>About Yourself</label>
-                                            <textarea name="address" class="form-control" placeholder="Write about userself"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="password-section">
-                                    <h6>Update Password</h6>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>New Password</label>
-                                                <input type="password" class="form-control" placeholder="Write new password">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>Repeat Password</label>
-                                                <input type="password" class="form-control" placeholder="Write same password again">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-lg mt-2">Submit</button>
-                            </form>
-                        </div>
-                    </div>
+
 
 
 
