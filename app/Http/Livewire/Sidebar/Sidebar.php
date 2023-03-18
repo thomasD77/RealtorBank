@@ -102,117 +102,145 @@ class Sidebar extends Component
         $this->driveWay = Floor::where('code', FloorKey::DriveWay)->pluck('id')->first();
         $this->outHouseIn = Floor::where('code', FloorKey::OutHouse)->pluck('id')->first();
         $this->outHouseEx = Floor::where('code', FloorKey::OutHouse)->pluck('id')->first();
-
-        $this->basementParam = Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-            ])->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::BasementFloor)->first()->id)
-            ->get();
-
-        $this->groundFloorParam = Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-            ])->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::GroundFloor)->first()->id)
-            ->get();
-
-        $this->upperFloorParam = Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-            ])->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::UpperFloor)->first()->id)
-            ->get();
-
-        $this->atticParam = Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-            ])->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::Attic)->first()->id)
-            ->get();
-
-        $this->garageParam =  Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-            ])->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::Garage)->first()->id)
-            ->get();
-
-        $this->outHouseInParam =  Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-            ])->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::DriveWay)->first()->id)
-            ->get();
-
-        $this->outHouseExParam =  Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-            ])->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::OutHouse)->first()->id)
-            ->get();
-
-        $this->buildingParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])
-            ->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::Building)->first()->id)
-            ->get();
-
-        $this->driveWayParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])
-            ->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::DriveWay)->first()->id)
-            ->get();
-
-        $this->techniqueParam = Technique::query()
-            ->select('id', 'title')
-            ->get();
     }
 
     public function toggleCategory($value)
     {
-        SidebarToggle::sidebarCategory($value);
+        $catID = SidebarToggle::sidebarCategory($value);
         //Render
-        $this->activeCat = $value;
+        $this->activeCat = $catID;
         $this->activeArea = null;
+        $this->emit('renderNewArea');
+    }
+
+    public function toggleFloor($value)
+    {
+        $floorID = SidebarToggle::sidebarFloor($value);
+        $this->activeFloor = $floorID;
+        $this->emit('renderNewArea');
     }
 
     public function toggleRoom($value)
     {
-        SidebarToggle::sidebarRoom($value);
+        $roomID = SidebarToggle::sidebarRoom($value);
+        $this->activeRoom = $roomID;
+        $this->emit('renderNewArea');
     }
 
     public function toggleTemplate($value)
     {
       SidebarToggle::sidebarTemplate($value);
+        $this->emit('renderNewArea');
     }
 
-    public function toggleFloor($value)
-    {
-        SidebarToggle::sidebarFloor($value);
-    }
+
 
     public function render()
     {
+        if($this->activeCat == $this->interior || $this->activeCat == null){
+            $this->basementParam = Room::with([
+                'basicAreas',
+                'basicAreas.area',
+                'specificAreas', 'specificAreas.specific',
+                'conformAreas',
+                'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
+                ->where('floor_id', Floor::where('code', FloorKey::BasementFloor)->first()->id)
+                ->get();
+        }
+
+        if($this->activeCat == $this->interior || $this->activeCat == null){
+            $this->groundFloorParam = Room::with([
+                'basicAreas',
+                'basicAreas.area',
+                'specificAreas', 'specificAreas.specific',
+                'conformAreas',
+                'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
+                ->where('floor_id', Floor::where('code', FloorKey::GroundFloor)->first()->id)
+                ->get();
+        }
+
+        if($this->activeCat == $this->interior || $this->activeCat == null){
+            $this->upperFloorParam = Room::with([
+                'basicAreas',
+                'basicAreas.area',
+                'specificAreas', 'specificAreas.specific',
+                'conformAreas',
+                'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
+                ->where('floor_id', Floor::where('code', FloorKey::UpperFloor)->first()->id)
+                ->get();
+        }
+
+        if($this->activeCat == $this->interior || $this->activeCat == null) {
+            $this->atticParam = Room::with([
+                'basicAreas',
+                'basicAreas.area',
+                'specificAreas', 'specificAreas.specific',
+                'conformAreas',
+                'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
+                ->where('floor_id', Floor::where('code', FloorKey::Attic)->first()->id)
+                ->get();
+        }
+
+        if($this->activeCat == $this->interior || $this->activeCat == null) {
+            $this->garageParam = Room::with([
+                'basicAreas',
+                'basicAreas.area',
+                'specificAreas', 'specificAreas.specific',
+                'conformAreas',
+                'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
+                ->where('floor_id', Floor::where('code', FloorKey::Garage)->first()->id)
+                ->get();
+        }
+
+        if($this->activeCat == $this->exterior || $this->activeCat == null) {
+            $this->buildingParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])
+                ->where('inspection_id', $this->inspection->id)
+                ->where('floor_id', Floor::where('code', FloorKey::Building)->first()->id)
+                ->get();
+        }
+
+        if($this->activeCat == $this->exterior || $this->activeCat == null) {
+            $this->driveWayParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])
+                ->where('inspection_id', $this->inspection->id)
+                ->where('floor_id', Floor::where('code', FloorKey::DriveWay)->first()->id)
+                ->get();
+        }
+
+        if($this->activeCat == $this->techniques || $this->activeCat == null) {
+            $this->techniqueParam = Technique::query()
+                ->select('id', 'title')
+                ->get();
+        }
+
+        if($this->activeCat == $this->outHouse || $this->activeCat == null) {
+            $this->outHouseInParam =  Room::with([
+                'basicAreas',
+                'basicAreas.area',
+                'specificAreas', 'specificAreas.specific',
+                'conformAreas',
+                'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
+                ->where('floor_id', Floor::where('code', FloorKey::DriveWay)->first()->id)
+                ->get();
+        }
+
+        if($this->activeCat == $this->outHouse || $this->activeCat == null) {
+            $this->outHouseExParam =  Room::with([
+                'basicAreas',
+                'basicAreas.area',
+                'specificAreas', 'specificAreas.specific',
+                'conformAreas',
+                'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
+                ->where('floor_id', Floor::where('code', FloorKey::OutHouse)->first()->id)
+                ->get();
+        }
+
         return view('livewire.sidebar.sidebar');
     }
 }

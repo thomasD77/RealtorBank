@@ -256,7 +256,7 @@
 
             <p class="pt-5">*refresh regelmatig deze pagina om de status van de PDF te updaten.</p>
         @endif
-        
+
     </div>
 
     <div class="single-add-property">

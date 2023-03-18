@@ -24,23 +24,8 @@ class SidebarToggle extends Model
         }
 
         $user->update();
-    }
 
-    public static function sidebarRoom($value)
-    {
-        $user = Auth()->user();
-
-        if(isset($user->room)){
-            if($user->room->id == $value){
-                $user->room_id = null;
-            }else {
-                $user->room_id = $value;
-            }
-        }else {
-            $user->room_id = $value;
-        }
-
-        $user->update();
+        return $user->category_id;
     }
 
     public static function sidebarFloor($value)
@@ -58,7 +43,29 @@ class SidebarToggle extends Model
         }
 
         $user->update();
+
+        return $user->floor_id;
     }
+
+    public static function sidebarRoom($value)
+    {
+        $user = Auth()->user();
+
+        if(isset($user->room)){
+            if($user->room->id == $value){
+                $user->room_id = null;
+            }else {
+                $user->room_id = $value;
+            }
+        }else {
+            $user->room_id = $value;
+        }
+
+        $user->update();
+
+        return $user->room_id;
+    }
+
 
     public static function sidebarTemplate($value)
     {
