@@ -10,4 +10,9 @@ class General extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function media()
+    {
+        return $this->hasMany(MediaGeneral::class, 'general_id');
+    }
 }

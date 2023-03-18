@@ -33,7 +33,12 @@ class Room extends Model
 
     public function floor()
     {
-        return $this->hasOne(Floor::class);
+        return $this->belongsTo(Floor::class, 'floor_id');
+    }
+
+    public function generalArea()
+    {
+        return $this->hasOne(General::class);
     }
 
 }

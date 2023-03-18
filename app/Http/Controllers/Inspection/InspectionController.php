@@ -6,10 +6,12 @@ use App\Enums\Keys;
 use App\Http\Controllers\Controller;
 use App\Models\BasicArea;
 use App\Models\Document;
+use App\Models\Floor;
 use App\Models\Inspection;
 use App\Models\Key;
 use App\Models\MediaInspection;
 use App\Models\Meter;
+use App\Models\Room;
 use App\Models\TechniqueArea;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Database\Query\Builder;
@@ -100,9 +102,14 @@ class InspectionController extends Controller
             ->where('inspection_id', $inspection->id)
             ->get();
 
+        $rooms = Room::query()
+            ->where('inspection_id', $inspection->id)
+            ->get();
+
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $inspection,
             'basicArea' => $basicArea,
+            'rooms' => $rooms,
             'techniqueArea' => $techniqueArea,
             'meters' => $meters,
             'documents' => $documents,
