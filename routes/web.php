@@ -42,6 +42,8 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/generate/inspection/{inspection}', [InspectionController::class, 'genereatePDF'])->name('generate.inspection');
     Route::get('/create/situation/{inspection}', [SituationController::class, 'create'])->name('create.situation');
     Route::get('/create/document/{inspection}', [InspectionController::class, 'createDocument'])->name('create.document');
+    Route::post('/create/signature', [SituationController::class, 'signature'])->name('create.signature');
+    Route::post('/toggle/contract', [SituationController::class, 'toggleContract'])->name('toggle.contract');
 
     Route::view('/inspections', 'inspections.index')
         ->name('inspections.index');

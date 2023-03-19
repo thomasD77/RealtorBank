@@ -20,10 +20,11 @@ return new class extends Migration
             $table->unsignedInteger('situation_id')
                 ->index();
 
+            $table->boolean('lock')->default(0)->nullable();
             $table->text('legal')
                 ->default('Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).')
                 ->nullable();
-            $table->string('signature_owner')->nullable();
+            $table->string('signature_tenant')->nullable();
             $table->string('signature_realtor')->nullable();
             $table->date('date')->nullable();
             $table->timestamps();

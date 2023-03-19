@@ -7,6 +7,7 @@ use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Jobs\GeneratePDF;
 use App\Models\BasicArea;
+use App\Models\Contract;
 use App\Models\Document;
 use App\Models\Floor;
 use App\Models\Inspection;
@@ -22,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class InspectionController extends Controller
