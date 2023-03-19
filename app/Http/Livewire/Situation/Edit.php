@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Situation;
 
 use App\Models\Category;
+use App\Models\Contract;
 use App\Models\Inspection;
 use App\Models\Situation;
 use App\Models\Tenant;
@@ -15,6 +16,7 @@ class Edit extends Component
     public Tenant $tenant;
     public $intrede;
     public $extra;
+    public $contract;
 
     public $name;
     public $email;
@@ -33,6 +35,11 @@ class Edit extends Component
         $this->email = $this->situation->tenant->email;
         $this->phone = $this->situation->tenant->phone;
         $this->date = $this->situation->date;
+
+        $this->contract = Contract::query()
+            ->where('inspection_id', $inspection->id)
+            ->where('situation_id', $situation->id)
+            ->first();
     }
 
     public function intredeSubmit($value)

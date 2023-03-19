@@ -1070,6 +1070,34 @@
         </li>
     @endif
 
+    @if($contracts == $activeCat || $activeCat == null)
+        {{--Contracts--}}
+        <li>
+            <a data-toggle="collapse"
+               href="#collapseContract"
+               role="button"
+               aria-expanded="false"
+               aria-controls="collapseContract"
+               wire:click="toggleCategory({{ $contracts }})"
+               class="custom-sidebar-padding @if($contracts == $activeCat) active @endif"
+            >
+                <i class="fa fa-folder"></i>{{ __('Contracten') }}
+            </a>
+            <div class="collapse @if($contracts == $activeCat) show @endif"
+                 wire:ignore.self
+                 id="collapseContract"
+            >
+                <ul>
+                    <li class="mx-3">
+                        <a href="{{ route('contracts.index', $inspection) }}">
+                            <i class="fa fa-list"></i>{{ __('Lijst') }}
+                        </a>
+                    <li>
+                </ul>
+            </div>
+        </li>
+    @endif
+
 </ul>
 
 

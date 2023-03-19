@@ -22,14 +22,14 @@ class Index extends Component
         $this->current_situation = Situation::query()
             ->orderBy('date')
             ->where('inspection_id', $this->inspection->id)
-            ->whereNotNull('intrede')
+            ->where('intrede', '!=', 0)
             ->with('tenant')
             ->first();
 
         $this->current_situation_out = Situation::query()
             ->orderBy('date')
             ->where('inspection_id', $this->inspection->id)
-            ->where('intrede', '=' ,0)
+            ->where('intrede', '===' ,0)
             ->with('tenant')
             ->first();
     }

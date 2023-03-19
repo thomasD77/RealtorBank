@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Inspection\InspectionController;
 use App\Http\Controllers\ProfileController;
     use App\Http\Controllers\Situation\SituationController;
+    use App\Models\Contract;
     use App\Models\Document;
     use App\Models\Inspection;
     use App\Models\Key;
@@ -89,6 +90,14 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/meter/edit/{inspection}/{meter}', function (Inspection $inspection, Meter $meter) {
         return view('meters.edit', compact('inspection','meter'));
     })->name('meter.edit');
+
+    Route::get('/inspection/contracts/{inspection}', function (Inspection $inspection) {
+        return view('contracts.index', compact('inspection'));
+    })->name('contracts.index');
+
+    Route::get('/contract/edit/{inspection}/{contract}', function (Inspection $inspection, Contract $contract) {
+        return view('contracts.edit', compact('inspection','contract'));
+    })->name('contract.edit');
 });
 
 Route::middleware('auth')->group(function () {

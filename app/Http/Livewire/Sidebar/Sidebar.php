@@ -44,6 +44,7 @@ class Sidebar extends Component
     public $outHouse;
     public $outHouseIn;
     public $outHouseEx;
+    public $contracts;
 
     //Models
     public $basementParam;
@@ -92,6 +93,7 @@ class Sidebar extends Component
         $this->keys = Category::where('title', CategoryKey::Keys)->pluck('id')->first();
         $this->meters = Category::where('title', CategoryKey::Meters)->pluck('id')->first();
         $this->outHouse = Category::where('title', CategoryKey::OutHouse)->pluck('id')->first();
+        $this->contracts = Category::where('title', CategoryKey::Contracts)->pluck('id')->first();
 
         $this->basement = Floor::where('code', FloorKey::BasementFloor)->pluck('id')->first();
         $this->groundFloor = Floor::where('code', FloorKey::GroundFloor)->pluck('id')->first();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Situation;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contract;
 use App\Models\Inspection;
 use App\Models\Situation;
 use App\Models\Tenant;
@@ -24,6 +25,11 @@ class SituationController extends Controller
         $situation->created_at = now();
         $situation->updated_at = now();
         $situation->save();
+
+        $contract = new Contract();
+        $contract->inspection_id = $inspection->id;
+        $contract->situation_id = $situation->id;
+        $contract->save();
 
         return to_route('situation.edit', [ $inspection , $situation]);
     }

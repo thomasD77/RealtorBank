@@ -30,6 +30,7 @@ return new class extends Migration
             'keys',
             'meters',
             'outHouse',
+            'contracts',
         ];
 
         $categoriesToInsert = [];
