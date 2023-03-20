@@ -31,7 +31,14 @@ class MainDropdownComponent extends Component
     {
         $object = $this->dynamicArea;
         $el = $this->element;
-        $object->$el = $title;
+
+        //This is a toggle - we need to set to null if we want to deselect
+        if($object->$el == $title){
+            $object->$el = null;
+        }else {
+            $object->$el = $title;
+        }
+
         $object->update();
 
         //Render

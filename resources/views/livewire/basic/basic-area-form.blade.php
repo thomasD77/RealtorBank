@@ -63,7 +63,7 @@
                 :dynamicArea="$basicArea"
             />
 
-            <livewire:basic.elements.types
+            <livewire:basic.elements.heating
                 :dynamicArea="$basicArea"
             />
 
@@ -95,7 +95,7 @@
                 :dynamicArea="$basicArea"
             />
 
-            <livewire:basic.elements.types
+            <livewire:basic.elements.window
                 :dynamicArea="$basicArea"
             />
 

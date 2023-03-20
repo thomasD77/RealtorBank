@@ -45,20 +45,75 @@ class InspectionController extends Controller
         return to_route('document.edit', [ $inspection, $document ]);
     }
 
+    //This function is only for testing purpose
     public function genereatePDF(Inspection $inspection)
     {
-        $rawFileName = time(). '-INSP-' . $inspection->id . '-plaatsbeschrijving.pdf';
-        $fileName = MediaStore::getValidFilename($rawFileName);
+        $documents = Document::query()
+            ->whereNotNull('title')
+            ->orWhereNotNull('reference')
+            ->orWhereNotNull('date')
+            ->orHas('media', '>', 0)
+            ->where('inspection_id', $inspection->id)
+            ->get();
 
-        $pdfStore = new \App\Models\PDF();
-        $pdfStore->inspection_id = $inspection->id;
-        $pdfStore->title = 'Plaatsbeschrijving';
-        $pdfStore->file_original = $fileName;
-        $pdfStore->status = Status::Pending->value;
-        $pdfStore->save();
+        $meters = Meter::query()
+            ->whereNotNull('reference')
+            ->orWhereNotNull('EAN')
+            ->orWhereNotNull('date')
+            ->orHas('media', '>', 0)
+            ->where('inspection_id', $inspection->id)
+            ->get();
 
-        $this->dispatch(new GeneratePDF($inspection, $fileName, $pdfStore));
+        $keys = Key::query()
+            ->orWhereNotNull('type')
+            ->orWhereNotNull('count')
+            ->orWhereNotNull('extra')
+            ->orHas('media', '>', 0)
+            ->where('inspection_id', $inspection->id)
+            ->get();
 
-        return redirect()->back();
+        $techniqueArea = TechniqueArea::query()
+            ->whereNotNull('type')
+            ->orWhereNotNull('analysis')
+            ->orWhereNotNull('fuel')
+            ->orWhereNotNull('brand')
+            ->orWhereNotNull('model')
+            ->orWhereNotNull('count')
+            ->orWhereNotNull('extra')
+            ->orHas('media', '>', 0)
+            ->where('inspection_id', $inspection->id)
+            ->get();
+
+        $rooms = Room::query()
+            ->where('inspection_id', $inspection->id)
+            ->get();
+
+        $pdf = Pdf::loadView('inspections.pdf', [
+            'inspection' => $inspection,
+            'rooms' => $rooms,
+            'techniqueArea' => $techniqueArea,
+            'meters' => $meters,
+            'documents' => $documents,
+            'keys' => $keys,
+        ]);
+
+        return $pdf->stream('plaatsbeschrijving-' . '#' . $inspection->id . '.pdf');
     }
+
+//    public function genereatePDF(Inspection $inspection)
+//    {
+//        $rawFileName = time(). '-INSP-' . $inspection->id . '-plaatsbeschrijving.pdf';
+//        $fileName = MediaStore::getValidFilename($rawFileName);
+//
+//        $pdfStore = new \App\Models\PDF();
+//        $pdfStore->inspection_id = $inspection->id;
+//        $pdfStore->title = 'Plaatsbeschrijving';
+//        $pdfStore->file_original = $fileName;
+//        $pdfStore->status = Status::Pending->value;
+//        $pdfStore->save();
+//
+//        $this->dispatch(new GeneratePDF($inspection, $fileName, $pdfStore));
+//
+//        return redirect()->back();
+//    }
 }

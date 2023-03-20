@@ -207,4 +207,31 @@ class BasicArea extends Model
         ];
     }
 
+    public static function getWindows() :array
+    {
+        return [
+            'vast',
+            'opendraaiend',
+            'kipraam',
+            'draai-kipraam',
+            'velux',
+            'schuifraam',
+            'ander',
+        ];
+    }
+
+    public static function getHeating() :array
+    {
+        return [
+            'radiator',
+            'convector',
+            'kachel',
+            'vloerverwarming',
+            'warmtestraler',
+            'ander',
+        ];
+    }
+
+
+
 }

@@ -35,7 +35,8 @@ class AddArea extends Component
         $extraArea = new BasicArea();
         $extraArea->room_id = $this->room->id;
         $extraArea->area_id = $newArea->id;
-        $extraArea->code = 'BASIC';
+        $extraArea->inspection_id = $this->inspection->id;
+        $extraArea->floor_id = $this->room->floor->id;
 
         $extraArea->created_at = now();
         $extraArea->updated_at = now();

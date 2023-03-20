@@ -16,6 +16,16 @@ class SpecificArea extends Model
         return $this->belongsTo(Specific::class);
     }
 
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
+
+    public function media()
+    {
+        return $this->hasMany(MediaSpecific::class, 'specific_id');
+    }
+
     public static function getMaterials() :array
     {
         return $data = [

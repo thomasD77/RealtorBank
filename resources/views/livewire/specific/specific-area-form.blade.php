@@ -28,6 +28,12 @@
         <livewire:specific.elements.glassinlay
             :dynamicArea="$specificArea"
         />
+        <livewire:specific.elements.mailbox
+            :dynamicArea="$specificArea"
+        />
+        <livewire:specific.elements.handle
+            :dynamicArea="$specificArea"
+        />
         <livewire:specific.elements.peephole
             :dynamicArea="$specificArea"
         />
