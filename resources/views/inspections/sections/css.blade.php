@@ -33,7 +33,7 @@
         padding-top: 15px;
     }
     section {
-        page-break-inside: avoid;
+        page-break-inside: avoid !important;
     }
 
     .table td, .table th {

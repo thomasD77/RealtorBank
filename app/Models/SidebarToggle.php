@@ -82,5 +82,7 @@ class SidebarToggle extends Model
         }
 
         $user->update();
+
+        return $user->template;
     }
 }

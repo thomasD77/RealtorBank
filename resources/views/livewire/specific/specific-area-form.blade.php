@@ -400,9 +400,6 @@
         <livewire:specific.elements.rooster
             :dynamicArea="$specificArea"
         />
-        <livewire:specific.elements.rooster
-            :dynamicArea="$specificArea"
-        />
         <livewire:specific.elements.bakingtray
             :dynamicArea="$specificArea"
         />

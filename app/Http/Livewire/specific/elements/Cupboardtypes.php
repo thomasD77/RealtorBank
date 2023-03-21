@@ -10,8 +10,8 @@ use Livewire\Component;
 class Cupboardtypes extends MainDropdownComponent
 {
     //--> Custom
-    public string $element = "type";
-    public string $title = "Type";
+    public string $element = "model";
+    public string $title = "Model";
 
     public function mount($dynamicArea)
     {

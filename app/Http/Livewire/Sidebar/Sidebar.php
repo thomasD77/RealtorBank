@@ -81,8 +81,8 @@ class Sidebar extends Component
         if(Auth()->user()->floor){
             $this->activeFloor = Auth()->user()->floor->id;
         }
-        if(Auth()->user()->area){
-            $this->activeArea = Auth()->user()->area->id;
+        if(Auth()->user()->area_id){
+            $this->activeArea = Auth()->user()->area_id;
         }
 
         $this->situation = Category::where('title', CategoryKey::Situation)->pluck('id')->first();
@@ -124,15 +124,18 @@ class Sidebar extends Component
 
     public function toggleRoom($value)
     {
+        $this->activeRoom = null;
         $roomID = SidebarToggle::sidebarRoom($value);
         $this->activeRoom = $roomID;
+        $this->activeTemplate = null;
         $this->emit('renderNewArea');
     }
 
     public function toggleTemplate($value)
     {
-      SidebarToggle::sidebarTemplate($value);
-        $this->emit('renderNewArea');
+      $templateID = SidebarToggle::sidebarTemplate($value);
+      $this->activeTemplate = $templateID;
+      $this->emit('renderNewArea');
     }
 
 
