@@ -61,7 +61,7 @@ class Inspection extends Model
          *
          */
         $owner = Owner::create([
-            'country' => 'Belgium'
+            'name' => 'unknown'
         ]);
 
         /**

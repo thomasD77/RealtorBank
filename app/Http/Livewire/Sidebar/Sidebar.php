@@ -113,13 +113,20 @@ class Sidebar extends Component
         //Render
         $this->activeCat = $catID;
         $this->activeArea = null;
+        $this->activeFloor = null;
+        $this->activeRoom = null;
+        $this->activeTemplate = null;
         $this->emit('renderNewArea');
     }
 
     public function toggleFloor($value)
     {
         $floorID = SidebarToggle::sidebarFloor($value);
+        //Render
         $this->activeFloor = $floorID;
+        $this->activeArea = null;
+        $this->activeRoom = null;
+        $this->activeTemplate = null;
         $this->emit('renderNewArea');
     }
 
@@ -128,7 +135,6 @@ class Sidebar extends Component
         $this->activeRoom = null;
         $roomID = SidebarToggle::sidebarRoom($value);
         $this->activeRoom = $roomID;
-        $this->activeTemplate = null;
         $this->emit('renderNewArea');
     }
 

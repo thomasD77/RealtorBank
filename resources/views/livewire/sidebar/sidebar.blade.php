@@ -23,7 +23,7 @@
                 @endif
 
             </a>
-            <div class="collapse @if($situation == $activeCat) show @else no-show @endif"
+            <div class="collapse @if($situation == $activeCat) show @endif"
                  wire:ignore.self
                  id="collapseSituation"
             >
@@ -238,7 +238,6 @@
                             @if($groundFloorParam)
                                 @foreach($groundFloorParam as $room)
                                     <li class="mx-2">
-
                                         @if($room->id == $activeRoom || $activeRoom == null)
                                         <a data-toggle="collapse"
                                            href="#collapseRoom{{ $room->id }}"
@@ -829,7 +828,6 @@
             </div>
         </li>
     @endif
-
 
     @if($exterior == $activeCat || $activeCat == null)
         {{--Exterieur--}}
