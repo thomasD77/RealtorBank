@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Owner extends Model
+class Company extends Model
 {
     use HasFactory;
 
@@ -13,7 +13,7 @@ class Owner extends Model
 
     public function address()
     {
-        return $this->belongsTo(Address::class, 'owner');
+        return $this->belongsTo(Address::class, 'company_id');
     }
 
 }

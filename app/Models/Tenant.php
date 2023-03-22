@@ -14,4 +14,9 @@ class Tenant extends Model
         'email',
         'phone',
     ];
+
+    public function address()
+    {
+        return $this->hasMany(Address::class, 'tenant_id');
+    }
 }
