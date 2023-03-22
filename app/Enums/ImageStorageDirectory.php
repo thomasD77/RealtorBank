@@ -12,5 +12,6 @@ enum ImageStorageDirectory : string
     case BasicArea = 'basic';
     case SpecificArea = 'specific';
     case ConformArea = 'conform';
+    case OutdoorArea = 'outdoor';
     case General = 'general';
 }

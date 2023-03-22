@@ -21,6 +21,8 @@
 
             @include('inspections.sections.conformArea')
 
+            @include('inspections.sections.outdoorArea')
+
         @endforeach
 
 {{--        @include('inspections.sections.techniques')--}}

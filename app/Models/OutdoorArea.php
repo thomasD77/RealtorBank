@@ -16,6 +16,16 @@ class OutdoorArea extends Model
         return $this->belongsTo(Outdoor::class);
     }
 
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
+
+    public function media()
+    {
+        return $this->hasMany(MediaOutdoor::class, 'outdoor_id');
+    }
+
     public static function getMaterials() :array
     {
         return $data = [
