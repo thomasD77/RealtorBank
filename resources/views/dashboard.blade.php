@@ -67,8 +67,8 @@
                             <i class="fas fa-heart"></i>
                         </div>
                         <div class="info">
-                            <h6 class="number">432</h6>
-                            <p class="type ml-1">Times Bookmarked</p>
+                            <h6 class="number">{{ $contracts }}</h6>
+                            <p class="type ml-1">Contracten getekend</p>
                         </div>
                     </div>
                 </div>

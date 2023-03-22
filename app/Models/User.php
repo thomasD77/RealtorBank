@@ -44,24 +44,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-    public function room()
-    {
-        return $this->belongsTo(Room::class);
-    }
-
-    public function floor()
-    {
-        return $this->belongsTo(Floor::class);
-    }
-
-    public function area()
-    {
-        return $this->belongsTo(Area::class, 'area_id');
-    }
 }

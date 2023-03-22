@@ -13,57 +13,57 @@ class SidebarToggle extends Model
     {
         $user = Auth()->user();
 
-        if(isset($user->category)){
-            if($user->category->id == $value){
-                $user->category_id = null;
+        if(isset($user->sidebar_category_id)){
+            if($user->sidebar_category_id == $value){
+                $user->sidebar_category_id = null;
             }else {
-                $user->category_id = $value;
+                $user->sidebar_category_id = $value;
             }
         }else {
-            $user->category_id = $value;
+            $user->sidebar_category_id = $value;
         }
 
         $user->update();
 
-        return $user->category_id;
+        return $user->sidebar_category_id;
     }
 
     public static function sidebarFloor($value)
     {
         $user = Auth()->user();
 
-        if(isset($user->floor)){
-            if($user->floor->id == $value){
-                $user->floor_id = null;
+        if(isset($user->sidebar_floor_id)){
+            if($user->sidebar_floor_id == $value){
+                $user->sidebar_floor_id = null;
             }else {
-                $user->floor_id = $value;
+                $user->sidebar_floor_id = $value;
             }
         }else {
-            $user->floor_id = $value;
+            $user->sidebar_floor_id = $value;
         }
 
         $user->update();
 
-        return $user->floor_id;
+        return $user->sidebar_floor_id;
     }
 
     public static function sidebarRoom($value)
     {
         $user = Auth()->user();
 
-        if(isset($user->room)){
-            if($user->room->id == $value){
-                $user->room_id = null;
+        if(isset($user->sidebar_room_id)){
+            if($user->sidebar_room_id == $value){
+                $user->sidebar_room_id = null;
             }else {
-                $user->room_id = $value;
+                $user->sidebar_room_id = $value;
             }
         }else {
-            $user->room_id = $value;
+            $user->sidebar_room_id = $value;
         }
 
         $user->update();
 
-        return $user->room_id;
+        return $user->sidebar_room_id;
     }
 
 
@@ -71,18 +71,18 @@ class SidebarToggle extends Model
     {
         $user = Auth()->user();
 
-        if(isset($user->template)){
-            if($user->template == $value){
-                $user->template = null;
+        if(isset($user->sidebar_template)){
+            if($user->sidebar_template == $value){
+                $user->sidebar_template = null;
             }else {
-                $user->template = $value;
+                $user->sidebar_template = $value;
             }
         }else {
-            $user->template = $value;
+            $user->sidebar_template = $value;
         }
 
         $user->update();
 
-        return $user->template;
+        return $user->sidebar_template;
     }
 }

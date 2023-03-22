@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\BasicArea;
 use App\Models\Conform;
 use App\Models\ConformArea;
+use App\Models\Contract;
 use App\Models\Inspection;
 use App\Models\Outdoor;
 use App\Models\OutdoorArea;
@@ -25,6 +26,7 @@ class DashboardController extends Controller
     {
         $inspectionsCount = Inspection::count();
         $situations = Situation::count();
+        $contracts = Contract::where('lock', 1)->count();
 
         $pdfs = \App\Models\PDF::query()
             ->latest()
@@ -40,6 +42,7 @@ class DashboardController extends Controller
             'inspections' =>  $inspections,
             'inspectionsCount' => $inspectionsCount,
             'situations' => $situations,
+            'contracts' => $contracts,
             'pdfs' => $pdfs
         ]);
     }
@@ -54,7 +57,7 @@ class DashboardController extends Controller
 
         //Set value for selected area in sidebar
         $user = Auth()->user();
-        $user->area_id = $area->id;
+        $user->sidebar_area_id = $area->id;
         $user->update();
 
         return view('basic-areas.template', [
@@ -75,7 +78,7 @@ class DashboardController extends Controller
 
         //Set value for selected area in sidebar
         $user = Auth()->user();
-        $user->area_id = $conform->id;
+        $user->sidebar_area_id = $conform->id;
         $user->update();
 
 
@@ -97,7 +100,7 @@ class DashboardController extends Controller
 
         //Set value for selected area in sidebar
         $user = Auth()->user();
-        $user->area_id = $specific->id;
+        $user->sidebar_area_id = $specific->id;
         $user->update();
 
 
@@ -119,7 +122,7 @@ class DashboardController extends Controller
 
         //Set value for selected area in sidebar
         $user = Auth()->user();
-        $user->area_id = $technique->id;
+        $user->sidebar_area_id = $technique->id;
         $user->update();
 
 
@@ -140,7 +143,7 @@ class DashboardController extends Controller
 
         //Set value for selected area in sidebar
         $user = Auth()->user();
-        $user->area_id = $outdoor->id;
+        $user->sidebar_area_id = $outdoor->id;
         $user->update();
 
 

@@ -29,15 +29,17 @@ return new class extends Migration
             $table->timestamps();
 
             //This is for the sidebar toggle
-            $table->unsignedInteger('category_id')
+            $table->unsignedInteger('sidebar_category_id')
                 ->index()->nullable();
-            $table->unsignedInteger('room_id')
+            $table->unsignedInteger('sidebar_room_id')
                 ->index()->nullable();
-            $table->unsignedInteger('floor_id')
+            $table->unsignedInteger('sidebar_floor_id')
                 ->index()->nullable();
-            $table->unsignedInteger('area_id')
+            $table->unsignedInteger('sidebar_area_id')
                 ->index()->nullable();
-            $table->string('template')->nullable();
+            $table->string('sidebar_template')
+                ->index()
+                ->nullable();
         });
 
         DB::table('users')->insert([

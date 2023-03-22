@@ -395,21 +395,21 @@
                                 @foreach($upperFloorParam as $room)
                                     @if($room->id == $activeRoom || $activeRoom == null)
                                         <li class="mx-2">
-                                        <a data-toggle="collapse"
-                                           href="#collapseRoom{{ $room->id }}"
-                                           role="button" aria-expanded="false"
-                                           aria-controls="collapseRoom"
-                                           wire:click="toggleRoom({{ $room->id }})"
-                                        >
-                                            @if($room->id == $activeRoom)
-                                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ $room->title }}
-                                            @else
-                                                <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $room->title }}</span>
-                                            @endif
+                                            <a data-toggle="collapse"
+                                               href="#collapseRoom{{ $room->id }}"
+                                               role="button" aria-expanded="false"
+                                               aria-controls="collapseRoom"
+                                               wire:click="toggleRoom({{ $room->id }})"
+                                            >
+                                                @if($room->id == $activeRoom)
+                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ $room->title }}
+                                                @else
+                                                    <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $room->title }}</span>
+                                                @endif
 
-                                        </a>
+                                            </a>
 
-                                        <div class="collapse @if($room->id == $activeRoom) show @endif"
+                                            <div class="collapse @if($room->id == $activeRoom) show @endif"
                                              wire:ignore.self
                                              id="collapseRoom{{ $room->id }}"
                                         >
@@ -516,7 +516,7 @@
                                                 @endif
                                             </ul>
                                         </div>
-                                    </li>
+                                        </li>
                                     @endif
                                 @endforeach
                             @endif
@@ -856,110 +856,132 @@
                 <ul>
 
                     {{-- Building--}}
-                    <a data-toggle="collapse"
-                       href="#collapseBuilding"
-                       role="button"
-                       aria-expanded="false"
-                       aria-controls="collapseBuilding"
-                       wire:click="toggleFloor({{ $building }})"
-                    >
-                        <i class="fa fa-bookmark"></i>{{ __('Algemeen gebouw') }}
-                    </a>
-                    <div class="collapse @if($building == $activeFloor) show @endif"
-                         wire:ignore.self
-                         id="collapseBuilding"
-                    >
-                        @if($buildingParam)
-                            @foreach($buildingParam as $building)
-                                <li class="mx-2">
+                    @if($building == $activeFloor || $activeFloor == null)
+                        <a data-toggle="collapse"
+                           href="#collapseBuilding"
+                           role="button"
+                           aria-expanded="false"
+                           aria-controls="collapseBuilding"
+                           wire:click="toggleFloor({{ $building }})"
+                        >
+                            @if($building == $activeFloor)
+                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Algemeen gebouw') }}
+                            @else
+                                <i class="fa fa-bookmark"></i>{{ __('Algemeen gebouw') }}
+                            @endif
 
-                                    <a data-toggle="collapse"
-                                       href="#collapseRoom{{ $building->id }}"
-                                       role="button" aria-expanded="false"
-                                       aria-controls="collapseRoom"
-                                       wire:click="toggleRoom({{ $building->id }})"
-                                    >
-                                        <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $building->title }}</span>
-                                    </a>
+                        </a>
+                        <div class="collapse @if($building == $activeFloor) show @endif"
+                             wire:ignore.self
+                             id="collapseBuilding"
+                        >
+                            @if($buildingParam)
+                                @foreach($buildingParam as $building)
+                                    <li class="mx-2">
 
-                                    <div class="collapse @if($building->id == $activeRoom) show @endif"
-                                         wire:ignore.self
-                                         id="collapseRoom{{ $building->id }}"
-                                    >
-                                        <ul>
-                                            <li>
-                                                <a href="{{ route('general.detail',  [$inspection, $building]) }}">
-                                                    <i class="fa fa-flag" aria-hidden="true"></i>{{ __('Algemeen') }}
-                                                </a>
-                                            </li>
+                                        <a data-toggle="collapse"
+                                           href="#collapseRoom{{ $building->id }}"
+                                           role="button" aria-expanded="false"
+                                           aria-controls="collapseRoom"
+                                           wire:click="toggleRoom({{ $building->id }})"
+                                        >
+                                            @if($building->id == $activeRoom)
+                                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ $building->title }}
+                                            @else
+                                                <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $building->title }}</span>
+                                            @endif
 
-                                            @foreach($building->outdoorAreas as $item)
-                                                <li class="mx-3">
-                                                    <a class="@if($activeArea == $item->outdoor->id) activeLink @endif" href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
-                                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}
+                                        </a>
+
+                                        <div class="collapse @if($building->id == $activeRoom) show @endif"
+                                             wire:ignore.self
+                                             id="collapseRoom{{ $building->id }}"
+                                        >
+                                            <ul>
+                                                <li>
+                                                    <a href="{{ route('general.detail',  [$inspection, $building]) }}">
+                                                        <i class="fa fa-flag" aria-hidden="true"></i>{{ __('Algemeen') }}
                                                     </a>
                                                 </li>
-                                            @endforeach
 
-                                        </ul>
-                                    </div>
-                                </li>
-                            @endforeach
-                        @endif
-                    </div>
+                                                @foreach($building->outdoorAreas as $item)
+                                                    <li class="mx-3">
+                                                        <a class="@if($activeArea == $item->outdoor->id) activeLink @endif" href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
+                                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+
+                                            </ul>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </div>
+                    @endif
 
                     {{--Driveway--}}
-                    <a data-toggle="collapse"
-                       href="#collapseDriveWay"
-                       role="button"
-                       aria-expanded="false"
-                       aria-controls="collapseDriveWay"
-                       wire:click="toggleFloor({{ $driveWay }})"
-                    >
-                        <i class="fa fa-bookmark"></i>{{ __('Algemeen aanleg') }}
-                    </a>
-                    <div class="collapse @if($driveWay == $activeFloor) show @endif"
-                         wire:ignore.self
-                         id="collapseDriveWay"
-                    >
-                        @if($driveWayParam)
-                            @foreach($driveWayParam as $room)
-                                <li class="mx-2">
+                    @if($driveWay == $activeFloor || $activeFloor == null)
+                        <a data-toggle="collapse"
+                           href="#collapseDriveWay"
+                           role="button"
+                           aria-expanded="false"
+                           aria-controls="collapseDriveWay"
+                           wire:click="toggleFloor({{ $driveWay }})"
+                        >
+                            @if($driveWay == $activeFloor)
+                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Algemeen aanleg') }}
+                            @else
+                                <i class="fa fa-bookmark"></i>{{ __('Algemeen aanleg') }}
+                            @endif
+                        </a>
+                        <div class="collapse @if($driveWay == $activeFloor) show @endif"
+                             wire:ignore.self
+                             id="collapseDriveWay"
+                        >
+                            @if($driveWayParam)
+                                @foreach($driveWayParam as $room)
+                                    <li class="mx-2">
 
-                                    <a data-toggle="collapse"
-                                       href="#collapseRoom{{ $room->id }}"
-                                       role="button" aria-expanded="false"
-                                       aria-controls="collapseRoom"
-                                       wire:click="toggleRoom({{ $room->id }})"
-                                    >
-                                        <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $room->title }}</span>
-                                    </a>
+                                        <a data-toggle="collapse"
+                                           href="#collapseRoom{{ $room->id }}"
+                                           role="button" aria-expanded="false"
+                                           aria-controls="collapseRoom"
+                                           wire:click="toggleRoom({{ $room->id }})"
+                                        >
+                                            @if($room->id == $activeRoom)
+                                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ $room->title }}
+                                            @else
+                                                <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $room->title }}</span>
+                                            @endif
 
-                                    <div class="collapse @if($room->id == $activeRoom) show @endif"
-                                         wire:ignore.self
-                                         id="collapseRoom{{ $room->id }}"
-                                    >
-                                        <ul>
-                                            <li>
-                                                <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                    <i class="fa fa-flag" aria-hidden="true"></i>{{ __('Algemeen') }}
-                                                </a>
-                                            </li>
+                                        </a>
 
-                                            @foreach($room->outdoorAreas->where('room_id', $room->id) as $item)
-                                                <li class="mx-3">
-                                                    <a class="@if($activeArea == $item->outdoor->id) activeLink @endif" href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
-                                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}
+                                        <div class="collapse @if($room->id == $activeRoom) show @endif"
+                                             wire:ignore.self
+                                             id="collapseRoom{{ $room->id }}"
+                                        >
+                                            <ul>
+                                                <li>
+                                                    <a href="{{ route('general.detail',  [$inspection, $room]) }}">
+                                                        <i class="fa fa-flag" aria-hidden="true"></i>{{ __('Algemeen') }}
                                                     </a>
                                                 </li>
-                                            @endforeach
 
-                                        </ul>
-                                    </div>
-                                </li>
-                            @endforeach
-                        @endif
-                    </div>
+                                                @foreach($room->outdoorAreas->where('room_id', $room->id) as $item)
+                                                    <li class="mx-3">
+                                                        <a class="@if($activeArea == $item->outdoor->id) activeLink @endif" href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
+                                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </div>
+                    @endif
                 </ul>
             </div>
         </li>

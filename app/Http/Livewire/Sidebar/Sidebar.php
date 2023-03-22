@@ -70,19 +70,20 @@ class Sidebar extends Component
             $this->responsive = 'responsive';
         }
         $this->inspection = $inspection;
-        $this->activeTemplate = Auth()->user()->template;
+        $this->activeTemplate = Auth()->user()->sidebar_template;
 
-        if(Auth()->user()->category){
-            $this->activeCat = Auth()->user()->category->id;
+        //Extra note here :: This can be confusing but we do not
+        if(Auth()->user()->sidebar_category_id){
+            $this->activeCat = Auth()->user()->sidebar_category_id;
         }
-        if(Auth()->user()->room){
-            $this->activeRoom = Auth()->user()->room->id;
+        if(Auth()->user()->sidebar_room_id){
+            $this->activeRoom = Auth()->user()->sidebar_room_id;
         }
-        if(Auth()->user()->floor){
-            $this->activeFloor = Auth()->user()->floor->id;
+        if(Auth()->user()->sidebar_floor_id){
+            $this->activeFloor = Auth()->user()->sidebar_floor_id;
         }
-        if(Auth()->user()->area_id){
-            $this->activeArea = Auth()->user()->area_id;
+        if(Auth()->user()->sidebar_area_id){
+            $this->activeArea = Auth()->user()->sidebar_area_id;
         }
 
         $this->situation = Category::where('title', CategoryKey::Situation)->pluck('id')->first();
