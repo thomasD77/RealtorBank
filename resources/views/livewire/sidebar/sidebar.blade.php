@@ -230,7 +230,6 @@
                             @else
                                 <i class="fa fa-bookmark"></i>{{ __('Gelijkvloers') }}
                             @endif
-
                         </a>
                         <div class="collapse @if($groundFloor == $activeFloor) show @endif"
                              wire:ignore.self
@@ -533,7 +532,11 @@
                            aria-controls="collapseAttic"
                            wire:click="toggleFloor({{ $attic }})"
                         >
-                            <i class="fa fa-bookmark"></i>{{ __('Zolderverdiep') }}
+                            @if($attic == $activeFloor)
+                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Zolderverdiep') }}
+                            @else
+                                <i class="fa fa-bookmark"></i>{{ __('Zolderverdiep') }}
+                            @endif
                         </a>
                         <div class="collapse @if($attic == $activeFloor) show @endif"
                              wire:ignore.self
@@ -541,7 +544,8 @@
                         >
                             @if($atticParam)
                                 @foreach($atticParam as $room)
-                                    <li class="mx-2">
+                                    @if($room->id == $activeRoom || $activeRoom == null)
+                                        <li class="mx-2">
 
                                         <a data-toggle="collapse"
                                            href="#collapseRoom{{ $room->id }}"
@@ -549,7 +553,11 @@
                                            aria-controls="collapseRoom"
                                            wire:click="toggleRoom({{ $room->id }})"
                                         >
-                                            <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $room->title }}</span>
+                                            @if($room->id == $activeRoom)
+                                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ $room->title }}
+                                            @else
+                                                <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $room->title }}</span>
+                                            @endif
                                         </a>
 
                                         <div class="collapse @if($room->id == $activeRoom) show @endif"
@@ -563,14 +571,19 @@
                                                     </a>
                                                 </li>
                                                 {{-- Basic--}}
-                                                <li>
+                                                @if($activeTemplate == \App\Enums\TemplateKey::Basic->value || $activeTemplate == null)
+                                                    <li>
                                                     <a data-toggle="collapse"
                                                        href="#collapseBasic{{ $room->id }}"
                                                        role="button" aria-expanded="false"
                                                        aria-controls="collapseExample"
                                                        wire:click="toggleTemplate('{{ $basic }}')"
                                                     >
-                                                        <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Basis') }}
+                                                        @if($activeTemplate == \App\Enums\TemplateKey::Basic->value)
+                                                            <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Basis') }}
+                                                        @else
+                                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Basis') }}
+                                                        @endif
                                                     </a>
                                                     <div>
                                                         <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Basic->value) show @endif"
@@ -587,16 +600,23 @@
                                                         </ul>
                                                     </div>
                                                 </li>
+                                                @endif
 
                                                 {{-- Spec--}}
-                                                <li>
+                                                @if($activeTemplate == \App\Enums\TemplateKey::Specific->value || $activeTemplate == null)
+                                                    <li>
                                                     <a data-toggle="collapse"
                                                        href="#collapseSpec{{ $room->id }}"
                                                        role="button" aria-expanded="false"
                                                        aria-controls="collapseExample"
                                                        wire:click="toggleTemplate('{{ $specific }}')"
                                                     >
-                                                        <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Specifiek') }}
+                                                        @if($activeTemplate == \App\Enums\TemplateKey::Specific->value)
+                                                            <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Specifiek') }}
+                                                        @else
+                                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Specifiek') }}
+                                                        @endif
+
                                                     </a>
                                                     <div>
                                                         <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Specific->value) show @endif"
@@ -613,16 +633,22 @@
                                                         </ul>
                                                     </div>
                                                 </li>
+                                                @endif
 
                                                 {{-- Conform--}}
-                                                <li>
+                                                @if($activeTemplate == \App\Enums\TemplateKey::Conform->value || $activeTemplate == null)
+                                                    <li>
                                                     <a data-toggle="collapse"
                                                        href="#collapseConform{{ $room->id }}"
                                                        role="button" aria-expanded="false"
                                                        aria-controls="collapseExample"
                                                        wire:click="toggleTemplate('{{ $conform }}')"
                                                     >
-                                                        <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Conformiteit') }}
+                                                        @if($activeTemplate == \App\Enums\TemplateKey::Conform->value)
+                                                            <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Conformiteit') }}
+                                                        @else
+                                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Conformiteit') }}
+                                                        @endif
                                                     </a>
                                                     <div>
                                                         <ul class="collapse  @if($activeTemplate == \App\Enums\TemplateKey::Conform->value) show @endif"
@@ -638,9 +664,11 @@
                                                         </ul>
                                                     </div>
                                                 </li>
+                                                @endif
                                             </ul>
                                         </div>
                                     </li>
+                                    @endif
                                 @endforeach
                             @endif
 
@@ -656,7 +684,11 @@
                            aria-controls="collapseGarage"
                            wire:click="toggleFloor({{ $garage }})"
                         >
-                            <i class="fa fa-bookmark"></i>{{ __('Zone garage') }}
+                            @if($garage == $activeFloor)
+                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Zone garage') }}
+                            @else
+                                <i class="fa fa-bookmark"></i>{{ __('Zone garage') }}
+                            @endif
                         </a>
                         <div class="collapse @if($garage == $activeFloor) show @endif"
                              wire:ignore.self
@@ -664,7 +696,8 @@
                         >
                             @if($garageParam)
                                 @foreach($garageParam as $room)
-                                    <li class="mx-2">
+                                    @if($room->id == $activeRoom || $activeRoom == null)
+                                        <li class="mx-2">
 
                                         <a data-toggle="collapse"
                                            href="#collapseRoom{{ $room->id }}"
@@ -672,7 +705,11 @@
                                            aria-controls="collapseRoom"
                                            wire:click="toggleRoom({{ $room->id }})"
                                         >
-                                            <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $room->title }}</span>
+                                            @if($room->id == $activeRoom)
+                                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ $room->title }}
+                                            @else
+                                                <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $room->title }}</span>
+                                            @endif
                                         </a>
 
                                         <div class="collapse @if($room->id == $activeRoom) show @endif"
@@ -686,14 +723,19 @@
                                                     </a>
                                                 </li>
                                                 {{-- Basic--}}
-                                                <li>
+                                                @if($activeTemplate == \App\Enums\TemplateKey::Basic->value || $activeTemplate == null)
+                                                    <li>
                                                     <a data-toggle="collapse"
                                                        href="#collapseBasic{{ $room->id }}"
                                                        role="button" aria-expanded="false"
                                                        aria-controls="collapseExample"
                                                        wire:click="toggleTemplate('{{ $basic }}')"
                                                     >
-                                                        <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Basis') }}
+                                                        @if($activeTemplate == \App\Enums\TemplateKey::Basic->value)
+                                                            <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Basis') }}
+                                                        @else
+                                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Basis') }}
+                                                        @endif
                                                     </a>
                                                     <div>
                                                         <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Basic->value) show @endif"
@@ -710,16 +752,22 @@
                                                         </ul>
                                                     </div>
                                                 </li>
+                                                @endif
 
                                                 {{-- Spec--}}
-                                                <li>
+                                                @if($activeTemplate == \App\Enums\TemplateKey::Specific->value || $activeTemplate == null)
+                                                    <li>
                                                     <a data-toggle="collapse"
                                                        href="#collapseSpec{{ $room->id }}"
                                                        role="button" aria-expanded="false"
                                                        aria-controls="collapseExample"
                                                        wire:click="toggleTemplate('{{ $specific }}')"
                                                     >
-                                                        <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Specifiek') }}
+                                                        @if($activeTemplate == \App\Enums\TemplateKey::Specific->value)
+                                                            <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Specifiek') }}
+                                                        @else
+                                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Specifiek') }}
+                                                        @endif
                                                     </a>
                                                     <div>
                                                         <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Specific->value) show @endif"
@@ -736,16 +784,22 @@
                                                         </ul>
                                                     </div>
                                                 </li>
+                                                @endif
 
                                                 {{--  Conform--}}
-                                                <li>
+                                                @if($activeTemplate == \App\Enums\TemplateKey::Conform->value || $activeTemplate == null)
+                                                    <li>
                                                     <a data-toggle="collapse"
                                                        href="#collapseConform{{ $room->id }}"
                                                        role="button" aria-expanded="false"
                                                        aria-controls="collapseExample"
                                                        wire:click="toggleTemplate('{{ $conform }}')"
                                                     >
-                                                        <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Conformiteit') }}
+                                                        @if($activeTemplate == \App\Enums\TemplateKey::Conform->value)
+                                                            <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Conformiteit') }}
+                                                        @else
+                                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Conformiteit') }}
+                                                        @endif
                                                     </a>
                                                     <div>
                                                         <ul class="collapse  @if($activeTemplate == \App\Enums\TemplateKey::Conform->value) show @endif"
@@ -761,9 +815,11 @@
                                                         </ul>
                                                     </div>
                                                 </li>
+                                                @endif
                                             </ul>
                                         </div>
                                     </li>
+                                    @endif
                                 @endforeach
                             @endif
 
