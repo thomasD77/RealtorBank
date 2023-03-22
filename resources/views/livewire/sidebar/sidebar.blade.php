@@ -786,7 +786,12 @@
                wire:click="toggleCategory({{ $exterior }})"
                class="custom-sidebar-padding @if($exterior == $activeCat) active @endif"
             >
-                <i class="fa fa-folder"></i>{{ __('Exterieur') }}
+
+                @if($exterior == $activeCat)
+                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Exterieur') }}
+                @else
+                    <i class="fa fa-folder"></i>{{ __('Exterieur') }}
+                @endif
             </a>
             <div class="collapse @if($exterior == $activeCat) show @endif"
                  wire:ignore.self
@@ -914,7 +919,11 @@
                wire:click="toggleCategory({{ $techniques }})"
                class="custom-sidebar-padding @if($techniques == $activeCat) active @endif"
             >
-                <i class="fa fa-folder" aria-hidden="true"></i>{{ __('Technieken') }}
+                @if($techniques == $activeCat)
+                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Technieken') }}
+                @else
+                    <i class="fa fa-folder" aria-hidden="true"></i>{{ __('Technieken') }}
+                @endif
             </a>
             <div>
                 <ul class="collapse @if($techniques == $activeCat) show @endif"
@@ -946,7 +955,11 @@
                wire:click="toggleCategory({{ $keys }})"
                class="custom-sidebar-padding @if($keys == $activeCat) active @endif"
             >
-                <i class="fa fa-folder"></i>{{ __('Sleutels') }}
+                @if($keys == $activeCat)
+                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Sleutels') }}
+                @else
+                    <i class="fa fa-folder"></i>{{ __('Sleutels') }}
+                @endif
             </a>
             <div class="collapse @if($keys == $activeCat) show @endif"
                  wire:ignore.self
@@ -974,7 +987,11 @@
                wire:click="toggleCategory({{ $meters }})"
                class="custom-sidebar-padding @if($meters == $activeCat) active @endif"
             >
-                <i class="fa fa-folder"></i>{{ __('Meters') }}
+                @if($meters == $activeCat)
+                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Meters') }}
+                @else
+                    <i class="fa fa-folder"></i>{{ __('Meters') }}
+                @endif
             </a>
             <div class="collapse @if($meters == $activeCat) show @endif"
                  wire:ignore.self
@@ -1002,7 +1019,11 @@
                wire:click="toggleCategory({{ $documents }})"
                class="custom-sidebar-padding @if($documents == $activeCat) active @endif"
             >
-                <i class="fa fa-folder"></i>{{ __('Documenten') }}
+                @if($documents == $activeCat)
+                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Documenten') }}
+                @else
+                    <i class="fa fa-folder"></i>{{ __('Documenten') }}
+                @endif
             </a>
             <div class="collapse @if($documents == $activeCat) show @endif"
                  wire:ignore.self
@@ -1033,7 +1054,11 @@
                wire:click="toggleCategory({{ $outHouse }})"
                class="custom-sidebar-padding @if($outHouse == $activeCat) active @endif"
             >
-                <i class="fa fa-folder"></i>{{ __('Bijgebouw') }}
+                @if($outHouse == $activeCat)
+                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Bijgebouw') }}
+                @else
+                    <i class="fa fa-folder"></i>{{ __('Bijgebouw') }}
+                @endif
             </a>
             <div class="collapse @if($outHouse == $activeCat) show @endif"
                  wire:ignore.self
@@ -1195,7 +1220,11 @@
                wire:click="toggleCategory({{ $contracts }})"
                class="custom-sidebar-padding @if($contracts == $activeCat) active @endif"
             >
-                <i class="fa fa-folder"></i>{{ __('Contracten') }}
+                @if($contracts == $activeCat)
+                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Contracten') }}
+                @else
+                    <i class="fa fa-folder"></i>{{ __('Contracten') }}
+                @endif
             </a>
             <div class="collapse @if($contracts == $activeCat) show @endif"
                  wire:ignore.self
