@@ -1,7 +1,6 @@
 <?php
 
-    use App\Models\Inspection;
-    use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -31,8 +30,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        //This is only for testing
-        Inspection::createInspection();
     }
 
     /**

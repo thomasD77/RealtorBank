@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('firstName')->nullable();;
             $table->string('lastName')->nullable();;
             $table->string('phone')->nullable();;
+            $table->string('companyName')->nullable();;
             $table->text('about')->nullable();;
 
             $table->string('email')->unique();
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
 
+            //Relation
             $table->unsignedInteger('company_id')->nullable();
 
             //This is for the sidebar toggle

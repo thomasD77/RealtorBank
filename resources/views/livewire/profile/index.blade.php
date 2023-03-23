@@ -26,7 +26,12 @@
                     @error('email') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
             </div>
-
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="companyName">{{ __('Bedrijfsnaam') }}</label>
+                    <input class="form-control" type="text" wire:model="companyName" placeholder="Vul hier je bedrijfsnaam in" id="companyName">
+                </div>
+            </div>
             <div class="col-lg-12">
                 <div class="form-group">
                     <label for="about">{{ __('Over mij') }}</label>

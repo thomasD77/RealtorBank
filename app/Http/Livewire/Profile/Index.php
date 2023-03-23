@@ -10,6 +10,7 @@ class Index extends Component
     public ? string $lastName;
     public ? string $email;
     public ? string $phone;
+    public ? string $companyName;
     public $about;
 
     protected $rules = [
@@ -22,6 +23,7 @@ class Index extends Component
         $this->lastName = $user->lastName;
         $this->phone = $user->phone ? $user->phone : '';
         $this->email = $user->email;
+        $this->companyName = $user->companyName;
         $this->about = $user->about;
     }
 
@@ -34,6 +36,7 @@ class Index extends Component
         $user->lastName = $this->lastName;
         $user->phone = $this->phone;
         $user->email = $this->email;
+        $user->companyName = $this->companyName;
         $user->about = $this->about;
         $user->update();
         session()->flash('success', 'success!');
