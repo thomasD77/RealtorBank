@@ -19,6 +19,11 @@
     </a>
 </li>
 <li>
+    <a href="{{ route('company') }}">
+        <i class="fa fa-building"></i>{{ __('Bedrijf') }}
+    </a>
+</li>
+<li>
     <a href="{{ route('update.password') }}">
         <i class="fa fa-lock"></i>{{ __('Wachtwoord') }}
     </a>
