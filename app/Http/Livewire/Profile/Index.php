@@ -20,7 +20,7 @@ class Index extends Component
         $user = Auth()->user();
         $this->firstName = $user->firstName;
         $this->lastName = $user->lastName;
-        $this->phone = $user->phone;
+        $this->phone = $user->phone ? $user->phone : '';
         $this->email = $user->email;
         $this->about = $user->about;
     }

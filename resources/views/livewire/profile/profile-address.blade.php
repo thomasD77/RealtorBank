@@ -3,36 +3,36 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="firstName">{{ __('Adres') }}</label>
-                    <input class="form-control" type="text" wire:model="address" placeholder="Vul hier de adres in" id="address">
-                    @error('address') <span class="error text-danger">{{ $message }}</span> @enderror
+                    <label for="addressInput">{{ __('Adres') }}</label>
+                    <input class="form-control" type="text" wire:model="addressInput" placeholder="Vul hier de adres in" id="addressInput">
+                    @error('addressInput') <span class="error text-danger">{{ $message }}</span> @enderror
 
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="lastName">{{ __('Bus nummer') }}</label>
+                    <label for="postBus">{{ __('Bus nummer') }}</label>
                     <input class="form-control" type="text" wire:model="postBus" placeholder="Vul hier de bus nummer in" id="postBus">
                     @error('postBus') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="phone">{{ __('Postcode') }}</label>
+                    <label for="zip">{{ __('Postcode') }}</label>
                     <input class="form-control" type="text" wire:model="zip" placeholder="Vul hier je postcode in" id="zip">
                     @error('zip') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="email">{{ __('Stad') }}</label>
+                    <label for="city">{{ __('Stad') }}</label>
                     <input class="form-control" type="text" wire:model="city" placeholder="Vul hier je stad in" id="city">
                     @error('city') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="email">{{ __('Land') }}</label>
+                    <label for="country">{{ __('Land') }}</label>
                     <input class="form-control" type="text" wire:model="country" placeholder="Vul hier je land in" id="country">
                     @error('country') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>

@@ -14,7 +14,7 @@ class User extends Authenticatable
 
     public function address()
     {
-        return $this->belongsTo(Address::class, 'user_id');
+        return $this->hasOne(Address::class, 'user_id');
     }
 
     /**

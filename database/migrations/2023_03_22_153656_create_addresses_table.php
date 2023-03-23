@@ -24,13 +24,13 @@ return new class extends Migration
             $table->boolean('tenant_future_address')->default(0)->nullable();
 
             $table->unsignedInteger('user_id')
-                ->index();
+                ->index()->nullable();
             $table->unsignedInteger('company_id')
-                ->index();
+                ->index()->nullable();
             $table->unsignedInteger('owner_id')
-                ->index();
+                ->index()->nullable();
             $table->unsignedInteger('tenant_id')
-                ->index();
+                ->index()->nullable();
 
             $table->timestamps();
         });
