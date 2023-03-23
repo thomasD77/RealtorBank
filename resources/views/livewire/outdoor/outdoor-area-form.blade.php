@@ -95,7 +95,7 @@
             <livewire:outdoor.elements.material
                 :dynamicArea="$outdoorArea"
             />
-            <livewire:outdoor.elements.types
+            <livewire:outdoor.elements.fence
                 :dynamicArea="$outdoorArea"
             />
         @break
@@ -109,17 +109,17 @@
             />
         @break
 
-        @case(\App\Enums\OutdoorKey::OutdoorLight->value)
-            <livewire:outdoor.elements.types
-                :dynamicArea="$outdoorArea"
-            />
-            <livewire:outdoor.elements.count
-                :dynamicArea="$outdoorArea"
-            />
-            <livewire:outdoor.elements.movementdetector
-                :dynamicArea="$outdoorArea"
-            />
-        @break
+{{--        @case(\App\Enums\OutdoorKey::Outdoorlight->value)--}}
+{{--            <livewire:outdoor.elements.types--}}
+{{--                :dynamicArea="$outdoorArea"--}}
+{{--            />--}}
+{{--            <livewire:outdoor.elements.count--}}
+{{--                :dynamicArea="$outdoorArea"--}}
+{{--            />--}}
+{{--            <livewire:outdoor.elements.movementdetector--}}
+{{--                :dynamicArea="$outdoorArea"--}}
+{{--            />--}}
+{{--        @break--}}
 
         @case(\App\Enums\OutdoorKey::Mailbox->value)
             <livewire:outdoor.elements.types

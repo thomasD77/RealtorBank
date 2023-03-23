@@ -8,7 +8,7 @@ use App\Models\OutdoorArea;
 class Fence extends MainDropdownComponent
 {
     //--> Custom
-    public string $element = "fence";
+    public string $element = "type";
     public string $title = "Omheining";
 
     public function mount($dynamicArea)
