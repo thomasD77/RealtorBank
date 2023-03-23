@@ -28,6 +28,8 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
 
+            $table->unsignedInteger('company_id')->nullable();
+
             //This is for the sidebar toggle
             $table->unsignedInteger('sidebar_category_id')
                 ->index()->nullable();

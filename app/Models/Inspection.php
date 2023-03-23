@@ -60,6 +60,14 @@ class Inspection extends Model
          * Owner
          *
          */
+        $company = Company::create([
+            'name' => 'unknown'
+        ]);
+
+        /**
+         * Owner
+         *
+         */
         $owner = Owner::create([
             'name' => 'unknown'
         ]);
@@ -72,6 +80,7 @@ class Inspection extends Model
             //'user_id' => Auth::id(),
             'user_id' => 1,
             'owner_id' => $owner->id,
+            'company_id' => $company->id,
         ]);
 
         /**
