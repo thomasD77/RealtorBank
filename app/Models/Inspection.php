@@ -103,7 +103,7 @@ class Inspection extends Model
             ['Terras', RoomKey::Terrace, Floor::where('code', FloorKey::DriveWay )->first()->id],
 
             //Bijgebouw
-            ['Bijgebouw binnen', RoomKey::OutHouseIn, Floor::where('code', FloorKey::DriveWay )->first()->id],
+            ['Bijgebouw binnen', RoomKey::OutHouseIn, Floor::where('code', FloorKey::OutHouse )->first()->id],
             ['Bijgebouw buiten', RoomKey::OutHouseEx, Floor::where('code', FloorKey::OutHouse )->first()->id],
         ];
 
