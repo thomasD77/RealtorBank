@@ -61,7 +61,7 @@
         <!-- Right Side Content / -->
         <div class="header-user-menu user-menu">
             <div class="header-user-name">
-                <span><img src="{{ asset('assets/images/testimonials/ts-1.jpg') }}" alt="logo"></span>
+                <span><img src="{{ asset('assets/images/avatar/avatar-small.png') }}" alt="logo"></span>
                 {{ __('Hi,') }} {{ Auth()->user()->firstName }}
             </div>
             <ul>
