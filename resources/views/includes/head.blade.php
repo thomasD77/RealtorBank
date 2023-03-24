@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/lightcase.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/owl-carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+{{--    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">--}}
     <link rel="stylesheet" href="{{ asset('assets/css/menu.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
 {{--    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">--}}
