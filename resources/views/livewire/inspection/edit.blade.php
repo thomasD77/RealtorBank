@@ -1,6 +1,6 @@
 <div>
     <div class="single-add-property">
-        <h3>{{ __('Inspectie en plaatsbeschrijving')  }}</h3>
+        <h3>{{ __('Algemene gegevens')  }}</h3>
         <div class="property-form-group">
             <form wire:submit.prevent="submitGeneral">
                 <div class="row">
@@ -34,32 +34,14 @@
     </div>
 
     <div class="single-add-property">
-        <h3>{{ __('Contact gegevens eigenaar') }}</h3>
+        <h3>{{ __('Adres gegevens') }}</h3>
         <div class="property-form-group">
             <form wire:submit.prevent="locationSubmit">
                 <div class="row">
                     <div class="col-lg-6 col-md-12">
                         <p>
-                            <label for="name">{{ __('Naam') }}</label>
-                            <input type="text" wire:model="name" placeholder="Vul hier de naam in" id="name">
-                        </p>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <p>
-                            <label for="email">{{ __('E-mail') }}</label>
-                            <input type="text" wire:model="email" placeholder="Vul hier de e-mail in" id="email">
-                        </p>
-                    </div>
-                    <div class="col-lg-6 offset-lg-6 col-md-12">
-                        <p>
-                            <label for="phone">{{ __('Phone') }}</label>
-                            <input type="text" wire:model="phone" placeholder="Vul hier de telefoon in" id="phone">
-                        </p>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <p>
-                            <label for="address">{{ __('Adres') }}</label>
-                            <input type="text" wire:model="address" placeholder="Vul hier je adres in" id="address">
+                            <label for="addressInput">{{ __('Adres') }}</label>
+                            <input type="text" wire:model="addressInput" placeholder="Vul hier je adres in" id="addressInput">
                         </p>
                     </div>
                     <div class="col-lg-6 col-md-12">

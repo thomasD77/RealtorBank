@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Inspection;
 
+use App\Models\Address;
 use App\Models\Inspection;
 use App\Models\MediaInspection;
 use App\Models\MediaStore;
@@ -17,7 +18,7 @@ class Edit extends Component
     use WithFileUploads;
 
     public Inspection $inspection;
-    public Owner $owner;
+    public Address $address;
 
     public $title;
     public $description;
@@ -32,7 +33,7 @@ class Edit extends Component
     public $name;
     public $email;
     public $phone;
-    public $address;
+    public $addressInput;
     public $postBus;
     public $zip;
     public $city;
@@ -58,17 +59,14 @@ class Edit extends Component
         $this->furnished = $inspection->furnished;
         $this->first_resident = $inspection->first_resident;
 
-        $owner = Owner::find($this->inspection->id);
+        $address = Address::where('inspection_id', $this->inspection->id)->first();
 
-        $this->owner = $owner;
-        $this->postBus = $owner->postBus;
-        $this->address = $owner->address;
-        $this->zip = $owner->zip;
-        $this->city = $owner->city;
-        $this->country = $owner->country;
-        $this->name = $owner->name;
-        $this->email = $owner->email;
-        $this->phone = $owner->phone;
+        $this->address = $address;
+        $this->addressInput = $address->address;
+        $this->postBus = $address->postBus;
+        $this->zip = $address->zip;
+        $this->city = $address->city;
+        $this->country = $address->country;
 
         $files = MediaInspection::where('inspection_id', $this->inspection->id)->get();
         $this->files = $files;
@@ -90,15 +88,12 @@ class Edit extends Component
 
     public function locationSubmit()
     {
-        $this->owner->name = $this->name;
-        $this->owner->email = $this->email;
-        $this->owner->phone = $this->phone;
-        $this->owner->address = $this->address;
-        $this->owner->postBus = $this->postBus;
-        $this->owner->zip = $this->zip;
-        $this->owner->city = $this->city;
-        $this->owner->country = $this->country;
-        $this->owner->update();
+        $this->address->address = $this->addressInput;
+        $this->address->postBus = $this->postBus;
+        $this->address->zip = $this->zip;
+        $this->address->city = $this->city;
+        $this->address->country = $this->country;
+        $this->address->update();
         session()->flash('success', 'success!');
     }
 

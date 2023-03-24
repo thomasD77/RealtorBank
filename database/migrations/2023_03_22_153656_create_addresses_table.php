@@ -21,13 +21,11 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
 
-            $table->boolean('tenant_future_address')->default(0)->nullable();
-
             $table->unsignedInteger('user_id')
                 ->index()->nullable();
             $table->unsignedInteger('company_id')
                 ->index()->nullable();
-            $table->unsignedInteger('owner_id')
+            $table->unsignedInteger('inspection_id')
                 ->index()->nullable();
             $table->unsignedInteger('tenant_id')
                 ->index()->nullable();

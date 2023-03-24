@@ -11,9 +11,5 @@ class Owner extends Model
 
     protected $guarded = [];
 
-    public function address()
-    {
-        return $this->belongsTo(Address::class, 'owner');
-    }
 
 }

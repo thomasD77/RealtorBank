@@ -26,9 +26,6 @@ return new class extends Migration
 
             $table->text('extra')->nullable();
 
-            $table->unsignedInteger('owner_id')
-                ->index();
-
             $table->unsignedInteger('user_id')
                 ->index();
 

@@ -13,5 +13,6 @@ enum FloorKey : string
     case Building = 'building';
     case DriveWay = 'driveWay';
 
-    case OutHouse = 'outHouse';
+    case OutHouseIn = 'outHouseIn';
+    case OutHouseEx = 'outHouseEx';
 }

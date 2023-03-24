@@ -17,4 +17,9 @@ class Situation extends Model
     {
         return $this->belongsTo(Tenant::class, 'tenant_id');
     }
+
+    public function owner()
+    {
+        return $this->hasMany(Owner::class, 'owner_id');
+    }
 }

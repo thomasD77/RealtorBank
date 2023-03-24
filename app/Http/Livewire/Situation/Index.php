@@ -18,20 +18,6 @@ class Index extends Component
     public function mount(Inspection $inspection)
     {
         $this->inspection = $inspection;
-
-        $this->current_situation = Situation::query()
-            ->orderBy('date')
-            ->where('inspection_id', $this->inspection->id)
-            ->where('intrede', '!=', 0)
-            ->with('tenant')
-            ->first();
-
-        $this->current_situation_out = Situation::query()
-            ->orderBy('date')
-            ->where('inspection_id', $this->inspection->id)
-            ->where('intrede', '===' ,0)
-            ->with('tenant')
-            ->first();
     }
 
     public function render()

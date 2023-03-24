@@ -23,6 +23,10 @@ return new class extends Migration
                 ->nullable()
                 ->index();
 
+            $table->unsignedInteger('owner_id')
+                ->nullable()
+                ->index();
+
             $table->unsignedInteger('inspection_id')
                 ->index();
 

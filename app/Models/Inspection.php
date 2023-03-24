@@ -54,16 +54,13 @@ class Inspection extends Model
         return $this->hasMany(Document::class);
     }
 
+    public function address()
+    {
+        return $this->belongsTo(Address::class, 'inspection_id');
+    }
+
     public static function createInspection()
     {
-        /**
-         * Owner
-         *
-         */
-        $owner = Owner::create([
-            'name' => 'unknown'
-        ]);
-
         /**
          * Inspection
          *
@@ -71,7 +68,14 @@ class Inspection extends Model
         $inspection = Inspection::create([
             //'user_id' => Auth::id(),
             'user_id' => 1,
-            'owner_id' => $owner->id,
+        ]);
+
+        /**
+         * Address
+         *
+         */
+        $address = Address::create([
+            'inspection_id' => $inspection->id
         ]);
 
         /**
@@ -103,8 +107,8 @@ class Inspection extends Model
             ['Terras', RoomKey::Terrace, Floor::where('code', FloorKey::DriveWay )->first()->id],
 
             //Bijgebouw
-            ['Bijgebouw binnen', RoomKey::OutHouseIn, Floor::where('code', FloorKey::OutHouse )->first()->id],
-            ['Bijgebouw buiten', RoomKey::OutHouseEx, Floor::where('code', FloorKey::OutHouse )->first()->id],
+            ['Bijgebouw binnen', RoomKey::OutHouseIn, Floor::where('code', FloorKey::OutHouseIn )->first()->id],
+            ['Bijgebouw buiten', RoomKey::OutHouseEx, Floor::where('code', FloorKey::OutHouseEx )->first()->id],
         ];
 
         $roomsToInsert = [];
