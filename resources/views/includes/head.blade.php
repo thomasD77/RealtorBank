@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/menu.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+{{--    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">--}}
     <link rel="stylesheet" id="color" href="{{ asset('assets/css/default.css') }}">
 
     <!-- JetStream -->
@@ -60,6 +60,8 @@
             height: auto;
         }
     </style>
+
+    @vite(['resources/js/app.js'])
 
     @livewireStyles
 </head>
