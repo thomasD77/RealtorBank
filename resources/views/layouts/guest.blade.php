@@ -92,8 +92,6 @@
         </div>
     </footer>
 
-    @include('includes.scripts')
-
 </div>
 <!-- Wrapper / End -->
 @livewireScripts
