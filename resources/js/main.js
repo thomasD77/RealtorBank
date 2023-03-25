@@ -26,7 +26,6 @@ import '../js/custom/signature'
 //All DEFAULT THEME JS fFILES
 import '../js/script'
 import '../js/jquery-3.5.1.min.js'
-import '../js/ui-lement'
 
 
 
