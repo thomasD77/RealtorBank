@@ -28,7 +28,7 @@
 
                     @include('includes.sidebar-default')
 
-                <div class="col-lg-9 col-md-12 col-xs-12 pl-0 user-dash2">
+                <div class="col-lg-9 col-md-12 col-xs-12 pl-lg-0 user-dash2">
 
                     @include('includes.sidebar-mobile')
 

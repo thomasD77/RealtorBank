@@ -7,7 +7,7 @@
 
     @if($interior == $activeCat || $activeCat == null)
         {{--Interieur--}}
-        <li>
+        <li class="sidebar-border">
             <a data-toggle="collapse"
                href="#collapseInterior"
                role="button"
@@ -26,7 +26,7 @@
 
                  id="collapseInterior"
             >
-                <ul>
+                <ul class="special">
 
                     @if($basement == $activeFloor || $activeFloor == null)
                         {{-- BasementFloor--}}
@@ -794,7 +794,7 @@
     @endif
     @if($exterior == $activeCat || $activeCat == null)
         {{--Exterieur--}}
-        <li>
+        <li class="sidebar-border">
             <a data-toggle="collapse"
                href="#collapseExterieur"
                role="button"
@@ -814,7 +814,7 @@
 
                  id="collapseExterieur"
             >
-                <ul>
+                <ul class="special">
 
                     {{-- Building--}}
                     @if($building == $activeFloor || $activeFloor == null)
@@ -951,7 +951,7 @@
     @endif
     @if($outHouse == $activeCat || $activeCat == null)
         {{--    OutHouse--}}
-        <li>
+        <li class="sidebar-border">
             <a data-toggle="collapse"
                href="#collapseOuthouse"
                role="button"
@@ -971,7 +971,7 @@
                  id="collapseOuthouse"
             >
 
-                <ul>
+                <ul class="special">
                     {{--   OutHouseIn--}}
                     @if($outHouseIn == $activeFloor || $activeFloor == null)
                         @if($activeRoom != $outHouseEx)
@@ -1150,7 +1150,7 @@
 
     @if($techniques == $activeCat || $activeCat == null)
         {{--Technieken--}}
-        <li>
+        <li class="sidebar-border">
             <a data-toggle="collapse"
                href="#collapseTechnique"
                role="button" aria-expanded="false"
@@ -1184,7 +1184,7 @@
     @endif
     @if($keys == $activeCat || $activeCat == null)
         {{--Sleutels--}}
-        <li>
+        <li class="sidebar-border">
             <a data-toggle="collapse"
                href="#collapseKey"
                role="button"
@@ -1215,7 +1215,7 @@
     @endif
     @if($meters == $activeCat || $activeCat == null)
         {{--Meters--}}
-        <li>
+        <li class="sidebar-border">
             <a data-toggle="collapse"
                href="#collapseMeter"
                role="button"
@@ -1247,7 +1247,7 @@
 
     @if($situation == $activeCat || $activeCat == null)
         {{--In/Uittrede--}}
-        <li>
+        <li class="sidebar-border">
             <a data-toggle="collapse"
                href="#collapseSituation"
                role="button"
@@ -1282,7 +1282,7 @@
     @endif
     @if($contracts == $activeCat || $activeCat == null)
         {{--Contracts--}}
-        <li>
+        <li class="sidebar-border">
             <a data-toggle="collapse"
                href="#collapseContract"
                role="button"
@@ -1313,7 +1313,7 @@
     @endif
     @if($documents == $activeCat || $activeCat == null)
         {{--Documenten--}}
-        <li>
+        <li class="sidebar-border">
             <a data-toggle="collapse"
                href="#collapseDocument"
                role="button"
