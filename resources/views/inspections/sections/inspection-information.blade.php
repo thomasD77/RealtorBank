@@ -95,6 +95,22 @@
                 </tr>
             @endif
         </table>
+
+        @if($inspection->user->signature)
+            <div class="signature">
+                <div class="row">
+                    <div class="column-half">
+                        <p><strong>Gelezen en goedgekeurd op {{ $inspection->date }}</strong></p>
+                        <p><strong>{{ $inspection->user->firstName }} {{ $inspection->user->lastName }}</strong></p>
+                    </div>
+                    <div class="column-half">
+                        <img src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
+                    </div>
+                </div>
+            </div>
+        @endif
+
+
     </section>
 
     <br>

@@ -38,6 +38,7 @@ class Edit extends Component
     public $zip;
     public $city;
     public $country;
+    public $date;
 
     public $media = [];
     public $files;
@@ -51,6 +52,7 @@ class Edit extends Component
         $this->inspection = $inspection;
         $this->title = $inspection->title;
         $this->description = $inspection->extra;
+        $this->date = $inspection->date;
 
         $this->tenant_present = $inspection->tenant_present;
         $this->owner_present = $inspection->owner_present;
@@ -81,9 +83,10 @@ class Edit extends Component
     public function submitGeneral()
     {
         $this->inspection->title = $this->title;
+        $this->inspection->date = $this->date;
         $this->inspection->extra = $this->description;
         $this->inspection->update();
-        session()->flash('success', 'success!');
+        session()->flash('successGeneral', 'success!');
     }
 
     public function locationSubmit()
@@ -94,7 +97,7 @@ class Edit extends Component
         $this->address->city = $this->city;
         $this->address->country = $this->country;
         $this->address->update();
-        session()->flash('success', 'success!');
+        session()->flash('successAddress', 'success!');
     }
 
     public function present($value)

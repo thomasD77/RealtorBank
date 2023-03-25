@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('inspections', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable()->default('DRAFT');
+            $table->date('date')->nullable();
 
             $table->string('owner_present')->nullable();
             $table->string('tenant_present')->nullable();

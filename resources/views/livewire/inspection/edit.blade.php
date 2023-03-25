@@ -4,10 +4,16 @@
         <div class="property-form-group">
             <form wire:submit.prevent="submitGeneral">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-8">
                         <p>
                             <label for="title">{{ __('Titel') }}</label>
                             <input class="form-control" type="text" wire:model="title" id="title" placeholder="Vul je titel hier in...">
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <p>
+                            <label for="date">{{ __('Datum') }}</label>
+                            <input type="date" wire:model="date" id="date">
                         </p>
                     </div>
                 </div>
@@ -22,9 +28,9 @@
                 <div class="row">
                     <div class="col-12">
                         <button type="submit" class="btn btn-dark">save</button>
-                        @if (session()->has('success'))
+                        @if (session()->has('successGeneral'))
                             <div class="btn btn-success flash_message">
-                                {{ session('success') }}
+                                {{ session('successGeneral') }}
                             </div>
                         @endif
                     </div>
@@ -77,9 +83,9 @@
                 <div class="row">
                     <div class="col-12 mt-5">
                         <button type="submit" class="btn btn-dark">save</button>
-                        @if (session()->has('success'))
+                        @if (session()->has('successAddress'))
                             <div class="btn btn-success flash_message">
-                                {{ session('success') }}
+                                {{ session('successAddress') }}
                             </div>
                         @endif
                     </div>

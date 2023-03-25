@@ -112,12 +112,25 @@
         margin-right: 5px;
     }
 
+    .column-half {
+        float: left;
+        width: 50%;
+        margin-right: 5px;
+    }
+
     /* Clear floats after the columns */
     .row:after {
         content: "";
         display: table;
         clear: both;
         padding-bottom: 5px;
+    }
+
+    .signature {
+        margin-top: 35px;
+    }
+    .signature img {
+        width: 85%;
     }
 
 </style>

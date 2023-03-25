@@ -1,21 +1,3 @@
-{{--<x-app-layout>--}}
-{{--    <x-slot name="header">--}}
-{{--        <h2 class="font-semibold text-xl text-gray-800 leading-tight">--}}
-{{--            {{ __('Dashboard') }}--}}
-{{--        </h2>--}}
-{{--    </x-slot>--}}
-
-{{--    <div class="py-12">--}}
-{{--        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">--}}
-{{--            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">--}}
-{{--                <div class="p-6 text-gray-900">--}}
-{{--                    {{ __("You're logged in!") }}--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</x-app-layout>--}}
-
 @extends('layout')
 
 @section('content')
@@ -139,8 +121,10 @@
                             <td>
                                 <div class="inner">
                                     <a href="{{ route('inspection.edit', $inspection)  }}"><h2>{{ $inspection->title }}</h2></a>
-                                    <figure class="mb-1"><i class="lni-map-marker"></i>{{ $inspection->address->address }} @if($inspection->address->postBus)Bus{{ $inspection->address->postBus }}@endif,</figure>
+                                    <figure class="mb-1"><i class="lni-map-marker"></i>{{ $inspection->address->address }} @if($inspection->address->postBus)Bus {{ $inspection->address->postBus }} ,@endif</figure>
+                                    @if($inspection->address->city || $inspection->address->country)
                                     <figure>{{ $inspection->address->city }} - {{ $inspection->address->country }}</figure>
+                                    @endif
                                     {{--                                <ul class="starts text-left mb-0">--}}
                                     {{--                                    <li class="mb-0"><i class="fa fa-star"></i>--}}
                                     {{--                                    </li>--}}
@@ -156,7 +140,8 @@
                                     {{--                                </ul>--}}
                                 </div>
                             </td>
-                            <td>{{ $inspection->created_at->format('d-m-Y') }}</td>
+
+                            <td>{{ Carbon\Carbon::parse($inspection->date)->format('d-m-Y') }}</td>
                             <td class="actions">
                                 <a href="{{ route('inspection.edit', $inspection->id) }}" class="edit"><i class="fa fa-pencil-alt"></i></a>
                             </td>

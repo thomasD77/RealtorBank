@@ -19,7 +19,7 @@ class Index extends Component
         'lastName' => 'max:30',
         'phone' => 'max:30',
         'companyName' => 'max:30',
-        'about' => 'max:500',
+        'about' => 'max:1500',
     ];
 
     public function mount(){
