@@ -15,6 +15,11 @@ class Index extends Component
 
     protected $rules = [
         'email' => 'required|email',
+        'firstName' => 'max:30',
+        'lastName' => 'max:30',
+        'phone' => 'max:30',
+        'companyName' => 'max:30',
+        'about' => 'max:500',
     ];
 
     public function mount(){
@@ -23,7 +28,7 @@ class Index extends Component
         $this->lastName = $user->lastName;
         $this->phone = $user->phone ? $user->phone : '';
         $this->email = $user->email;
-        $this->companyName = $user->companyName;
+        $this->companyName = $user->companyName ? $user->companyName : '';
         $this->about = $user->about;
     }
 

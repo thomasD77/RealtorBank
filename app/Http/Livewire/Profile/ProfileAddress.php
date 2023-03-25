@@ -16,6 +16,14 @@ class ProfileAddress extends Component
     public $city;
     public $country;
 
+    protected $rules = [
+        'addressInput' => 'max:30',
+        'zip' => 'max:10',
+        'postBus' => 'max:30',
+        'city' => 'max:30',
+        'country' => 'max:30',
+    ];
+
 
     public function mount()
     {
@@ -32,6 +40,8 @@ class ProfileAddress extends Component
 
     public function addressSubmit()
     {
+        $this->validate();
+
         if(Auth()->user()->address){
              $this->address = Auth()->user()->address;
              $this->address->address = $this->addressInput;
@@ -40,7 +50,7 @@ class ProfileAddress extends Component
              $this->address->city = $this->city;
              $this->address->country = $this->country;
              $this->address->update();
-             session()->flash('success', 'success!');
+             session()->flash('successAddress', 'success!');
 
         }else {
             $address = new Address();

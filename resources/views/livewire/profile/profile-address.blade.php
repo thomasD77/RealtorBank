@@ -39,9 +39,9 @@
             </div>
         </div>
         <button type="submit" class="btn-common btn">{{ __('save') }}</button>
-        @if (session()->has('success'))
+        @if (session()->has('successAddress'))
             <div class="btn btn-success flash_message p-3">
-                {{ session('success') }}
+                {{ session('successAddress') }}
             </div>
         @endif
     </form>
