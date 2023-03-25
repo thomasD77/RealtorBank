@@ -100,56 +100,38 @@
     <br>
 
     <section>
-        @if($inspection->owner->name || $inspection->owner->email || $inspection->owner->phone || $inspection->owner->address || $inspection->owner->postBus || $inspection->owner->zip || $inspection->owner->city || $inspection->owner->country)
-            <h2>{{ __('Eigenaar van het eigendom') }}</h2>
+        @if($inspection->address)
+            <h2>{{ __('Adres van het eigendom') }}</h2>
             <table class="table">
 
-                @if($inspection->owner->name)
-                    <tr class="row--text">
-                        <th>{{ __('Naam') }}</th>
-                        <th>{{ $inspection->owner->name }}</th>
-                    </tr>
-                @endif
-                @if($inspection->owner->email)
-                    <tr class="row--text">
-                        <th>{{ __('E-mail') }}</th>
-                        <th>{{ $inspection->owner->email }}</th>
-                    </tr>
-                @endif
-                @if($inspection->owner->phone)
-                    <tr class="row--text">
-                        <th>{{ __('Telefoon') }}</th>
-                        <th>{{ $inspection->owner->phone }}</th>
-                    </tr>
-                @endif
-                @if($inspection->owner->address)
+                @if($inspection->address->address)
                     <tr class="row--text">
                         <th>{{ __('Adres') }}</th>
-                        <th>{{ $inspection->owner->address }} @if($inspection->owner->postBus)bus {{ $inspection->owner->postBus }} @endif</th>
+                        <th>{{ $inspection->address->address }} @if($inspection->address->postBus)bus {{ $inspection->address->postBus }} @endif</th>
                     </tr>
                 @endif
-                @if($inspection->owner->zip)
+                @if($inspection->address->zip)
                     <tr class="row--text">
                         <th>{{ __('Postcode') }}</th>
-                        <th>{{ $inspection->owner->zip }}</th>
+                        <th>{{ $inspection->address->zip }}</th>
                     </tr>
                 @endif
-                @if($inspection->owner->city)
+                @if($inspection->address->city)
                     <tr class="row--text">
                         <th>{{ __('Stad') }}</th>
-                        <th>{{ $inspection->owner->city }}</th>
+                        <th>{{ $inspection->address->city }}</th>
                     </tr>
                 @endif
-                @if($inspection->owner->country)
+                @if($inspection->address->country)
                     <tr class="row--text">
                         <th>{{ __('Land') }}</th>
-                        <th>{{ $inspection->owner->country }}</th>
+                        <th>{{ $inspection->address->country }}</th>
                     </tr>
                 @endif
             </table>
         @endif
     </section>
-    
+
     <section>
         @if($inspection->owner_present || $inspection->tenant_present || $inspection->new_building || $inspection->inhabited || $inspection->furnished || $inspection->first_resident)
             <h2>{{ __('Extra informatie') }}</h2>

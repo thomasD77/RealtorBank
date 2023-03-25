@@ -3,3 +3,10 @@
 .test {
     color: yellow;
 }
+.no-edit {
+    color: black;
+    text-decoration: none;
+}
+.no-edit:hover {
+    color: black;
+}

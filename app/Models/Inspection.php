@@ -56,7 +56,7 @@ class Inspection extends Model
 
     public function address()
     {
-        return $this->belongsTo(Address::class, 'inspection_id');
+        return $this->hasOne(Address::class, 'inspection_id');
     }
 
     public static function createInspection()

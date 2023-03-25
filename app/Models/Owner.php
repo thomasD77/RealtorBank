@@ -11,5 +11,4 @@ class Owner extends Model
 
     protected $guarded = [];
 
-
 }

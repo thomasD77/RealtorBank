@@ -17,6 +17,6 @@ class Tenant extends Model
 
     public function address()
     {
-        return $this->hasMany(Address::class, 'tenant_id');
+        return $this->hasOne(Address::class, 'tenant_id');
     }
 }

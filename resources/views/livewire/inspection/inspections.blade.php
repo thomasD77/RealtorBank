@@ -24,24 +24,25 @@
                         </td>
                         <td>
                             <div class="inner">
-                                <a href="single-property-1.html"><h2>{{ $inspection->title }}</h2></a>
-                                <figure><i class="lni-map-marker"></i>{{ $inspection->address }} @if($inspection->postBus)Bus{{ $inspection->postBus }}@endif, {{ $inspection->city }} - {{ $inspection->country }}</figure>
-                                <ul class="starts text-left mb-0">
-                                    <li class="mb-0"><i class="fa fa-star"></i>
-                                    </li>
-                                    <li class="mb-0"><i class="fa fa-star"></i>
-                                    </li>
-                                    <li class="mb-0"><i class="fa fa-star"></i>
-                                    </li>
-                                    <li class="mb-0"><i class="fa fa-star"></i>
-                                    </li>
-                                    <li class="mb-0"><i class="fa fa-star"></i>
-                                    </li>
-                                    <li class="ml-3">(6 Reviews)</li>
-                                </ul>
+                                <a href="{{ route('inspection.edit', $inspection)  }}"><h2>{{ $inspection->title }}</h2></a>
+                                <figure class="mb-1"><i class="lni-map-marker"></i>{{ $inspection->address->address }} @if($inspection->address->postBus)Bus{{ $inspection->address->postBus }}@endif,</figure>
+                                <figure>{{ $inspection->address->city }} - {{ $inspection->address->country }}</figure>
+{{--                                <ul class="starts text-left mb-0">--}}
+{{--                                    <li class="mb-0"><i class="fa fa-star"></i>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="mb-0"><i class="fa fa-star"></i>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="mb-0"><i class="fa fa-star"></i>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="mb-0"><i class="fa fa-star"></i>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="mb-0"><i class="fa fa-star"></i>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="ml-3">(6 Reviews)</li>--}}
+{{--                                </ul>--}}
                             </div>
                         </td>
-                        <td>{{ $inspection->created_at->format('Y-m-d') }}</td>
+                        <td>{{ $inspection->created_at->format('d-m-Y') }}</td>
                         <td class="actions">
                             <a href="{{ route('inspection.edit', $inspection->id) }}" class="edit"><i class="fa fa-pencil"></i></a>
                         </td>

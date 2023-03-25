@@ -19,13 +19,17 @@
                         @if($situations)
                             @foreach($situations as $situation)
                                 <tr>
-                                <td>{{ $situation->intrede ? 'Intrede' : "Uitrede" }}</td>
+                                <td>
+                                    <a href="{{ route('situation.edit', [ $inspection, $situation ]) }}" class="no-edit">
+                                        {{ $situation->intrede ? 'Intrede' : "Uitrede" }}
+                                    </a>
+                                </td>
                                 <td>{{ $situation->date ?? "" }}</td>
                                 <td>{{ $situation->tenant->name ?? "" }}</td>
                                 <td>{{ $situation->tenant->email ?? "" }}</td>
                                 <td>{{ $situation->tenant->phone ?? "" }}</td>
                                 <td>
-                                    <a href="{{ route('situation.edit', [ $inspection, $situation ]) }}" class="edit text-success"><i class="fa fa-pencil"></i></a>
+                                    <a href="{{ route('situation.edit', [ $inspection, $situation ]) }}" class="text-success"><i class="fa fa-pencil"></i></a>
                                 </td>
                                 </tr>
                             @endforeach

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Situation;
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
 use App\Models\Inspection;
+use App\Models\Owner;
 use App\Models\Situation;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
@@ -21,9 +22,15 @@ class SituationController extends Controller
         $tenant->updated_at = now();
         $tenant->save();
 
+        $owner = new Owner();
+        $owner->created_at = now();
+        $owner->updated_at = now();
+        $owner->save();
+
         $situation = new Situation();
         $situation->inspection_id = $inspection->id;
         $situation->tenant_id = $tenant->id;
+        $situation->owner_id = $owner->id;
         $situation->created_at = now();
         $situation->updated_at = now();
         $situation->save();

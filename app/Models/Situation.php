@@ -20,6 +20,6 @@ class Situation extends Model
 
     public function owner()
     {
-        return $this->hasMany(Owner::class, 'owner_id');
+        return $this->belongsTo(Owner::class, 'owner_id');
     }
 }

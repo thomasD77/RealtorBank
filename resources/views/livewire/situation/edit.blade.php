@@ -39,7 +39,7 @@
     </div>
 
     <div class="single-add-property">
-        <h3>{{ __('Eigenaar') }} <small style="text-transform: lowercase">(verkoper/verhuurder)</small></h3>
+        <h3>{{ __('Eigenaar') }} <small style="text-transform: lowercase">({{ __('verkoper/verhuurder') }})</small></h3>
         <div class="property-form-group">
             <form wire:submit.prevent="ownerSubmit">
                 <div class="row">
@@ -117,7 +117,8 @@
 
     @if($intrede === 0)
         <div class="single-add-property">
-        <h3>{{ __('Verhuist naar') }}</h3>
+        <p class="mb-0">{{ $nameTenant }}</p>
+        <h3>{{ __('Verhuist naar') }} <small style="text-transform: lowercase">(*{{ __('optioneel') }})</small></h3>
         <div class="property-form-group">
             <form wire:submit.prevent="addressSubmit">
                 <div class="row">
@@ -215,7 +216,7 @@
                                         <td>{{ __('Contract') }}</td>
                                         <td>{{ $contract->created_at->format('d-m-Y') }}</td>
                                         <td class="edit">
-                                            <a href="{{ route('contract.edit', [ $inspection, $contract]) }}"><i class="fa fa-pencil text-success"></i></a>
+                                            <a href="{{ route('contract.edit', [ $inspection, $contract]) }}"><i class="fa fa-pencil text-dark"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
