@@ -54,6 +54,12 @@ class SituationController extends Controller
         }
 
         $image_parts = explode(";base64,", $request->signed);
+
+        //Check when signature is empty
+        if($image_parts[0] == ''){
+            return redirect()->back();
+        }
+
         $image_type_aux = explode("image/", $image_parts[0]);
         $image_type = $image_type_aux[1];
         $image_base64 = base64_decode($image_parts[1]);
@@ -70,7 +76,20 @@ class SituationController extends Controller
             $contract->signature_tenant = $name;
             $contract->update();
             Session::flash('successTenant', 'Handtekening werd succesvol opgeslagen.');
-        }else {
+
+
+        }
+
+        elseif($request->user){
+            $user = Auth()->user();
+            File::delete('assets/signatures/' . $user->signature);
+
+            $user->signature = $name;
+            $user->update();
+            Session::flash('success', 'Handtekening werd succesvol opgeslagen.');
+        }
+
+        else {
             File::delete('assets/signatures/' . $contract->signature_realtor);
 
             $contract->signature_owner = $name;

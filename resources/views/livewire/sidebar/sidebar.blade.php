@@ -1,7 +1,7 @@
 <ul id="{{ $responsive }}">
     <li>
         <a class="custom-sidebar-padding" href="{{ route('inspection.edit', $inspection) }}">
-            <i class="fa fa-map-marker"></i>{{ $inspection->title }}
+            <i class="fa fa-map-marker text-danger"></i>{{ $inspection->title }}
         </a>
     </li>
 

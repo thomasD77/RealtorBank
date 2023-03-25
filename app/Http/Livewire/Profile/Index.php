@@ -39,7 +39,7 @@ class Index extends Component
         $user->companyName = $this->companyName;
         $user->about = $this->about;
         $user->update();
-        session()->flash('success', 'success!');
+        session()->flash('successGeneral', 'success!');
     }
     public function render()
     {
