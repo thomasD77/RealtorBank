@@ -121,9 +121,11 @@
                             <td>
                                 <div class="inner">
                                     <a href="{{ route('inspection.edit', $inspection)  }}"><h2>{{ $inspection->title }}</h2></a>
-                                    <figure class="mb-1"><i class="lni-map-marker"></i>{{ $inspection->address->address }} @if($inspection->address->postBus)Bus {{ $inspection->address->postBus }} ,@endif</figure>
-                                    @if($inspection->address->city || $inspection->address->country)
-                                    <figure>{{ $inspection->address->city }} - {{ $inspection->address->country }}</figure>
+                                    @if($inspection->address)
+                                        <figure class="mb-1"><i class="lni-map-marker"></i>{{ $inspection->address->address }} @if($inspection->address->postBus)Bus {{ $inspection->address->postBus }} ,@endif</figure>
+                                        @if($inspection->address->city || $inspection->address->country)
+                                        <figure>{{ $inspection->address->city }} - {{ $inspection->address->country }}</figure>
+                                        @endif
                                     @endif
                                     {{--                                <ul class="starts text-left mb-0">--}}
                                     {{--                                    <li class="mb-0"><i class="fa fa-star"></i>--}}
