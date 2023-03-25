@@ -9,8 +9,8 @@
 </div>
 <!-- END PRELOADER -->
 
+<!-- SIGNATURE -->
 <script type="text/javascript">
-
     var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
     $('#clear').click(function(e) {
         e.preventDefault();
@@ -24,14 +24,9 @@
         sig_tenant.signature('clear');
         $("#signature65").val('');
     });
-
 </script>
 
-<script>
-    setTimeout(function() {
-        $('.flash_message').fadeOut('fast');
-    }, 2000); // <-- time in milliseconds
-</script>
+<!-- SIDEBAR -->
 <script>
     function getSidebar() {
         var filter = document.getElementById("sidebarResp");
@@ -43,14 +38,6 @@
     }
 </script>
 
-<script>
-    Fancybox.bind("[data-fancybox]", {
-        // options
-        Image: {
-            zoom: false,
-        },
-    });
-</script>
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
 
 <!-- ARCHIVES JS -->
@@ -91,21 +78,8 @@
 <script src="{{ asset('assets/js/Countdown.min.js') }}"></script>
 <script src="{{ asset('assets/js/ui-lement.js') }}"></script>
 
-
 <!-- MAIN JS -->
 <script src="{{ asset('assets/js/script.js') }}"></script>
-<script>
-    $(".dropzone").dropzone({
-        dictDefaultMessage: "<i class='fa fa-cloud-upload'></i> Click here or drop files to upload",
-    });
-
-</script>
-<script>
-    $(".header-user-name").on("click", function() {
-        $(".header-user-menu ul").toggleClass("hu-menu-vis");
-        $(this).toggleClass("hu-menu-visdec");
-    });
-</script>
 
 
 
