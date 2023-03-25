@@ -8,6 +8,7 @@ use App\Models\Inspection;
 use App\Models\Owner;
 use App\Models\Situation;
 use App\Models\Tenant;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
@@ -92,6 +93,17 @@ class SituationController extends Controller
         $contract->update();
 
         return redirect()->back();
+    }
+
+    public function printContract(Inspection $inspection, Contract $contract)
+    {
+        $pdf = Pdf::loadView('contracts.pdf', [
+            'inspection' => $inspection,
+            'contract' => $contract,
+
+        ]);
+
+        return $pdf->download('contract-' . '#' . $inspection->id . '.pdf');
     }
 
 }

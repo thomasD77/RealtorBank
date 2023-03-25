@@ -102,7 +102,23 @@
                     </div>
                 </div>
 
-                <hr class="my-5">
+
+                <div class="row p-5 the-five">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="border-0 text-uppercase small font-weight-bold">{{ __('Beschrijving') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{!! $contract->legal !!}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
                 <div class="row pb-5 p-5 the-five">
                     <div class="col-md-6">
@@ -124,36 +140,20 @@
                     <div class="col-md-6 text-right">
                         <h3 class="font-weight-bold mb-4">{{ __('Koper/huurder ') }}</h3>
                         <p class="mb-0 font-weight-bold">{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
-                        <p class="mb-0"><span class="text-muted">{{ $situation->tenant->phone }}</p>
-                        <p class="mb-1"><span class="text-muted">{{ $situation->tenant->email }}</p>
+                        <p class="mb-0"><span class="text-muted">{{  $contract->situation->tenant ? $contract->situation->tenant->phone : "" }}</p>
+                        <p class="mb-1"><span class="text-muted">{{  $contract->situation->tenant ? $contract->situation->tenant->email : "" }}</p>
                     </div>
                 </div>
 
-                <div class="row p-5 the-five">
-                    <div class="col-md-12">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th class="border-0 text-uppercase small font-weight-bold">{{ __('Beschrijving') }}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>{!! $contract->legal !!}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
 
                 <div class="row pb-5 p-5 the-five">
                     <div class="col-md-6">
-                        <h3 class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</h3>
+                        <h5 class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</h5>
                         <img src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}" alt="">
                     </div>
 
                     <div class="col-md-6 text-right">
-                        <h3 class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</h3>
+                        <h5 class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</h5>
                         <img src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}" alt="">
                     </div>
                 </div>
@@ -161,7 +161,7 @@
                 @if($lock)
                     <div class="single-add-property">
                         <h3>{{ __('Contract printen') }}</h3>
-                        <button class="btn btn-dark">{{ __('Printen') }}</button>
+                        <a href="{{ route('print.contract', [$inspection, $contract]) }}" class="btn btn-dark">{{ __('Printen') }}</a>
                     </div>
                 @endif
 
