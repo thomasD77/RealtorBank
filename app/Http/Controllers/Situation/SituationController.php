@@ -38,6 +38,7 @@ class SituationController extends Controller
         $contract = new Contract();
         $contract->inspection_id = $inspection->id;
         $contract->situation_id = $situation->id;
+        $contract->legal = Config('contract.legal');
         $contract->save();
 
         return to_route('situation.edit', [ $inspection , $situation]);
@@ -71,7 +72,7 @@ class SituationController extends Controller
         }else {
             File::delete('assets/signatures/' . $contract->signature_realtor);
 
-            $contract->signature_realtor = $name;
+            $contract->signature_owner = $name;
             $contract->update();
             Session::flash('success', 'Handtekening werd succesvol opgeslagen.');
         }

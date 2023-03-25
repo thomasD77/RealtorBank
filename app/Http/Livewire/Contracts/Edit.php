@@ -16,20 +16,19 @@ class Edit extends Component
 
     public Contract $contract;
     public Situation $situation;
+    public Inspection $inspection;
 
-    public $realtor;
     public $date;
     public $lock;
 
     public function mount(Inspection $inspection, Contract $contract)
     {
-        $this->contract = $contract;
+        $this->inspection = $inspection;
         $this->situation = Situation::find($contract->situation_id);
+        $this->contract = $contract;
 
         $this->date = $this->contract->date;
         $this->lock = $this->contract->lock;
-
-        $this->realtor = Auth()->user();
     }
 
     public function changeDate()

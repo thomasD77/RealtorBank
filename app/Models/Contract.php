@@ -10,4 +10,9 @@ class Contract extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function situation()
+    {
+        return $this->belongsTo(Situation::class);
+    }
 }

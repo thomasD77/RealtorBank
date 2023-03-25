@@ -1,4 +1,26 @@
 <div>
+    <div class="single-add-property">
+        <h3>{{ __('Status contract') }}</h3>
+        <form action="{{ route('toggle.contract') }}" method="post">
+            @csrf
+            <input type="hidden" name="contract" value="{{ $contract->id }}">
+            <button class="btn btn-dark">
+                @if($lock)
+                    {{ __('Openen') }}
+                @else
+                    {{ __('Sluiten') }}
+                @endif
+            </button>
+            @if($lock)
+                <p class="text-muted">
+                    {{ __('*Een contract kan alleen aangepast worden wanneer je deze opent.') }}
+                    {{ __('Dit kan door op deze knop te klikken.') }}
+                </p>
+            @else
+                <p class="text-muted mt-1">{{ __('*Om een contract te printen moet deze eerst gesloten worden. Druk op deze knop om alle gegevens vast te zetten.') }}</p>
+            @endif
+        </form>
+    </div>
     @if(!$lock)
         <div class="p-5 the-five" style="background-color: #1d293e;">
             <div class="row">
@@ -8,7 +30,7 @@
                         <input type="hidden" name="contract" value="{{ $contract->id }}">
                         @csrf
                         <div class="col-md-11">
-                            <label class="py-3" for="">{{ __('Handtekening') }} {{ $realtor->firstName }} {{ $realtor->lastName }}</label>
+                            <label class="py-3" for="">{{ __('Handtekening') }} {{ $contract->situation->owner ? $contract->situation->owner->name : "" }} </label>
                             <br/>
                             <div id="sig"></div>
                             <br/>
@@ -54,7 +76,6 @@
         </div>
     @endif
 
-
     <div class="invoice mb-0">
         <div class="card border-0">
             <div class="card-body p-0">
@@ -85,19 +106,26 @@
 
                 <div class="row pb-5 p-5 the-five">
                     <div class="col-md-6">
-                        <h3 class="font-weight-bold mb-4">{{ __('Contract door') }}</h3>
-                        <p class="mb-0 font-weight-bold">{{ $realtor->firstName }} {{ $realtor->lastName }}</p>
-                        <p class="mb-0">RealtorBank</p>
-                        <p class="mb-0">Est St, 77 - Central Park, NYC</p>
-                        <p class="mb-0">{{ $realtor->phone }}</p>
-                        <p class="mb-0">{{ $realtor->email }}</p>
+                        <h3 class="font-weight-bold mb-4">{{ __('Verkoper/verhuurder') }}</h3>
+                        <p class="mb-0 font-weight-bold">{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
+                        <p class="mb-0"><span class="text-muted">{{  $contract->situation->owner ? $contract->situation->owner->phone : "" }}</p>
+                        <p class="mb-1"><span class="text-muted">{{  $contract->situation->owner ? $contract->situation->owner->email : "" }}</p>
+
+                        <p class="mb-0">
+                            {{  $inspection->address->address }}
+                            @if($inspection->address->postBus) {{  $inspection->address->postBus }} @endif
+                            @if($inspection->address->zip || $inspection->address->city) ,{{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
+                        </p>
+                        <p>
+                            @if($inspection->address->country) {{  $inspection->address->country }} @endif
+                        </p>
                     </div>
 
                     <div class="col-md-6 text-right">
-                        <h3 class="font-weight-bold mb-4">{{ __('Contract voor ') }}</h3>
-                        <p class="mb-1"><span class="text-muted">{{ $situation->tenant->name }}</p>
+                        <h3 class="font-weight-bold mb-4">{{ __('Koper/huurder ') }}</h3>
+                        <p class="mb-0 font-weight-bold">{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
+                        <p class="mb-0"><span class="text-muted">{{ $situation->tenant->phone }}</p>
                         <p class="mb-1"><span class="text-muted">{{ $situation->tenant->email }}</p>
-                        <p class="mb-1"><span class="text-muted">{{ $situation->tenant->phone }}</p>
                     </div>
                 </div>
 
@@ -121,7 +149,7 @@
                 <div class="row pb-5 p-5 the-five">
                     <div class="col-md-6">
                         <h3 class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</h3>
-                        <img src="{{ asset('assets/signatures'. '/' . $contract->signature_realtor) }}" alt="">
+                        <img src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}" alt="">
                     </div>
 
                     <div class="col-md-6 text-right">
@@ -136,30 +164,6 @@
                         <button class="btn btn-dark">{{ __('Printen') }}</button>
                     </div>
                 @endif
-
-                <div class="single-add-property">
-                    <h3>{{ __('Status contract') }}</h3>
-                    <form action="{{ route('toggle.contract') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="contract" value="{{ $contract->id }}">
-                                <button class="btn btn-dark">
-                                    @if($lock)
-                                        {{ __('Openen') }}
-                                    @else
-                                        {{ __('Sluiten') }}
-                                    @endif
-                                </button>
-                                @if($lock)
-                                    <p class="text-muted">
-                                        {{ __('*Een contract kan alleen aangepast worden wanneer je deze opent.') }}
-                                        {{ __('Dit kan door op deze knop te klikken.') }}
-                                    </p>
-                                @else
-                                    <p class="text-muted">{{ __('*Om een contract te printen moet deze eerst gesloten worden. Druk op deze knop om alle gegevens vast te zetten.') }}</p>
-                                @endif
-
-                            </form>
-                </div>
 
             </div>
         </div>

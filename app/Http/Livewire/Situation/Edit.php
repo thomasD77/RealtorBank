@@ -56,11 +56,13 @@ class Edit extends Component
         $this->emailTenant = $this->situation->tenant->email;
         $this->phoneTenant = $this->situation->tenant->phone;
 
-        $this->currentAddress = $this->situation->tenant->address->address;
-        $this->currentZip = $this->situation->tenant->address->zip;
-        $this->currentPostBus = $this->situation->tenant->address->postBus;
-        $this->currentCity = $this->situation->tenant->address->city;
-        $this->currentCountry = $this->situation->tenant->address->country;
+        if($this->situation->tenant->address){
+            $this->currentAddress = $this->situation->tenant->address->address;
+            $this->currentZip = $this->situation->tenant->address->zip;
+            $this->currentPostBus = $this->situation->tenant->address->postBus;
+            $this->currentCity = $this->situation->tenant->address->city;
+            $this->currentCountry = $this->situation->tenant->address->country;
+        }
 
         $this->contract = Contract::query()
             ->where('inspection_id', $inspection->id)
