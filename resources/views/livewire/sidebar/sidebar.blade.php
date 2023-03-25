@@ -24,7 +24,7 @@
 
             </a>
             <div class="collapse @if($situation == $activeCat) show @endif"
-                 wire:ignore.self
+
                  id="collapseSituation"
             >
                 <ul>
@@ -59,7 +59,7 @@
                 @endif
             </a>
             <div class="collapse @if($interior == $activeCat) show @endif"
-                 wire:ignore.self
+
                  id="collapseInterior"
             >
                 <ul>
@@ -81,7 +81,7 @@
                             @endif
                         </a>
                         <div class="collapse @if($basement == $activeFloor) show @endif"
-                             wire:ignore.self
+
                              id="collapseBasement"
                         >
                             @if($basementParam)
@@ -102,7 +102,7 @@
                                     </a>
 
                                     <div class="collapse @if($room->id == $activeRoom) show @endif"
-                                         wire:ignore.self
+
                                          id="collapseRoom{{ $room->id }}"
                                     >
                                         <ul>
@@ -128,7 +128,7 @@
                                                 </a>
                                                 <div>
                                                     <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Basic->value) show @endif"
-                                                        wire:ignore.self
+
                                                         id="collapseBasic{{ $room->id }}"
                                                     >
                                                         @foreach($room->basicAreas->sortByDesc('title') as $item)
@@ -161,7 +161,7 @@
                                                 </a>
                                                 <div>
                                                     <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Specific->value) show @endif"
-                                                        wire:ignore.self
+
                                                         id="collapseSpec{{ $room->id }}"
                                                     >
                                                         @foreach($room->specificAreas as $item)
@@ -194,7 +194,7 @@
                                                 </a>
                                                 <div>
                                                     <ul class="collapse  @if($activeTemplate == \App\Enums\TemplateKey::Conform->value) show @endif"
-                                                        wire:ignore.self
+
                                                         id="collapseConform{{ $room->id }}">
                                                         @foreach($room->conformAreas as $item)
                                                             <li class="mx-3">
@@ -232,7 +232,7 @@
                             @endif
                         </a>
                         <div class="collapse @if($groundFloor == $activeFloor) show @endif"
-                             wire:ignore.self
+
                              id="collapseGroundFloor"
                         >
                             @if($groundFloorParam)
@@ -257,7 +257,7 @@
                                             </span>
                                         </a>
                                         <div class="collapse @if($room->id == $activeRoom) show @endif"
-                                             wire:ignore.self
+
                                              id="collapseRoom{{ $room->id }}"
                                         >
                                             <ul>
@@ -282,7 +282,7 @@
                                                         @endif                                                    </a>
                                                     <div>
                                                         <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Basic->value) show @endif"
-                                                            wire:ignore.self
+
                                                             id="collapseBasic{{ $room->id }}"
                                                         >
                                                             @foreach($room->basicAreas as $item)
@@ -314,7 +314,7 @@
                                                     </a>
                                                     <div>
                                                         <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Specific->value) show @endif"
-                                                            wire:ignore.self
+
                                                             id="collapseSpec{{ $room->id }}"
                                                         >
 
@@ -347,7 +347,7 @@
                                                     </a>
                                                     <div>
                                                         <ul class="collapse  @if($activeTemplate == \App\Enums\TemplateKey::Conform->value) show @endif"
-                                                            wire:ignore.self
+
                                                             id="collapseConform{{ $room->id }}">
                                                             @foreach($room->conformAreas as $item)
                                                                 <li class="mx-3">
@@ -387,7 +387,7 @@
 
                         </a>
                         <div class="collapse @if($upperFloor == $activeFloor) show @endif"
-                             wire:ignore.self
+
                              id="collapseUpperFloor"
                         >
                             @if($upperFloorParam)
@@ -409,7 +409,7 @@
                                             </a>
 
                                             <div class="collapse @if($room->id == $activeRoom) show @endif"
-                                             wire:ignore.self
+
                                              id="collapseRoom{{ $room->id }}"
                                         >
                                             <ul>
@@ -435,7 +435,7 @@
                                                     </a>
                                                     <div>
                                                         <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Basic->value) show @endif"
-                                                            wire:ignore.self
+
                                                             id="collapseBasic{{ $room->id }}"
                                                         >
                                                             @foreach($room->basicAreas->sortByDesc('title') as $item)
@@ -467,7 +467,7 @@
                                                     </a>
                                                     <div>
                                                         <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Specific->value) show @endif"
-                                                            wire:ignore.self
+
                                                             id="collapseSpec{{ $room->id }}"
                                                         >
                                                             @foreach($room->specificAreas->where('room_id', $room->id) as $item)
@@ -500,7 +500,7 @@
                                                     </a>
                                                     <div>
                                                         <ul class="collapse  @if($activeTemplate == \App\Enums\TemplateKey::Conform->value) show @endif"
-                                                            wire:ignore.self
+
                                                             id="collapseConform{{ $room->id }}">
                                                             @foreach($room->conformAreas as $item)
                                                                 <li class="mx-3">
@@ -538,7 +538,7 @@
                             @endif
                         </a>
                         <div class="collapse @if($attic == $activeFloor) show @endif"
-                             wire:ignore.self
+
                              id="collapseAttic"
                         >
                             @if($atticParam)
@@ -560,7 +560,7 @@
                                         </a>
 
                                         <div class="collapse @if($room->id == $activeRoom) show @endif"
-                                             wire:ignore.self
+
                                              id="collapseRoom{{ $room->id }}"
                                         >
                                             <ul>
@@ -586,7 +586,7 @@
                                                     </a>
                                                     <div>
                                                         <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Basic->value) show @endif"
-                                                            wire:ignore.self
+
                                                             id="collapseBasic{{ $room->id }}"
                                                         >
                                                             @foreach($room->basicAreas->sortByDesc('title') as $item)
@@ -619,7 +619,7 @@
                                                     </a>
                                                     <div>
                                                         <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Specific->value) show @endif"
-                                                            wire:ignore.self
+
                                                             id="collapseSpec{{ $room->id }}"
                                                         >
                                                             @foreach($room->specificAreas->where('room_id', $room->id) as $item)
@@ -651,7 +651,7 @@
                                                     </a>
                                                     <div>
                                                         <ul class="collapse  @if($activeTemplate == \App\Enums\TemplateKey::Conform->value) show @endif"
-                                                            wire:ignore.self
+
                                                             id="collapseConform{{ $room->id }}">
                                                             @foreach($room->conformAreas as $item)
                                                                 <li class="mx-3">
@@ -690,7 +690,7 @@
                             @endif
                         </a>
                         <div class="collapse @if($garage == $activeFloor) show @endif"
-                             wire:ignore.self
+
                              id="collapseGarage"
                         >
                             @if($garageParam)
@@ -712,7 +712,7 @@
                                         </a>
 
                                         <div class="collapse @if($room->id == $activeRoom) show @endif"
-                                             wire:ignore.self
+
                                              id="collapseRoom{{ $room->id }}"
                                         >
                                             <ul>
@@ -738,7 +738,7 @@
                                                     </a>
                                                     <div>
                                                         <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Basic->value) show @endif"
-                                                            wire:ignore.self
+
                                                             id="collapseBasic{{ $room->id }}"
                                                         >
                                                             @foreach($room->basicAreas as $item)
@@ -770,7 +770,7 @@
                                                     </a>
                                                     <div>
                                                         <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Specific->value) show @endif"
-                                                            wire:ignore.self
+
                                                             id="collapseSpec{{ $room->id }}"
                                                         >
                                                             @foreach($room->specificAreas->where('room_id', $room->id) as $item)
@@ -802,7 +802,7 @@
                                                     </a>
                                                     <div>
                                                         <ul class="collapse  @if($activeTemplate == \App\Enums\TemplateKey::Conform->value) show @endif"
-                                                            wire:ignore.self
+
                                                             id="collapseConform{{ $room->id }}">
                                                             @foreach($room->conformAreas as $item)
                                                                 <li class="mx-3">
@@ -848,7 +848,7 @@
                 @endif
             </a>
             <div class="collapse @if($exterior == $activeCat) show @endif"
-                 wire:ignore.self
+
                  id="collapseExterieur"
             >
                 <ul>
@@ -870,7 +870,7 @@
 
                         </a>
                         <div class="collapse @if($building == $activeFloor) show @endif"
-                             wire:ignore.self
+
                              id="collapseBuilding"
                         >
                             @if($buildingParam)
@@ -892,7 +892,7 @@
                                             </a>
 
                                             <div class="collapse @if($building->id == $activeRoom) show @endif"
-                                                 wire:ignore.self
+
                                                  id="collapseRoom{{ $building->id }}"
                                             >
                                                 <ul>
@@ -935,7 +935,7 @@
                             @endif
                         </a>
                         <div class="collapse @if($driveWay == $activeFloor) show @endif"
-                             wire:ignore.self
+
                              id="collapseDriveWay"
                         >
                             @if($driveWayParam)
@@ -957,7 +957,7 @@
                                             </a>
 
                                             <div class="collapse @if($room->id == $activeRoom) show @endif"
-                                                 wire:ignore.self
+
                                                  id="collapseRoom{{ $room->id }}"
                                             >
                                                 <ul>
@@ -1005,7 +1005,7 @@
             </a>
             <div>
                 <ul class="collapse @if($techniques == $activeCat) show @endif"
-                    wire:ignore.self
+
                     id="collapseTechnique"
                 >
                     @if($techniqueParam)
@@ -1040,7 +1040,7 @@
                 @endif
             </a>
             <div class="collapse @if($keys == $activeCat) show @endif"
-                 wire:ignore.self
+
                  id="collapseKey"
             >
                 <ul>
@@ -1072,7 +1072,7 @@
                 @endif
             </a>
             <div class="collapse @if($meters == $activeCat) show @endif"
-                 wire:ignore.self
+
                  id="collapseMeter"
             >
                 <ul>
@@ -1104,7 +1104,7 @@
                 @endif
             </a>
             <div class="collapse @if($documents == $activeCat) show @endif"
-                 wire:ignore.self
+
                  id="collapseDocument"
             >
                 <ul>
@@ -1139,7 +1139,7 @@
                 @endif
             </a>
             <div class="collapse @if($outHouse == $activeCat) show @endif"
-                 wire:ignore.self
+
                  id="collapseOuthouse"
             >
 
@@ -1160,7 +1160,7 @@
                             @endif
                         </a>
                         <div class="collapse @if($outHouseIn == $activeFloor) show @endif"
-                             wire:ignore.self
+
                              id="collapseOutHouseIn"
                         >
                             <ul>
@@ -1188,7 +1188,7 @@
                                             </a>
                                             <div>
                                                 <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Basic->value) show @endif"
-                                                    wire:ignore.self
+
                                                     id="collapseBasic{{ $room->id }}"
                                                 >
                                                     @foreach($room->basicAreas as $item)
@@ -1220,7 +1220,7 @@
                                             </a>
                                             <div>
                                                 <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Specific->value) show @endif"
-                                                    wire:ignore.self
+
                                                     id="collapseSpec{{ $room->id }}"
                                                 >
                                                     @foreach($room->specificAreas as $item)
@@ -1252,7 +1252,7 @@
                                             </a>
                                             <div>
                                                 <ul class="collapse  @if($activeTemplate == \App\Enums\TemplateKey::Conform->value) show @endif"
-                                                    wire:ignore.self
+
                                                     id="collapseConform{{ $room->id }}">
                                                     @foreach($room->conformAreas as $item)
                                                         <li class="mx-3">
@@ -1272,7 +1272,8 @@
                     @endif
 
                     {{--OutHouseEx--}}
-                    @if($outHouseExParam)
+                    @if($outHouseIn != $activeFloor || $activeFloor == null)
+                        @if($outHouseExParam)
                         @foreach($outHouseExParam as $room)
                             <a data-toggle="collapse"
                                href="#collapseRoom{{ $room->id }}"
@@ -1283,7 +1284,7 @@
                                 <i class="fa fa-bookmark"></i>{{ __('Bijgebouw buiten') }}
                             </a>
                             <div class="collapse @if($room->id == $activeRoom) show @endif"
-                                 wire:ignore.self
+
                                  id="collapseRoom{{ $room->id }}"
                             >
                                 <ul>
@@ -1304,6 +1305,7 @@
                                 </ul>
                             </div>
                         @endforeach
+                    @endif
                     @endif
 
                 </ul>
@@ -1329,7 +1331,7 @@
                 @endif
             </a>
             <div class="collapse @if($contracts == $activeCat) show @endif"
-                 wire:ignore.self
+
                  id="collapseContract"
             >
                 <ul>

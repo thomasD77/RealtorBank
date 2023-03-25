@@ -104,47 +104,50 @@ class Sidebar extends Component
         $this->building = Floor::where('code', FloorKey::Building)->pluck('id')->first();
         $this->driveWay = Floor::where('code', FloorKey::DriveWay)->pluck('id')->first();
         $this->outHouseIn = Floor::where('code', FloorKey::OutHouseIn)->pluck('id')->first();
-        $this->outHouseEx = Floor::where('code', FloorKey::OutHouseEx)->pluck('id')->first();
+        $this->outHouseEx = Room::where('code', RoomKey::OutHouseEx)->pluck('id')->first();
     }
 
     public function toggleCategory($value)
     {
         $catID = SidebarToggle::sidebarCategory($value);
-        //Render
         $this->activeCat = $catID;
-        $this->activeArea = null;
+
+        //Render
         $this->activeFloor = null;
         $this->activeRoom = null;
         $this->activeTemplate = null;
-        $this->emit('renderNewArea');
+        $this->activeArea = null;
     }
 
     public function toggleFloor($value)
     {
         $floorID = SidebarToggle::sidebarFloor($value);
-        //Render
         $this->activeFloor = $floorID;
-        $this->activeArea = null;
+
+        //Render
         $this->activeRoom = null;
         $this->activeTemplate = null;
-        $this->emit('renderNewArea');
+        $this->activeArea = null;
     }
 
     public function toggleRoom($value)
     {
-        $this->activeRoom = null;
         $roomID = SidebarToggle::sidebarRoom($value);
         $this->activeRoom = $roomID;
-        $this->emit('renderNewArea');
+
+        //Render
+        $this->activeTemplate = null;
+        $this->activeArea = null;
     }
 
     public function toggleTemplate($value)
     {
-      $templateID = SidebarToggle::sidebarTemplate($value);
-      $this->activeTemplate = $templateID;
-      $this->emit('renderNewArea');
-    }
+        $templateID = SidebarToggle::sidebarTemplate($value);
+        $this->activeTemplate = $templateID;
 
+        //Render
+        $this->activeArea = null;
+    }
 
 
     public function render()

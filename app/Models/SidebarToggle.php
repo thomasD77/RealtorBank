@@ -16,6 +16,10 @@ class SidebarToggle extends Model
         if(isset($user->sidebar_category_id)){
             if($user->sidebar_category_id == $value){
                 $user->sidebar_category_id = null;
+                $user->sidebar_floor_id = null;
+                $user->sidebar_room_id = null;
+                $user->sidebar_template = null;
+                $user->sidebar_area_id = null;
             }else {
                 $user->sidebar_category_id = $value;
             }
@@ -35,6 +39,9 @@ class SidebarToggle extends Model
         if(isset($user->sidebar_floor_id)){
             if($user->sidebar_floor_id == $value){
                 $user->sidebar_floor_id = null;
+                $user->sidebar_room_id = null;
+                $user->sidebar_template = null;
+                $user->sidebar_area_id = null;
             }else {
                 $user->sidebar_floor_id = $value;
             }
@@ -54,6 +61,8 @@ class SidebarToggle extends Model
         if(isset($user->sidebar_room_id)){
             if($user->sidebar_room_id == $value){
                 $user->sidebar_room_id = null;
+                $user->sidebar_template = null;
+                $user->sidebar_area_id = null;
             }else {
                 $user->sidebar_room_id = $value;
             }
@@ -74,6 +83,7 @@ class SidebarToggle extends Model
         if(isset($user->sidebar_template)){
             if($user->sidebar_template == $value){
                 $user->sidebar_template = null;
+                $user->sidebar_area_id = null;
             }else {
                 $user->sidebar_template = $value;
             }
