@@ -1146,129 +1146,131 @@
                 <ul>
                     {{--   OutHouseIn--}}
                     @if($outHouseIn == $activeFloor || $activeFloor == null)
-                        <a data-toggle="collapse"
-                           href="#collapseOutHouseIn"
-                           role="button"
-                           aria-expanded="false"
-                           aria-controls="collapseOutHouseIn"
-                           wire:click="toggleFloor({{ $outHouseIn }})"
-                        >
-                            @if($outHouse == $activeFloor)
-                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Bijgebouw binnen') }}
-                            @else
-                                <i class="fa fa-bookmark"></i>{{ __('Bijgebouw binnen') }}
-                            @endif
-                        </a>
-                        <div class="collapse @if($outHouseIn == $activeFloor) show @endif"
-
-                             id="collapseOutHouseIn"
-                        >
-                            <ul>
-                                @if($outHouseInParam)
-                                    @foreach($outHouseInParam as $room)
-                                        <li>
-                                            <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                <i class="fa fa-flag" aria-hidden="true"></i>{{ __('Algemeen') }}
-                                            </a>
-                                        </li>
-                                        {{--          Basic--}}
-                                        @if($activeTemplate == \App\Enums\TemplateKey::Basic->value || $activeTemplate == null)
-                                            <li>
-                                            <a data-toggle="collapse"
-                                               href="#collapseBasic{{ $room->id }}"
-                                               role="button" aria-expanded="false"
-                                               aria-controls="collapseExample"
-                                               wire:click="toggleTemplate('{{ $basic }}')"
-                                            >
-                                                @if($activeTemplate == \App\Enums\TemplateKey::Basic->value)
-                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Basis') }}
-                                                @else
-                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Basis') }}
-                                                @endif
-                                            </a>
-                                            <div>
-                                                <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Basic->value) show @endif"
-
-                                                    id="collapseBasic{{ $room->id }}"
-                                                >
-                                                    @foreach($room->basicAreas as $item)
-                                                        <li class="mx-3">
-                                                            <a class="@if($activeArea == $item->area->id) activeLink @endif" href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
-                                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->area->title }}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        @endif
-
-                                        {{--         Spec--}}
-                                        @if($activeTemplate == \App\Enums\TemplateKey::Specific->value || $activeTemplate == null)
-                                        <li>
-                                            <a data-toggle="collapse"
-                                               href="#collapseSpec{{ $room->id }}"
-                                               role="button" aria-expanded="false"
-                                               aria-controls="collapseExample"
-                                               wire:click="toggleTemplate('{{ $specific }}')"
-                                            >
-                                                @if($activeTemplate == \App\Enums\TemplateKey::Specific->value)
-                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Specifiek') }}
-                                                @else
-                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Specifiek') }}
-                                                @endif
-                                            </a>
-                                            <div>
-                                                <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Specific->value) show @endif"
-
-                                                    id="collapseSpec{{ $room->id }}"
-                                                >
-                                                    @foreach($room->specificAreas as $item)
-                                                        <li class="mx-3">
-                                                            <a class="@if($activeArea == $item->specific->id) activeLink @endif" href="{{ route('area.specific', [$inspection, $room, $item->specific]) }}">
-                                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->specific->title }}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        @endif
-
-                                        {{-- Conform--}}
-                                        @if($activeTemplate == \App\Enums\TemplateKey::Conform->value || $activeTemplate == null)
-                                            <li>
-                                            <a data-toggle="collapse"
-                                               href="#collapseConform{{ $room->id }}"
-                                               role="button" aria-expanded="false"
-                                               aria-controls="collapseExample"
-                                               wire:click="toggleTemplate('{{ $conform }}')"
-                                            >
-                                                @if($activeTemplate == \App\Enums\TemplateKey::Conform->value)
-                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Conformiteit') }}
-                                                @else
-                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Conformiteit') }}
-                                                @endif
-                                            </a>
-                                            <div>
-                                                <ul class="collapse  @if($activeTemplate == \App\Enums\TemplateKey::Conform->value) show @endif"
-
-                                                    id="collapseConform{{ $room->id }}">
-                                                    @foreach($room->conformAreas as $item)
-                                                        <li class="mx-3">
-                                                            <a class="@if($activeArea == $item->conform->id) activeLink @endif" href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
-                                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->conform->title }}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        @endif
-                                    @endforeach
+                        @if($activeRoom != $outHouseEx)
+                            <a data-toggle="collapse"
+                               href="#collapseOutHouseIn"
+                               role="button"
+                               aria-expanded="false"
+                               aria-controls="collapseOutHouseIn"
+                               wire:click="toggleFloor({{ $outHouseIn }})"
+                            >
+                                @if($outHouse == $activeFloor)
+                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Bijgebouw binnen') }}
+                                @else
+                                    <i class="fa fa-bookmark"></i>{{ __('Bijgebouw binnen') }}
                                 @endif
-                            </ul>
-                        </div>
+                            </a>
+                            <div class="collapse @if($outHouseIn == $activeFloor) show @endif"
+
+                                 id="collapseOutHouseIn"
+                            >
+                                <ul>
+                                    @if($outHouseInParam)
+                                        @foreach($outHouseInParam as $room)
+                                            <li>
+                                                <a href="{{ route('general.detail',  [$inspection, $room]) }}">
+                                                    <i class="fa fa-flag" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                </a>
+                                            </li>
+                                            {{--          Basic--}}
+                                            @if($activeTemplate == \App\Enums\TemplateKey::Basic->value || $activeTemplate == null)
+                                                <li>
+                                                <a data-toggle="collapse"
+                                                   href="#collapseBasic{{ $room->id }}"
+                                                   role="button" aria-expanded="false"
+                                                   aria-controls="collapseExample"
+                                                   wire:click="toggleTemplate('{{ $basic }}')"
+                                                >
+                                                    @if($activeTemplate == \App\Enums\TemplateKey::Basic->value)
+                                                        <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Basis') }}
+                                                    @else
+                                                        <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Basis') }}
+                                                    @endif
+                                                </a>
+                                                <div>
+                                                    <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Basic->value) show @endif"
+
+                                                        id="collapseBasic{{ $room->id }}"
+                                                    >
+                                                        @foreach($room->basicAreas as $item)
+                                                            <li class="mx-3">
+                                                                <a class="@if($activeArea == $item->area->id) activeLink @endif" href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
+                                                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->area->title }}
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            @endif
+
+                                            {{--         Spec--}}
+                                            @if($activeTemplate == \App\Enums\TemplateKey::Specific->value || $activeTemplate == null)
+                                            <li>
+                                                <a data-toggle="collapse"
+                                                   href="#collapseSpec{{ $room->id }}"
+                                                   role="button" aria-expanded="false"
+                                                   aria-controls="collapseExample"
+                                                   wire:click="toggleTemplate('{{ $specific }}')"
+                                                >
+                                                    @if($activeTemplate == \App\Enums\TemplateKey::Specific->value)
+                                                        <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Specifiek') }}
+                                                    @else
+                                                        <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Specifiek') }}
+                                                    @endif
+                                                </a>
+                                                <div>
+                                                    <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Specific->value) show @endif"
+
+                                                        id="collapseSpec{{ $room->id }}"
+                                                    >
+                                                        @foreach($room->specificAreas as $item)
+                                                            <li class="mx-3">
+                                                                <a class="@if($activeArea == $item->specific->id) activeLink @endif" href="{{ route('area.specific', [$inspection, $room, $item->specific]) }}">
+                                                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->specific->title }}
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            @endif
+
+                                            {{-- Conform--}}
+                                            @if($activeTemplate == \App\Enums\TemplateKey::Conform->value || $activeTemplate == null)
+                                                <li>
+                                                <a data-toggle="collapse"
+                                                   href="#collapseConform{{ $room->id }}"
+                                                   role="button" aria-expanded="false"
+                                                   aria-controls="collapseExample"
+                                                   wire:click="toggleTemplate('{{ $conform }}')"
+                                                >
+                                                    @if($activeTemplate == \App\Enums\TemplateKey::Conform->value)
+                                                        <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Conformiteit') }}
+                                                    @else
+                                                        <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Conformiteit') }}
+                                                    @endif
+                                                </a>
+                                                <div>
+                                                    <ul class="collapse  @if($activeTemplate == \App\Enums\TemplateKey::Conform->value) show @endif"
+
+                                                        id="collapseConform{{ $room->id }}">
+                                                        @foreach($room->conformAreas as $item)
+                                                            <li class="mx-3">
+                                                                <a class="@if($activeArea == $item->conform->id) activeLink @endif" href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
+                                                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->conform->title }}
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </div>
+                        @endif
                     @endif
 
                     {{--OutHouseEx--}}
@@ -1281,7 +1283,12 @@
                                aria-controls="collapseRoom"
                                wire:click="toggleRoom({{ $room->id }})"
                             >
-                                <i class="fa fa-bookmark"></i>{{ __('Bijgebouw buiten') }}
+                                @if($room->id == $activeRoom)
+                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Bijgebouw buiten') }}
+                                @else
+                                    <i class="fa fa-bookmark"></i>{{ __('Bijgebouw buiten') }}
+                                @endif
+
                             </a>
                             <div class="collapse @if($room->id == $activeRoom) show @endif"
 
@@ -1296,7 +1303,7 @@
 
                                     @foreach($room->outdoorAreas as $item)
                                         <li class="mx-3">
-                                            <a href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
+                                            <a class="@if($activeArea == $item->outdoor->id) activeLink @endif" href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}
                                             </a>
                                         </li>
