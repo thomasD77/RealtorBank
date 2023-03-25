@@ -18,14 +18,14 @@ import '../css/fontawesome-all.min.css'
 import '../css/jquery-ui.css'
 
 //All CUSTOM JS fFILES
-import '../js/custom/fancybox'
-import '../js/custom/flash'
-import '../js/custom/theme'
-import '../js/custom/signature'
+// import '../js/custom/fancybox'
+// import '../js/custom/flash'
+// import '../js/custom/theme'
+// import '../js/custom/signature'
 
 //All DEFAULT THEME JS fFILES
-import '../js/script'
-import '../js/jquery-3.5.1.min.js'
+// import '../../public/assets/js/script'
+// import '../../public/assets/js/jquery-3.5.1.min.js'
 
 
 

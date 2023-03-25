@@ -77,7 +77,7 @@
 <script src="{{ asset('assets/js/range-slider.js') }}"></script>
 <script src="{{ asset('assets/js/Countdown.min.js') }}"></script>
 <script src="{{ asset('assets/js/mmenu.js') }}"></script>
-
+<script src="{{ asset('assets/js/script.js') }}"></script>
 
 
 
