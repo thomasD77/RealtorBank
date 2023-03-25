@@ -16,7 +16,7 @@
                         <tr>
                             <td>{{ $meter->title }}</td>
                             <td class="rating"><span>{{ $meter->media->count() }}</span></td>
-                            <td class="edit"><a href="{{ route('meter.edit', [ $inspection, $meter ]) }}"><i class="fa fa-pencil text-success"></i></a></td>
+                            <td class="edit"><a href="{{ route('meter.edit', [ $inspection, $meter ]) }}"><i class="fa fa-pencil-alt text-success"></i></a></td>
                         </tr>
                     @endforeach
                 @endif

@@ -40,7 +40,7 @@
             </div>
 
         </div>
-        <button type="submit" class="btn-common btn">{{ __('Submit') }}</button>
+        <button type="submit" class="btn-common btn">{{ __('save') }}</button>
         @if (session()->has('success'))
             <div class="btn btn-success flash_message">
                 {{ session('success') }}

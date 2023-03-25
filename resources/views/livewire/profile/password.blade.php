@@ -24,7 +24,7 @@
             </div>
             <div class="col-12">
                 <div class="send-btn">
-                    <button type="submit" class="btn btn-common">{{ __('Submit') }}</button>
+                    <button type="submit" class="btn btn-common">{{ __('save') }}</button>
                 </div>
                 @if (session()->has('success'))
                     <div class="btn btn-success flash_message mt-2">

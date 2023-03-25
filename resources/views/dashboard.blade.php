@@ -158,7 +158,7 @@
                             </td>
                             <td>{{ $inspection->created_at->format('d-m-Y') }}</td>
                             <td class="actions">
-                                <a href="{{ route('inspection.edit', $inspection->id) }}" class="edit"><i class="fa fa-pencil"></i></a>
+                                <a href="{{ route('inspection.edit', $inspection->id) }}" class="edit"><i class="fa fa-pencil-alt"></i></a>
                             </td>
                         </tr>
                     @endforeach

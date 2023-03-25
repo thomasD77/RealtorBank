@@ -198,47 +198,50 @@
     <div class="single-add-property">
         <h3>{{ __('PDF genereren')  }}</h3>
 
-        <a href="{{ route('generate.inspection', $inspection) }}"  class="btn btn-dark mb-3"><i class="fa fa-file-pdf mr-2"></i>{{ __('PDF SYNC') }}</a>
+        <div class="property-form-group">
+            <div class="row">
+                <a href="{{ route('generate.inspection', $inspection) }}"  class="btn btn-dark mb-3"><i class="fa fa-file-pdf mr-2"></i>{{ __('PDF SYNC') }}</a>
 
-        @if($pdfs->isNotEmpty())
-            <div class="section-body listing-table">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>{{ __('Titel') }}</th>
-                            <th>{{ __('File') }}</th>
-                            <th>{{ __('Datum') }}</th>
-                            <th>{{ __('Actie') }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($pdfs as $pdf)
+                @if($pdfs->isNotEmpty())
+                    <div class="section-body listing-table">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
                                 <tr>
-                                    <td>{{ $pdf->title }} {{ $pdf->id }}</td>
-                                    <td>
-                                        @if($pdf->status == \App\Enums\Status::Pending->value)
-                                            <span class="badge badge-pill bg-warning px-3 py-2 text-white">{{ $pdf->status }}</span>
-                                        @else
-                                            <a class="mx-4" target="_blank" href="{{ asset('assets/inspections/pdf/' . $pdf->file_original) }}"><i class="fa fa-file-pdf text-dark"></i></a>
-                                        @endif
-                                    </td>
-                                    <td>{{ $pdf->created_at->format('d-m-Y -  H:i:s') }}</td>
-                                    <td class="edit">
-                                        <form wire:submit.prevent="deletePDF({{ $pdf->id }})">
-                                            <button class="btn_trash" type="submit"><i class="fa fa-trash text-danger"></i></button>
-                                        </form>
-                                    </td>
+                                    <th>{{ __('Titel') }}</th>
+                                    <th>{{ __('File') }}</th>
+                                    <th>{{ __('Datum') }}</th>
+                                    <th>{{ __('Actie') }}</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                                </thead>
+                                <tbody>
+                                @foreach($pdfs as $pdf)
+                                    <tr>
+                                        <td>{{ $pdf->title }} {{ $pdf->id }}</td>
+                                        <td>
+                                            @if($pdf->status == \App\Enums\Status::Pending->value)
+                                                <span class="badge badge-pill bg-warning px-3 py-2 text-white">{{ $pdf->status }}</span>
+                                            @else
+                                                <a class="mx-4" target="_blank" href="{{ asset('assets/inspections/pdf/' . $pdf->file_original) }}"><i class="fa fa-file-pdf text-dark"></i></a>
+                                            @endif
+                                        </td>
+                                        <td>{{ $pdf->created_at->format('d-m-Y -  H:i:s') }}</td>
+                                        <td class="edit">
+                                            <form wire:submit.prevent="deletePDF({{ $pdf->id }})">
+                                                <button class="btn_trash" type="submit"><i class="fa fa-trash text-danger"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <p class="pt-5">*refresh regelmatig deze pagina om de status van de PDF te updaten.</p>
+                @endif
             </div>
-
-            <p class="pt-5">*refresh regelmatig deze pagina om de status van de PDF te updaten.</p>
-        @endif
-
+        </div>
     </div>
 
     <div class="single-add-property">

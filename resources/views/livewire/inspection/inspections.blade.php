@@ -1,7 +1,7 @@
 <div>
     <div class="my-properties">
         <div class="text-right">
-            <button wire:click="addInspection" class="btn btn-dark mb-3"><i class="fa fa-plus mr-2"></i>{{ __('Inspectie') }}</button>
+            <button wire:click="addInspection" class="btn btn-common mb-3"><i class="fa fa-plus mr-2"></i>{{ __('Inspectie') }}</button>
         </div>
         <table class="table-responsive">
             <thead>

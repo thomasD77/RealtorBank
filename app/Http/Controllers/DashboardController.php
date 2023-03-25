@@ -17,6 +17,7 @@ use App\Models\SpecificArea;
 use App\Models\Technique;
 use App\Models\TechniqueArea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
@@ -24,9 +25,11 @@ class DashboardController extends Controller
     //
     public function index(): View
     {
-        $inspectionsCount = Inspection::count();
-        $situations = Situation::count();
-        $contracts = Contract::where('lock', 1)->count();
+        $inspectionsCount = Inspection::where('user_id', Auth::id())->count();
+        $inspectinIds = Inspection::where('user_id', Auth::id())->pluck('id');
+
+        $situations = Situation::whereIn('inspection_id', $inspectinIds)->count();
+        $contracts = Contract::whereIn('inspection_id', $inspectinIds)->where('lock', 1)->count();
 
         $pdfs = \App\Models\PDF::query()
             ->latest()
@@ -34,6 +37,7 @@ class DashboardController extends Controller
             ->get();
 
         $inspections = Inspection::query()
+            ->where('user_id', Auth::id())
             ->latest()
             ->take(5)
             ->get();

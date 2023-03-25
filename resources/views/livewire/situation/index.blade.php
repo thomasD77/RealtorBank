@@ -29,7 +29,7 @@
                                 <td>{{ $situation->tenant->email ?? "" }}</td>
                                 <td>{{ $situation->tenant->phone ?? "" }}</td>
                                 <td>
-                                    <a href="{{ route('situation.edit', [ $inspection, $situation ]) }}" class="text-success"><i class="fa fa-pencil"></i></a>
+                                    <a href="{{ route('situation.edit', [ $inspection, $situation ]) }}" class="text-success"><i class="fa fa-pencil-alt"></i></a>
                                 </td>
                                 </tr>
                             @endforeach
