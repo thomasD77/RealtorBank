@@ -216,7 +216,7 @@
                                         <td>{{ __('Contract') }}</td>
                                         <td>{{ $contract->created_at->format('d-m-Y') }}</td>
                                         <td class="edit">
-                                            <a href="{{ route('contract.edit', [ $inspection, $contract]) }}"><i class="fa fa-pencil text-dark"></i></a>
+                                            <a href="{{ route('contract.edit', [ $inspection, $contract]) }}"><i class="fa fa-pencil-alt text-success"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>

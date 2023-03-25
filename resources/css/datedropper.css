@@ -1,7 +1,7 @@
 @font-face {
   font-family: "datedropper";
-  src: url("src/datedropper.eot");
-  src: url("src/datedropper.eot?#iefix") format("embedded-opentype"), url("src/datedropper.woff") format("woff"), url("src/datedropper.ttf") format("truetype"), url("src/datedropper.svg#datedropper") format("svg");
+  src: url("resources/css/src/datedropper.eot");
+  src: url("resources/css/src/datedropper.eot?#iefix") format("embedded-opentype"), url("resources/css/src/datedropper.woff") format("woff"), url("resources/css/src/datedropper.ttf") format("truetype"), url("resources/css/src/datedropper.svg#datedropper") format("svg");
   font-weight: normal;
   font-style: normal;
 }
