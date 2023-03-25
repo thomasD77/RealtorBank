@@ -40,14 +40,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
 
-<!-- ARCHIVES JS -->
-<script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery-ui.js') }}"></script>
+<!-- THEME JS -->
 <script src="{{ asset('assets/js/tether.min.js') }}"></script>
 <script src="{{ asset('assets/js/moment.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/js/mmenu.min.js') }}"></script>
-<script src="{{ asset('assets/js/mmenu.js') }}"></script>
 <script src="{{ asset('assets/js/swiper.min.js') }}"></script>
 <script src="{{ asset('assets/js/swiper.js') }}"></script>
 <script src="{{ asset('assets/js/slick.min.js') }}"></script>
@@ -71,15 +68,16 @@
 <script src="{{ asset('assets/js/forms-2.js') }}"></script>
 <script src="{{ asset('assets/js/color-switcher.js') }}"></script>
 <script src="{{ asset('assets/js/dropzone.js') }}"></script>
-<script src="{{ asset('assets/js/range-slider.js') }}"></script>
 <script src="{{ asset('assets/js/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.barfiller.js') }}"></script>
 <script src="{{ asset('assets/js/barfiller.js') }}"></script>
-<script src="{{ asset('assets/js/Countdown.min.js') }}"></script>
-<script src="{{ asset('assets/js/ui-lement.js') }}"></script>
 
-<!-- MAIN JS -->
-<script src="{{ asset('assets/js/script.js') }}"></script>
+
+{{--<script src="{{ asset('assets/js/jquery-ui.js') }}"></script>--}}
+{{--<script src="{{ asset('assets/js/range-slider.js') }}"></script>--}}
+{{--<script src="{{ asset('assets/js/Countdown.min.js') }}"></script>--}}
+{{--<script src="{{ asset('assets/js/ui-lement.js') }}"></script>--}}
+{{--<script src="{{ asset('assets/js/mmenu.js') }}"></script>--}}
 
 
 
