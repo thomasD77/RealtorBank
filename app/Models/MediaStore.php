@@ -30,7 +30,7 @@ class MediaStore extends Model
             $mediaStore->file_original = $name;
 
             //Save crop version image
-            $crop = time(). $media->getClientOriginalName();
+            $crop = MediaStore::getValidFilename(time(). $media->getClientOriginalName());
 
             $imgCrop = Image::make($newMedia);
             $width = Image::make($newMedia)->width();

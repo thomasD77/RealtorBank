@@ -49,8 +49,12 @@ input[type=checkbox]{
 }
 .custom-sidebar-padding {
     padding-left: 2rem !important;
+    border-bottom: 0.5px solid rgba(174, 183, 194, 0.4)
 }
-
+.user-profile-box {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 .img-wrapper {
     position: relative;
 }
@@ -98,3 +102,23 @@ input[type=checkbox]{
     background-color: #ff385c;
     color: #ffffff;
 }
+.text-success {
+    color: #1ec38b !important;
+}
+.text-warning {
+    color: #ffc107 !important;
+}
+.text-info {
+    color: #007bff !important;
+}
+.text-danger {
+    color: #dc3545 !important;
+}
+.text-dark {
+    color: #343a40 !important;
+}
+.btn-dark {
+    background-color: #343a40 !important;
+}
+
+

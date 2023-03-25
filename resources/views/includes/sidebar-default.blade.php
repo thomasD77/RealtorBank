@@ -2,7 +2,7 @@
     <div class="user-profile-box mb-0">
     <div class="sidebar-header"><a href="{{ asset('/dashboard') }}"><img src="{{ asset('assets/images/logo-blue.svg') }}" alt="header-logo2.png"></a> </div>
     <div class="header clearfix">
-        <img src="{{ asset('assets/images/avatar/avatar-big.png') }}" alt="avatar" class="img-fluid profile-img">
+        <a href="{{ asset('/dashboard') }}"><img src="{{ asset('assets/images/avatar/avatar-big.png') }}" alt="avatar" class="img-fluid profile-img"></a>
     </div>
     <div class="active-user">
         <h2>{{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }}</h2>

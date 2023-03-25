@@ -28,6 +28,7 @@ class Media extends Component
     public function saveMedia()
     {
         //Validate
+        $this->resetValidation();
         $this->validate([
             'media.*' => 'image|max:2024',
         ]);

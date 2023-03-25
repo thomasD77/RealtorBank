@@ -56,6 +56,16 @@ return new class extends Migration
             'created_at'=>Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'=>Carbon::now()->format('Y-m-d H:i:s'),
         ]);
+
+        DB::table('users')->insert([
+            'firstName'=>'Andreas',
+            'lastName'=>'Geldof',
+            'email'=>'andreasgeldof@hotmail.com',
+            'email_verified_at'=>Carbon::now()->format('Y-m-d H:i:s'),
+            'password'=>bcrypt('realtorbank123'),
+            'created_at'=>Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
     }
 
     /**

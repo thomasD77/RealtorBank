@@ -9,6 +9,7 @@ use App\Models\MediaStore;
 use App\Models\Owner;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -112,6 +113,7 @@ class Edit extends Component
 
     public function saveMedia()
     {
+        $this->resetValidation();
         $this->validate([
             'media.*' => 'image|max:1024',
         ]);
