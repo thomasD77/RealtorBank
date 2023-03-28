@@ -19,11 +19,17 @@
     />
 
     <!-- Signature pad -->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
-    <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
+{{--    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>--}}
+{{--    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">--}}
+{{--    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>--}}
+{{--    <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>--}}
+{{--    <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">--}}
+
+    @include('includes.signature.script-1')
+    @include('includes.signature.script-2')
+    @include('includes.signature.script-3')
+    @include('includes.signature.script-4')
+    @include('includes.signature.script-5')
 
     @vite(['resources/js/main.js'])
 
