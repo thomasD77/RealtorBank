@@ -168,4 +168,22 @@
             </div>
         </div>
     </div>
+    <!-- SIGNATURE -->
+    <script type="text/javascript">
+        var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
+        $('#clear').click(function(e) {
+            e.preventDefault();
+            sig.signature('clear');
+            $("#signature64").val('');
+        });
+
+        var sig_tenant = $('#sig_tenant').signature({syncField: '#signature65', syncFormat: 'PNG'});
+        $('#clear65').click(function(e) {
+            e.preventDefault();
+            sig_tenant.signature('clear');
+            $("#signature65").val('');
+        });
+    </script>
 </div>
+
+

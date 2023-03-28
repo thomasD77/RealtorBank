@@ -43,14 +43,7 @@ $(".radio-option").click(function () {
     a || ($('input[name="' + b + '"]').parent().removeClass("checked"), $(this).addClass("checked"), $(this).find("input").prop("checked", !0))
 });
 
-var countdown = new Countdown({
-    node:   document.querySelector( '.countdown' ),
-    from:   '2017-08-19',
-    to:     '2019-09-20',
-    count:  'auto',
-    tick:   100,
-    onTick: function() { console.log( this ); }
-});
+
 
 /*----------------------------------
     //------ MODAL ------//
@@ -68,7 +61,7 @@ var countdown = new Countdown({
     $('.close-reg').on("click", function () {
         modal.hide();
     });
-    
+
     /*----------------------------------
     //------ TABS ------//
     -----------------------------------*/

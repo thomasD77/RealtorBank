@@ -9,22 +9,7 @@
 </div>
 <!-- END PRELOADER -->
 
-<!-- SIGNATURE -->
-<script type="text/javascript">
-    var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
-    $('#clear').click(function(e) {
-        e.preventDefault();
-        sig.signature('clear');
-        $("#signature64").val('');
-    });
 
-    var sig_tenant = $('#sig_tenant').signature({syncField: '#signature65', syncFormat: 'PNG'});
-    $('#clear65').click(function(e) {
-        e.preventDefault();
-        sig_tenant.signature('clear');
-        $("#signature65").val('');
-    });
-</script>
 
 <!-- SIDEBAR -->
 <script>
@@ -75,7 +60,7 @@
 <script src="{{ asset('assets/js/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.barfiller.js') }}"></script>
 <script src="{{ asset('assets/js/barfiller.js') }}"></script>
-<script src="{{ asset('assets/js/Countdown.min.js') }}"></script>
+{{--<script src="{{ asset('assets/js/Countdown.min.js') }}"></script>--}}
 <script src="{{ asset('assets/js/ui-lement.js') }}"></script>
 
 <!-- MAIN JS -->
