@@ -4,6 +4,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="html 5 template">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>RealtorBank</title>
 
     <!-- GOOGLE FONTS -->
@@ -24,6 +25,7 @@
     @include('includes.signature.script-3')
     @include('includes.signature.script-4')
     @include('includes.signature.script-5')
+    <script type="text/javascript" src="{{ asset('assets/signature/jquery.ui.touch-punch.min.js') }}"></script>
 
     @vite(['resources/js/main.js'])
 
