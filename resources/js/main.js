@@ -18,6 +18,8 @@ import '../css/fontawesome-all.min.css'
 import '../css/jquery-ui.css'
 
 
+import '../js/custom/signaturePad'
+
 import $ from "jquery";
 import { Model } from "survey-jquery";
 import "survey-jquery/defaultV2.min.css";

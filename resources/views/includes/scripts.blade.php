@@ -12,7 +12,7 @@
 <!-- SIGNATURE -->
 <script type="text/javascript">
 
-    var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
+    var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG', drawOnly:true, drawBezierCurves:true, lineTop:90});
     $('#clear').click(function(e) {
         e.preventDefault();
         sig.signature('clear');
