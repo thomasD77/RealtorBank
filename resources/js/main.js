@@ -18,5 +18,24 @@ import '../css/fontawesome-all.min.css'
 import '../css/jquery-ui.css'
 
 
+import $ from "jquery";
+import { Model } from "survey-jquery";
+import "survey-jquery/defaultV2.min.css";
+import { json } from '../js/custom/json';
+
+const survey = new Model(json);
+survey.onComplete.add((sender, options) => {
+    console.log(JSON.stringify(sender.data, null, 3));
+});
+
+$("#surveyElement").Survey({ model: survey });
+
+const sig = new Model(json);
+sig.onComplete.add((sender, options) => {
+    console.log(JSON.stringify(sender.data, null, 3));
+});
+
+$("#surveySig").Survey({ model: sig });
+
 
 

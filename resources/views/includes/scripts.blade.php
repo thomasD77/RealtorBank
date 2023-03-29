@@ -19,30 +19,12 @@
         $("#signature64").val('');
     });
 
-    // Adjust canvas coordinate space taking into account pixel ratio,
-    // to make it look crisp on mobile devices.
-    // This also causes canvas to be cleared.
-
-    canvas = wrapper.querySelector("#signature64");
-
-    window.resizeCanvas = function () {
-        var ratio =  window.devicePixelRatio || 1;
-        canvas.width = canvas.offsetWidth * ratio;
-        canvas.height = canvas.offsetHeight * ratio;
-        canvas.getContext("2d").scale(ratio, ratio);
-    }
-
-    resizeCanvas();
-
-
-
-
-    // var sig_tenant = $('#sig_tenant').signature({syncField: '#signature65', syncFormat: 'PNG'});
-    // $('#clear65').click(function(e) {
-    //     e.preventDefault();
-    //     sig_tenant.signature('clear');
-    //     $("#signature65").val('');
-    // });
+    var sig_tenant = $('#sig_tenant').signature({syncField: '#signature65', syncFormat: 'PNG'});
+    $('#clear65').click(function(e) {
+        e.preventDefault();
+        sig_tenant.signature('clear');
+        $("#signature65").val('');
+    });
 </script>
 
 <!-- SIDEBAR -->

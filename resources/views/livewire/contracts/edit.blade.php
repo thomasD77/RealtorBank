@@ -21,6 +21,12 @@
             @endif
         </form>
     </div>
+
+    <div id="surveyElement"></div>
+
+    <div id="surveySig"></div>
+
+
     @if(!$lock)
         <div class="p-5 the-five" style="background-color: #1d293e;">
             <div class="row">
@@ -32,7 +38,7 @@
                         <div class="col-md-11">
                             <label class="py-3" for="">{{ __('Handtekening') }} {{ $contract->situation->owner ? $contract->situation->owner->name : "" }} </label>
                             <br/>
-                            <div id="sig"></div>
+                            <div id="sig" style="touch-action: none;"></div>
                             <br/>
                             <div class="text-right">
                                 <button id="clear" class="btn btn-danger btn-sm">{{ __('wissen') }}</button>

@@ -47,6 +47,7 @@ class SituationController extends Controller
 
     public function signature(Request $request)
     {
+        dd($request);
         $folderPath = public_path('assets/signatures/');
 
         if(!File::isDirectory($folderPath)){
