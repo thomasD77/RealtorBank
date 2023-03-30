@@ -27,15 +27,15 @@ class MediaStore extends Model
 
             $name = MediaStore::getValidFilename($name);
 
-            $test = Image::make($media)->setFileInfoFromPath($media)->exif('orientation');
+            $newMedia = $media->storeAs('assets/images/' . $folder , $name);
+            $mediaStore->file_original = $name;
+
+            $test = Image::make($media)->setFileInfoFromPath($newMedia)->exif('orientation');
 
             if($test){
                 $rotation = new MediaStore();
                 $newMedia = $rotation->orientate($media, $test);
             }
-
-            $newMedia = $media->storeAs('assets/images/' . $folder . '/', $name);
-            $mediaStore->file_original = $name;
 
             //Save crop version image
             $crop = MediaStore::getValidFilename(time(). $media->getClientOriginalName());
