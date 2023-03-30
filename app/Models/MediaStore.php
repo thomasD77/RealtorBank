@@ -27,9 +27,11 @@ class MediaStore extends Model
 
             $name = MediaStore::getValidFilename($name);
 
-            if(Image::make($media)->exif('orientation')){
+            $test = Image::make($media)->setFileInfoFromPath($media)->exif('orientation');
+
+            if($test){
                 $rotation = new MediaStore();
-                $newMedia = $rotation->orientate($media, Image::make($media)->exif('orientation'));
+                $newMedia = $rotation->orientate($media, $test);
             }
 
             $newMedia = $media->storeAs('assets/images/' . $folder . '/', $name);
