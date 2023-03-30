@@ -26,13 +26,18 @@ class MediaStore extends Model
             }
 
             $name = MediaStore::getValidFilename($name);
+
+            if(Image::make($media)->exif('orientation')){
+                $rotation = new MediaStore();
+                $newMedia = $rotation->orientate($media, Image::make($media)->exif('orientation'));
+            }
+
             $newMedia = $media->storeAs('assets/images/' . $folder . '/', $name);
             $mediaStore->file_original = $name;
 
             //Save crop version image
             $crop = MediaStore::getValidFilename(time(). $media->getClientOriginalName());
-
-            $imgCrop = Image::make($newMedia)->orientate();
+            $imgCrop = Image::make($newMedia);
             $width = Image::make($newMedia)->width();
             $height = Image::make($newMedia)->height();
 
@@ -92,5 +97,71 @@ class MediaStore extends Model
         $new = str_replace('(', '_', $new);
         $new = str_replace(')', '_', $new);
         return str_replace('=', '_', $new);
+    }
+
+    public function orientate($image, $orientation)
+    {
+        switch ($orientation) {
+
+            // 888888
+            // 88
+            // 8888
+            // 88
+            // 88
+            case 1:
+                return $image;
+
+            // 888888
+            //     88
+            //   8888
+            //     88
+            //     88
+            case 2:
+                return $image->flip('h');
+
+
+            //     88
+            //     88
+            //   8888
+            //     88
+            // 888888
+            case 3:
+                return $image->rotate(180);
+
+            // 88
+            // 88
+            // 8888
+            // 88
+            // 888888
+            case 4:
+                return $image->rotate(180)->flip('h');
+
+            // 8888888888
+            // 88  88
+            // 88
+            case 5:
+                return $image->rotate(-90)->flip('h');
+
+            // 88
+            // 88  88
+            // 8888888888
+            case 6:
+                return $image->rotate(-90);
+
+            //         88
+            //     88  88
+            // 8888888888
+            case 7:
+                return $image->rotate(-90)->flip('v');
+
+            // 8888888888
+            //     88  88
+            //         88
+            case 8:
+                return $image->rotate(90);
+
+            default:
+                return $image;
+        }
     }
 }

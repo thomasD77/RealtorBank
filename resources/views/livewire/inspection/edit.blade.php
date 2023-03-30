@@ -178,6 +178,9 @@
                         @if($media)
                             <div class="btn  btn-success text-white">media ready!</div>
                         @endif
+                        <div wire:loading wire:target="saveMedia">
+                            <i class="fa fa-clock mr-1 ml-2"></i>uploading...
+                        </div>
                         @error('media.*') <span class="text-danger">{{ $message }}</span> @enderror
                     </form>
                 </div>
