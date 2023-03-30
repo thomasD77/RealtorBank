@@ -6,6 +6,8 @@ namespace App\Http\Livewire\Basic\Elements;
 use App\Models\BasicArea;
 use App\Models\MediaBasic;
 use App\Models\MediaStore;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -47,6 +49,24 @@ class Media extends Component
         $this->media = "";
     }
 
+    public function rotateMedia($file)
+    {
+        //Do the work
+        $mediaStore = MediaBasic::find($file);
+        $img = Image::make(public_path('/assets/images/' . $this->folder . '/' . $mediaStore->file_original));
+        $img->rotate(90);
+
+        //Delete original files
+        File::delete('assets/images/' . $this->folder . '/' . $mediaStore->file_original);
+        File::delete('assets/images/' . $this->folder . '/crop/' . $mediaStore->file_crop);
+
+        $img->save(public_path('/assets/images/' . $this->folder . '/' . $mediaStore->file_original));
+        $img->save(public_path('/assets/images/' . $this->folder . '/crop/' . $mediaStore->file_original));
+
+        //Render
+        $this->files = MediaBasic::where($this->relation_id, $this->basicArea->id)->get();
+    }
+
     public function deleteMedia($file)
     {
         //Do the work
@@ -59,6 +79,7 @@ class Media extends Component
 
     public function render()
     {
+        $this->files = MediaBasic::where($this->relation_id, $this->basicArea->id)->get();
         return view('livewire.elements.media');
     }
 }
