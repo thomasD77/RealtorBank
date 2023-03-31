@@ -13,18 +13,6 @@ class MediaStore extends Model
 {
     use HasFactory;
 
-//    public static function createAndStoreMedia($mediaStore, $template, $mediaItems, $folder, $relation_id){
-//        foreach ($mediaItems as $media){
-//
-//            $imagick = new Imagick();
-//
-//            $test = $imagick->readImage($media);
-//            dd($test);
-//
-//            $imagick->writeImages('converted.jpg', false);
-//        }
-//    }
-
     public static function createAndStoreMedia($mediaStore, $template, $mediaItems, $folder, $relation_id)
     {
         //Save original image
@@ -41,21 +29,17 @@ class MediaStore extends Model
 
             //Create a name
             $name = MediaStore::getValidFilename($name);
-            $newMedia = $media->storeAs('assets/images/' . $folder , $name);
-            $mediaStore->file_original = $name;
-
 
             //Check for extension
-            $extension = $media->getClientOriginalExtension();
-
+            $extension = strtolower($media->getClientOriginalExtension());
             if($extension == 'heic'){
+
                 //STEP I :: Make new file name with correct extension
-                $exName = basename($name, '.HEIC');
+                $exName = basename(strtolower($name), '.heic');
                 $newName = $exName . '.png';
 
                 //STEP II :: Save the converted image and delete original
-                $img = HeicToJpg::convert($newMedia)->saveAs(public_path('assets/images/' . $folder . '/' . $newName));
-                File::delete('assets/images/' . $folder . '/' . $mediaStore->file_original);
+                HeicToJpg::convert($media->getRealPath())->saveAs(public_path('assets/images/' . $folder . '/' . $newName));
 
                 //STEP III :: Check the orientation and reset
                 $myImage = Image::make(public_path('assets/images/' . $folder . '/' . $newName));
@@ -69,74 +53,55 @@ class MediaStore extends Model
                 }
 
                 $mediaStore->file_original = $newName;
+
+                //STEP IIII :: Crop the image
+                $cropFile = new MediaStore();
+                $cropFile->crop($folder, $newName, $mediaStore, $template, $relation_id );
+
+            } else {
+
+                //Save original version image
+                $newMedia = $media->storeAs('assets/images/' . $folder , $name);
+                $mediaStore->file_original = $name;
+
+                //Save crop version image
+                $newName = MediaStore::getValidFilename(time(). $media->getClientOriginalName());
+                $cropFile = new MediaStore();
+                $cropFile->crop($folder, $newName, $mediaStore, $template, $relation_id );
+
             }
 
-
-            //Save crop version image
-            $crop = MediaStore::getValidFilename(time(). $media->getClientOriginalName());
-            $imgCrop = Image::make($newMedia)->rotate(360);
-            $width = Image::make($newMedia)->width();
-            $height = Image::make($newMedia)->height();
-
-            //Make sure there is a directory to save the images
-            $path = public_path('assets/images/' . $folder . '/crop');
-            if(!File::isDirectory($path)){
-                File::makeDirectory($path, 0777, true, true);
-            }
-
-            if($width > $height){
-                $imgCrop->resize( 450, 350, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save(public_path('assets/images/' . $folder . '/' . 'crop').'/'.$crop);
-            }else {
-                $imgCrop->resize( 450, 350, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save(public_path('assets/images/' . $folder . '/' . 'crop').'/'.$crop);
-            }
-
-            $mediaStore->file_crop = $crop;
-
-            $mediaStore->$relation_id = $template->id;
-            $mediaStore->save();
         }
     }
 
-    public static function deleteMedia($mediaStore, $folder)
+    private function crop($folder, $newName, $mediaStore, $template, $relation_id)
     {
-        File::delete('assets/images/' . $folder . '/' . $mediaStore->file_original);
-        File::delete('assets/images/' . $folder . '/crop/' . $mediaStore->file_crop);
-        $mediaStore->delete();
+        $imgCrop = Image::make(public_path('assets/images/' . $folder . '/' . $newName));
+        $width = Image::make($imgCrop)->width();
+        $height = Image::make($imgCrop)->height();
+
+        //Make sure there is a directory to save the images
+        $path = public_path('assets/images/' . $folder . '/crop');
+        if(!File::isDirectory($path)){
+            File::makeDirectory($path, 0777, true, true);
+        }
+
+        if($width > $height){
+            $imgCrop->resize( 450, 350, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('assets/images/' . $folder . '/' . 'crop').'/'.$newName);
+        }else {
+            $imgCrop->resize( 450, 350, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('assets/images/' . $folder . '/' . 'crop').'/'.$newName);
+        }
+
+        $mediaStore->file_crop = $newName;
+        $mediaStore->$relation_id = $template->id;
+        $mediaStore->save();
     }
 
-    public static function getValidFilename($name)
-    {
-        $new = str_replace('#', '_', $name);
-        $new = str_replace('%', '_', $new);
-        $new = str_replace('&', '_', $new);
-        $new = str_replace('{', '_', $new);
-        $new = str_replace('}', '_', $new);
-        $new = str_replace('\\', '_', $new);
-        $new = str_replace('<', '_', $new);
-        $new = str_replace('>', '_', $new);
-        $new = str_replace('*', '_', $new);
-        $new = str_replace('?', '_', $new);
-        $new = str_replace(' ', '_', $new);
-        $new = str_replace('$', '_', $new);
-        $new = str_replace('!', '_', $new);
-        $new = str_replace("'", '_', $new);
-        $new = str_replace('"', '_', $new);
-        $new = str_replace(':', '_', $new);
-        $new = str_replace('@', '_', $new);
-        $new = str_replace('+', '_', $new);
-        $new = str_replace('`', '_', $new);
-        $new = str_replace('|', '_', $new);
-        $new = str_replace(',', '_', $new);
-        $new = str_replace('(', '_', $new);
-        $new = str_replace(')', '_', $new);
-        return str_replace('=', '_', $new);
-    }
-
-    public function orientate($image, $orientation)
+    private function orientate($image, $orientation)
     {
         switch ($orientation) {
 
@@ -200,5 +165,40 @@ class MediaStore extends Model
             default:
                 return $image;
         }
+    }
+
+    public static function deleteMedia($mediaStore, $folder)
+    {
+        File::delete('assets/images/' . $folder . '/' . $mediaStore->file_original);
+        File::delete('assets/images/' . $folder . '/crop/' . $mediaStore->file_crop);
+        $mediaStore->delete();
+    }
+
+    public static function getValidFilename($name)
+    {
+        $new = str_replace('#', '_', $name);
+        $new = str_replace('%', '_', $new);
+        $new = str_replace('&', '_', $new);
+        $new = str_replace('{', '_', $new);
+        $new = str_replace('}', '_', $new);
+        $new = str_replace('\\', '_', $new);
+        $new = str_replace('<', '_', $new);
+        $new = str_replace('>', '_', $new);
+        $new = str_replace('*', '_', $new);
+        $new = str_replace('?', '_', $new);
+        $new = str_replace(' ', '_', $new);
+        $new = str_replace('$', '_', $new);
+        $new = str_replace('!', '_', $new);
+        $new = str_replace("'", '_', $new);
+        $new = str_replace('"', '_', $new);
+        $new = str_replace(':', '_', $new);
+        $new = str_replace('@', '_', $new);
+        $new = str_replace('+', '_', $new);
+        $new = str_replace('`', '_', $new);
+        $new = str_replace('|', '_', $new);
+        $new = str_replace(',', '_', $new);
+        $new = str_replace('(', '_', $new);
+        $new = str_replace(')', '_', $new);
+        return str_replace('=', '_', $new);
     }
 }
