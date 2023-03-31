@@ -22,6 +22,10 @@ class Media extends Component
 
     use WithFileUploads;
 
+    protected $messages = [
+        'media.*' => 'Oeps, bestand mag niet groter zijn dan 202 MB.',
+    ];
+
     public function mount(BasicArea $basicArea)
     {
         $this->basicArea = $basicArea;
@@ -31,10 +35,10 @@ class Media extends Component
     public function saveMedia()
     {
         //Validate
-//        $this->resetValidation();
-//        $this->validate([
-//            'media.*' => 'image|max:2024',
-//        ]);
+        $this->resetValidation();
+        $this->validate([
+            'media.*' => 'max:2024',
+        ]);
 
         //Set up model
         $mediaStore = new MediaBasic();
