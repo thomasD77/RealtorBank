@@ -5,11 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
+use Imagick;
 use Intervention\Image\Facades\Image;
+use Maestroerror\HeicToJpg;
 
 class MediaStore extends Model
 {
     use HasFactory;
+
+//    public static function createAndStoreMedia($mediaStore, $template, $mediaItems, $folder, $relation_id){
+//        foreach ($mediaItems as $media){
+//
+//            $imagick = new Imagick();
+//
+//            $test = $imagick->readImage($media);
+//            dd($test);
+//
+//            $imagick->writeImages('converted.jpg', false);
+//        }
+//    }
 
     public static function createAndStoreMedia($mediaStore, $template, $mediaItems, $folder, $relation_id)
     {
@@ -25,27 +39,42 @@ class MediaStore extends Model
                 File::makeDirectory($path, 0777, true, true);
             }
 
+            //Create a name
             $name = MediaStore::getValidFilename($name);
-
             $newMedia = $media->storeAs('assets/images/' . $folder , $name);
             $mediaStore->file_original = $name;
 
 
-            $img = Image::make(public_path('/assets/images/' . $folder . '/' . $mediaStore->file_original))->exif('Orientation');
+            //Check for extension
+            $extension = $media->getClientOriginalExtension();
 
-            if($img){
-                $rotation = new MediaStore();
-                $img = $rotation->orientate($media, $img);
+            if($extension == 'heic'){
+                //STEP I :: Make new file name with correct extension
+                $exName = basename($name, '.HEIC');
+                $newName = $exName . '.png';
 
-                //Delete original files
+                //STEP II :: Save the converted image and delete original
+                $img = HeicToJpg::convert($newMedia)->saveAs(public_path('assets/images/' . $folder . '/' . $newName));
                 File::delete('assets/images/' . $folder . '/' . $mediaStore->file_original);
 
-                $img->save(public_path('/assets/images/' . $folder . '/' . $mediaStore->file_original));
+                //STEP III :: Check the orientation and reset
+                $myImage = Image::make(public_path('assets/images/' . $folder . '/' . $newName));
+                $imageHasOrientation = $myImage->exif('Orientation');
+
+                if($imageHasOrientation){
+                    $rotation = new MediaStore();
+                    $rotateImage = $rotation->orientate($myImage, $myImage->exif('Orientation'));
+                    File::delete('assets/images/' . $folder . '/' . $mediaStore->file_original);
+                    $rotateImage->save(public_path('assets/images/' . $folder . '/' . $newName));
+                }
+
+                $mediaStore->file_original = $newName;
             }
+
 
             //Save crop version image
             $crop = MediaStore::getValidFilename(time(). $media->getClientOriginalName());
-            $imgCrop = Image::make($newMedia);
+            $imgCrop = Image::make($newMedia)->rotate(360);
             $width = Image::make($newMedia)->width();
             $height = Image::make($newMedia)->height();
 
