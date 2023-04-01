@@ -45,7 +45,7 @@ class Media extends Component
 
         //Save and store
         if( $this->media != [] && $this->media != ""){
-            MediaStore::createAndStoreMedia($mediaStore, $this->basicArea, $this->media, $this->folder, $this->relation_id);
+            (new \App\Models\MediaStore)->createAndStoreMedia($mediaStore, $this->basicArea, $this->media, $this->folder, $this->relation_id);
         }
 
         //Render
@@ -76,7 +76,7 @@ class Media extends Component
     {
         //Do the work
         $mediaStore = MediaBasic::find($file);
-        
+
         if($mediaStore){
             MediaStore::deleteMedia($mediaStore, $this->folder);
         }

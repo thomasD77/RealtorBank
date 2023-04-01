@@ -18,6 +18,11 @@
                     <div wire:loading.block class="mb-2">
                         <i class="fa fa-clock mr-1 ml-2"></i>uploading...
                     </div>
+                    @if (session()->has('process'))
+                        <div class="btn btn-info flash_message">
+                            {{ session('process') }}
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="row">

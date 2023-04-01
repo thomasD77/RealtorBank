@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
+use App\Jobs\UploadLargeImageFiles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use Imagick;
 use Intervention\Image\Facades\Image;
 use Maestroerror\HeicToJpg;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+
 
 class MediaStore extends Model
 {
     use HasFactory;
 
-    public static function createAndStoreMedia($mediaStore, $template, $mediaItems, $folder, $relation_id)
+    public function createAndStoreMedia($mediaStore, $template, $mediaItems, $folder, $relation_id)
     {
         $thisModel = new MediaStore();
 
@@ -26,6 +30,22 @@ class MediaStore extends Model
         if(!File::isDirectory($pathCrop)){
             File::makeDirectory($pathCrop, 0777, true, true);
         }
+
+        //Check how many files needs to be uploaded with the .HEIC format
+        $countHEIC = 0;
+        foreach ($mediaItems as $media ){
+            $extension = strtolower($media->getClientOriginalExtension());
+            if($extension == 'heic' ) {
+                $countHEIC += 1;
+            }
+        }
+
+        //Create a job QUEUE when there are to many files in general or with the .HEIC format
+//        if($countHEIC >= 2 || count($mediaItems)){
+//            dispatch(new UploadLargeImageFiles($mediaStore, $template, $mediaItems, $folder, $relation_id));
+//            Session::flash('process', 'De afbeeldingen zijn aan het uploaden. Dit kan even duren. Kom gerust later terug om deze te bewerken.');
+//            return;
+//        }
 
         //Save original image
         foreach ($mediaItems as $media ){
@@ -55,6 +75,7 @@ class MediaStore extends Model
             }
 
             $myImage = Image::make(public_path('assets/images/' . $folder . '/' . $name));
+            $myImage->save(public_path('assets/images/' . $folder . '/test/' . $name), 5);
             $imageHasOrientation = $myImage->exif('Orientation');
 
             //Save crop version image
