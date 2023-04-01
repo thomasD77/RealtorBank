@@ -76,8 +76,10 @@ class Media extends Component
     {
         //Do the work
         $mediaStore = MediaBasic::find($file);
-        MediaStore::deleteMedia($mediaStore, $this->folder);
-
+        
+        if($mediaStore){
+            MediaStore::deleteMedia($mediaStore, $this->folder);
+        }
         //Render
         $this->files = MediaBasic::where($this->relation_id, $this->basicArea->id)->get();
     }
