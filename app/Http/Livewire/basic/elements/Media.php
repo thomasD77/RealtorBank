@@ -44,7 +44,7 @@ class Media extends Component
         //Validate
         $this->resetValidation();
         $this->validate([
-            'media.*' => 'max:2024',
+            'media.*' => 'max:22024',
         ]);
 
         //Set up model
@@ -58,6 +58,24 @@ class Media extends Component
         //Render
         $this->files = MediaBasic::where($this->relation_id, $this->basicArea->id)->get();
         $this->media = "";
+    }
+
+    public function rotateMedia()
+    {
+        //Do the work
+        $img = Image::make(public_path('/assets/images/' . $this->folder . '/' . $this->mediaStore->file_original));
+        $img->rotate(90);
+
+        //Delete original files
+        File::delete('assets/images/' . $this->folder . '/' . $this->mediaStore->file_original);
+        File::delete('assets/images/' . $this->folder . '/crop/' . $this->mediaStore->file_crop);
+
+        $img->save(public_path('/assets/images/' . $this->folder . '/' . $this->mediaStore->file_original));
+        $img->save(public_path('/assets/images/' . $this->folder . '/crop/' . $this->mediaStore->file_crop));
+
+        $files = MediaBasic::where($this->relation_id, $this->basicArea->id)->get();
+
+        $this->emit('renderMedia');
     }
 
     public function deleteMedia($file)

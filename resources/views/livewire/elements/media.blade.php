@@ -27,7 +27,7 @@
 
                             <button wire:click="deleteMedia({{ $file->id }})" class="btn btn-danger delete"><span style="font-weight: bold">x</span></button>
 
-                            <livewire:media.rotate :file="$file" :basicArea="$basicArea" :wire:key="'file-'.$file->id"/>
+                            <button wire:click="rotateMedia({{ $file->id }})" class="btn btn-dark rotate"><i class="fa fa-rotate-left text-white"></i></button>
 
                             <a data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
                                 <div class="img--cover"
