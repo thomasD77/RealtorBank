@@ -53,24 +53,24 @@ class Media extends Component
         $this->media = "";
     }
 
-    public function rotateMedia($file)
-    {
-        $mediaStore = MediaBasic::find($file);
-        //Do the work
-        $img = Image::make(public_path('/assets/images/' . $this->folder . '/' . $mediaStore->file_original));
-        $img->rotate(90);
-
-        //Delete original files
-        File::delete('assets/images/' . $this->folder . '/' . $mediaStore->file_original);
-        File::delete('assets/images/' . $this->folder . '/crop/' . $mediaStore->file_crop);
-
-        $img->save(public_path('/assets/images/' . $this->folder . '/' . $mediaStore->file_original));
-        $img->save(public_path('/assets/images/' . $this->folder . '/crop/' . $mediaStore->file_crop));
-
-        $files = MediaBasic::where($this->relation_id, $this->basicArea->id)->get();
-
-        $this->emit('renderMedia');
-    }
+//    public function rotateMedia($file)
+//    {
+//        $mediaStore = MediaBasic::find($file);
+//        //Do the work
+//        $img = Image::make(public_path('/assets/images/' . $this->folder . '/' . $mediaStore->file_original));
+//        $img->rotate(90);
+//
+//        //Delete original files
+//        File::delete('assets/images/' . $this->folder . '/' . $mediaStore->file_original);
+//        File::delete('assets/images/' . $this->folder . '/crop/' . $mediaStore->file_crop);
+//
+//        $img->save(public_path('/assets/images/' . $this->folder . '/' . $mediaStore->file_original));
+//        $img->save(public_path('/assets/images/' . $this->folder . '/crop/' . $mediaStore->file_crop));
+//
+//        $files = MediaBasic::where($this->relation_id, $this->basicArea->id)->get();
+//
+//        $this->emit('renderMedia');
+//    }
 
     public function deleteMedia($file)
     {

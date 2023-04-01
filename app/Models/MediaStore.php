@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Imagick;
 use Intervention\Image\Facades\Image;
 use Maestroerror\HeicToJpg;
@@ -34,6 +35,7 @@ class MediaStore extends Model
         //Check how many files needs to be uploaded with the .HEIC format
         $countHEIC = 0;
         foreach ($mediaItems as $media ){
+            //Check for .HEIC extension
             $extension = strtolower($media->getClientOriginalExtension());
             if($extension == 'heic' ) {
                 $countHEIC += 1;
@@ -41,11 +43,72 @@ class MediaStore extends Model
         }
 
         //Create a job QUEUE when there are to many files in general or with the .HEIC format
-//        if($countHEIC >= 2 || count($mediaItems)){
-//            dispatch(new UploadLargeImageFiles($mediaStore, $template, $mediaItems, $folder, $relation_id));
-//            Session::flash('process', 'De afbeeldingen zijn aan het uploaden. Dit kan even duren. Kom gerust later terug om deze te bewerken.');
-//            return;
-//        }
+        if($countHEIC >= 1 || count($mediaItems)){
+            $mediaPaths = [];
+            foreach ($mediaItems as $media ){
+               $mediaPaths [] = [
+                   'path' => [
+                       'name' => $media->getClientOriginalName(),
+                       'path' => $media->getRealPath(),
+                       'extension' => $media->getClientOriginalExtension()
+                   ]
+               ];
+            }
+
+            //Example for UploadLargeImagesFiles Job
+
+//            foreach ($mediaPaths as $media ){
+//
+//                $mediaStore = new $mediaStore;
+//
+//                //Create variables
+//                $name = time(). $media['path']['name'];
+//                $name = MediaStore::getValidFilename($name);
+//
+//                //Check for extension
+//                $extension = strtolower($media['path']['extension']);
+//
+//                if($extension == 'heic'){
+//
+//                    //Make new file name with correct extension
+//                    $exName = basename(strtolower($name), '.heic');
+//                    $name = $exName . '.png';
+//
+//                    //Clean file name
+//                    $convertPath = str_replace('0', '' , file_get_contents($media['path']['path']));
+//
+//                    //Save the converted image and delete original
+//                    HeicToJpg::convert($convertPath)
+//                        ->saveAs(public_path('assets/images/' . $this->folder . '/' . $name));
+//
+//                } else {
+//                    Storage::disk('local')
+//                        ->put('assets/images/basic/'.$name, file_get_contents($media['path']['path']), 'public');
+//                }
+//
+//                $myImage = Image::make(public_path('assets/images/' . $folder . '/' . $name));
+//                $imageHasOrientation = $myImage->exif('Orientation');
+//
+//                //Save crop version image
+//                $thisModel->crop($myImage, $folder, $name, $mediaStore, $template, $relation_id );
+//
+//                //Check for orientation
+//                if($imageHasOrientation){
+//                    $myImage = Image::make(public_path('assets/images/' . $folder . '/crop/' . $name));
+//                    $thisModel->hasOrientation($myImage, $imageHasOrientation, $folder, $mediaStore, $name, $thisModel);
+//                }
+//
+//                $mediaStore->file_original = $name;
+//                $mediaStore->file_crop = $name;
+//                $mediaStore->$relation_id = $template->id;
+//                $mediaStore->save();
+//            }
+
+            dispatch(new UploadLargeImageFiles($mediaStore, $template, $folder, $relation_id, $mediaPaths));
+
+            Session::flash('process', 'De afbeeldingen zijn aan het uploaden. Dit kan even duren. Kom gerust later terug om deze te bewerken.');
+            return;
+        }
 
         //Save original image
         foreach ($mediaItems as $media ){
@@ -98,7 +161,7 @@ class MediaStore extends Model
         }
     }
 
-    private function crop($myImage, $folder, $name, $mediaStore, $template, $relation_id)
+    public function crop($myImage, $folder, $name, $mediaStore, $template, $relation_id)
     {
         $imgCrop = $myImage;
         $width = Image::make($imgCrop)->width();
@@ -115,7 +178,7 @@ class MediaStore extends Model
         }
     }
 
-    private function orientate($image, $orientation)
+    public function orientate($image, $orientation)
     {
         switch ($orientation) {
 
@@ -180,7 +243,7 @@ class MediaStore extends Model
         return str_replace('=', '_', $new);
     }
 
-    private function hasOrientation($myImage, $orientation, $folder, $mediaStore, $name, $thisModel)
+    public function hasOrientation($myImage, $orientation, $folder, $mediaStore, $name, $thisModel)
     {
         $rotateImage = $thisModel->orientate($myImage, $orientation);
         File::delete('assets/images/' . $folder . '/crop/' . $mediaStore->file_original);

@@ -6,6 +6,7 @@ use App\Enums\Keys;
 use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Jobs\GeneratePDF;
+use App\Jobs\UploadLargeImageFiles;
 use App\Models\BasicArea;
 use App\Models\Contract;
 use App\Models\Document;

@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Maestroerror\HeicToJpg;
 
@@ -18,7 +19,7 @@ class UploadLargeImageFiles implements ShouldQueue
 
     public $mediaStore;
     public $template;
-    public $mediaItems;
+    public $mediaPaths;
     public $relation_id;
     public $folder;
 
@@ -27,14 +28,16 @@ class UploadLargeImageFiles implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($mediaStore, $template, $mediaItems, $folder, $relation_id)
+    public function __construct($mediaStore, $template, $folder, $relation_id, $mediaPaths)
     {
         //
-        $this->mediaItems = $mediaItems;
+        $this->mediaPaths = $mediaPaths;
         $this->mediaStore = $mediaStore;
         $this->template = $template;
         $this->folder = $folder;
         $this->relation_id = $relation_id;
+
+        $thisModel = new MediaStore();
     }
 
     /**
@@ -45,18 +48,18 @@ class UploadLargeImageFiles implements ShouldQueue
     public function handle()
     {
         //
-        $thisModel = new MediaStore();
+        foreach ($this->mediaPaths as $media ){
 
-        foreach ($this->mediaItems as $media ){
+            $thisModel = new MediaStore();
 
             $mediaStore = new $this->mediaStore;
 
             //Create variables
-            $name = time(). $media->getClientOriginalName();
+            $name = time(). $media['path']['name'];
             $name = MediaStore::getValidFilename($name);
 
             //Check for extension
-            $extension = strtolower($media->getClientOriginalExtension());
+            $extension = strtolower($media['path']['extension']);
 
             if($extension == 'heic'){
 
@@ -64,13 +67,16 @@ class UploadLargeImageFiles implements ShouldQueue
                 $exName = basename(strtolower($name), '.heic');
                 $name = $exName . '.png';
 
+                //Clean file name
+                $convertPath = str_replace('0', '' , file_get_contents($media['path']['path']));
+
                 //Save the converted image and delete original
-                HeicToJpg::convert($media->getRealPath())->saveAs(public_path('assets/images/' . $this->folder . '/' . $name));
+                HeicToJpg::convert($convertPath)
+                    ->saveAs(public_path('assets/images/' . $this->folder . '/' . $name));
 
             } else {
-
-                //Save original version image
-                $newMedia = $media->storeAs('assets/images/' . $this->folder , $name);
+                Storage::disk('local')
+                    ->put('assets/images/basic/'.$name, file_get_contents($media['path']['path']), 'public');
             }
 
             $myImage = Image::make(public_path('assets/images/' . $this->folder . '/' . $name));
@@ -85,9 +91,11 @@ class UploadLargeImageFiles implements ShouldQueue
                 $thisModel->hasOrientation($myImage, $imageHasOrientation, $this->folder, $mediaStore, $name, $thisModel);
             }
 
+            $relation_id = $this->relation_id;
+
             $mediaStore->file_original = $name;
             $mediaStore->file_crop = $name;
-            $mediaStore->$this->relation_id = $this->template->id;
+            $mediaStore->$relation_id = $this->template->id;
             $mediaStore->save();
         }
     }
