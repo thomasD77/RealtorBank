@@ -75,10 +75,8 @@ class MediaStore extends Model
                 }
 
                 //Save crop version image
-                $newName = MediaStore::getValidFilename(time(). $media->getClientOriginalName());
                 $cropFile = new MediaStore();
-                $cropFile->crop($folder, $newName, $mediaStore, $template, $relation_id );
-
+                $cropFile->crop($folder, $name, $mediaStore, $template, $relation_id );
             }
 
         }
