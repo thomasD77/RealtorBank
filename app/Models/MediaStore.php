@@ -74,8 +74,13 @@ class MediaStore extends Model
                 $newMedia = $media->storeAs('assets/images/' . $folder , $name);
             }
 
+            //Create variables
             $myImage = Image::make(public_path('assets/images/' . $folder . '/' . $name));
             $imageHasOrientation = $myImage->exif('Orientation');
+
+            //Image compressor
+            File::delete('assets/images/' . $folder . '/' . $mediaStore->file_original);
+            $myImage->save(public_path('assets/images/' . $folder ) . '/' . $name, 50);
 
             //Save crop version image
             $thisModel->crop($myImage, $folder, $name, $mediaStore, $template, $relation_id );
