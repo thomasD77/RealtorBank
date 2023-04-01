@@ -75,7 +75,6 @@ class MediaStore extends Model
             }
 
             $myImage = Image::make(public_path('assets/images/' . $folder . '/' . $name));
-            $myImage->save(public_path('assets/images/' . $folder . '/test/' . $name), 5);
             $imageHasOrientation = $myImage->exif('Orientation');
 
             //Save crop version image
