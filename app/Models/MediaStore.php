@@ -64,6 +64,16 @@ class MediaStore extends Model
                 $newMedia = $media->storeAs('assets/images/' . $folder , $name);
                 $mediaStore->file_original = $name;
 
+                $myImage = Image::make(public_path('assets/images/' . $folder . '/' . $name));
+                $imageHasOrientation = $myImage->exif('Orientation');
+
+                if($imageHasOrientation){
+                    $rotation = new MediaStore();
+                    $rotateImage = $rotation->orientate($myImage, $myImage->exif('Orientation'));
+                    File::delete('assets/images/' . $folder . '/' . $mediaStore->file_original);
+                    $rotateImage->save(public_path('assets/images/' . $folder . '/' . $name));
+                }
+
                 //Save crop version image
                 $newName = MediaStore::getValidFilename(time(). $media->getClientOriginalName());
                 $cropFile = new MediaStore();

@@ -24,8 +24,11 @@
                 @foreach($files as $file)
                     <div class="col-md-3 mt-4">
                         <div class="img-wrapper">
+
                             <button wire:click="deleteMedia({{ $file->id }})" class="btn btn-danger delete"><span style="font-weight: bold">x</span></button>
-                            <button wire:click="rotateMedia({{ $file->id }})" class="btn btn-dark rotate"><i class="fa fa-rotate-left text-white"></i></button>
+
+                            <livewire:media.rotate :file="$file" :basicArea="$basicArea" :wire:key="'file-'.$file->id"/>
+
                             <a data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
                                 <div class="img--cover"
                                      style="background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}');
