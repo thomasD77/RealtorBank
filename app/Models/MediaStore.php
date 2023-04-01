@@ -15,6 +15,8 @@ class MediaStore extends Model
 
     public static function createAndStoreMedia($mediaStore, $template, $mediaItems, $folder, $relation_id)
     {
+        $thisModel = new MediaStore();
+
         //Make sure there is a directory to save the images
         $path = public_path('assets/images/' . $folder);
         if(!File::isDirectory($path)){
@@ -24,7 +26,6 @@ class MediaStore extends Model
         if(!File::isDirectory($pathCrop)){
             File::makeDirectory($pathCrop, 0777, true, true);
         }
-        $thisModel = new MediaStore();
 
         //Save original image
         foreach ($mediaItems as $media ){
@@ -40,40 +41,29 @@ class MediaStore extends Model
 
             if($extension == 'heic'){
 
-                //STEP I :: Make new file name with correct extension
+                //Make new file name with correct extension
                 $exName = basename(strtolower($name), '.heic');
                 $name = $exName . '.png';
 
-                //STEP II :: Save the converted image and delete original
+                //Save the converted image and delete original
                 HeicToJpg::convert($media->getRealPath())->saveAs(public_path('assets/images/' . $folder . '/' . $name));
-
-                $myImage = Image::make(public_path('assets/images/' . $folder . '/' . $name));
-                $imageHasOrientation = $myImage->exif('Orientation');
-
-                //STEP III :: Crop the image
-                $thisModel->crop($myImage, $folder, $name, $mediaStore, $template, $relation_id );
-
-                //STEP IIII :: Check the orientation and reset
-                if($imageHasOrientation){
-                    $myImage = Image::make(public_path('assets/images/' . $folder . '/crop/' . $name));
-                    $thisModel->hasOrientation($myImage, $imageHasOrientation, $folder, $mediaStore, $name, $thisModel);
-                }
 
             } else {
 
                 //Save original version image
                 $newMedia = $media->storeAs('assets/images/' . $folder , $name);
-                $myImage = Image::make(public_path('assets/images/' . $folder . '/' . $name));
-                $imageHasOrientation = $myImage->exif('Orientation');
+            }
 
-                //Save crop version image
-                $thisModel->crop($myImage, $folder, $name, $mediaStore, $template, $relation_id );
+            $myImage = Image::make(public_path('assets/images/' . $folder . '/' . $name));
+            $imageHasOrientation = $myImage->exif('Orientation');
 
-                //Check for orientation
-                if($imageHasOrientation){
-                    $myImage = Image::make(public_path('assets/images/' . $folder . '/crop/' . $name));
-                    $thisModel->hasOrientation($myImage, $imageHasOrientation, $folder, $mediaStore, $name, $thisModel);
-                }
+            //Save crop version image
+            $thisModel->crop($myImage, $folder, $name, $mediaStore, $template, $relation_id );
+
+            //Check for orientation
+            if($imageHasOrientation){
+                $myImage = Image::make(public_path('assets/images/' . $folder . '/crop/' . $name));
+                $thisModel->hasOrientation($myImage, $imageHasOrientation, $folder, $mediaStore, $name, $thisModel);
             }
 
             $mediaStore->file_original = $name;
