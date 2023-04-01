@@ -49,10 +49,10 @@ class MediaStore extends Model
                 $myImage = Image::make(public_path('assets/images/' . $folder . '/' . $newName));
 
                 //STEP III :: Check the orientation and reset
-                $imageHasOrientation = $myImage->exif('Orientation');
-                if($imageHasOrientation){
-                    $thisModel->hasOrientation($myImage, $folder, $mediaStore, $newName, $thisModel);
-                }
+//                $imageHasOrientation = $myImage->exif('Orientation');
+//                if($imageHasOrientation){
+//                    $thisModel->hasOrientation($myImage, $folder, $mediaStore, $newName, $thisModel);
+//                }
 
                 $mediaStore->file_original = $newName;
 
@@ -102,33 +102,32 @@ class MediaStore extends Model
 
     private function orientate($image, $orientation)
     {
-        return $image->rotate(-90);
-//        switch ($orientation) {
-//
-//            case 6:
-//                return $image->rotate(-90);
-//
-//            case 2:
-//                return $image->flip('h');
-//
-//            case 3:
-//                return $image->rotate(180);
-//
-//            case 4:
-//                return $image->rotate(180)->flip('h');
-//
-//            case 5:
-//                return $image->rotate(-90)->flip('h');
-//
-//            case 7:
-//                return $image->rotate(-90)->flip('v');
-//
-//            case 8:
-//                return $image->rotate(90);
-//
-//            default:
-//                return $image;
-//        }
+        switch ($orientation) {
+
+            case 6:
+                return $image->rotate(-90);
+
+            case 2:
+                return $image->flip('h');
+
+            case 3:
+                return $image->rotate(180);
+
+            case 4:
+                return $image->rotate(180)->flip('h');
+
+            case 5:
+                return $image->rotate(-90)->flip('h');
+
+            case 7:
+                return $image->rotate(-90)->flip('v');
+
+            case 8:
+                return $image->rotate(90);
+
+            default:
+                return $image;
+        }
     }
 
     public static function deleteMedia($mediaStore, $folder)
