@@ -22,8 +22,6 @@ class Media extends Component
 
     use WithFileUploads;
 
-    protected $listeners = ['renderMedia' => '$refresh'];
-
     protected $messages = [
         'media.*' => 'Oeps, bestand mag niet groter zijn dan 202 MB.',
     ];
@@ -32,11 +30,6 @@ class Media extends Component
     {
         $this->basicArea = $basicArea;
         $this->files = MediaBasic::where($this->relation_id, $this->basicArea->id)->get();
-    }
-
-    public function renderMedia($files)
-    {
-        //
     }
 
     public function saveMedia()
@@ -60,18 +53,19 @@ class Media extends Component
         $this->media = "";
     }
 
-    public function rotateMedia()
+    public function rotateMedia($file)
     {
+        $mediaStore = MediaBasic::find($file);
         //Do the work
-        $img = Image::make(public_path('/assets/images/' . $this->folder . '/' . $this->mediaStore->file_original));
+        $img = Image::make(public_path('/assets/images/' . $this->folder . '/' . $mediaStore->file_original));
         $img->rotate(90);
 
         //Delete original files
-        File::delete('assets/images/' . $this->folder . '/' . $this->mediaStore->file_original);
-        File::delete('assets/images/' . $this->folder . '/crop/' . $this->mediaStore->file_crop);
+        File::delete('assets/images/' . $this->folder . '/' . $mediaStore->file_original);
+        File::delete('assets/images/' . $this->folder . '/crop/' . $mediaStore->file_crop);
 
-        $img->save(public_path('/assets/images/' . $this->folder . '/' . $this->mediaStore->file_original));
-        $img->save(public_path('/assets/images/' . $this->folder . '/crop/' . $this->mediaStore->file_crop));
+        $img->save(public_path('/assets/images/' . $this->folder . '/' . $mediaStore->file_original));
+        $img->save(public_path('/assets/images/' . $this->folder . '/crop/' . $mediaStore->file_crop));
 
         $files = MediaBasic::where($this->relation_id, $this->basicArea->id)->get();
 
