@@ -25,6 +25,14 @@
                     @endif
                 </div>
             </div>
+            <style>
+                .img--cover {
+                    aspect-ratio: 3/2;
+                }
+                .img-wrapper {
+                    position: relative;
+                }
+            </style>
             <div class="row">
                 @foreach($files as $file)
                     <div class="col-md-3 mt-4">
