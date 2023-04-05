@@ -50,7 +50,7 @@ class UploadLargeImageFiles implements ShouldQueue
         foreach ($this->mediaPaths as $media ){
 
             $thisModel = new MediaStore();
-            $className = 'App\Models\{$this->mediaModel}';
+            $className = "App\Models\\" . $this->mediaModel;
             $mediaModel = new $className();
 
             //Create variables
