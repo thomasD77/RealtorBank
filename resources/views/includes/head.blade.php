@@ -29,14 +29,5 @@
 
     @vite(['resources/js/main.js'])
 
-    <style>
-        .img--cover {
-            aspect-ratio: 3/2;
-        }
-        .img-wrapper {
-            position: relative;
-        }
-    </style>
-
     @livewireStyles
 </head>

@@ -28,13 +28,7 @@
             <div class="row">
                 @foreach($files as $file)
                     <div class="col-md-3 mt-4">
-
-
-
                         <div class="img-wrapper">
-
-                            <img src="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}" alt="test">
-
                             <button wire:click="deleteMedia({{ $file->id }})" class="btn btn-danger delete"><span style="font-weight: bold">x</span></button>
 
 {{--                            <button wire:click="rotateMedia({{ $file->id }})" class="btn btn-dark rotate"><i class="fa fa-rotate-left text-white"></i></button>--}}
