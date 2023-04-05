@@ -37,9 +37,11 @@
                 @foreach($files as $file)
                     <div class="col-md-3 mt-4">
 
-                        <img src="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}" alt="test">
+
 
                         <div class="img-wrapper">
+
+                            <img src="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}" alt="test">
 
                             <button wire:click="deleteMedia({{ $file->id }})" class="btn btn-danger delete"><span style="font-weight: bold">x</span></button>
 
