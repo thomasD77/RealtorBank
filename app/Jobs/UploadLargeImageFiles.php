@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Models\MediaBasic;
 use App\Models\MediaStore;
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -30,7 +29,7 @@ class UploadLargeImageFiles implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($mediaModel, $template, $folder, $relation_id, $mediaPaths)
+    public function __construct( $mediaModel, $template, $folder, $relation_id, $mediaPaths)
     {
         //
         $this->mediaPaths = $mediaPaths;
@@ -51,7 +50,8 @@ class UploadLargeImageFiles implements ShouldQueue
         foreach ($this->mediaPaths as $media ){
 
             $thisModel = new MediaStore();
-            $mediaModel = $this->mediaModel;
+            $className = 'App\Models\{$this->mediaModel}';
+            $mediaModel = new $className();
 
             //Create variables
             $name = time(). $media['path']['name'];

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Jobs\UploadLargeImageFiles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -43,7 +44,7 @@ class MediaStore extends Model
         }
 
         //Create a job QUEUE when there are to many files in general or with the .HEIC format
-        if($countHEIC >= 3 || count($mediaItems) >= 5){
+        if($countHEIC >= 2 || count($mediaItems) >= 5){
             $mediaPaths = [];
             foreach ($mediaItems as $media ){
                $mediaPaths [] = [
@@ -63,8 +64,6 @@ class MediaStore extends Model
 
         //Save original image
         foreach ($mediaItems as $media ){
-
-            $mediaStore = new $mediaStore;
 
             //Create variables
             $name = time(). $media->getClientOriginalName();

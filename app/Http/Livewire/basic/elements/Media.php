@@ -41,7 +41,7 @@ class Media extends Component
         ]);
 
         //Set up model
-        $mediaStore = new MediaBasic();
+        $mediaStore = 'MediaBasic';
 
         //Save and store
         if( $this->media != [] && $this->media != ""){
