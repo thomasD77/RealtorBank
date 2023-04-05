@@ -43,7 +43,7 @@ class MediaStore extends Model
         }
 
         //Create a job QUEUE when there are to many files in general or with the .HEIC format
-        if($countHEIC >= 1 || count($mediaItems) >= 2){
+        if($countHEIC >= 3 || count($mediaItems) >= 5){
             $mediaPaths = [];
             foreach ($mediaItems as $media ){
                $mediaPaths [] = [
@@ -54,6 +54,7 @@ class MediaStore extends Model
                    ]
                ];
             }
+
             dispatch(new UploadLargeImageFiles($mediaStore, $template, $folder, $relation_id, $mediaPaths));
 
             Session::flash('process', 'De afbeeldingen zijn aan het uploaden. Dit kan even duren. Kom gerust later terug om deze te bewerken.');
@@ -78,8 +79,15 @@ class MediaStore extends Model
                 $exName = basename(strtolower($name), '.heic');
                 $name = $exName . '.png';
 
-                //Save the converted image and delete original
+                //Save the converted image from HEIC to .png
+                //This is a package made by a third party. If this doesn't work anymore, activate exec command (bellow).
+                //This is also a function to convert but it takes 27sec for 1 HEIC pic.
+                //The package is only taking 12sec
                 HeicToJpg::convert($media->getRealPath())->saveAs(public_path('assets/images/' . $folder . '/' . $name));
+
+                //Seccond option for converting
+                //exec('magick convert ' . $media->getRealPath() . ' ' . public_path('assets/images/' . $folder . '/' . $name));
+                //Image::make(public_path('assets/images/' . $folder . '/' . $name));
 
             } else {
 
