@@ -123,7 +123,7 @@ class Edit extends Component
 
         //Save and store
         if( $this->media != [] && $this->media != "") {
-            MediaStore::createAndStoreMedia($mediaStore, $this->inspection, $this->media, $this->folder, $this->relation_id);
+            (new \App\Models\MediaStore)->createAndStoreMedia($mediaStore, $this->inspection, $this->media, $this->folder, $this->relation_id);
         }
 
         //Render

@@ -44,7 +44,7 @@ class Media extends Component
 
         //Save and store
         if( $this->media != [] && $this->media != ""){
-            MediaStore::createAndStoreMedia($this->mediaName, $mediaStore, $this->meter, $this->media, $this->folder, $this->relation_id);
+            (new \App\Models\MediaStore)->createAndStoreMedia($this->mediaName, $mediaStore, $this->meter, $this->media, $this->folder, $this->relation_id);
         }
 
         //Render
