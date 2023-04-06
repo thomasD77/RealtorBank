@@ -38,6 +38,7 @@
                                      style="background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}');">
                                 </div>
                             </a>
+
                         </div>
                     </div>
                 @endforeach

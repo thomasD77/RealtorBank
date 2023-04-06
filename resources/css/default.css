@@ -26,17 +26,14 @@
     border: none;
 }
 
-.ja {
-    color: yellow;
-}
-
 .img--cover {
-    aspect-ratio: 3/2;
-    min-height:100%;
-    min-width:100%;
-    background-size:cover;
-    background-repeat:no-repeat;
-    background-position: center;
+    aspect-ratio: 3/2 !important;
+    min-height:100% !important;
+    min-width:100% !important;
+    background-size:cover !important;
+    background-repeat:no-repeat !important;
+    background-position: center !important;
+    background-attachment: initial !important;
 }
 
 .activeLink {
