@@ -35,9 +35,7 @@
 
                             <a data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
                                 <div class="img--cover"
-                                     style="background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}');
-                                     background-position: center;
-                                     background-size: cover;">
+                                     style="background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}');">
                                 </div>
                             </a>
                         </div>
