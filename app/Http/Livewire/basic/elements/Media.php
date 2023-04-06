@@ -19,6 +19,7 @@ class Media extends Component
     public $files;
     public $folder = 'basic';
     public $relation_id = 'basic_id';
+    public $mediaName = 'MediaBasic';
 
     use WithFileUploads;
 
@@ -37,15 +38,15 @@ class Media extends Component
         //Validate
         $this->resetValidation();
         $this->validate([
-            'media.*' => 'max:22024',
+            'media.*' => 'max:5000',
         ]);
 
         //Set up model
-        $mediaStore = 'MediaBasic';
+        $mediaStore = new MediaBasic();
 
         //Save and store
         if( $this->media != [] && $this->media != ""){
-            (new \App\Models\MediaStore)->createAndStoreMedia($mediaStore, $this->basicArea, $this->media, $this->folder, $this->relation_id);
+            (new \App\Models\MediaStore)->createAndStoreMedia($this->mediaName, $mediaStore, $this->basicArea, $this->media, $this->folder, $this->relation_id);
         }
 
         //Render

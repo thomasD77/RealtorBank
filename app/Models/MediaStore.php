@@ -19,7 +19,7 @@ class MediaStore extends Model
 {
     use HasFactory;
 
-    public function createAndStoreMedia($mediaStore, $template, $mediaItems, $folder, $relation_id)
+    public function createAndStoreMedia($mediaName, $mediaStore, $template, $mediaItems, $folder, $relation_id)
     {
         $thisModel = new MediaStore();
 
@@ -56,7 +56,7 @@ class MediaStore extends Model
                ];
             }
 
-            dispatch(new UploadLargeImageFiles($mediaStore, $template, $folder, $relation_id, $mediaPaths));
+            dispatch(new UploadLargeImageFiles($mediaName, $template, $folder, $relation_id, $mediaPaths));
 
             Session::flash('process', 'De afbeeldingen zijn aan het uploaden. Dit kan even duren. Kom gerust later terug om deze te bewerken.');
             return;
@@ -64,6 +64,8 @@ class MediaStore extends Model
 
         //Save original image
         foreach ($mediaItems as $media ){
+
+            $mediaStore = new $mediaStore;
 
             //Create variables
             $name = time(). $media->getClientOriginalName();
@@ -100,7 +102,7 @@ class MediaStore extends Model
 
             //Image compressor
             File::delete('assets/images/' . $folder . '/' . $mediaStore->file_original);
-            $myImage->save(public_path('assets/images/' . $folder ) . '/' . $name, 50);
+            $myImage->save(public_path('assets/images/' . $folder ) . '/' . $name, 75);
 
             //Save crop version image
             $thisModel->crop($myImage, $folder, $name, $mediaStore, $template, $relation_id );
