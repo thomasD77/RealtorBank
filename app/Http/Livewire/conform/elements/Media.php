@@ -16,8 +16,13 @@ class Media extends Component
     public $files;
     public $folder = 'conform';
     public $relation_id = 'conform_id';
+    public $mediaName = 'MediaConform';
 
     use WithFileUploads;
+
+    protected $messages = [
+        'media.*' => 'Oeps, limit om aantal bestanden up te loaden is overschreden. Probeer het opnieuw.',
+    ];
 
     public function mount(ConformArea $conformArea)
     {
@@ -30,7 +35,7 @@ class Media extends Component
         //Validate
         $this->resetValidation();
         $this->validate([
-            'media.*' => 'image|max:2024',
+            'media.*' => 'max:5000',
         ]);
 
         //Set up model
@@ -38,7 +43,7 @@ class Media extends Component
 
         //Save and store
         if( $this->media != [] && $this->media != ""){
-            MediaStore::createAndStoreMedia($mediaStore, $this->conformArea, $this->media, $this->folder, $this->relation_id);
+            MediaStore::createAndStoreMedia($this->mediaName, $mediaStore, $this->conformArea, $this->media, $this->folder, $this->relation_id);
         }
 
         //Render

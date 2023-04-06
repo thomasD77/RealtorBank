@@ -24,7 +24,7 @@ class Media extends Component
     use WithFileUploads;
 
     protected $messages = [
-        'media.*' => 'Oeps, bestand mag niet groter zijn dan 202 MB.',
+        'media.*' => 'Oeps, limit om aantal bestanden up te loaden is overschreden. Probeer het opnieuw.',
     ];
 
     public function mount(BasicArea $basicArea)

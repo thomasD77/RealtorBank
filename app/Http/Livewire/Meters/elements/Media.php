@@ -17,8 +17,13 @@ class Media extends Component
     public $files;
     public $folder = 'meters';
     public $relation_id = 'meter_id';
+    public $mediaName = 'MediaMeter';
 
     use WithFileUploads;
+
+    protected $messages = [
+        'media.*' => 'Oeps, limit om aantal bestanden up te loaden is overschreden. Probeer het opnieuw.',
+    ];
 
     public function mount(Meter $dynamicArea)
     {
@@ -31,7 +36,7 @@ class Media extends Component
         //Validate
         $this->resetValidation();
         $this->validate([
-            'media.*' => 'image|max:2024',
+            'media.*' => 'max:5000',
         ]);
 
         //Set up model
@@ -39,7 +44,7 @@ class Media extends Component
 
         //Save and store
         if( $this->media != [] && $this->media != ""){
-            MediaStore::createAndStoreMedia($mediaStore, $this->meter, $this->media, $this->folder, $this->relation_id);
+            MediaStore::createAndStoreMedia($this->mediaName, $mediaStore, $this->meter, $this->media, $this->folder, $this->relation_id);
         }
 
         //Render
