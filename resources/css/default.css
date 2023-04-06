@@ -28,19 +28,12 @@
 
 .img--cover {
     aspect-ratio: 3/2 !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
     min-height:100% !important;
     min-width:100% !important;
-    /*background-size:cover !important;*/
-    background-repeat:no-repeat !important;
-    background-position: center !important;
-    background-attachment: initial !important;
-
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
 }
 
 .activeLink {
