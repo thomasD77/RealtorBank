@@ -5,30 +5,30 @@
         <div class="left-side">
             <!-- Logo -->
             <div id="logo">
-                <a href="index.html"><img src="{{ asset('assets/images/logo.svg') }}" alt="logo"></a>
+                <a href="{{ asset('/dashboard') }}"><img src="{{ asset('assets/images/logo.svg') }}" alt="logo"></a>
             </div>
-
-            <!-- Mobile Navigation MD -->
-            <div class="d-xl-none">
-                <button onclick="getSidebar()"
-                        class="hamburger hamburger--collapse"
-                        type="button"
-                >
-                <span class="hamburger-box"><span class="hamburger-inner"></span></span>
-                </button>
-            </div>
-
             <!-- Custom Sidebar Tablet M  -->
-            @if(isset($inspection))
-                <div id="sidebarResp" class="overlay d-none pt-3">
-                    <div class="text-right">
-                        <button onclick="closeSidebar()" class="p-2 btn-close"><strong>x</strong></button>
+            @if(Route::currentRouteName() != 'dashboard')
+                @if(isset($inspection))
+                    <div class="d-xl-none">
+                        <button onclick="getSidebar()"
+                                class="hamburger hamburger--collapse"
+                                type="button"
+                        >
+                            <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+                        </button>
                     </div>
-                    <livewire:sidebar.sidebar
-                        :Inspection="$inspection"
-                        :Responsive="false"
-                    />
-                </div>
+
+                    <div id="sidebarResp" class="overlay d-none pt-3">
+                        <div class="text-right">
+                            <button onclick="closeSidebar()" class="p-2 btn-close"><strong>x</strong></button>
+                        </div>
+                        <livewire:sidebar.sidebar
+                            :Inspection="$inspection"
+                            :Responsive="false"
+                        />
+                    </div>
+                @endif
             @endif
             <div class="clearfix"></div>
             <!-- Main Navigation / End -->
