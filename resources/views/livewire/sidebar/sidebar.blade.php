@@ -1268,49 +1268,52 @@
                  id="collapseSituation"
             >
                 <ul>
-                    <li class="mx-3">
+                    <li class="mx-4">
                         <a href="{{ route('situation.index', $inspection) }}">
                             <i class="fa fa-list"></i>{{ __('Lijst') }}
                         </a>
+                    </li>
+                    <li class="mx-4">
                         <a href="{{ route('create.situation', $inspection) }}">
                             <i class="fa fa-plus"></i>{{ __('Toevoegen') }}
                         </a>
-                    <li>
+                    </li>
                 </ul>
-            </div>
-        </li>
-    @endif
-    @if($contracts == $activeCat || $activeCat == null)
-        {{--Contracts--}}
-        <li class="sidebar-border">
-            <a data-toggle="collapse"
-               href="#collapseContract"
-               role="button"
-               aria-expanded="false"
-               aria-controls="collapseContract"
-               wire:click="toggleCategory({{ $contracts }})"
-               class="custom-sidebar-padding @if($contracts == $activeCat) active @endif"
-            >
-                @if($contracts == $activeCat)
-                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Contracten') }}
-                @else
-                    <i class="fa fa-folder text-success"></i>{{ __('Contracten') }}
-                @endif
-            </a>
-            <div class="collapse @if($contracts == $activeCat) show @endif"
 
-                 id="collapseContract"
-            >
-                <ul>
-                    <li class="mx-3">
-                        <a href="{{ route('contracts.index', $inspection) }}">
-                            <i class="fa fa-list"></i>{{ __('Lijst') }}
-                        </a>
-                    <li>
-                </ul>
             </div>
         </li>
     @endif
+{{--    @if($contracts == $activeCat || $activeCat == null)--}}
+{{--        Contracts--}}
+{{--        <li class="sidebar-border">--}}
+{{--            <a data-toggle="collapse"--}}
+{{--               href="#collapseContract"--}}
+{{--               role="button"--}}
+{{--               aria-expanded="false"--}}
+{{--               aria-controls="collapseContract"--}}
+{{--               wire:click="toggleCategory({{ $contracts }})"--}}
+{{--               class="custom-sidebar-padding @if($contracts == $activeCat) active @endif"--}}
+{{--            >--}}
+{{--                @if($contracts == $activeCat)--}}
+{{--                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Contracten') }}--}}
+{{--                @else--}}
+{{--                    <i class="fa fa-folder text-success"></i>{{ __('Contracten') }}--}}
+{{--                @endif--}}
+{{--            </a>--}}
+{{--            <div class="collapse @if($contracts == $activeCat) show @endif"--}}
+
+{{--                 id="collapseContract"--}}
+{{--            >--}}
+{{--                <ul>--}}
+{{--                    <li class="mx-3">--}}
+{{--                        <a href="{{ route('contracts.index', $inspection) }}">--}}
+{{--                            <i class="fa fa-list"></i>{{ __('Lijst') }}--}}
+{{--                        </a>--}}
+{{--                    <li>--}}
+{{--                </ul>--}}
+{{--            </div>--}}
+{{--        </li>--}}
+{{--    @endif--}}
     @if($documents == $activeCat || $activeCat == null)
         {{--Documenten--}}
         <li class="sidebar-border">
@@ -1333,14 +1336,16 @@
                  id="collapseDocument"
             >
                 <ul>
-                    <li class="mx-3">
+                    <li class="mx-4">
                         <a href="{{ route('documents.index', $inspection) }}">
                             <i class="fa fa-list"></i>{{ __('Lijst') }}
                         </a>
+                    </li>
+                    <li class="mx-4">
                         <a href="{{ route('create.document', $inspection) }}">
                             <i class="fa fa-plus"></i>{{ __('Toevoegen') }}
                         </a>
-                    <li>
+                    </li>
                 </ul>
             </div>
         </li>

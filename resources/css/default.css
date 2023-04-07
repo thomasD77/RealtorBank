@@ -16,6 +16,13 @@
     width: 100% !important;
     height: auto;
 }
+.title-uppercase {
+    text-transform: uppercase;
+}
+
+.breadcrumb-title {
+    font-size: 8px;
+}
 
 /*-----------------------------------*/
 /*------ 1. CUSTOM  ------*/
@@ -105,7 +112,7 @@ input[type=checkbox]{
 .btn-close {
     color: #aeb7c2;
     background-color: transparent;
-    border: 1px solid #aeb7c2;
+    /*border: 1px solid #aeb7c2;*/
     margin-right: 2rem;
 }
 .btn-common {
@@ -149,7 +156,7 @@ input[type=checkbox]{
 
 @media only screen and (max-width: 1024px) {
     .special{
-        padding-left: 1.5rem !important;
+        padding-left: 1rem !important;
     }
     .sidebar a {
         width: 100%;

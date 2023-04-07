@@ -31,8 +31,8 @@
                 :outdoor="$outdoor"
                 :outdoorArea="$outdoorArea"
             />
-
         </ul>
+        <h6 class="mb20 text-md-right">{{ $inspection->title }} | {{ __('Exterieur') }} | <strong>{{ $outdoorArea->outdoor->title }}</strong></h6>
     </div>
 
 @endsection

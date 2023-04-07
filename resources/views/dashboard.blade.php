@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="dashborad-box stat bg-white">
-        <h4 class="title">{{ __('Dashboard') }}</h4>
+        <h4 class="title title-uppercase">{{ __('Dashboard') }}</h4>
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-xs-12 dar pro mr-3">
@@ -59,7 +59,7 @@
     </div>
     @if($pdfs->isNotEmpty())
         <div class="dashborad-box">
-        <h4 class="title">{{ __('Recente PDF') }}</h4>
+        <h4 class="title title-uppercase">{{ __('Recente PDF') }}</h4>
             <div class="section-body listing-table">
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -99,7 +99,7 @@
 
     @if($inspections->isNotEmpty())
         <div class="my-properties">
-            <h4 class="title">{{ __('Mijn inspecties') }}</h4>
+            <h4 class="title title-uppercase">{{ __('Recente inspecties') }}</h4>
             <table class="table-custom">
                 <thead>
                 </thead>

@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="single-add-property">
-        <h6 class="mb20 text-md-right">{{ $inspection->title }} > {{ $room->title }} > <strong>{{ $basicArea->area->title }}</strong></h6>
+        <h6 class="mb20 text-md-right">{{ $inspection->title }} | {{ $room->title }} | <strong>{{ $basicArea->area->title }}</strong></h6>
         <h3 class="uppercase">{{ __('Basis gegevens') }}</h3>
 
     <livewire:basic.add-area
@@ -35,7 +35,7 @@
         />
 
     </ul>
-    <h6 class="mb20 text-md-right">{{ $inspection->title }} > {{ $room->title }} > <strong>{{ $basicArea->area->title }}</strong></h6>
+    <h6 class="mb20 text-md-right">{{ $inspection->title }} | {{ $room->title }} | <strong>{{ $basicArea->area->title }}</strong></h6>
 </div>
 
 @endsection

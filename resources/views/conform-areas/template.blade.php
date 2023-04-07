@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="single-add-property">
-        <h6 class="mb20 text-md-right">{{ $inspection->title }} > {{ $room->title }} > <strong>{{ $conformArea->conform->title }}</strong></h6>
+        <h6 class="mb20 text-md-right">{{ $inspection->title }} | {{ $room->title }} | <strong>{{ $conformArea->conform->title }}</strong></h6>
         <h3 class="uppercase">{{ __('Conformiteit') }}</h3>
 
         <ul class="accordion accordion-1 one-open">
@@ -29,7 +29,7 @@
 
         </ul>
 
-        <h6 class="mb20 text-md-right">{{ $inspection->title }} > {{ $room->title }} > <strong>{{ $conformArea->conform->title }}</strong></h6>
+        <h6 class="mb20 text-md-right">{{ $inspection->title }} | {{ $room->title }} | <strong>{{ $conformArea->conform->title }}</strong></h6>
     </div>
 
 @endsection
