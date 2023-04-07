@@ -5,7 +5,8 @@
             $item->dorpel || $item->glassInlay || $item->handle ||
             $item->mailbox || $item->peephole || $item->window ||
             $item->doorBel || $item->brand ||
-            $item->type || $item->model || $item->doors ||
+            $item->type || $item->model || $item->doors || $item->drawers ||
+            $item->rod || $item->trap ||
             $item->mirror || $item->toiletPaperHolder || $item->cupboard ||
             $item->stop || $item->crane || $item->siphon ||
             $item->angleCrane || $item->rinse || $item->seat ||
@@ -207,7 +208,6 @@
                         <th>{{ $item->energy }}</th>
                     </tr>
                 @endif
-
                 @if($item->cabLow)
                     <tr class="row--text--list">
                         <th>{{ __('Lage kasten') }}</th>

@@ -15,12 +15,6 @@
                         <th>{{ $item->reference }}</th>
                     </tr>
                 @endif
-                @if($item->EAN)
-                    <tr class="row--text--list">
-                        <th>{{ __('EAN') }}</th>
-                        <th>{{ $item->EAN }}</th>
-                    </tr>
-                @endif
                 @if($item->date)
                     <tr class="row--text--list">
                         <th>{{ __('Datum') }}</th>

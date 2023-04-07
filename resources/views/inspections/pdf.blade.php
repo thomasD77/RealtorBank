@@ -25,13 +25,13 @@
 
         @endforeach
 
-{{--        @include('inspections.sections.techniques')--}}
+        @include('inspections.sections.techniques')
 
-{{--        @include('inspections.sections.keys')--}}
+        @include('inspections.sections.keys')
 
-{{--        @include('inspections.sections.meters')--}}
+        @include('inspections.sections.meters')
 
-{{--        @include('inspections.sections.documents')--}}
+        @include('inspections.sections.documents')
 
 </body>
 </html>

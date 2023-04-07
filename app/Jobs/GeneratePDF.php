@@ -66,7 +66,7 @@ class GeneratePDF implements ShouldQueue
             ->get();
 
         $keys = Key::query()
-            ->orWhereNotNull('type')
+            ->whereNotNull('type')
             ->orWhereNotNull('count')
             ->orWhereNotNull('extra')
             ->orHas('media', '>', 0)
