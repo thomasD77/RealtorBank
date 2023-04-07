@@ -47,6 +47,13 @@ class Edit extends Component
 
     public $folder = 'inspections';
     public $relation_id = 'inspection_id';
+    public $mediaName = 'MediaInspection';
+
+    use WithFileUploads;
+
+    protected $messages = [
+        'media.*' => 'Oeps, limit om aantal bestanden up te loaden is overschreden. Probeer het opnieuw.',
+    ];
 
     public function mount(Inspection $inspection)
     {
@@ -115,7 +122,7 @@ class Edit extends Component
     {
         $this->resetValidation();
         $this->validate([
-            'media.*' => 'image|max:1024',
+            'media.*' => 'max:5000',
         ]);
 
         //Set up model
@@ -123,7 +130,7 @@ class Edit extends Component
 
         //Save and store
         if( $this->media != [] && $this->media != "") {
-            (new \App\Models\MediaStore)->createAndStoreMedia($mediaStore, $this->inspection, $this->media, $this->folder, $this->relation_id);
+            (new \App\Models\MediaStore)->createAndStoreMedia($this->mediaName, $mediaStore, $this->inspection, $this->media, $this->folder, $this->relation_id);
         }
 
         //Render
