@@ -8,19 +8,8 @@
                 <a href="index.html"><img src="{{ asset('assets/images/logo.svg') }}" alt="logo"></a>
             </div>
 
-            <!-- Mobile Navigation Mobile -->
-            <div class="d-md-none">
-                <div class="mmenu-trigger">
-                    <button class="hamburger hamburger--collapse" type="button">
-                                    <span class="hamburger-box">
-							<span class="hamburger-inner"></span>
-                                    </span>
-                    </button>
-                </div>
-            </div>
-
             <!-- Mobile Navigation MD -->
-            <div class="d-none d-md-block d-lg-none">
+            <div class="d-xl-none">
                 <button onclick="getSidebar()"
                         class="hamburger hamburger--collapse"
                         type="button"
@@ -31,7 +20,7 @@
 
             <!-- Custom Sidebar Tablet M  -->
             @if(isset($inspection))
-                <div id="sidebarResp" class="overlay d-none d-xl-none pt-3">
+                <div id="sidebarResp" class="overlay d-none pt-3">
                     <div class="text-right">
                         <button onclick="closeSidebar()" class="p-2 btn-close">X</button>
                     </div>
@@ -39,19 +28,6 @@
                         :Inspection="$inspection"
                         :Responsive="false"
                     />
-                </div>
-            @endif
-
-            <!-- Sidebar Mobile  -->
-            @if(isset($inspection))
-                <div class="d-md-none">
-                    <!-- Main Navigation -->
-                    <nav id="navigation" class="style-1">
-                        <livewire:sidebar.sidebar
-                            :Inspection="$inspection"
-                            :Responsive="true"
-                        />
-                    </nav>
                 </div>
             @endif
             <div class="clearfix"></div>

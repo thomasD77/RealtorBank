@@ -31,11 +31,11 @@
 <script>
     function getSidebar() {
         var filter = document.getElementById("sidebarResp");
-        filter.classList.add("d-md-block");
+        filter.classList.remove("d-none");
     }
     function closeSidebar() {
         var filter = document.getElementById("sidebarResp");
-        filter.classList.remove("d-md-block");
+        filter.classList.add("d-none");
     }
 </script>
 
