@@ -1,6 +1,7 @@
 <div>
 
     <div class="single-add-property">
+        <a href="{{ route('meters.index', $inspection) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
         <h3>{{ $meter->title }}</h3>
         <div class="property-form-group">
 

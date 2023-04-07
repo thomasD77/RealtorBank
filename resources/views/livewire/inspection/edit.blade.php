@@ -1,5 +1,7 @@
 <div>
     <div class="single-add-property">
+        <a href="{{ route('inspections.index', $inspection) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
+
         <h3>{{ __('Algemene gegevens')  }}</h3>
         <div class="property-form-group">
             <form wire:submit.prevent="submitGeneral">

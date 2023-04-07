@@ -1,5 +1,6 @@
 <div>
     <div class="single-add-property">
+        <a href="{{ route('keys.index', $inspection) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
 
         <h3>{{  __('Sleutel') }} - {{ $key->title }}</h3>
 

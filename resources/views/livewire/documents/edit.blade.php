@@ -1,6 +1,6 @@
 <div>
     <div class="single-add-property">
-        <a href="{{ route('documents.index', $inspection) }}"><p class="breadcrumb-title text-md-right text-dark"><< {{ __('naar') }} <strong>{{ __('documents') }}</strong></p></a>
+        <a href="{{ route('documents.index', $inspection) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
         <h3>{{ __('Document') }}</h3>
         <div class="property-form-group">
             <form wire:submit.prevent="documentSubmit">

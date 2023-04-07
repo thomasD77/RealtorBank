@@ -1,6 +1,7 @@
 <div>
 
     <div class="single-add-property">
+        <a href="{{ route('situation.index', $inspection) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
         <h3>{{ __('In/uittrede') }}</h3>
         <div class="property-form-group">
             <div class="row">
@@ -216,7 +217,7 @@
                                         <td>{{ __('Contract') }}</td>
                                         <td>{{ $contract->created_at->format('d-m-Y') }}</td>
                                         <td class="edit">
-                                            <a href="{{ route('contract.edit', [ $inspection, $contract]) }}"><i class="fa fa-pencil-alt text-success"></i></a>
+                                            <a href="{{ route('contract.edit', [ $inspection, $contract]) }}"><i class="fa fa-pencil-alt text-dark"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>

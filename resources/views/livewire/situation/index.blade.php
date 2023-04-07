@@ -15,8 +15,6 @@
                             <th>{{ __('In/uittrede') }}</th>
                             <th>{{ __('Datum') }}</th>
                             <th>{{ __('Naam') }}</th>
-                            <th>{{ __('E-mail') }}</th>
-                            <th>{{ __('Telefoon') }}</th>
                             <th>{{ __('Actie') }}</th>
                         </tr>
                         </thead>
@@ -31,8 +29,6 @@
                                 </td>
                                 <td>{{ $situation->date ?? "" }}</td>
                                 <td>{{ $situation->tenant->name ?? "" }}</td>
-                                <td>{{ $situation->tenant->email ?? "" }}</td>
-                                <td>{{ $situation->tenant->phone ?? "" }}</td>
                                 <td>
                                     <a href="{{ route('situation.edit', [ $inspection, $situation ]) }}" class="text-success"><i class="fa fa-pencil-alt"></i></a>
                                 </td>

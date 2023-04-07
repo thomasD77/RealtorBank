@@ -6,7 +6,6 @@
                 <thead>
                 <tr>
                     <th>{{ __('Titel') }}</th>
-                    <th>{{ __('Referentie') }}</th>
                     <th>{{ __('Datum') }}</th>
                     <th>{{ __('Media') }}</th>
                     <th>{{ __('Actie') }}</th>
@@ -17,10 +16,9 @@
                         @foreach($documents as $document)
                             <tr>
                                 <td>{{ $document->title }}</td>
-                                <td>{{ $document->reference }}</td>
                                 <td>{{ $document->date }}</td>
                                 <td class="rating"><span>{{ $document->media->count() }}</span></td>
-                                <td class="edit"><a href="{{ route('document.edit', [ $inspection, $document ]) }}"><i class="fa fa-pencil-alt text-success"></i></a></td>
+                                <td class="edit"><a href="{{ route('document.edit', [ $inspection, $document ]) }}"><i class="fa fa-pencil-alt text-dark"></i></a></td>
                             </tr>
                         @endforeach
                     @endif
