@@ -70,9 +70,9 @@
                                              id="collapseRoom{{ $room->id }}"
                                         >
                                             <ul>
-                                                <li>
+                                                <li class="pt-3 pt-lg-0">
                                                     <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                        <i class="fa fa-flag" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                        <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
                                                     </a>
                                                 </li>
                                                 {{-- Basic--}}
@@ -201,8 +201,9 @@
                         >
                             @if($groundFloorParam)
                                 @foreach($groundFloorParam as $room)
-                                    <li class="mx-2">
-                                        @if($room->id == $activeRoom || $activeRoom == null)
+                                    @if($room->id == $activeRoom || $activeRoom == null)
+                                        <li class="mx-2">
+
                                             <a data-toggle="collapse"
                                                href="#collapseRoom{{ $room->id }}"
                                                role="button" aria-expanded="false"
@@ -225,9 +226,9 @@
                                                  id="collapseRoom{{ $room->id }}"
                                             >
                                                 <ul>
-                                                    <li>
+                                                    <li class="pt-3 pt-lg-0">
                                                         <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                            <i class="fa fa-flag" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                            <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
                                                         </a>
                                                     </li>
                                                     {{-- Basic--}}
@@ -326,8 +327,9 @@
                                                     @endif
                                                 </ul>
                                             </div>
-                                        @endif
+
                                     </li>
+                                    @endif
                                 @endforeach
                             @endif
                         </div>
@@ -379,7 +381,7 @@
                                                 <ul>
                                                     <li>
                                                         <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                            <i class="fa fa-flag" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                            <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
                                                         </a>
                                                     </li>
                                                     {{--  Basic--}}
@@ -530,7 +532,7 @@
                                                 <ul>
                                                     <li>
                                                         <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                            <i class="fa fa-flag" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                            <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
                                                         </a>
                                                     </li>
                                                     {{-- Basic--}}
@@ -682,7 +684,7 @@
                                                 <ul>
                                                     <li>
                                                         <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                            <i class="fa fa-flag" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                            <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
                                                         </a>
                                                     </li>
                                                     {{-- Basic--}}
@@ -838,45 +840,45 @@
                         >
                             @if($buildingParam)
                                 @foreach($buildingParam as $building)
+                                    @if($building->id == $activeRoom || $activeRoom == null)
                                     <li class="mx-2">
-                                        @if($building->id == $activeRoom || $activeRoom == null)
-                                            <a data-toggle="collapse"
-                                               href="#collapseRoom{{ $building->id }}"
-                                               role="button" aria-expanded="false"
-                                               aria-controls="collapseRoom"
-                                               wire:click="toggleRoom({{ $building->id }})"
-                                            >
-                                                @if($building->id == $activeRoom)
-                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ $building->title }}
-                                                @else
-                                                    <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $building->title }}</span>
-                                                @endif
+                                        <a data-toggle="collapse"
+                                           href="#collapseRoom{{ $building->id }}"
+                                           role="button" aria-expanded="false"
+                                           aria-controls="collapseRoom"
+                                           wire:click="toggleRoom({{ $building->id }})"
+                                        >
+                                            @if($building->id == $activeRoom)
+                                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ $building->title }}
+                                            @else
+                                                <i class="fa fa-list" aria-hidden="true"></i><span class="bold">{{ $building->title }}</span>
+                                            @endif
 
-                                            </a>
+                                        </a>
 
-                                            <div class="collapse @if($building->id == $activeRoom) show @endif"
+                                        <div class="collapse @if($building->id == $activeRoom) show @endif"
 
-                                                 id="collapseRoom{{ $building->id }}"
-                                            >
-                                                <ul>
-                                                    <li>
-                                                        <a href="{{ route('general.detail',  [$inspection, $building]) }}">
-                                                            <i class="fa fa-flag" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                             id="collapseRoom{{ $building->id }}"
+                                        >
+                                            <ul>
+                                                <li>
+                                                    <a href="{{ route('general.detail',  [$inspection, $building]) }}">
+                                                        <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                    </a>
+                                                </li>
+
+                                                @foreach($building->outdoorAreas as $item)
+                                                    <li class="mx-3">
+                                                        <a class="@if($activeArea == $item->outdoor->id) activeLink @endif" href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
+                                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}
                                                         </a>
                                                     </li>
+                                                @endforeach
 
-                                                    @foreach($building->outdoorAreas as $item)
-                                                        <li class="mx-3">
-                                                            <a class="@if($activeArea == $item->outdoor->id) activeLink @endif" href="{{ route('area.outdoor', [$inspection, $item->outdoor]) }}">
-                                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->outdoor->title }}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-
-                                                </ul>
-                                            </div>
-                                        @endif
+                                            </ul>
+                                        </div>
                                     </li>
+                                    @endif
                                 @endforeach
                             @endif
                         </div>
@@ -903,8 +905,8 @@
                         >
                             @if($driveWayParam)
                                 @foreach($driveWayParam as $room)
-                                    <li class="mx-2">
-                                        @if($room->id == $activeRoom || $activeRoom == null)
+                                    @if($room->id == $activeRoom || $activeRoom == null)
+                                        <li class="mx-2">
                                             <a data-toggle="collapse"
                                                href="#collapseRoom{{ $room->id }}"
                                                role="button" aria-expanded="false"
@@ -926,7 +928,7 @@
                                                 <ul>
                                                     <li>
                                                         <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                            <i class="fa fa-flag" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                            <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
                                                         </a>
                                                     </li>
 
@@ -939,8 +941,8 @@
                                                     @endforeach
                                                 </ul>
                                             </div>
-                                        @endif
-                                    </li>
+                                        </li>
+                                    @endif
                                 @endforeach
                             @endif
                         </div>
@@ -997,7 +999,7 @@
                                         @foreach($outHouseInParam as $room)
                                             <li>
                                                 <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                    <i class="fa fa-flag" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                    <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
                                                 </a>
                                             </li>
                                             {{--          Basic--}}
@@ -1125,7 +1127,7 @@
                                     <ul>
                                         <li>
                                             <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                <i class="fa fa-flag" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
                                             </a>
                                         </li>
 

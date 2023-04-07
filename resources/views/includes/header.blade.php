@@ -22,7 +22,7 @@
             @if(isset($inspection))
                 <div id="sidebarResp" class="overlay d-none pt-3">
                     <div class="text-right">
-                        <button onclick="closeSidebar()" class="p-2 btn-close">X</button>
+                        <button onclick="closeSidebar()" class="p-2 btn-close"><strong>x</strong></button>
                     </div>
                     <livewire:sidebar.sidebar
                         :Inspection="$inspection"
