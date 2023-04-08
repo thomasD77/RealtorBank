@@ -89,19 +89,6 @@
             @endif
         </table>
 
-        @if($inspection->user->signature)
-            <section class="signature">
-                <div class="row">
-                    <div class="column-half">
-                        <p><strong>Gelezen en goedgekeurd op {{ $inspection->date }}</strong></p>
-                        <p><strong>{{ $inspection->user->firstName }} {{ $inspection->user->lastName }}</strong></p>
-                    </div>
-                    <div class="column-half signature">
-                        <img src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
-                    </div>
-                </div>
-            </section>
-        @endif
     </section>
 
     <br>
@@ -191,6 +178,20 @@
             </table>
         @endif
     </section>
+
+    @if($inspection->user->signature)
+        <section class="signature">
+            <div class="row">
+                <div class="column-half">
+                    <p><strong>Gelezen en goedgekeurd op {{ $inspection->date }}</strong></p>
+                    <p><strong>{{ $inspection->user->firstName }} {{ $inspection->user->lastName }}</strong></p>
+                </div>
+                <div class="column-half signature">
+                    <img src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
+                </div>
+            </div>
+        </section>
+    @endif
 
     <br>
     <br>
