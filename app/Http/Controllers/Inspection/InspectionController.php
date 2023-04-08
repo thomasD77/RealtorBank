@@ -110,7 +110,7 @@ class InspectionController extends Controller
 
         $pdfStore = new \App\Models\PDF();
         $pdfStore->inspection_id = $inspection->id;
-        $pdfStore->title = 'Plaatsbeschrijving';
+        $pdfStore->title = 'Plaatsbeschrijving' . '|' . $inspection->address ? $inspection->address->city : now();
         $pdfStore->file_original = $fileName;
         $pdfStore->status = Status::Pending->value;
         $pdfStore->save();
