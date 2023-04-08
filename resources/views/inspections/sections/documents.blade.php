@@ -1,8 +1,6 @@
-<section class="areas">
-    @if($documents)
-
+@if($documents->isNotEmpty())
+    <section class="areas">
         <h2>{{ __('Documents') }}</h2>
-
         @foreach($documents as $item)
             <table class="table">
                 <tr class="row--head--list">
@@ -26,5 +24,6 @@
             @include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::Documents->value ])
 
         @endforeach
-    @endif
-</section>
+    </section>
+@endif
+

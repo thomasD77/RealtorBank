@@ -1,19 +1,18 @@
-<section>
-    @foreach($room->outdoorAreas as $item)
-        @if($item->material || $item->finish || $item->color ||
-            $item->windowsill || $item->type || $item->footh ||
-            $item->cover || $item->chimney || $item->solar ||
-            $item->lock || $item->handrail || $item->balustrade ||
-            $item->parts || $item->count || $item->movementDetector ||
-            $item->gras || $item->hedges || $item->trees ||
-            $item->single || $item->double || $item->brand ||
-            $item->crane || $item->glassInlay || $item->handle ||
-            $item->mailbox || $item->peephole || $item->window ||
-            $item->doorBel || $item->dorpel || $item->analysis || $item->extra)
-
+@foreach($room->outdoorAreas as $item)
+    @if($item->material || $item->finish || $item->color ||
+        $item->windowsill || $item->type || $item->footh ||
+        $item->cover || $item->chimney || $item->solar ||
+        $item->lock || $item->handrail || $item->balustrade ||
+        $item->parts || $item->count || $item->movementDetector ||
+        $item->gras || $item->hedges || $item->trees ||
+        $item->single || $item->double || $item->brand ||
+        $item->crane || $item->glassInlay || $item->handle ||
+        $item->mailbox || $item->peephole || $item->window ||
+        $item->doorBel || $item->dorpel || $item->analysis || $item->extra)
+        <section>
             <table class="table">
                 <tr class="row--head--list">
-                    <th>{{ $room->floor->title }} | {{  $item->outdoor->title }}</th>
+                    <th>{{ $room->floor->title }} | {{ $item->room->title }} | {{  $item->outdoor->title }}</th>
                     <th></th>
                 </tr>
                 @if($item->material)
@@ -216,9 +215,10 @@
                     </tr>
                 @endif
             </table>
-        @endif
+        </section>
+    @endif
 
-        @include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::OutdoorArea->value ])
-    @endforeach
-</section>
+    @include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::OutdoorArea->value ])
+@endforeach
+
 

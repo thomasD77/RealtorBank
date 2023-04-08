@@ -25,19 +25,12 @@
         sit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate quo repudiandae similique sunt voluptates.
         Consectetur debitis, id iusto minima mollitia omnis quasi sed. Animi dolore, eveniet facilis iusto officia
         sit.
-    </p>
-
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate quo repudiandae similique sunt voluptates.
-        Consectetur debitis, id iusto minima mollitia omnis quasi sed. Animi dolore, eveniet facilis iusto officia
-        sit.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate quo repudiandae similique sunt voluptates.
-        Consectetur debitis, id iusto minima mollitia omnis quasi sed. Animi dolore, eveniet facilis iusto officia
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate quo repudiandae similique sunt voluptates.
         Consectetur debitis, id iusto minima mollitia omnis quasi sed. Animi dolore, eveniet facilis iusto officia
         sit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate quo repudiandae similique sunt voluptates.
         Consectetur debitis, id iusto minima mollitia omnis quasi sed. Animi dolore, eveniet facilis iusto officia
         sit.
+
+
     </p>
 
     <br>
@@ -103,50 +96,50 @@
                         <p><strong>Gelezen en goedgekeurd op {{ $inspection->date }}</strong></p>
                         <p><strong>{{ $inspection->user->firstName }} {{ $inspection->user->lastName }}</strong></p>
                     </div>
-                    <div class="column-half">
+                    <div class="column-half signature">
                         <img src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
                     </div>
                 </div>
             </section>
         @endif
-
-
     </section>
 
     <br>
 
-    <section>
-        @if($inspection->address)
-            <h2>{{ __('Adres van het eigendom') }}</h2>
-            <table class="table">
 
-                @if($inspection->address->address)
-                    <tr class="row--text">
-                        <th>{{ __('Adres') }}</th>
-                        <th>{{ $inspection->address->address }} @if($inspection->address->postBus)bus {{ $inspection->address->postBus }} @endif</th>
-                    </tr>
-                @endif
-                @if($inspection->address->zip)
-                    <tr class="row--text">
-                        <th>{{ __('Postcode') }}</th>
-                        <th>{{ $inspection->address->zip }}</th>
-                    </tr>
-                @endif
-                @if($inspection->address->city)
-                    <tr class="row--text">
-                        <th>{{ __('Stad') }}</th>
-                        <th>{{ $inspection->address->city }}</th>
-                    </tr>
-                @endif
-                @if($inspection->address->country)
-                    <tr class="row--text">
-                        <th>{{ __('Land') }}</th>
-                        <th>{{ $inspection->address->country }}</th>
-                    </tr>
-                @endif
-            </table>
+        @if($inspection->address)
+            <section>
+                <h2>{{ __('Adres van het eigendom') }}</h2>
+                <table class="table">
+
+                    @if($inspection->address->address)
+                        <tr class="row--text">
+                            <th>{{ __('Adres') }}</th>
+                            <th>{{ $inspection->address->address }} @if($inspection->address->postBus)bus {{ $inspection->address->postBus }} @endif</th>
+                        </tr>
+                    @endif
+                    @if($inspection->address->zip)
+                        <tr class="row--text">
+                            <th>{{ __('Postcode') }}</th>
+                            <th>{{ $inspection->address->zip }}</th>
+                        </tr>
+                    @endif
+                    @if($inspection->address->city)
+                        <tr class="row--text">
+                            <th>{{ __('Stad') }}</th>
+                            <th>{{ $inspection->address->city }}</th>
+                        </tr>
+                    @endif
+                    @if($inspection->address->country)
+                        <tr class="row--text">
+                            <th>{{ __('Land') }}</th>
+                            <th>{{ $inspection->address->country }}</th>
+                        </tr>
+                    @endif
+                </table>
+            </section>
         @endif
-    </section>
+
 
     <section>
         @if($inspection->owner_present || $inspection->tenant_present || $inspection->new_building || $inspection->inhabited || $inspection->furnished || $inspection->first_resident)

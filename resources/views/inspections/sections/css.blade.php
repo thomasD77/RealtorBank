@@ -130,7 +130,7 @@
         margin-top: 35px;
     }
     .signature img {
-        width: 85%;
+        width: 90%;
     }
 
 </style>

@@ -1,4 +1,4 @@
-@if($item->media)
+@if($item->media->isNotEmpty())
     @for ($i = 0; $i <= count($item->media); $i++ )
         <div class="row">
             @if(isset($item->media[$i]))
