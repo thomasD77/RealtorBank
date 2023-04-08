@@ -114,7 +114,7 @@
 
     .column-half {
         float: left;
-        width: 45%;
+        width: 50%;
         margin-right: 5px;
     }
 
@@ -130,7 +130,7 @@
         margin-top: 35px;
     }
     .signature img {
-        width: 90%;
+        width: 85%;
     }
 
 </style>
