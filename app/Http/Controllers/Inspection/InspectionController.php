@@ -118,6 +118,7 @@ class InspectionController extends Controller
         $pdfStore->save();
 
         $this->dispatch(new GeneratePDF($inspection, $fileName, $pdfStore));
+        Session::flash('successPDF', 'PDF is aan het genereren.');
 
         return redirect()->back();
     }

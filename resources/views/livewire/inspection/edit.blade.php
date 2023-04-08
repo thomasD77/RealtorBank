@@ -1,7 +1,11 @@
 <div>
     <div class="single-add-property">
         <a href="{{ route('inspections.index', $inspection) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
-
+        @if (session()->has('successPDF'))
+            <div class="btn btn-success flash_message">
+                {{ session('successPDF') }}
+            </div>
+        @endif
         <h3>{{ __('Algemene gegevens')  }}</h3>
         <div class="property-form-group">
             <form wire:submit.prevent="submitGeneral">

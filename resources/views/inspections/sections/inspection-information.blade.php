@@ -107,7 +107,7 @@
     <br>
 
 
-    @if($inspection->address->isNotEmpty())
+    @if($inspection->address != [])
         <section>
             <h2>{{ __('Adres van het eigendom') }}</h2>
             <table class="table">
