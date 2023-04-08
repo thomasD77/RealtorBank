@@ -54,24 +54,25 @@ class InspectionController extends Controller
 //            ->orWhereNotNull('reference')
 //            ->orWhereNotNull('date')
 //            ->orHas('media', '>', 0)
-//            ->where('inspection_id', $inspection->id)
 //            ->get();
+//        $documents = $documents->where('inspection_id', $inspection->id);
 //
 //        $meters = Meter::query()
 //            ->whereNotNull('reference')
 //            ->orWhereNotNull('EAN')
 //            ->orWhereNotNull('date')
 //            ->orHas('media', '>', 0)
-//            ->where('inspection_id', $inspection->id)
 //            ->get();
+//        $meters = $meters->where('inspection_id', $inspection->id);
 //
 //        $keys = Key::query()
-//            ->orWhereNotNull('type')
+//            ->whereNotNull('type')
 //            ->orWhereNotNull('count')
 //            ->orWhereNotNull('extra')
 //            ->orHas('media', '>', 0)
-//            ->where('inspection_id', $inspection->id)
 //            ->get();
+//        $keys = $keys->where('inspection_id', $inspection->id);
+//
 //
 //        $techniqueArea = TechniqueArea::query()
 //            ->whereNotNull('type')
@@ -82,8 +83,9 @@ class InspectionController extends Controller
 //            ->orWhereNotNull('count')
 //            ->orWhereNotNull('extra')
 //            ->orHas('media', '>', 0)
-//            ->where('inspection_id', $inspection->id)
 //            ->get();
+//        $techniqueArea = $techniqueArea->where('inspection_id', $inspection->id);
+//
 //
 //        $rooms = Room::query()
 //            ->where('inspection_id', $inspection->id)

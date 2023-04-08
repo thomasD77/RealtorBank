@@ -54,8 +54,8 @@ class GeneratePDF implements ShouldQueue
             ->orWhereNotNull('reference')
             ->orWhereNotNull('date')
             ->orHas('media', '>', 0)
-            ->where('inspection_id', $this->inspection->id)
             ->get();
+        $documents = $documents->where('inspection_id', $this->inspection->id);
 
         $meters = Meter::query()
             ->whereNotNull('reference')
@@ -64,6 +64,7 @@ class GeneratePDF implements ShouldQueue
             ->orHas('media', '>', 0)
             ->where('inspection_id', $this->inspection->id)
             ->get();
+        $meters = $meters->where('inspection_id', $this->inspection->id);
 
         $keys = Key::query()
             ->whereNotNull('type')
@@ -72,6 +73,7 @@ class GeneratePDF implements ShouldQueue
             ->orHas('media', '>', 0)
             ->where('inspection_id', $this->inspection->id)
             ->get();
+        $keys = $keys->where('inspection_id', $this->inspection->id);
 
         $techniqueArea = TechniqueArea::query()
             ->whereNotNull('type')
@@ -84,6 +86,7 @@ class GeneratePDF implements ShouldQueue
             ->orHas('media', '>', 0)
             ->where('inspection_id', $this->inspection->id)
             ->get();
+        $techniqueArea = $techniqueArea->where('inspection_id', $this->inspection->id);
 
         $rooms = Room::query()
             ->where('inspection_id', $this->inspection->id)
