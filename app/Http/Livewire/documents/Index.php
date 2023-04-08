@@ -23,7 +23,7 @@ class Index extends Component
         $documents = Document::query()
             ->where('inspection_id', $this->inspection->id)
             ->latest()
-            ->simplePaginate(2);
+            ->simplePaginate(10);
 
         return view('livewire.documents.index', [
             'documents' => $documents

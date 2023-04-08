@@ -7,6 +7,7 @@ use App\Models\Inspection;
 use App\Models\MediaBasic;
 use App\Models\MediaDocument;
 use App\Models\MediaStore;
+use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -85,6 +86,22 @@ class Edit extends Component
 
         //Render
         $this->files = MediaDocument::where($this->relation_id, $this->document->id)->get();
+    }
+
+    public function deleteDocument()
+    {
+        $document = $this->document;
+
+        //Delete all the media items from this document
+        $documentMedias = MediaDocument::where('document_id', $document->id)->get();
+        foreach ($documentMedias as $item){
+            File::delete('assets/images/' . $this->folder . '/' . $item->file_original);
+            File::delete('assets/images/' . $this->folder . '/crop/' . $item->file_crop);
+            $item->delete();
+        }
+
+        $document->delete();
+        return redirect()->route('documents.index', $this->inspection);
     }
 
     public function render()
