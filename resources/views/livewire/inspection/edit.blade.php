@@ -2,7 +2,7 @@
     <div class="single-add-property">
         <a href="{{ route('inspections.index', $inspection) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
         @if (session()->has('successPDF'))
-            <div class="btn btn-success flash_message">
+            <div class="btn btn-success flash_message mb-3">
                 {{ session('successPDF') }}
             </div>
         @endif
