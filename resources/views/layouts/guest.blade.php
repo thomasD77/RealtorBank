@@ -83,9 +83,9 @@
             <div class="container">
                 <p>2023 © Copyright | Innova Webcreations | All Rights Reserved.</p>
                 <ul class="netsocials">
-                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="https://www.facebook.com/profile.php?id=100077198534312"><i class="fa fa-facebook" ></i></a></li>
                     <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li><a target="_blank" href="https://www.instagram.com/innovawebcreations/"><i class="fab fa-instagram"></i></a></li>
                     <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
                 </ul>
             </div>

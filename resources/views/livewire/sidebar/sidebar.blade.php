@@ -1,7 +1,7 @@
 <ul id="{{ $responsive }}" class="sidebar">
     <li>
         <a class="custom-sidebar-padding" href="{{ route('inspection.edit', $inspection) }}">
-            <i class="fa fa-map-marker text-danger"></i>{{ $inspection->title }}
+            <i class="fa fa-map-marker text-danger"></i>{{ Str::limit($inspection->title, 50) }}
         </a>
     </li>
 

@@ -27,13 +27,13 @@
         </style>
     </head>
     <body>
-    <div class="container-fluid test py-5" style="background-image: url('{{ asset('assets/images/real.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat">
+    <div class="container-fluid test py-5" style="background-image: url('{{ asset('assets/images/real.png') }}'); background-size: cover; background-position: bottom center; background-repeat: no-repeat">
         @if (Route::has('login'))
             <div class="fixed top-0 right-0 px-6 py-4">
                 @auth
-                    <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                    <a href="{{ url('/dashboard') }}" style="color: #ffffff; text-transform: uppercase"><strong>Dashboard</strong></a>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+                    <a href="{{ route('login') }}" style="color: #ffffff; text-transform: uppercase"><strong>Log in</strong></a>
 
 {{--                    @if (Route::has('register'))--}}
 {{--                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>--}}
