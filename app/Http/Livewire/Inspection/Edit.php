@@ -91,7 +91,11 @@ class Edit extends Component
     public function submitGeneral()
     {
         $this->inspection->title = $this->title;
-        $this->inspection->date = $this->date;
+        if($this->date){
+            $this->inspection->date = $this->date;
+        }else {
+            $this->inspection->date = null;
+        }
         $this->inspection->extra = $this->description;
         $this->inspection->update();
         session()->flash('successGeneral', 'success!');
