@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\BasicArea;
 use App\Models\Inspection;
 use App\Models\Room;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class AddArea extends Component
@@ -42,6 +43,7 @@ class AddArea extends Component
         $extraArea->updated_at = now();
 
         $extraArea->save();
+        Session::flash('successAdd', 'succes!');
         $this->emit('renderNewArea');
     }
 
