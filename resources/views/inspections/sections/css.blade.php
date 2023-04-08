@@ -20,6 +20,10 @@
         height: auto;
     }
 
+    .inspection-information {
+        page-break-after: always;
+    }
+
     strong {
         margin-bottom: 0;
         padding-right: 8px;
@@ -130,7 +134,7 @@
         margin-top: 35px;
     }
     .signature img {
-        width: 85%;
+        width: 50%;
     }
 
 </style>

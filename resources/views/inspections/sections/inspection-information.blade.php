@@ -179,6 +179,12 @@
         @endif
     </section>
 
+    <br>
+    <br>
+
+    @include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::Inspections->value, 'item' => $inspection ])
+
+
     @if($inspection->user->signature)
         <section class="signature">
             <div class="row">
@@ -193,9 +199,5 @@
         </section>
     @endif
 
-    <br>
-    <br>
-
-    @include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::Inspections->value, 'item' => $inspection ])
 
 </section>
