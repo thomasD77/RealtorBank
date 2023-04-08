@@ -31,7 +31,9 @@ class Edit extends Component
     {
         $this->meter->EAN = $this->EAN;
         $this->meter->reference = $this->reference;
-        $this->meter->date = $this->date;
+        if($this->date){
+            $this->meter->date = $this->date;
+        }
         $this->meter->update();
         session()->flash('success', 'success!');
     }
