@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class InspectionController extends Controller
 {
@@ -106,7 +107,7 @@ class InspectionController extends Controller
     public function genereatePDF(Inspection $inspection)
     {
         $rawFileName = time(). '-INSP-' . $inspection->id . '-plaatsbeschrijving.pdf';
-        $cleanFileName = '-INSP-' . $inspection->id . '-plaatsbeschrijving.pdf';
+        $cleanFileName = Str::limit($inspection->title, 20, '...') . '-' . now()->format('d-m-Y') . '-plaatsbeschrijving.pdf';
         $fileName = MediaStore::getValidFilename($rawFileName);
 
         $pdfStore = new \App\Models\PDF();
