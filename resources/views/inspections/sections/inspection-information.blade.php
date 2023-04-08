@@ -97,7 +97,7 @@
         </table>
 
         @if($inspection->user->signature)
-            <div class="signature">
+            <section class="signature">
                 <div class="row">
                     <div class="column-half">
                         <p><strong>Gelezen en goedgekeurd op {{ $inspection->date }}</strong></p>
@@ -107,7 +107,7 @@
                         <img src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
                     </div>
                 </div>
-            </div>
+            </section>
         @endif
 
 

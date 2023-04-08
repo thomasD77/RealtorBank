@@ -114,7 +114,7 @@
 
     .column-half {
         float: left;
-        width: 50%;
+        width: 45%;
         margin-right: 5px;
     }
 

@@ -100,7 +100,7 @@
         </div>
     </div>
 
-        <div class="row">
+    <div class="row">
         <div class="column">
             <h3>{{ __('Gelezen en goedgekeurd') }}</h3>
             <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>

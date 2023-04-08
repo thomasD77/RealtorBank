@@ -10,7 +10,7 @@ class Types extends MainDropdownComponent
 {
     //--> Custom
     public string $element = "type";
-    public string $title = "Roof";
+    public string $title = "Type";
 
     public function mount($dynamicArea)
     {
