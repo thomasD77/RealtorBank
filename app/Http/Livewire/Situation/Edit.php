@@ -121,7 +121,9 @@ class Edit extends Component
     public function editDate()
     {
         $this->situation->date = $this->date;
-        $this->situation->update();
+        if($this->date){
+            $this->situation->update();
+        }
     }
 
     public function extraSubmit()
