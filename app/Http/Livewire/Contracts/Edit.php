@@ -33,9 +33,11 @@ class Edit extends Component
 
     public function changeDate()
     {
-        $contract =  $this->contract;
-        $contract->date = $this->date;
-        $contract->update();
+        if($this->date){
+            $contract =  $this->contract;
+            $contract->date = $this->date;
+            $contract->update();
+        }
     }
 
     public function render()

@@ -1,5 +1,7 @@
 <div>
     <div class="single-add-property">
+        <a class="breadcrumb-link" href="{{ route('situation.edit', [$inspection, $contract->situation->id]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('in/uittrede') }}</strong></p></a>
+
         <h3>{{ __('Status contract') }}</h3>
         <form action="{{ route('toggle.contract') }}" method="post">
             @csrf
@@ -265,8 +267,8 @@
                     <div class="col-md-6">
                         <h3 class="font-weight-bold mb-4">{{ __('Verkoper/verhuurder') }}</h3>
                         <p class="mb-0 font-weight-bold">{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
-                        <p class="mb-0"><span class="text-muted">{{  $contract->situation->owner ? $contract->situation->owner->phone : "" }}</p>
-                        <p class="mb-1"><span class="text-muted">{{  $contract->situation->owner ? $contract->situation->owner->email : "" }}</p>
+                        <p class="mb-0"><span class="text-dark">{{  $contract->situation->owner ? $contract->situation->owner->phone : "" }}</p>
+                        <p class="mb-1"><span class="text-dark">{{  $contract->situation->owner ? $contract->situation->owner->email : "" }}</p>
 
                         <p class="mb-0">
                             {{  $inspection->address->address }}
@@ -281,8 +283,8 @@
                     <div class="col-md-6 text-right">
                         <h3 class="font-weight-bold mb-4">{{ __('Koper/huurder ') }}</h3>
                         <p class="mb-0 font-weight-bold">{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
-                        <p class="mb-0"><span class="text-muted">{{  $contract->situation->tenant ? $contract->situation->tenant->phone : "" }}</p>
-                        <p class="mb-1"><span class="text-muted">{{  $contract->situation->tenant ? $contract->situation->tenant->email : "" }}</p>
+                        <p class="mb-0"><span class="text-dark">{{  $contract->situation->tenant ? $contract->situation->tenant->phone : "" }}</p>
+                        <p class="mb-1"><span class="text-dark">{{  $contract->situation->tenant ? $contract->situation->tenant->email : "" }}</p>
                     </div>
                 </div>
 
