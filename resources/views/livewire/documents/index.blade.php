@@ -1,4 +1,7 @@
 <div class="dashborad-box single-add-property">
+    <div class="text-right">
+        <a href="{{ route('create.document', $inspection) }}" class="btn btn-common mb-3 text-white"><i class="fa fa-plus mr-2"></i>{{ __('Document') }}</a>
+    </div>
     <h3 class="title">{{ __('Mijn documenten') }}</h3>
     <div class="section-body listing-table">
         <div class="table-responsive">

@@ -46,7 +46,7 @@
                         </td>
                         <td>{{ Carbon\Carbon::parse($inspection->date)->format('d-m-Y') }}</td>
                         <td class="actions">
-                            <a href="{{ route('inspection.edit', $inspection->id) }}" class="edit"><i class="fa fa-pencil-alt"></i></a>
+                            <a href="{{ route('inspection.edit', $inspection->id) }}" class="edit"><i class="fa fa-pencil-alt text-dark"></i></a>
                         </td>
                     </tr>
                 @endforeach
