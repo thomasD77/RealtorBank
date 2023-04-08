@@ -7,7 +7,7 @@
             <div class="row m-3">
                 @foreach($parameters as $i => $parameter)
                     @if($parameter != \App\Enums\DynamicKey::Dynamic->value)
-                        <div class="col-md-3 col-lg-2">
+                        <div class="col-md-4 col-lg-2">
                             <div class="m-2">
                                 <label class="mx-2">
                                     <input type="checkbox"
