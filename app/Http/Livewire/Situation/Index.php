@@ -23,7 +23,7 @@ class Index extends Component
     public function render()
     {
         $situations = Situation::query()
-            ->orderBy('date')
+            ->orderByDesc('date')
             ->where('inspection_id', $this->inspection->id)
             ->with('tenant')
             ->simplePaginate(9);
