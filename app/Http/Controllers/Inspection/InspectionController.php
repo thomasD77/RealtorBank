@@ -106,11 +106,12 @@ class InspectionController extends Controller
     public function genereatePDF(Inspection $inspection)
     {
         $rawFileName = time(). '-INSP-' . $inspection->id . '-plaatsbeschrijving.pdf';
+        $cleanFileName = '-INSP-' . $inspection->id . '-plaatsbeschrijving.pdf';
         $fileName = MediaStore::getValidFilename($rawFileName);
 
         $pdfStore = new \App\Models\PDF();
         $pdfStore->inspection_id = $inspection->id;
-        $pdfStore->title = 'Plaatsbeschrijving' . '|' . $inspection->address ? $inspection->address->city : now();
+        $pdfStore->title = $cleanFileName;
         $pdfStore->file_original = $fileName;
         $pdfStore->status = Status::Pending->value;
         $pdfStore->save();

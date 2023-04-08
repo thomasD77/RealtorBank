@@ -239,7 +239,7 @@
                             <tbody>
                             @foreach($pdfs as $pdf)
                                 <tr>
-                                    <td>{{ $pdf->title }} {{ $pdf->id }}</td>
+                                    <td>{{ $pdf->title }}</td>
                                     <td>
                                         @if($pdf->status == \App\Enums\Status::Pending->value)
                                             <span class="badge badge-pill bg-warning px-3 py-2 text-white">{{ $pdf->status }}</span>
