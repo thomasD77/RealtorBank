@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedInteger('inspection_id')
                 ->index();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

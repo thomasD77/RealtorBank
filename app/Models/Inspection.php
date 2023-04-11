@@ -222,9 +222,7 @@ class Inspection extends Model
          * OutdoorArea
          *
          */
-
         $outdoors = Outdoor::all();
-
         foreach ($rooms as $room){
             $outdoorsToInsert = [];
             foreach ($outdoors as $outdoor) {

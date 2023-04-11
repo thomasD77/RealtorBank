@@ -68,7 +68,6 @@
                             <th>{{ __('Titel') }}</th>
                             <th>{{ __('File') }}</th>
                             <th>{{ __('Datum') }}</th>
-                            <th>{{ __('Actie') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -83,11 +82,6 @@
                                     @endif
                                 </td>
                                 <td>{{ $pdf->created_at->format('d-m-Y -  H:i:s') }}</td>
-                                <td class="edit">
-                                    <form wire:submit.prevent="deletePDF({{ $pdf->id }})">
-                                        <button class="btn_trash" type="submit"><i class="fa fa-trash text-danger"></i></button>
-                                    </form>
-                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -127,7 +121,7 @@
 
                             <td>{{ Carbon\Carbon::parse($inspection->date)->format('d-m-Y') }}</td>
                             <td class="actions">
-                                <a href="{{ route('inspection.edit', $inspection->id) }}" class="edit"><i class="fa fa-pencil-alt"></i></a>
+                                <a href="{{ route('inspection.edit', $inspection->id) }}" class="edit"><i class="fa fa-pencil-alt text-dark"></i></a>
                             </td>
                         </tr>
                     @endforeach

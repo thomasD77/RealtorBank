@@ -39,6 +39,29 @@ class AddArea extends Component
         $extraArea->inspection_id = $this->inspection->id;
         $extraArea->floor_id = $this->room->floor->id;
 
+        $extraArea->material = $this->basicArea->material;
+        $extraArea->color = $this->basicArea->color;
+        $extraArea->plinth = $this->basicArea->plinth;
+        $extraArea->analysis = $this->basicArea->analysis;
+        $extraArea->type = $this->basicArea->type;
+        $extraArea->handle = $this->basicArea->handle;
+        $extraArea->lists = $this->basicArea->lists;
+        $extraArea->key = $this->basicArea->key;
+        $extraArea->doorPump = $this->basicArea->doorPump;
+        $extraArea->doorStop = $this->basicArea->doorStop;
+        $extraArea->plaster = $this->basicArea->plaster;
+        $extraArea->finish = $this->basicArea->finish;
+        $extraArea->ventilationGrille = $this->basicArea->ventilationGrille;
+        $extraArea->glazing = $this->basicArea->glazing;
+        $extraArea->windowsill = $this->basicArea->windowsill;
+        $extraArea->rollerShutter = $this->basicArea->rollerShutter;
+        $extraArea->windowDecoration = $this->basicArea->windowDecoration;
+        $extraArea->windowDecoration = $this->basicArea->windowDecoration;
+        $extraArea->hor = $this->basicArea->hor;
+        $extraArea->fallProtection = $this->basicArea->fallProtection;
+        $extraArea->energy = $this->basicArea->energy;
+        $extraArea->extra = $this->basicArea->extra;
+
         $extraArea->created_at = now();
         $extraArea->updated_at = now();
 
