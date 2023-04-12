@@ -12,7 +12,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use Maestroerror\HeicToJpg;
+use Imagick;
 
 class UploadLargeImageFiles implements ShouldQueue
 {
