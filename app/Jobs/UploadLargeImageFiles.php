@@ -66,7 +66,7 @@ class UploadLargeImageFiles implements ShouldQueue
                 $exName = basename(strtolower($name), '.heic');
                 $name = $exName . '.png';
 
-                shell_exec('magick convert' . $media['path']['path'] . ' ' . public_path('assets/images/' . $this->folder . '/' . $name));
+                shell_exec('convert' . $media['path']['path'] . ' -resize 800x600 -quality 80 ' . public_path('assets/images/' . $this->folder . '/' . $name));
 
                 // Make the image from the new converted file
                 Image::make(public_path('assets/images/' . $this->folder . '/' . $name));
