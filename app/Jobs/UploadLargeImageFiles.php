@@ -11,8 +11,8 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
-use Imagick;
 use Intervention\Image\Facades\Image;
+use Imagick;
 
 class UploadLargeImageFiles implements ShouldQueue
 {
@@ -66,8 +66,7 @@ class UploadLargeImageFiles implements ShouldQueue
                 $exName = basename(strtolower($name), '.heic');
                 $name = $exName . '.png';
 
-                exec('magick convert ' . $media['path']['path'] . ' ' . public_path('assets/images/' . $this->folder . '/' . $name));
-//                shell_exec('magick convert ' . $media['path']['path'] . ' ' . public_path('assets/images/' . $this->folder . '/' . $name));
+                shell_exec('magick convert ' . $media['path']['path'] . ' ' . public_path('assets/images/' . $this->folder . '/' . $name));
 
                 // Make the image from the new converted file
                 Image::make(public_path('assets/images/' . $this->folder . '/' . $name));

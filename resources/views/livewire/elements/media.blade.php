@@ -33,16 +33,21 @@
 
                             {{--     <button wire:click="rotateMedia({{ $file->id }})" class="btn btn-dark rotate"><i class="fa fa-rotate-left text-white"></i></button>--}}
 
-                            <a class="d-md-none d-lg-block" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
-                                <div class="img--cover"
-                                     style="background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}');">
+{{--                            <a class="d-md-none d-lg-block" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">--}}
+{{--                                <div class="img--cover"--}}
+{{--                                     style="background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}');">--}}
+{{--                                </div>--}}
+{{--                            </a>--}}
+
+                            <a class="" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
+                                <div class="" style="height: 250px; background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}'); background-repeat: no-repeat; background-position: center; background-size: cover">
                                 </div>
                             </a>
 
                             {{--Temp fix for background images not displaying on tablets--}}
-                            <a class="d-none d-md-block d-lg-none" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
-                                <img class="img--cover" src="{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}" alt="img">
-                            </a>
+{{--                            <a class="d-none d-md-block d-lg-none" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">--}}
+{{--                                <img class="img--cover" src="{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}" alt="img">--}}
+{{--                            </a>--}}
 
                         </div>
                     </div>
