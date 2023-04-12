@@ -11,8 +11,8 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
 use Imagick;
+use Intervention\Image\Facades\Image;
 
 class UploadLargeImageFiles implements ShouldQueue
 {
