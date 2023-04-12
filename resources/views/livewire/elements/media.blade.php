@@ -40,7 +40,7 @@
 {{--                            </a>--}}
 
                             <a class="" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
-                                <div class="" style=" aspect-ratio: 3/2 ; background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}'); background-repeat: no-repeat; background-position: center; background-size: cover">
+                                <div class="img--cover" style=" min-height: 180px ; background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}'); background-repeat: no-repeat; background-position: center; background-size: cover">
                                 </div>
                             </a>
 

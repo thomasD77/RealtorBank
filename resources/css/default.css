@@ -38,12 +38,6 @@
 
 .img--cover {
     aspect-ratio: 3/2 !important;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-
-    min-height:100% !important;
-    min-width:100% !important;
 }
 
 .activeLink {
