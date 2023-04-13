@@ -256,7 +256,11 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td>{!! $contract->legal !!}</td>
+                                @if($contract->situation->intrede)
+                                    <td>{!! $contract->legal_in !!}</td>
+                                @else
+                                    <td>{!! $contract->legal_uit !!}</td>
+                                @endif
                             </tr>
                             </tbody>
                         </table>

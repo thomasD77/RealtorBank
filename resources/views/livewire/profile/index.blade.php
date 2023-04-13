@@ -25,7 +25,7 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="email">{{ __('E-mail') }}</label>
-                    <input class="form-control" type="text" wire:model="email" placeholder="Vul hier de e-mail in" id="email" required>
+                    <input class="form-control" type="text" wire:model="email" placeholder="Vul hier de e-mail in" id="email" disabled required>
                     @error('email') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
             </div>

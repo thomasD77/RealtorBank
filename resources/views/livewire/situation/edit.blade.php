@@ -197,37 +197,37 @@
         </div>
 
 
-    @if($intrede === 0)
-        <div class="single-add-property">
-            <h3>{{ __('Contract') }}</h3>
-            <div class="property-form-group">
-                @if($contract)
-                    <div class="section-body listing-table">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
+
+    <div class="single-add-property">
+        <h3>{{ __('Contract') }}</h3>
+        <div class="property-form-group">
+            @if($contract)
+                <div class="section-body listing-table">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>{{ __('Titel') }}</th>
+                                <th>{{ __('Datum') }}</th>
+                                <th>{{ __('Actie') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
                                 <tr>
-                                    <th>{{ __('Titel') }}</th>
-                                    <th>{{ __('Datum') }}</th>
-                                    <th>{{ __('Actie') }}</th>
+                                    <td>{{ __('Contract') }}</td>
+                                    <td>{{ $contract->created_at->format('d-m-Y') }}</td>
+                                    <td class="edit">
+                                        <a href="{{ route('contract.edit', [ $inspection, $contract]) }}"><i class="fa fa-pencil-alt text-dark"></i></a>
+                                    </td>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{{ __('Contract') }}</td>
-                                        <td>{{ $contract->created_at->format('d-m-Y') }}</td>
-                                        <td class="edit">
-                                            <a href="{{ route('contract.edit', [ $inspection, $contract]) }}"><i class="fa fa-pencil-alt text-dark"></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
-                @endif
-            </div>
+                </div>
+            @endif
         </div>
-    @endif
+    </div>
+
 
     <div class="single-add-property">
         <h3>{{ __('Verwijderen') }}</h3>
