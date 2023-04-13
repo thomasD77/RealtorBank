@@ -40,7 +40,7 @@
     </div>
 
     <div class="single-add-property">
-        <h3>{{ __('Eigenaar') }} <small style="text-transform: lowercase">({{ __('verkoper/verhuurder') }})</small></h3>
+        <h3>{{ __('Eigenaar') }} <small style="text-transform: lowercase">({{ __('verhuurder') }})</small></h3>
         <div class="property-form-group">
             <form wire:submit.prevent="ownerSubmit">
                 <div class="row">
@@ -79,7 +79,7 @@
     </div>
 
     <div class="single-add-property">
-        <h3>{{ __('Koper/huurder') }}</h3>
+        <h3>{{ __('Huurder') }}</h3>
         <div class="property-form-group">
             <form wire:submit.prevent="tenantSubmit">
                 <div class="row">
