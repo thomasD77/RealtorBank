@@ -212,7 +212,8 @@
 
                             {{--Temp fix for background images not displaying on tablets--}}
                             <a class="d-none d-md-block d-lg-none" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
-                                <img class="img--cover" src="{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}" alt="img">
+                                <div style=" min-height: 125px ; background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}'); background-repeat: no-repeat; background-position: center; background-size: cover">
+                                </div>
                             </a>
 
                         </div>
