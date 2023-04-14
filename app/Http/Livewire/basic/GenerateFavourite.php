@@ -17,6 +17,8 @@ class GenerateFavourite extends Component
     public BasicArea $basicArea;
     public $isFavourite;
 
+    protected $listeners = ['renderFavourite' => 'render'];
+
     public function mount(Inspection $inspection, Room $room, Area $area, BasicArea $basicArea)
     {
         $this->inspection = $inspection;
@@ -58,7 +60,7 @@ class GenerateFavourite extends Component
 
         $this->basicArea->updated_at = now();
         $this->basicArea->save();
-        
+
         $this->dispatchBrowserEvent('refresh-page');
         Session::flash('successGen', 'succes!');
     }

@@ -51,6 +51,7 @@ class MakeFavourite extends Component
 
         $this->basicArea->update();
         $this->isFavourite = $this->basicArea->isFavourite;
+        $this->emit('renderFavourite');
     }
 
     public function render()
