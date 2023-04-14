@@ -58,7 +58,8 @@ class GenerateFavourite extends Component
 
         $this->basicArea->updated_at = now();
         $this->basicArea->save();
-
+        
+        $this->dispatchBrowserEvent('refresh-page');
         Session::flash('successGen', 'succes!');
     }
 

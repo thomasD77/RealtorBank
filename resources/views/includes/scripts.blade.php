@@ -9,6 +9,12 @@
 </div>
 <!-- END PRELOADER -->
 
+<script>
+    window.addEventListener('refresh-page', event => {
+        window.location.reload(false);
+    })
+</script>
+
 <!-- SIGNATURE -->
 <script type="text/javascript">
 
