@@ -52,7 +52,6 @@ class GenerateFavourite extends Component
         $this->basicArea->windowsill = $favourite->windowsill;
         $this->basicArea->rollerShutter = $favourite->rollerShutter;
         $this->basicArea->windowDecoration = $favourite->windowDecoration;
-        $this->basicArea->windowDecoration = $favourite->windowDecoration;
         $this->basicArea->hor = $favourite->hor;
         $this->basicArea->fallProtection = $favourite->fallProtection;
         $this->basicArea->energy = $favourite->energy;

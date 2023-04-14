@@ -9,7 +9,7 @@ use Livewire\Component;
 class Windowsill extends MainDropdownComponent
 {
     //--> Custom
-    public string $element = "windowSill";
+    public string $element = "windowsill";
     public string $title = "Vensterbank";
 
     public function mount($dynamicArea)
