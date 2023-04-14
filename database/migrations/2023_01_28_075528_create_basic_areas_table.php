@@ -49,6 +49,7 @@ return new class extends Migration
             $table->string('energy')->nullable();
 
             $table->text('extra')->nullable();
+            $table->string('isFavourite')->nullable();
             $table->timestamps();
         });
 

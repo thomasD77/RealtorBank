@@ -3,6 +3,15 @@
 @section('content')
 
     <div class="single-add-property">
+
+    <livewire:basic.make-favourite
+        :Inspection="$inspection"
+        :Room="$room"
+        :Area="$area"
+        :basicArea="$basicArea"
+    />
+
+
         <h6 class="mb20 text-md-right">{{ $inspection->title }} | {{ $room->title }} | <strong>{{ $basicArea->area->title }}</strong></h6>
         <h3 class="uppercase">{{ __('Basis gegevens') }}</h3>
 
