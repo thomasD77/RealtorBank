@@ -18,13 +18,6 @@ class MainDropdownComponent extends Component
     public function mount($dynamicArea)
     {
         $this->dynamicArea = $dynamicArea;
-//        $el = $this->element;
-//
-//        if(in_array($this->dynamicArea->$el, $this->parameters)){
-//            $this->dynamic = null;
-//        }else {
-//            $this->dynamic = $this->dynamicArea->$el;
-//        }
     }
 
     public function select($title)
@@ -60,6 +53,7 @@ class MainDropdownComponent extends Component
     public function render()
     {
         return view('livewire.elements.dropdown' , [
+            'dynamic' => $this->dynamic,
             'parameters' => $this->parameters,
         ]);
     }
