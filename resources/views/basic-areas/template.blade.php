@@ -4,16 +4,26 @@
 
     <div class="single-add-property">
 
-    <livewire:basic.make-favourite
-        :Inspection="$inspection"
-        :Room="$room"
-        :Area="$area"
-        :basicArea="$basicArea"
-    />
+        <div class="d-flex justify-content-between">
+            <livewire:basic.make-favourite
+                :Inspection="$inspection"
+                :Room="$room"
+                :Area="$area"
+                :basicArea="$basicArea"
+            />
+
+            <livewire:basic.generate-favourite
+                :Inspection="$inspection"
+                :Room="$room"
+                :Area="$area"
+                :basicArea="$basicArea"
+            />
+        </div>
 
 
-        <h6 class="mb20 text-md-right">{{ $inspection->title }} | {{ $room->title }} | <strong>{{ $basicArea->area->title }}</strong></h6>
-        <h3 class="uppercase">{{ __('Basis gegevens') }}</h3>
+
+    <h6 class="mb20 mt-3 text-md-right">{{ $inspection->title }} | {{ $room->title }} | <strong>{{ $basicArea->area->title }}</strong></h6>
+    <h3 class="uppercase">{{ __('Basis gegevens') }}</h3>
 
     <livewire:basic.add-area
         :Inspection="$inspection"
