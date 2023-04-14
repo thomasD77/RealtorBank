@@ -16,5 +16,14 @@ class Fireplaceenergy extends MainDropdownComponent
     {
         //--> Custom
         $this->parameters = SpecificArea::getFirePlaceEnergies();
+
+        //--> Rendering 'Andere' text field
+        $this->dynamicArea = $dynamicArea;
+        $el = $this->element;
+        if(in_array($this->dynamicArea->$el, $this->parameters)){
+            $this->dynamic = null;
+        }else {
+            $this->dynamic = $this->dynamicArea->$el;
+        }
     }
 }
