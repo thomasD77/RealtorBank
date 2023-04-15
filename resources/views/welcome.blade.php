@@ -25,6 +25,10 @@
                 height: 100%;
             }
         </style>
+        <!-- PWA  -->
+        <meta name="theme-color" content="#6777ef"/>
+        <link rel="apple-touch-icon" href="{{ asset('/avatar-small.png') }}">
+        <link rel="manifest" href="{{ asset('/manifest.json') }}">
     </head>
     <body>
     <div class="container-fluid test py-5" style="background-image: url('{{ asset('assets/images/real.png') }}'); background-size: cover; background-position: bottom center; background-repeat: no-repeat">
@@ -42,5 +46,14 @@
             </div>
         @endif
     </div>
+        <!-- lARAVEL PWA -->
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+        if (!navigator.serviceWorker.controller) {
+            navigator.serviceWorker.register("/sw.js").then(function (reg) {
+                console.log("Service worker has been registered for scope: " + reg.scope);
+            });
+        }
+    </script>
     </body>
 </html>
