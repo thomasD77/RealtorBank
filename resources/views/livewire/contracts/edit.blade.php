@@ -251,7 +251,7 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th class="border-0 text-uppercase small font-weight-bold">{{ __('Beschrijving') }}</th>
+                                <th class="border-0 text-uppercase small font-weight-bold">{{ __('Inleiding') }}</th>
                             </tr>
                             </thead>
                             <tbody>
