@@ -19,6 +19,9 @@ return new class extends Migration
             $table->date('date')->nullable();
             $table->text('extra')->nullable();
 
+            $table->string('client')->nullable();
+            $table->text('general')->nullable();
+
             $table->unsignedInteger('tenant_id')
                 ->nullable()
                 ->index();

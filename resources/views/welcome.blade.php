@@ -49,31 +49,11 @@
         <!-- lARAVEL PWA -->
     <script src="{{ asset('/sw.js') }}"></script>
     <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load',()=>{
-                navigator.serviceWorker.register('/sw.js').then(registration=>{
-                    console.log('Service worker registered');
-
-                    if (!navigator.onLine) {
-                        console.log('Offline');
-                        handleOffline();                        
-                    }
-                })
-                .catch(error=>{
-                    console.log("service worker registration failed:",error);
-                });
-            });  
-        }
-        function handleOffline(){
-            const offlineMsg=document.createElement('div');
-            offlineMsg.textContent="You are offline. Please check internet";
-            document.body.appendChild(offlineMsg);
-        }
-       // if (!navigator.serviceWorker.controller) {
-          //  navigator.serviceWorker.register("/sw.js").then(function (reg) {
-           //     console.log("Service worker has been registered for scope: " + reg.scope);
-          //  });
-      //  }
+      if (!navigator.serviceWorker.controller) {
+        navigator.serviceWorker.register("/sw.js").then(function (reg) {
+            console.log("Service worker has been registered for scope: " + reg.scope);
+        });
+    }
     </script>
     </body>
 </html>

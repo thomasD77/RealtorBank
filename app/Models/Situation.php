@@ -22,4 +22,14 @@ class Situation extends Model
     {
         return $this->belongsTo(Owner::class, 'owner_id');
     }
+
+    public function address()
+    {
+        return $this->hasOne(Address::class, 'situation_id');
+    }
+
+    public function media()
+    {
+        return $this->hasMany(MediaSituation::class, 'situation_id');
+    }
 }

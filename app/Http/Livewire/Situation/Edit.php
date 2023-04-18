@@ -10,6 +10,9 @@ use App\Models\Owner;
 use App\Models\Situation;
 use App\Models\Tenant;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use App\Models\MediaSituation;
+use App\Models\MediaStore;
 
 class Edit extends Component
 {
@@ -31,13 +34,33 @@ class Edit extends Component
     public $emailTenant;
     public $phoneTenant;
 
-
     public $currentAddress;
     public $currentZip;
     public $currentPostBus;
     public $currentCity;
     public $currentCountry;
 
+    public $address;
+    public $zip;
+    public $postBus;
+    public $city;
+    public $country;
+
+    public $client;
+    public $general;
+
+    public $media = [];
+    public $files;
+
+    public $folder = 'situations';
+    public $relation_id = 'situation_id';
+    public $mediaName = 'MediaSituation';
+
+    use WithFileUploads;
+
+    protected $messages = [
+        'media.*' => 'Oeps, limit om aantal bestanden up te loaden is overschreden. Probeer het opnieuw.',
+    ];
 
     public function mount(Inspection $inspection, Situation $situation)
     {
@@ -56,6 +79,15 @@ class Edit extends Component
         $this->emailTenant = $this->situation->tenant->email;
         $this->phoneTenant = $this->situation->tenant->phone;
 
+        $this->address = $this->situation->address->address;
+        $this->zip = $this->situation->address->zip;
+        $this->postBus = $this->situation->address->postBus;
+        $this->city = $this->situation->address->city;
+        $this->country = $this->situation->address->country;
+
+        $this->client = $this->situation->client;
+        $this->general = $this->situation->general;
+
         if($this->situation->tenant->address){
             $this->currentAddress = $this->situation->tenant->address->address;
             $this->currentZip = $this->situation->tenant->address->zip;
@@ -68,6 +100,9 @@ class Edit extends Component
             ->where('inspection_id', $inspection->id)
             ->where('situation_id', $situation->id)
             ->first();
+
+        $files = MediaSituation::where('situation_id', $this->situation->id)->get();
+        $this->files = $files;
     }
 
     public function intredeSubmit($value)
@@ -134,12 +169,70 @@ class Edit extends Component
         session()->flash('successExtra', 'success!');
     }
 
+    public function startWorkSubmit()
+    {
+        $this->situation->general = $this->general;
+        $this->situation->client = $this->client;
+        $this->situation->update();
+        session()->flash('successStartWork', 'success!');
+    }
+
+    public function locationStartWorkerSubmit()
+    {
+        $address = Address::where('situation_id', $this->situation->id)->first();
+
+        if(!$address){
+            $address = new Address();
+        }else {
+            $address = Address::where('situation_id', $this->situation->id)->first();
+        }
+
+        $address->address = $this->address;
+        $address->zip = $this->zip;
+        $address->postBus = $this->postBus;
+        $address->city = $this->city;
+        $address->country = $this->country;
+        $address->situation_id = $this->situation->id;
+        $address->save();
+        session()->flash('successStartWorkerAddress', 'success!');
+    }
+
     public function deleteSituation()
     {
         $situation = $this->situation;
         $situation->delete();
 
         return redirect()->route('situation.index', $this->inspection);
+    }
+
+    public function saveMedia()
+    {
+        $this->resetValidation();
+        $this->validate([
+            'media.*' => 'max:5000',
+        ]);
+
+        //Set up model
+        $mediaStore = new MediaSituation();
+
+        //Save and store
+        if( $this->media != [] && $this->media != "") {
+            (new \App\Models\MediaStore)->createAndStoreMedia($this->mediaName, $mediaStore, $this->inspection, $this->media, $this->folder, $this->relation_id);
+        }
+
+        //Render
+        $this->files = MediaSituation::where('situation_id', $this->situation->id)->get();
+        $this->media = "";
+    }
+
+    public function deleteMedia($file)
+    {
+        //Do the work
+        $mediaStore = MediaSituation::find($file);
+        MediaStore::deleteMedia($mediaStore, $this->folder);
+
+        //Render
+        $this->files = MediaSituation::where('situation_id', $this->situation->id)->get();
     }
 
 }

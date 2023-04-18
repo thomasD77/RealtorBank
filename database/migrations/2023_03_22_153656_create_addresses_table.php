@@ -29,6 +29,8 @@ return new class extends Migration
                 ->index()->nullable();
             $table->unsignedInteger('tenant_id')
                 ->index()->nullable();
+            $table->unsignedInteger('situation_id')
+                ->index()->nullable();
 
             $table->timestamps();
         });
