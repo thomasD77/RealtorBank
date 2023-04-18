@@ -32,6 +32,7 @@ class DashboardController extends Controller
         $contracts = Contract::whereIn('inspection_id', $inspectinIds)->where('lock', 1)->count();
 
         $pdfs = \App\Models\PDF::query()
+            ->whereIn('inspection_id', $inspectinIds)
             ->latest()
             ->take(5)
             ->get();
