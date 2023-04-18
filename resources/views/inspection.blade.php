@@ -49,7 +49,7 @@
 <!-- lARAVEL PWA -->
 <script src="{{ asset('/sw.js') }}"></script>
 <script>
-      if ('serviceWorker' in navivigator) {
+       if ('serviceWorker' in navigator) {
             window.addEventListener('load',()=>{
                 navigator.serviceWorker('/sw.js');
             });
