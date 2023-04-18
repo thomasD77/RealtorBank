@@ -29,6 +29,16 @@
             margin-right: 5px;
         }
 
+        .img--cover {
+        aspect-ratio: 3/2;
+        }
+
+        .column-pic {
+            float: left;
+            width: 32.775%;
+            margin-right: 5px;
+        }
+
         /* Clear floats after the columns */
         .row:after {
             content: "";
@@ -71,26 +81,77 @@
         <hr>
 
         <div class="row">
-        <h3>{{ __('Inleiding') }}</h3>
-        <p>Met betrekking tot het pand gelegen te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }} @endif,
-        @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
-        verhuurd aan {{ $contract->situation->tenant ? $contract->situation->tenant->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}} een gedetailleerde 
-        @if($contract->situation->intrede)
-            Intrede
-        @else
-            Uittrede
-        @endif opname gedaan.
-        De plaatsbeschrijving is uitgevoerd door {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} voor {{ Auth()->user()->companyName }}</p>
-        @if($contract->situation->intrede)
-            <p>{!! $contract->legal_in !!}</p>
-        @else
-            <p>{!! $contract->legal_uit !!}</p>
+            <h3>{{ __('Inleiding') }}</h3>
+            @if($contract->situation->intrede != 2)
+                <p>Met betrekking tot het pand gelegen te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }} @endif,
+                @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
+                verhuurd aan {{ $contract->situation->tenant ? $contract->situation->tenant->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}} een gedetailleerde 
+                @if($contract->situation->intrede)
+                    Intrede
+                @else
+                    Uittrede
+                @endif opname gedaan.
+                De plaatsbeschrijving is uitgevoerd door {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} voor {{ Auth()->user()->companyName }}</p>
+                @if($contract->situation->intrede)
+                    <p>{!! $contract->legal_in !!}</p>
+                @else
+                    <p>{!! $contract->legal_uit !!}</p>
+                @endif
+            @else
+                <p>{!! $contract->legal_aanvang !!}</p>
+            @endif
+        </div>
+
+        @if($contract->situation->intrede = 2)
+            <div class="row">
+                <h3>{{ __('Algemene bepalingen') }}</h3>
+                <p>{!! $contract->situation->general !!}</p>
+            </div>
         @endif
-    </div>
+
+        <div class="row">
+
+        
+            
+            @if($contract->situation->media->isNotEmpty())
+                @for ($i = 0; $i <= count($contract->situation->media); $i++ )
+                    <div class="row">
+                        @if(isset($contract->situation->media[$i]))
+                            <div class="column-pic img--cover"
+                                style="background-image: url('{{ asset('assets/images/situations/crop' . '/' . $contract->situation->media[$i]->file_crop) }}');
+                                    background-position: center;
+                                    background-size: cover; height: 150px">
+                            </div>
+                        @endif
+                        @php
+                            $i += 1;
+                        @endphp
+                        @if(isset($contract->situation->media[$i]))
+                            <div class="column-pic img--cover"
+                                style="background-image: url('{{ asset('assets/images/situations/crop' . '/' . $contract->situation->media[$i]->file_crop) }}');
+                                    background-position: center;
+                                    background-size: cover; height: 150px;">
+                            </div>
+                        @endif
+                        @php
+                            $i += 1;
+                        @endphp
+                        @if(isset($contract->situation->media[$i]))
+                            <div class="column img--cover"
+                            style="background-image: url('{{ asset('assets/images/situations/crop' . '/' . $contract->situation->media[$i]->file_crop) }}');
+                                    background-position: center;
+                                    background-size: cover; height: 150px">
+                            </div>
+                        @endif
+                    </div>
+                @endfor
+            @endif
+           
+        </div>
 
         <div class="row">
         <div class="column">
-            <h3>{{ __('Verkoper/verhuurder') }}</h3>
+            <h3>{{ __('Eigenaar') }}</h3>
             <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
             <p>{{  $contract->situation->owner ? $contract->situation->owner->phone : "" }}</p>
             <p>{{  $contract->situation->owner ? $contract->situation->owner->email : "" }}</p>
@@ -106,10 +167,21 @@
         </div>
 
         <div class="column">
-            <h3>{{ __('Koper/huurder ') }}</h3>
-            <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
-            <p>{{  $contract->situation->tenant ? $contract->situation->tenant->phone : "" }}</p>
-            <p>{{  $contract->situation->tenant ? $contract->situation->tenant->email : "" }}</p>
+            @if($contract->situation->intrede != 2)
+                <h3>{{ __('Koper/huurder ') }}</h3>
+                <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
+                <p>{{  $contract->situation->tenant ? $contract->situation->tenant->phone : "" }}</p>
+                <p>{{  $contract->situation->tenant ? $contract->situation->tenant->email : "" }}</p>
+            @else
+                <p>{{  $contract->situation->client }}</p>
+                @if($contract->situation->address)
+                    <p class="mb-0">
+                        {{  $contract->situation->address->address }}
+                        @if($contract->situation->address->postBus) {{  $contract->situation->address->postBus }} @endif
+                        @if($contract->situation->address->zip || $contract->situation->address->city) ,{{  $contract->situation->address->zip }} {{  $contract->situation->address->city }} @endif
+                    </p>
+                @endif
+            @endif
         </div>
     </div>
 
@@ -121,9 +193,11 @@
         </div>
 
         <div class="column">
-            <h3 class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</h3>
-            <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
-            <img src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
+            @if($contract->situation->intrede != 2)
+                <h3 class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</h3>
+                <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
+                <img src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
+            @endif
         </div>
     </div>
 
