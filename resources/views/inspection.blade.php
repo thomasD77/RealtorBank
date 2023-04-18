@@ -49,11 +49,17 @@
 <!-- lARAVEL PWA -->
 <script src="{{ asset('/sw.js') }}"></script>
 <script>
-    if (!navigator.serviceWorker.controller) {
-        navigator.serviceWorker.register("/sw.js").then(function (reg) {
-            console.log("Service worker has been registered for scope: " + reg.scope);
-        });
-    }
+      if ('serviceWorker' in navivigator) {
+            window.addEventListener('load',()=>{
+                navigator.serviceWorker('/sw.js');
+            });
+            
+        }
+    //if (!navigator.serviceWorker.controller) {
+     //   navigator.serviceWorker.register("/sw.js").then(function (reg) {
+       //     console.log("Service worker has been registered for scope: " + reg.scope);
+       // });
+    //}
 </script>
 </body>
 
