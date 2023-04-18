@@ -67,7 +67,7 @@ class Inspection extends Model
          */
         $inspection = Inspection::create([
             //'user_id' => Auth::id(),
-            'user_id' => 1,
+            'user_id' => Auth()->user()->id,
         ]);
 
         /**
