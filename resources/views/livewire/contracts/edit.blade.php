@@ -192,28 +192,30 @@
                     </form>
                 </div>
                 <div class="col-md-6 bg-white px-0">
-                    <form method="POST" action="{{ route('create.signature') }}">
-                        <input type="hidden" name="tenant" value="1">
-                        <input type="hidden" name="contract" value="{{ $contract->id }}">
-                        @csrf
-                        <div class="col-md-11">
-                            <label class="py-3" for="">{{ __('Handtekening') }} {{ $situation->tenant->name }}</label>
-                            <br/>
-                            <div id="sig_tenant"></div>
-                            <br/>
-                            <div class="text-right">
-                                <button id="clear65" class="btn btn-danger btn-sm">{{ __('wissen') }}</button>
+                    @if($contract->situation->intrede != 2)
+                        <form method="POST" action="{{ route('create.signature') }}">
+                            <input type="hidden" name="tenant" value="1">
+                            <input type="hidden" name="contract" value="{{ $contract->id }}">
+                            @csrf
+                            <div class="col-md-11">
+                                <label class="py-3" for="">{{ __('Handtekening') }} {{ $situation->tenant->name }}</label>
+                                <br/>
+                                <div id="sig_tenant"></div>
+                                <br/>
+                                <div class="text-right">
+                                    <button id="clear65" class="btn btn-danger btn-sm">{{ __('wissen') }}</button>
+                                </div>
+                                <textarea id="signature65" name="signed" style="display: none"></textarea>
                             </div>
-                            <textarea id="signature65" name="signed" style="display: none"></textarea>
-                        </div>
-                        <br/>
-                        <button class="btn btn-dark m-3">{{ __('Submit') }}</button>
-                        @if (session()->has('successTenant'))
-                            <div class="btn btn-success flash_message">
-                                {{ session('successTenant') }}
-                            </div>
-                        @endif
-                    </form>
+                            <br/>
+                            <button class="btn btn-dark m-3">{{ __('Submit') }}</button>
+                            @if (session()->has('successTenant'))
+                                <div class="btn btn-success flash_message">
+                                    {{ session('successTenant') }}
+                                </div>
+                            @endif
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>
@@ -256,20 +258,60 @@
                             </thead>
                             <tbody>
                             <tr>
-                                @if($contract->situation->intrede)
+                                @if($contract->situation->intrede == 1)
                                     <td>{!! $contract->legal_in !!}</td>
-                                @else
+                                @elseif($contract->situation->intrede == 0)
                                     <td>{!! $contract->legal_uit !!}</td>
+                                @elseif($contract->situation->intrede == 2)
+                                    <td>{!! $contract->legal_aanvang !!}</td>
                                 @endif
                             </tr>
                             </tbody>
                         </table>
+                        @if($contract->situation->intrede == 2)
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="border-0 text-uppercase small font-weight-bold">{{ __('Algemene bepalingen') }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{{ $contract->situation->general}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        @endif
                     </div>
                 </div>
 
+                @if($contract->situation->intrede == 2)
+                    <div class="row p-5 the-five">
+                        @foreach($files as $file)
+                            <div class="col-md-4 col-lg-3 mt-4">
+                                <div class="img-wrapper">
+
+                                    <a class="d-md-none d-lg-block" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
+                                        <div class="img--cover"
+                                            style="background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}');">
+                                        </div>
+                                    </a>
+
+                                    {{--Temp fix for background images not displaying on tablets--}}
+                                    <a class="d-none d-md-block d-lg-none" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
+                                        <div style=" min-height: 125px ; background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}'); background-repeat: no-repeat; background-position: center; background-size: cover">
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
                 <div class="row pb-5 p-5 the-five">
                     <div class="col-md-6">
-                        <h3 class="font-weight-bold mb-4">{{ __('Verkoper/verhuurder') }}</h3>
+                        <h3 class="font-weight-bold mb-4">{{ __('Eigenaar') }}</h3>
                         <p class="mb-0 font-weight-bold">{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
                         <p class="mb-0 text-dark"><span class="text-dark">{{  $contract->situation->owner ? $contract->situation->owner->phone : "" }}</p>
                         <p class="mb-1"><span class="text-dark">{{  $contract->situation->owner ? $contract->situation->owner->email : "" }}</p>
@@ -284,13 +326,29 @@
                         </p>
                     </div>
 
+                    @if($contract->situation->intrede != 2)
                     <div class="col-md-6 text-right">
                         <h3 class="font-weight-bold mb-4">{{ __('Koper/huurder ') }}</h3>
                         <p class="mb-0 font-weight-bold">{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
                         <p class="mb-0 text-dark"><span class="text-dark">{{  $contract->situation->tenant ? $contract->situation->tenant->phone : "" }}</p>
                         <p class="mb-1"><span class="text-dark">{{  $contract->situation->tenant ? $contract->situation->tenant->email : "" }}</p>
                     </div>
+                    @else
+                    <div class="col-md-6 text-right">
+                        <p class="mb-0 font-weight-bold">{{  $contract->situation->client }}</p>
+                        @if($contract->situation->address)
+                            <p class="mb-0">
+                                {{  $contract->situation->address->address }}
+                                @if($contract->situation->address->postBus) {{  $contract->situation->address->postBus }} @endif
+                                @if($contract->situation->address->zip || $contract->situation->address->city) ,{{  $contract->situation->address->zip }} {{  $contract->situation->address->city }} @endif
+                            </p>
+                        @endif
+                    </div>
+                    @endif
                 </div>
+
+               
+            </div>
 
 
                 <div class="row pb-5 p-5 the-five">
@@ -299,10 +357,12 @@
                         <img src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}" alt="">
                     </div>
 
-                    <div class="col-md-6 text-right">
-                        <h5 class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</h5>
-                        <img src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}" alt="">
-                    </div>
+                    @if($contract->situation->intrede != 2)
+                        <div class="col-md-6 text-right">
+                            <h5 class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</h5>
+                            <img src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}" alt="">
+                        </div>
+                    @endif
                 </div>
 
                 @if($lock)

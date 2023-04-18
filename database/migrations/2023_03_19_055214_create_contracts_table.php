@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('lock')->default(0)->nullable();
             $table->text('legal_in')->nullable();
             $table->text('legal_uit')->nullable();
+            $table->text('legal_aanvang')->nullable();
             $table->string('signature_tenant')->nullable();
             $table->string('signature_owner')->nullable();
             $table->date('date')->nullable();

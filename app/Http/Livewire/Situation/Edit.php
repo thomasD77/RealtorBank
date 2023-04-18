@@ -79,11 +79,13 @@ class Edit extends Component
         $this->emailTenant = $this->situation->tenant->email;
         $this->phoneTenant = $this->situation->tenant->phone;
 
-        $this->address = $this->situation->address->address;
-        $this->zip = $this->situation->address->zip;
-        $this->postBus = $this->situation->address->postBus;
-        $this->city = $this->situation->address->city;
-        $this->country = $this->situation->address->country;
+        if($this->situation->address){
+            $this->address = $this->situation->address->address;
+            $this->zip = $this->situation->address->zip;
+            $this->postBus = $this->situation->address->postBus;
+            $this->city = $this->situation->address->city;
+            $this->country = $this->situation->address->country;
+        }
 
         $this->client = $this->situation->client;
         $this->general = $this->situation->general;
