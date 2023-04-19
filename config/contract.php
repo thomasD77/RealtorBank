@@ -148,10 +148,37 @@
         zonder deze markering werden genomen tijdens een voorgaande opname.',
 
 
-        'legal_aanvang' => 'Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud.
-         Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min 
-         of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" 
-         ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).'
+        'legal_aanvang' => 'De beschrijving van de huidige staat is een gedetailleerde beschrijving van de staat waarin het onroerend goed zich bevindt bij aanvang van de werken. Door de gedetailleerde beschrijving kan bij einde van de werken de verantwoordelijkheid voor mogelijk schade objectief vastgesteld worden. 
+        <br><br>
+        Tenzij anders vermeld: 
+        -	Wordt geen onderzoek ingesteld naar hetgeen zich in de wanden, in de vloeren, achter meubelen en in de plafonds bevindt. De toestand van de bodem onder de vloerbedekking wordt niet onderzocht en er wordt geen bodemonderzoek ingesteld.  <br>
+        -	Wordt geen onderzoek ingesteld naar de basisconstructie noch stabiliteit van het goed. Beschadigingen die hierin hun oorsprong vinden, worden niet genoteerd. Indien zekere gebreken of schadegevallen van constructieve aard alsnog mochten worden vermeld, gebeurt dit uitsluitend ten titel van inlichting en zonder enige nadelige erkentenis van één der partijen. Dergelijke opmerkingen hebben tevens nooit de bedoeling volledig te zijn.  <br>
+        -	worden de muren niet gelood en de vloeren worden niet gepast.  <br>
+        -	wordt geen vermelding gemaakt van de normale afscheiding rondom de lijsten van ramen en deuren.  <br>
+        -	Er wordt geen vermelding gemaakt van openstaande verstekken aan de deur- en raambekledingen en de normale afscheiding bij de overgang van diverse bouwmaterialen.  <br>
+        -	omvat deze plaatsbeschrijving niet de controle van het goed functioneren van de verschillende uitrustingen, zoals elektriciteit, sanitair, ventilatie, rookmelders, afvoerleidingen, verwarmingsinstallatie, leidingen, kokers, waterputten, rioleringen, tv, telefoon, parlofonie, videofonie, centrale stofzuiger, elektrische huishoudapparaten, enz.  <br>
+        -	worden de vermelde uitrustingen en toestellen verondersteld als zijnde in normale staat van goed gebruik, tenzij anders vermeld.   <br>
+        -	bevindt het pand zich in goede staat van onderhoud.  <br>
+        Indien in de plaatsbeschrijving geen beschadigingen of vaststellingen worden vermeld, wordt door de partijen automatisch verondersteld dat hetgeen beschreven is onbeschadigd en onbesmeurd is, in goede staat verkeert en dat alle toestellen en mechanismen goed functioneren.
+        Indien in dit rapport vaststellingen getoond worden met een datum die aan de huidige opnamedatum voorafgaat, dan zijn deze vaststellingen nog steeds van toepassing en is de toestand ervan ongewijzigd. 
+        De partijen worden erop gewezen een bijkomende controle aan te vragen indien er belangrijke werken worden uitgevoerd of als bijkomende elementen een aanpassing van de plaatsbeschrijving vereisen. 
+          <br> <br>
+        CONVENTIES inzake terminologieën 
+        1. Toelichting bij de evaluatie: 
+        - Nieuw : het element is nieuw 
+        - Zeer goed : het element verkeert in uitstekende staat 
+        - Goed : het element verkeert in algemeen goede staat en vertoont geen zichtbare schade
+         - Matig: de staat van het element is matig of het vertoont gebruikssporen of slijtage 
+        - Slecht : het element verkeert in slechte staat 
+         <br> <br>
+        2. Bij het gevolg te geven aan een vaststelling kunnen volgende termen gebruikt worden. Deze dienen louter als aanbeveling beschouwd te worden: 
+        - te herstellen : verwijst naar een systeem of element dat ontbreekt, niet functioneert of beschadigd is en waarvoor actie moet ondernomen worden om correct en betrouwbaar te kunnen functioneren of in oorspronkelijke staat hersteld te worden 
+        - te vervangen : het element dient vervangen te worden - te regelen : de vaststelling dient vergoed te worden of op een andere wijze geregeld 
+        - op takenlijst : de vaststelling vereist een actie 
+        - suggestie : de opmerking wordt louter als suggestie geformuleerd. Deze suggesties kunnen gaan over zaken die de betrokken partij best nakijkt, dient te laten herstellen of vervangen of die in de toekomst problemen zouden kunnen stellen.
+        <br>
+        3. Bij de beschrijving van muren wordt de muur evenwijdig aan de straatzijde “muur 1” genoemd. Vervolgens worden de muren in wijzerzin aangeduid. Indien een pand op een hoek gelegen is, wordt als straatzijde beschouwd daar waar de inkomdeur van het individuele kavel gesitueerd is.
+        '
 
     ];
 
