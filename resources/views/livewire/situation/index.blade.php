@@ -12,9 +12,8 @@
                     <table class="basic-table">
                         <thead>
                         <tr>
-                            <th>{{ __('In/uittrede') }}</th>
+                            <th>{{ __('Type') }}</th>
                             <th>{{ __('Datum') }}</th>
-                            <th>{{ __('Naam') }}</th>
                             <th>{{ __('Actie') }}</th>
                         </tr>
                         </thead>
@@ -24,11 +23,16 @@
                                 <tr>
                                 <td>
                                     <a href="{{ route('situation.edit', [ $inspection, $situation ]) }}" class="no-edit">
-                                        {{ $situation->intrede ? 'Intrede' : "Uitrede" }}
+                                        @if($situation->intrede == 1)
+                                            {{ __('Intrede')}}
+                                        @elseif($situation->intrede === 0)
+                                            {{ __('Uittrede')}}
+                                        @elseif($situation->intrede === 2)
+                                            {{ __('Aanvang van werken')}}
+                                        @endif
                                     </a>
                                 </td>
                                 <td>{{ $situation->date ?? "" }}</td>
-                                <td>{{ $situation->tenant->name ?? "" }}</td>
                                 <td>
                                     <a href="{{ route('situation.edit', [ $inspection, $situation ]) }}" class="text-success"><i class="fa fa-pencil-alt text-dark"></i></a>
                                 </td>

@@ -22,6 +22,16 @@
                 <p class="text-muted mt-1">{{ __('*Om een contract te printen moet deze eerst gesloten worden. Druk op deze knop om alle gegevens vast te zetten.') }}</p>
             @endif
         </form>
+        @if (session()->has('successTenant'))
+            <div class="btn btn-success flash_message">
+                {{ session('successTenant') }}
+            </div>
+        @endif
+        @if (session()->has('success'))
+            <div class="btn btn-success flash_message">
+                {{ session('success') }}
+            </div>
+        @endif
     </div>
 
     <style>
@@ -184,11 +194,6 @@
                         </div>
                         <br/>
                         <button class="btn btn-dark m-3">{{ __('Submit') }}</button>
-                        @if (session()->has('success'))
-                            <div class="btn btn-success flash_message">
-                                {{ session('success') }}
-                            </div>
-                        @endif
                     </form>
                 </div>
                 <div class="col-md-6 bg-white px-0">
@@ -209,11 +214,6 @@
                             </div>
                             <br/>
                             <button class="btn btn-dark m-3">{{ __('Submit') }}</button>
-                            @if (session()->has('successTenant'))
-                                <div class="btn btn-success flash_message">
-                                    {{ session('successTenant') }}
-                                </div>
-                            @endif
                         </form>
                     @endif
                 </div>

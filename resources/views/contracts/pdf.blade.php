@@ -53,6 +53,10 @@
         hr {
             margin: 35px 0;
         }
+
+        section {
+            page-break-inside: avoid !important;
+        }
     </style>
 
 </head>
@@ -102,7 +106,7 @@
             @endif
         </div>
 
-        @if($contract->situation->intrede = 2)
+        @if($contract->situation->intrede == 2)
             <div class="row">
                 <h3>{{ __('Algemene bepalingen') }}</h3>
                 <p>{!! $contract->situation->general !!}</p>
@@ -185,21 +189,24 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="column">
-            <h3>{{ __('Gelezen en goedgekeurd') }}</h3>
-            <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
-            <img src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
-        </div>
-
-        <div class="column">
-            @if($contract->situation->intrede != 2)
-                <h3 class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</h3>
+    <section>
+        <div class="row">
+            <div class="column">
+                <h3>{{ __('Gelezen en goedgekeurd') }}</h3>
                 <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
-                <img src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
-            @endif
+                <img src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
+            </div>
+
+            <div class="column">
+                @if($contract->situation->intrede != 2)
+                    <h3 class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</h3>
+                    <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
+                    <img src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
+                @endif
+            </div>
         </div>
-    </div>
+    </section>
+   
 
     </section>
 
