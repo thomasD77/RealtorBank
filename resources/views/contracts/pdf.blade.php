@@ -107,16 +107,15 @@
         </div>
 
         @if($contract->situation->intrede == 2)
-            <div class="row">
-                <h3>{{ __('Algemene bepalingen') }}</h3>
-                <p>{!! $contract->situation->general !!}</p>
-            </div>
+            @if($contract->situation->general)
+                <div class="row">
+                    <h3>{{ __('Algemene bepalingen') }}</h3>
+                    <p>{!! $contract->situation->general !!}</p>
+                </div>
+            @endif
         @endif
 
         <div class="row">
-
-        
-            
             @if($contract->situation->media->isNotEmpty())
                 @for ($i = 0; $i <= count($contract->situation->media); $i++ )
                     <div class="row">
@@ -191,19 +190,23 @@
 
     <section>
         <div class="row">
-            <div class="column">
-                <h3>{{ __('Gelezen en goedgekeurd') }}</h3>
-                <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
-                <img src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
-            </div>
-
-            <div class="column">
-                @if($contract->situation->intrede != 2)
-                    <h3 class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</h3>
+            @if($contract->signature_owner)
+                <div class="column">
+                    <h3>{{ __('Gelezen en goedgekeurd') }}</h3>
                     <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
-                    <img src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
-                @endif
-            </div>
+                    <img src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
+                </div>
+            @endif
+
+            @if($contract->signature_tenant)
+                <div class="column">
+                    @if($contract->situation->intrede != 2)
+                        <h3 class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</h3>
+                        <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
+                        <img src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
+                    @endif
+                </div>
+            @endif
         </div>
     </section>
    
