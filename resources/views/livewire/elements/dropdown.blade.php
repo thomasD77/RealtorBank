@@ -3,7 +3,7 @@
         <div class="title">
             <span>{{ __($title) }}</span>
         </div>
-        <div class="content" style="overflow-y: scroll">
+        <div class="content" >
             <div class="row m-3">
                 @foreach($parameters as $i => $parameter)
                     @if($parameter != \App\Enums\DynamicKey::Dynamic->value)
