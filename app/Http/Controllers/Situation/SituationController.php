@@ -42,6 +42,9 @@ class SituationController extends Controller
         $contract->legal_in = Config('contract.legal_in');
         $contract->legal_uit = Config('contract.legal_uit');
         $contract->legal_aanvang = Config('contract.legal_aanvang');
+        $contract->slot_in = Config('contract.slot_in');
+        $contract->slot_uit = Config('contract.slot_uit');
+        $contract->slot_aanvang = Config('contract.slot_aanvang');
         $contract->save();
 
         return to_route('situation.edit', [ $inspection , $situation]);

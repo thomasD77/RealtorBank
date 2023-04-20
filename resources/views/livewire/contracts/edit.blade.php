@@ -233,7 +233,7 @@
                 </div>
                 <div class="row p-5 the-five">
                     <div class="col-md-6">
-                        <img src="{{ asset('assets/images/logo.svg') }}" width="80" alt="Logo">
+                        <!-- <img src="{{ asset('assets/images/logo.svg') }}" width="80" alt="Logo"> -->
                     </div>
 
                     <div class="col-md-6 text-right">
@@ -247,74 +247,80 @@
                     </div>
                 </div>
 
-
                 <div class="row p-5 the-five">
-                    <div class="col-md-12">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th class="border-0 text-uppercase small font-weight-bold">{{ __('Inleiding') }}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                @if($contract->situation->intrede == 1)
-                                    <td>{!! $contract->legal_in !!}</td>
-                                @elseif($contract->situation->intrede == 0)
-                                    <td>{!! $contract->legal_uit !!}</td>
-                                @elseif($contract->situation->intrede == 2)
-                                    <td>{!! $contract->legal_aanvang !!}</td>
-                                @endif
-                            </tr>
-                            </tbody>
-                        </table>
-                        @if($contract->situation->intrede == 2)
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th class="border-0 text-uppercase small font-weight-bold">{{ __('Algemene bepalingen') }}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>{{ $contract->situation->general}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                    <div class="col-md-6">
+                        @if(Auth()->user()->companyName)
+                            <strong>{{ Auth()->user()->companyName }}</strong>
                         @endif
+                        <p class="mb-0">{{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }}</p>
+                        @if(Auth()->user()->phone)
+                            <p class="mb-0">{{ Auth()->user()->phone }}</p>
+                        @endif
+                        @if(Auth()->user()->email)
+                            <p class="mb-0">{{ Auth()->user()->email }}</p>
+                        @endif
+                        <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
+                    </div>
+
+                    <div class="col-md-6 text-right">
+                        @if($contract->situation->intrede === 0)
+                            <strong>{{__('Uittrede')}}</strong>
+                        @elseif($contract->situation->intrede == 1)
+                            <strong>{{__('Intrede')}}</strong>
+                        @elseif($contract->situation->intrede == 2)
+                            <strong>{{__('Aanvang van werken')}}</strong>
+                        @endif <br>
+                        {{ $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif <br>
+                        @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
                     </div>
                 </div>
 
-                @if($contract->situation->intrede == 2)
-                    <div class="row p-5 the-five">
-                        @foreach($files as $file)
-                            <div class="col-md-4 col-lg-3 mt-4">
-                                <div class="img-wrapper">
-
-                                    <a class="d-md-none d-lg-block" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
-                                        <div class="img--cover"
-                                            style="background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}');">
-                                        </div>
-                                    </a>
-
-                                    {{--Temp fix for background images not displaying on tablets--}}
-                                    <a class="d-none d-md-block d-lg-none" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
-                                        <div style=" min-height: 125px ; background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}'); background-repeat: no-repeat; background-position: center; background-size: cover">
-                                        </div>
-                                    </a>
-
-                                </div>
+                <!-- Images from the propperty  -->
+                <div class="row p-5 the-five">
+                    @if($inspection->media->isNotEmpty())
+                        @for ($i = 0; $i <= count($inspection->media); $i++ )
+                            <div class="row">
+                                @if(isset($inspection->media[$i]))
+                                    <div class="column-pic img--cover"
+                                        style="background-image: url('{{ asset('assets/images/inspections/crop' . '/' . $inspection->media[$i]->file_crop) }}');
+                                            background-position: center;
+                                            background-size: cover; height: 150px">
+                                    </div>
+                                @endif
+                                @php
+                                    $i += 1;
+                                @endphp
+                                @if(isset($inspection->media[$i]))
+                                    <div class="column-pic img--cover"
+                                        style="background-image: url('{{ asset('assets/images/inspections/crop' . '/' . $inspection->media[$i]->file_crop) }}');
+                                            background-position: center;
+                                            background-size: cover; height: 150px;">
+                                    </div>
+                                @endif
+                                @php
+                                    $i += 1;
+                                @endphp
+                                @if(isset($inspection->media[$i]))
+                                    <div class="column img--cover"
+                                    style="background-image: url('{{ asset('assets/images/inspections/crop' . '/' . $inspection->media[$i]->file_crop) }}');
+                                            background-position: center;
+                                            background-size: cover; height: 150px">
+                                    </div>
+                                @endif
                             </div>
-                        @endforeach
-                    </div>
-                @endif
+                        @endfor
+                    @endif
+                </div>
 
-                <div class="row pb-5 p-5 the-five">
+                <hr>
+
+                 <!-- Credentials authorized parties -->
+                <div class="row p-5 the-five">
                     <div class="col-md-6">
-                        <h3 class="font-weight-bold mb-4">{{ __('Eigenaar') }}</h3>
-                        <p class="mb-0 font-weight-bold">{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
-                        <p class="mb-0 text-dark"><span class="text-dark">{{  $contract->situation->owner ? $contract->situation->owner->phone : "" }}</p>
-                        <p class="mb-1"><span class="text-dark">{{  $contract->situation->owner ? $contract->situation->owner->email : "" }}</p>
+                        <strong>{{ __('Eigenaar') }}</strong>
+                        <p class="mb-0">{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
+                        <p class="mb-0">{{  $contract->situation->owner ? $contract->situation->owner->phone : "" }}</p>
+                        <p class="mb-0">{{  $contract->situation->owner ? $contract->situation->owner->email : "" }}</p>
 
                         <p class="mb-0">
                             {{  $inspection->address->address }}
@@ -326,51 +332,172 @@
                         </p>
                     </div>
 
-                    @if($contract->situation->intrede != 2)
-                    <div class="col-md-6 text-right">
-                        <h3 class="font-weight-bold mb-4">{{ __('Koper/huurder ') }}</h3>
-                        <p class="mb-0 font-weight-bold">{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
-                        <p class="mb-0 text-dark"><span class="text-dark">{{  $contract->situation->tenant ? $contract->situation->tenant->phone : "" }}</p>
-                        <p class="mb-1"><span class="text-dark">{{  $contract->situation->tenant ? $contract->situation->tenant->email : "" }}</p>
-                    </div>
-                    @else
-                    <div class="col-md-6 text-right">
-                        <p class="mb-0 font-weight-bold">{{  $contract->situation->client }}</p>
-                        @if($contract->situation->address)
-                            <p class="mb-0">
-                                {{  $contract->situation->address->address }}
-                                @if($contract->situation->address->postBus) {{  $contract->situation->address->postBus }} @endif
-                                @if($contract->situation->address->zip || $contract->situation->address->city) ,{{  $contract->situation->address->zip }} {{  $contract->situation->address->city }} @endif
-                            </p>
+                    <div class="col-md-6">
+                        @if($contract->situation->intrede != 2)
+                            <strong>{{ __('Koper/huurder ') }}</strong>
+                            <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
+                            <p>{{  $contract->situation->tenant ? $contract->situation->tenant->phone : "" }}</p>
+                            <p>{{  $contract->situation->tenant ? $contract->situation->tenant->email : "" }}</p>
+                        @else
+                            <strong>{{__('Opdrachtgever')}}</strong>
+                            <p>{{  $contract->situation->client }}</p>
+
+                            <strong>{{__('Adres bouwwerken')}}</strong>
+                            @if($contract->situation->address)
+                                <p class="mb-0">
+                                    {{  $contract->situation->address->address }}
+                                    @if($contract->situation->address->postBus) {{  $contract->situation->address->postBus }} @endif
+                                    @if($contract->situation->address->zip || $contract->situation->address->city) ,{{  $contract->situation->address->zip }} {{  $contract->situation->address->city }} @endif
+                                </p>
+                            @endif
                         @endif
                     </div>
-                    @endif
                 </div>
 
-               
-            </div>
-
-
-                <div class="row pb-5 p-5 the-five">
-                    <div class="col-md-6">
-                        <h5 class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</h5>
-                        <img src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}" alt="">
+                 <!-- Inleiding -->
+                <div class="row p-5 the-five">
+                    <div class="col-12">
+                        <strong>{{ __('Inleiding') }}</strong>
+                        @if($contract->situation->intrede != 2)
+                            <p>Met betrekking tot het pand gelegen te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
+                            @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
+                            verhuurd aan {{ $contract->situation->tenant ? $contract->situation->tenant->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}} een gedetailleerde 
+                            @if($contract->situation->intrede)
+                                Intrede
+                            @else
+                                Uittrede
+                            @endif opname gedaan.
+                            De plaatsbeschrijving is uitgevoerd door {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} voor {{ Auth()->user()->companyName }}</p>
+                            @if($contract->situation->intrede)
+                                {!! $contract->legal_in !!}
+                            @else
+                                {!! $contract->legal_uit !!}
+                            @endif
+                        @else
+                            <p>Met betrekking tot het pand gelegen te {{  $contract->situation->address->address }}, @if($contract->situation->address->postBus) {{  $contract->situation->address->postBus }}, @endif
+                            @if($contract->situation->address->zip || $contract->situation->address->city) {{  $contract->situation->address->zip }} {{  $contract->situation->address->city }} @endif
+                            eigendom van {{ $contract->situation->owner ? $contract->situation->owner->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}} een gedetailleerde plaatsbeschrijving gedaan.
+                            De plaatsbeschrijving is uitgevoerd door {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} voor {{ Auth()->user()->companyName }}</p>
+                            {!! $contract->legal_aanvang !!}
+                        @endif
                     </div>
-
-                    @if($contract->situation->intrede != 2)
-                        <div class="col-md-6 text-right">
-                            <h5 class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</h5>
-                            <img src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}" alt="">
-                        </div>
-                    @endif
                 </div>
 
-                @if($lock)
-                    <div class="single-add-property">
-                        <h3>{{ __('Contract printen') }}</h3>
-                        <a href="{{ route('print.contract', [$inspection, $contract]) }}" class="btn btn-dark">{{ __('Printen') }}</a>
+                <!-- Extra info contract -->
+                @if($contract->situation->extra)
+                    <div class="row p-5 the-five">
+                        <strong>{{ __('Extra info') }}</strong>
+                        {!! $contract->situation->extra !!}
                     </div>
                 @endif
+
+                <!-- Aanvang van werken -->
+                @if($contract->situation->intrede == 2)
+                    @if($contract->situation->general)
+                        <div class="row p-5 the-five">
+                            <strong>{{ __('Algemene bepalingen') }}</strong>
+                            {!! $contract->situation->general !!}
+                        </div>
+                    @endif
+                @endif
+
+
+                 <!-- Media for 'aanvang van werken' -->
+                @if($contract->situation->intrede == 2)
+                    <div class="row p-5 the-five">
+                        @if($contract->situation->media->isNotEmpty())
+                            @for ($i = 0; $i <= count($contract->situation->media); $i++ )
+                                <div class="row">
+                                    @if(isset($contract->situation->media[$i]))
+                                        <div class="column-pic img--cover"
+                                            style="background-image: url('{{ asset('assets/images/situations/crop' . '/' . $contract->situation->media[$i]->file_crop) }}');
+                                                background-position: center;
+                                                background-size: cover; height: 150px">
+                                        </div>
+                                    @endif
+                                    @php
+                                        $i += 1;
+                                    @endphp
+                                    @if(isset($contract->situation->media[$i]))
+                                        <div class="column-pic img--cover"
+                                            style="background-image: url('{{ asset('assets/images/situations/crop' . '/' . $contract->situation->media[$i]->file_crop) }}');
+                                                background-position: center;
+                                                background-size: cover; height: 150px;">
+                                        </div>
+                                    @endif
+                                    @php
+                                        $i += 1;
+                                    @endphp
+                                    @if(isset($contract->situation->media[$i]))
+                                        <div class="column img--cover"
+                                        style="background-image: url('{{ asset('assets/images/situations/crop' . '/' . $contract->situation->media[$i]->file_crop) }}');
+                                                background-position: center;
+                                                background-size: cover; height: 150px">
+                                        </div>
+                                    @endif
+                                </div>
+                            @endfor
+                        @endif
+                    </div>
+                @endif
+
+                <!-- Slot -->
+                @if($contract->situation->intrede === 0)
+                    @if($contract->slot_uit)
+                        <div class="row p-5 the-five">
+                            <strong class="w-100">{{ __('Slot') }}</strong>
+                            {!! $contract->slot_uit !!}
+                        </div>
+                    @endif
+                @elseif($contract->situation->intrede == 1)
+                    @if($contract->slot_in)
+                        <div class="row p-5 the five">
+                            <strong class="w-100">{{ __('Tot slot') }}</strong>
+                            {!! $contract->slot_in !!}
+                        </div>
+                    @endif
+                @elseif($contract->situation->intrede == 2)
+                    @if($contract->slot_aanvang)
+                        <div class="row p-5 the-five">
+                            <strong class="w-100">{{ __('Tot slot') }}</strong>
+                            {!! $contract->slot_aanvang !!}
+                        </div>
+                    @endif
+                @endif
+
+                <!-- Signatures -->
+                <section class="signature">
+                    <div class="row p-5 the-five">
+                        @if($contract->signature_owner)
+                            <div class="col-md-6">
+                                <strong>{{ __('Gelezen en goedgekeurd') }}</strong>
+                                <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
+                                <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
+                                <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
+                            </div>
+                        @endif
+
+                        @if($contract->signature_tenant)
+                            <div class="col-md-6 text-right">
+                                @if($contract->situation->intrede != 2)
+                                    <strong class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</strong>
+                                    <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
+                                    <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
+                                    <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
+                                @endif
+                            </div>
+                        @endif
+                    </div>
+                </section>
+
+            </div>
+
+            @if($lock)
+                <div class="single-add-property">
+                    <h3>{{ __('Contract printen') }}</h3>
+                    <a href="{{ route('print.contract', [$inspection, $contract]) }}" class="btn btn-dark">{{ __('Printen') }}</a>
+                </div>
+            @endif
 
             </div>
         </div>

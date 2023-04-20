@@ -178,8 +178,13 @@
         - suggestie : de opmerking wordt louter als suggestie geformuleerd. Deze suggesties kunnen gaan over zaken die de betrokken partij best nakijkt, dient te laten herstellen of vervangen of die in de toekomst problemen zouden kunnen stellen.
         <br>
         3. Bij de beschrijving van muren wordt de muur evenwijdig aan de straatzijde “muur 1” genoemd. Vervolgens worden de muren in wijzerzin aangeduid. Indien een pand op een hoek gelegen is, wordt als straatzijde beschouwd daar waar de inkomdeur van het individuele kavel gesitueerd is.
-        '
+        ',
 
+        'slot_in' => 'Dit is het slot voor een intrede',
+
+        'slot_uit' => 'Dit is het slot voor een uittrede',
+
+        'slot_aanvang' => 'Dit is het slot voor een aanvang',
     ];
 
 

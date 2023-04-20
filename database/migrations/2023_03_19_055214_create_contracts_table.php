@@ -24,6 +24,9 @@ return new class extends Migration
             $table->text('legal_in')->nullable();
             $table->text('legal_uit')->nullable();
             $table->text('legal_aanvang')->nullable();
+            $table->text('slot_in')->nullable();
+            $table->text('slot_uit')->nullable();
+            $table->text('slot_aanvang')->nullable();
             $table->string('signature_tenant')->nullable();
             $table->string('signature_owner')->nullable();
             $table->date('date')->nullable();
