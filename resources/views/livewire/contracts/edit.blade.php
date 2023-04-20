@@ -335,9 +335,9 @@
                     <div class="col-md-6">
                         @if($contract->situation->intrede != 2)
                             <strong>{{ __('Koper/huurder ') }}</strong>
-                            <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
-                            <p>{{  $contract->situation->tenant ? $contract->situation->tenant->phone : "" }}</p>
-                            <p>{{  $contract->situation->tenant ? $contract->situation->tenant->email : "" }}</p>
+                            <p class="mb-0" >{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
+                            <p class="mb-0">{{  $contract->situation->tenant ? $contract->situation->tenant->phone : "" }}</p>
+                            <p class="mb-0">{{  $contract->situation->tenant ? $contract->situation->tenant->email : "" }}</p>
                         @else
                             <strong>{{__('Opdrachtgever')}}</strong>
                             <p>{{  $contract->situation->client }}</p>
@@ -374,11 +374,13 @@
                                 {!! $contract->legal_uit !!}
                             @endif
                         @else
-                            <p>Met betrekking tot het pand gelegen te {{  $contract->situation->address->address }}, @if($contract->situation->address->postBus) {{  $contract->situation->address->postBus }}, @endif
-                            @if($contract->situation->address->zip || $contract->situation->address->city) {{  $contract->situation->address->zip }} {{  $contract->situation->address->city }} @endif
-                            eigendom van {{ $contract->situation->owner ? $contract->situation->owner->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}} een gedetailleerde plaatsbeschrijving gedaan.
-                            De plaatsbeschrijving is uitgevoerd door {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} voor {{ Auth()->user()->companyName }}</p>
-                            {!! $contract->legal_aanvang !!}
+                            @if($contract->situation->address)
+                                <p>Met betrekking tot het pand gelegen te {{  $contract->situation->address->address }}, @if($contract->situation->address->postBus) {{  $contract->situation->address->postBus }}, @endif
+                                @if($contract->situation->address->zip || $contract->situation->address->city) {{  $contract->situation->address->zip }} {{  $contract->situation->address->city }} @endif
+                                eigendom van {{ $contract->situation->owner ? $contract->situation->owner->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}} een gedetailleerde plaatsbeschrijving gedaan.
+                                De plaatsbeschrijving is uitgevoerd door {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} voor {{ Auth()->user()->companyName }}</p>
+                                {!! $contract->legal_aanvang !!}
+                            @endif
                         @endif
                     </div>
                 </div>
