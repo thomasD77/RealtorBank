@@ -72,7 +72,7 @@
                                             <ul>
                                                 <li class="pt-3 pt-lg-0">
                                                     <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                        <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                        <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                     </a>
                                                 </li>
                                                 {{-- Basic--}}
@@ -85,9 +85,9 @@
                                                            wire:click="toggleTemplate('{{ $basic }}')"
                                                         >
                                                             @if($activeTemplate == \App\Enums\TemplateKey::Basic->value)
-                                                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Basis') }}
+                                                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Standaard') }}
                                                             @else
-                                                                <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Basis') }}
+                                                                <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Standaard') }}
                                                             @endif
                                                         </a>
                                                         <div>
@@ -228,7 +228,7 @@
                                                 <ul>
                                                     <li class="pt-3 pt-lg-0">
                                                         <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                            <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                            <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                         </a>
                                                     </li>
                                                     {{-- Basic--}}
@@ -241,9 +241,9 @@
                                                                wire:click="toggleTemplate('{{ $basic }}')"
                                                             >
                                                                 @if($activeTemplate == \App\Enums\TemplateKey::Basic->value)
-                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Basis') }}
+                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Standaard') }}
                                                                 @else
-                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Basis') }}
+                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Standaard') }}
                                                                 @endif                                                    </a>
                                                             <div>
                                                                 <ul class="collapse @if($activeTemplate == \App\Enums\TemplateKey::Basic->value) show @endif"
@@ -381,7 +381,7 @@
                                                 <ul>
                                                     <li>
                                                         <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                            <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                            <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                         </a>
                                                     </li>
                                                     {{--  Basic--}}
@@ -394,9 +394,9 @@
                                                                wire:click="toggleTemplate('{{ $basic }}')"
                                                             >
                                                                 @if($activeTemplate == \App\Enums\TemplateKey::Basic->value)
-                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Basis') }}
+                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Standaard') }}
                                                                 @else
-                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Basis') }}
+                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Standaard') }}
                                                                 @endif
                                                             </a>
                                                             <div>
@@ -532,7 +532,7 @@
                                                 <ul>
                                                     <li>
                                                         <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                            <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                            <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                         </a>
                                                     </li>
                                                     {{-- Basic--}}
@@ -545,9 +545,9 @@
                                                                wire:click="toggleTemplate('{{ $basic }}')"
                                                             >
                                                                 @if($activeTemplate == \App\Enums\TemplateKey::Basic->value)
-                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Basis') }}
+                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Standaard') }}
                                                                 @else
-                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Basis') }}
+                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Standaard') }}
                                                                 @endif
                                                             </a>
                                                             <div>
@@ -684,7 +684,7 @@
                                                 <ul>
                                                     <li>
                                                         <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                            <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                            <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                         </a>
                                                     </li>
                                                     {{-- Basic--}}
@@ -697,9 +697,9 @@
                                                                wire:click="toggleTemplate('{{ $basic }}')"
                                                             >
                                                                 @if($activeTemplate == \App\Enums\TemplateKey::Basic->value)
-                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Basis') }}
+                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Standaard') }}
                                                                 @else
-                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Basis') }}
+                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Standaard') }}
                                                                 @endif
                                                             </a>
                                                             <div>
@@ -863,7 +863,7 @@
                                             <ul>
                                                 <li>
                                                     <a href="{{ route('general.detail',  [$inspection, $building]) }}">
-                                                        <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                        <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                     </a>
                                                 </li>
 
@@ -928,7 +928,7 @@
                                                 <ul>
                                                     <li>
                                                         <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                            <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                            <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                         </a>
                                                     </li>
 
@@ -999,7 +999,7 @@
                                         @foreach($outHouseInParam as $room)
                                             <li>
                                                 <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                    <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                    <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                 </a>
                                             </li>
                                             {{--          Basic--}}
@@ -1012,9 +1012,9 @@
                                                        wire:click="toggleTemplate('{{ $basic }}')"
                                                     >
                                                         @if($activeTemplate == \App\Enums\TemplateKey::Basic->value)
-                                                            <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Basis') }}
+                                                            <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Standaard') }}
                                                         @else
-                                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Basis') }}
+                                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Standaard') }}
                                                         @endif
                                                     </a>
                                                     <div>
@@ -1127,7 +1127,7 @@
                                     <ul>
                                         <li>
                                             <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                                <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                                <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                             </a>
                                         </li>
 

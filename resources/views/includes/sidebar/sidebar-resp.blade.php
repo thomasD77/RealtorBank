@@ -16,7 +16,7 @@
                     <ul>
                         <li>
                             <a href="{{ route('general.detail',  [$inspection, $room]) }}">
-                                <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Algemeen') }}
+                                <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Overzicht') }}
                             </a>
                         </li>
                         {{--   Basic--}}

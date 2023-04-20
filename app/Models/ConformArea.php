@@ -32,7 +32,7 @@ class ConformArea extends Model
         return $data = [
             'kunststof',
             'aluminium',
-            'bakelliet',
+            'bakeliet',
             'inox',
             'ander',
         ];

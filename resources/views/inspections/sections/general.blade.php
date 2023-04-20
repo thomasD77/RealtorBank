@@ -2,13 +2,13 @@
     $room->generalArea->analysis || $room->generalArea->extra)
     <table class="table">
         <tr class="row--head--list">
-            <th>{{ $room->floor->title }} | {{ $room->title }} | {{ __('Algemeen') }}</th>
+            <th>{{ $room->floor->title }} | {{ $room->title }} | {{ __('Overzicht') }}</th>
             <th></th>
         </tr>
 
         @if($room->generalArea->order)
             <tr class="row--text--list">
-                <th>{{ __('Orde') }}</th>
+                <th>{{ __('Toestand') }}</th>
                 <th>{{ $room->generalArea->order }}</th>
             </tr>
         @endif
