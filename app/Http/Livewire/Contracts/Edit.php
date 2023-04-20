@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\MediaSituation;
+use App\Models\MediaInspection;
 
 class Edit extends Component
 {
@@ -25,6 +26,7 @@ class Edit extends Component
     public $lock;
 
     public $files;
+    public $medias;
 
     public function mount(Inspection $inspection, Contract $contract)
     {
@@ -35,8 +37,11 @@ class Edit extends Component
         $this->date = $this->contract->date;
         $this->lock = $this->contract->lock;
 
-        $files = MediaSituation::where('situation_id', $this->situation->id)->get();
+        $files = MediaInspection::where('inspection_id', $this->inspection->id)->get();
         $this->files = $files;
+
+        $medias = MediaSituation::where('situation_id', $this->situation->id)->get();
+        $this->medias = $medias;
     }
 
     public function changeDate()

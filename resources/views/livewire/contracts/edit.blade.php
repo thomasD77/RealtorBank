@@ -277,39 +277,25 @@
 
                 <!-- Images from the propperty  -->
                 <div class="row p-5 the-five">
-                    @if($inspection->media->isNotEmpty())
-                        @for ($i = 0; $i <= count($inspection->media); $i++ )
-                            <div class="row">
-                                @if(isset($inspection->media[$i]))
-                                    <div class="column-pic img--cover"
-                                        style="background-image: url('{{ asset('assets/images/inspections/crop' . '/' . $inspection->media[$i]->file_crop) }}');
-                                            background-position: center;
-                                            background-size: cover; height: 150px">
+                    @foreach($files as $file)
+                        <div class="col-md-4 col-lg-3 mt-4">
+                            <div class="img-wrapper">
+
+                                <a class="d-md-none d-lg-block" data-fancybox="gallery" href="{{ asset('assets/images/inspections/' . $file->file_original) }}">
+                                    <div class="img--cover"
+                                        style="background-image: url('{{ asset('assets/images/inspections/crop' . '/' . $file->file_crop) }}');">
                                     </div>
-                                @endif
-                                @php
-                                    $i += 1;
-                                @endphp
-                                @if(isset($inspection->media[$i]))
-                                    <div class="column-pic img--cover"
-                                        style="background-image: url('{{ asset('assets/images/inspections/crop' . '/' . $inspection->media[$i]->file_crop) }}');
-                                            background-position: center;
-                                            background-size: cover; height: 150px;">
+                                </a>
+
+                                {{--Temp fix for background images not displaying on tablets--}}
+                                <a class="d-none d-md-block d-lg-none" data-fancybox="gallery" href="{{ asset('assets/images/inspections/' . $file->file_original) }}">
+                                    <div style=" min-height: 125px ; background-image: url('{{ asset('assets/images/inspections/crop' . '/' . $file->file_crop) }}'); background-repeat: no-repeat; background-position: center; background-size: cover">
                                     </div>
-                                @endif
-                                @php
-                                    $i += 1;
-                                @endphp
-                                @if(isset($inspection->media[$i]))
-                                    <div class="column img--cover"
-                                    style="background-image: url('{{ asset('assets/images/inspections/crop' . '/' . $inspection->media[$i]->file_crop) }}');
-                                            background-position: center;
-                                            background-size: cover; height: 150px">
-                                    </div>
-                                @endif
+                                </a>
+
                             </div>
-                        @endfor
-                    @endif
+                        </div>
+                    @endforeach
                 </div>
 
                 <hr>
@@ -407,39 +393,25 @@
                  <!-- Media for 'aanvang van werken' -->
                 @if($contract->situation->intrede == 2)
                     <div class="row p-5 the-five">
-                        @if($contract->situation->media->isNotEmpty())
-                            @for ($i = 0; $i <= count($contract->situation->media); $i++ )
-                                <div class="row">
-                                    @if(isset($contract->situation->media[$i]))
-                                        <div class="column-pic img--cover"
-                                            style="background-image: url('{{ asset('assets/images/situations/crop' . '/' . $contract->situation->media[$i]->file_crop) }}');
-                                                background-position: center;
-                                                background-size: cover; height: 150px">
+                        @foreach($medias as $file)
+                            <div class="col-md-4 col-lg-3 mt-4">
+                                <div class="img-wrapper">
+
+                                    <a class="d-md-none d-lg-block" data-fancybox="gallery" href="{{ asset('assets/images/situations/' . $file->file_original) }}">
+                                        <div class="img--cover"
+                                            style="background-image: url('{{ asset('assets/images/situations/crop' . '/' . $file->file_crop) }}');">
                                         </div>
-                                    @endif
-                                    @php
-                                        $i += 1;
-                                    @endphp
-                                    @if(isset($contract->situation->media[$i]))
-                                        <div class="column-pic img--cover"
-                                            style="background-image: url('{{ asset('assets/images/situations/crop' . '/' . $contract->situation->media[$i]->file_crop) }}');
-                                                background-position: center;
-                                                background-size: cover; height: 150px;">
+                                    </a>
+
+                                    {{--Temp fix for background images not displaying on tablets--}}
+                                    <a class="d-none d-md-block d-lg-none" data-fancybox="gallery" href="{{ asset('assets/images/situations/' . $file->file_original) }}">
+                                        <div style=" min-height: 125px ; background-image: url('{{ asset('assets/images/situations/crop' . '/' . $file->file_crop) }}'); background-repeat: no-repeat; background-position: center; background-size: cover">
                                         </div>
-                                    @endif
-                                    @php
-                                        $i += 1;
-                                    @endphp
-                                    @if(isset($contract->situation->media[$i]))
-                                        <div class="column img--cover"
-                                        style="background-image: url('{{ asset('assets/images/situations/crop' . '/' . $contract->situation->media[$i]->file_crop) }}');
-                                                background-position: center;
-                                                background-size: cover; height: 150px">
-                                        </div>
-                                    @endif
+                                    </a>
+
                                 </div>
-                            @endfor
-                        @endif
+                            </div>
+                        @endforeach
                     </div>
                 @endif
 
