@@ -85,6 +85,7 @@ class Inspection extends Model
         $rooms = [
             //Interieur
             ['Kelder', RoomKey::Basement, Floor::where('code', FloorKey::BasementFloor )->first()->id],
+            
             ['Inkomhal', RoomKey::EntranceHall->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
             ['Toilet', RoomKey::Toilet->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
             ['Woonkamer', RoomKey::LivingRoom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
@@ -93,9 +94,13 @@ class Inspection extends Model
             ['Gang', RoomKey::NightHall->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
             ['Berging', RoomKey::Storage->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
             ['Slaapkamer', RoomKey::Bedroom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
+
             ['Nachthal', RoomKey::NightHall->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
             ['Badkamer', RoomKey::Bathroom->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
             ['Slaapkamer', RoomKey::Bedroom->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
+            ['Berging', RoomKey::Storage->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
+            ['Toilet', RoomKey::Toilet->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
+
             ['Zolder', RoomKey::Attic->value, Floor::where('code', FloorKey::Attic)->first()->id],
             ['Garage', RoomKey::Garage->value, Floor::where('code', FloorKey::Garage)->first()->id],
 

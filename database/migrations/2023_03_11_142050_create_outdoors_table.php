@@ -33,7 +33,7 @@ return new class extends Migration
             [ 'Buitentrap', 'outdoorTrap', RoomKey::Building],
             [ 'Balkon', 'balcony', RoomKey::Building],
 
-            [ 'Verharding oprit', 'driveWayMaterial', RoomKey::DriveWay],
+            [ 'Verharding terras', 'driveWayMaterial', RoomKey::DriveWay],
             [ 'Verharding voetpad', 'footPathMaterial', RoomKey::DriveWay],
             [ 'Inrijpoort', 'gate', RoomKey::DriveWay],
             [ 'Omheining', 'fence', RoomKey::DriveWay],
@@ -55,7 +55,7 @@ return new class extends Migration
             [ 'Verharding voetpad', 'footPathMaterial', RoomKey::Yard],
             [ 'Overige zaken', 'extraFrontYard', RoomKey::Yard],
 
-            [ 'Verharding oprit', 'driveWayMaterial', RoomKey::Terrace],
+            [ 'Verharding terras', 'driveWayMaterial', RoomKey::Terrace],
             [ 'Kraanwerk', 'crane', RoomKey::Terrace],
             [ 'Buitenverlichting', 'outdoorLight', RoomKey::Terrace],
             [ 'Stopcontacten', 'sockets', RoomKey::Terrace],
