@@ -135,7 +135,7 @@
                             $i += 1;
                         @endphp
                         @if(isset($inspection->media[$i]))
-                            <div class="column img--cover"
+                            <div class="column-pic img--cover"
                             style="background-image: url('{{ asset('assets/images/inspections/crop' . '/' . $inspection->media[$i]->file_crop) }}');
                                     background-position: center;
                                     background-size: cover; height: 150px">
@@ -258,7 +258,7 @@
                                 $i += 1;
                             @endphp
                             @if(isset($contract->situation->media[$i]))
-                                <div class="column img--cover"
+                                <div class="column-pic img--cover"
                                 style="background-image: url('{{ asset('assets/images/situations/crop' . '/' . $contract->situation->media[$i]->file_crop) }}');
                                         background-position: center;
                                         background-size: cover; height: 150px">
