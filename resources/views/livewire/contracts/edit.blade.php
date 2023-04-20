@@ -388,7 +388,7 @@
                 <!-- Extra info contract -->
                 @if($contract->situation->extra)
                     <div class="row p-5 the-five">
-                        <strong>{{ __('Extra info') }}</strong>
+                        <strong class="w-100">{{ __('Extra info') }}</strong>
                         {!! $contract->situation->extra !!}
                     </div>
                 @endif
@@ -397,7 +397,7 @@
                 @if($contract->situation->intrede == 2)
                     @if($contract->situation->general)
                         <div class="row p-5 the-five">
-                            <strong>{{ __('Algemene bepalingen') }}</strong>
+                            <strong class="w-100">{{ __('Algemene bepalingen') }}</strong>
                             {!! $contract->situation->general !!}
                         </div>
                     @endif
