@@ -10,7 +10,7 @@ class Cleanliness extends MainDropdownComponent
 {
     //--> Custom
     public string $element = "cleanliness";
-    public string $title = "Netheid";
+    public string $title = "Proper";
 
     public function mount($dynamicArea)
     {

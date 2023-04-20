@@ -14,13 +14,13 @@
         @endif
         @if($room->generalArea->cleanliness)
             <tr class="row--text--list">
-                <th>{{ __('Netheid') }}</th>
+                <th>{{ __('Proper') }}</th>
                 <th>{{ $room->generalArea->cleanliness }}</th>
             </tr>
         @endif
         @if($room->generalArea->painting)
             <tr class="row--text--list">
-                <th>{{ __('Schilderwerken') }}</th>
+                <th>{{ __('Verfwerken') }}</th>
                 <th>{{ $room->generalArea->painting }}</th>
             </tr>
         @endif

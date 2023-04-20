@@ -48,7 +48,7 @@
                                role="button" aria-expanded="false"
                                aria-controls="collapseExample"
                             >
-                                <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Specifiek') }}
+                                <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Typerend') }}
                             </a>
                             <div>
                                 <ul class="collapse" id="collapseSpec{{ $room->id }}">

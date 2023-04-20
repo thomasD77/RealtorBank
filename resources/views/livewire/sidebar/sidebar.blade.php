@@ -118,9 +118,9 @@
                                                         >
 
                                                             @if($activeTemplate == \App\Enums\TemplateKey::Specific->value)
-                                                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Specifiek') }}
+                                                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Typerend') }}
                                                             @else
-                                                                <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Specifiek') }}
+                                                                <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Typerend') }}
                                                             @endif
                                                         </a>
                                                         <div>
@@ -150,9 +150,9 @@
                                                            wire:click="toggleTemplate('{{ $conform }}')"
                                                         >
                                                             @if($activeTemplate == \App\Enums\TemplateKey::Conform->value)
-                                                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Conformiteit') }}
+                                                                <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Elektriciteit') }}
                                                             @else
-                                                                <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Conformiteit') }}
+                                                                <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Elektriciteit') }}
                                                             @endif
 
                                                         </a>
@@ -272,9 +272,9 @@
                                                                wire:click="toggleTemplate('{{ $specific }}')"
                                                             >
                                                                 @if($activeTemplate == \App\Enums\TemplateKey::Specific->value)
-                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Specifiek') }}
+                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Typerend') }}
                                                                 @else
-                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Specifiek') }}
+                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Typerend') }}
                                                                 @endif
                                                             </a>
                                                             <div>
@@ -305,9 +305,9 @@
                                                                wire:click="toggleTemplate('{{ $conform }}')"
                                                             >
                                                                 @if($activeTemplate == \App\Enums\TemplateKey::Conform->value)
-                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Conformiteit') }}
+                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Elektriciteit') }}
                                                                 @else
-                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Conformiteit') }}
+                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Elektriciteit') }}
                                                                 @endif
                                                             </a>
                                                             <div>
@@ -426,9 +426,9 @@
                                                                wire:click="toggleTemplate('{{ $specific }}')"
                                                             >
                                                                 @if($activeTemplate == \App\Enums\TemplateKey::Specific->value)
-                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Specifiek') }}
+                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Typerend') }}
                                                                 @else
-                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Specifiek') }}
+                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Typerend') }}
                                                                 @endif
                                                             </a>
                                                             <div>
@@ -459,9 +459,9 @@
                                                                wire:click="toggleTemplate('{{ $conform }}')"
                                                             >
                                                                 @if($activeTemplate == \App\Enums\TemplateKey::Conform->value)
-                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Conformiteit') }}
+                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Elektriciteit') }}
                                                                 @else
-                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Conformiteit') }}
+                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Elektriciteit') }}
                                                                 @endif
                                                             </a>
                                                             <div>
@@ -577,9 +577,9 @@
                                                                wire:click="toggleTemplate('{{ $specific }}')"
                                                             >
                                                                 @if($activeTemplate == \App\Enums\TemplateKey::Specific->value)
-                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Specifiek') }}
+                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Typerend') }}
                                                                 @else
-                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Specifiek') }}
+                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Typerend') }}
                                                                 @endif
 
                                                             </a>
@@ -610,9 +610,9 @@
                                                                wire:click="toggleTemplate('{{ $conform }}')"
                                                             >
                                                                 @if($activeTemplate == \App\Enums\TemplateKey::Conform->value)
-                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Conformiteit') }}
+                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Elektriciteit') }}
                                                                 @else
-                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Conformiteit') }}
+                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Elektriciteit') }}
                                                                 @endif
                                                             </a>
                                                             <div>
@@ -729,9 +729,9 @@
                                                                wire:click="toggleTemplate('{{ $specific }}')"
                                                             >
                                                                 @if($activeTemplate == \App\Enums\TemplateKey::Specific->value)
-                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Specifiek') }}
+                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Typerend') }}
                                                                 @else
-                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Specifiek') }}
+                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Typerend') }}
                                                                 @endif
                                                             </a>
                                                             <div>
@@ -761,9 +761,9 @@
                                                                wire:click="toggleTemplate('{{ $conform }}')"
                                                             >
                                                                 @if($activeTemplate == \App\Enums\TemplateKey::Conform->value)
-                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Conformiteit') }}
+                                                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Elektriciteit') }}
                                                                 @else
-                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Conformiteit') }}
+                                                                    <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Elektriciteit') }}
                                                                 @endif
                                                             </a>
                                                             <div>
@@ -1044,9 +1044,9 @@
                                                        wire:click="toggleTemplate('{{ $specific }}')"
                                                     >
                                                         @if($activeTemplate == \App\Enums\TemplateKey::Specific->value)
-                                                            <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Specifiek') }}
+                                                            <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Typerend') }}
                                                         @else
-                                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Specifiek') }}
+                                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Typerend') }}
                                                         @endif
                                                     </a>
                                                     <div>
@@ -1076,9 +1076,9 @@
                                                        wire:click="toggleTemplate('{{ $conform }}')"
                                                     >
                                                         @if($activeTemplate == \App\Enums\TemplateKey::Conform->value)
-                                                            <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Conformiteit') }}
+                                                            <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Elektriciteit') }}
                                                         @else
-                                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Conformiteit') }}
+                                                            <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Elektriciteit') }}
                                                         @endif
                                                     </a>
                                                     <div>

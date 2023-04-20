@@ -161,6 +161,7 @@ class Sidebar extends Component
                 'conformAreas.conform'
             ])->where('inspection_id', $this->inspection->id)
                 ->where('floor_id', Floor::where('code', FloorKey::BasementFloor)->first()->id)
+                ->orderBy('title', 'asc')
                 ->get();
         }
 
@@ -173,6 +174,7 @@ class Sidebar extends Component
                 'conformAreas.conform'
             ])->where('inspection_id', $this->inspection->id)
                 ->where('floor_id', Floor::where('code', FloorKey::GroundFloor)->first()->id)
+                ->orderBy('title', 'asc')
                 ->get();
         }
 
@@ -185,6 +187,7 @@ class Sidebar extends Component
                 'conformAreas.conform'
             ])->where('inspection_id', $this->inspection->id)
                 ->where('floor_id', Floor::where('code', FloorKey::UpperFloor)->first()->id)
+                ->orderBy('title', 'asc')
                 ->get();
         }
 
@@ -197,6 +200,7 @@ class Sidebar extends Component
                 'conformAreas.conform'
             ])->where('inspection_id', $this->inspection->id)
                 ->where('floor_id', Floor::where('code', FloorKey::Attic)->first()->id)
+                ->orderBy('title', 'asc')
                 ->get();
         }
 
@@ -209,6 +213,7 @@ class Sidebar extends Component
                 'conformAreas.conform'
             ])->where('inspection_id', $this->inspection->id)
                 ->where('floor_id', Floor::where('code', FloorKey::Garage)->first()->id)
+                ->orderBy('title', 'asc')
                 ->get();
         }
 
@@ -216,6 +221,7 @@ class Sidebar extends Component
             $this->buildingParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])
                 ->where('inspection_id', $this->inspection->id)
                 ->where('floor_id', Floor::where('code', FloorKey::Building)->first()->id)
+                ->orderBy('title', 'asc')
                 ->get();
         }
 
@@ -223,12 +229,14 @@ class Sidebar extends Component
             $this->driveWayParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])
                 ->where('inspection_id', $this->inspection->id)
                 ->where('floor_id', Floor::where('code', FloorKey::DriveWay)->first()->id)
+                ->orderBy('title', 'asc')
                 ->get();
         }
 
         if($this->activeCat == $this->techniques || $this->activeCat == null) {
             $this->techniqueParam = Technique::query()
                 ->select('id', 'title')
+                ->orderBy('title', 'asc')
                 ->get();
         }
 
@@ -241,6 +249,7 @@ class Sidebar extends Component
                 'conformAreas.conform'
             ])->where('inspection_id', $this->inspection->id)
                 ->where('floor_id', Floor::where('code', FloorKey::OutHouseIn)->first()->id)
+                ->orderBy('title', 'asc')
                 ->get();
         }
 
@@ -253,6 +262,7 @@ class Sidebar extends Component
                 'conformAreas.conform'
             ])->where('inspection_id', $this->inspection->id)
                 ->where('floor_id', Floor::where('code', FloorKey::OutHouseEx)->first()->id)
+                ->orderBy('title', 'asc')
                 ->get();
         }
 

@@ -10,7 +10,7 @@ class Painting extends MainDropdownComponent
 {
     //--> Custom
     public string $element = "painting";
-    public string $title = "Schilderwerken";
+    public string $title = "Verfwerken";
 
     public function mount($dynamicArea)
     {

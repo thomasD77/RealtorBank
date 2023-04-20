@@ -29,7 +29,7 @@ return new class extends Migration
             ['Schakelaars', 'switches'],
             ['Aansluitingen', 'connection'],
             ['Verlichting', 'lighting'],
-            ['Ventilater', 'ventilator'],
+            ['Ventilator', 'ventilator'],
         ];
 
         $conformsToInsert = [];
