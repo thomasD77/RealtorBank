@@ -7,7 +7,7 @@
     @if(!$basicArea->isFavourite)
         <button wire:click="generateFavourite" class="btn btn-info text-white">
 
-            <i class="fa fa-file text-white"></i>
+            <i class="fa fa-file text-white mr-1"></i>
 
             {{ __('Generate') }}
 

@@ -1,4 +1,7 @@
 /*Blank CSS*/
+a:hover {
+    text-decoration: none;
+}
 
 .test {
     color: yellow;

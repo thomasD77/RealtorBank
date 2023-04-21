@@ -5,6 +5,6 @@
                 {{ session('successAdd') }}
             </div>
         @endif
-        <button wire:click="addRoom" class="btn btn-common mb-3"><i class="fa fa-plus"></i>{{ __($room->title) }}</button>
+        <button wire:click="addRoom" class="btn btn-common mb-3"><i class="fa fa-plus mr-1"></i>{{ __($room->title) }}</button>
     @endif
 </div>

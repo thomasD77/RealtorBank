@@ -5,6 +5,12 @@
     h1, h2 {
         margin-bottom: 3px;
     }
+    h1 {
+        font-size: 1.7rem;
+    }
+    h2{
+        font-size: 1.2rem;
+    }
     h3 {
         font-size: 0.7rem;
         text-transform: uppercase;
