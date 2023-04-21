@@ -149,6 +149,7 @@ class Inspection extends Model
             $areasToInsert = [];
             foreach ($areas as $area) {
                 $areasToInsert[] = [
+                    'order' => substr($area->title, 0, 1),
                     'area_id' => $area->id,
                     'room_id' => $room->id,
                     'floor_id' => $room->floor_id,
