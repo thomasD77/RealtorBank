@@ -63,6 +63,7 @@ class AddRoom extends Component
         foreach($basicAreas as $newArea){
             $extraArea = new BasicArea();
 
+            $extraArea->order = substr($newArea->area->title, 0, 1);
             $extraArea->room_id = $newRoom->id;
             $extraArea->area_id = $newArea->area_id;
             $extraArea->inspection_id = $newArea->inspection_id;
