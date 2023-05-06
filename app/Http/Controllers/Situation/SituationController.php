@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Situation;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
+use App\Models\Damage;
 use App\Models\Inspection;
 use App\Models\Owner;
 use App\Models\Situation;
@@ -121,7 +122,14 @@ class SituationController extends Controller
 
     public function printContract(Inspection $inspection, Contract $contract)
     {
+        $damages = Damage::query()
+            ->where('inspection_id', $inspection->id)
+            ->where('print_pdf', 1)
+            ->orderBy('date', 'desc')
+            ->get();
+
         $pdf = Pdf::loadView('contracts.pdf', [
+            'damages' => $damages,
             'inspection' => $inspection,
             'contract' => $contract,
 

@@ -49,7 +49,7 @@ class Edit extends Component
         $this->damages = Damage::query()
             ->where('inspection_id', $this->inspection->id)
             ->where('print_pdf', 1)
-            ->latest()
+            ->orderBy('date', 'desc')
             ->get();
     }
 

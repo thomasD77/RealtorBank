@@ -89,7 +89,7 @@ class Index extends Component
     {
         $damages = Damage::query()
             ->where($this->paramHelper, $this->dynamicArea->id)
-            ->latest()
+            ->orderBy('date', 'desc')
             ->simplePaginate(5);
 
         return view('livewire.damage.index', [

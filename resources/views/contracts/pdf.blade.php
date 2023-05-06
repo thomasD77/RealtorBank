@@ -32,22 +32,27 @@
             margin: 5px;
             font-weight: normal;
         }
-
         .column-sig {
             float: left;
             width: 47%;
         }
-
         .img--cover {
         aspect-ratio: 3/2;
         }
-
         .column-pic {
             float: left;
             width: 32.775%;
             margin-right: 5px;
         }
-
+        section {
+            page-break-inside: avoid !important;
+        }
+        .signature img {
+            width: 85%;
+        }
+        .keep {
+            page-break-inside: avoid !important;
+        }
         /* Clear floats after the columns */
         .row:after {
             content: "";
@@ -56,26 +61,60 @@
             padding-bottom: 25px;
         }
         .table {
-            margin: 50px 0;
+            font-family: Montserrat, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            padding-top: 15px;
+            margin: 10px 0;
         }
-
         hr {
             margin: 35px 0;
         }
-
-        section {
-            page-break-inside: avoid !important;
+        .table td, .table th {
+            border: 1px solid #ddd;
+            padding: 8px;
         }
-
-        .signature img {
-            width: 85%;
+        .table tr:nth-child(even){background-color: #f2f2f2;}
+        .table th {
+            text-align: left;
+            color: white;
+            background-color:  #f2f2f2;
+            font-size: 14px;
+            page-break-before: always;
+            font-weight: normal;
         }
-
-        .keep {
-            page-break-inside: avoid !important;
+        .row--head th {
+            background-color: rgba(36, 50, 74, 0.7); !important;
+            text-transform: uppercase;
+        }
+        .row--head--list tr {
+            padding: 2rem;
+        }
+        .row--head--list th {
+            background-color: rgba(36, 50, 74, 0.7); !important;
+            opacity: 0.8;
+            padding: 0.2rem;
+            width: 100%;
+        }
+        .row--head--list th:first-child {
+            width: 35%;
+        }
+        .row--text th {
+            background-color: transparent;
+            color: black;
+            border: none;
+            border-bottom: 1px solid  #f2f2f2; !important;
+            font-weight: normal;
+        }
+        .row--text--list th {
+            background-color: transparent;
+            color: black;
+            border: none;
+            border-bottom: 1px solid  #f2f2f2; !important;
+            padding: 0;
+            font-weight: normal;
         }
     </style>
-
 </head>
 <body>
     <section>
@@ -192,7 +231,7 @@
             @if($contract->situation->intrede != 2)
                 <p>Met betrekking tot het pand gelegen te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
                 @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
-                verhuurd aan {{ $contract->situation->tenant ? $contract->situation->tenant->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}} een gedetailleerde 
+                verhuurd aan {{ $contract->situation->tenant ? $contract->situation->tenant->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}} een gedetailleerde
                 @if($contract->situation->intrede)
                     Intrede
                 @else
@@ -270,6 +309,40 @@
             </div>
         @endif
 
+        <!-- Damges -->
+        @if($damages->isNotEmpty() )
+            <section class="techniques">
+                <h2>{{ __('Schade') }}</h2>
+                @foreach($damages as $item)
+                    <section>
+                        <table class="table">
+                            <tr class="row--head--list">
+                                <th>{{ $item->title }}</th>
+                                <th></th>
+                            </tr>
+
+                            <tr class="row--text--list">
+                                <th>{{ __('Titel') }}</th>
+                                <th>{{ $item->title }}</th>
+                            </tr>
+
+                            <tr class="row--text--list">
+                                <th>{{ __('Datum') }}</th>
+                                <th>{{ $item->date }}</th>
+                            </tr>
+
+                            <tr class="row--text--list textareaExtra">
+                                <th>{{ __('Omschrijving') }}</th>
+                                <th class="">{{ $item->description }}</th>
+                                <th></th>
+                            </tr>
+
+                        </table>
+                    </section>
+                @endforeach
+            </section>
+        @endif
+
         <!-- Slot -->
         @if($contract->situation->intrede === 0)
             @if($contract->slot_uit)
@@ -294,7 +367,7 @@
             @endif
         @endif
 
-      
+
 
     </section>
 
