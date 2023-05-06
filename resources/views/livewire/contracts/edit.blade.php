@@ -416,11 +416,10 @@
                 @endif
 
                 <!-- Damages -->
+                @if($damages->isNotEmpty())
                 <div class="row p-5 the-five">
                     <strong class="w-100">{{ __('Schade') }}</strong>
-                    @if($damages)
-
-                        <div class="section-body listing-table">
+                    <div class="section-body listing-table">
                             <div class="table-responsive">
                                 <table class="table table-striped" style="width: 100%">
                                     <thead>
@@ -442,9 +441,8 @@
                                 </table>
                             </div>
                         </div>
-
-                    @endif
                 </div>
+                @endif
 
                 <!-- Slot -->
                 @if($contract->situation->intrede === 0)
