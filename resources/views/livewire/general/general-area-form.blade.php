@@ -42,6 +42,11 @@
             :Inspection="$inspection"
         />
 
+        <livewire:general.rename-room
+            :Inspection="$inspection"
+            :Room="$room"
+        />
+
         <livewire:general.elements.media
             :general="$general"
         />

@@ -1,10 +1,11 @@
 <div class="single-add-property">
 
-    <h3 class="" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <h3 class="d-flex justify-content-between" data-toggle="collapse" href="#collapseDamage" role="button" aria-expanded="false" aria-controls="collapseExample">
         {{ __('Schade opmetingen') }}
+        <i class="fa fa-arrow-down"></i>
     </h3>
 
-    <div class="collapse @if($damages->isNotEmpty()) show @endif" id="collapseExample" wire:ignore.self >
+    <div class="collapse @if($damages->isNotEmpty()) show @endif" id="collapseDamage" wire:ignore.self >
 
         <div class="d-flex justify-content-end">
             <a wire:click="createDamage" wire:loading.attr="disabled" class="btn btn-common mb-3"><i class="fa fa-plus"></i>{{ __('NIEUW') }}</a>
