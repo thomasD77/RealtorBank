@@ -347,7 +347,7 @@
                         @if($contract->situation->intrede != 2)
                             <p>Met betrekking tot het pand gelegen te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
                             @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
-                            verhuurd aan {{ $contract->situation->tenant ? $contract->situation->tenant->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}} een gedetailleerde 
+                            verhuurd aan {{ $contract->situation->tenant ? $contract->situation->tenant->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}} een gedetailleerde
                             @if($contract->situation->intrede)
                                 Intrede
                             @else
@@ -414,6 +414,37 @@
                         @endforeach
                     </div>
                 @endif
+
+                <!-- Damages -->
+                <div class="row p-5 the-five">
+                    <strong class="w-100">{{ __('Schade') }}</strong>
+                    @if($damages)
+
+                        <div class="section-body listing-table">
+                            <div class="table-responsive">
+                                <table class="table table-striped" style="width: 100%">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 20%">{{ __('Titel') }}</th>
+                                        <th style="width: 10%">{{ __('Datum') }}</th>
+                                        <th style="width: 70%">{{ __('Beschrijving') }}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($damages as $damage)
+                                        <tr>
+                                            <td>{{ $damage->title }}</td>
+                                            <td>{{ $damage->date }}</td>
+                                            <td>{{ $damage->description }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    @endif
+                </div>
 
                 <!-- Slot -->
                 @if($contract->situation->intrede === 0)

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Contracts;
 
 use App\Models\Contract;
+use App\Models\Damage;
 use App\Models\Inspection;
 use App\Models\Situation;
 use Illuminate\Support\Facades\File;
@@ -21,6 +22,8 @@ class Edit extends Component
     public Inspection $inspection;
 
     public $folder = 'situations';
+
+    public $damages;
 
     public $date;
     public $lock;
@@ -42,6 +45,12 @@ class Edit extends Component
 
         $medias = MediaSituation::where('situation_id', $this->situation->id)->get();
         $this->medias = $medias;
+
+        $this->damages = Damage::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->where('print_pdf', 1)
+            ->latest()
+            ->get();
     }
 
     public function changeDate()

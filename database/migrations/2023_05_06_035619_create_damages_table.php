@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->date('date')->nullable();
             $table->text('description')->nullable();
+            $table->boolean('print_pdf')->default(0);
+
+            $table->unsignedInteger('inspection_id')
+                ->index();
 
             $table->unsignedInteger('basic_id')
                 ->index()->nullable();

@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Situation;
 use App\Models\Address;
 use App\Models\Category;
 use App\Models\Contract;
+use App\Models\Damage;
 use App\Models\Inspection;
 use App\Models\Owner;
 use App\Models\Situation;
@@ -13,6 +14,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\MediaSituation;
 use App\Models\MediaStore;
+use Livewire\WithPagination;
 
 class Edit extends Component
 {
@@ -57,6 +59,7 @@ class Edit extends Component
     public $mediaName = 'MediaSituation';
 
     use WithFileUploads;
+    use WithPagination;
 
     protected $messages = [
         'media.*' => 'Oeps, limit om aantal bestanden up te loaden is overschreden. Probeer het opnieuw.',
@@ -235,6 +238,28 @@ class Edit extends Component
 
         //Render
         $this->files = MediaSituation::where('situation_id', $this->situation->id)->get();
+    }
+
+    public function togglePdfPrint(Damage $damage)
+    {
+        if($damage['print_pdf']){
+            $damage['print_pdf'] = 0;
+        }else {
+            $damage['print_pdf'] = 1;
+        }
+        $damage->update();
+    }
+
+    public function render()
+    {
+        $damages = Damage::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->orderBy('date', 'desc')
+            ->simplePaginate(10);
+
+        return view('livewire.situation.edit', [
+            'damages' => $damages
+        ]);
     }
 
 }

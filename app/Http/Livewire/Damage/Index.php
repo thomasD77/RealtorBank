@@ -55,6 +55,7 @@ class Index extends Component
         $damage = new Damage();
         $damage->title = 'Default';
         $damage->date = now();
+        $damage->inspection_id = $this->inspection->id;
 
         $paramHelper = $this->paramHelper;
         $damage->$paramHelper = $this->dynamicArea->id;

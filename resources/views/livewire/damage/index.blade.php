@@ -4,7 +4,7 @@
         {{ __('Schade opmetingen') }}
     </h3>
 
-    <div class="collapse" id="collapseExample" wire:ignore.self>
+    <div class="collapse @if($damages->isNotEmpty()) show @endif" id="collapseExample" wire:ignore.self >
 
         <div class="d-flex justify-content-end">
             <a wire:click="createDamage" wire:loading.attr="disabled" class="btn btn-common mb-3"><i class="fa fa-plus"></i>{{ __('NIEUW') }}</a>
@@ -14,7 +14,7 @@
             <table class="basic-table">
                 <thead>
                 <tr>
-                    <th>{{ __('Title') }}</th>
+                    <th>{{ __('Titel') }}</th>
                     <th>{{ __('Datum') }}</th>
                     <th>{{ __('Actie') }}</th>
                 </tr>

@@ -353,7 +353,51 @@
 
     @endif
 
-
+    <div class="single-add-property">
+                <h3>{{ __('Schade') }}</h3>
+                <div class="property-form-group">
+                    @if($damages)
+                        <div class="section-body listing-table">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>{{ __('Titel') }}</th>
+                                        <th>{{ __('Datum') }}</th>
+                                        <th>{{ __('PDF') }}</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($damages as $damage)
+                                        <tr>
+                                            <td>{{ $damage->title }}</td>
+                                            <td>{{ $damage->date }}</td>
+                                            <td><input type="checkbox"
+                                                       @if($damage->print_pdf) checked @endif
+                                                       wire:click="togglePdfPrint({{ $damage }})"
+                                                       wire:key="{{ $damage->id }}">
+                                            </td>
+                                            <td class="edit">
+                                                <a href="{{ route('damage.edit', [ $inspection, $damage]) }}"><i class="fa fa-pencil-alt text-dark"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                <!--pagination-->
+                                <div class="pagination-container">
+                                    <nav>
+                                        <ul class="pagination d-flex justify-content-center">
+                                            {{ $damages->links() }}
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
 
     <div class="single-add-property">
         <h3>{{ __('Contract') }}</h3>
@@ -384,7 +428,6 @@
             @endif
         </div>
     </div>
-
 
     <div class="single-add-property">
         <h3>{{ __('Verwijderen') }}</h3>
