@@ -26,6 +26,11 @@ class OutdoorArea extends Model
         return $this->hasMany(MediaOutdoor::class, 'outdoor_id');
     }
 
+    public function damages()
+    {
+        return $this->hasMany(Damage::class, 'outdoor_id');
+    }
+
     public static function getMaterials() :array
     {
         return $data = [

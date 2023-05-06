@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('technique_areas', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->default('TECHNIQUE');
             $table->unsignedInteger('inspection_id')
                 ->index();
             $table->unsignedInteger('technique_id')

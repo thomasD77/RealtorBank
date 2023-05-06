@@ -3,13 +3,14 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Inspection\InspectionController;
 use App\Http\Controllers\ProfileController;
-    use App\Http\Controllers\Situation\SituationController;
-    use App\Models\Contract;
-    use App\Models\Document;
-    use App\Models\Inspection;
-    use App\Models\Key;
-    use App\Models\Meter;
-    use App\Models\Situation;
+use App\Http\Controllers\Situation\SituationController;
+use App\Models\Contract;
+use App\Models\Damage;
+use App\Models\Document;
+use App\Models\Inspection;
+use App\Models\Key;
+use App\Models\Meter;
+use App\Models\Situation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +35,7 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/specific/{inspection}/{room}/{specific}', [DashboardController::class, 'specific'])->name('area.specific');
     Route::get('/technique/{inspection}/{technique}', [DashboardController::class, 'technique'])->name('area.technique');
     Route::get('/outdoor/{inspection}/{outdoor}', [DashboardController::class, 'outdoor'])->name('area.outdoor');
-    Route::get('/general/{inspection}/{room}/', [DashboardController::class, 'general'])->name('general.detail');
+    Route::get('/general/{inspection}/{room}/', [DashboardController::class, 'general'])->name('area.general');
 
     Route::get('/create/inspection', [InspectionController::class, 'create'])->name('create.inspection');
     Route::get('/generate/inspection/{inspection}', [InspectionController::class, 'genereatePDF'])->name('generate.inspection');
@@ -72,6 +73,11 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/situation/edit/{inspection}/{situation}', function (Inspection $inspection, Situation $situation) {
         return view('situation.edit', compact('inspection', 'situation'));
     })->name('situation.edit')
+        ->can('hasAccessCheckUser','inspection');
+
+    Route::get('/damage/edit/{inspection}/{damage}/', function (Inspection $inspection, Damage $damage) {
+        return view('damage.edit', compact('inspection', 'damage'));
+    })->name('damage.edit')
         ->can('hasAccessCheckUser','inspection');
 
     Route::get('/documents/{inspection}', function (Inspection $inspection) {

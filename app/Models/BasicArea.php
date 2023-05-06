@@ -27,6 +27,11 @@ class BasicArea extends Model
         return $this->hasMany(MediaBasic::class, 'basic_id');
     }
 
+    public function damages()
+    {
+        return $this->hasMany(Damage::class, 'basic_id');
+    }
+
     public static function getMaterials() :array
     {
         return [

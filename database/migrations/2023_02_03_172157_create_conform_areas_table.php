@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('conform_areas', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->default('CONFORM');
             $table->unsignedInteger('inspection_id')
                 ->index();
 

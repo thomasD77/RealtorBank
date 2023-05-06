@@ -27,6 +27,11 @@ class ConformArea extends Model
         return $this->hasMany(MediaConform::class, 'conform_id');
     }
 
+    public function damages()
+    {
+        return $this->hasMany(Damage::class, 'conform_id');
+    }
+
     public static function getMaterials() :array
     {
         return $data = [

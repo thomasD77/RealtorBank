@@ -2,6 +2,12 @@
 
     <h6 class="mb20 text-md-right">{{ $inspection->title }} > {{ $room->title }}</strong></h6>
 
+    @if (session()->has('successDeleteDamage'))
+        <div class="btn btn-success flash_message">
+            {{ session('successDeleteDamage') }}
+        </div>
+    @endif
+
     <livewire:general.add-room
         :Inspection="$inspection"
         :Room="$room"
@@ -29,6 +35,11 @@
 
         <livewire:general.elements.extra
             :dynamicArea="$general"
+        />
+
+        <livewire:damage.index
+            :dynamicArea="$general"
+            :Inspection="$inspection"
         />
 
         <livewire:general.elements.media

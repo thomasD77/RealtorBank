@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('generals', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->default('GENERAL');
             $table->unsignedInteger('inspection_id')
                 ->index();
             $table->unsignedInteger('room_id')->nullable()

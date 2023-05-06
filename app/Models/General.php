@@ -15,4 +15,14 @@ class General extends Model
     {
         return $this->hasMany(MediaGeneral::class, 'general_id');
     }
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
+
+    public function damages()
+    {
+        return $this->hasMany(Damage::class, 'general_id');
+    }
 }

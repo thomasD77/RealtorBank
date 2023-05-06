@@ -3,6 +3,13 @@
 @section('content')
 
     <div class="single-add-property">
+
+        @if (session()->has('successDeleteDamage'))
+            <div class="btn btn-success flash_message mb-2">
+                {{ session('successDeleteDamage') }}
+            </div>
+        @endif
+
         <h6 class="mb20 text-md-right">{{ $inspection->title }} | {{ $room->title }} | <strong>{{ $conformArea->conform->title }}</strong></h6>
         <h3 class="uppercase">{{ __('Conformiteit') }}</h3>
 
@@ -21,6 +28,11 @@
 
             <livewire:conform.elements.extra
                 :dynamicArea="$conformArea"
+            />
+
+            <livewire:damage.index
+                :dynamicArea="$conformArea"
+                :Inspection="$inspection"
             />
 
             <livewire:conform.elements.media

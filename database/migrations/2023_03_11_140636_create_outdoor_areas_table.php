@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('outdoor_areas', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->default('OUTDOOR');
             $table->unsignedInteger('inspection_id')
                 ->index();
 

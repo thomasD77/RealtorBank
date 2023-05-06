@@ -15,7 +15,7 @@
                 <div class="collapse {{ $show }}" id="collapseRoom{{ $room->id }}">
                     <ul>
                         <li>
-                            <a href="{{ route('general.detail',  [$inspection, $room]) }}">
+                            <a href="{{ route('area.general',  [$inspection, $room]) }}">
                                 <i class="fa fa-circle" aria-hidden="true"></i>{{ __('Overzicht') }}
                             </a>
                         </li>

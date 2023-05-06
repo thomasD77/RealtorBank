@@ -71,7 +71,7 @@
                                         >
                                             <ul>
                                                 <li class="pt-3 pt-lg-0">
-                                                    <a href="{{ route('general.detail',  [$inspection, $room]) }}">
+                                                    <a href="{{ route('area.general',  [$inspection, $room]) }}">
                                                         <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                     </a>
                                                 </li>
@@ -227,7 +227,7 @@
                                             >
                                                 <ul>
                                                     <li class="pt-3 pt-lg-0">
-                                                        <a href="{{ route('general.detail',  [$inspection, $room]) }}">
+                                                        <a href="{{ route('area.general',  [$inspection, $room]) }}">
                                                             <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                         </a>
                                                     </li>
@@ -380,7 +380,7 @@
                                             >
                                                 <ul>
                                                     <li>
-                                                        <a href="{{ route('general.detail',  [$inspection, $room]) }}">
+                                                        <a href="{{ route('area.general',  [$inspection, $room]) }}">
                                                             <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                         </a>
                                                     </li>
@@ -531,7 +531,7 @@
                                             >
                                                 <ul>
                                                     <li>
-                                                        <a href="{{ route('general.detail',  [$inspection, $room]) }}">
+                                                        <a href="{{ route('area.general',  [$inspection, $room]) }}">
                                                             <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                         </a>
                                                     </li>
@@ -683,7 +683,7 @@
                                             >
                                                 <ul>
                                                     <li>
-                                                        <a href="{{ route('general.detail',  [$inspection, $room]) }}">
+                                                        <a href="{{ route('area.general',  [$inspection, $room]) }}">
                                                             <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                         </a>
                                                     </li>
@@ -862,7 +862,7 @@
                                         >
                                             <ul>
                                                 <li>
-                                                    <a href="{{ route('general.detail',  [$inspection, $building]) }}">
+                                                    <a href="{{ route('area.general',  [$inspection, $building]) }}">
                                                         <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                     </a>
                                                 </li>
@@ -927,7 +927,7 @@
                                             >
                                                 <ul>
                                                     <li>
-                                                        <a href="{{ route('general.detail',  [$inspection, $room]) }}">
+                                                        <a href="{{ route('area.general',  [$inspection, $room]) }}">
                                                             <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                         </a>
                                                     </li>
@@ -998,7 +998,7 @@
                                     @if($outHouseInParam)
                                         @foreach($outHouseInParam as $room)
                                             <li>
-                                                <a href="{{ route('general.detail',  [$inspection, $room]) }}">
+                                                <a href="{{ route('area.general',  [$inspection, $room]) }}">
                                                     <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                 </a>
                                             </li>
@@ -1126,7 +1126,7 @@
                                 >
                                     <ul>
                                         <li>
-                                            <a href="{{ route('general.detail',  [$inspection, $room]) }}">
+                                            <a href="{{ route('area.general',  [$inspection, $room]) }}">
                                                 <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                             </a>
                                         </li>

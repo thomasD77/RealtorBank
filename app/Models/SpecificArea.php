@@ -26,6 +26,11 @@ class SpecificArea extends Model
         return $this->hasMany(MediaSpecific::class, 'specific_id');
     }
 
+    public function damages()
+    {
+        return $this->hasMany(Damage::class, 'specific_id');
+    }
+
     public static function getMaterials() :array
     {
         return $data = [
