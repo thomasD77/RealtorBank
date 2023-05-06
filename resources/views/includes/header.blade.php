@@ -4,8 +4,10 @@
         <!-- Left Side Content -->
         <div class="left-side">
             <!-- Logo -->
-            <div id="logo">
-                <a href="{{ asset('/dashboard') }}"><img src="{{ asset('assets/images/logo.svg') }}" alt="logo"></a>
+            <div id="logo" class="d-none d-md-block">
+                <a href="{{ asset('/dashboard') }}">
+                    <img src="{{ asset('assets/images/em_logo_white.png') }}" alt="logo">
+                </a>
             </div>
             <!-- Custom Sidebar Tablet M  -->
             @if(Route::currentRouteName() != 'dashboard')

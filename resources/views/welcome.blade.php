@@ -31,7 +31,7 @@
         <link rel="manifest" href="{{ asset('/manifest.json') }}">
     </head>
     <body>
-    <div class="container-fluid test py-5" style="background-image: url('{{ asset('assets/images/real.png') }}'); background-size: cover; background-position: bottom center; background-repeat: no-repeat">
+    <div class="container-fluid test py-5" style="background-image: url('{{ asset('assets/images/estatemetrics_bg.png') }}'); background-size: cover; background-position: bottom center; background-repeat: no-repeat">
         @if (Route::has('login'))
             <div class="fixed top-0 right-0 px-6 py-4">
                 @auth

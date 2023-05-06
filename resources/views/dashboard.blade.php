@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <div class="dashborad-box stat bg-white">
-        <h4 class="title title-uppercase">{{ __('Dashboard') }}</h4>
+    <div class="dashborad-box stat ">
+{{--        <h4 class="title title-uppercase">{{ __('Dashboard') }}</h4>--}}
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-xs-12 dar pro mr-3">
@@ -58,7 +58,7 @@
         </div>
     </div>
     @if($pdfs->isNotEmpty())
-        <div class="dashborad-box">
+        <div class="dashborad-box rounded">
         <h4 class="title title-uppercase">{{ __('Recente PDF') }}</h4>
             <div class="section-body listing-table">
                 <div class="table-responsive">
@@ -92,7 +92,7 @@
     @endif
 
     @if($inspections->isNotEmpty())
-        <div class="my-properties">
+        <div class="my-properties rounded">
             <h4 class="title title-uppercase">{{ __('Recente inspecties') }}</h4>
             <table class="table-custom">
                 <thead>

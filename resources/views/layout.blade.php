@@ -26,9 +26,11 @@
         <div class="container-fluid">
             <div class="row">
 
+                <div class="col-lg-3 pl-0 pr-0 user-dash">
                     @include('includes.sidebar-default')
+                </div>
 
-                <div class="col-lg-9 col-md-12 col-xs-12 pl-lg-0 user-dash2">
+                <div class="col-lg-9  pl-lg-0 user-dash2 dashboard-padding">
 
                     @include('includes.sidebar-mobile')
 

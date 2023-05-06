@@ -187,3 +187,9 @@ input[type=checkbox]{
         border-bottom: none;
     }
 }
+
+@media only screen and (min-width: 1450px) {
+    .dashboard-padding {
+        padding-right: 5%;
+    }
+}
