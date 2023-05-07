@@ -30,6 +30,7 @@ class AddRoom extends Component
         $newRoom = new Room();
         $newRoom->title = $this->room->title;
         $newRoom->code = $this->room->code;
+        $newRoom->order = $this->room->order;
         $newRoom->general = $this->room->general;
         $newRoom->analysis = $this->room->analysis;
         $newRoom->extra = $this->room->extra;
@@ -44,7 +45,7 @@ class AddRoom extends Component
         $conformAreas = ConformArea::where('room_id', $this->room->id)->get();
 
         $extraGeneral = new General();
-            
+
         $extraGeneral->inspection_id = $gen->inspection_id;
         $extraGeneral->room_id = $newRoom->id;
         $extraGeneral->floor_id = $gen->floor_id;
@@ -63,7 +64,7 @@ class AddRoom extends Component
         foreach($basicAreas as $newArea){
             $extraArea = new BasicArea();
 
-            $extraArea->order = substr($newArea->area->title, 0, 1);
+            $extraArea->order = $newArea->area->order;
             $extraArea->room_id = $newRoom->id;
             $extraArea->area_id = $newArea->area_id;
             $extraArea->inspection_id = $newArea->inspection_id;
@@ -85,7 +86,6 @@ class AddRoom extends Component
             $extraArea->glazing = $newArea->glazing;
             $extraArea->windowsill = $newArea->windowsill;
             $extraArea->rollerShutter = $newArea->rollerShutter;
-            $extraArea->windowDecoration = $newArea->windowDecoration;
             $extraArea->windowDecoration = $newArea->windowDecoration;
             $extraArea->hor = $newArea->hor;
             $extraArea->fallProtection = $newArea->fallProtection;

@@ -174,7 +174,7 @@ class Sidebar extends Component
                 'conformAreas.conform'
             ])->where('inspection_id', $this->inspection->id)
                 ->where('floor_id', Floor::where('code', FloorKey::GroundFloor)->first()->id)
-                ->orderBy('title', 'asc')
+                ->orderBy('order', 'asc')
                 ->get();
         }
 
@@ -187,7 +187,7 @@ class Sidebar extends Component
                 'conformAreas.conform'
             ])->where('inspection_id', $this->inspection->id)
                 ->where('floor_id', Floor::where('code', FloorKey::UpperFloor)->first()->id)
-                ->orderBy('title', 'asc')
+                ->orderBy('order', 'asc')
                 ->get();
         }
 
