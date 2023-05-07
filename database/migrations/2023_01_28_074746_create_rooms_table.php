@@ -19,6 +19,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('code');
+            $table->integer('order')->nullable();
             $table->string('general')->nullable();
             $table->string('analysis')->nullable();
             $table->text('extra')->nullable();

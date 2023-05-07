@@ -18,17 +18,18 @@ return new class extends Migration
         Schema::create('areas', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->integer('order');
             $table->string('code')->nullable();
             $table->timestamps();
         });
 
         $areas = [
-            ['Vloer', 'floor'],
-            ['Plafond', 'celling'],
-            ['Deur', 'door'],
-            ['Muur', 'wall'],
-            ['Raam', 'window'],
-            ['Verwarming', 'heating'],
+            ['Vloer', 'floor', 1],
+            ['Plafond', 'celling', 2],
+            ['Muur', 'wall', 3],
+            ['Deur', 'door', 4],
+            ['Raam', 'window', 5],
+            ['Verwarming', 'heating', 6],
         ];
 
         $areasToInsert = [];
@@ -37,6 +38,7 @@ return new class extends Migration
             $areasToInsert[] = [
                 'title' => $area[0],
                 'code' => $area[1],
+                'order' => $area[2],
                 'created_at' => DB::raw('NOW()'),
                 'updated_at' => DB::raw('NOW()'),
             ];

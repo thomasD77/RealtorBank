@@ -29,6 +29,7 @@ class AddArea extends Component
         $newArea = new Area();
         $newArea->title = $this->area->title;
         $newArea->code = $this->area->code;
+        $newArea->order = $this->area->order;
         $newArea->created_at = now();
         $newArea->updated_at = now();
         $newArea->save();
@@ -38,7 +39,7 @@ class AddArea extends Component
         $extraArea->area_id = $newArea->id;
         $extraArea->inspection_id = $this->inspection->id;
         $extraArea->floor_id = $this->room->floor->id;
-        $extraArea->order = substr($this->area->title, 0, 1);
+        $extraArea->order = $this->area->order;
 
         $extraArea->material = $this->basicArea->material;
         $extraArea->color = $this->basicArea->color;

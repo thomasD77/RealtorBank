@@ -84,36 +84,36 @@ class Inspection extends Model
          */
         $rooms = [
             //Interieur
-            ['Kelder', RoomKey::Basement, Floor::where('code', FloorKey::BasementFloor )->first()->id],
-            
-            ['Inkomhal', RoomKey::EntranceHall->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
-            ['Toilet', RoomKey::Toilet->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
-            ['Woonkamer', RoomKey::LivingRoom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
-            ['Keuken', RoomKey::Kitchen->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
-            ['Badkamer', RoomKey::Bathroom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
-            ['Gang', RoomKey::NightHall->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
-            ['Berging', RoomKey::Storage->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
-            ['Slaapkamer', RoomKey::Bedroom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id],
+            ['Kelder', RoomKey::Basement, Floor::where('code', FloorKey::BasementFloor )->first()->id, null],
 
-            ['Nachthal', RoomKey::NightHall->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
-            ['Badkamer', RoomKey::Bathroom->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
-            ['Slaapkamer', RoomKey::Bedroom->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
-            ['Berging', RoomKey::Storage->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
-            ['Toilet', RoomKey::Toilet->value, Floor::where('code', FloorKey::UpperFloor)->first()->id],
+            ['Inkomhal', RoomKey::EntranceHall->value, Floor::where('code', FloorKey::GroundFloor)->first()->id, 0],
+            ['Toilet', RoomKey::Toilet->value, Floor::where('code', FloorKey::GroundFloor)->first()->id, 5],
+            ['Woonkamer', RoomKey::LivingRoom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id, 10],
+            ['Keuken', RoomKey::Kitchen->value, Floor::where('code', FloorKey::GroundFloor)->first()->id, 15],
+            ['Berging', RoomKey::Storage->value, Floor::where('code', FloorKey::GroundFloor)->first()->id, 20],
+            ['Gang', RoomKey::NightHall->value, Floor::where('code', FloorKey::GroundFloor)->first()->id, 25],
+            ['Badkamer', RoomKey::Bathroom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id, 30],
+            ['Slaapkamer', RoomKey::Bedroom->value, Floor::where('code', FloorKey::GroundFloor)->first()->id, 35],
 
-            ['Zolder', RoomKey::Attic->value, Floor::where('code', FloorKey::Attic)->first()->id],
-            ['Garage', RoomKey::Garage->value, Floor::where('code', FloorKey::Garage)->first()->id],
+            ['Nachthal', RoomKey::NightHall->value, Floor::where('code', FloorKey::UpperFloor)->first()->id, 0],
+            ['Toilet', RoomKey::Toilet->value, Floor::where('code', FloorKey::UpperFloor)->first()->id, 5],
+            ['Badkamer', RoomKey::Bathroom->value, Floor::where('code', FloorKey::UpperFloor)->first()->id, 10],
+            ['Slaapkamer', RoomKey::Bedroom->value, Floor::where('code', FloorKey::UpperFloor)->first()->id, 15],
+            ['Berging', RoomKey::Storage->value, Floor::where('code', FloorKey::UpperFloor)->first()->id, 20],
+
+            ['Zolder', RoomKey::Attic->value, Floor::where('code', FloorKey::Attic)->first()->id, null],
+            ['Garage', RoomKey::Garage->value, Floor::where('code', FloorKey::Garage)->first()->id, null],
 
             //Exterieur
-            ['Gebouw', RoomKey::Building, Floor::where('code', FloorKey::Building )->first()->id],
-            ['Aanleg', RoomKey::DriveWay, Floor::where('code', FloorKey::DriveWay )->first()->id],
-            ['Voortuin', RoomKey::FrontYard, Floor::where('code', FloorKey::DriveWay )->first()->id],
-            ['Tuin', RoomKey::Yard, Floor::where('code', FloorKey::DriveWay )->first()->id],
-            ['Terras', RoomKey::Terrace, Floor::where('code', FloorKey::DriveWay )->first()->id],
+            ['Gebouw', RoomKey::Building, Floor::where('code', FloorKey::Building )->first()->id, null],
+            ['Aanleg', RoomKey::DriveWay, Floor::where('code', FloorKey::DriveWay )->first()->id, null],
+            ['Voortuin', RoomKey::FrontYard, Floor::where('code', FloorKey::DriveWay )->first()->id, null],
+            ['Tuin', RoomKey::Yard, Floor::where('code', FloorKey::DriveWay )->first()->id, null],
+            ['Terras', RoomKey::Terrace, Floor::where('code', FloorKey::DriveWay )->first()->id, null],
 
             //Bijgebouw
-            ['Bijgebouw binnen', RoomKey::OutHouseIn, Floor::where('code', FloorKey::OutHouseIn )->first()->id],
-            ['Bijgebouw buiten', RoomKey::OutHouseEx, Floor::where('code', FloorKey::OutHouseEx )->first()->id],
+            ['Bijgebouw binnen', RoomKey::OutHouseIn, Floor::where('code', FloorKey::OutHouseIn )->first()->id, null],
+            ['Bijgebouw buiten', RoomKey::OutHouseEx, Floor::where('code', FloorKey::OutHouseEx )->first()->id, null],
         ];
 
         $roomsToInsert = [];
@@ -122,6 +122,7 @@ class Inspection extends Model
                 'title' => $room[0],
                 'code' => $room[1],
                 'floor_id' => $room[2],
+                'order' => $room[3],
                 'inspection_id' => $inspection->id,
                 'created_at' => DB::raw('NOW()'),
                 'updated_at' => DB::raw('NOW()'),
@@ -149,7 +150,7 @@ class Inspection extends Model
             $areasToInsert = [];
             foreach ($areas as $area) {
                 $areasToInsert[] = [
-                    'order' => substr($area->title, 0, 1),
+                    'order' => $area->order,
                     'area_id' => $area->id,
                     'room_id' => $room->id,
                     'floor_id' => $room->floor_id,
