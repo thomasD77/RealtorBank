@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\General;
 
+use App\Enums\FloorKey;
+use App\Models\Floor;
 use Livewire\Component;
 use App\Models\Inspection;
 use App\Models\Room;
@@ -26,11 +28,38 @@ class AddRoom extends Component
 
     public function addRoom()
     {
+        if($this->room->floor_id == Floor::where('code', FloorKey::GroundFloor)->first()->id){
+            $max = Room::with([
+                'basicAreas',
+                'basicAreas.area',
+                'specificAreas', 'specificAreas.specific',
+                'conformAreas',
+                'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
+                ->where('floor_id', Floor::where('code', FloorKey::GroundFloor)->first()->id)
+                ->whereNotNull('order')
+                ->max('order');
+        }
+        if($this->room->floor_id == Floor::where('code', FloorKey::UpperFloor)->first()->id){
+            $max = Room::with([
+                'basicAreas',
+                'basicAreas.area',
+                'specificAreas', 'specificAreas.specific',
+                'conformAreas',
+                'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
+                ->where('floor_id', Floor::where('code', FloorKey::UpperFloor)->first()->id)
+                ->whereNotNull('order')
+                ->max('order');
+        }
+
+        $newOrder = $max += 1;
+
         //First create new room
         $newRoom = new Room();
         $newRoom->title = $this->room->title;
         $newRoom->code = $this->room->code;
-        $newRoom->order = $this->room->order;
+        $newRoom->order = $newOrder;
         $newRoom->general = $this->room->general;
         $newRoom->analysis = $this->room->analysis;
         $newRoom->extra = $this->room->extra;

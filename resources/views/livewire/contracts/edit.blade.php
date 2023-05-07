@@ -420,27 +420,27 @@
                 <div class="row p-5 the-five">
                     <strong class="w-100">{{ __('Schade') }}</strong>
                     <div class="section-body listing-table">
-                            <div class="table-responsive">
-                                <table class="table table-striped" style="width: 100%">
-                                    <thead>
+                        <div class="table-responsive">
+                            <table class="table table-striped" style="width: 100%">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%">{{ __('Titel') }}</th>
+                                    <th style="width: 10%">{{ __('Datum') }}</th>
+                                    <th style="width: 70%">{{ __('Beschrijving') }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($damages as $damage)
                                     <tr>
-                                        <th style="width: 20%">{{ __('Titel') }}</th>
-                                        <th style="width: 10%">{{ __('Datum') }}</th>
-                                        <th style="width: 70%">{{ __('Beschrijving') }}</th>
+                                        <td>{{ $damage->title }}</td>
+                                        <td>{{ $damage->date }}</td>
+                                        <td>{{ $damage->description }}</td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($damages as $damage)
-                                        <tr>
-                                            <td>{{ $damage->title }}</td>
-                                            <td>{{ $damage->date }}</td>
-                                            <td>{{ $damage->description }}</td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
+                    </div>
                 </div>
                 @endif
 

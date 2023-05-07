@@ -168,8 +168,6 @@
         </div>
     </div>
 
-
-
     <div class="single-add-property">
         <h3>{{ __('Media') }}</h3>
         <div class="property-form-group">
@@ -267,6 +265,57 @@
 
                 <p class="pt-5">*refresh regelmatig deze pagina om de status van de PDF te updaten.</p>
             @endif
+        </div>
+    </div>
+
+    <div class="single-add-property">
+
+        <h3 class="d-flex justify-content-between" data-toggle="collapse" href="#collapseName" role="button" aria-expanded="false" aria-controls="collapseExample">
+            {{ __('Sortering') }}
+            <i class="fa fa-arrow-down"></i>
+        </h3>
+
+        <div class="collapse" id="collapseName" wire:ignore.self >
+            <div class="row">
+                <div class="col-md-6">
+                    <strong class="w-100">{{ __('Gelijkvloers') }}</strong>
+                    <div class="section-body listing-table">
+                        <div class="table-responsive">
+                            <table class="table table-striped" style="width: 100%">
+                                <thead>
+                                <tr>
+                                    <th>{{ __('Titel') }}</th>
+                                    <th>{{ __('Up') }}</th>
+                                    <th>{{ __('Down') }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($groundFloorParam as $item)
+                                        <tr>
+                                            <td>{{ $item->title }}</td>
+                                            <td>
+                                                @if($item->order != 1)
+                                                    <button class="btn btn-sm" wire:key="item-{{ $item->title }}-{{ $item->id }}" wire:click="itemUp({{ $item }})">
+                                                        <i class="fa fa-arrow-up"></i>
+                                                    </button>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($maxGround != $item->order)
+                                                    <button class="btn btn-sm" wire:key="item-{{ $item->title }}-{{ $item->id }}" wire:click="itemDown({{ $item }})">
+                                                        <i class="fa fa-arrow-down"></i>
+                                                    </button>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
