@@ -57,6 +57,7 @@ class Edit extends Component
 
     public $maxGround;
     public $maxUpper;
+    public $minUpper;
 
     use WithFileUploads;
 
@@ -95,40 +96,6 @@ class Edit extends Component
             ->latest()
             ->get();
         $this->pdfs = $pdfs;
-
-        $this->groundFloorParam = Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-        ])->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::GroundFloor)->first()->id)
-            ->whereNotNull('order')
-            ->orderBy('order', 'asc')
-            ->get();
-
-        $this->maxGround = Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-        ])->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::GroundFloor)->first()->id)
-            ->whereNotNull('order')
-            ->max('order');
-
-        $this->maxUpper = Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-        ])->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::UpperFloor)->first()->id)
-            ->whereNotNull('order')
-            ->max('order');
     }
 
     public function submitGeneral()
@@ -217,65 +184,8 @@ class Edit extends Component
         return redirect()->route('inspections.index');
     }
 
-    public function itemUp($room)
-    {
-        //Find upperRoom and reset order
-        $upperRoomId = $room['order'] -= 1;
-
-        $upperRoom = Room::where('order',$upperRoomId)->first();
-        $upperRoom->order += 1;
-        $upperRoom->save();
-
-        //Change order requested room
-        $room = Room::find($room['id']);
-        $room->order -= 1;
-        $room->save();
-
-        $this->render();
-    }
-
-    public function itemDown($room)
-    {
-        //Find upperRoom and reset order
-        $downRoomId = $room['order'] += 1;
-        $downRoom = Room::where('order',$downRoomId)->first();
-        $downRoom->order -= 1;
-        $downRoom->save();
-
-        //Change order requested room
-        $room = Room::find($room['id']);
-        $room->order += 1;
-        $room->save();
-
-        $this->render();
-    }
-
     public function render()
     {
-        $this->groundFloorParam = Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-        ])->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::GroundFloor)->first()->id)
-            ->whereNotNull('order')
-            ->orderBy('order', 'asc')
-            ->get();
-
-        $this->upperFloorParam = Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-        ])->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::UpperFloor)->first()->id)
-            ->whereNotNull('order')
-            ->orderBy('order', 'asc')
-            ->get();
-
         return view('livewire.inspection.edit');
     }
 
