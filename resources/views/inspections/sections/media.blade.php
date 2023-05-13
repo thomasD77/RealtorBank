@@ -1,6 +1,6 @@
 @if($item->media->isNotEmpty())
     @for ($i = 0; $i <= count($item->media); $i++ )
-        <div class="row">
+        <div class="row" style="margin-top: 0.8rem">
             @if(isset($item->media[$i]))
                 <div class="column img--cover"
                      style="background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $item->media[$i]->file_crop) }}');

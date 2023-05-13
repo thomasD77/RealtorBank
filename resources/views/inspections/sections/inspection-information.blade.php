@@ -15,7 +15,7 @@
         <section class="signature main-sig">
             <div class="row keep">
                 <hr>
-                <p class="date-title">{{ __('Datum opgemaakt') }} | {{ $inspection->created_at }}</p>
+                <p class="date-title">{{ __('Datum opgemaakt') }} | {{ $inspection->created_at->format('Y-m-d') }}</p>
 
                 <div class="column-sig">
                     <h3>{{ __('UITVOERDER') }}</h3>

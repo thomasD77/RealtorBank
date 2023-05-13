@@ -19,7 +19,7 @@
 
             @include('inspections.sections.general')
 
-{{--            @include('inspections.sections.basicArea')--}}
+            @include('inspections.sections.basicArea')
 
             @include('inspections.sections.specificArea')
 
@@ -36,6 +36,8 @@
         @include('inspections.sections.meters')
 
         @include('inspections.sections.documents')
+
+        @include('inspections.sections.consensus')
 <footer>
     {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} | {{ __('EstateMetrics') }} | {{ now()->format('Y') }}
 </footer>

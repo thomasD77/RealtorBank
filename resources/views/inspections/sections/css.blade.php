@@ -4,8 +4,6 @@
     }
     h1, h2, h3 {
         font-family: Montserrat, sans-serif;
-        margin-top: 0;
-        padding-top: 0;
     }
     h1, h2 {
         margin-bottom: 3px;
@@ -30,9 +28,6 @@
         max-width: 100%;
         height: auto;
     }
-    .page-break_after {
-
-    }
 
     .inspection-information {
         page-break-after: always;
@@ -50,6 +45,7 @@
         width: 100%;
         padding-top: 15px;
     }
+
     section {
         page-break-inside: avoid !important;
     }
@@ -155,10 +151,6 @@
     .column-sig {
         float: left;
         width: 33%;
-    }
-
-    section {
-        page-break-inside: avoid !important;
     }
 
     .keep {

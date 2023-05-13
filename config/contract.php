@@ -184,5 +184,19 @@ return [
         •	Matig: het element werkt naar behoren maar vertoont zichtbare slijtage. <br>
         •	Slecht : het element werkt niet naar behoren, in verval. <br>
         •	Bij het beschrijven van de elementen in het rapport wordt telkens gewerkt vanaf het element parallel aan de straat. Verdere vermeldingen zijn in wijzerzin. <br>
+        ',
+
+        'consensus' => 'Het opstellen van de plaatsbeschrijving gebeurt digitaal. Naast de plaatsbeschrijving op zich, worden alle foto’s digitaal bewaard bij de uitvoerder. Deze foto’s maken onverdeeld deel uit van de plaatsbeschrijving en kunnen dienst doen als bewijs. <br><br>
+        De plaatsbeschrijving en bijhorende rapporten worden verzonden na betaling. <br>
+        Beide partijen kunnen schriftelijk of via mail opmerkingen op de plaatsbeschrijving doorgeven aan de uitvoerder én de andere partij.
+        Meldingen moeten gebeuren binnen de 10 kalenderdagen na oplevering van de plaatsbeschrijving. <br>
+        De partijen gaan akkoord met onderstaande stellingen: <br>
+        •	De plaatsbeschrijving omvat een inspectie van alle ruimtes en elementen van het pand samen met alle zaken die toebehoren bij het pand van de verhuurder. <br>
+        •	De plaatsbeschrijving werd volledig op tegenspraak opgemaakt. Dit voldoende gedetailleerd en gedocumenteerd. <br>
+        •	De afstanden en afmetingen opgenomen in de plaatsbeschrijving zijn indicatief en werden naar best vermogen ingeschat. <br>
+        •	De evaluaties, vaststellingen, opmerkingen en begrotingen in de plaatsbeschrijving werden neutraal en waarachtig opgesteld. <br>
+        •	De uitvoerder van de plaatsbeschrijving kan niet aansprakelijk gesteld worden voor het niet vermelden van gekende, ongekende, zichtbare en verborgen gebreken. <br>
+        •	Het rapport van de plaatsbeschrijving wordt in evenveel exemplaren opgesteld als er partijen zijn. <br>
+        •	Bij einde van de huurovereenkomst dienen alle ruimtes en elementen van het pand onbezet en proper zijn. Indien er hiervoor kosten aangerekend moeten worden, zal dit ten laste zijn van de huurder. <br>
         '
 ];
