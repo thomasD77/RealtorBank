@@ -176,7 +176,7 @@ return [
         <br>
         Als er opmerkingen zijn in het rapport met datum voor opnamedatum, dan zijn dit opmerkingen die tot op heden nog waarneembaar en onveranderd zijn. <br>
         Bij uitvoering van grote werken is het aangeraden om een extra inspectie te voorzien van de uitgevoerde werken die aanleiding geven tot een aanpassing van de plaatsbeschrijving. <br>
-        <br>
+        <br><br>
         Uitleg woordkeuze:  <br>
         •	Toelichting bij de analyse: <br>
         •	Zeer goed : het element is in uitstekende of nieuwe staat  <br>

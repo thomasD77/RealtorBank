@@ -9,7 +9,7 @@
     @include('inspections.sections.css')
 </head>
 <body>
-<header>
+<header style="margin-bottom: 3rem">
     {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
     @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
 </header>
@@ -39,7 +39,7 @@
 
         @include('inspections.sections.consensus')
 <footer>
-    {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} | {{ __('EstateMetrics') }} | {{ now()->format('Y') }}
+    {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} | {{ __('EstateMetrics') }} | &copy; {{ now()->format('Y') }}
 </footer>
 </body>
 </html>

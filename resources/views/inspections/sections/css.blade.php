@@ -50,13 +50,12 @@
         page-break-inside: avoid !important;
     }
 
+    /*Table*/
     .table td, .table th {
         border: 1px solid #ddd;
         padding: 8px;
     }
-
     .table tr:nth-child(even){background-color: #f2f2f2;}
-
     .table th {
         text-align: left;
         color: white;
@@ -80,7 +79,6 @@
     .row--head--list th:first-child {
         width: 65%;
     }
-
     .row--text th {
         background-color: transparent;
         color: black;
@@ -96,6 +94,13 @@
         padding: 0;
         font-weight: normal;
     }
+    .textareaExtra th {
+        max-width: 200px;
+        padding: 1rem 0;
+        font-size: 11px;
+        font-weight: normal;
+    }
+
     .icon {
         margin-right: 250px;
     }
@@ -103,12 +108,7 @@
         font-size: 13px;
         margin-bottom: 5px;
     }
-    .textareaExtra th {
-        max-width: 200px;
-        padding: 1rem 0;
-        font-size: 11px;
-        font-weight: normal;
-    }
+
     .renderImage img {
         page-break-inside: avoid;
         padding: 2rem 0;
@@ -144,10 +144,6 @@
         width: 50%;
     }
 
-    @page {
-        margin: 100px 25px;
-    }
-
     .column-sig {
         float: left;
         width: 33%;
@@ -159,16 +155,15 @@
 
     header {
         position: fixed;
-        top: -60px;
+        top: -25px;
         left: 0px;
         right: 0px;
 
         font-size: 0.8rem !important;
         font-family: Montserrat, sans-serif;
-        margin-top: -1.8rem;
 
         /** Extra personal styles **/
-        background-color: rgba(36, 50, 74, 0.7);
+        background-color: rgba(135, 140, 155, 0.7);
         color: white;
         text-align: center;
         line-height: 1.3rem;
@@ -176,14 +171,15 @@
 
     footer {
         position: fixed;
-        bottom: -60px;
+        bottom: -25px;
         left: 0px;
         right: 0px;
+
         font-size: 0.8rem !important;
         font-family: Montserrat, sans-serif;
 
         /** Extra personal styles **/
-        background-color: rgba(36, 50, 74, 0.7);
+        background-color: rgba(135, 140, 155, 0.7);
         color: white;
         text-align: center;
         line-height: 1.5rem;
