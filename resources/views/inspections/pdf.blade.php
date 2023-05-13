@@ -39,7 +39,7 @@
 
         @include('inspections.sections.consensus')
 <footer>
-    {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} | {{ __('EstateMetrics') }} | &copy; {{ now()->format('Y') }}
+    {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : ""  }} | {{ __('EstateMetrics') }} | &copy; {{ now()->format('Y') }}
 </footer>
 </body>
 </html>

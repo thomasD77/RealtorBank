@@ -63,7 +63,7 @@
             Aanvang van werken
         @endif gedaan.
         <br>
-        De plaatsbeschrijving is uitgevoerd door {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} voor {{ Auth()->user()->companyName }}</p>
+        De plaatsbeschrijving is uitgevoerd door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} voor {{ $inspection->user ? $inspection->user->companyName : "" }}</p>
         <br>
     <p>{!! Config('contract.inspection') !!}</p>
 

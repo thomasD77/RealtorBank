@@ -62,7 +62,7 @@
 
                     <div class="column-sig">
                         <h3>{{ __('UITVOERDER') }}</h3>
-                        <p>{{ $inspection->user->firstName }} {{ $inspection->user->lastName }}</p>
+                        <p>{{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }}</p>
                         <img src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
                     </div>
 
