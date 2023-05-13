@@ -270,7 +270,7 @@
                 var attrs2 = (this.options.svgStyles ?
                     'style="fill: none; stroke: ' + this.options.color + '; stroke-width: ' + this.options.thickness + ';"' :
                     'fill="none" stroke="' + this.options.color + '" stroke-width="' + this.options.thickness + '"');
-                return '<?xml ?>\n<!DOCTYPE svg PUBLIC ' +
+                return '<!DOCTYPE svg PUBLIC ' +
                     '"-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n' +
                     '<svg xmlns="http://www.w3.org/2000/svg" width="15cm" height="15cm">\n' +
                     '	<g ' + attrs1 + '>\n' +
