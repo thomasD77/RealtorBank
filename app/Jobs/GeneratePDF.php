@@ -99,7 +99,10 @@ class GeneratePDF implements ShouldQueue
 
         $inspection = Inspection::find($this->inspection->id);
 
-        $contract = Contract::where('inspection_id', $inspection->id)->first();
+        $contract = Contract::query()
+            ->whereNotNull('print_pdf')
+            ->where('inspection_id', $inspection->id)
+            ->first();
 
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $inspection,

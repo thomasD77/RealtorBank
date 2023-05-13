@@ -61,6 +61,8 @@ class Edit extends Component
     use WithFileUploads;
     use WithPagination;
 
+    public $printPDF;
+
     protected $messages = [
         'media.*' => 'Oeps, limit om aantal bestanden up te loaden is overschreden. Probeer het opnieuw.',
     ];
@@ -106,8 +108,31 @@ class Edit extends Component
             ->where('situation_id', $situation->id)
             ->first();
 
+        $this->printPDF = $this->contract->print_pdf;
+
         $files = MediaSituation::where('situation_id', $this->situation->id)->get();
         $this->files = $files;
+    }
+
+    public function printPdfInspection()
+    {
+        //First reset print status for all situations
+        $contracts = Contract::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->where('situation_id', $this->situation->id)
+            ->get();
+
+        foreach ($contracts as $contract){
+            $contract->print_pdf = null;
+            $contract->save();
+        }
+
+        //Set new print status
+        $this->contract->print_pdf = 1;
+        $this->contract->save();
+
+        //Render
+        $this->printPDF = $this->contract->print_pdf;
     }
 
     public function intredeSubmit($value)

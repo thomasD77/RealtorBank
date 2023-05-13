@@ -47,6 +47,18 @@
                         <input type="date" wire:change="editDate" wire:model="date" id="date">
                     </p>
                 </div>
+                <div class="col-12 mt-4">
+                    <ul>
+                        <li class="fl-wrap filter-tags clearfix">
+                            <div class="checkboxes float-left">
+                                <div class="filter-tags-wrap">
+                                    <input id="check-f" type="checkbox" wire:click="printPdfInspection"  @if($printPDF) checked @endif>
+                                    <label for="check-f">{{ __('Print in plaatsbeschrijving') }}</label>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

@@ -4,11 +4,13 @@
 
     <br>
 
+    @if($inspection->media->isNotEmpty())
     <div class="img--cover"
          style="background-image: url('{{ asset('assets/images/inspections/' . $inspection->media->first()->file_original) }}');
                          background-position: center;
                          background-size: cover; min-height: 450px">
     </div>
+    @endif
 
     <!-- Signatures -->
     @if($contract)
@@ -19,7 +21,7 @@
 
                 <div class="column-sig">
                     <h3>{{ __('UITVOERDER') }}</h3>
-                    <p>{{ $inspection->user->firstName }} {{ $inspection->user->lastName }}</p>
+                    <p>{{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }}</p>
                     <img src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
                 </div>
 

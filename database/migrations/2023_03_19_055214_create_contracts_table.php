@@ -20,6 +20,8 @@ return new class extends Migration
             $table->unsignedInteger('situation_id')
                 ->index();
 
+            $table->boolean('print_pdf')->nullable();
+
             $table->boolean('lock')->default(0)->nullable();
             $table->text('legal_in')->nullable();
             $table->text('legal_uit')->nullable();
