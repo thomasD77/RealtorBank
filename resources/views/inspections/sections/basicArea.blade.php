@@ -31,12 +31,6 @@
                     <th>{{ $item->plinth }}</th>
                 </tr>
             @endif
-            @if($item->analysis)
-                <tr class="row--text--list">
-                    <th>{{ __('Analyse') }}</th>
-                    <th>{{ $item->analysis }}</th>
-                </tr>
-            @endif
             @if($item->type)
                 <tr class="row--text--list">
                     <th>{{ __('Type') }}</th>
@@ -131,6 +125,12 @@
                 <tr class="row--text--list">
                     <th>{{ __('Energie') }}</th>
                     <th>{{ $item->energy }}</th>
+                </tr>
+            @endif
+            @if($item->analysis)
+                <tr class="row--text--list">
+                    <th>{{ __('Analyse') }}</th>
+                    <th>{{ $item->analysis }}</th>
                 </tr>
             @endif
             @if($item->extra)

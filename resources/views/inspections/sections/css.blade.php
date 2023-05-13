@@ -1,6 +1,11 @@
 <style>
+    h1 {
+        text-align: center;
+    }
     h1, h2, h3 {
         font-family: Montserrat, sans-serif;
+        margin-top: 0;
+        padding-top: 0;
     }
     h1, h2 {
         margin-bottom: 3px;
@@ -24,6 +29,9 @@
     .img-fluid img {
         max-width: 100%;
         height: auto;
+    }
+    .page-break_after {
+
     }
 
     .inspection-information {
@@ -136,11 +144,64 @@
         padding-bottom: 5px;
     }
 
-    .signature {
-        margin-top: 35px;
-    }
     .signature img {
         width: 50%;
+    }
+
+    @page {
+        margin: 100px 25px;
+    }
+
+    .column-sig {
+        float: left;
+        width: 33%;
+    }
+
+    section {
+        page-break-inside: avoid !important;
+    }
+
+    .keep {
+        page-break-inside: avoid !important;
+    }
+
+    header {
+        position: fixed;
+        top: -60px;
+        left: 0px;
+        right: 0px;
+
+        font-size: 0.8rem !important;
+        font-family: Montserrat, sans-serif;
+        margin-top: -1.8rem;
+
+        /** Extra personal styles **/
+        background-color: rgba(36, 50, 74, 0.7);
+        color: white;
+        text-align: center;
+        line-height: 1.3rem;
+    }
+
+    footer {
+        position: fixed;
+        bottom: -60px;
+        left: 0px;
+        right: 0px;
+        font-size: 0.8rem !important;
+        font-family: Montserrat, sans-serif;
+
+        /** Extra personal styles **/
+        background-color: rgba(36, 50, 74, 0.7);
+        color: white;
+        text-align: center;
+        line-height: 1.5rem;
+    }
+
+    .main-sig {
+        position: fixed;
+        bottom: 0;
+        left: 0px;
+        right: 0px;
     }
 
 </style>

@@ -13,12 +13,6 @@
                         <th>{{ $item->type }}</th>
                     </tr>
                 @endif
-                @if($item->analysis)
-                    <tr class="row--text--list">
-                        <th>{{ __('Analyse') }}</th>
-                        <th>{{ $item->analysis }}</th>
-                    </tr>
-                @endif
                 @if($item->fuel)
                     <tr class="row--text--list">
                         <th>{{ __('Brandstof') }}</th>
@@ -41,6 +35,12 @@
                     <tr class="row--text--list">
                         <th>{{ __('Aantal') }}</th>
                         <th>{{ $item->count }}</th>
+                    </tr>
+                @endif
+                @if($item->analysis)
+                    <tr class="row--text--list">
+                        <th>{{ __('Analyse') }}</th>
+                        <th>{{ $item->analysis }}</th>
                     </tr>
                 @endif
                 @if($item->extra)

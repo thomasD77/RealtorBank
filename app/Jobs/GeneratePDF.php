@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Enums\Status;
 use App\Models\BasicArea;
+use App\Models\Contract;
 use App\Models\Document;
 use App\Models\Inspection;
 use App\Models\Key;
@@ -98,6 +99,8 @@ class GeneratePDF implements ShouldQueue
 
         $inspection = Inspection::find($this->inspection->id);
 
+        $contract = Contract::where('inspection_id', $inspection->id)->first();
+
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $inspection,
             'rooms' => $rooms,
@@ -105,6 +108,7 @@ class GeneratePDF implements ShouldQueue
             'meters' => $meters,
             'documents' => $documents,
             'keys' => $keys,
+            'contract' => $contract,
         ]);
 
         $path = public_path('assets/inspections/pdf/');

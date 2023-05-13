@@ -89,7 +89,7 @@
                 </tr>
             @endif
             @if($item->extra)
-                <tr class="row--text--list">
+                <tr class="row--text--list textareaExtra">
                     <th>{{ __('Extra') }}</th>
                     <th>{{ $item->extra }}</th>
                 </tr>

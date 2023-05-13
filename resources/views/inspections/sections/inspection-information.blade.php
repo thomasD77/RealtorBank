@@ -1,178 +1,68 @@
-<section class="inspection-information">
-    <h1>{{ $inspection->title ?? 'DRAFT' }}</h1>
-    <p class="date-title">{{ __('Datum opgemaakt') }} | {{ $inspection->created_at }}</p>
+<section>
+
+    <h1>{{ __('PLAATSBESCHRIJVING') }}</h1>
 
     <br>
 
-    @if($inspection->extra)
-        <p>{{ $inspection->extra }}</p>
-    @endif
+    <div class="img--cover"
+         style="background-image: url('{{ asset('assets/images/inspections/' . $inspection->media->first()->file_original) }}');
+                         background-position: center;
+                         background-size: cover; min-height: 450px">
+    </div>
 
-    <br>
+    <!-- Signatures -->
+    @if($contract)
+        <section class="signature main-sig">
+            <div class="row keep">
+                <hr>
+                <p class="date-title">{{ __('Datum opgemaakt') }} | {{ $inspection->created_at }}</p>
 
-    <hr>
-
-    <br>
-
-    <section>
-        <h2>{{ __('Persoon van afname plaatsbeschrijving') }}</h2>
-        <table class="table">
-            @if($inspection->user->firstName || $inspection->user->lastName)
-                <tr class="row--text">
-                    <th>{{ __('Naam') }}</th>
-                    <th>{{ $inspection->user->firstName }} {{ $inspection->user->lastName }}</th>
-                </tr>
-            @endif
-            @if($inspection->user->email)
-                <tr class="row--text w-100">
-                    <th>{{ __('E-mail') }}</th>
-                    <th>{{ $inspection->user->email }}</th>
-                </tr>
-            @endif
-            @if($inspection->user->phone)
-                <tr class="row--text w-100">
-                    <th>{{ __('Telefoon of GSM') }}</th>
-                    <th>{{ $inspection->user->phone }}</th>
-                </tr>
-            @endif
-            @if($inspection->user->companyName)
-                <tr class="row--text w-100">
-                    <th>{{ __('Bedrijfsnaam') }}</th>
-                    <th>{{ $inspection->user->companyName }}</th>
-                </tr>
-            @endif
-            @if($inspection->user->address)
-                <tr class="row--text w-100">
-                    <th>{{ __('Adres') }}</th>
-                    <th>
-                        {{ $inspection->user->address->address }}
-                        @if($inspection->user->address->postBus)- {{ $inspection->user->address->postBus }}@endif
-                        @if($inspection->user->address->zip || $inspection->user->address->city)
-                            , {{ $inspection->user->address->zip }} {{ $inspection->user->address->city }}
-                        @endif
-                        @if($inspection->user->address->country)
-                            , {{ $inspection->user->address->country }}
-                        @endif
-                    </th>
-                </tr>
-            @endif
-            @if($inspection->user->about)
-                <tr class="row--text w-100">
-                    <th>{{ __('Over mij') }}</th>
-                    <th>{{ $inspection->user->about }}</th>
-                </tr>
-            @endif
-        </table>
-
-    </section>
-
-    <br>
-
-
-    @if($inspection->address != [])
-        <section>
-            <h2>{{ __('Adres van het eigendom') }}</h2>
-            <table class="table">
-
-                @if($inspection->address->address)
-                    <tr class="row--text">
-                        <th>{{ __('Adres') }}</th>
-                        <th>{{ $inspection->address->address }} @if($inspection->address->postBus)bus {{ $inspection->address->postBus }} @endif</th>
-                    </tr>
-                @endif
-                @if($inspection->address->zip)
-                    <tr class="row--text">
-                        <th>{{ __('Postcode') }}</th>
-                        <th>{{ $inspection->address->zip }}</th>
-                    </tr>
-                @endif
-                @if($inspection->address->city)
-                    <tr class="row--text">
-                        <th>{{ __('Stad') }}</th>
-                        <th>{{ $inspection->address->city }}</th>
-                    </tr>
-                @endif
-                @if($inspection->address->country)
-                    <tr class="row--text">
-                        <th>{{ __('Land') }}</th>
-                        <th>{{ $inspection->address->country }}</th>
-                    </tr>
-                @endif
-            </table>
-        </section>
-    @endif
-
-
-    <section>
-        @if($inspection->owner_present || $inspection->tenant_present || $inspection->new_building || $inspection->inhabited || $inspection->furnished || $inspection->first_resident)
-            <h2>{{ __('Extra informatie') }}</h2>
-            <table class="table">
-
-                @if($inspection->owner_present)
-                    <tr class="row--text">
-                        <th>{{ __('Eigenaar aanwezig') }}</th>
-                        <th><img alt="icon" class="img-fluid" src="{{ asset('assets/images/icons/checkbox.png') }}"></th>
-                    </tr>
-                @endif
-
-                @if($inspection->tenant_present)
-                    <tr class="row--text">
-                        <th>{{ __('Huurder aanwezig') }}</th>
-                        <th><img alt="icon" class="img-fluid icon" src="{{ asset('assets/images/icons/checkbox.png') }}"></th>
-                    </tr>
-                @endif
-
-                @if($inspection->new_building)
-                    <tr class="row--text">
-                        <th>{{ __('Nieuwbouw') }}</th>
-                        <th><img alt="icon" class="img-fluid icon" src="{{ asset('assets/images/icons/checkbox.png') }}"></th>
-                    </tr>
-                @endif
-
-                @if($inspection->inhabited)
-                    <tr class="row--text">
-                        <th>{{ __('Bewoond') }}</th>
-                        <th><img alt="icon" class="img-fluid icon" src="{{ asset('assets/images/icons/checkbox.png') }}"></th>
-                    </tr>
-                @endif
-
-                @if($inspection->furnished)
-                    <tr class="row--text">
-                        <th>{{ __('Bemeubeld') }}</th>
-                        <th><img alt="icon" class="img-fluid icon" src="{{ asset('assets/images/icons/checkbox.png') }}"></th>
-                    </tr>
-                @endif
-
-                @if($inspection->first_resident)
-                    <tr class="row--text">
-                        <th>{{ __('Eerste bewoner') }}</th>
-                        <th><img alt="icon" class="img-fluid icon" src="{{ asset('assets/images/icons/checkbox.png') }}"></th>
-                    </tr>
-                @endif
-
-            </table>
-        @endif
-    </section>
-
-    <br>
-    <br>
-
-    @include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::Inspections->value, 'item' => $inspection ])
-
-
-    @if($inspection->user->signature)
-        <section class="signature">
-            <div class="row">
-                <div class="column-half">
-                    <p><strong>Gelezen en goedgekeurd op {{ $inspection->date }}</strong></p>
-                    <p><strong>{{ $inspection->user->firstName }} {{ $inspection->user->lastName }}</strong></p>
-                </div>
-                <div class="column-half signature">
+                <div class="column-sig">
+                    <h3>{{ __('UITVOERDER') }}</h3>
+                    <p>{{ $inspection->user->firstName }} {{ $inspection->user->lastName }}</p>
                     <img src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
                 </div>
+
+                @if($contract->signature_owner)
+                    <div class="column-sig">
+                        <h3>{{ __('HUURDER') }}</h3>
+                        <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
+                        <img src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
+                    </div>
+                @endif
+
+                @if($contract->signature_tenant)
+                    <div class="column-sig">
+                        @if($contract->situation->intrede != 2)
+                            <h3 class="font-weight-bold mb-4">{{ __('VERHUURDER') }}</h3>
+                            <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
+                            <img src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
+                        @endif
+                    </div>
+                @endif
             </div>
         </section>
     @endif
 
+</section>
+
+<section class="inspection-information">
+    <h2>{{ __('INTRO') }}</h2>
+
+    <p>Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
+        @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
+        eigendom van {{ $contract->situation->owner ? $contract->situation->owner->name : "" }} en verhuurd aan {{ $contract->situation->tenant ? $contract->situation->tenant->name : "" }},
+        werd op datum van {{ \Carbon\Carbon::parse($inspection->date)->format('d-m-Y')}} een gedetailleerde plaatsbeschrijving bij
+        @if($contract->situation->intrede == 1)
+            Intrede
+        @elseif($contract->situation->intrede === 0)
+            Uittrede
+        @elseif($contract->situation->intrede == 2)
+            Aanvang van werken
+        @endif gedaan.
+        <br>
+        De plaatsbeschrijving is uitgevoerd door {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} voor {{ Auth()->user()->companyName }}</p>
+        <br>
+    <p>{!! Config('contract.inspection') !!}</p>
 
 </section>

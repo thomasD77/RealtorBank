@@ -9,13 +9,17 @@
     @include('inspections.sections.css')
 </head>
 <body>
+<header>
+    {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
+    @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
+</header>
         @include('inspections.sections.inspection-information')
 
         @foreach($rooms as $room)
 
             @include('inspections.sections.general')
 
-            @include('inspections.sections.basicArea')
+{{--            @include('inspections.sections.basicArea')--}}
 
             @include('inspections.sections.specificArea')
 
@@ -32,6 +36,8 @@
         @include('inspections.sections.meters')
 
         @include('inspections.sections.documents')
-
+<footer>
+    {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} | {{ __('EstateMetrics') }} | {{ now()->format('Y') }}
+</footer>
 </body>
 </html>
