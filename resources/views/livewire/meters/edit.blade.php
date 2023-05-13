@@ -15,6 +15,12 @@
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <p>
+                            <label for="reference">{{ __('Meterstand') }}</label>
+                            <input type="text" wire:model="reading" placeholder="Vul hier de meterstand in" id="reading">
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <p>
                             <label for="ean">{{ __('EAN') }}</label>
                             <input type="text" wire:model="EAN" placeholder="Vul hier de EAN in" id="ean">
                         </p>

@@ -13,6 +13,12 @@
                             <th>{{ $item->reference }}</th>
                         </tr>
                     @endif
+                    @if($item->reading)
+                        <tr class="row--text--list">
+                            <th>{{ __('Meterstand') }}</th>
+                            <th>{{ $item->reading }}</th>
+                        </tr>
+                    @endif
                     @if($item->EAN)
                         <tr class="row--text--list">
                             <th>{{ __('EAN') }}</th>

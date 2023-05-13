@@ -15,6 +15,7 @@ class Edit extends Component
     public Meter $meter;
 
     public $EAN;
+    public $reading;
     public $reference;
     public $date;
 
@@ -23,6 +24,7 @@ class Edit extends Component
         $this->inspection = $inspection;
         $this->meter = $meter;
         $this->EAN = $this->meter->EAN;
+        $this->reading = $this->meter->reading;
         $this->date = $this->meter->date;
         $this->reference = $this->meter->reference;
     }
@@ -30,6 +32,7 @@ class Edit extends Component
     public function meterSubmit()
     {
         $this->meter->EAN = $this->EAN;
+        $this->meter->reading = $this->reading;
         $this->meter->reference = $this->reference;
         if($this->date){
             $this->meter->date = $this->date;

@@ -19,6 +19,7 @@ return new class extends Migration
                 ->index();
 
             $table->string('title')->nullable();
+            $table->string('reading')->nullable();
             $table->string('reference')->nullable();
             $table->string('EAN')->nullable();
             $table->date('date')->nullable();
