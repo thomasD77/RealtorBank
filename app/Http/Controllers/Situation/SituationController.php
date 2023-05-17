@@ -202,22 +202,15 @@ class SituationController extends Controller
         return redirect()->back();
     }
 
-    public function printContract(Inspection $inspection, Contract $contract)
+    public function printContract(Inspection $inspection, Contract $contract, Situation $situation)
     {
-        $damages = Damage::query()
-            ->where('inspection_id', $inspection->id)
-            ->where('print_pdf', 1)
-            ->orderBy('date', 'desc')
-            ->get();
-
         $pdf = Pdf::loadView('contracts.pdf', [
-            'damages' => $damages,
             'inspection' => $inspection,
             'contract' => $contract,
-
+            'situation' => $situation,
         ]);
 
-        return $pdf->download('contract-' . '#' . $inspection->id . '.pdf');
+        return $pdf->download('mandaat-' . '#' . $inspection->id . '-' . $contract->id . '.pdf');
     }
 
 }

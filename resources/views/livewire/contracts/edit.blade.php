@@ -2,7 +2,7 @@
     <div class="single-add-property">
         <a class="breadcrumb-link" href="{{ route('situation.edit', [$inspection, $contract->situation->id]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('in/uittrede') }}</strong></p></a>
 
-        <h3>{{ __('Status contract') }}</h3>
+        <h3>{{ __('Status mandaat') }}</h3>
         <form action="{{ route('toggle.contract') }}" method="post">
             @csrf
             <input type="hidden" name="contract" value="{{ $contract->id }}">
@@ -15,11 +15,11 @@
             </button>
             @if($lock)
                 <p class="text-muted">
-                    {{ __('*Een contract kan alleen aangepast worden wanneer je deze opent.') }}
+                    {{ __('*Een mandaat kan alleen aangepast worden wanneer je deze opent.') }}
                     {{ __('Dit kan door op deze knop te klikken.') }}
                 </p>
             @else
-                <p class="text-muted mt-1">{{ __('*Om een contract te printen moet deze eerst gesloten worden. Druk op deze knop om alle gegevens vast te zetten.') }}</p>
+                <p class="text-muted mt-1">{{ __('*Om een mandaat te printen moet deze eerst gesloten worden. Druk op deze knop om alle gegevens vast te zetten.') }}</p>
             @endif
         </form>
         @if (session()->has('successTenant'))
@@ -237,7 +237,7 @@
                     </div>
 
                     <div class="col-md-6 text-right">
-                        <p class="font-weight-bold mb-1">{{ __('Contract opgemaakt op') }}</p>
+                        <p class="font-weight-bold mb-1">{{ __('Mandaat opgemaakt op') }}</p>
                         @if($lock)
                             <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
                         @else
@@ -247,249 +247,69 @@
                     </div>
                 </div>
 
-                <div class="row p-5 the-five">
-                    <div class="col-md-6">
-                        @if(Auth()->user()->companyName)
-                            <strong>{{ Auth()->user()->companyName }}</strong>
-                        @endif
-                        <p class="mb-0">{{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }}</p>
-                        @if(Auth()->user()->phone)
-                            <p class="mb-0">{{ Auth()->user()->phone }}</p>
-                        @endif
-                        @if(Auth()->user()->email)
-                            <p class="mb-0">{{ Auth()->user()->email }}</p>
-                        @endif
-                        <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
-                    </div>
-
-                    <div class="col-md-6 text-right">
-                        @if($contract->situation->intrede === 0)
-                            <strong>{{__('Uittrede')}}</strong>
-                        @elseif($contract->situation->intrede == 1)
-                            <strong>{{__('Intrede')}}</strong>
-                        @elseif($contract->situation->intrede == 2)
-                            <strong>{{__('Aanvang van werken')}}</strong>
-                        @endif <br>
-                        {{ $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif <br>
-                        @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
-                    </div>
-                </div>
-
-                <!-- Images from the propperty  -->
-                <div class="row p-5 the-five">
-                    @foreach($files as $file)
-                        <div class="col-md-4 col-lg-3 mt-4">
-                            <div class="img-wrapper">
-
-                                <a class="d-md-none d-lg-block" data-fancybox="gallery" href="{{ asset('assets/images/inspections/' . $file->file_original) }}">
-                                    <div class="img--cover"
-                                        style="background-image: url('{{ asset('assets/images/inspections/crop' . '/' . $file->file_crop) }}');">
-                                    </div>
-                                </a>
-
-                                {{--Temp fix for background images not displaying on tablets--}}
-                                <a class="d-none d-md-block d-lg-none" data-fancybox="gallery" href="{{ asset('assets/images/inspections/' . $file->file_original) }}">
-                                    <div style=" min-height: 125px ; background-image: url('{{ asset('assets/images/inspections/crop' . '/' . $file->file_crop) }}'); background-repeat: no-repeat; background-position: center; background-size: cover">
-                                    </div>
-                                </a>
-
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
                 <hr>
 
                  <!-- Credentials authorized parties -->
                 <div class="row p-5 the-five">
-                    <div class="col-md-6">
-                        <strong>{{ __('Eigenaar') }}</strong>
-                        <p class="mb-0">{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
-                        <p class="mb-0">{{  $contract->situation->owner ? $contract->situation->owner->phone : "" }}</p>
-                        <p class="mb-0">{{  $contract->situation->owner ? $contract->situation->owner->email : "" }}</p>
 
-                        <p class="mb-0">
-                            {{  $inspection->address->address }}
-                            @if($inspection->address->postBus) {{  $inspection->address->postBus }} @endif
-                            @if($inspection->address->zip || $inspection->address->city) ,{{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
-                        </p>
-                        <p>
-                            @if($inspection->address->country) {{  $inspection->address->country }} @endif
-                        </p>
+                    <div class="text-center w-100 mb-4">
+                        <h1>{{ __('PLAATSBESCHRIJVING ') }} <br> {{ __('INTREDE MANDAAT ') }}</h1>
                     </div>
 
-                    <div class="col-md-6">
-                        @if($contract->situation->intrede != 2)
-                            <strong>{{ __('Koper/huurder ') }}</strong>
-                            <p class="mb-0" >{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
-                            <p class="mb-0">{{  $contract->situation->tenant ? $contract->situation->tenant->phone : "" }}</p>
-                            <p class="mb-0">{{  $contract->situation->tenant ? $contract->situation->tenant->email : "" }}</p>
-                        @else
-                            <strong>{{__('Opdrachtgever')}}</strong>
-                            <p>{{  $contract->situation->client }}</p>
+                    <p>Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
+                        @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
+                        , eigendom van {{ $situation->owner ? $situation->owner->name : "" }}
+                        en verhuurd aan {{ $situation->tenant ? $situation->tenant->name : "" }}, werd op datum van {{ $contract->date }} een gedetailleerde intrede gedaan.
+                        <br>
+                        De plaatsbeschrijving is uitgevoerd door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif
+                    </p>
 
-                            <strong>{{__('Adres bouwwerken')}}</strong>
-                            @if($contract->situation->address)
-                                <p class="mb-0">
-                                    {{  $contract->situation->address->address }}
-                                    @if($contract->situation->address->postBus) {{  $contract->situation->address->postBus }} @endif
-                                    @if($contract->situation->address->zip || $contract->situation->address->city) ,{{  $contract->situation->address->zip }} {{  $contract->situation->address->city }} @endif
-                                </p>
-                            @endif
-                        @endif
-                    </div>
+                    <p>
+                        Ondergetekende(n) geven de opdracht aan {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} om als onafhankelijk deskundige de plaatsbeschrijving bij intrede op te nemen van het pand te
+                        {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
+                        @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif.
+                    </p>
+
+                    <p>
+                        Tevens geven ondergetekende(n) {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} de toestemming om de plaatsbeschrijving bij intrede van het pand te ADRES geldig te ondertekenen in hun naam.
+                    </p>
+
+                    <p>
+                        Elke partij heeft het recht om binnen de 10 kalenderdagen na ontvangst van de plaatbeschrijving zijn of haar opmerkingen door te geven. Zo wordt de tegensprekelijkheid van de plaatsbeschrijving gegarandeerd.
+                        Opmerkingen dienen per aangetekend schrijven of per mail naar {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} overgemaakt worden.
+                        Deze opmerkingen kunnen als bijlage bij de plaatsbeschrijving worden gevoegd.
+                    </p>
+
+                    <p>
+                        Indien een partij geen opmerkingen geeft binnen deze termijn, gaan ze definitief akkoord met de volledige plaatsbeschrijving en met de bevindingen van de {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }}.
+                    </p>
+
                 </div>
-
-                 <!-- Inleiding -->
-                <div class="row p-5 the-five">
-                    <div class="col-12">
-                        <strong>{{ __('Inleiding') }}</strong>
-                        @if($contract->situation->intrede != 2)
-                            <p>Met betrekking tot het pand gelegen te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
-                            @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
-                            verhuurd aan {{ $contract->situation->tenant ? $contract->situation->tenant->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}} een gedetailleerde
-                            @if($contract->situation->intrede)
-                                Intrede
-                            @else
-                                Uittrede
-                            @endif opname gedaan.
-                            De plaatsbeschrijving is uitgevoerd door {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} voor {{ Auth()->user()->companyName }}</p>
-                            @if($contract->situation->intrede)
-                                {!! $contract->legal_in !!}
-                            @else
-                                {!! $contract->legal_uit !!}
-                            @endif
-                        @else
-                            @if($contract->situation->address)
-                                <p>Met betrekking tot het pand gelegen te {{  $contract->situation->address->address }}, @if($contract->situation->address->postBus) {{  $contract->situation->address->postBus }}, @endif
-                                @if($contract->situation->address->zip || $contract->situation->address->city) {{  $contract->situation->address->zip }} {{  $contract->situation->address->city }} @endif
-                                eigendom van {{ $contract->situation->owner ? $contract->situation->owner->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}} een gedetailleerde plaatsbeschrijving gedaan.
-                                De plaatsbeschrijving is uitgevoerd door {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} voor {{ Auth()->user()->companyName }}</p>
-                                {!! $contract->legal_aanvang !!}
-                            @endif
-                        @endif
-                    </div>
-                </div>
-
-                <!-- Extra info contract -->
-                @if($contract->situation->extra)
-                    <div class="row p-5 the-five">
-                        <strong class="w-100">{{ __('Extra info') }}</strong>
-                        {!! $contract->situation->extra !!}
-                    </div>
-                @endif
-
-                <!-- Aanvang van werken -->
-                @if($contract->situation->intrede == 2)
-                    @if($contract->situation->general)
-                        <div class="row p-5 the-five">
-                            <strong class="w-100">{{ __('Algemene bepalingen') }}</strong>
-                            {!! $contract->situation->general !!}
-                        </div>
-                    @endif
-                @endif
-
-
-                 <!-- Media for 'aanvang van werken' -->
-                @if($contract->situation->intrede == 2)
-                    <div class="row p-5 the-five">
-                        @foreach($medias as $file)
-                            <div class="col-md-4 col-lg-3 mt-4">
-                                <div class="img-wrapper">
-
-                                    <a class="d-md-none d-lg-block" data-fancybox="gallery" href="{{ asset('assets/images/situations/' . $file->file_original) }}">
-                                        <div class="img--cover"
-                                            style="background-image: url('{{ asset('assets/images/situations/crop' . '/' . $file->file_crop) }}');">
-                                        </div>
-                                    </a>
-
-                                    {{--Temp fix for background images not displaying on tablets--}}
-                                    <a class="d-none d-md-block d-lg-none" data-fancybox="gallery" href="{{ asset('assets/images/situations/' . $file->file_original) }}">
-                                        <div style=" min-height: 125px ; background-image: url('{{ asset('assets/images/situations/crop' . '/' . $file->file_crop) }}'); background-repeat: no-repeat; background-position: center; background-size: cover">
-                                        </div>
-                                    </a>
-
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
-
-                <!-- Damages -->
-                @if($damages->isNotEmpty())
-                <div class="row p-5 the-five">
-                    <strong class="w-100">{{ __('Schade') }}</strong>
-                    <div class="section-body listing-table">
-                        <div class="table-responsive">
-                            <table class="table table-striped" style="width: 100%">
-                                <thead>
-                                <tr>
-                                    <th style="width: 20%">{{ __('Titel') }}</th>
-                                    <th style="width: 10%">{{ __('Datum') }}</th>
-                                    <th style="width: 70%">{{ __('Beschrijving') }}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($damages as $damage)
-                                    <tr>
-                                        <td>{{ $damage->title }}</td>
-                                        <td>{{ $damage->date }}</td>
-                                        <td>{{ $damage->description }}</td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                @endif
-
-                <!-- Slot -->
-                @if($contract->situation->intrede === 0)
-                    @if($contract->slot_uit)
-                        <div class="row p-5 the-five">
-                            <strong class="w-100">{{ __('Slot') }}</strong>
-                            {!! $contract->slot_uit !!}
-                        </div>
-                    @endif
-                @elseif($contract->situation->intrede == 1)
-                    @if($contract->slot_in)
-                        <div class="row p-5 the five">
-                            <strong class="w-100">{{ __('Tot slot') }}</strong>
-                            {!! $contract->slot_in !!}
-                        </div>
-                    @endif
-                @elseif($contract->situation->intrede == 2)
-                    @if($contract->slot_aanvang)
-                        <div class="row p-5 the-five">
-                            <strong class="w-100">{{ __('Tot slot') }}</strong>
-                            {!! $contract->slot_aanvang !!}
-                        </div>
-                    @endif
-                @endif
 
                 <!-- Signatures -->
                 <section class="signature">
                     <div class="row p-5 the-five">
-                        @if($contract->signature_owner)
-                            <div class="col-md-6">
-                                <strong>{{ __('Gelezen en goedgekeurd') }}</strong>
-                                <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
-                                <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
-                                <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
-                            </div>
-                        @endif
+                        <div class="col-12">
+                            @if($contract->date)
+                                <hr>
+                                <p class="date-title">{{ __('Opnamedatum') }}: {{ $contract->date }}</p>
+                            @endif
+                        </div>
 
-                        @if($contract->signature_tenant)
-                            <div class="col-md-6 text-right">
-                                @if($contract->situation->intrede != 2)
-                                    <strong class="font-weight-bold mb-4">{{ __('Gelezen en goedgekeurd') }}</strong>
-                                    <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
-                                    <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
-                                    <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
-                                @endif
-                            </div>
-                        @endif
+                        <div class="col-md-6 ">
+                            <strong>{{ __('HUURDERS') }}</strong><br>
+                            <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                            <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
+                            <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
+                        </div>
+
+                        <div class="col-md-6 text-right">
+                            <strong>{{ __('VERHUURDERS') }}</strong><br>
+                            <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                            <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
+                            <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
+                        </div>
+
                     </div>
                 </section>
 
@@ -497,8 +317,8 @@
 
             @if($lock)
                 <div class="single-add-property">
-                    <h3>{{ __('Contract printen') }}</h3>
-                    <a href="{{ route('print.contract', [$inspection, $contract]) }}" class="btn btn-dark">{{ __('Printen') }}</a>
+                    <h3>{{ __('Mandaat printen') }}</h3>
+                    <a href="{{ route('print.contract', [$inspection, $contract, $situation]) }}" class="btn btn-dark">{{ __('Printen') }}</a>
                 </div>
             @endif
 
