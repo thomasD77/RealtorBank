@@ -85,6 +85,8 @@
         border: none;
         border-bottom: 1px solid  #f2f2f2; !important;
         font-weight: normal;
+        margin: 0;
+        padding: 0;
     }
     .row--text--list th {
         background-color: transparent;
@@ -141,7 +143,7 @@
     }
 
     .signature img {
-        width: 50%;
+        width: 75%;
     }
 
     .column-sig {
@@ -186,10 +188,15 @@
     }
 
     .main-sig {
+        page-break-before: initial;
         position: fixed;
         bottom: 0;
         left: 0px;
         right: 0px;
+    }
+
+    .slot {
+        page-break-before: always;
     }
 
 </style>

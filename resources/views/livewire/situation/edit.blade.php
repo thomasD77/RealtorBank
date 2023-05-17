@@ -1,7 +1,11 @@
 <div>
-
     <div class="single-add-property">
         <a href="{{ route('situation.index', $inspection) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
+        @if (session()->has('successPDF'))
+            <div class="btn btn-success flash_message mb-3">
+                {{ session('successPDF') }}
+            </div>
+        @endif
         <h3>{{ __('In/uittrede') }}</h3>
         <div class="property-form-group">
             <div class="row">
@@ -46,18 +50,6 @@
                         <label for="date">{{ __('Datum') }}</label>
                         <input type="date" wire:change="editDate" wire:model="date" id="date">
                     </p>
-                </div>
-                <div class="col-12 mt-4">
-                    <ul>
-                        <li class="fl-wrap filter-tags clearfix">
-                            <div class="checkboxes float-left">
-                                <div class="filter-tags-wrap">
-                                    <input id="check-f" type="checkbox" wire:click="printPdfInspection"  @if($printPDF) checked @endif>
-                                    <label for="check-f">{{ __('Print in plaatsbeschrijving') }}</label>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -104,7 +96,7 @@
         </div>
 
         @if($situation->intrede != 2)
-        <div class="single-add-property">
+            <div class="single-add-property">
             <h3>{{ __('Huurder') }}</h3>
             <div class="property-form-group">
                 <form wire:submit.prevent="tenantSubmit">
@@ -227,40 +219,16 @@
 
         @if($intrede == 2)
             <div class="single-add-property">
-                <h3>{{ __('Algemene bepalingen') }}</h3>
-                <div class="property-form-group">
-                    <form wire:submit.prevent="startWorkSubmit">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p>
-                                    <label for="client">{{ __('Opdrachtgever') }}</label>
-                                    <input type="text" wire:model="client" placeholder="Vul hier de opdrachtgever in..." id="client"></input>
-                                </p>
-                                <p>
-                                    <label for="general">{{ __('Algemene bepalingen') }}</label>
-                                    <textarea type="text" wire:model="general" placeholder="Vul hier alle tekst toe..." id="general"></textarea>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 mt-5">
-                                <button type="submit" class="btn btn-dark">save</button>
-                                @if (session()->has('successStartWork'))
-                                    <div class="btn btn-success flash_message">
-                                        {{ session('successStartWork') }}
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="single-add-property">
-            <h3>{{ __('Adres bouwwerken') }}</h3>
+            <h3>{{ __('Bouwwerken') }}</h3>
             <div class="property-form-group">
                 <form wire:submit.prevent="locationStartWorkerSubmit">
                     <div class="row">
+                        <div class="col-12">
+                            <p>
+                                <label for="client">{{ __('Opdrachtgever') }}</label>
+                                <input type="text" wire:model="client" placeholder="Vul hier de opdrachtgever in..." id="client"></input>
+                            </p>
+                        </div>
                         <div class="col-lg-6 col-md-12">
                             <p>
                                 <label for="address">{{ __('Adres') }}</label>
@@ -311,58 +279,58 @@
             </div>
         </div>
 
-            <div class="single-add-property">
-                <h3>{{ __('Media') }}</h3>
-                <div class="property-form-group">
+{{--        <div class="single-add-property">--}}
+{{--                <h3>{{ __('Media') }}</h3>--}}
+{{--                <div class="property-form-group">--}}
+{{--                    <div class="row">--}}
+{{--                        <div class="col-md-12">--}}
+{{--                            <form wire:submit.prevent="saveMedia">--}}
+{{--                                <div class="dropzone--custom">--}}
+{{--                                    <input class="py-5 w-100 file--button" type="file" wire:model="media" multiple>--}}
+{{--                                    <p class="mx-5">Klik hier om bestanden toe te voegen.</p>--}}
+{{--                                </div>--}}
+{{--                                <button class="btn btn-dark my-4" type="submit">Save Photo</button>--}}
+{{--                                @if($media)--}}
+{{--                                    <div class="btn  btn-success text-white">media ready!</div>--}}
+{{--                                @endif--}}
+{{--                                @error('media.*') <span class="text-danger">{{ $message }}</span> @enderror--}}
+{{--                            </form>--}}
+{{--                            <div wire:loading.block class="mb-2">--}}
+{{--                                <i class="fa fa-clock mr-1 ml-2"></i>uploading...--}}
+{{--                            </div>--}}
+{{--                            @if (session()->has('process'))--}}
+{{--                                <div class="btn btn-info flash_message">--}}
+{{--                                    {{ session('process') }}--}}
+{{--                                </div>--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="row">--}}
+{{--                        @foreach($files as $file)--}}
+{{--                            <div class="col-md-4 col-lg-3 mt-4">--}}
+{{--                                <div class="img-wrapper">--}}
+{{--                                    <button wire:click="deleteMedia({{ $file->id }})" class="btn btn-danger delete"><span style="font-weight: bold">x</span></button>--}}
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <form wire:submit.prevent="saveMedia">
-                            <div class="dropzone--custom">
-                                <input class="py-5 w-100 file--button" type="file" wire:model="media" multiple>
-                                <p class="mx-5">Klik hier om bestanden toe te voegen.</p>
-                            </div>
-                            <button class="btn btn-dark my-4" type="submit">Save Photo</button>
-                            @if($media)
-                                <div class="btn  btn-success text-white">media ready!</div>
-                            @endif
-                            @error('media.*') <span class="text-danger">{{ $message }}</span> @enderror
-                        </form>
-                        <div wire:loading.block class="mb-2">
-                            <i class="fa fa-clock mr-1 ml-2"></i>uploading...
-                        </div>
-                        @if (session()->has('process'))
-                            <div class="btn btn-info flash_message">
-                                {{ session('process') }}
-                            </div>
-                        @endif
-                    </div>
-                </div>
-                <div class="row">
-                    @foreach($files as $file)
-                        <div class="col-md-4 col-lg-3 mt-4">
-                            <div class="img-wrapper">
-                                <button wire:click="deleteMedia({{ $file->id }})" class="btn btn-danger delete"><span style="font-weight: bold">x</span></button>
+{{--                                    --}}{{--     <button wire:click="rotateMedia({{ $file->id }})" class="btn btn-dark rotate"><i class="fa fa-rotate-left text-white"></i></button>--}}
 
-                                {{--     <button wire:click="rotateMedia({{ $file->id }})" class="btn btn-dark rotate"><i class="fa fa-rotate-left text-white"></i></button>--}}
+{{--                                    <a class="d-md-none d-lg-block" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">--}}
+{{--                                        <div class="img--cover"--}}
+{{--                                             style="background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}');">--}}
+{{--                                        </div>--}}
+{{--                                    </a>--}}
 
-                                <a class="d-md-none d-lg-block" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
-                                    <div class="img--cover"
-                                         style="background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}');">
-                                    </div>
-                                </a>
+{{--                                    --}}{{--Temp fix for background images not displaying on tablets--}}
+{{--                                    <a class="d-none d-md-block d-lg-none" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">--}}
+{{--                                        <div style=" min-height: 125px ; background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}'); background-repeat: no-repeat; background-position: center; background-size: cover">--}}
+{{--                                        </div>--}}
+{{--                                    </a>--}}
 
-                                {{--Temp fix for background images not displaying on tablets--}}
-                                <a class="d-none d-md-block d-lg-none" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
-                                    <div style=" min-height: 125px ; background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}'); background-repeat: no-repeat; background-position: center; background-size: cover">
-                                    </div>
-                                </a>
-
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        @endforeach--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
         @endif
 
@@ -415,7 +383,55 @@
         </div>
 
         <div class="single-add-property">
-            <h3>{{ __('Contract') }}</h3>
+            <h3>{{ __('PDF genereren')  }}</h3>
+
+            <div class="property-form-group">
+                <a href="{{ route('generate.inspection', [$inspection, $situation]) }}" class="btn btn-dark mb-3"><i class="fa fa-file-pdf mr-2"></i>{{ __('PDF SYNC') }}</a>
+
+                @if($pdfs->isNotEmpty())
+                    <div class="section-body listing-table">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>{{ __('Titel') }}</th>
+                                    <th>{{ __('File') }}</th>
+                                    <th>{{ __('Datum') }}</th>
+                                    <th>{{ __('Actie') }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($pdfs as $pdf)
+                                    <tr>
+                                        <td>{{ $pdf->title }}</td>
+                                        <td>
+                                            @if($pdf->status == \App\Enums\Status::Pending->value)
+                                                <span class="badge badge-pill bg-warning px-3 py-2 text-white">{{ $pdf->status }}</span>
+                                            @else
+                                                <a class="mx-4" target="_blank" href="{{ asset('assets/inspections/pdf/' . $pdf->file_original) }}"><i class="fa fa-file-pdf text-dark"></i></a>
+                                            @endif
+                                        </td>
+                                        <td>{{ $pdf->created_at->format('d-m-Y -  H:i:s') }}</td>
+                                        <td class="edit">
+                                            <form wire:submit.prevent="deletePDF({{ $pdf->id }})">
+                                                <button class="btn_trash" type="submit"><i class="fa fa-trash text-danger"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <p class="pt-5">*refresh regelmatig deze pagina om de status van de PDF te updaten.</p>
+                @endif
+            </div>
+        </div>
+
+        @if($situation->intrede == 1)
+            <div class="single-add-property">
+            <h3>{{ __('Mandaat') }}</h3>
             <div class="property-form-group">
                 @if($contract)
                     <div class="section-body listing-table">
@@ -443,6 +459,7 @@
                 @endif
             </div>
         </div>
+        @endif
 
         <div class="single-add-property">
             <h3>{{ __('Verwijderen') }}</h3>

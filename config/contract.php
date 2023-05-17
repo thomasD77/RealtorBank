@@ -112,7 +112,7 @@ return [
         •	Bij het beschrijven van de elementen in het rapport wordt telkens gewerkt vanaf het element parallel aan de straat. Verdere vermeldingen zijn in wijzerzin. <br>
     ',
 
-    'slot_in' => 'Het opstellen van de plaatsbeschrijving gebeurt digitaal. Naast de plaatsbeschrijving op zich, worden alle foto\’s digitaal bewaard bij de uitvoerder. Deze foto\’s maken onverdeeld deel uit van de plaatsbeschrijving en kunnen dienst doen als bewijs.
+    'slot_in' => 'Het opstellen van de plaatsbeschrijving gebeurt digitaal. Naast de plaatsbeschrijving op zich, worden alle foto’s digitaal bewaard bij de uitvoerder. Deze foto\’s maken onverdeeld deel uit van de plaatsbeschrijving en kunnen dienst doen als bewijs.
         De plaatsbeschrijving en bijhorende rapporten worden verzonden na betaling. <br>
         Beide partijen kunnen schriftelijk of via mail opmerkingen op de plaatsbeschrijving doorgeven aan de uitvoerder én de andere partij.
         Meldingen moeten gebeuren binnen de 10 kalenderdagen na oplevering van de plaatsbeschrijving. <br>

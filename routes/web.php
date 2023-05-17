@@ -38,7 +38,7 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/general/{inspection}/{room}/', [DashboardController::class, 'general'])->name('area.general');
 
     Route::get('/create/inspection', [InspectionController::class, 'create'])->name('create.inspection');
-    Route::get('/generate/inspection/{inspection}', [InspectionController::class, 'genereatePDF'])->name('generate.inspection');
+    Route::get('/generate/inspection/{inspection}/{situation}', [SituationController::class, 'genereatePDF'])->name('generate.inspection');
     Route::get('/create/situation/{inspection}', [SituationController::class, 'create'])->name('create.situation');
     Route::get('/create/document/{inspection}', [InspectionController::class, 'createDocument'])->name('create.document');
     Route::post('/create/signature/', [SituationController::class, 'signature'])->name('create.signature');

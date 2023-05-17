@@ -1,7 +1,7 @@
-<section>
+<section class="slot">
     @if($inspection->owner_present || $inspection->tenant_present || $inspection->new_building || $inspection->inhabited || $inspection->furnished || $inspection->first_resident)
         <h2>{{ __('CONSENSUS') }}</h2>
-        <h3 style="margin-top: 2rem">{{ __('CONTEXT') }}</h3>
+        <h3 style="margin-top: 2rem; margin-bottom: 0">{{ __('CONTEXT') }}</h3>
         <table class="table" style="margin-top: 0">
 
             @if($inspection->owner_present)
@@ -49,47 +49,80 @@
         </table>
     @endif
 
-    <h3 style="margin-top: 2rem">{{ __('ALGEMENE BEPALINGEN') }}</h3>
+    <section>
+        <h3 style="margin-top: 2rem">{{ __('ALGEMENE BEPALINGEN') }}</h3>
+        @if($situation->intrede === 0)
+            <div class="row">
+                {!! Config('contract.slot_uit') !!}
+            </div>
+        @elseif($situation->intrede == 1)
+            <div class="row">
+                {!! Config('contract.slot_in') !!}
+            </div>
+        @elseif($situation->intrede == 2)
+            <div class="row">
+                {!! Config('contract.slot_aanvang') !!}
+            </div>
+        @endif
+    </section>
 
-    <p>{!! Config('contract.consensus') !!}</p>
 
-        <!-- Signatures -->
-        @if($contract)
-            <section class="signature main-sig">
-                <div class="row keep">
+    <!-- Signatures -->
+    <section class="signature main-sig">
+            <div class="row keep">
 
-                    <p class="date-title">{{ __('Datum opgemaakt') }} | {{ $inspection->created_at->format('Y-m-d') }}</p>
+                @if($situation->date)
+                    <hr>
+                    <p class="date-title">{{ __('Opnamedatum') }}: {{ $situation->date }}</p>
+                @endif
 
+                {{--This is Intrede or Uittrede--}}
+                @if($situation->intrede != 2)
+                <div class="column-sig">
+                    <h3>{{ __('HUURDER') }}</h3>
+                    {{--                    <p> {{  $inspection->address->address }} @if($inspection->address->postBus) ,{{  $inspection->address->postBus }} @endif--}}
+                    {{--                        @if($inspection->address->zip || $inspection->address->city) , {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>--}}
+                    <p>{{  $situation->owner ? $situation->owner->name : "" }}</p>
+                    <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                </div>
+
+                <div class="column-sig">
+                    <h3>{{ __('VERHUURDER') }}</h3>
+                    <p>{{  $situation->tenant ? $contract->situation->tenant->name : "" }}</p>
+                    {{--                        <p> {{  $inspection->address->address }} @if($inspection->address->postBus), {{  $inspection->address->postBus }} @endif--}}
+                    {{--                            @if($inspection->address->zip || $inspection->address->city), {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>--}}
+                    <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                </div>
+
+                @else
                     <div class="column-sig">
-                        <h3>{{ __('UITVOERDER') }}</h3>
-                        <p>{{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }}</p>
-                        <img src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
+                        <h3>{{ __('EIGENAAR') }}</h3>
+                        <p>{{  $situation->owner ? $situation->owner->name : "" }}</p>
+                        <p> {{  $inspection->address->address }} @if($inspection->address->postBus) ,{{  $inspection->address->postBus }} @endif
+                        @if($inspection->address->zip || $inspection->address->city) , {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>
+                        <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
                     </div>
 
-                    @if($contract->signature_owner)
-                        <div class="column-sig">
-                            <h3>{{ __('HUURDER') }}</h3>
-                            <p>  {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
-                                @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>
-                            <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
-                            <img src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
-                        </div>
-                    @endif
+                    <div class="column-sig">
+                        <h3>{{ __('OPDRACHTGEVER') }}</h3>
+                        <p>{{  $situation->client }}</p>
+                        <p> {{  $situation->address->address }} @if($situation->address->postBus), {{  $situation->address->postBus }} @endif
+                        @if($situation->address->zip || $situation->address->city), {{  $situation->address->zip }} {{  $situation->address->city }} @endif</p>
+                        <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                    </div>
+                @endif
 
-                    @if($contract->signature_tenant)
-                        <div class="column-sig">
-                            @if($contract->situation->intrede != 2)
-                                <h3 class="font-weight-bold mb-4">{{ __('VERHUURDER') }}</h3>
-                                <p>  {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
-                                    @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>
-                                <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
-                                <img src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
-                            @endif
-                        </div>
+                <div class="column-sig">
+                    <h3>{{ __('UITVOERDER') }}</h3>
+                    <p>{{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }}</p>
+                    <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                    @if($inspection->user->signature)
+                        <img src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
                     @endif
                 </div>
-            </section>
-        @endif
+
+            </div>
+        </section>
 </section>
 
 

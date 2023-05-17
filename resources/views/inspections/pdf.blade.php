@@ -10,10 +10,13 @@
 </head>
 <body>
 <header style="margin-bottom: 3rem">
-    {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
-    @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
+    PB: {{  $inspection->address->address }} @if($inspection->address->postBus), {{  $inspection->address->postBus }} @endif
+    @if($inspection->address->zip || $inspection->address->city), {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
 </header>
+
         @include('inspections.sections.inspection-information')
+
+        @include('inspections.sections.intro')
 
         @foreach($rooms as $room)
 
@@ -38,6 +41,7 @@
         @include('inspections.sections.documents')
 
         @include('inspections.sections.consensus')
+
 <footer>
     {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : ""  }} | {{ __('EstateMetrics') }} | &copy; {{ now()->format('Y') }}
 </footer>

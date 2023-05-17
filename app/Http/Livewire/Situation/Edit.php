@@ -10,6 +10,7 @@ use App\Models\Inspection;
 use App\Models\Owner;
 use App\Models\Situation;
 use App\Models\Tenant;
+use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\MediaSituation;
@@ -58,10 +59,10 @@ class Edit extends Component
     public $relation_id = 'situation_id';
     public $mediaName = 'MediaSituation';
 
+    public $pdfs;
+
     use WithFileUploads;
     use WithPagination;
-
-    public $printPDF;
 
     protected $messages = [
         'media.*' => 'Oeps, limit om aantal bestanden up te loaden is overschreden. Probeer het opnieuw.',
@@ -108,31 +109,30 @@ class Edit extends Component
             ->where('situation_id', $situation->id)
             ->first();
 
-        $this->printPDF = $this->contract->print_pdf;
-
         $files = MediaSituation::where('situation_id', $this->situation->id)->get();
         $this->files = $files;
-    }
 
-    public function printPdfInspection()
-    {
-        //First reset print status for all situations
-        $contracts = Contract::query()
+        $pdfs = \App\Models\PDF::query()
             ->where('inspection_id', $this->inspection->id)
             ->where('situation_id', $this->situation->id)
+            ->latest()
             ->get();
+        $this->pdfs = $pdfs;
+    }
 
-        foreach ($contracts as $contract){
-            $contract->print_pdf = null;
-            $contract->save();
-        }
-
-        //Set new print status
-        $this->contract->print_pdf = 1;
-        $this->contract->save();
+    public function deletePDF($pdf)
+    {
+        $pdf = \App\Models\PDF::find($pdf);
+        File::delete('assets/inspections/pdf/' . $pdf->file_original);
+        $pdf->delete();
 
         //Render
-        $this->printPDF = $this->contract->print_pdf;
+        $pdfs = \App\Models\PDF::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->where('situation_id', $this->situation->id)
+            ->latest()
+            ->get();
+        $this->pdfs = $pdfs;
     }
 
     public function intredeSubmit($value)
@@ -202,13 +202,16 @@ class Edit extends Component
     public function startWorkSubmit()
     {
         $this->situation->general = $this->general;
-        $this->situation->client = $this->client;
-        $this->situation->update();
+
+
         session()->flash('successStartWork', 'success!');
     }
 
     public function locationStartWorkerSubmit()
     {
+        $this->situation->client = $this->client;
+        $this->situation->update();
+
         $address = Address::where('situation_id', $this->situation->id)->first();
 
         if(!$address){

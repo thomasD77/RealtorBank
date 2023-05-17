@@ -225,33 +225,6 @@
             </div>
         </div>
 
-        <!-- Inleiding -->
-        <div class="row">
-            <h3>{{ __('Inleiding') }}</h3>
-            @if($contract->situation->intrede != 2)
-                <p>Met betrekking tot het pand gelegen te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
-                @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
-                verhuurd aan {{ $contract->situation->tenant ? $contract->situation->tenant->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}} een gedetailleerde
-                @if($contract->situation->intrede)
-                    Intrede
-                @else
-                    Uittrede
-                @endif opname gedaan.
-                De plaatsbeschrijving is uitgevoerd door {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} voor {{ Auth()->user()->companyName }}</p>
-                @if($contract->situation->intrede)
-                    <p>{!! $contract->legal_in !!}</p>
-                @else
-                    <p>{!! $contract->legal_uit !!}</p>
-                @endif
-            @else
-                <p>Met betrekking tot het pand gelegen te {{  $contract->situation->address->address }}, @if($contract->situation->address->postBus) {{  $contract->situation->address->postBus }}, @endif
-                @if($contract->situation->address->zip || $contract->situation->address->city) {{  $contract->situation->address->zip }} {{  $contract->situation->address->city }} @endif
-                eigendom van {{ $contract->situation->owner ? $contract->situation->owner->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}} een gedetailleerde plaatsbeschrijving gedaan.
-                De plaatsbeschrijving is uitgevoerd door {{ Auth()->user()->firstName }} {{ Auth()->user()->lastName }} voor {{ Auth()->user()->companyName }}</p>
-                <p>{!! $contract->legal_aanvang !!}</p>
-            @endif
-        </div>
-
          <!-- Extra info contract -->
         @if($contract->situation->extra)
             <div class="row">
