@@ -113,10 +113,27 @@ class MediaStore extends Model
                 $thisModel->hasOrientation($myImage, $imageHasOrientation, $folder, $mediaStore, $name, $thisModel);
             }
 
+            //Save orientation
+            $orientation = $thisModel->checkOrientation($myImage);
+
             $mediaStore->file_original = $name;
             $mediaStore->file_crop = $name;
             $mediaStore->$relation_id = $template->id;
+            $mediaStore->orientation = $orientation;
             $mediaStore->save();
+        }
+    }
+
+    public function checkOrientation($myImage)
+    {
+        $imgCrop = $myImage;
+        $width = Image::make($imgCrop)->width();
+        $height = Image::make($imgCrop)->height();
+
+        if($width > $height){
+            return 'h';
+        }else {
+            return 'v';
         }
     }
 

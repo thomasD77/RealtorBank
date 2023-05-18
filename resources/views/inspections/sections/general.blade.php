@@ -39,4 +39,8 @@
     </table>
 
     @include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::General->value, 'item' => $room->generalArea ])
+
 @endif
+
+
+

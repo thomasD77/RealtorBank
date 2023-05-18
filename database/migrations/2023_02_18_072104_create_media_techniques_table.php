@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('file_original');
             $table->string('file_crop');
+            $table->string('orientation');
 
             $table->unsignedInteger('technique_id')
                 ->index();

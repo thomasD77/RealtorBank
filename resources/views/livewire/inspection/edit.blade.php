@@ -198,9 +198,18 @@
                             {{--     <button wire:click="rotateMedia({{ $file->id }})" class="btn btn-dark rotate"><i class="fa fa-rotate-left text-white"></i></button>--}}
 
                             <a class="d-md-none d-lg-block" data-fancybox="gallery" href="{{ asset('assets/images/' . $folder . '/' . $file->file_original) }}">
-                                <div class="img--cover"
-                                     style="background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}');">
-                                </div>
+                                @if($file->orientation == 'v')
+                                    <div class="img--cover"
+                                        style="background-color: rgb(228,229,233); height: 100%;
+                                        background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}');
+                                        background-size: contain">
+                                    </div>
+                                @else
+                                    <div class="img--cover"
+                                        style="background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $file->file_crop) }}');
+                                        background-size: cover">
+                                    </div>
+                                @endif
                             </a>
 
                             {{--Temp fix for background images not displaying on tablets--}}
