@@ -84,7 +84,7 @@
                     {{-- <p> {{  $inspection->address->address }} @if($inspection->address->postBus), {{  $inspection->address->postBus }} @endif--}}
                     {{-- @if($inspection->address->zip || $inspection->address->city), {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>--}}
                     <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                    @if($claim)
+                    @if($claim->signature_tenant)
                         <img src="{{ asset('assets/signatures'. '/' . $claim->signature_tenant) }}" alt="">
                     @endif
                 </div>
@@ -95,7 +95,7 @@
                     {{--  @if($inspection->address->zip || $inspection->address->city) , {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>--}}
                     <p>{{  $situation->owner ? $situation->owner->name : "" }}</p>
                     <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                    @if($claim)
+                    @if($claim->signature_owner)
                         <img src="{{ asset('assets/signatures'. '/' . $claim->signature_owner) }}" alt="">
                     @endif
                 </div>
@@ -124,6 +124,8 @@
                     <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
                     @if($inspection->user->signature)
                         <img src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
+                    @else
+                        <div class="spacer"></div>
                     @endif
                 </div>
 

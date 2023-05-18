@@ -195,6 +195,10 @@
         right: 0px;
     }
 
+    .spacer {
+        height: 100px;
+    }
+
     .slot {
         page-break-before: always;
     }

@@ -9,6 +9,7 @@ use App\Models\Document;
 use App\Models\Inspection;
 use App\Models\Key;
 use App\Models\Meter;
+use App\Models\RentalClaim;
 use App\Models\Room;
 use App\Models\Situation;
 use App\Models\TechniqueArea;
@@ -25,9 +26,7 @@ use Illuminate\Support\Facades\Storage;
 class GeneratePDF implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
     public Inspection $inspection;
-
     public Situation $situation;
 
     public string $fileName;
@@ -105,11 +104,14 @@ class GeneratePDF implements ShouldQueue
         $inspection = Inspection::find($this->inspection->id);
 
         $contract = Contract::query()
-            ->whereNotNull('print_pdf')
             ->where('inspection_id', $inspection->id)
+            ->where('situation_id', $this->situation->id)
             ->first();
 
-        $situation = Situation::find($this->situation->id);
+        $claim = RentalClaim::query()
+            ->where('inspection_id', $inspection->id)
+            ->where('situation_id', $this->situation->id)
+            ->first();
 
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $inspection,
@@ -119,7 +121,8 @@ class GeneratePDF implements ShouldQueue
             'documents' => $documents,
             'keys' => $keys,
             'contract' => $contract,
-            'situation' => $situation,
+            'claim' => $claim,
+            'situation' => $this->situation,
         ]);
 
         $path = public_path('assets/inspections/pdf/');
