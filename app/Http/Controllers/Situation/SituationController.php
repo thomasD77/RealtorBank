@@ -101,6 +101,7 @@ class SituationController extends Controller
 
         $rooms = Room::query()
             ->where('inspection_id', $inspection->id)
+            ->orderBy('order')
             ->get();
 
         $contract = Contract::where('inspection_id', $inspection->id)->first();
