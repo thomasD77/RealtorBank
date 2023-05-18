@@ -178,25 +178,23 @@
         <div class="p-5 the-five" style="background-color: #1d293e;">
             <div class="row">
                 <div class="col-md-6 bg-white px-0">
-                    @if($contract->situation->intrede != 2)
-                        <form method="POST" action="{{ route('create.signature') }}">
-                            <input type="hidden" name="tenant" value="1">
-                            <input type="hidden" name="contract" value="{{ $contract->id }}">
-                            @csrf
-                            <div class="col-md-11">
-                                <label class="py-3" for="">{{ __('Handtekening') }} {{ $situation->tenant->name }}</label>
-                                <br/>
-                                <div id="sig_tenant"></div>
-                                <br/>
-                                <div class="text-right">
-                                    <button id="clear65" class="btn btn-danger btn-sm">{{ __('wissen') }}</button>
-                                </div>
-                                <textarea id="signature65" name="signed" style="display: none"></textarea>
-                            </div>
+                    <form method="POST" action="{{ route('create.signature') }}">
+                        <input type="hidden" name="tenant" value="1">
+                        <input type="hidden" name="contract" value="{{ $contract->id }}">
+                        @csrf
+                        <div class="col-md-11">
+                            <label class="py-3" for="">{{ __('Handtekening') }} {{ $situation->tenant->name }}</label>
                             <br/>
-                            <button class="btn btn-dark m-3">{{ __('Submit') }}</button>
-                        </form>
-                    @endif
+                            <div id="sig_tenant"></div>
+                            <br/>
+                            <div class="text-right">
+                                <button id="clear65" class="btn btn-danger btn-sm">{{ __('wissen') }}</button>
+                            </div>
+                            <textarea id="signature65" name="signed" style="display: none"></textarea>
+                        </div>
+                        <br/>
+                        <button class="btn btn-dark m-3">{{ __('Submit') }}</button>
+                    </form>
                 </div>
                 <div class="col-md-6 bg-white px-0">
                     <form method="POST" action="{{ route('create.signature') }}">
