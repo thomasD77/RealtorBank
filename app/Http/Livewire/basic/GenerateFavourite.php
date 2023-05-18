@@ -35,33 +35,37 @@ class GenerateFavourite extends Component
             ->where('isFavourite', $this->basicArea->area->code)
             ->first();
 
-        $this->basicArea->material = $favourite->material;
-        $this->basicArea->color = $favourite->color;
-        $this->basicArea->plinth = $favourite->plinth;
-        $this->basicArea->analysis = $favourite->analysis;
-        $this->basicArea->type = $favourite->type;
-        $this->basicArea->handle = $favourite->handle;
-        $this->basicArea->lists = $favourite->lists;
-        $this->basicArea->key = $favourite->key;
-        $this->basicArea->doorPump = $favourite->doorPump;
-        $this->basicArea->doorStop = $favourite->doorStop;
-        $this->basicArea->plaster = $favourite->plaster;
-        $this->basicArea->finish = $favourite->finish;
-        $this->basicArea->ventilationGrille = $favourite->ventilationGrille;
-        $this->basicArea->glazing = $favourite->glazing;
-        $this->basicArea->windowsill = $favourite->windowsill;
-        $this->basicArea->rollerShutter = $favourite->rollerShutter;
-        $this->basicArea->windowDecoration = $favourite->windowDecoration;
-        $this->basicArea->hor = $favourite->hor;
-        $this->basicArea->fallProtection = $favourite->fallProtection;
-        $this->basicArea->energy = $favourite->energy;
-        $this->basicArea->extra = $favourite->extra;
+        if($favourite){
+            $this->basicArea->material = $favourite->material;
+            $this->basicArea->color = $favourite->color;
+            $this->basicArea->plinth = $favourite->plinth;
+            $this->basicArea->analysis = $favourite->analysis;
+            $this->basicArea->type = $favourite->type;
+            $this->basicArea->handle = $favourite->handle;
+            $this->basicArea->lists = $favourite->lists;
+            $this->basicArea->key = $favourite->key;
+            $this->basicArea->doorPump = $favourite->doorPump;
+            $this->basicArea->doorStop = $favourite->doorStop;
+            $this->basicArea->plaster = $favourite->plaster;
+            $this->basicArea->finish = $favourite->finish;
+            $this->basicArea->ventilationGrille = $favourite->ventilationGrille;
+            $this->basicArea->glazing = $favourite->glazing;
+            $this->basicArea->windowsill = $favourite->windowsill;
+            $this->basicArea->rollerShutter = $favourite->rollerShutter;
+            $this->basicArea->windowDecoration = $favourite->windowDecoration;
+            $this->basicArea->hor = $favourite->hor;
+            $this->basicArea->fallProtection = $favourite->fallProtection;
+            $this->basicArea->energy = $favourite->energy;
+            $this->basicArea->extra = $favourite->extra;
 
-        $this->basicArea->updated_at = now();
-        $this->basicArea->save();
+            $this->basicArea->updated_at = now();
+            $this->basicArea->save();
 
-        $this->dispatchBrowserEvent('refresh-page');
-        Session::flash('successGen', 'succes!');
+            $this->dispatchBrowserEvent('refresh-page');
+            Session::flash('successGen', 'succes!');
+        }else {
+            Session::flash('successGen', 'geen favoriet gevonden');
+        }
     }
 
     public function render()

@@ -62,7 +62,7 @@ return new class extends Migration
             'lastName'=>'Geldof',
             'email'=>'andreasgeldof@hotmail.com',
             'email_verified_at'=>Carbon::now()->format('Y-m-d H:i:s'),
-            'password'=>bcrypt('realtorbank123'),
+            'password'=>bcrypt('@estatemetrics1234'),
             'created_at'=>Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'=>Carbon::now()->format('Y-m-d H:i:s'),
         ]);

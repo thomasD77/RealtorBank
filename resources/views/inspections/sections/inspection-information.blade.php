@@ -37,13 +37,13 @@
             @if($situation->intrede != 2)
                 <div class="column-sig">
                     <h3>{{ __('HUURDER') }}</h3>
-                    <p>{{  $situation->owner ? $situation->owner->name : "" }}</p>
+                    <p>{{  $situation->tenant ? $situation->tenant->name : "" }}</p>
                 </div>
 
                 <div class="column-sig">
                     @if($situation->intrede != 2)
                         <h3 class="font-weight-bold mb-4">{{ __('VERHUURDER') }}</h3>
-                        <p>{{  $situation->tenant ? $situation->tenant->name : "" }}</p>
+                        <p>{{  $situation->owner ? $situation->owner->name : "" }}</p>
                     @endif
                 </div>
             @else

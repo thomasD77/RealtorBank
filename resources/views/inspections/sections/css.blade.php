@@ -203,4 +203,10 @@
         page-break-before: always;
     }
 
+    .marker {
+        width: 30px;
+        height: 18px;
+        background-color: yellow;
+    }
+
 </style>

@@ -39,7 +39,7 @@
                         </div>
                         <div class="info">
                             <h6 class="number">{{ $situations }}</h6>
-                            <p class="type ml-1">{{ __('Totale aantal in/uitredes') }}</p>
+                            <p class="type ml-1">{{ __('Totale aantal in/uitredes of aanvang van werken') }}</p>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                         </div>
                         <div class="info">
                             <h6 class="number">{{ $contracts }}</h6>
-                            <p class="type ml-1">Contracten getekend</p>
+                            <p class="type ml-1">Mandaten getekend</p>
                         </div>
                     </div>
                 </div>

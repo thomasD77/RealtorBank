@@ -1,22 +1,26 @@
 <section>
     <h3>{{ __('Inleiding') }}</h3>
     @if($situation->intrede != 2)
-        <p>Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
+        <p>Voor het pand te @if($inspection->address->address){{  $inspection->address->address }}, @else <span class="marker">...</span> @endif
+            @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
             @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
-            , eigendom van {{ $situation->owner ? $situation->owner->name : "" }}
-            en verhuurd aan {{ $situation->tenant ? $situation->tenant->name : "" }}, werd op datum van {{ $situation->date }} een gedetailleerde
+            , eigendom van @if($situation->owner->name){{ $situation->owner->name }} @else <span class="marker">...</span> @endif
+            en verhuurd aan @if($situation->tenant->name){{ $situation->tenant->name }} @else <span class="marker">...</span> @endif
+            , werd op datum van @if($situation->date){{ $situation->date }} @else <span class="marker">...</span> @endif
+            een gedetailleerde
             @if($situation->intrede)
                 intrede
             @else
                 uittrede
             @endif opname gedaan. <br>
             De plaatsbeschrijving is uitgevoerd door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif</p>
+
         @if($situation->intrede)
             <br>
-            {!! Config('contract.legal_in') !!}
+            <p>{!! Config('contract.legal_in') !!}</p>
         @else
             <br>
-            {!! Config('contract.legal_uit') !!}
+            <p>{!! Config('contract.legal_uit') !!}</p>
         @endif
     @else
         <p>Met betrekking tot het pand gelegen te {{  $situation->address->address }}, @if($situation->address->postBus) {{  $situation->address->postBus }}, @endif
@@ -24,6 +28,6 @@
             eigendom van {{ $situation->owner ? $situation->owner->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($situation->date)->format('d-m-Y')}} een gedetailleerde plaatsbeschrijving gedaan.
             De plaatsbeschrijving is uitgevoerd door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif</p>
         <br>
-        {!! Config('contract.legal_aanvang') !!}
+        <p>{!! Config('contract.legal_aanvang') !!}</p>
     @endif
 </section>
