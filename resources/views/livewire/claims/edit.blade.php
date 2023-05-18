@@ -1,11 +1,11 @@
 <div>
     <div class="single-add-property">
-        <a class="breadcrumb-link" href="{{ route('situation.edit', [$inspection, $contract->situation->id]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('in/uittrede') }}</strong></p></a>
+        <a class="breadcrumb-link" href="{{ route('situation.edit', [$inspection, $claim->situation->id]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('in/uittrede') }}</strong></p></a>
 
-        <h3>{{ __('Status mandaat') }}</h3>
-        <form action="{{ route('toggle.contract') }}" method="post">
+        <h3>{{ __('Status huurschade contract') }}</h3>
+        <form action="{{ route('toggle.claim') }}" method="post">
             @csrf
-            <input type="hidden" name="contract" value="{{ $contract->id }}">
+            <input type="hidden" name="claim" value="{{ $claim->id }}">
             <button class="btn btn-dark">
                 @if($lock)
                     {{ __('Openen') }}
@@ -15,11 +15,11 @@
             </button>
             @if($lock)
                 <p class="text-muted">
-                    {{ __('*Een mandaat kan alleen aangepast worden wanneer je deze opent.') }}
+                    {{ __('*Een contract kan alleen aangepast worden wanneer je deze opent.') }}
                     {{ __('Dit kan door op deze knop te klikken.') }}
                 </p>
             @else
-                <p class="text-muted mt-1">{{ __('*Om een mandaat te printen moet deze eerst gesloten worden. Druk op deze knop om alle gegevens vast te zetten.') }}</p>
+                <p class="text-muted mt-1">{{ __('*Om een contract te printen moet deze eerst gesloten worden. Druk op deze knop om alle gegevens vast te zetten.') }}</p>
             @endif
         </form>
         @if (session()->has('successTenant'))
@@ -178,10 +178,10 @@
         <div class="p-5 the-five" style="background-color: #1d293e;">
             <div class="row">
                 <div class="col-md-6 bg-white px-0">
-                    @if($contract->situation->intrede != 2)
-                        <form method="POST" action="{{ route('create.signature') }}">
+                    @if($claim->situation->intrede != 2)
+                        <form method="POST" action="{{ route('create.signature.claim') }}">
                             <input type="hidden" name="tenant" value="1">
-                            <input type="hidden" name="contract" value="{{ $contract->id }}">
+                            <input type="hidden" name="claim" value="{{ $claim->id }}">
                             @csrf
                             <div class="col-md-11">
                                 <label class="py-3" for="">{{ __('Handtekening') }} {{ $situation->tenant->name }}</label>
@@ -199,17 +199,17 @@
                     @endif
                 </div>
                 <div class="col-md-6 bg-white px-0">
-                    <form method="POST" action="{{ route('create.signature') }}">
+                    <form method="POST" action="{{ route('create.signature.claim') }}">
                         <input type="hidden" name="tenant" value="0">
-                        <input type="hidden" name="contract" value="{{ $contract->id }}">
+                        <input type="hidden" name="claim" value="{{ $claim->id }}">
                         @csrf
                         <div class="col-md-11">
-                            <label class="py-3" for="">{{ __('Handtekening') }} {{ $contract->situation->owner ? $contract->situation->owner->name : "" }} </label>
+                            <label class="py-3" for="">{{ __('Handtekening') }} {{ $claim->situation->owner ? $claim->situation->owner->name : "" }} </label>
                             <br/>
                             <div id="sig" style="touch-action: none;"></div>
                             <br/>
                             <div class="text-right">
-                                <button id="clear" class="btn btn-danger btn-sm">{{ __('wissen') }}</button>
+                                <button id="clear64" class="btn btn-danger btn-sm">{{ __('wissen') }}</button>
                             </div>
                             <textarea id="signature64" name="signed" style="display: none"></textarea>
                         </div>
@@ -237,9 +237,9 @@
                     </div>
 
                     <div class="col-md-6 text-right">
-                        <p class="font-weight-bold mb-1">{{ __('Mandaat opgemaakt op') }}</p>
+                        <p class="font-weight-bold mb-1">{{ __('Contract opgemaakt op') }}</p>
                         @if($lock)
-                            <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
+                            <p>{{ \Carbon\Carbon::parse($claim->date)->format('d-m-Y')}}</p>
                         @else
                             <input type="date" class="form-control"wire:change="changeDate"
                                    wire:model.defer="date">
@@ -249,40 +249,30 @@
 
                 <hr>
 
-                 <!-- Credentials authorized parties -->
+                <!-- Credentials authorized parties -->
                 <div class="row p-5 the-five">
 
-                    <div class="text-center w-100 mb-4">
-                        <h1>{{ __('PLAATSBESCHRIJVING ') }} <br> {{ __('INTREDE MANDAAT ') }}</h1>
+                    <div class="text-center w-100 my-4">
+                        <h1>{{ __('PLAATSBESCHRIJVING ') }} <br> {{ __('HUURSCHADE ') }}</h1>
                     </div>
 
-                    <p>Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
-                        @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
-                        , eigendom van {{ $situation->owner ? $situation->owner->name : "" }}
-                        en verhuurd aan {{ $situation->tenant ? $situation->tenant->name : "" }}, werd op datum van {{ $contract->date }} een gedetailleerde intrede gedaan.
-                        <br>
-                        De plaatsbeschrijving is uitgevoerd door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif
-                    </p>
-
-                    <p>
-                        Ondergetekende(n) geven de opdracht aan {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} om als onafhankelijk deskundige de plaatsbeschrijving bij intrede op te nemen van het pand te
-                        {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
-                        @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif.
-                    </p>
-
-                    <p>
-                        Tevens geven ondergetekende(n) {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} de toestemming om de plaatsbeschrijving bij intrede van het pand te ADRES geldig te ondertekenen in hun naam.
-                    </p>
-
-                    <p>
-                        Elke partij heeft het recht om binnen de 10 kalenderdagen na ontvangst van de plaatbeschrijving zijn of haar opmerkingen door te geven. Zo wordt de tegensprekelijkheid van de plaatsbeschrijving gegarandeerd.
-                        Opmerkingen dienen per aangetekend schrijven of per mail naar {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} overgemaakt worden.
-                        Deze opmerkingen kunnen als bijlage bij de plaatsbeschrijving worden gevoegd.
-                    </p>
-
-                    <p>
-                        Indien een partij geen opmerkingen geeft binnen deze termijn, gaan ze definitief akkoord met de volledige plaatsbeschrijving en met de bevindingen van de {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }}.
-                    </p>
+                    @if($damages->isNotEmpty())
+                        @foreach($damages as $damage)
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <h5>{{ $damage->title }}</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>{{ $damage->date }}</h5>
+                                </div>
+                                <div class="col-12">
+                                    {{ $damage->description }}
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        <p>{{ __('Er zijn is geen schade gevonden of actief gemarkeerd om in dit contract te printen.') }}</p>
+                    @endif
 
                 </div>
 
@@ -290,27 +280,27 @@
                 <section class="signature">
                     <div class="row p-5 the-five">
                         <div class="col-12">
-                            @if($contract->date)
+                            @if($claim->date)
                                 <hr>
-                                <p class="date-title">{{ __('Opnamedatum') }}: {{ $contract->date }}</p>
+                                <p class="date-title">{{ __('Opnamedatum') }}: {{ $claim->date }}</p>
                             @endif
                         </div>
 
                         <div class="col-md-6 ">
                             <strong>{{ __('HUURDERS') }}</strong><br>
                             <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                            <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
-                            @if($contract->signature_tenant)
-                                <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
+                            <p>{{  $claim->situation->tenant ? $claim->situation->tenant->name : "" }}</p>
+                            @if($claim->signature_tenant)
+                                <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $claim->signature_tenant) }}">
                             @endif
                         </div>
 
                         <div class="col-md-6 text-right">
                             <strong>{{ __('VERHUURDERS') }}</strong><br>
                             <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                            <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
-                            @if($contract->signature_owner)
-                                <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
+                            <p>{{  $claim->situation->owner ? $claim->situation->owner->name : "" }}</p>
+                            @if($claim->signature_owner)
+                                <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $claim->signature_owner) }}">
                             @endif
                         </div>
 
@@ -322,13 +312,13 @@
             @if($lock)
                 <div class="single-add-property">
                     <h3>{{ __('Mandaat printen') }}</h3>
-                    <a href="{{ route('print.contract', [$inspection, $contract, $situation]) }}" class="btn btn-dark">{{ __('Printen') }}</a>
+                    <a href="{{ route('print.claim', [$inspection, $claim, $situation]) }}" class="btn btn-dark">{{ __('Printen') }}</a>
                 </div>
             @endif
 
-            </div>
         </div>
     </div>
+</div>
 </div>
 
 

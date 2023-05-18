@@ -10,6 +10,7 @@ use App\Models\Document;
 use App\Models\Inspection;
 use App\Models\Key;
 use App\Models\Meter;
+use App\Models\RentalClaim;
 use App\Models\Situation;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,10 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::post('/create/signature/', [SituationController::class, 'signature'])->name('create.signature');
     Route::post('/toggle/contract', [SituationController::class, 'toggleContract'])->name('toggle.contract');
     Route::get('/print/contract/{inspection}/{contract}/{situation}', [SituationController::class, 'printContract'])->name('print.contract');
+
+    Route::post('/create/signature/claim', [SituationController::class, 'signatureClaim'])->name('create.signature.claim');
+    Route::post('/toggle/claim', [SituationController::class, 'toggleClaim'])->name('toggle.claim');
+    Route::get('/print/claim/{inspection}/{claim}/{situation}', [SituationController::class, 'printClaim'])->name('print.claim');
 
     Route::view('/inspections', 'inspections.index')
         ->name('inspections.index');
@@ -118,6 +123,11 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/contract/edit/{inspection}/{contract}', function (Inspection $inspection, Contract $contract) {
         return view('contracts.edit', compact('inspection','contract'));
     })->name('contract.edit')
+        ->can('hasAccessCheckUser','inspection');
+
+    Route::get('/claim/edit/{inspection}/{claim}', function (Inspection $inspection, RentalClaim $claim) {
+        return view('claims.edit', compact('inspection','claim'));
+    })->name('rentalClaim.edit')
         ->can('hasAccessCheckUser','inspection');
 });
 

@@ -2,8 +2,10 @@
 
     <h1>
         {{ __('PLAATSBESCHRIJVING') }}
-        @if($situation->intrede == 0)
+        @if($situation->intrede == 0 && !$claim)
             {{ __('UITTREDE') }}
+        @elseif($situation->intrede == 0 && $claim)
+            {{ __('HUURSCHADE') }}
         @elseif($situation->intrede == 1)
             {{ __('INTREDE') }}
         @elseif($situation->intrede == 2)

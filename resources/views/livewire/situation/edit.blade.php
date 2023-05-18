@@ -382,6 +382,38 @@
             </div>
         </div>
 
+        @if($situation->intrede == 0 && $damages->isNotEmpty())
+            <div class="single-add-property">
+                <h3>{{ __('Huurschade contract') }}</h3>
+                <div class="property-form-group">
+                    @if($claim)
+                        <div class="section-body listing-table">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>{{ __('Titel') }}</th>
+                                        <th>{{ __('Datum') }}</th>
+                                        <th>{{ __('Actie') }}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>{{ __('Contract') }}</td>
+                                        <td>{{ $claim->date }}</td>
+                                        <td class="edit">
+                                            <a href="{{ route('rentalClaim.edit', [ $inspection, $claim ]) }}"><i class="fa fa-pencil-alt text-dark"></i></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        @endif
+
         <div class="single-add-property">
             <h3>{{ __('PDF genereren')  }}</h3>
 

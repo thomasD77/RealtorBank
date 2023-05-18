@@ -13,6 +13,7 @@ use App\Models\Key;
 use App\Models\MediaStore;
 use App\Models\Meter;
 use App\Models\Owner;
+use App\Models\RentalClaim;
 use App\Models\Room;
 use App\Models\Situation;
 use App\Models\TechniqueArea;
@@ -50,6 +51,11 @@ class SituationController extends Controller
         $contract->inspection_id = $inspection->id;
         $contract->situation_id = $situation->id;
         $contract->save();
+
+        $claim = new RentalClaim();
+        $claim->inspection_id = $inspection->id;
+        $claim->situation_id = $situation->id;
+        $claim->save();
 
         return to_route('situation.edit', [ $inspection , $situation]);
     }
@@ -211,6 +217,81 @@ class SituationController extends Controller
         ]);
 
         return $pdf->download('mandaat-' . '#' . $inspection->id . '-' . $contract->id . '.pdf');
+    }
+
+    public function toggleClaim(Request $request){
+
+        $claim = RentalClaim::find($request->claim);
+
+        if($claim->lock == 1){
+            $claim->lock = 0;
+        }else {
+            $claim->lock = 1;
+        }
+        $claim->update();
+
+        return redirect()->back();
+    }
+
+    public function signatureClaim(Request $request)
+    {
+        $folderPath = public_path('assets/signatures/');
+
+        if(!File::isDirectory($folderPath)){
+            File::makeDirectory($folderPath, 0777, true, true);
+        }
+
+        $image_parts = explode(";base64,", $request->signed);
+
+        //Check when signature is empty
+        if($image_parts[0] == ''){
+            return redirect()->back();
+        }
+
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+
+        $file = $folderPath . 'signature-' . time() . '.'.$image_type;
+        file_put_contents($file, $image_base64);
+
+        $claim = RentalClaim::find($request->claim);
+        $name = 'signature-' . time() . '.'.$image_type;
+
+        if($request->tenant){
+            File::delete('assets/signatures/' . $claim->signature_tenant);
+
+            $claim->signature_tenant = $name;
+            $claim->update();
+            Session::flash('successTenant', 'Handtekening werd succesvol opgeslagen.');
+        }
+        else {
+            File::delete('assets/signatures/' . $claim->signature_realtor);
+
+            $claim->signature_owner = $name;
+            $claim->update();
+            Session::flash('success', 'Handtekening werd succesvol opgeslagen.');
+        }
+
+        return redirect()->back();
+    }
+
+    public function printClaim(Inspection $inspection, RentalClaim $claim, Situation $situation)
+    {
+        $damages = Damage::query()
+            ->where('inspection_id', $inspection->id)
+            ->where('print_pdf', 1)
+            ->orderBy('date', 'desc')
+            ->get();
+
+        $pdf = Pdf::loadView('claims.pdf', [
+            'inspection' => $inspection,
+            'claim' => $claim,
+            'situation' => $situation,
+            'damages' => $damages
+        ]);
+
+        return $pdf->stream('huurschade-' . '#' . $inspection->id . '-' . $claim->id . '.pdf');
     }
 
 }

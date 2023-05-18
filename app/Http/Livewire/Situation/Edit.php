@@ -8,6 +8,7 @@ use App\Models\Contract;
 use App\Models\Damage;
 use App\Models\Inspection;
 use App\Models\Owner;
+use App\Models\RentalClaim;
 use App\Models\Situation;
 use App\Models\Tenant;
 use Illuminate\Support\Facades\File;
@@ -29,6 +30,7 @@ class Edit extends Component
     public $extra;
     public $contract;
     public $date;
+    public $claim;
 
     public $name;
     public $email;
@@ -105,6 +107,11 @@ class Edit extends Component
         }
 
         $this->contract = Contract::query()
+            ->where('inspection_id', $inspection->id)
+            ->where('situation_id', $situation->id)
+            ->first();
+
+        $this->claim = RentalClaim::query()
             ->where('inspection_id', $inspection->id)
             ->where('situation_id', $situation->id)
             ->first();

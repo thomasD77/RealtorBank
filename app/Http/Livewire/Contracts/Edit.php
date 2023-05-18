@@ -17,17 +17,18 @@ class Edit extends Component
 {
     use WithFileUploads;
 
+    //Models
     public Contract $contract;
     public Situation $situation;
     public Inspection $inspection;
 
-    public $folder = 'situations';
-
+    //Variables
     public $damages;
-
     public $date;
     public $lock;
 
+    //Media
+    public $folder = 'situations';
     public $files;
     public $medias;
 
