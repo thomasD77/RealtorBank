@@ -90,10 +90,13 @@ class UploadLargeImageFiles implements ShouldQueue
             }
 
             $relation_id = $this->relation_id;
+            //Save orientation
+            $orientation = $thisModel->checkOrientation($myImage);
 
             $mediaModel->file_original = $name;
             $mediaModel->file_crop = $name;
             $mediaModel->$relation_id = $this->template->id;
+            $mediaModel->orientation = $orientation;
             $mediaModel->save();
         }
     }

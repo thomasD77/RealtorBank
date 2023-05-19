@@ -985,9 +985,13 @@
                                wire:click="toggleFloor({{ $outHouseIn }})"
                             >
                                 @if($outHouse == $activeFloor)
-                                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Bijgebouw binnen') }}
+                                    @if($outHouseInParam)
+                                        <i class="fa fa-angle-down text-warning fa-2x"></i>{{ $outHouseInParam[0]['title'] }}
+                                    @endif
                                 @else
-                                    <i class="fa fa-bookmark"></i>{{ __('Bijgebouw binnen') }}
+                                    @if($outHouseInParam)
+                                        <i class="fa fa-bookmark"></i>{{ $outHouseInParam[0]['title'] }}
+                                    @endif
                                 @endif
                             </a>
                             <div class="collapse @if($outHouseIn == $activeFloor) show @endif"
@@ -1114,11 +1118,14 @@
                                    wire:click="toggleRoom({{ $room->id }})"
                                 >
                                     @if($room->id == $activeRoom)
-                                        <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Bijgebouw buiten') }}
+                                        @if($outHouseExParam)
+                                            <i class="fa fa-angle-down text-warning fa-2x"></i>{{ $outHouseExParam[0]['title'] }}
+                                        @endif
                                     @else
-                                        <i class="fa fa-bookmark"></i>{{ __('Bijgebouw buiten') }}
+                                        @if($outHouseExParam)
+                                            <i class="fa fa-bookmark"></i>{{ $outHouseExParam[0]['title'] }}
+                                        @endif
                                     @endif
-
                                 </a>
                                 <div class="collapse @if($room->id == $activeRoom) show @endif"
 

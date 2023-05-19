@@ -53,15 +53,15 @@
         <h3 style="margin-top: 2rem">{{ __('ALGEMENE BEPALINGEN') }}</h3>
         @if($situation->intrede === 0)
             <div class="row">
-                {!! Config('contract.slot_uit') !!}
+                <p>{!! Config('contract.slot_uit') !!}</p>
             </div>
         @elseif($situation->intrede == 1)
             <div class="row">
-                {!! Config('contract.slot_in') !!}
+                <p>{!! Config('contract.slot_in') !!}</p>
             </div>
         @elseif($situation->intrede == 2)
             <div class="row">
-                {!! Config('contract.slot_aanvang') !!}
+                <p>{!! Config('contract.slot_aanvang') !!}</p>
             </div>
         @endif
     </section>

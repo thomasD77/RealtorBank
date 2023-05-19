@@ -1,4 +1,4 @@
-<section>
+<section class="break">
     <h3>{{ __('Inleiding') }}</h3>
     @if($situation->intrede != 2)
         <p>Voor het pand te @if($inspection->address->address){{  $inspection->address->address }}, @else <span class="marker">...</span> @endif

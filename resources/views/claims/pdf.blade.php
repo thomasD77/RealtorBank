@@ -14,9 +14,7 @@
     @if($inspection->address->zip || $inspection->address->city), {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
 </header>
 
-@include('inspections.sections.inspection-information')
-
-@include('inspections.sections.intro')
+@include('claims.intro')
 
 <div class="slot">
 

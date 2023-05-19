@@ -2,7 +2,7 @@
     <div class="single-add-property">
 
         <div class="d-flex justify-content-end">
-            <a href="{{ route('create.situation', $inspection) }}" class="btn btn-common mb-3"><i class="fa fa-plus"></i>{{ __('NIEUW') }}</a>
+            <a href="{{ route('create.situation', $inspection) }}" class="btn btn-common mb-3"><i class="fa fa-plus mr-2"></i>{{ __('NIEUW') }}</a>
         </div>
 
         <h3>{{ __('In/Uittrede')  }}</h3>

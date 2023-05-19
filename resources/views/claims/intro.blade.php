@@ -1,26 +1,18 @@
 <section>
 
     <h1>
-        {{ __('PLAATSBESCHRIJVING') }}
-        @if($situation->intrede == 0)
-            {{ __('UITTREDE') }}
-        @elseif($situation->intrede == 1)
-            {{ __('INTREDE') }}
-        @elseif($situation->intrede == 2)
-            <br>
-            {{ __('AANVANG VAN WERKEN') }}
-        @endif
+        {{ __('HUURSCHADE') }}
     </h1>
 
     <br>
 
     @if($inspection->media->isNotEmpty())
-    <div class="img--cover"
-         style="background-image:
+        <div class="img--cover"
+             style="background-image:
          url('{{ asset('assets/images/inspections/' . $inspection->media->first()->file_original) }}');
          background-position: center;
          background-size: cover; min-height: 450px">
-    </div>
+        </div>
     @endif
 
     <!-- Signatures -->
@@ -66,4 +58,3 @@
         </div>
     </section>
 </section>
-

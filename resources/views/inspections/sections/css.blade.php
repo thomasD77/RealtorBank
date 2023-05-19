@@ -209,4 +209,8 @@
         background-color: yellow;
     }
 
+    .break {
+        page-break-after: always;
+    }
+
 </style>
