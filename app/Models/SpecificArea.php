@@ -38,7 +38,7 @@ class SpecificArea extends Model
             'steen',
             'inox',
             'aluminium',
-            'pvc',
+            'PVC',
             'staal',
             'chroom',
             'kunststof',

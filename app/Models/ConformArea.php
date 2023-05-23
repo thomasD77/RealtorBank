@@ -36,6 +36,7 @@ class ConformArea extends Model
     {
         return $data = [
             'kunststof',
+            'PVC',
             'aluminium',
             'bakeliet',
             'inox',

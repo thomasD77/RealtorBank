@@ -36,6 +36,7 @@ class BasicArea extends Model
     {
         return [
             'keramische tegel',
+            'PVC',
             'tegel',
             'parket',
             'laminaat',

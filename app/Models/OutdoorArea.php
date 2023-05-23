@@ -35,6 +35,7 @@ class OutdoorArea extends Model
     {
         return $data = [
             'baksteen',
+            'PVC',
             'beton',
             'sierplijster',
             'metselwerk',

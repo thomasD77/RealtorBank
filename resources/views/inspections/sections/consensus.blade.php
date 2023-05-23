@@ -112,8 +112,10 @@
                     <div class="column-sig">
                         <h3>{{ __('OPDRACHTGEVER') }}</h3>
                         <p>{{  $situation->client }}</p>
-                        <p> {{  $situation->address->address }} @if($situation->address->postBus), {{  $situation->address->postBus }} @endif
-                        @if($situation->address->zip || $situation->address->city), {{  $situation->address->zip }} {{  $situation->address->city }} @endif</p>
+                        @if($situation->address)
+                            <p> {{  $situation->address->address }} @if($situation->address->postBus), {{  $situation->address->postBus }} @endif
+                            @if($situation->address->zip || $situation->address->city), {{  $situation->address->zip }} {{  $situation->address->city }} @endif</p>
+                        @endif
                         <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
                     </div>
                 @endif

@@ -23,11 +23,13 @@
             <p>{!! Config('contract.legal_uit') !!}</p>
         @endif
     @else
-        <p>Met betrekking tot het pand gelegen te {{  $situation->address->address }}, @if($situation->address->postBus) {{  $situation->address->postBus }}, @endif
+        @if($situation->address)
+        <p>Met betrekking tot het pand gelegen te @if($situation->address){{  $situation->address->address }}, @endif @if($situation->address->postBus) {{  $situation->address->postBus }}, @endif
             @if($situation->address->zip || $situation->address->city) {{  $situation->address->zip }} {{  $situation->address->city }} @endif
             eigendom van {{ $situation->owner ? $situation->owner->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($situation->date)->format('d-m-Y')}} een gedetailleerde plaatsbeschrijving gedaan.
             De plaatsbeschrijving is uitgevoerd door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif</p>
         <br>
+        @endif
         <p>{!! Config('contract.legal_aanvang') !!}</p>
     @endif
 </section>
