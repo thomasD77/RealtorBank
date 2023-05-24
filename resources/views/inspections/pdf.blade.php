@@ -21,6 +21,12 @@
             @include('inspections.rooms.basement' , ['rooms' => $basementParam ])
             @include('inspections.rooms.groundFloor' , ['rooms' => $groundFloorParam ])
             @include('inspections.rooms.upperFloorParam' , ['rooms' => $upperFloorParam ])
+            @include('inspections.rooms.atticParam' , ['rooms' => $atticParam ])
+            @include('inspections.rooms.garageParam' , ['rooms' => $garageParam ])
+            @include('inspections.rooms.buildingParam' , ['rooms' => $buildingParam ])
+            @include('inspections.rooms.driveWayParam' , ['rooms' => $driveWayParam ])
+            @include('inspections.rooms.outHouseInParam' , ['rooms' => $outHouseInParam ])
+            @include('inspections.rooms.outHouseExParam' , ['rooms' => $outHouseExParam ])
 
         @include('inspections.sections.techniques')
 
