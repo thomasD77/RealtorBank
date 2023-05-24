@@ -16,7 +16,6 @@ class Room extends Model
     {
         //Find upperRoom and reset order
         $upperRoomOrder = $room['order'] -= 1;
-
         //Find the correct floor
         if($room['floor_id'] == Floor::where('code', FloorKey::GroundFloor)->first()->id){
             $upperRoom = Room::where('order',$upperRoomOrder)
@@ -28,13 +27,15 @@ class Room extends Model
                 ->first();
         }
 
-        $upperRoom->order += 1;
-        $upperRoom->save();
+        if($upperRoom){
+            $upperRoom->order += 1;
+            $upperRoom->update();
 
-        //Change order requested room
-        $room = Room::find($room['id']);
-        $room->order -= 1;
-        $room->save();
+            //Change order requested room
+            $room = Room::find($room['id']);
+            $room->order -= 1;
+            $room->update();
+        }
     }
 
     public static function itemDown($room)

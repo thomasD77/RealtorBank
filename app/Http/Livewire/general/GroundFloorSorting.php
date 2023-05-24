@@ -26,7 +26,7 @@ class GroundFloorSorting extends Component
     {
         Room::itemUp($room);
 
-        $this->render();
+        //Render
         $this->emit('renderNewArea');
     }
 
@@ -34,7 +34,7 @@ class GroundFloorSorting extends Component
     {
         Room::itemDown($room);
 
-        $this->render();
+        //Render
         $this->emit('renderNewArea');
     }
 

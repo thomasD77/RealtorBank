@@ -16,16 +16,20 @@
                         <td>{{ $item->title }}</td>
                         <td>
                             @if($item->order != $minGround)
-                                <button class="btn btn-sm" wire:key="up-{{ $item->id }}" wire:click="itemUp({{ $item }})">
-                                    <i class="fa fa-arrow-up"></i>
-                                </button>
+                                <div wire:loading.remove>
+                                    <button class="btn btn-sm" wire:key="(itemUp-{{ $item->id }})" wire:click="itemUp({{ $item }})">
+                                        <i class="fa fa-arrow-up"></i>
+                                    </button>
+                                </div>
                             @endif
                         </td>
                         <td>
                             @if($maxGround != $item->order)
-                                <button class="btn btn-sm" wire:key="down-{{ $item->id }}" wire:click="itemDown({{ $item }})">
-                                    <i class="fa fa-arrow-down"></i>
-                                </button>
+                                <div wire:loading.remove>
+                                    <button class="btn btn-sm" wire:key="(itemDown-{{ $item->id }})" wire:click="itemDown({{ $item }})">
+                                        <i class="fa fa-arrow-down"></i>
+                                    </button>
+                                </div>
                             @endif
                         </td>
                     </tr>
