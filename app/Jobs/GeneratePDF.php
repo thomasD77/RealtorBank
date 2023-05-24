@@ -2,10 +2,12 @@
 
 namespace App\Jobs;
 
+use App\Enums\FloorKey;
 use App\Enums\Status;
 use App\Models\BasicArea;
 use App\Models\Contract;
 use App\Models\Document;
+use App\Models\Floor;
 use App\Models\Inspection;
 use App\Models\Key;
 use App\Models\Meter;
@@ -113,9 +115,106 @@ class GeneratePDF implements ShouldQueue
             ->where('situation_id', $this->situation->id)
             ->first();
 
+        $basementParam = Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+        ])->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::BasementFloor)->first()->id)
+            ->orderBy('title', 'asc')
+            ->get();
+
+        $groundFloorParam = Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+        ])->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::GroundFloor)->first()->id)
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $upperFloorParam = Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+        ])->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::UpperFloor)->first()->id)
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $atticParam = Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+        ])->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::Attic)->first()->id)
+            ->orderBy('title', 'asc')
+            ->get();
+
+        $garageParam = Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+        ])->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::Garage)->first()->id)
+            ->orderBy('title', 'asc')
+            ->get();
+
+        $buildingParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])
+            ->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::Building)->first()->id)
+            ->orderBy('title', 'asc')
+            ->get();
+
+        $driveWayParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])
+            ->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::DriveWay)->first()->id)
+            ->orderBy('title', 'asc')
+            ->get();
+
+        $outHouseInParam =  Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+        ])->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::OutHouseIn)->first()->id)
+            ->orderBy('title', 'asc')
+            ->get();
+
+        $outHouseExParam =  Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+        ])->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::OutHouseEx)->first()->id)
+            ->orderBy('title', 'asc')
+            ->get();
+
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $inspection,
-            'rooms' => $rooms,
+            'basementParam' => $basementParam,
+            'groundFloorParam' => $groundFloorParam,
+            'upperFloorParam' => $upperFloorParam,
+            'atticParam' => $atticParam,
+            'garageParam' => $garageParam,
+            'buildingParam' => $buildingParam,
+            'driveWayParam' => $driveWayParam,
+            'outHouseInParam' => $outHouseInParam,
+            'outHouseExParam' => $outHouseExParam,
             'techniqueArea' => $techniqueArea,
             'meters' => $meters,
             'documents' => $documents,
