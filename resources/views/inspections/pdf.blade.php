@@ -18,21 +18,12 @@
 
         @include('inspections.sections.intro')
 
-        @foreach($rooms as $room)
-
-            @include('inspections.sections.general')
-
-            @include('inspections.sections.basicArea')
-
-            @include('inspections.sections.specificArea')
-
-            @include('inspections.sections.conformArea')
-
-            @include('inspections.sections.outdoorArea')
-
-        @endforeach
+            @include('inspections.rooms.basement' , ['rooms' => $basementParam ])
+            @include('inspections.rooms.groundFloor' , ['rooms' => $groundFloorParam ])
+            @include('inspections.rooms.upperFloorParam' , ['rooms' => $upperFloorParam ])
 
         @include('inspections.sections.techniques')
+
 
         @include('inspections.sections.keys')
 

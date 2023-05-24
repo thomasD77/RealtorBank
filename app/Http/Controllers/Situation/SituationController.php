@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Situation;
 
+use App\Enums\FloorKey;
 use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Jobs\GeneratePDF;
 use App\Models\Contract;
 use App\Models\Damage;
 use App\Models\Document;
+use App\Models\Floor;
 use App\Models\Inspection;
 use App\Models\Key;
 use App\Models\MediaStore;
@@ -61,90 +63,121 @@ class SituationController extends Controller
     }
 
     //This function is only for testing purpose
-//    public function genereatePDF(Inspection $inspection, Situation $situation)
-//    {
-//        $documents = Document::query()
-//            ->whereNotNull('title')
-//            ->orWhereNotNull('reference')
-//            ->orWhereNotNull('date')
-//            ->orHas('media', '>', 0)
-//            ->get();
-//        $documents = $documents->where('inspection_id', $inspection->id);
-//
-//        $meters = Meter::query()
-//            ->whereNotNull('reference')
-//            ->orWhereNotNull('EAN')
-//            ->orWhereNotNull('date')
-//            ->orHas('media', '>', 0)
-//            ->get();
-//        $meters = $meters->where('inspection_id', $inspection->id);
-//
-//        $keys = Key::query()
-//            ->whereNotNull('type')
-//            ->orWhereNotNull('count')
-//            ->orWhereNotNull('extra')
-//            ->orHas('media', '>', 0)
-//            ->get();
-//        $keys = $keys->where('inspection_id', $inspection->id);
-//
-//        $techniqueArea = TechniqueArea::query()
-//            ->whereNotNull('type')
-//            ->orWhereNotNull('analysis')
-//            ->orWhereNotNull('fuel')
-//            ->orWhereNotNull('brand')
-//            ->orWhereNotNull('model')
-//            ->orWhereNotNull('count')
-//            ->orWhereNotNull('extra')
-//            ->orHas('media', '>', 0)
-//            ->get();
-//        $techniqueArea = $techniqueArea->where('inspection_id', $inspection->id);
-//
-//        $rooms = Room::query()
-//            ->where('inspection_id', $inspection->id)
-//            ->orderBy('order')
-//            ->get();
-//
-//        $contract = Contract::where('inspection_id', $inspection->id)->first();
-//
-//        $claim = RentalClaim::query()
-//            ->where('inspection_id', $inspection->id)
-//            ->where('situation_id', $situation->id)
-//            ->first();
-//
-//        $pdf = Pdf::loadView('inspections.pdf', [
-//            'inspection' => $inspection,
-//            'rooms' => $rooms,
-//            'techniqueArea' => $techniqueArea,
-//            'meters' => $meters,
-//            'documents' => $documents,
-//            'keys' => $keys,
-//            'contract' => $contract,
-//            'claim' => $claim,
-//            'situation' => $situation,
-//        ]);
-//
-//        return $pdf->stream('plaatsbeschrijving-' . '#' . $inspection->id . '.pdf');
-//    }
-
     public function genereatePDF(Inspection $inspection, Situation $situation)
     {
-        $rawFileName = time(). '-INSP-' . $inspection->id . '-plaatsbeschrijving.pdf';
-        $cleanFileName = Str::limit($inspection->title, 20, '...') . '-' . now()->format('d-m-Y') . '-plaatsbeschrijving.pdf';
-        $fileName = MediaStore::getValidFilename($rawFileName);
+        $documents = Document::query()
+            ->whereNotNull('title')
+            ->orWhereNotNull('reference')
+            ->orWhereNotNull('date')
+            ->orHas('media', '>', 0)
+            ->get();
+        $documents = $documents->where('inspection_id', $inspection->id);
 
-        $pdfStore = new \App\Models\PDF();
-        $pdfStore->inspection_id = $inspection->id;
-        $pdfStore->situation_id = $situation->id;
-        $pdfStore->title = $cleanFileName;
-        $pdfStore->file_original = $fileName;
-        $pdfStore->status = Status::Pending->value;
-        $pdfStore->save();
+        $meters = Meter::query()
+            ->whereNotNull('reference')
+            ->orWhereNotNull('EAN')
+            ->orWhereNotNull('date')
+            ->orHas('media', '>', 0)
+            ->get();
+        $meters = $meters->where('inspection_id', $inspection->id);
 
-        $this->dispatch(new GeneratePDF($inspection, $fileName, $pdfStore, $situation));
-        Session::flash('successPDF', 'PDF is aan het genereren.');
+        $keys = Key::query()
+            ->whereNotNull('type')
+            ->orWhereNotNull('count')
+            ->orWhereNotNull('extra')
+            ->orHas('media', '>', 0)
+            ->get();
+        $keys = $keys->where('inspection_id', $inspection->id);
 
-        return redirect()->back();
+        $techniqueArea = TechniqueArea::query()
+            ->whereNotNull('type')
+            ->orWhereNotNull('analysis')
+            ->orWhereNotNull('fuel')
+            ->orWhereNotNull('brand')
+            ->orWhereNotNull('model')
+            ->orWhereNotNull('count')
+            ->orWhereNotNull('extra')
+            ->orHas('media', '>', 0)
+            ->get();
+        $techniqueArea = $techniqueArea->where('inspection_id', $inspection->id);
+
+        $contract = Contract::where('inspection_id', $inspection->id)->first();
+
+        $claim = RentalClaim::query()
+            ->where('inspection_id', $inspection->id)
+            ->where('situation_id', $situation->id)
+            ->first();
+
+        $basementParam = Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+        ])->where('inspection_id', $inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::BasementFloor)->first()->id)
+            ->orderBy('title', 'asc')
+            ->get();
+
+        $groundFloorParam = Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+        ])->where('inspection_id', $inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::GroundFloor)->first()->id)
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $upperFloorParam = Room::with([
+            'basicAreas',
+            'basicAreas.area',
+            'specificAreas', 'specificAreas.specific',
+            'conformAreas',
+            'conformAreas.conform'
+        ])->where('inspection_id', $inspection->id)
+            ->where('floor_id', Floor::where('code', FloorKey::UpperFloor)->first()->id)
+            ->orderBy('order', 'asc')
+            ->get();
+
+
+        $pdf = Pdf::loadView('inspections.pdf', [
+            'inspection' => $inspection,
+            'basementParam' => $basementParam,
+            'groundFloorParam' => $groundFloorParam,
+            'upperFloorParam' => $upperFloorParam,
+            'techniqueArea' => $techniqueArea,
+            'meters' => $meters,
+            'documents' => $documents,
+            'keys' => $keys,
+            'contract' => $contract,
+            'claim' => $claim,
+            'situation' => $situation,
+        ]);
+
+        return $pdf->stream('plaatsbeschrijving-' . '#' . $inspection->id . '.pdf');
     }
+
+//    public function genereatePDF(Inspection $inspection, Situation $situation)
+//    {
+//        $rawFileName = time(). '-INSP-' . $inspection->id . '-plaatsbeschrijving.pdf';
+//        $cleanFileName = Str::limit($inspection->title, 20, '...') . '-' . now()->format('d-m-Y') . '-plaatsbeschrijving.pdf';
+//        $fileName = MediaStore::getValidFilename($rawFileName);
+//
+//        $pdfStore = new \App\Models\PDF();
+//        $pdfStore->inspection_id = $inspection->id;
+//        $pdfStore->situation_id = $situation->id;
+//        $pdfStore->title = $cleanFileName;
+//        $pdfStore->file_original = $fileName;
+//        $pdfStore->status = Status::Pending->value;
+//        $pdfStore->save();
+//
+//        $this->dispatch(new GeneratePDF($inspection, $fileName, $pdfStore, $situation));
+//        Session::flash('successPDF', 'PDF is aan het genereren.');
+//
+//        return redirect()->back();
+//    }
 
     public function signature(Request $request)
     {
