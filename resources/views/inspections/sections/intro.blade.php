@@ -24,12 +24,21 @@
         @endif
     @else
         @if($situation->address)
-        <p>Met betrekking tot het pand gelegen te @if($situation->address){{  $situation->address->address }}, @endif @if($situation->address->postBus) {{  $situation->address->postBus }}, @endif
-            @if($situation->address->zip || $situation->address->city) {{  $situation->address->zip }} {{  $situation->address->city }} @endif
+        <p>Met betrekking tot het pand gelegen te @if($inspection->address->address){{  $inspection->address->address }}, @else <span class="marker">...</span> @endif
+            @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
+            @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
             eigendom van {{ $situation->owner ? $situation->owner->name : "" }}, werd op datum van {{ \Carbon\Carbon::parse($situation->date)->format('d-m-Y')}} een gedetailleerde plaatsbeschrijving gedaan.
             De plaatsbeschrijving is uitgevoerd door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif</p>
         <br>
         @endif
         <p>{!! Config('contract.legal_aanvang') !!}</p>
     @endif
+
+    <br>
+
+    @if($inspection->extra)
+        <h3>{{ __('Beschrijving') }}</h3>
+        <p>{{ $inspection->extra }}</p>
+    @endif
+
 </section>
