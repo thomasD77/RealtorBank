@@ -61,7 +61,7 @@ class TechniqueArea extends Model
     public static function getTypes() :array
     {
         return $data = [
-            'autmatische',
+            'automatische',
             'smeltverzekering',
             'manueel',
             'elektrisch',

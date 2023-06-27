@@ -30,7 +30,6 @@
 
         @include('inspections.sections.techniques')
 
-
         @include('inspections.sections.keys')
 
         @include('inspections.sections.meters')
