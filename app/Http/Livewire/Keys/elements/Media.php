@@ -9,7 +9,7 @@ use App\Models\MediaStore;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Media extends Component
+class  Media extends Component
 {
     public Key $key;
 

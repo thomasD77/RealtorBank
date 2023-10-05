@@ -272,6 +272,7 @@ class Inspection extends Model
             Keys::Garage->value,
             Keys::Mailbox->value,
             Keys::Doors->value,
+            Keys::CommonDoor->value,
         ];
 
         $keysToInsert = [];

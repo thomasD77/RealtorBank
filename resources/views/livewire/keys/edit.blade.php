@@ -2,7 +2,7 @@
     <div class="single-add-property">
         <a href="{{ route('keys.index', $inspection) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
 
-        <h3>{{  __('Sleutel') }} - {{ $key->title }}</h3>
+        <h3>{{  __('Sleutel') }} -  <input class="form-control" type="text" wire:model="title" wire:change="editTitle" id="title" placeholder="Vul je titel hier in..."></h3>
 
         <ul class="accordion accordion-1 one-open">
 
