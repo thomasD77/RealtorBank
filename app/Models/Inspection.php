@@ -170,11 +170,30 @@ class Inspection extends Model
         foreach ($rooms as $room){
             $conformsToInsert = [];
             foreach ($conforms as $conform) {
+
+                //Default values
+                $material = null;
+                $color = null;
+                $type = null;
+
+                if($conform->code == "socket"){
+                    $material = "kunststof";
+                    $color = "wit";
+                }elseif ($conform->code == "switches"){
+                    $material = "kunststof";
+                    $color = "wit";
+                }elseif($conform->code == "lighting"){
+                    $type = "wachtkabel met lamp";
+                }
+
                 $conformsToInsert[] = [
                     'conform_id' => $conform->id,
                     'room_id' => $room->id,
                     'floor_id' => $room->floor_id,
                     'inspection_id' => $inspection->id,
+                    'material' => $material,
+                    'color' => $color,
+                    'type' => $type,
                     'created_at' => DB::raw('NOW()'),
                     'updated_at' => DB::raw('NOW()'),
                 ];
