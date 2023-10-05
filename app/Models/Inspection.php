@@ -212,11 +212,38 @@ class Inspection extends Model
             $specificsToInsert = [];
             foreach ($specifics as $specific) {
                 if($specific->room_key == $room->code){
+
+                    //Default values
+                    $material = null;
+                    $color = null;
+                    $crane = null;
+                    $siphon = null;
+                    $model = null;
+
+                    if($specific->code == "toilet"){
+                        $material = "keramisch";
+                        $color = "wit";
+                    }elseif ($specific->code == "sink" && $specific->room_key == "kitchen"){
+                        $material = "inox";
+                        $crane = "mengkraan";
+                        $siphon = "kunststof";
+                    }elseif($specific->code == "sink" && $specific->room_key == "bathroom"){
+                        $model = "bevestigd aan muur";
+                        $color = "wit";
+                        $crane = "mengkraan";
+                        $siphon = "kunststof";
+                    }
+
                     $specificsToInsert[] = [
                         'specific_id' => $specific->id,
                         'room_id' => $room->id,
                         'floor_id' => $room->floor_id,
                         'inspection_id' => $inspection->id,
+                        'model' => $model,
+                        'material' => $material,
+                        'color' => $color,
+                        'crane' => $crane,
+                        'siphon' => $siphon,
                         'created_at' => DB::raw('NOW()'),
                         'updated_at' => DB::raw('NOW()'),
                     ];
