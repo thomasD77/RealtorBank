@@ -250,7 +250,7 @@
 
                                                                     id="collapseBasic{{ $room->id }}"
                                                                 >
-                                                                    @foreach(\App\Models\BasicArea::where('room_id', $room->id)->orderBy('order')->get() as $item)
+                                                                    @foreach(\App\Models\BasicArea::where('room_id', $room->id)->orderBy('order', 'asc')->orderBy('sidebar_count', 'asc')->get() as $item)
                                                                         <li class="mx-3">
                                                                             <a class="@if($activeArea == $item->area->id) activeLink @endif" href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
                                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->sidebar_count }}@if($item->sidebar_count).@endif{{ $item->area->title }}
@@ -404,7 +404,7 @@
 
                                                                     id="collapseBasic{{ $room->id }}"
                                                                 >
-                                                                    @foreach(\App\Models\BasicArea::where('room_id', $room->id)->orderBy('order', 'asc')->get() as $item)
+                                                                    @foreach(\App\Models\BasicArea::where('room_id', $room->id)->orderBy('order', 'asc')->orderBy('sidebar_count', 'asc')->get() as $item)
                                                                         <li class="mx-3">
                                                                             <a class="@if($activeArea == $item->area->id) activeLink @endif" href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
                                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->sidebar_count }}@if($item->sidebar_count).@endif{{ $item->area->title }}
@@ -555,7 +555,7 @@
 
                                                                     id="collapseBasic{{ $room->id }}"
                                                                 >
-                                                                    @foreach(\App\Models\BasicArea::where('room_id', $room->id)->orderBy('order', 'asc')->get() as $item)
+                                                                    @foreach(\App\Models\BasicArea::where('room_id', $room->id)->orderBy('order', 'asc')->orderBy('sidebar_count', 'asc')->get() as $item)
                                                                         <li class="mx-3">
                                                                             <a class="@if($activeArea == $item->area->id) activeLink @endif" href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
                                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->sidebar_count }}@if($item->sidebar_count).@endif{{ $item->area->title }}
@@ -707,7 +707,7 @@
 
                                                                     id="collapseBasic{{ $room->id }}"
                                                                 >
-                                                                    @foreach(\App\Models\BasicArea::where('room_id', $room->id)->orderBy('order', 'asc')->get() as $item)
+                                                                    @foreach(\App\Models\BasicArea::where('room_id', $room->id)->orderBy('order', 'asc')->orderBy('sidebar_count', 'asc')->get() as $item)
                                                                         <li class="mx-3">
                                                                             <a class="@if($activeArea == $item->area->id) activeLink @endif" href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
                                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->sidebar_count }}@if($item->sidebar_count).@endif{{ $item->area->title }}
@@ -1026,7 +1026,7 @@
 
                                                             id="collapseBasic{{ $room->id }}"
                                                         >
-                                                            @foreach(\App\Models\BasicArea::where('room_id', $room->id)->orderBy('order')->get() as $item)
+                                                            @foreach(\App\Models\BasicArea::where('room_id', $room->id)->orderBy('order', 'asc')->orderBy('sidebar_count', 'asc')->get() as $item)
                                                                 <li class="mx-3">
                                                                     <a class="@if($activeArea == $item->area->id) activeLink @endif" href="{{ route('area.detail', [$inspection, $room, $item->area]) }}">
                                                                         <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->sidebar_count }}@if($item->sidebar_count).@endif{{ $item->area->title }}
