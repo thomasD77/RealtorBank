@@ -141,12 +141,15 @@
         </table>
         </section>
     @endif
+
+    @include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::BasicArea->value ])
+
     @if($item->damages)
         @foreach($item->damages as $damage)
             @if($damage->print_pdf)
                 <table class="table">
-                    <tr class="row--head--list">
-                        <th>{{ __('Schade') }}</th>
+                    <tr class="damages">
+                        <th>{{ $room->floor->title }} | {{ $item->room->title }} | {{  $item->area->title }} >> {{ __('Schade') }}</th>
                         <th>{{ $damage->title }}</th>
                     </tr>
 
@@ -159,11 +162,13 @@
                         <th>{{ $damage->description }}</th>
                     </tr>
                 </table>
+
+                @include('inspections.sections.media' , [ 'folder' => 'damages' , 'item' => $damage ])
+
             @endif
         @endforeach
     @endif
 
-    @include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::BasicArea->value ])
 @endforeach
 
 

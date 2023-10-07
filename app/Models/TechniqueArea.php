@@ -23,7 +23,7 @@ class TechniqueArea extends Model
 
     public function damages()
     {
-        return $this->hasMany(Damage::class, 'specific_id');
+        return $this->hasMany(Damage::class, 'technique_id');
     }
 
     public static function getFuels() :array

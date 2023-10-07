@@ -76,6 +76,11 @@
         opacity: 0.8;
         padding: 0.2rem;
     }
+    .damages th {
+        background-color: rgba(74, 36, 42, 0.7); !important;
+        opacity: 0.8;
+        padding: 0.2rem;
+    }
     .row--head--list th:first-child {
         width: 65%;
     }

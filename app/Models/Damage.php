@@ -11,6 +11,10 @@ class Damage extends Model
     use HasFactory;
     use SoftDeletes;
 
-
     protected $guarded = [];
+
+    public function media()
+    {
+        return $this->hasMany(MediaDamages::class, 'damage_id');
+    }
 }
