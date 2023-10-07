@@ -2,8 +2,11 @@
 
 namespace App\Http\Livewire\Basic;
 
+use App\Enums\AreaKey;
+use App\Enums\FloorKey;
 use App\Models\Area;
 use App\Models\BasicArea;
+use App\Models\Floor;
 use App\Models\Inspection;
 use App\Models\Room;
 use Illuminate\Support\Facades\Session;
@@ -34,12 +37,25 @@ class AddArea extends Component
         $newArea->updated_at = now();
         $newArea->save();
 
+        //First select all the areas for this BasicArea
+        $basicAreas = BasicArea::where('floor_id', $this->basicArea->floor_id)
+            ->where('room_id', $this->basicArea->room_id)
+            ->pluck('area_id')
+            ->toArray();
+
+        //Count how much areas we have for this Inspection -> floor -> room
+        $areaCount = Area::query()
+            ->whereIn('id', $basicAreas)
+            ->whereIn('code', [$this->area->code])
+            ->count();
+
         $extraArea = new BasicArea();
         $extraArea->room_id = $this->room->id;
         $extraArea->area_id = $newArea->id;
         $extraArea->inspection_id = $this->inspection->id;
         $extraArea->floor_id = $this->room->floor->id;
         $extraArea->order = $this->area->order;
+        $extraArea->sidebar_count = $areaCount + 1;
 
         $extraArea->material = $this->basicArea->material;
         $extraArea->color = $this->basicArea->color;

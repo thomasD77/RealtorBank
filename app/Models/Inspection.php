@@ -144,12 +144,13 @@ class Inspection extends Model
                 'id'
             ])->get();
 
-        $areas = Area::all();
+        $areas = Area::take(6)->get();
         foreach ($rooms as $room){
             $areasToInsert = [];
             foreach ($areas as $area) {
                 $areasToInsert[] = [
                     'order' => $area->order,
+                    'sidebar_count' => 1,
                     'area_id' => $area->id,
                     'room_id' => $room->id,
                     'floor_id' => $room->floor_id,
