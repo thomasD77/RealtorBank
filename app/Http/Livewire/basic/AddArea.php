@@ -58,7 +58,6 @@ class AddArea extends Component
         $extraArea->windowsill = $this->basicArea->windowsill;
         $extraArea->rollerShutter = $this->basicArea->rollerShutter;
         $extraArea->windowDecoration = $this->basicArea->windowDecoration;
-        $extraArea->windowDecoration = $this->basicArea->windowDecoration;
         $extraArea->hor = $this->basicArea->hor;
         $extraArea->fallProtection = $this->basicArea->fallProtection;
         $extraArea->energy = $this->basicArea->energy;

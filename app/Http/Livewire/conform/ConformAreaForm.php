@@ -13,6 +13,7 @@ class ConformAreaForm extends Component
 {
     public Inspection $inspection;
     public Room $room;
+    public Area $area;
     public Conform $conform;
     public ConformArea $conformArea;
 

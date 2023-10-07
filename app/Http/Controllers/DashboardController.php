@@ -91,7 +91,7 @@ class DashboardController extends Controller
             'inspection' => $inspection,
             'room' => $room,
             'conform' => $conform,
-            'conformArea' => $conformArea
+            'conformArea' => $conformArea,
         ]);
     }
 
