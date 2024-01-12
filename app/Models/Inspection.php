@@ -144,6 +144,9 @@ class Inspection extends Model
                 'id'
             ])->get();
 
+        /**
+        We need to set a limit because we can have duplicated values in this table
+         */
         $areas = Area::take(6)->get();
         foreach ($rooms as $room){
             $areasToInsert = [];
@@ -165,9 +168,9 @@ class Inspection extends Model
 
         /**
          * Conforms
-         *
+         * We need to set a limit because we can have duplicated values in this table
          */
-        $conforms = Conform::all();
+        $conforms = Conform::take(7)->get();
         foreach ($rooms as $room){
             $conformsToInsert = [];
             foreach ($conforms as $conform) {
