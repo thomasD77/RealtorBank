@@ -5,8 +5,11 @@
         $item->audio || $item->type || $item->count ||
         $item->analysis || $item->extra)
         <section>
-            <table class="table">
+            {{--Extra check if analysis is checked, we have some default values set that can only be printed in the PDF when analysis is checked--}}
+            @if($item->analysis)
+                <table class="table">
             <tr class="row--head--list">
+
                 <th>{{ $room->floor->title }} | {{ $item->room->title }} | {{  $item->conform->title }}</th>
                 <th></th>
             </tr>
@@ -95,6 +98,7 @@
                 </tr>
             @endif
         </table>
+            @endif
         </section>
     @endif
 

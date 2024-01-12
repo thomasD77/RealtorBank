@@ -22,11 +22,13 @@
         $item->analysis || $item->extra || $item->cabHighDoors ||
         $item->cabHighDrawers || $item->cabHighShelves)
         <section>
-            <table class="table">
-            <tr class="row--head--list">
-                <th>{{ $room->floor->title }} | {{ $item->room->title }} | {{  $item->specific->title }}</th>
-                <th></th>
-            </tr>
+            {{--Extra check if analysis is checked, we have some default values set that can only be printed in the PDF when analysis is checked--}}
+            @if($item->analysis)
+                <table class="table">
+                <tr class="row--head--list">
+                    <th>{{ $room->floor->title }} | {{ $item->room->title }} | {{  $item->specific->title }}</th>
+                    <th></th>
+                </tr>
             @if($item->handrail)
                 <tr class="row--text--list">
                     <th>{{ __('Leuning') }}</th>
@@ -422,6 +424,7 @@
                 </tr>
             @endif
         </table>
+            @endif
         </section>
     @endif
 
