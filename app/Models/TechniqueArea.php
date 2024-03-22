@@ -46,6 +46,7 @@ class TechniqueArea extends Model
             'Junkers',
             'Valliant',
             'Viessmann',
+            'ander'
         ];
     }
 
