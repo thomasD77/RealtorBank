@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\General;
 
 use App\Enums\FloorKey;
+use App\Models\Area;
 use App\Models\Floor;
 use Livewire\Component;
 use App\Models\Inspection;
@@ -28,7 +29,19 @@ class AddRoom extends Component
 
     public function addRoom()
     {
-        if($this->room->floor_id == Floor::where('code', FloorKey::GroundFloor)->first()->id){
+        if($this->room->floor_id == Floor::where('code', FloorKey::BasementFloor)->first()->id){
+            $max = Room::with([
+                'basicAreas',
+                'basicAreas.area',
+                'specificAreas', 'specificAreas.specific',
+                'conformAreas',
+                'conformAreas.conform'
+            ])->where('inspection_id', $this->inspection->id)
+                ->where('floor_id', Floor::where('code', FloorKey::BasementFloor)->first()->id)
+                ->whereNotNull('order')
+                ->max('order');
+        }
+        elseif($this->room->floor_id == Floor::where('code', FloorKey::GroundFloor)->first()->id){
             $max = Room::with([
                 'basicAreas',
                 'basicAreas.area',
@@ -40,7 +53,7 @@ class AddRoom extends Component
                 ->whereNotNull('order')
                 ->max('order');
         }
-        if($this->room->floor_id == Floor::where('code', FloorKey::UpperFloor)->first()->id){
+        elseif($this->room->floor_id == Floor::where('code', FloorKey::UpperFloor)->first()->id){
             $max = Room::with([
                 'basicAreas',
                 'basicAreas.area',
@@ -51,6 +64,8 @@ class AddRoom extends Component
                 ->where('floor_id', Floor::where('code', FloorKey::UpperFloor)->first()->id)
                 ->whereNotNull('order')
                 ->max('order');
+        }else{
+            $max = 0;
         }
 
         $newOrder = $max += 1;
@@ -94,6 +109,8 @@ class AddRoom extends Component
             $extraArea = new BasicArea();
 
             $extraArea->order = $newArea->area->order;
+            $extraArea->sidebar_count = $newArea->sidebar_count;
+
             $extraArea->room_id = $newRoom->id;
             $extraArea->area_id = $newArea->area_id;
             $extraArea->inspection_id = $newArea->inspection_id;
