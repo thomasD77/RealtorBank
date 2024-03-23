@@ -170,7 +170,7 @@ class Inspection extends Model
          * Conforms
          * We need to set a limit because we can have duplicated values in this table
          */
-        $conforms = Conform::take(7)->get();
+        $conforms = Conform::take(8)->get();
         foreach ($rooms as $room){
             $conformsToInsert = [];
             foreach ($conforms as $conform) {

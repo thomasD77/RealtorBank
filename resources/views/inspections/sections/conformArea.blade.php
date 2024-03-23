@@ -1,6 +1,6 @@
 @foreach($room->conformAreas as $item)
     @if($item->material || $item->color || $item->present ||
-        $item->single || $item->multiple || $item->brand ||
+        $item->single || $item->multiple || $item->model || $item->brand ||
         $item->electronics || $item->phone || $item->internet ||
         $item->audio || $item->type || $item->count ||
         $item->analysis || $item->extra)
@@ -71,6 +71,12 @@
                 <tr class="row--text--list">
                     <th>{{ __('Audio') }}</th>
                     <th>{{ $item->audio }}</th>
+                </tr>
+            @endif
+            @if($item->model)
+                <tr class="row--text--list">
+                    <th>{{ __('Model') }}</th>
+                    <th>{{ $item->model }}</th>
                 </tr>
             @endif
             @if($item->type)

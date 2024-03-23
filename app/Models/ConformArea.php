@@ -80,4 +80,38 @@ class ConformArea extends Model
             'ander',
         ];
     }
+
+    public static function getTypesThermostat() :array
+    {
+        return $data = [
+            'elektrisch',
+            'digitaal',
+            'mechanisch',
+            'ander',
+        ];
+    }
+
+    public static function getModels() :array
+    {
+        return $data = [
+            'vast',
+            'draadloos',
+            'losstaand',
+            'ander',
+        ];
+    }
+
+    public static function getHeatingBrands() :array
+    {
+        return $data = [
+            'Bosh',
+            'Honeywell',
+            'Junkers',
+            'Nest',
+            'Siemens',
+            'Vaillant',
+            'Viessman',
+            'ander',
+        ];
+    }
 }

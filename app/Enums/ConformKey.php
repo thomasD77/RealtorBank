@@ -11,4 +11,5 @@ enum ConformKey : string
     case Connection = 'connection';
     case Lighting = 'lighting';
     case Ventilator = 'ventilator';
+    case Thermostat = 'thermostat';
 }

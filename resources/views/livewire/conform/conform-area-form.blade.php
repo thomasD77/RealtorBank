@@ -98,5 +98,17 @@
             />
         @break
 
+        @case(\App\Enums\ConformKey::Thermostat->value)
+            <livewire:conform.elements.typesthermostat
+                :dynamicArea="$conformArea"
+            />
+            <livewire:conform.elements.model
+                :dynamicArea="$conformArea"
+            />
+            <livewire:conform.elements.thermostatbrand
+                :dynamicArea="$conformArea"
+            />
+            @break
+
     @endswitch
 </div>
