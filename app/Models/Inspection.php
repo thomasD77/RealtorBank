@@ -171,7 +171,13 @@ class Inspection extends Model
          * Conforms
          * We need to set a limit because we can have duplicated values in this table
          */
-        $conforms = Conform::take(8)->get();
+        $conforms = Conform::take(7)->get();
+
+        //Thermostat was added later to te list, this is not ideal but yeah..
+        //ALWAYS CHECK THE ID !!!
+        $thermostat = Conform::find(23)->get();
+        $conforms = $conforms->merge($thermostat);
+
         foreach ($rooms as $room){
             $conformsToInsert = [];
             foreach ($conforms as $conform) {
@@ -203,6 +209,7 @@ class Inspection extends Model
                     'updated_at' => DB::raw('NOW()'),
                 ];
             }
+
             ConformArea::insert($conformsToInsert);
         }
 
