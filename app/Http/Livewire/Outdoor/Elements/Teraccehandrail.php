@@ -8,7 +8,7 @@ use App\Models\OutdoorArea;
 class Teraccehandrail extends MainDropdownComponent
 {
     //--> Custom
-    public string $element = "handrail";
+    public string $element = "balustrade";
     public string $title = "Balustrade";
 
     public function mount($dynamicArea)

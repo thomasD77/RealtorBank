@@ -8,7 +8,9 @@
         $item->single || $item->double || $item->brand ||
         $item->crane || $item->glassInlay || $item->handle ||
         $item->mailbox || $item->peephole || $item->window ||
-        $item->doorBel || $item->dorpel || $item->analysis || $item->extra)
+        $item->doorBel || $item->dorpel || $item->analysis || $item->extra || $item->plinth
+        || $item->plaster || $item->ventilationGrille || $item->glazing || $item->rollerShutter || $item->windowDecoration
+        || $item->hor || $item->fallProtection || $item->construction)
         <section>
             <table class="table">
                 <tr class="row--head--list">
@@ -21,10 +23,28 @@
                         <th>{{ $item->material }}</th>
                     </tr>
                 @endif
+                @if($item->window)
+                    <tr class="row--text--list">
+                        <th>{{ __('Raam') }}</th>
+                        <th>{{ $item->window }}</th>
+                    </tr>
+                @endif
+                @if($item->plaster)
+                    <tr class="row--text--list">
+                        <th>{{ __('Pleisterwerk') }}</th>
+                        <th>{{ $item->plaster }}</th>
+                    </tr>
+                @endif
                 @if($item->finish)
                     <tr class="row--text--list">
                         <th>{{ __('Afwerking') }}</th>
                         <th>{{ $item->finish }}</th>
+                    </tr>
+                @endif
+                @if($item->type)
+                    <tr class="row--text--list">
+                        <th>{{ __('Type') }}</th>
+                        <th>{{ $item->type }}</th>
                     </tr>
                 @endif
                 @if($item->color)
@@ -33,16 +53,52 @@
                         <th>{{ $item->color }}</th>
                     </tr>
                 @endif
+                @if($item->ventilationGrille)
+                    <tr class="row--text--list">
+                        <th>{{ __('Ventilatie rooster') }}</th>
+                        <th>{{ $item->ventilationGrille }}</th>
+                    </tr>
+                @endif
+                @if($item->glazing)
+                    <tr class="row--text--list">
+                        <th>{{ __('Beglazing') }}</th>
+                        <th>{{ $item->glazing }}</th>
+                    </tr>
+                @endif
+                @if($item->handle)
+                    <tr class="row--text--list">
+                        <th>{{ __('Klink') }}</th>
+                        <th>{{ $item->handle }}</th>
+                    </tr>
+                @endif
                 @if($item->windowsill)
                     <tr class="row--text--list">
                         <th>{{ __('Vensterbank') }}</th>
                         <th>{{ $item->windowsill }}</th>
                     </tr>
                 @endif
-                @if($item->type)
+                @if($item->rollerShutter)
                     <tr class="row--text--list">
-                        <th>{{ __('Type') }}</th>
-                        <th>{{ $item->type }}</th>
+                        <th>{{ __('Rolluiken') }}</th>
+                        <th>{{ $item->rollerShutter }}</th>
+                    </tr>
+                @endif
+                @if($item->windowDecoration)
+                    <tr class="row--text--list">
+                        <th>{{ __('Raamdecoratie') }}</th>
+                        <th>{{ $item->windowDecoration }}</th>
+                    </tr>
+                @endif
+                @if($item->hor)
+                    <tr class="row--text--list">
+                        <th>{{ __('Hor') }}</th>
+                        <th>{{ $item->hor }}</th>
+                    </tr>
+                @endif
+                @if($item->fallProtection)
+                    <tr class="row--text--list">
+                        <th>{{ __('Valbeveiliging') }}</th>
+                        <th>{{ $item->fallProtection }}</th>
                     </tr>
                 @endif
                 @if($item->footh)
@@ -135,7 +191,6 @@
                         <th>{{ $item->double }}</th>
                     </tr>
                 @endif
-
                 @if($item->brand)
                     <tr class="row--text--list">
                         <th>{{ __('Merk') }}</th>
@@ -160,12 +215,6 @@
                         <th>{{ $item->double }}</th>
                     </tr>
                 @endif
-                @if($item->handle)
-                    <tr class="row--text--list">
-                        <th>{{ __('Klink') }}</th>
-                        <th>{{ $item->handle }}</th>
-                    </tr>
-                @endif
                 @if($item->mailbox)
                     <tr class="row--text--list">
                         <th>{{ __('Brievenbus') }}</th>
@@ -176,12 +225,6 @@
                     <tr class="row--text--list">
                         <th>{{ __('Kijkgat') }}</th>
                         <th>{{ $item->peephole }}</th>
-                    </tr>
-                @endif
-                @if($item->window)
-                    <tr class="row--text--list">
-                        <th>{{ __('Venster') }}</th>
-                        <th>{{ $item->window }}</th>
                     </tr>
                 @endif
                 @if($item->mailbox)
@@ -200,6 +243,18 @@
                     <tr class="row--text--list">
                         <th>{{ __('Dorpel') }}</th>
                         <th>{{ $item->dorpel }}</th>
+                    </tr>
+                @endif
+                @if($item->plinth)
+                    <tr class="row--text--list">
+                        <th>{{ __('Plinten') }}</th>
+                        <th>{{ $item->plinth }}</th>
+                    </tr>
+                @endif
+                @if($item->construction)
+                    <tr class="row--text--list">
+                        <th>{{ __('Opbouw') }}</th>
+                        <th>{{ $item->construction }}</th>
                     </tr>
                 @endif
                 @if($item->analysis)
