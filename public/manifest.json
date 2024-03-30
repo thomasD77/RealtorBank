@@ -1,9 +1,9 @@
 {
-    "name": "Realtorbank",
+    "name": "Estatemetrics",
     "short_name": "LPT",
     "start_url": "/index.php",
     "background_color": "#6777ef",
-    "description": "Platform voor plaatsbeschrijvingen",
+    "description": "Platform voor Vastgoeddiensten",
     "display": "fullscreen",
     "theme_color": "#6777ef",
     "icons": [
