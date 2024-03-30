@@ -174,7 +174,7 @@
                                                                         <li class="mx-3">
                                                                             <a class="@if($activeArea == $item->conform->id) activeLink @endif" href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
                                                                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                                                                @if($item->$conform->code == 'lighting')
+                                                                                @if($item->$conform->code == 'lighting' && $item->sidebar_count != null)
                                                                                     {{ $item->sidebar_count }}.
                                                                                 @endif
                                                                                 {{ $item->conform->title }}
@@ -327,14 +327,29 @@
                                                             </a>
                                                             <div>
                                                                 <ul class="collapse  @if($activeTemplate == \App\Enums\TemplateKey::Conform->value) show @endif"
-
                                                                     id="collapseConform{{ $room->id }}">
-                                                                    @foreach($room->conformAreas as $item)
-                                                                        <li class="mx-3">
-                                                                            <a class="@if($activeArea == $item->conform->id) activeLink @endif" href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
-                                                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>{{ $item->conform->title }}
-                                                                            </a>
-                                                                        </li>
+                                                                    @foreach(\App\Models\ConformArea::where('room_id', $room->id)->get() as $item)
+                                                                        @if($item->$conform->code != 'lighting')
+                                                                            <li class="mx-3">
+                                                                                <a class="@if($activeArea == $item->conform->id) activeLink @endif" href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
+                                                                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                                                                    {{ $item->conform->title }}
+                                                                                </a>
+                                                                            </li>
+                                                                        @endif
+                                                                    @endforeach
+                                                                    @foreach(\App\Models\ConformArea::where('room_id', $room->id)->orderBy('sidebar_count', 'asc')->get() as $item)
+                                                                        @if($item->$conform->code == 'lighting')
+                                                                            <li class="mx-3">
+                                                                                <a class="@if($activeArea == $item->conform->id) activeLink @endif" href="{{ route('area.conform', [$inspection, $room, $item->conform]) }}">
+                                                                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                                                                    @if($item->$conform->code == 'lighting' && $item->sidebar_count != null)
+                                                                                        {{ $item->sidebar_count }}.
+                                                                                    @endif
+                                                                                    {{ $item->conform->title }}
+                                                                                </a>
+                                                                            </li>
+                                                                        @endif
                                                                     @endforeach
                                                                 </ul>
                                                             </div>
@@ -342,7 +357,6 @@
                                                     @endif
                                                 </ul>
                                             </div>
-
                                     </li>
                                     @endif
                                 @endforeach
