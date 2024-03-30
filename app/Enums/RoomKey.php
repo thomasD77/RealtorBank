@@ -22,6 +22,8 @@ enum RoomKey : string
     case Yard = 'yard';
     case Terrace = 'terrace';
 
+    case AppTerrace = 'appTerrace';
+
     case OutHouseIn = 'outHouseIn';
     case OutHouseEx = 'outHouseEx';
 }

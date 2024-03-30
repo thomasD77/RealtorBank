@@ -119,6 +119,26 @@ class OutdoorArea extends Model
         ];
     }
 
+    public static function getTeracceHandrails() :array
+    {
+        return $data = [
+            'gemetseld',
+            'metalen profielen',
+            'combinatie gemetseld & metalen profielen',
+        ];
+    }
+
+    public static function getConstruction() :array
+    {
+        return $data = [
+            'Met glasinleg',
+            'Open',
+            'Dicht',
+        ];
+    }
+
+
+
     public static function getPositions() :array
     {
         return $data = [

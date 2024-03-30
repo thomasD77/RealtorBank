@@ -235,5 +235,126 @@
             />
         @break
 
+        @case(\App\Enums\OutdoorKey::Celling->value)
+            <livewire:outdoor.elements.material
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.types
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.colors
+                :dynamicArea="$outdoorArea"
+            />
+        @break
+
+        @case(\App\Enums\OutdoorKey::Wall->value)
+            <livewire:outdoor.elements.material
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.plaster
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.finish
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.colors
+                :dynamicArea="$outdoorArea"
+            />
+        @break
+
+        @case(\App\Enums\OutdoorKey::OutsideWindows->value)
+            <livewire:outdoor.elements.material
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.window
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.colors
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.ventilationgrille
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.glazing
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.handle
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.windowsill
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.rollershutter
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.windowdecoration
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.hor
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.fallprotection
+                :dynamicArea="$outdoorArea"
+            />
+        @break
+
+        @case(\App\Enums\OutdoorKey::Switches->value)
+            <livewire:outdoor.elements.material
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.colors
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.single
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.multiple
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.brand
+                :dynamicArea="$outdoorArea"
+            />
+        @break
+
+        @case(\App\Enums\OutdoorKey::Lighting->value)
+            <livewire:outdoor.elements.types
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.count
+                :dynamicArea="$outdoorArea"
+            />
+        @break
+
+        @case(\App\Enums\OutdoorKey::Handrail->value)
+            <livewire:outdoor.elements.teraccehandrail
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.construction
+                :dynamicArea="$outdoorArea"
+            />
+        @break
+
+
     @endswitch
 </div>
