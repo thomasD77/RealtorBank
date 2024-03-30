@@ -120,26 +120,26 @@
     <section>
         <div class="row p-5 the-five">
 
-            <h1 style="text-align: center; margin-bottom: 50px">{{ __('PLAATSBESCHRIJVING ') }} <br> {{ __('INTREDE MANDAAT ') }}</h1>
+            <h1 style="text-align: center; margin-bottom: 50px">{{ __('PLAATSBESCHRIJVING ') }} <br> @if($situation->intrede) {{ __('INTREDE MANDAAT ') }} @else {{ __('UITTREDE MANDAAT ') }} @endif</h1>
 
             <p>Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
                 @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
                 , eigendom van {{ $situation->owner ? $situation->owner->name : "" }}
-                en verhuurd aan {{ $situation->tenant ? $situation->tenant->name : "" }}, werd op datum van {{ $contract->date }} een gedetailleerde intrede gedaan.
+                en verhuurd aan {{ $situation->tenant ? $situation->tenant->name : "" }}, werd op datum van {{ $contract->date }} een gedetailleerde @if($situation->intrede) intrede @else uittrede @endif gedaan.
                 <br>
                 De plaatsbeschrijving is uitgevoerd door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif
             </p>
             <br>
 
             <p>
-                Ondergetekende(n) geven de opdracht aan {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} om als onafhankelijk deskundige de plaatsbeschrijving bij intrede op te nemen van het pand te
+                Ondergetekende(n) geven de opdracht aan {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} om als onafhankelijk deskundige de plaatsbeschrijving bij @if($situation->intrede) intrede @else uittrede @endif op te nemen van het pand te
                 {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
                 @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif.
             </p>
             <br>
 
             <p>
-                Tevens geven ondergetekende(n) {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} de toestemming om de plaatsbeschrijving bij intrede van het pand te
+                Tevens geven ondergetekende(n) {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} de toestemming om de plaatsbeschrijving bij @if($situation->intrede) intrede @else uittrede @endif van het pand te
                 {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
                 @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif geldig te ondertekenen in hun naam.
             </p>
@@ -168,21 +168,40 @@
           @endif
       </div>
         <div class="row keep">
-            <div class="column-sig">
-                <h3 style="margin-bottom: 10px">{{ __('HUURDERS') }}</h3><br>
-                <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
-                <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
-            </div>
+            @if($contract->mandate_tenant)
+                <div class="column-sig">
+                    <h3 style="margin-bottom: 10px">{{ __('HUURDERS') }}</h3><br>
+                    <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                    <p>{{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }}</p>
+                    <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}">
+                </div>
+                <p>Met Mandaat</p>
+            @else
+                <div class="column-sig">
+                    <h3 style="margin-bottom: 10px">{{ __('HUURDERS') }}</h3><br>
+                    <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                    <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
+                    <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
+                </div>
+            @endif
 
-            <div class="column-sig signature">
-                <h3 style="margin-bottom: 10px">{{ __('VERHUURDERS') }}</h3><br>
-                <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
-                <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
-            </div>
+            @if($contract->mandate_owner)
+                <div class="column-sig">
+                    <h3 style="margin-bottom: 10px">{{ __('HUURDERS') }}</h3><br>
+                    <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                    <p>{{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }}</p>
+                    <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}">
+                </div>
+                <p>Met Mandaat</p>
+            @else
+                <div class="column-sig signature">
+                    <h3 style="margin-bottom: 10px">{{ __('VERHUURDERS') }}</h3><br>
+                    <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                    <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
+                    <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
+                </div>
+            @endif
         </div>
     </section>
-
 </body>
 </html>

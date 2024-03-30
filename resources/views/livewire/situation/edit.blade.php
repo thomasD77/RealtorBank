@@ -461,7 +461,7 @@
             </div>
         </div>
 
-        @if($situation->intrede == 1)
+        @if($situation->intrede == 0 Or $situation->intrede == 1)
             <div class="single-add-property">
             <h3>{{ __('Mandaat') }}</h3>
             <div class="property-form-group">

@@ -241,6 +241,36 @@
                         @else
                             <input type="date" class="form-control"wire:change="changeDate"
                                    wire:model.defer="date">
+
+                            <p class="font-weight-bold mb-1">{{ __('Met mandaat getekend') }}</p>
+                            <div class="property-form-group">
+                                <div class="row justify-content-end">
+                                    <div class="col-md-4 dropdown faq-drop">
+                                        <ul>
+                                            <li class="fl-wrap filter-tags clearfix">
+                                                <div class="checkboxes float-right">
+                                                    <div class="filter-tags-wrap">
+                                                        <input id="check-a" type="checkbox" wire:click="ToggleTenant"  @if($mandaat_tenant == 1) checked @endif>
+                                                        <label for="check-a">{{ __('Mandaat huurder') }}</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4 dropdown faq-drop">
+                                        <ul>
+                                            <li class="fl-wrap filter-tags clearfix">
+                                                <div class="checkboxes float-right">
+                                                    <div class="filter-tags-wrap">
+                                                        <input id="check-c" type="checkbox" wire:click="ToggleOwner" @if($mandaat_owner == 1) checked @endif>
+                                                        <label for="check-c">{{ __('Mandaat eigenaar') }}</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -251,25 +281,26 @@
                 <div class="row p-5 the-five">
 
                     <div class="text-center w-100 mb-4">
-                        <h1>{{ __('PLAATSBESCHRIJVING ') }} <br> {{ __('INTREDE MANDAAT ') }}</h1>
+                        <h1>{{ __('PLAATSBESCHRIJVING ') }} <br> @if($situation->intrede) {{ __('INTREDE MANDAAT ') }} @else {{ __('UITTREDE MANDAAT ') }} @endif</h1>
                     </div>
 
                     <p>Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
                         @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
                         , eigendom van {{ $situation->owner ? $situation->owner->name : "" }}
-                        en verhuurd aan {{ $situation->tenant ? $situation->tenant->name : "" }}, werd op datum van {{ $contract->date }} een gedetailleerde intrede gedaan.
+                        en verhuurd aan {{ $situation->tenant ? $situation->tenant->name : "" }}, werd op datum van {{ $contract->date }}
+                        een gedetailleerde @if($situation->intrede) intrede @else uittrede @endif gedaan.
                         <br>
                         De plaatsbeschrijving is uitgevoerd door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif
                     </p>
 
                     <p>
-                        Ondergetekende(n) geven de opdracht aan {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} om als onafhankelijk deskundige de plaatsbeschrijving bij intrede op te nemen van het pand te
+                        Ondergetekende(n) geven de opdracht aan {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} om als onafhankelijk deskundige de plaatsbeschrijving bij @if($situation->intrede) intrede @else uittrede @endif op te nemen van het pand te
                         {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
                         @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif.
                     </p>
 
                     <p>
-                        Tevens geven ondergetekende(n) {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} de toestemming om de plaatsbeschrijving bij intrede van het pand te ADRES geldig te ondertekenen in hun naam.
+                        Tevens geven ondergetekende(n) {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} de toestemming om de plaatsbeschrijving bij @if($situation->intrede) intrede @else uittrede @endif van het pand te ADRES geldig te ondertekenen in hun naam.
                     </p>
 
                     <p>
@@ -294,23 +325,51 @@
                             @endif
                         </div>
 
-                        <div class="col-md-6 ">
-                            <strong>{{ __('HUURDERS') }}</strong><br>
-                            <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                            <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
-                            @if($contract->signature_tenant)
-                                <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
-                            @endif
-                        </div>
+                        @if($contract->mandate_tenant)
+                            <div class="col-md-6 text-left">
+                                <strong>{{ __('HUURDERS') }}</strong><br>
+                                <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                                <p>{{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }}</p>
+                                @if($inspection->user->signature)
+                                    <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
+                                @else
+                                    <div class="spacer"></div>
+                                @endif
+                                <p>Met Mandaat</p>
+                            </div>
+                        @else
+                            <div class="col-md-6">
+                                <strong>{{ __('HUURDERS') }}</strong><br>
+                                <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                                <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
+                                @if($contract->signature_tenant)
+                                    <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
+                                @endif
+                            </div>
+                        @endif
 
-                        <div class="col-md-6 text-right">
-                            <strong>{{ __('VERHUURDERS') }}</strong><br>
-                            <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                            <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
-                            @if($contract->signature_owner)
-                                <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
-                            @endif
-                        </div>
+                        @if($contract->mandate_owner)
+                            <div class="col-md-6 text-right">
+                                <strong>{{ __('VERHUURDERS') }}</strong><br>
+                                <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                                <p>{{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }}</p>
+                                @if($inspection->user->signature)
+                                    <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
+                                @else
+                                    <div class="spacer"></div>
+                                @endif
+                                <p>Met Mandaat</p>
+                            </div>
+                        @else
+                            <div class="col-md-6 text-right">
+                                <strong>{{ __('VERHUURDERS') }}</strong><br>
+                                <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                                <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
+                                @if($contract->signature_owner)
+                                    <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
+                                @endif
+                            </div>
+                        @endif
 
                     </div>
                 </section>

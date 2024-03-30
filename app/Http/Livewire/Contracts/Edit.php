@@ -27,6 +27,9 @@ class Edit extends Component
     public $date;
     public $lock;
 
+    public $mandaat_tenant;
+    public $mandaat_owner;
+
     //Media
     public $folder = 'situations';
     public $files;
@@ -40,6 +43,9 @@ class Edit extends Component
 
         $this->date = $this->contract->date;
         $this->lock = $this->contract->lock;
+
+        $this->mandaat_tenant = $this->contract->mandate_tenant;
+        $this->mandaat_owner = $this->contract->mandate_owner;
 
         $files = MediaInspection::where('inspection_id', $this->inspection->id)->get();
         $this->files = $files;
@@ -61,6 +67,28 @@ class Edit extends Component
             $contract->date = $this->date;
             $contract->update();
         }
+    }
+
+    public function ToggleTenant(Damage $damage)
+    {
+        $contract =  $this->contract;
+        if($this->contract->mandate_tenant){
+            $contract->mandate_tenant = 0;
+        }else {
+            $contract->mandate_tenant = 1;
+        }
+        $contract->update();
+    }
+
+    public function ToggleOwner(Damage $damage)
+    {
+        $contract =  $this->contract;
+        if($this->contract->mandate_owner){
+            $contract->mandate_owner = 0;
+        }else {
+            $contract->mandate_owner = 1;
+        }
+        $contract->update();
     }
 
     public function render()
