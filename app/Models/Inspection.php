@@ -173,10 +173,11 @@ class Inspection extends Model
          */
         $conforms = Conform::take(7)->get();
 
-        //Thermostat was added later to te list, this is not ideal but yeah..
-        //ALWAYS CHECK THE ID !!!
-        $thermostat = Conform::find(23)->get();
-        $conforms = $conforms->merge($thermostat);
+        //Thermostat was added later to te list, this is not ideal but yeah..,
+        $thermostat = Conform::where('id', 23)->first();
+        if ($thermostat) {
+            $conforms->push($thermostat);
+        }
 
         foreach ($rooms as $room){
             $conformsToInsert = [];
