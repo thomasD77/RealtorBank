@@ -203,6 +203,7 @@ class Inspection extends Model
                     'room_id' => $room->id,
                     'floor_id' => $room->floor_id,
                     'inspection_id' => $inspection->id,
+                    'sidebar_count' => 1,
                     'material' => $material,
                     'color' => $color,
                     'type' => $type,

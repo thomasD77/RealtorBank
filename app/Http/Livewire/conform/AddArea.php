@@ -36,12 +36,24 @@ class AddArea extends Component
         $newConform->updated_at = now();
         $newConform->save();
 
+        //First select all the areas for this BasicArea
+        $conformAreas = ConformArea::where('floor_id', $this->conformArea->floor_id)
+            ->where('room_id', $this->conformArea->room_id)
+            ->pluck('conform_id')
+            ->toArray();
+
+        //Count how much areas we have for this Inspection -> floor -> room
+        $lightingCount = Conform::query()
+            ->whereIn('id', $conformAreas)
+            ->where('code', 'lighting')
+            ->count();
+
         $extraArea = new ConformArea();
         $extraArea->room_id = $this->room->id;
         $extraArea->conform_id = $newConform->id;
         $extraArea->inspection_id = $this->inspection->id;
         $extraArea->floor_id = $this->room->floor->id;
-        //$extraArea->order = $this->conform->order;
+        $extraArea->sidebar_count = $lightingCount + 1;
 
         $extraArea->material = $this->conformArea->material;
         $extraArea->color = $this->conformArea->color;
