@@ -171,11 +171,11 @@
             @if($contract->mandate_tenant)
                 <div class="column-sig">
                     <h3 style="margin-bottom: 10px">{{ __('HUURDERS') }}</h3><br>
+                    <p>Met Mandaat</p>
                     <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
                     <p>{{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }}</p>
                     <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}">
                 </div>
-                <p>Met Mandaat</p>
             @else
                 <div class="column-sig">
                     <h3 style="margin-bottom: 10px">{{ __('HUURDERS') }}</h3><br>
@@ -188,11 +188,11 @@
             @if($contract->mandate_owner)
                 <div class="column-sig">
                     <h3 style="margin-bottom: 10px">{{ __('HUURDERS') }}</h3><br>
+                    <p>Met Mandaat</p>
                     <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
                     <p>{{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }}</p>
                     <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}">
                 </div>
-                <p>Met Mandaat</p>
             @else
                 <div class="column-sig signature">
                     <h3 style="margin-bottom: 10px">{{ __('VERHUURDERS') }}</h3><br>
