@@ -87,8 +87,8 @@
                         <img class="" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
                         <p>Met Mandaat</p>
                     @else
-                        @if($claim->signature_tenant)
-                            <img src="{{ asset('assets/signatures'. '/' . $claim->signature_tenant) }}" alt="">
+                        @if($contract->signature_tenant)
+                            <img src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}" alt="">
                         @endif
                     @endif
                 </div>
@@ -103,8 +103,8 @@
                         <img class="" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
                         <p>Met Mandaat</p>
                     @else
-                        @if($claim->signature_owner)
-                            <img src="{{ asset('assets/signatures'. '/' . $claim->signature_owner) }}" alt="">
+                        @if($contract->signature_owner)
+                            <img src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}" alt="">
                         @endif
                     @endif
                 </div>
