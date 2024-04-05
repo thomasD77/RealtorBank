@@ -101,8 +101,6 @@ class SituationController extends Controller
 //            ->get();
 //        $techniqueArea = $techniqueArea->where('inspection_id', $inspection->id);
 //
-//        $contract = Contract::where('inspection_id', $inspection->id)->first();
-//
 //        $claim = RentalClaim::query()
 //            ->where('inspection_id', $inspection->id)
 //            ->where('situation_id', $situation->id)
@@ -197,7 +195,9 @@ class SituationController extends Controller
 //            ->orderBy('title', 'asc')
 //            ->get();
 //
-//
+//        $contract =  Contract::where('inspection_id', $inspection->id)
+//            ->where('situation_id', $situation->id)
+//            ->first();
 //
 //        $pdf = Pdf::loadView('inspections.pdf', [
 //            'inspection' => $inspection,

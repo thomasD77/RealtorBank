@@ -76,49 +76,56 @@
                     <p class="date-title">{{ __('Opnamedatum') }}: {{ $situation->date }}</p>
                 @endif
 
-                {{--This is Intrede or Uittrede--}}
-{{--                @if($situation->intrede != 2)--}}
-{{--                <div class="column-sig">--}}
-{{--                    <h3>{{ __('HUURDER') }}</h3>--}}
-{{--                    <p>{{  $situation->tenant ? $situation->tenant->name : "" }}</p>--}}
-{{--                    --}}{{-- <p> {{  $inspection->address->address }} @if($inspection->address->postBus), {{  $inspection->address->postBus }} @endif--}}
-{{--                    --}}{{-- @if($inspection->address->zip || $inspection->address->city), {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>--}}
-{{--                    <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>--}}
-{{--                    @if($claim->signature_tenant)--}}
-{{--                        <img src="{{ asset('assets/signatures'. '/' . $claim->signature_tenant) }}" alt="">--}}
-{{--                    @endif--}}
-{{--                </div>--}}
+
+                <div class="column-sig">
+                    <h3>{{ __('HUURDER') }}</h3>
+                    <p>{{  $situation->tenant ? $situation->tenant->name : "" }}</p>
+                    <p> {{  $inspection->address->address }} @if($inspection->address->postBus), {{  $inspection->address->postBus }} @endif
+                    @if($inspection->address->zip || $inspection->address->city), {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>
+                    <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                    @if($contract->mandate_tenant)
+                        <img class="" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
+                        <p>Met Mandaat</p>
+                    @else
+                        @if($claim->signature_tenant)
+                            <img src="{{ asset('assets/signatures'. '/' . $claim->signature_tenant) }}" alt="">
+                        @endif
+                    @endif
+                </div>
+
+                <div class="column-sig">
+                    <h3>{{ __('VERHUURDER') }}</h3>
+                    <p>{{  $situation->owner ? $situation->owner->name : "" }}</p>
+                    <p> {{  $inspection->address->address }} @if($inspection->address->postBus) ,{{  $inspection->address->postBus }} @endif
+                    @if($inspection->address->zip || $inspection->address->city) , {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>
+                    <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                    @if($contract->mandate_owner)
+                        <img class="" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
+                        <p>Met Mandaat</p>
+                    @else
+                        @if($claim->signature_owner)
+                            <img src="{{ asset('assets/signatures'. '/' . $claim->signature_owner) }}" alt="">
+                        @endif
+                    @endif
+                </div>
 
 {{--                <div class="column-sig">--}}
-{{--                    <h3>{{ __('VERHUURDER') }}</h3>--}}
-{{--                    --}}{{--  <p> {{  $inspection->address->address }} @if($inspection->address->postBus) ,{{  $inspection->address->postBus }} @endif--}}
-{{--                    --}}{{--  @if($inspection->address->zip || $inspection->address->city) , {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>--}}
+{{--                    <h3>{{ __('EIGENAAR') }}</h3>--}}
 {{--                    <p>{{  $situation->owner ? $situation->owner->name : "" }}</p>--}}
+{{--                    <p> {{  $inspection->address->address }} @if($inspection->address->postBus) ,{{  $inspection->address->postBus }} @endif--}}
+{{--                    @if($inspection->address->zip || $inspection->address->city) , {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>--}}
 {{--                    <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>--}}
-{{--                    @if($claim->signature_owner)--}}
-{{--                        <img src="{{ asset('assets/signatures'. '/' . $claim->signature_owner) }}" alt="">--}}
-{{--                    @endif--}}
 {{--                </div>--}}
 
-{{--                @else--}}
-{{--                    <div class="column-sig">--}}
-{{--                        <h3>{{ __('EIGENAAR') }}</h3>--}}
-{{--                        <p>{{  $situation->owner ? $situation->owner->name : "" }}</p>--}}
-{{--                        <p> {{  $inspection->address->address }} @if($inspection->address->postBus) ,{{  $inspection->address->postBus }} @endif--}}
-{{--                        @if($inspection->address->zip || $inspection->address->city) , {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>--}}
-{{--                        <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>--}}
-{{--                    </div>--}}
-
-{{--                    <div class="column-sig">--}}
-{{--                        <h3>{{ __('OPDRACHTGEVER') }}</h3>--}}
-{{--                        <p>{{  $situation->client }}</p>--}}
-{{--                        @if($situation->address)--}}
-{{--                            <p> {{  $situation->address->address }} @if($situation->address->postBus), {{  $situation->address->postBus }} @endif--}}
-{{--                            @if($situation->address->zip || $situation->address->city), {{  $situation->address->zip }} {{  $situation->address->city }} @endif</p>--}}
-{{--                        @endif--}}
-{{--                        <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>--}}
-{{--                    </div>--}}
-{{--                @endif--}}
+{{--                <div class="column-sig">--}}
+{{--                    <h3>{{ __('OPDRACHTGEVER') }}</h3>--}}
+{{--                    <p>{{  $situation->client }}</p>--}}
+{{--                    @if($situation->address)--}}
+{{--                        <p> {{  $situation->address->address }} @if($situation->address->postBus), {{  $situation->address->postBus }} @endif--}}
+{{--                        @if($situation->address->zip || $situation->address->city), {{  $situation->address->zip }} {{  $situation->address->city }} @endif</p>--}}
+{{--                    @endif--}}
+{{--                    <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>--}}
+{{--                </div>--}}
 
                 <div class="column-sig">
                     <h3>{{ __('UITVOERDER') }}</h3>
@@ -130,7 +137,6 @@
                         <div class="spacer"></div>
                     @endif
                 </div>
-
             </div>
         </section>
 </section>
