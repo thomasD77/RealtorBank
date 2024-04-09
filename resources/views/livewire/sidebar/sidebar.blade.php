@@ -1344,7 +1344,7 @@
     @endif
 
     @if($situation == $activeCat || $activeCat == null)
-        {{--In/Uittrede--}}
+        {{--Beschrijvingen--}}
         <li class="sidebar-border">
             <a data-toggle="collapse"
                href="#collapseSituation"
@@ -1355,9 +1355,9 @@
                class="custom-sidebar-padding @if($situation == $activeCat) active @endif"
             >
                 @if($situation == $activeCat)
-                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('In/uittrede') }}
+                    <i class="fa fa-angle-down text-warning fa-2x"></i>{{ __('Beschrijvingen') }}
                 @else
-                    <i class="fa fa-folder text-success"></i>{{ __('In/uittrede') }}
+                    <i class="fa fa-folder text-success"></i>{{ __('Beschrijvingen') }}
                 @endif
 
             </a>

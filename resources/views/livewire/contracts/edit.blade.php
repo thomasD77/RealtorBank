@@ -1,7 +1,7 @@
 <div>
-    <div class="single-add-property">
-        <a class="breadcrumb-link" href="{{ route('situation.edit', [$inspection, $contract->situation->id]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('in/uittrede') }}</strong></p></a>
 
+        <div class="single-add-property">
+        <a class="breadcrumb-link" href="{{ route('situation.edit', [$inspection, $contract->situation->id]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('beschrijvingen') }}</strong></p></a>
         <h3>{{ __('Status mandaat') }}</h3>
         <form action="{{ route('toggle.contract') }}" method="post">
             @csrf
@@ -33,6 +33,7 @@
             </div>
         @endif
     </div>
+
 
     <style>
         .m-signature-pad {
@@ -183,7 +184,11 @@
                         <input type="hidden" name="contract" value="{{ $contract->id }}">
                         @csrf
                         <div class="col-md-11">
+                            @if($situation->intrede != 2)
                             <label class="py-3" for="">{{ __('Handtekening') }} {{ $situation->tenant->name }}</label>
+                            @else
+                                <label class="py-3" for="">{{ __('Handtekening') }} {{ $situation->client }}</label>
+                            @endif
                             <br/>
                             <div id="sig_tenant"></div>
                             <br/>
@@ -222,64 +227,68 @@
     <div class="invoice mb-0">
         <div class="card border-0">
             <div class="card-body p-0">
-                <div class="text-right">
-                    @if($lock)
-                        <span class="badge badge bg-danger text-white p-3">{{ __('Gesloten') }}</span>
-                    @else
-                        <span class="badge badge bg-success text-white p-3">{{ __('Open') }}</span>
-                    @endif
-                </div>
-                <div class="row p-5 the-five">
-                    <div class="col-md-6">
-                        <!-- <img src="{{ asset('assets/images/logo.svg') }}" width="80" alt="Logo"> -->
-                    </div>
 
-                    <div class="col-md-6 text-right">
-                        <p class="font-weight-bold mb-1">{{ __('Mandaat opgemaakt op') }}</p>
+                @if($situation->intrede != 2)
+                    <div class="text-right">
                         @if($lock)
-                            <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
+                            <span class="badge badge bg-danger text-white p-3">{{ __('Gesloten') }}</span>
                         @else
-                            <input type="date" class="form-control"wire:change="changeDate"
-                                   wire:model.defer="date">
-
-                            <p class="font-weight-bold mb-1">{{ __('Met mandaat getekend') }}</p>
-                            <div class="property-form-group">
-                                <div class="row justify-content-end">
-                                    <div class="col-md-4 dropdown faq-drop">
-                                        <ul>
-                                            <li class="fl-wrap filter-tags clearfix">
-                                                <div class="checkboxes float-right">
-                                                    <div class="filter-tags-wrap">
-                                                        <input id="check-a" type="checkbox" wire:click="ToggleTenant"  @if($mandaat_tenant == 1) checked @endif>
-                                                        <label for="check-a">{{ __('Mandaat huurder') }}</label>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4 dropdown faq-drop">
-                                        <ul>
-                                            <li class="fl-wrap filter-tags clearfix">
-                                                <div class="checkboxes float-right">
-                                                    <div class="filter-tags-wrap">
-                                                        <input id="check-c" type="checkbox" wire:click="ToggleOwner" @if($mandaat_owner == 1) checked @endif>
-                                                        <label for="check-c">{{ __('Mandaat eigenaar') }}</label>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            <span class="badge badge bg-success text-white p-3">{{ __('Open') }}</span>
                         @endif
                     </div>
-                </div>
+                    <div class="row p-5 the-five">
+                        <div class="col-md-6">
+                            <!-- <img src="{{ asset('assets/images/logo.svg') }}" width="80" alt="Logo"> -->
+                        </div>
+
+                        <div class="col-md-6 text-right">
+                            <p class="font-weight-bold mb-1">{{ __('Mandaat opgemaakt op') }}</p>
+                            @if($lock)
+                                <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
+                            @else
+                                <input type="date" class="form-control"wire:change="changeDate"
+                                       wire:model.defer="date">
+
+                                <p class="font-weight-bold mb-1">{{ __('Met mandaat getekend') }}</p>
+                                <div class="property-form-group">
+                                    <div class="row justify-content-end">
+                                        <div class="col-md-4 dropdown faq-drop">
+                                            <ul>
+                                                <li class="fl-wrap filter-tags clearfix">
+                                                    <div class="checkboxes float-right">
+                                                        <div class="filter-tags-wrap">
+                                                            <input id="check-a" type="checkbox" wire:click="ToggleTenant"  @if($mandaat_tenant == 1) checked @endif>
+                                                            <label for="check-a">{{ __('Mandaat huurder') }}</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4 dropdown faq-drop">
+                                            <ul>
+                                                <li class="fl-wrap filter-tags clearfix">
+                                                    <div class="checkboxes float-right">
+                                                        <div class="filter-tags-wrap">
+                                                            <input id="check-c" type="checkbox" wire:click="ToggleOwner" @if($mandaat_owner == 1) checked @endif>
+                                                            <label for="check-c">{{ __('Mandaat eigenaar') }}</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                @endif
 
                 <hr>
 
                  <!-- Credentials authorized parties -->
                 <div class="row p-5 the-five">
 
+                    @if($situation->intrede != 2)
                     <div class="text-center w-100 mb-4">
                         <h1>{{ __('PLAATSBESCHRIJVING ') }} <br> @if($situation->intrede) {{ __('INTREDE MANDAAT ') }} @else {{ __('UITTREDE MANDAAT ') }} @endif</h1>
                     </div>
@@ -312,6 +321,11 @@
                     <p>
                         Indien een partij geen opmerkingen geeft binnen deze termijn, gaan ze definitief akkoord met de volledige plaatsbeschrijving en met de bevindingen van de {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }}.
                     </p>
+                    @else
+                        <div class="text-center w-100 mb-4">
+                            <h1>{{ __('PLAATSBESCHRIJVING ') }} <br>  {{ __('Aanvang van werken') }}</h1>
+                        </div>
+                    @endif
 
                 </div>
 
@@ -324,53 +338,78 @@
                                 <p class="date-title">{{ __('Opnamedatum') }}: {{ $contract->date }}</p>
                             @endif
                         </div>
-                        <div class="col-md-6">
-                            <strong>{{ __('HUURDERS') }}</strong><br>
-                            <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                            <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
-                            @if($contract->mandate_tenant)
-                                @if($inspection->user->signature)
-                                    <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
-                                    <p>Met Mandaat</p>
+                        @if($situation->intrede != 2)
+                            <div class="col-md-6">
+                                <strong>{{ __('HUURDERS') }}</strong><br>
+                                <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                                <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
+                                @if($contract->mandate_tenant)
+                                    @if($inspection->user->signature)
+                                        <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
+                                        <p>Met Mandaat</p>
+                                    @else
+                                        <div class="spacer"></div>
+                                    @endif
                                 @else
-                                    <div class="spacer"></div>
+                                    @if($contract->signature_tenant)
+                                        <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
+                                    @else
+                                        <div class="spacer"></div>
+                                    @endif
                                 @endif
-                            @else
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <strong>{{ __('VERHUURDERS') }}</strong><br>
+                                <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                                <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
+                                @if($contract->mandate_owner)
+                                    @if($inspection->user->signature)
+                                        <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
+                                        <p>Met Mandaat</p>
+                                    @else
+                                        <div class="spacer"></div>
+                                    @endif
+                                @else
+                                    @if($contract->signature_owner)
+                                        <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
+                                    @else
+                                        <div class="spacer"></div>
+                                    @endif
+                                @endif
+                            </div>
+                        @else
+                            <div class="col-md-6">
+                                <strong>{{ __('Opdrachtgever') }}</strong><br>
+                                <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                                <p>{{  $situation->client }}</p>
                                 @if($contract->signature_tenant)
                                     <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
                                 @else
                                     <div class="spacer"></div>
                                 @endif
-                            @endif
-                        </div>
-                        <div class="col-md-6 text-right">
-                            <strong>{{ __('VERHUURDERS') }}</strong><br>
-                            <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                            <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
-                            @if($contract->mandate_owner)
-                                @if($inspection->user->signature)
-                                    <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
-                                    <p>Met Mandaat</p>
-                                @else
-                                    <div class="spacer"></div>
-                                @endif
-                            @else
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <strong>{{ __('VERHUURDERS') }}</strong><br>
+                                <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                                <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
                                 @if($contract->signature_owner)
                                     <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
                                 @else
                                     <div class="spacer"></div>
                                 @endif
-                            @endif
-                        </div>
+                            </div>
+                        @endif
                     </div>
                 </section>
             </div>
 
-            @if($lock)
-                <div class="single-add-property">
-                    <h3>{{ __('Mandaat printen') }}</h3>
-                    <a href="{{ route('print.contract', [$inspection, $contract, $situation]) }}" class="btn btn-dark">{{ __('Printen') }}</a>
-                </div>
+            @if($situation->intrede != 2)
+                @if($lock)
+                    <div class="single-add-property">
+                        <h3>{{ __('Mandaat printen') }}</h3>
+                        <a href="{{ route('print.contract', [$inspection, $contract, $situation]) }}" class="btn btn-dark">{{ __('Printen') }}</a>
+                    </div>
+                @endif
             @endif
 
             </div>

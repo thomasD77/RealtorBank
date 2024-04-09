@@ -6,10 +6,10 @@
                 {{ session('successPDF') }}
             </div>
         @endif
-        <h3>{{ __('In/uittrede') }}</h3>
+        <h3>{{ __('Beschrijvingen') }}</h3>
         <div class="property-form-group">
             <div class="row">
-                <div class="col-md-4 dropdown faq-drop">
+                <div class="col-md-6 dropdown faq-drop">
                     <ul>
                         <li class="fl-wrap filter-tags clearfix">
                             <div class="checkboxes float-left">
@@ -21,7 +21,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-4 dropdown faq-drop">
+                <div class="col-md-6 dropdown faq-drop">
                     <ul>
                         <li class="fl-wrap filter-tags clearfix">
                             <div class="checkboxes float-left">
@@ -33,13 +33,25 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-4 dropdown faq-drop">
+                <div class="col-md-6 dropdown faq-drop">
                     <ul>
                         <li class="fl-wrap filter-tags clearfix">
                             <div class="checkboxes float-left">
                                 <div class="filter-tags-wrap">
                                     <input id="check-d" type="checkbox" wire:click="intredeSubmit({{2}})" @if($intrede == 2) checked @endif>
                                     <label for="check-d">{{ __('Aanvang van werken') }}</label>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6 dropdown faq-drop">
+                    <ul>
+                        <li class="fl-wrap filter-tags clearfix">
+                            <div class="checkboxes float-left">
+                                <div class="filter-tags-wrap">
+                                    <input id="check-e" type="checkbox" wire:click="intredeSubmit({{3}})" @if($intrede == 3) checked @endif>
+                                    <label for="check-e">{{ __('Addendum') }}</label>
                                 </div>
                             </div>
                         </li>
@@ -55,7 +67,7 @@
         </div>
     </div>
 
-    @if($intrede === 0 || $intrede == 1 || $intrede == 2)
+    @if($intrede === 0 || $intrede == 1 || $intrede == 2 || $intrede == 3)
         <div class="single-add-property">
             <h3>{{ __('Eigenaar') }} <small style="text-transform: lowercase">({{ __('verhuurder') }})</small></h3>
             <div class="property-form-group">
@@ -461,8 +473,7 @@
             </div>
         </div>
 
-        @if($situation->intrede == 0 Or $situation->intrede == 1)
-            <div class="single-add-property">
+        <div class="single-add-property">
             <h3>{{ __('Mandaat') }}</h3>
             <div class="property-form-group">
                 @if($contract)
@@ -491,7 +502,6 @@
                 @endif
             </div>
         </div>
-        @endif
 
         <div class="single-add-property">
             <h3>{{ __('Verwijderen') }}</h3>
@@ -515,7 +525,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <p>{{ __('Ben je zeker om deze in/uittrede te verwijderen?') }}</p>
+                                <p>{{ __('Ben je zeker om deze beschrijving te verwijderen?') }}</p>
                                 <form wire:submit.prevent="deleteSituation">
                                     <div class="row">
                                         <div class="col-md-12">

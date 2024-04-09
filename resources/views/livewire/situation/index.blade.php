@@ -5,7 +5,7 @@
             <a href="{{ route('create.situation', $inspection) }}" class="btn btn-common mb-3"><i class="fa fa-plus mr-2"></i>{{ __('NIEUW') }}</a>
         </div>
 
-        <h3>{{ __('In/Uittrede')  }}</h3>
+        <h3>{{ __('Contracten')  }}</h3>
         <div class="property-form-group">
             <div class="row">
                 <div class="col-12 mb70">

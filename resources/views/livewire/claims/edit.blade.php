@@ -1,6 +1,6 @@
 <div>
     <div class="single-add-property">
-        <a class="breadcrumb-link" href="{{ route('situation.edit', [$inspection, $claim->situation->id]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('in/uittrede') }}</strong></p></a>
+        <a class="breadcrumb-link" href="{{ route('situation.edit', [$inspection, $claim->situation->id]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('beschrijvingen') }}</strong></p></a>
 
         <h3>{{ __('Status huurschade contract') }}</h3>
         <form action="{{ route('toggle.claim') }}" method="post">
