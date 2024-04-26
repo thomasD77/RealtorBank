@@ -408,6 +408,30 @@
         />
         @break
 
+        @case(\App\Enums\SpecificKey::Microgolfoven->value)
+            <livewire:specific.elements.oventypes
+                :dynamicArea="$specificArea"
+            />
+            <livewire:specific.elements.appliancemodel
+                :dynamicArea="$specificArea"
+            />
+            <livewire:specific.elements.energy
+                :dynamicArea="$specificArea"
+            />
+            <livewire:specific.elements.brand
+                :dynamicArea="$specificArea"
+            />
+            <livewire:specific.elements.rooster
+                :dynamicArea="$specificArea"
+            />
+            <livewire:specific.elements.bakingtray
+                :dynamicArea="$specificArea"
+            />
+            <livewire:specific.elements.manual
+                :dynamicArea="$specificArea"
+            />
+        @break
+
         @case(\App\Enums\SpecificKey::Fridge->value)
         <livewire:specific.elements.reftypes
             :dynamicArea="$specificArea"

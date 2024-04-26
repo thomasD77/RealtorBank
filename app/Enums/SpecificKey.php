@@ -29,6 +29,7 @@ enum SpecificKey : string
     case Suction = 'suction';
     case Cooker = 'cooker';
     case Oven = 'oven';
+    case Microgolfoven = 'microgolfoven';
     case Fridge = 'fridge';
     case Dishwasher = 'dishwasher';
     case DischargePoint = 'dischargePoint';
