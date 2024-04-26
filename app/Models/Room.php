@@ -93,9 +93,4 @@ class Room extends Model
         return $this->hasOne(General::class);
     }
 
-    public function damages()
-    {
-        return $this->hasMany(Damage::class, 'general_id');
-    }
-
 }

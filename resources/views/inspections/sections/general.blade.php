@@ -37,31 +37,33 @@
             </tr>
         @endif
     </table>
-    @if($room->damages)
-        @foreach($room->damages as $damage)
-            @if($damage->print_pdf)
-                <table class="table">
-                    <tr class="row--head--list">
-                        <th>{{ __('Schade') }}</th>
-                        <th>{{ $damage->title }}</th>
-                    </tr>
-
-                    <tr class="row--text--list">
-                        <th>{{ __('Datum') }}</th>
-                        <th>{{ $damage->date }}</th>
-                    </tr>
-                    <tr class="row--text--list">
-                        <th>{{ __('Beschrijving') }}</th>
-                        <th>{{ $damage->description }}</th>
-                    </tr>
-                </table>
-            @endif
-        @endforeach
-    @endif
-
-    @include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::General->value, 'item' => $room->generalArea ])
-
 @endif
+
+@if($room->generalArea->damages)
+    @foreach($room->generalArea->damages as $damage)
+        @if($damage->print_pdf)
+            <table class="table">
+                <tr class="damages">
+                    <th>{{ $room->floor->title }} | {{ __('Overzicht') }} | {{ __('Schade') }}</th>
+                    <th>{{ $damage->title }}</th>
+                </tr>
+
+                <tr class="row--text--list">
+                    <th>{{ __('Datum') }}</th>
+                    <th>{{ $damage->date }}</th>
+                </tr>
+                <tr class="row--text--list">
+                    <th>{{ __('Beschrijving') }}</th>
+                    <th>{{ $damage->description }}</th>
+                </tr>
+            </table>
+        @endif
+    @endforeach
+@endif
+
+@include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::General->value, 'item' => $room->generalArea ])
+
+
 
 
 
