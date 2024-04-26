@@ -30,6 +30,7 @@
                 :dynamicArea="$specificArea"
             />
 
+            
             <livewire:damage.index
                 :dynamicArea="$specificArea"
                 :Inspection="$inspection"
