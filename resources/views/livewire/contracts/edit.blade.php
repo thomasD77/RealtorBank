@@ -389,7 +389,7 @@
                                 @endif
                             </div>
                             <div class="col-md-6 text-right">
-                                <strong>{{ __('VERHUURDERS') }}</strong><br>
+                                <strong>{{ __('Eigenaar') }}</strong><br>
                                 <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
                                 <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
                                 @if($contract->signature_owner)

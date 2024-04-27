@@ -120,6 +120,18 @@
                         <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
 {{--                        <p> {{  $inspection->address->address }} @if($inspection->address->postBus) ,{{  $inspection->address->postBus }} @endif--}}
 {{--                        @if($inspection->address->zip || $inspection->address->city) , {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>--}}
+                            @if(isset($contract))
+                                @if($contract->mandate_owner)
+                                    <img class="" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
+                                    <p>Met Mandaat</p>
+                                @else
+                                    @if($contract->signature_owner)
+                                        <img src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}" alt="">
+                                    @endif
+                                @endif
+                            @elseif(isset($claim))
+                                <img src="{{ asset('assets/signatures'. '/' . $claim->signature_owner) }}" alt="">
+                            @endif
                     </div>
                     <div class="column-sig">
                         <h3>{{ __('OPDRACHTGEVER') }}</h3>
@@ -129,6 +141,18 @@
 {{--                            <p> {{  $situation->address->address }} @if($situation->address->postBus), {{  $situation->address->postBus }} @endif--}}
 {{--                            @if($situation->address->zip || $situation->address->city), {{  $situation->address->zip }} {{  $situation->address->city }} @endif</p>--}}
 {{--                        @endif--}}
+                            @if(isset($contract))
+                                @if($contract->mandate_tenant)
+                                    <img class="" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
+                                    <p>Met Mandaat</p>
+                                @else
+                                    @if($contract->signature_tenant)
+                                        <img src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}" alt="">
+                                    @endif
+                                @endif
+                            @elseif(isset($claim))
+                                <img src="{{ asset('assets/signatures'. '/' . $claim->signature_tenant) }}" alt="">
+                            @endif
                     </div>
                 @endif
                 <div class="column-sig">
