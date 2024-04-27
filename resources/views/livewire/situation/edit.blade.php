@@ -484,7 +484,11 @@
 
         @if($situation->intrede != 3)
             <div class="single-add-property">
-            <h3>{{ __('Mandaat') }}</h3>
+                @if($situation->intrede != 2)
+                    <h3>{{ __('Mandaat') }}</h3>
+                @else
+                    <h3>{{ __('Handtekenen') }}</h3>
+                @endif
             <div class="property-form-group">
                 @if($contract)
                     <div class="section-body listing-table">
