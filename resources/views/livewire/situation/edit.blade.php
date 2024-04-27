@@ -72,7 +72,11 @@
 
     @if($intrede === 0 || $intrede == 1 || $intrede == 2 || $intrede == 3)
         <div class="single-add-property">
-            <h3>{{ __('Eigenaar') }} <small style="text-transform: lowercase">({{ __('verhuurder') }})</small></h3>
+            @if($intrede != 2)
+                <h3>{{ __('Verhuurder') }}</h3>
+            @else
+                <h3>{{ __('Eigenaar') }}</h3>
+            @endif
             <div class="property-form-group">
                 <form wire:submit.prevent="ownerSubmit">
                     <div class="row">

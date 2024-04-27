@@ -346,7 +346,7 @@
                             @if($situation->intrede != 2)
                                 <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
                             @else
-                                <p>{{  $situation->client }}</p>                         
+                                <p>{{  $situation->client }}</p>
                             @endif
                             @if($contract->mandate_tenant)
                                 @if($inspection->user->signature)
