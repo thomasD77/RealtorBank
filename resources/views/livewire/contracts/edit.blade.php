@@ -227,61 +227,59 @@
     <div class="invoice mb-0">
         <div class="card border-0">
             <div class="card-body p-0">
-
-                @if($situation->intrede != 2)
-                    <div class="text-right">
-                        @if($lock)
-                            <span class="badge badge bg-danger text-white p-3">{{ __('Gesloten') }}</span>
-                        @else
-                            <span class="badge badge bg-success text-white p-3">{{ __('Open') }}</span>
-                        @endif
+                
+                <div class="text-right">
+                    @if($lock)
+                        <span class="badge badge bg-danger text-white p-3">{{ __('Gesloten') }}</span>
+                    @else
+                        <span class="badge badge bg-success text-white p-3">{{ __('Open') }}</span>
+                    @endif
+                </div>
+                <div class="row p-5 the-five">
+                    <div class="col-md-6">
+                        <!-- <img src="{{ asset('assets/images/logo.svg') }}" width="80" alt="Logo"> -->
                     </div>
-                    <div class="row p-5 the-five">
-                        <div class="col-md-6">
-                            <!-- <img src="{{ asset('assets/images/logo.svg') }}" width="80" alt="Logo"> -->
-                        </div>
 
-                        <div class="col-md-6 text-right">
-                            <p class="font-weight-bold mb-1">{{ __('Mandaat opgemaakt op') }}</p>
-                            @if($lock)
-                                <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
-                            @else
-                                <input type="date" class="form-control"wire:change="changeDate"
-                                       wire:model.defer="date">
+                    <div class="col-md-6 text-right">
+                        <p class="font-weight-bold mb-1">{{ __('Mandaat opgemaakt op') }}</p>
+                        @if($lock)
+                            <p>{{ \Carbon\Carbon::parse($contract->date)->format('d-m-Y')}}</p>
+                        @else
+                            <input type="date" class="form-control"wire:change="changeDate"
+                                   wire:model.defer="date">
 
-                                <p class="font-weight-bold mb-1">{{ __('Met mandaat getekend') }}</p>
-                                <div class="property-form-group">
-                                    <div class="row justify-content-end">
-                                        <div class="col-md-4 dropdown faq-drop">
-                                            <ul>
-                                                <li class="fl-wrap filter-tags clearfix">
-                                                    <div class="checkboxes float-right">
-                                                        <div class="filter-tags-wrap">
-                                                            <input id="check-a" type="checkbox" wire:click="ToggleTenant"  @if($mandaat_tenant == 1) checked @endif>
-                                                            <label for="check-a">{{ __('Mandaat huurder') }}</label>
-                                                        </div>
+                            <p class="font-weight-bold mb-1">{{ __('Met mandaat getekend') }}</p>
+                            <div class="property-form-group">
+                                <div class="row justify-content-end">
+                                    <div class="col-md-4 dropdown faq-drop">
+                                        <ul>
+                                            <li class="fl-wrap filter-tags clearfix">
+                                                <div class="checkboxes float-right">
+                                                    <div class="filter-tags-wrap">
+                                                        <input id="check-a" type="checkbox" wire:click="ToggleTenant"  @if($mandaat_tenant == 1) checked @endif>
+                                                        <label for="check-a">{{ __('Mandaat huurder') }}</label>
                                                     </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-4 dropdown faq-drop">
-                                            <ul>
-                                                <li class="fl-wrap filter-tags clearfix">
-                                                    <div class="checkboxes float-right">
-                                                        <div class="filter-tags-wrap">
-                                                            <input id="check-c" type="checkbox" wire:click="ToggleOwner" @if($mandaat_owner == 1) checked @endif>
-                                                            <label for="check-c">{{ __('Mandaat eigenaar') }}</label>
-                                                        </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4 dropdown faq-drop">
+                                        <ul>
+                                            <li class="fl-wrap filter-tags clearfix">
+                                                <div class="checkboxes float-right">
+                                                    <div class="filter-tags-wrap">
+                                                        <input id="check-c" type="checkbox" wire:click="ToggleOwner" @if($mandaat_owner == 1) checked @endif>
+                                                        <label for="check-c">{{ __('Mandaat eigenaar') }}</label>
                                                     </div>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
-                            @endif
-                        </div>
+                            </div>
+                        @endif
                     </div>
-                @endif
+                </div>
 
                 <hr>
 
