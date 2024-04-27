@@ -296,7 +296,7 @@
 
                 </div>
 
-                @if($claim->situation->intrede == 3)
+                @if($claim->situation->intrede == 3 && $relation_intrede)
                     <div class="row p-5 the-five">
                         <p>Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
                             @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
@@ -305,6 +305,10 @@
                             door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif
                         </p>
                     </div>
+                @else
+                    <div class="row p-5 the-five">
+                        <p>Er werd nog geen intrede opgemaakt voor deze plaatsbeschrijving. Gelieve deze eerst op te maken voor een addendum toe te voegen.</p>
+                   </div>
                 @endif
 
                 <!-- Signatures -->

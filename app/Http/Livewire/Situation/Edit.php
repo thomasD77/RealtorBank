@@ -54,6 +54,8 @@ class Edit extends Component
     public $client;
     public $general;
 
+    public $addendum_check;
+
     public $media = [];
     public $files;
 
@@ -105,6 +107,10 @@ class Edit extends Component
             $this->currentCity = $this->situation->tenant->address->city;
             $this->currentCountry = $this->situation->tenant->address->country;
         }
+
+        $this->addendum_check = Situation::where('inspection_id', $this->inspection->id)
+            ->where('intrede', 1)
+            ->first();
 
         $this->contract = Contract::query()
             ->where('inspection_id', $inspection->id)

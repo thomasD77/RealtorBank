@@ -45,18 +45,21 @@
                         </li>
                     </ul>
                 </div>
+
                 <div class="col-md-6 dropdown faq-drop">
                     <ul>
                         <li class="fl-wrap filter-tags clearfix">
                             <div class="checkboxes float-left">
                                 <div class="filter-tags-wrap">
-                                    <input id="check-e" type="checkbox" wire:click="intredeSubmit({{3}})" @if($intrede == 3) checked @endif>
-                                    <label for="check-e">{{ __('Addendum') }}</label>
+                                    <input id="check-e" type="checkbox" wire:click="intredeSubmit({{3}})" @if($intrede == 3) checked @endif
+                                    @if(!$addendum_check) disabled @endif>
+                                    <label for="check-e">{{ __('Addendum') }} @if(!$addendum_check) <p style="font-size:12px; text-transform: lowercase">{{ __('*er werd nog geen intrede gekoppeld voor deze PB') }}</p> @endif</label>
                                 </div>
                             </div>
                         </li>
                     </ul>
                 </div>
+
                 <div class="col-lg-6 col-md-12">
                     <p>
                         <label for="date">{{ __('Datum') }}</label>
