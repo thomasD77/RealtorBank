@@ -2,7 +2,11 @@
     <div class="single-add-property">
         <a class="breadcrumb-link" href="{{ route('situation.edit', [$inspection, $claim->situation->id]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('beschrijvingen') }}</strong></p></a>
 
-        <h3>{{ __('Status huurschade contract') }}</h3>
+        @if($claim->situation->intrede != 0)
+            <h3>{{ __('Addendum') }}</h3>
+        @else
+            <h3>{{ __('Status huurschade contract') }}</h3>
+        @endif
         <form action="{{ route('toggle.claim') }}" method="post">
             @csrf
             <input type="hidden" name="claim" value="{{ $claim->id }}">
@@ -251,28 +255,57 @@
                 <div class="row p-5 the-five">
 
                     <div class="text-center w-100 my-4">
-                        <h1>{{ __('PLAATSBESCHRIJVING ') }} <br> {{ __('HUURSCHADE ') }}</h1>
+                        @if($claim->situation->intrede != 0)
+                            <h3>{{ __('ADDENDUM ') }} <br> {{ __('HUURSCHADE ') }}</h3>
+                        @else
+                            <h1>{{ __('PLAATSBESCHRIJVING ') }} <br> {{ __('HUURSCHADE ') }}</h1>
+                        @endif
                     </div>
 
+                    <div class="my-5 w-100">
                     @if($damages->isNotEmpty())
                         @foreach($damages as $damage)
-                            <div class="row mb-3">
-                                <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <h6>Naam:</h6>
+                                </div>
+                                <div class="col-md-5">
                                     <h5>{{ $damage->title }}</h5>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-1">
+                                    <h6>Datum:</h6>
+                                </div>
+                                <div class="col-md-5">
                                     <h5>{{ $damage->date }}</h5>
                                 </div>
-                                <div class="col-12">
-                                    {{ $damage->description }}
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <h6>Beschrijving:</h6>
+                                </div>
+                                <div class="col-md-11">
+                                    <h5>{{ $damage->description }}</h5>
                                 </div>
                             </div>
+                            <hr class="mb-5">
                         @endforeach
+                    </div>
                     @else
                         <p>{{ __('Er zijn is geen schade gevonden of actief gemarkeerd om in dit contract te printen.') }}</p>
                     @endif
 
                 </div>
+
+                @if($claim->situation->intrede == 3)
+                    <div class="row p-5 the-five">
+                        <p>Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
+                            @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
+                            , eigendom van {{ $situation->owner ? $situation->owner->name : "" }}
+                            en verhuurd aan {{ $situation->tenant ? $situation->tenant->name : "" }}, werd op datum van {{ $relation_intrede->date }} een gedetailleerde @if($situation->intrede) intrede @else uittrede @endif gedaan
+                            door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif
+                        </p>
+                    </div>
+                @endif
 
                 <!-- Signatures -->
                 <section class="signature">

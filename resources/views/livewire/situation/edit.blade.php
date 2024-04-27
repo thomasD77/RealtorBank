@@ -394,9 +394,13 @@
             </div>
         </div>
 
-        @if($situation->intrede == 0 && $damages->isNotEmpty())
+        @if($situation->intrede == 0 && $damages->isNotEmpty()  || $situation->intrede == 3 && $damages->isNotEmpty() )
             <div class="single-add-property">
-                <h3>{{ __('Huurschade contract') }}</h3>
+                @if($situation->intrede != 0)
+                    <h3>{{ __('Addendum') }}</h3>
+                @else
+                    <h3>{{ __('Huurschade contract') }}</h3>
+                @endif
                 <div class="property-form-group">
                     @if($claim)
                         <div class="section-body listing-table">
@@ -426,7 +430,8 @@
             </div>
         @endif
 
-        <div class="single-add-property">
+        @if($situation->intrede != 3)
+            <div class="single-add-property">
             <h3>{{ __('PDF genereren')  }}</h3>
 
             <div class="property-form-group">
@@ -472,8 +477,10 @@
                 @endif
             </div>
         </div>
+        @endif
 
-        <div class="single-add-property">
+        @if($situation->intrede != 3)
+            <div class="single-add-property">
             <h3>{{ __('Mandaat') }}</h3>
             <div class="property-form-group">
                 @if($contract)
@@ -502,6 +509,7 @@
                 @endif
             </div>
         </div>
+        @endif
 
         <div class="single-add-property">
             <h3>{{ __('Verwijderen') }}</h3>

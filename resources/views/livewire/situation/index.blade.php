@@ -29,6 +29,8 @@
                                             {{ __('Uittrede')}}
                                         @elseif($situation->intrede === 2)
                                             {{ __('Aanvang van werken')}}
+                                        @elseif($situation->intrede === 3)
+                                            {{ __('Addendum')}}
                                         @endif
                                     </a>
                                 </td>
