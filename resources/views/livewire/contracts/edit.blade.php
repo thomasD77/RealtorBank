@@ -227,7 +227,7 @@
     <div class="invoice mb-0">
         <div class="card border-0">
             <div class="card-body p-0">
-                
+
                 <div class="text-right">
                     @if($lock)
                         <span class="badge badge bg-danger text-white p-3">{{ __('Gesloten') }}</span>
@@ -336,67 +336,52 @@
                                 <p class="date-title">{{ __('Opnamedatum') }}: {{ $contract->date }}</p>
                             @endif
                         </div>
-                        @if($situation->intrede != 2)
-                            <div class="col-md-6">
+                        <div class="col-md-6">
+                            @if($situation->intrede != 2)
                                 <strong>{{ __('HUURDERS') }}</strong><br>
-                                <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                                <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
-                                @if($contract->mandate_tenant)
-                                    @if($inspection->user->signature)
-                                        <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
-                                        <p>Met Mandaat</p>
-                                    @else
-                                        <div class="spacer"></div>
-                                    @endif
+                            @else
+                                <strong>{{ __('OPDRACHTGEVER') }}</strong><br>
+                            @endif
+                            <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                            <p>{{  $contract->situation->tenant ? $contract->situation->tenant->name : "" }}</p>
+                            @if($contract->mandate_tenant)
+                                @if($inspection->user->signature)
+                                    <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
+                                    <p>Met Mandaat</p>
                                 @else
-                                    @if($contract->signature_tenant)
-                                        <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
-                                    @else
-                                        <div class="spacer"></div>
-                                    @endif
+                                    <div class="spacer"></div>
                                 @endif
-                            </div>
-                            <div class="col-md-6 text-right">
-                                <strong>{{ __('VERHUURDERS') }}</strong><br>
-                                <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                                <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
-                                @if($contract->mandate_owner)
-                                    @if($inspection->user->signature)
-                                        <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
-                                        <p>Met Mandaat</p>
-                                    @else
-                                        <div class="spacer"></div>
-                                    @endif
-                                @else
-                                    @if($contract->signature_owner)
-                                        <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
-                                    @else
-                                        <div class="spacer"></div>
-                                    @endif
-                                @endif
-                            </div>
-                        @else
-                            <div class="col-md-6">
-                                <strong>{{ __('Opdrachtgever') }}</strong><br>
-                                <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                                <p>{{  $situation->client }}</p>
+                            @else
                                 @if($contract->signature_tenant)
                                     <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_tenant) }}">
                                 @else
                                     <div class="spacer"></div>
                                 @endif
-                            </div>
-                            <div class="col-md-6 text-right">
-                                <strong>{{ __('Eigenaar') }}</strong><br>
-                                <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                                <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
+                            @endif
+                        </div>
+                        <div class="col-md-6 text-right">
+                            @if($situation->intrede != 2)
+                                <strong>{{ __('VERHUURDERS') }}</strong><br>
+                            @else
+                                <strong>{{ __('EIGENAAR') }}</strong><br>
+                            @endif
+                            <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                            <p>{{  $contract->situation->owner ? $contract->situation->owner->name : "" }}</p>
+                            @if($contract->mandate_owner)
+                                @if($inspection->user->signature)
+                                    <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $inspection->user->signature) }}" alt="">
+                                    <p>Met Mandaat</p>
+                                @else
+                                    <div class="spacer"></div>
+                                @endif
+                            @else
                                 @if($contract->signature_owner)
                                     <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $contract->signature_owner) }}">
                                 @else
                                     <div class="spacer"></div>
                                 @endif
-                            </div>
-                        @endif
+                            @endif
+                        </div>
                     </div>
                 </section>
             </div>
