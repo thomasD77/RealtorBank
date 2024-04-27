@@ -80,8 +80,8 @@
                     <div class="column-sig">
                         <h3>{{ __('HUURDER') }}</h3>
                         <p>{{  $situation->tenant ? $situation->tenant->name : "" }}</p>
-                        <p> {{  $inspection->address->address }} @if($inspection->address->postBus), {{  $inspection->address->postBus }} @endif
-                        @if($inspection->address->zip || $inspection->address->city), {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>
+{{--                        <p> {{  $inspection->address->address }} @if($inspection->address->postBus), {{  $inspection->address->postBus }} @endif--}}
+{{--                        @if($inspection->address->zip || $inspection->address->city), {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>--}}
                         <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
                         @if(isset($contract))
                             @if($contract->mandate_tenant)
@@ -117,16 +117,18 @@
                     <div class="column-sig">
                         <h3>{{ __('EIGENAAR') }}</h3>
                         <p>{{  $situation->owner ? $situation->owner->name : "" }}</p>
-                        <p> {{  $inspection->address->address }} @if($inspection->address->postBus) ,{{  $inspection->address->postBus }} @endif
-                        @if($inspection->address->zip || $inspection->address->city) , {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>
+                        <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+{{--                        <p> {{  $inspection->address->address }} @if($inspection->address->postBus) ,{{  $inspection->address->postBus }} @endif--}}
+{{--                        @if($inspection->address->zip || $inspection->address->city) , {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif</p>--}}
                     </div>
                     <div class="column-sig">
                         <h3>{{ __('OPDRACHTGEVER') }}</h3>
                         <p>{{  $situation->client }}</p>
-                        @if($situation->address)
-                            <p> {{  $situation->address->address }} @if($situation->address->postBus), {{  $situation->address->postBus }} @endif
-                            @if($situation->address->zip || $situation->address->city), {{  $situation->address->zip }} {{  $situation->address->city }} @endif</p>
-                        @endif
+                        <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+{{--                        @if($situation->address)--}}
+{{--                            <p> {{  $situation->address->address }} @if($situation->address->postBus), {{  $situation->address->postBus }} @endif--}}
+{{--                            @if($situation->address->zip || $situation->address->city), {{  $situation->address->zip }} {{  $situation->address->city }} @endif</p>--}}
+{{--                        @endif--}}
                     </div>
                 @endif
                 <div class="column-sig">
