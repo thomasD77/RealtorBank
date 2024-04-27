@@ -266,24 +266,24 @@
                     @if($damages->isNotEmpty())
                         @foreach($damages as $damage)
                             <div class="row">
-                                <div class="col-md-1">
+                                <div class="col-md-2">
                                     <h6>Naam:</h6>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <h5>{{ $damage->title }}</h5>
                                 </div>
-                                <div class="col-md-1">
+                                <div class="col-md-2">
                                     <h6>Datum:</h6>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <h5>{{ $damage->date }}</h5>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-1">
+                                <div class="col-md-2">
                                     <h6>Beschrijving:</h6>
                                 </div>
-                                <div class="col-md-11">
+                                <div class="col-md-12">
                                     <h5>{{ $damage->description }}</h5>
                                 </div>
                             </div>

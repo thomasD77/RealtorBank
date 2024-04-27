@@ -19,6 +19,7 @@ class Edit extends Component
     public $damages;
     public $date;
     public $lock;
+    public $relation_intrede;
 
     public function mount(Inspection $inspection, RentalClaim $claim)
     {
@@ -31,6 +32,12 @@ class Edit extends Component
             ->where('print_pdf', 1)
             ->orderBy('date', 'desc')
             ->get();
+
+        // Addendum is always a document added to the latest 'INTREDE'
+        $this->relation_intrede = Situation::where('inspection_id', $this->inspection->id)
+            ->where('intrede', 1)
+            ->orderBy('date', 'desc')
+            ->first();
     }
 
     public function changeDate()
