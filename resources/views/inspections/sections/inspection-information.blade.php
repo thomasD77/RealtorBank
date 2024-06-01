@@ -83,16 +83,16 @@
                 <br>
                 {{ __('EstateMetrics') }} | &copy; {{ now()->format('Y') }}
             </div>
+        </div>
 
-            <div>
-                @foreach($logos as $item)
-                    <img src="{{ asset('assets/images/logos/' . $item->file_original) }}"
-                         alt="logo"
-                         width="150"
-                         height="auto"
-                    >
-                @endforeach
-            </div>
+        <div class="row keep">
+            @foreach($logos as $item)
+                <img src="{{ asset('assets/images/logos/' . $item->file_original) }}"
+                     alt="logo"
+                     width="150"
+                     height="auto"
+                >
+            @endforeach
         </div>
 
 
