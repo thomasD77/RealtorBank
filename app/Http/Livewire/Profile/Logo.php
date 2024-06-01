@@ -40,11 +40,11 @@ class Logo extends Component
         $mediaStore = new MediaProfiles();
 
         // We need to send an inspection, not really relevant here but take a random one from this user.
-        $inspection = Inspection::where('user_id', Auth()->user()->id)->first();
+        $user = Auth()->user();
 
         //Save and store
         if( $this->media != [] && $this->media != "") {
-            (new \App\Models\MediaStore)->createAndStoreMedia($this->mediaName, $mediaStore, $inspection, $this->media, $this->folder, $this->relation_id);
+            (new \App\Models\MediaStore)->createAndStoreMedia($this->mediaName, $mediaStore, $user, $this->media, $this->folder, $this->relation_id);
         }
 
         //Render
