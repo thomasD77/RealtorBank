@@ -87,11 +87,13 @@
 
         <div class="row keep">
             @foreach($logos as $item)
-                <img src="{{ asset('assets/images/logos/' . $item->file_original) }}"
-                     alt="logo"
-                     width="150"
-                     height="auto"
-                >
+                <div class="column-half">
+                    <img src="{{ asset('assets/images/logos/' . $item->file_original) }}"
+                         alt="logo"
+                         width="150"
+                         height="auto"
+                    >
+                </div>
             @endforeach
         </div>
 
