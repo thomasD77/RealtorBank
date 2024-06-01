@@ -86,12 +86,11 @@
 
             <div>
                 @foreach($logos as $item)
-                    <div class="img--cover"
-                         style="background-image:
-                         url('{{ asset('assets/images/logos/' . $item->file_original) }}');
-                         background-position: center;
-                         background-size: cover; min-height: 150px">
-                    </div>
+                    <img src="{{ asset('assets/images/logos/' . $item->file_original) }}"
+                         alt="logo"
+                         width="150"
+                         height="auto"
+                    >
                 @endforeach
             </div>
         </div>
