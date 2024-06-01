@@ -43,4 +43,32 @@
         </div>
     @endif
 
+    @if($insp_damages)
+        <div class="inspection-description">
+            <h3>{{ __('Algemene Schade Opmetingen') }}</h3>
+            @foreach($insp_damages as $damage)
+                @if($damage->print_pdf)
+                    <table class="table">
+                        <tr class="damages">
+                            <th>{{ __('Schade') }}</th>
+                            <th>{{ $damage->title }}</th>
+                        </tr>
+
+                        <tr class="row--text--list">
+                            <th>{{ __('Datum') }}</th>
+                            <th>{{ $damage->date }}</th>
+                        </tr>
+                        <tr class="row--text--list">
+                            <th>{{ __('Beschrijving') }}</th>
+                            <th>{{ $damage->description }}</th>
+                        </tr>
+                    </table>
+
+                    @include('inspections.sections.media' , [ 'folder' => 'damages' , 'item' => $damage ])
+
+                @endif
+            @endforeach
+        </div>
+    @endif
+
 </section>

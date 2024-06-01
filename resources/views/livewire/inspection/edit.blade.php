@@ -249,6 +249,17 @@
     </div>
 
     <div class="single-add-property">
+        <ul class="accordion accordion-1 one-open">
+
+            <livewire:damage.index
+                :dynamicArea="null"
+                :Inspection="$inspection"
+            />
+
+        </ul>
+    </div>
+
+    <div class="single-add-property">
         <h3>{{ __('Verwijderen') }}</h3>
         <div class="property-form-group">
 

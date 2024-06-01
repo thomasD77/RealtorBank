@@ -202,6 +202,16 @@ class SituationController extends Controller
 //
 //        $logos = MediaProfiles::where('user_id', Auth()->user()->id)->get();
 //
+//        $insp_damages =  Damage::query()
+//            ->where('inspection_id', $inspection->id)
+//            ->whereNull('basic_id')
+//            ->whereNull('specific_id')
+//            ->whereNull('conform_id')
+//            ->whereNull('general_id')
+//            ->whereNull('outdoor_id')
+//            ->whereNull('technique_id')
+//            ->get();
+//
 //        $pdf = Pdf::loadView('inspections.pdf', [
 //            'inspection' => $inspection,
 //            'basementParam' => $basementParam,
@@ -220,7 +230,8 @@ class SituationController extends Controller
 //            'contract' => $contract,
 //            'claim' => $claim,
 //            'situation' => $situation,
-//            'logos' => $logos
+//            'logos' => $logos,
+//            'insp_damages' => $insp_damages,
 //        ]);
 //
 //

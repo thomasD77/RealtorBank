@@ -28,25 +28,27 @@ class Index extends Component
         $this->dynamicArea = $dynamicArea;
         $this->inspection = $inspection;
 
-        switch ($this->dynamicArea->code){
-            case (BigAreaKey::BASIC->value):
-                $this->paramHelper = 'basic_id';
-                break;
-            case (BigAreaKey::SPECIFIC->value):
-                $this->paramHelper = 'specific_id';
-                break;
-            case (BigAreaKey::CONFORM->value):
-                $this->paramHelper = 'conform_id';
-                break;
-            case (BigAreaKey::GENERAL->value):
-                $this->paramHelper = 'general_id';
-                break;
-            case (BigAreaKey::OUTDOOR->value):
-                $this->paramHelper = 'outdoor_id';
-                break;
-            case (BigAreaKey::TECHNIQUE->value):
-                $this->paramHelper = 'technique_id';
-                break;
+        if($this->dynamicArea) {
+            switch ($this->dynamicArea->code) {
+                case (BigAreaKey::BASIC->value):
+                    $this->paramHelper = 'basic_id';
+                    break;
+                case (BigAreaKey::SPECIFIC->value):
+                    $this->paramHelper = 'specific_id';
+                    break;
+                case (BigAreaKey::CONFORM->value):
+                    $this->paramHelper = 'conform_id';
+                    break;
+                case (BigAreaKey::GENERAL->value):
+                    $this->paramHelper = 'general_id';
+                    break;
+                case (BigAreaKey::OUTDOOR->value):
+                    $this->paramHelper = 'outdoor_id';
+                    break;
+                case (BigAreaKey::TECHNIQUE->value):
+                    $this->paramHelper = 'technique_id';
+                    break;
+            }
         }
     }
 
@@ -57,40 +59,58 @@ class Index extends Component
         $damage->date = now();
         $damage->inspection_id = $this->inspection->id;
 
-        $paramHelper = $this->paramHelper;
-        $damage->$paramHelper = $this->dynamicArea->id;
+        if($this->dynamicArea) {
+            $paramHelper = $this->paramHelper;
+            $damage->$paramHelper = $this->dynamicArea->id;
+        }
 
         $damage->save();
 
         //Render the table
-        switch ($this->dynamicArea->code){
-            case (BigAreaKey::BASIC->value):
-                $this->dynamicArea = BasicArea::find($this->dynamicArea->id);
-                break;
-            case (BigAreaKey::SPECIFIC->value):
-                $this->dynamicArea = SpecificArea::find($this->dynamicArea->id);
-                break;
-            case (BigAreaKey::CONFORM->value):
-                $this->dynamicArea = ConformArea::find($this->dynamicArea->id);
-                break;
-            case (BigAreaKey::GENERAL->value):
-                $this->dynamicArea = General::find($this->dynamicArea->id);
-                break;
-            case (BigAreaKey::OUTDOOR->value):
-                $this->dynamicArea = OutdoorArea::find($this->dynamicArea->id);
-                break;
-            case (BigAreaKey::TECHNIQUE->value):
-                $this->dynamicArea = TechniqueArea::find($this->dynamicArea->id);
-                break;
+        if($this->dynamicArea) {
+            switch ($this->dynamicArea->code) {
+                case (BigAreaKey::BASIC->value):
+                    $this->dynamicArea = BasicArea::find($this->dynamicArea->id);
+                    break;
+                case (BigAreaKey::SPECIFIC->value):
+                    $this->dynamicArea = SpecificArea::find($this->dynamicArea->id);
+                    break;
+                case (BigAreaKey::CONFORM->value):
+                    $this->dynamicArea = ConformArea::find($this->dynamicArea->id);
+                    break;
+                case (BigAreaKey::GENERAL->value):
+                    $this->dynamicArea = General::find($this->dynamicArea->id);
+                    break;
+                case (BigAreaKey::OUTDOOR->value):
+                    $this->dynamicArea = OutdoorArea::find($this->dynamicArea->id);
+                    break;
+                case (BigAreaKey::TECHNIQUE->value):
+                    $this->dynamicArea = TechniqueArea::find($this->dynamicArea->id);
+                    break;
+            }
         }
     }
 
     public function render()
     {
-        $damages = Damage::query()
-            ->where($this->paramHelper, $this->dynamicArea->id)
-            ->orderBy('date', 'desc')
-            ->simplePaginate(5);
+
+        if(!$this->dynamicArea){
+            $damages = Damage::query()
+                ->where('inspection_id', $this->inspection->id)
+                ->whereNull('basic_id')
+                ->whereNull('specific_id')
+                ->whereNull('conform_id')
+                ->whereNull('general_id')
+                ->whereNull('outdoor_id')
+                ->whereNull('technique_id')
+                ->orderBy('date', 'desc')
+                ->simplePaginate(5);
+        }else {
+            $damages = Damage::query()
+                ->where($this->paramHelper, $this->dynamicArea->id)
+                ->orderBy('date', 'desc')
+                ->simplePaginate(5);
+        }
 
         return view('livewire.damage.index', [
             'damages' => $damages

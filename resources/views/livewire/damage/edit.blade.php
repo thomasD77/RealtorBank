@@ -1,10 +1,15 @@
 <div>
     <div class="single-add-property">
-        @if(!$dynamicArea->technique_id)
-            <a href="{{ route('area.' . $urlParam, [ $inspection, $dynamicArea->room, $dynamicArea->$urlParamHelper]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
+        @if($dynamicArea)
+            @if(!$dynamicArea->technique_id)
+                <a href="{{ route('area.' . $urlParam, [ $inspection, $dynamicArea->room, $dynamicArea->$urlParamHelper]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
+            @else
+                <a href="{{ route('area.' . $urlParam, [ $inspection, $dynamicArea->$urlParamHelper]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
+            @endif
         @else
-            <a href="{{ route('area.' . $urlParam, [ $inspection, $dynamicArea->$urlParamHelper]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
+            <a href="{{ route('inspection.edit', $inspection->id) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
         @endif
+
         <h3>{{ $title }}</h3>
         <div class="property-form-group">
 

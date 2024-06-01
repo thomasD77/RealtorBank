@@ -6,6 +6,7 @@ use App\Enums\FloorKey;
 use App\Enums\Status;
 use App\Models\BasicArea;
 use App\Models\Contract;
+use App\Models\Damage;
 use App\Models\Document;
 use App\Models\Floor;
 use App\Models\Inspection;
@@ -210,6 +211,16 @@ class GeneratePDF implements ShouldQueue
 
         $logos = MediaProfiles::where('user_id', $this->user->id)->get();
 
+        $insp_damages =  Damage::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->whereNull('basic_id')
+            ->whereNull('specific_id')
+            ->whereNull('conform_id')
+            ->whereNull('general_id')
+            ->whereNull('outdoor_id')
+            ->whereNull('technique_id')
+            ->get();
+
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $inspection,
             'basementParam' => $basementParam,
@@ -228,7 +239,8 @@ class GeneratePDF implements ShouldQueue
             'contract' => $contract,
             'claim' => $claim,
             'situation' => $this->situation,
-            'logos' => $logos
+            'logos' => $logos,
+            'insp_damages' => $insp_damages,
         ]);
 
         $path = public_path('assets/inspections/pdf/');
