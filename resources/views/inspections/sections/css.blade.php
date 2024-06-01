@@ -37,6 +37,12 @@
         page-break-before: always;
     }
 
+    .inspection-damages
+    {
+        page-break-before: always;
+        page-break-after: always;
+    }
+
     strong {
         margin-bottom: 0;
         padding-right: 8px;

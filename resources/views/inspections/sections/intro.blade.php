@@ -44,7 +44,7 @@
     @endif
 
     @if($insp_damages)
-        <div class="inspection-description">
+        <div class="inspection-damages">
             <h3>{{ __('Algemene Schade Opmetingen') }}</h3>
             @foreach($insp_damages as $damage)
                 @if($damage->print_pdf)
