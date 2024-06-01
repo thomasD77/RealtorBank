@@ -33,6 +33,10 @@
         page-break-after: always;
     }
 
+    .inspection-description {
+        page-break-before: always;
+    }
+
     strong {
         margin-bottom: 0;
         padding-right: 8px;
@@ -190,6 +194,24 @@
         color: white;
         text-align: center;
         line-height: 1.5rem;
+    }
+
+    .footer_first_page {
+        position: fixed;
+        bottom: -25px;
+        left: 0px;
+        right: 0px;
+
+        font-size: 0.8rem !important;
+        font-family: Montserrat, sans-serif;
+
+        /** Extra personal styles **/
+        /*
+        background-color: rgba(135, 140, 155, 0.7);
+        */
+        color: black;
+        text-align: left;
+        line-height: 1.2rem;
     }
 
     .main-sig {

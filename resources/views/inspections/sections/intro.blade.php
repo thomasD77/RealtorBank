@@ -37,8 +37,10 @@
     <br>
 
     @if($inspection->extra)
-        <h3>{{ __('Beschrijving') }}</h3>
-        <p>{{ $inspection->extra }}</p>
+        <div class="inspection-description">
+            <h3>{{ __('Beschrijving') }}</h3>
+            <p>{{ $inspection->extra }}</p>
+        </div>
     @endif
 
 </section>

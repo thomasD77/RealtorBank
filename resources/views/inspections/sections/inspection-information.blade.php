@@ -15,12 +15,12 @@
     <br>
 
     @if($inspection->media->isNotEmpty())
-    <div class="img--cover"
-         style="background-image:
-         url('{{ asset('assets/images/inspections/' . $inspection->media->first()->file_original) }}');
-         background-position: center;
-         background-size: cover; min-height: 450px">
-    </div>
+        <div class="img--cover"
+             style="background-image:
+             url('{{ asset('assets/images/inspections/' . $inspection->media->first()->file_original) }}');
+             background-position: center;
+             background-size: cover; min-height: 450px">
+        </div>
     @endif
 
     <!-- Signatures -->
@@ -65,5 +65,38 @@
 {{--            </div>--}}
 {{--        </div>--}}
 {{--    </section>--}}
+    <div class="footer_first_page">
+        <div class="row keep">
+
+            <hr>
+
+            <div class="column-half">
+                Uitvoerder: {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : ""  }}
+                <br>
+                Telefoon: {{ $inspection->user ? $inspection->user->phone : "" }}
+            </div>
+
+            <div class="column-half">
+                Email: {{ $inspection->user ? $inspection->user->email : ""  }}
+                <br>
+                Bedrijf: {{ $inspection->user ? $inspection->user->companyName : "" }}
+                <br>
+                {{ __('EstateMetrics') }} | &copy; {{ now()->format('Y') }}
+            </div>
+
+            <div>
+                @foreach($logos as $item)
+                    <div class="img--cover"
+                         style="background-image:
+                         url('{{ asset('assets/images/logos/' . $item->file_original) }}');
+                         background-position: center;
+                         background-size: cover; min-height: 150px">
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+
+    </div>
 </section>
 

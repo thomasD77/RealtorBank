@@ -10,6 +10,7 @@ use App\Models\Document;
 use App\Models\Floor;
 use App\Models\Inspection;
 use App\Models\Key;
+use App\Models\MediaProfiles;
 use App\Models\Meter;
 use App\Models\RentalClaim;
 use App\Models\Room;
@@ -204,6 +205,8 @@ class GeneratePDF implements ShouldQueue
             ->orderBy('title', 'asc')
             ->get();
 
+        $logos = MediaProfiles::where('user_id', Auth()->user()->id)->get();
+
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $inspection,
             'basementParam' => $basementParam,
@@ -222,6 +225,7 @@ class GeneratePDF implements ShouldQueue
             'contract' => $contract,
             'claim' => $claim,
             'situation' => $this->situation,
+            'logos' => $logos
         ]);
 
         $path = public_path('assets/inspections/pdf/');
