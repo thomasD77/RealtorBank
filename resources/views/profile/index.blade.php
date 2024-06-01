@@ -16,6 +16,16 @@
     </div>
 
     <div class="dashborad-box mt-5">
+        <h3 class="heading pt-0">{{ __('Logo(s)') }}</h3>
+
+        <div class="section-inforamation mt-5">
+
+            <livewire:profile.logo/>
+
+        </div>
+    </div>
+
+    <div class="dashborad-box mt-5">
         <h3 class="heading pt-0">{{ __('Mijn adresgegevens') }}</h3>
         <div class="section-inforamation">
 
