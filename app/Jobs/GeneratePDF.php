@@ -16,6 +16,7 @@ use App\Models\RentalClaim;
 use App\Models\Room;
 use App\Models\Situation;
 use App\Models\TechniqueArea;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -31,6 +32,7 @@ class GeneratePDF implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     public Inspection $inspection;
     public Situation $situation;
+    public User $user;
 
     public string $fileName;
     public \App\Models\PDF $pdfStore;
@@ -40,13 +42,14 @@ class GeneratePDF implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($inspection, $fileName, $pdfStore, $situation)
+    public function __construct($inspection, $fileName, $pdfStore, $situation, $user)
     {
         //
         $this->inspection = $inspection;
         $this->fileName = $fileName;
         $this->pdfStore = $pdfStore;
         $this->situation = $situation;
+        $this->user = $user;
     }
 
     /**
@@ -205,7 +208,7 @@ class GeneratePDF implements ShouldQueue
             ->orderBy('title', 'asc')
             ->get();
 
-        $logos = MediaProfiles::where('user_id', Auth()->user()->id)->get();
+        $logos = MediaProfiles::where('user_id', $this->user->id)->get();
 
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $inspection,

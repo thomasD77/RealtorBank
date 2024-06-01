@@ -12,6 +12,7 @@ use App\Models\Document;
 use App\Models\Floor;
 use App\Models\Inspection;
 use App\Models\Key;
+use App\Models\MediaProfiles;
 use App\Models\MediaStore;
 use App\Models\Meter;
 use App\Models\Owner;
@@ -199,6 +200,8 @@ class SituationController extends Controller
 //            ->where('situation_id', $situation->id)
 //            ->first();
 //
+//        $logos = MediaProfiles::where('user_id', Auth()->user()->id)->get();
+//
 //        $pdf = Pdf::loadView('inspections.pdf', [
 //            'inspection' => $inspection,
 //            'basementParam' => $basementParam,
@@ -217,6 +220,7 @@ class SituationController extends Controller
 //            'contract' => $contract,
 //            'claim' => $claim,
 //            'situation' => $situation,
+//            'logos' => $logos
 //        ]);
 //
 //
@@ -238,7 +242,9 @@ class SituationController extends Controller
         $pdfStore->status = Status::Pending->value;
         $pdfStore->save();
 
-        $this->dispatch(new GeneratePDF($inspection, $fileName, $pdfStore, $situation));
+        $user = Auth()->user();
+
+        $this->dispatch(new GeneratePDF($inspection, $fileName, $pdfStore, $situation, $user));
         Session::flash('successPDF', 'PDF is aan het genereren.');
 
         return redirect()->back();
