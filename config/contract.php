@@ -4,11 +4,7 @@ return [
 
     'legal_in' => 'Huurder en verhuurder laten, in gemeenschappelijk akkoord, een tegensprekelijke staat van bevinding opmaken.
         De huurder ontvangt het pand in deze staat en dient het pand in zelfde staat terug te geven bij einde van de huurovereenkomst.
-        Schade voortkomend uit normaal gebruik of overmacht wordt niet in rekening gebracht.
-
-        <br><br>
-
-        Dit alles conform de beschrijvingen in art 1728, 1730, 1731 en 1732 van het Burgerlijk Wetboek, gewijzigd door de wetten van 7 nov 1973 en van 29 dec 1983 en van 25 april 2007 maar ook rekening houdende met het feit dat de wetgeving voor het huren van een woning behoort tot de bevoegdheid van de regio\'s:
+        Schade voortkomend uit normaal gebruik of overmacht wordt niet in rekening gebracht. Dit alles conform de beschrijvingen in art 1728, 1730, 1731 en 1732 van het Burgerlijk Wetboek, gewijzigd door de wetten van 7 nov 1973 en van 29 dec 1983 en van 25 april 2007 maar ook rekening houdende met het feit dat de wetgeving voor het huren van een woning behoort tot de bevoegdheid van de regio\'s:
 
         <br><br>
 
@@ -151,9 +147,7 @@ return [
 
     'inspection' => 'Huurder en verhuurder laten, in gemeenschappelijk akkoord, een tegensprekelijke staat van bevinding opmaken. <br>
         De huurder ontvangt het pand in deze staat en dient het pand in zelfde staat terug te geven bij einde van de huurovereenkomst.
-        Schade voortkomend uit normaal gebruik of overmacht wordt niet in rekening gebracht. <br>
-        <br>
-        Dit alles conform de beschrijvingen in art 1728, 1730, 1731 en 1732 van het Burgerlijk Wetboek, gewijzigd door de wetten van 7 nov 1973 en van 29 dec 1983 en van 25 april 2007 maar ook rekening houdende met het feit dat de wetgeving voor het huren van een woning behoort tot de bevoegdheid van de regio’s: <br>
+        Schade voortkomend uit normaal gebruik of overmacht wordt niet in rekening gebracht. Dit alles conform de beschrijvingen in art 1728, 1730, 1731 en 1732 van het Burgerlijk Wetboek, gewijzigd door de wetten van 7 nov 1973 en van 29 dec 1983 en van 25 april 2007 maar ook rekening houdende met het feit dat de wetgeving voor het huren van een woning behoort tot de bevoegdheid van de regio’s: <br>
         <br>
         Op 30 oktober 2017 heeft het Brussels Hoofdstedelijk Gewest de Ordonnantie houdende de regionalisering van de woninghuurovereenkomst dd 27 juli 2017 gepubliceerd in het Belgisch Staatsblad. Deze regelgeving is in werking getreden op 1 januari 2018. In het Brussels Hoofdstedelijk Gewest zijn de regels mbt de woninghuurovereenkomsten thans te vinden in de Brusselse Huisvestingcode. De plaatsbeschrijvingen zijn conform met de bepalingen vermeld in Hoofdstuk II Artikel 220 voor wat de woninghuurovereenkomst betreft en Artikel 253 voor wat de studentenhuurovereenkomst betreft.
         Op 15 maart 2018 werd het Waals Decreet betreffende de woninghuurovereenkomst afgekondigd. Dit decreet werd gepubliceerd in het Belgisch Staatsblad op 28 maart 2018. Deze regelgeving is in werking getreden op 1 september 2018. De plaatsbeschrijving zijn conform met de bepalingen vermeld in Hoofdstuk II sectie 7 Artikel 27 & 28 : état des lieux. <br>
