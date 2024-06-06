@@ -85,7 +85,7 @@
             </div>
         </div>
 
-        <div class="row keep">
+        {{--<div class="row keep">
             @foreach($logos as $item)
                 <div class="column-half">
                     <img src="{{ asset('assets/images/logos/' . $item->file_original) }}"
@@ -95,7 +95,7 @@
                     >
                 </div>
             @endforeach
-        </div>
+        </div>--}}
 
 
     </div>
