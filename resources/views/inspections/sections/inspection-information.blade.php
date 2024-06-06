@@ -70,13 +70,13 @@
 
             <hr>
 
-            <div class="column-half">
+            <div class="column-sig">
                 Uitvoerder: {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : ""  }}
                 <br>
                 Telefoon: {{ $inspection->user ? $inspection->user->phone : "" }}
             </div>
 
-            <div class="column-half">
+            <div class="column-sig">
                 Email: {{ $inspection->user ? $inspection->user->email : ""  }}
                 <br>
                 Bedrijf: {{ $inspection->user ? $inspection->user->companyName : "" }}
@@ -85,7 +85,7 @@
             </div>
 
             @foreach($logos as $item)
-                <div class="column-half">
+                <div class="column-sig">
                     <img src="{{ asset('assets/images/logos/' . $item->file_original) }}"
                          alt="logo"
                          width="150"
