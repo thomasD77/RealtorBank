@@ -13,6 +13,11 @@ class Damage extends Model
 
     protected $guarded = [];
 
+    public function situations()
+    {
+        return $this->belongsToMany(Situation::class)->withPivot('print_pdf', 'archived');
+    }
+
     public function media()
     {
         return $this->hasMany(MediaDamages::class, 'damage_id');

@@ -283,12 +283,30 @@ class Edit extends Component
 
     public function togglePdfPrint(Damage $damage)
     {
-        if($damage['print_pdf']){
-            $damage['print_pdf'] = 0;
-        }else {
-            $damage['print_pdf'] = 1;
+        $pivotRecord = $this->situation->damages()->where('damage_id', $damage->id)->first();
+
+        if ($pivotRecord) {
+            $this->situation->damages()->detach($damage->id);
+        } else {
+            $this->situation->damages()->attach($damage->id);
         }
-        $damage->update();
+    }
+
+    public function archive(Damage $damage)
+    {
+        $pivotRecord = $this->situation->damages()->where('damage_id', $damage->id)->first();
+
+        // Check if exists...
+        if ($pivotRecord) {
+            // Do the Toggle here
+            if($pivotRecord->print_pdf = 1){
+                $this->situation->damages()->updateExistingPivot($damage->id, ['print_pdf'=> 0, 'archived' => 0]);
+            }else {
+                $this->situation->damages()->updateExistingPivot($damage->id, ['print_pdf'=> 0, 'archived' => 1]);
+            }
+        } else {
+            $this->situation->damages()->attach($damage->id , ['print_pdf'=> 0, 'archived' => 1]);
+        }
     }
 
     public function render()

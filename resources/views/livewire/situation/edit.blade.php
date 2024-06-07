@@ -365,6 +365,7 @@
                                     <th>{{ __('Titel') }}</th>
                                     <th>{{ __('Datum') }}</th>
                                     <th>{{ __('PDF') }}</th>
+                                    <th>{{ __('Archief') }}</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -374,9 +375,13 @@
                                         <td>{{ $damage->title }}</td>
                                         <td>{{ $damage->date }}</td>
                                         <td><input type="checkbox"
-                                                   @if($damage->print_pdf) checked @endif
+                                                   @if($damage->situations->where('id', $situation->id)->first()?->pivot->print_pdf == 1) checked @endif
                                                    wire:click="togglePdfPrint({{ $damage }})"
-                                                   wire:key="{{ $damage->id }}">
+                                                   wire:key="pdf_print{{ $damage->id }}">
+                                        </td>
+                                        <td><input type="checkbox"
+                                                   wire:click="archive({{ $damage }})"
+                                                   wire:key="archive-{{ $damage->id }}">
                                         </td>
                                         <td class="edit">
                                             <a href="{{ route('damage.edit', [ $inspection, $damage]) }}"><i class="fa fa-pencil-alt text-dark"></i></a>
