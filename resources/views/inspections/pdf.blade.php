@@ -14,11 +14,11 @@
     @if($inspection->address->zip || $inspection->address->city), {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
 </header>
 
-        {{--@include('inspections.sections.inspection-information')--}}
+        @include('inspections.sections.inspection-information')
 
         @include('inspections.sections.intro')
 
-           {{-- @include('inspections.rooms.basement' , ['rooms' => $basementParam ])
+            @include('inspections.rooms.basement' , ['rooms' => $basementParam ])
             @include('inspections.rooms.groundFloor' , ['rooms' => $groundFloorParam ])
             @include('inspections.rooms.upperFloorParam' , ['rooms' => $upperFloorParam ])
             @include('inspections.rooms.atticParam' , ['rooms' => $atticParam ])
@@ -36,7 +36,7 @@
 
         @include('inspections.sections.documents')
 
-        @include('inspections.sections.consensus')--}}
+        @include('inspections.sections.consensus')
 
 <footer>
     {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : ""  }} | {{ __('EstateMetrics') }} | &copy; {{ now()->format('Y') }}
