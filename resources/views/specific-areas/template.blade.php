@@ -43,6 +43,11 @@
                 :Inspection="$inspection"
             />
 
+            <livewire:general.rename-specific
+                :Inspection="$inspection"
+                :specific="$specific"
+            />
+
             <livewire:specific.elements.media
                 :specificArea="$specificArea"
             />

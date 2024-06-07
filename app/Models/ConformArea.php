@@ -104,7 +104,7 @@ class ConformArea extends Model
     public static function getHeatingBrands() :array
     {
         return $data = [
-            'Bosh',
+            'Bosch',
             'Honeywell',
             'Junkers',
             'Nest',

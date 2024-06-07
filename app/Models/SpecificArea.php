@@ -270,7 +270,7 @@ class SpecificArea extends Model
     public static function getHeatingBrands() :array
     {
         return $data = [
-            'Bosh',
+            'Bosch',
             'Honeywell',
             'Junkers',
             'Nest',
@@ -284,7 +284,7 @@ class SpecificArea extends Model
     public static function getCookerBrands() :array
     {
         return $data = [
-            'Bosh',
+            'Bosch',
             'Honeywell',
             'Junkers',
             'Nest',
@@ -318,7 +318,7 @@ class SpecificArea extends Model
             'AEG',
             'ATAG',
             'Beko',
-            'Bosh',
+            'Bosch',
             'Ikea',
             'Miele',
             'Novy',
