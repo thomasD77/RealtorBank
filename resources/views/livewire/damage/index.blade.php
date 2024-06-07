@@ -1,7 +1,7 @@
 <div class="single-add-property">
 
     <h3 class="d-flex justify-content-between" data-toggle="collapse" href="#collapseDamage" role="button" aria-expanded="false" aria-controls="collapseExample">
-        {{ __('Schade opmetingen') }}
+        {{ __('Algemene Schade opmetingen') }}
         <i class="fa fa-arrow-down"></i>
     </h3>
 

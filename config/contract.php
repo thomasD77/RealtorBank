@@ -14,9 +14,6 @@ return [
         <br><br>
 
         Het Vlaams Woninghuurdecreet van 9 nov 2018 is verschenen op 7 December 2018 en in werking getreden op 1 januari 2019 en bevat regels voor de woninghuurovereenkomst en de studentenhuurovereenkomst. Tevens werd voorzien in een aantal specifieke bepalingen betreffende de medehuur. De plaatsbeschrijvingen voor woningverhuur zijn conform met de bepalingen vermeld in art 9 in Hoofdstuk II en art 39 in hoofdstuk IV en voor wat de huurovereenkomst voor huisvesting van studenten betreft in Artikel 56 bij Titel III.
-
-        <br><br>
-
         Het rapport waarin de staat van bevinding wordt opgenomen is gedetailleerd en wordt opgenomen net voor of in het begin van de huurovereenkomst.
         Bij einde van de huurovereenkomst kan schade objectief worden vastgesteld aan de hand van deze staat van bevinding.
         Het rapport van staat van bevinding maakt onverdeeld deel uit van de huurovereenkomst en dient eveneens geregistreerd te worden.
@@ -31,7 +28,7 @@ return [
             •	De stabiliteit en bodemtoestand van het onroerende goed worden niet geïnspecteerd. <br>
             •	Er wordt verondersteld dat alle installaties (gas, water, elektriciteit, etc.) en alle toestellen (rookmelders, keukentoestellen, etc.) naar behoren werken. Dit wordt niet onderzocht. Het is aan de huurder om de toestellen te onderhouden. <br>
             •	Er wordt verondersteld dat alle afvoeren en/of opslag voor hemelwater naar behoren werken. <br>
-            •	Het beschreven goed is vrij van waterschade. <br>
+            •	Het beschreven goed is vrij van waterschade.
 
         <br><br>
 
