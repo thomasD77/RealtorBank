@@ -428,7 +428,7 @@
                     <small>*{{ __('Tip: zorg dat je vorige intrede steeds een datum bevat.') }}</small>
                     <br>
                     <small style="font-weight: bold">
-                        @if($last_intrede->date)
+                        @if($last_intrede && $last_intrede->date)
                             {{ __('Laatste intrede opgemaakt op:') }} {{ \Illuminate\Support\Carbon::parse($last_intrede->date)->format('d-m-Y') }}
                         @else
                             {{ __('Er werd geen datum geselecteerd voor de (vorige) intrede.') }}
