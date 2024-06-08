@@ -275,30 +275,8 @@
 
     @include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::OutdoorArea->value ])
 
-    @if($item->damages)
-        @foreach($item->damages as $damage)
-            @if($damage->print_pdf)
-                <table class="table">
-                    <tr class="damages">
-                        <th>{{ $room->floor->title }} | {{ $item->room->title }} | {{  $item->outdoor->title }} >> {{ __('Schade') }}</th>
-                        <th>{{ $damage->title }}</th>
-                    </tr>
+    @include('inspections.sections.damages' , [ 'damages' => $item->damages, 'title' => $item->outdoor->title ])
 
-                    <tr class="row--text--list">
-                        <th>{{ __('Datum') }}</th>
-                        <th>{{ $damage->date }}</th>
-                    </tr>
-                    <tr class="row--text--list">
-                        <th>{{ __('Beschrijving') }}</th>
-                        <th>{{ $damage->description }}</th>
-                    </tr>
-                </table>
-
-                @include('inspections.sections.media' , [ 'folder' => 'damages' , 'item' => $damage ])
-
-            @endif
-        @endforeach
-    @endif
 @endforeach
 
 

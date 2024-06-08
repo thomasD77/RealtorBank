@@ -147,30 +147,7 @@
 
     @include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::BasicArea->value ])
 
-    @if($item->damages)
-        @foreach($item->damages as $damage)
-            @if($damage->print_pdf)
-                <table class="table">
-                    <tr class="damages">
-                        <th>{{ $room->floor->title }} | {{ $item->room->title }} | {{  $item->area->title }} >> {{ __('Schade') }}</th>
-                        <th>{{ $damage->title }}</th>
-                    </tr>
-
-                    <tr class="row--text--list">
-                        <th>{{ __('Datum') }}</th>
-                        <th>{{ $damage->date }}</th>
-                    </tr>
-                    <tr class="row--text--list">
-                        <th>{{ __('Beschrijving') }}</th>
-                        <th>{{ $damage->description }}</th>
-                    </tr>
-                </table>
-
-                @include('inspections.sections.media' , [ 'folder' => 'damages' , 'item' => $damage ])
-
-            @endif
-        @endforeach
-    @endif
+    @include('inspections.sections.damages' , [ 'damages' => $item->damages, 'title' => $item->area->title ])
 
 @endforeach
 
