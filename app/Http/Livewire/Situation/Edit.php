@@ -69,6 +69,8 @@ class Edit extends Component
 
     public $showArchived = false;
 
+    public $last_intrede;
+
     use WithFileUploads;
     use WithPagination;
 
@@ -135,6 +137,15 @@ class Edit extends Component
             ->latest()
             ->get();
         $this->pdfs = $pdfs;
+
+        // Get the latest INTREDE
+        $last_intrede = Situation::query()
+            ->where('intrede', 1)
+            ->where('inspection_id', $inspection->id)
+            ->orderBy('date', 'desc')
+            ->first();
+
+        $this->last_intrede = $last_intrede;
     }
 
     public function deletePDF($pdf)
@@ -249,8 +260,14 @@ class Edit extends Component
 
     public function deleteSituation()
     {
+        $damages = $this->situation->damages()->where('situation_id', $this->situation->id)->get();
+        foreach ($damages as $damage){
+            $this->situation->damages()->detach($damage->id);
+        }
+
         $situation = $this->situation;
         $situation->delete();
+
 
         return redirect()->route('situation.index', $this->inspection);
     }
@@ -338,6 +355,7 @@ class Edit extends Component
             ->pluck('id');
 
         $pivotArchivedIds = DamagesSituation::where('archived', 1)
+            ->where('situation_id', $this->situation->id)
             ->whereIn('damage_id', $damageIds)
             ->pluck('damage_id');
 

@@ -360,7 +360,6 @@
                 </button>
             </div>
             <h3>{{ __('Schade') }}</h3>
-
             <div class="property-form-group">
                 @if($damages->isNotEmpty())
                     <div class="section-body listing-table">
@@ -387,7 +386,7 @@
                                 @foreach($damages as $damage)
                                     <tr>
                                         <td>{{ $damage->title }}</td>
-                                        <td>{{ $damage->date }}</td>
+                                        <td>{{ \Illuminate\Support\Carbon::parse($damage->date)->format('d-m-Y') }}</td>
                                         @if(!$showArchived)
                                             <td><input type="checkbox"
                                                        @if($damage->situations()->where('damage_id', $damage->id)->where('situation_id', $situation->id)->pluck('print_pdf')->first() == 1) checked @endif
@@ -424,6 +423,17 @@
                             </div>
                         </div>
                     </div>
+                    <small>*{{ __('Bij een nieuwe beschrijving worden telkens alle schade gevallen gemarkeerd t.e.m. de vorige geregistreerde intrede. De schade voor deze intrede werd gearchiveerd.') }}</small>
+                    <br>
+                    <small>*{{ __('Tip: zorg dat je vorige intrede steeds een datum bevat.') }}</small>
+                    <br>
+                    <small style="font-weight: bold">
+                        @if($last_intrede->date)
+                            {{ __('Laatste intrede opgemaakt op:') }} {{ \Illuminate\Support\Carbon::parse($last_intrede->date)->format('d-m-Y') }}
+                        @else
+                            {{ __('Er werd geen datum geselecteerd voor de (vorige) intrede.') }}
+                        @endif
+                    </small>
                 @else
                 <p>{{ __('Er werd geen schade opgenomen.') }}</p>
                 @endif
