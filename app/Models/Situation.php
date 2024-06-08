@@ -30,7 +30,7 @@ class Situation extends Model
 
     public function damages()
     {
-        return $this->belongsToMany(Damage::class)->withPivot('print_pdf', 'archived');
+        return $this->belongsToMany(Damage::class, 'damages_situations')->withPivot('print_pdf', 'archived');
     }
 
     public function media()

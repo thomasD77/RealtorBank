@@ -354,7 +354,13 @@
         @endif
 
         <div class="single-add-property">
+            <div class="d-flex justify-content-end">
+                <button class="border-0 {{ $showArchived ? 'btn-common btn-sm' : 'btn-dark btn' }}  mb-3" wire:click="toggleArchived">
+                    {{ $showArchived ? 'Archief' : 'Actief' }}
+                </button>
+            </div>
             <h3>{{ __('Schade') }}</h3>
+
             <div class="property-form-group">
                 @if($damages->isNotEmpty())
                     <div class="section-body listing-table">
@@ -364,8 +370,16 @@
                                 <tr>
                                     <th>{{ __('Titel') }}</th>
                                     <th>{{ __('Datum') }}</th>
-                                    <th>{{ __('PDF') }}</th>
-                                    <th>{{ __('Archief') }}</th>
+                                    @if(!$showArchived)
+                                        <th>{{ __('PDF') }}</th>
+                                    @endif
+                                    <th>
+                                        @if(!$showArchived)
+                                            {{ __('Archiveer') }}
+                                        @else
+                                            {{ __('Activeer') }}
+                                        @endif
+                                    </th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -374,14 +388,24 @@
                                     <tr>
                                         <td>{{ $damage->title }}</td>
                                         <td>{{ $damage->date }}</td>
-                                        <td><input type="checkbox"
-                                                   @if($damage->situations->where('id', $situation->id)->first()?->pivot->print_pdf == 1) checked @endif
-                                                   wire:click="togglePdfPrint({{ $damage }})"
-                                                   wire:key="pdf_print{{ $damage->id }}">
-                                        </td>
-                                        <td><input type="checkbox"
-                                                   wire:click="archive({{ $damage }})"
-                                                   wire:key="archive-{{ $damage->id }}">
+                                        @if(!$showArchived)
+                                            <td><input type="checkbox"
+                                                       @if($damage->situations()->where('damage_id', $damage->id)->where('situation_id', $situation->id)->pluck('print_pdf')->first() == 1) checked @endif
+                                                       wire:click="togglePdfPrint({{ $damage->id }})"
+                                                       wire:key="pdf_print-{{ $damage->id }}">
+                                            </td>
+                                        @endif
+                                        <td>
+                                            <button wire:click="archive({{ $damage->id }})"
+                                                    wire:key="archive-{{ $damage->id }}"
+                                                    class=" {{ $showArchived ? 'btn-common btn-sm border-0' : 'btn-dark btn' }}"
+                                            >
+                                            @if(!$showArchived)
+                                                <i class="fa fa-archive"></i>
+                                            @else
+                                                <i class="fa fa-refresh"></i>
+                                            @endif
+                                            </button>
                                         </td>
                                         <td class="edit">
                                             <a href="{{ route('damage.edit', [ $inspection, $damage]) }}"><i class="fa fa-pencil-alt text-dark"></i></a>
