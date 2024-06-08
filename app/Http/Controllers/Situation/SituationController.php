@@ -108,202 +108,202 @@ class SituationController extends Controller
     }
 
     //This function is only for testing purpose
-    public function genereatePDF(Inspection $inspection, Situation $situation)
-    {
-        $documents = Document::query()
-            ->whereNotNull('title')
-            ->orWhereNotNull('reference')
-            ->orWhereNotNull('date')
-            ->orHas('media', '>', 0)
-            ->get();
-        $documents = $documents->where('inspection_id', $inspection->id);
-
-        $meters = Meter::query()
-            ->whereNotNull('reference')
-            ->orWhereNotNull('EAN')
-            ->orWhereNotNull('date')
-            ->orHas('media', '>', 0)
-            ->get();
-        $meters = $meters->where('inspection_id', $inspection->id);
-
-        $keys = Key::query()
-            ->whereNotNull('type')
-            ->orWhereNotNull('count')
-            ->orWhereNotNull('extra')
-            ->orHas('media', '>', 0)
-            ->get();
-        $keys = $keys->where('inspection_id', $inspection->id);
-
-        $techniqueArea = TechniqueArea::query()
-            ->whereNotNull('type')
-            ->orWhereNotNull('analysis')
-            ->orWhereNotNull('fuel')
-            ->orWhereNotNull('brand')
-            ->orWhereNotNull('model')
-            ->orWhereNotNull('count')
-            ->orWhereNotNull('extra')
-            ->orHas('media', '>', 0)
-            ->get();
-        $techniqueArea = $techniqueArea->where('inspection_id', $inspection->id);
-
-        $claim = RentalClaim::query()
-            ->where('inspection_id', $inspection->id)
-            ->where('situation_id', $situation->id)
-            ->first();
-
-        $basementParam = Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-        ])->where('inspection_id', $inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::BasementFloor)->first()->id)
-            ->orderBy('title', 'asc')
-            ->get();
-
-        $groundFloorParam = Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-        ])->where('inspection_id', $inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::GroundFloor)->first()->id)
-            ->orderBy('order', 'asc')
-            ->get();
-
-        $upperFloorParam = Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-        ])->where('inspection_id', $inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::UpperFloor)->first()->id)
-            ->orderBy('order', 'asc')
-            ->get();
-
-        $atticParam = Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-        ])->where('inspection_id', $inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::Attic)->first()->id)
-            ->orderBy('title', 'asc')
-            ->get();
-
-        $garageParam = Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-        ])->where('inspection_id', $inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::Garage)->first()->id)
-            ->orderBy('title', 'asc')
-            ->get();
-
-        $buildingParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])
-            ->where('inspection_id', $inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::Building)->first()->id)
-            ->orderBy('title', 'asc')
-            ->get();
-
-        $driveWayParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])
-            ->where('inspection_id', $inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::DriveWay)->first()->id)
-            ->orderBy('title', 'asc')
-            ->get();
-
-        $outHouseInParam =  Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-        ])->where('inspection_id', $inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::OutHouseIn)->first()->id)
-            ->orderBy('title', 'asc')
-            ->get();
-
-        $outHouseExParam =  Room::with([
-            'basicAreas',
-            'basicAreas.area',
-            'specificAreas', 'specificAreas.specific',
-            'conformAreas',
-            'conformAreas.conform'
-        ])->where('inspection_id', $inspection->id)
-            ->where('floor_id', Floor::where('code', FloorKey::OutHouseEx)->first()->id)
-            ->orderBy('title', 'asc')
-            ->get();
-
-        $contract =  Contract::where('inspection_id', $inspection->id)
-            ->where('situation_id', $situation->id)
-            ->first();
-
-        $logos = MediaProfiles::where('user_id', Auth()->user()->id)->get();
-
-        $insp_damages =  Damage::query()
-            ->where('inspection_id', $inspection->id)
-            ->whereNull('basic_id')
-            ->whereNull('specific_id')
-            ->whereNull('conform_id')
-            ->whereNull('general_id')
-            ->whereNull('outdoor_id')
-            ->whereNull('technique_id')
-            ->get();
-
-        $pdf = Pdf::loadView('inspections.pdf', [
-            'inspection' => $inspection,
-            'basementParam' => $basementParam,
-            'groundFloorParam' => $groundFloorParam,
-            'upperFloorParam' => $upperFloorParam,
-            'atticParam' => $atticParam,
-            'garageParam' => $garageParam,
-            'buildingParam' => $buildingParam,
-            'driveWayParam' => $driveWayParam,
-            'outHouseInParam' => $outHouseInParam,
-            'outHouseExParam' => $outHouseExParam,
-            'techniqueArea' => $techniqueArea,
-            'meters' => $meters,
-            'documents' => $documents,
-            'keys' => $keys,
-            'contract' => $contract,
-            'claim' => $claim,
-            'situation' => $situation,
-            'logos' => $logos,
-            'insp_damages' => $insp_damages,
-        ]);
-
-
-
-        return $pdf->stream('plaatsbeschrijving-' . '#' . $inspection->id . '.pdf');
-    }
-
 //    public function genereatePDF(Inspection $inspection, Situation $situation)
 //    {
-//        $rawFileName = time(). '-INSP-' . $inspection->id . '-plaatsbeschrijving.pdf';
-//        $cleanFileName = Str::limit($inspection->title, 20, '...') . '-' . now()->format('d-m-Y') . '-plaatsbeschrijving.pdf';
-//        $fileName = MediaStore::getValidFilename($rawFileName);
+//        $documents = Document::query()
+//            ->whereNotNull('title')
+//            ->orWhereNotNull('reference')
+//            ->orWhereNotNull('date')
+//            ->orHas('media', '>', 0)
+//            ->get();
+//        $documents = $documents->where('inspection_id', $inspection->id);
 //
-//        $pdfStore = new \App\Models\PDF();
-//        $pdfStore->inspection_id = $inspection->id;
-//        $pdfStore->situation_id = $situation->id;
-//        $pdfStore->title = $cleanFileName;
-//        $pdfStore->file_original = $fileName;
-//        $pdfStore->status = Status::Pending->value;
-//        $pdfStore->save();
+//        $meters = Meter::query()
+//            ->whereNotNull('reference')
+//            ->orWhereNotNull('EAN')
+//            ->orWhereNotNull('date')
+//            ->orHas('media', '>', 0)
+//            ->get();
+//        $meters = $meters->where('inspection_id', $inspection->id);
 //
-//        $user = Auth()->user();
+//        $keys = Key::query()
+//            ->whereNotNull('type')
+//            ->orWhereNotNull('count')
+//            ->orWhereNotNull('extra')
+//            ->orHas('media', '>', 0)
+//            ->get();
+//        $keys = $keys->where('inspection_id', $inspection->id);
 //
-//        $this->dispatch(new GeneratePDF($inspection, $fileName, $pdfStore, $situation, $user));
-//        Session::flash('successPDF', 'PDF is aan het genereren.');
+//        $techniqueArea = TechniqueArea::query()
+//            ->whereNotNull('type')
+//            ->orWhereNotNull('analysis')
+//            ->orWhereNotNull('fuel')
+//            ->orWhereNotNull('brand')
+//            ->orWhereNotNull('model')
+//            ->orWhereNotNull('count')
+//            ->orWhereNotNull('extra')
+//            ->orHas('media', '>', 0)
+//            ->get();
+//        $techniqueArea = $techniqueArea->where('inspection_id', $inspection->id);
 //
-//        return redirect()->back();
+//        $claim = RentalClaim::query()
+//            ->where('inspection_id', $inspection->id)
+//            ->where('situation_id', $situation->id)
+//            ->first();
+//
+//        $basementParam = Room::with([
+//            'basicAreas',
+//            'basicAreas.area',
+//            'specificAreas', 'specificAreas.specific',
+//            'conformAreas',
+//            'conformAreas.conform'
+//        ])->where('inspection_id', $inspection->id)
+//            ->where('floor_id', Floor::where('code', FloorKey::BasementFloor)->first()->id)
+//            ->orderBy('title', 'asc')
+//            ->get();
+//
+//        $groundFloorParam = Room::with([
+//            'basicAreas',
+//            'basicAreas.area',
+//            'specificAreas', 'specificAreas.specific',
+//            'conformAreas',
+//            'conformAreas.conform'
+//        ])->where('inspection_id', $inspection->id)
+//            ->where('floor_id', Floor::where('code', FloorKey::GroundFloor)->first()->id)
+//            ->orderBy('order', 'asc')
+//            ->get();
+//
+//        $upperFloorParam = Room::with([
+//            'basicAreas',
+//            'basicAreas.area',
+//            'specificAreas', 'specificAreas.specific',
+//            'conformAreas',
+//            'conformAreas.conform'
+//        ])->where('inspection_id', $inspection->id)
+//            ->where('floor_id', Floor::where('code', FloorKey::UpperFloor)->first()->id)
+//            ->orderBy('order', 'asc')
+//            ->get();
+//
+//        $atticParam = Room::with([
+//            'basicAreas',
+//            'basicAreas.area',
+//            'specificAreas', 'specificAreas.specific',
+//            'conformAreas',
+//            'conformAreas.conform'
+//        ])->where('inspection_id', $inspection->id)
+//            ->where('floor_id', Floor::where('code', FloorKey::Attic)->first()->id)
+//            ->orderBy('title', 'asc')
+//            ->get();
+//
+//        $garageParam = Room::with([
+//            'basicAreas',
+//            'basicAreas.area',
+//            'specificAreas', 'specificAreas.specific',
+//            'conformAreas',
+//            'conformAreas.conform'
+//        ])->where('inspection_id', $inspection->id)
+//            ->where('floor_id', Floor::where('code', FloorKey::Garage)->first()->id)
+//            ->orderBy('title', 'asc')
+//            ->get();
+//
+//        $buildingParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])
+//            ->where('inspection_id', $inspection->id)
+//            ->where('floor_id', Floor::where('code', FloorKey::Building)->first()->id)
+//            ->orderBy('title', 'asc')
+//            ->get();
+//
+//        $driveWayParam = Room::with(['outdoorAreas', 'outdoorAreas.outdoor'])
+//            ->where('inspection_id', $inspection->id)
+//            ->where('floor_id', Floor::where('code', FloorKey::DriveWay)->first()->id)
+//            ->orderBy('title', 'asc')
+//            ->get();
+//
+//        $outHouseInParam =  Room::with([
+//            'basicAreas',
+//            'basicAreas.area',
+//            'specificAreas', 'specificAreas.specific',
+//            'conformAreas',
+//            'conformAreas.conform'
+//        ])->where('inspection_id', $inspection->id)
+//            ->where('floor_id', Floor::where('code', FloorKey::OutHouseIn)->first()->id)
+//            ->orderBy('title', 'asc')
+//            ->get();
+//
+//        $outHouseExParam =  Room::with([
+//            'basicAreas',
+//            'basicAreas.area',
+//            'specificAreas', 'specificAreas.specific',
+//            'conformAreas',
+//            'conformAreas.conform'
+//        ])->where('inspection_id', $inspection->id)
+//            ->where('floor_id', Floor::where('code', FloorKey::OutHouseEx)->first()->id)
+//            ->orderBy('title', 'asc')
+//            ->get();
+//
+//        $contract =  Contract::where('inspection_id', $inspection->id)
+//            ->where('situation_id', $situation->id)
+//            ->first();
+//
+//        $logos = MediaProfiles::where('user_id', Auth()->user()->id)->get();
+//
+//        $insp_damages =  Damage::query()
+//            ->where('inspection_id', $inspection->id)
+//            ->whereNull('basic_id')
+//            ->whereNull('specific_id')
+//            ->whereNull('conform_id')
+//            ->whereNull('general_id')
+//            ->whereNull('outdoor_id')
+//            ->whereNull('technique_id')
+//            ->get();
+//
+//        $pdf = Pdf::loadView('inspections.pdf', [
+//            'inspection' => $inspection,
+//            'basementParam' => $basementParam,
+//            'groundFloorParam' => $groundFloorParam,
+//            'upperFloorParam' => $upperFloorParam,
+//            'atticParam' => $atticParam,
+//            'garageParam' => $garageParam,
+//            'buildingParam' => $buildingParam,
+//            'driveWayParam' => $driveWayParam,
+//            'outHouseInParam' => $outHouseInParam,
+//            'outHouseExParam' => $outHouseExParam,
+//            'techniqueArea' => $techniqueArea,
+//            'meters' => $meters,
+//            'documents' => $documents,
+//            'keys' => $keys,
+//            'contract' => $contract,
+//            'claim' => $claim,
+//            'situation' => $situation,
+//            'logos' => $logos,
+//            'insp_damages' => $insp_damages,
+//        ]);
+//
+//
+//
+//        return $pdf->stream('plaatsbeschrijving-' . '#' . $inspection->id . '.pdf');
 //    }
+
+    public function genereatePDF(Inspection $inspection, Situation $situation)
+    {
+        $rawFileName = time(). '-INSP-' . $inspection->id . '-plaatsbeschrijving.pdf';
+        $cleanFileName = Str::limit($inspection->title, 20, '...') . '-' . now()->format('d-m-Y') . '-plaatsbeschrijving.pdf';
+        $fileName = MediaStore::getValidFilename($rawFileName);
+
+        $pdfStore = new \App\Models\PDF();
+        $pdfStore->inspection_id = $inspection->id;
+        $pdfStore->situation_id = $situation->id;
+        $pdfStore->title = $cleanFileName;
+        $pdfStore->file_original = $fileName;
+        $pdfStore->status = Status::Pending->value;
+        $pdfStore->save();
+
+        $user = Auth()->user();
+
+        $this->dispatch(new GeneratePDF($inspection, $fileName, $pdfStore, $situation, $user));
+        Session::flash('successPDF', 'PDF is aan het genereren.');
+
+        return redirect()->back();
+    }
 
     public function signature(Request $request)
     {
