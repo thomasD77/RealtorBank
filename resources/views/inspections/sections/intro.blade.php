@@ -47,7 +47,7 @@
         <div class="inspection-damages">
             <h3>{{ __('Algemene Schade Opmetingen') }}</h3>
             @foreach($insp_damages as $damage)
-                @if($damage->print_pdf)
+                @if($damage->situations()->where('damage_id', $damage->id)->where('situation_id', $situation->id)->pluck('print_pdf')->first() == 1)
                     <table class="table">
                         <tr class="damages">
                             <th>{{ __('Schade') }}</th>

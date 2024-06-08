@@ -53,7 +53,7 @@
         font-family: Montserrat, sans-serif;
         border-collapse: collapse;
         width: 100%;
-        padding-top: 15px;
+        padding-top: 50px;
     }
 
     section {
@@ -70,16 +70,16 @@
         text-align: left;
         color: white;
         background-color:  #f2f2f2;
-        font-size: 14px;
+        font-size: 16px;
         page-break-before: always;
-        font-weight: normal;
+        font-weight: bold;
     }
     .row--head th {
         background-color: rgba(36, 50, 74, 0.7); !important;
         text-transform: uppercase;
     }
     .row--head--list tr {
-        padding: 2rem;
+        padding: 5rem;
     }
     .row--head--list th {
         background-color: rgba(36, 50, 74, 0.7); !important;

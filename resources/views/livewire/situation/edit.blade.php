@@ -354,6 +354,11 @@
         @endif
 
         <div class="single-add-property">
+            <div class="d-flex justify-content-end">
+                <button class="border-0 {{ $showArchived ? 'btn-common btn-sm' : 'btn-dark btn' }}  mb-3" wire:click="toggleArchived">
+                    {{ $showArchived ? 'Archief' : 'Actief' }}
+                </button>
+            </div>
             <h3>{{ __('Schade') }}</h3>
             <div class="property-form-group">
                 @if($damages->isNotEmpty())
@@ -364,7 +369,16 @@
                                 <tr>
                                     <th>{{ __('Titel') }}</th>
                                     <th>{{ __('Datum') }}</th>
-                                    <th>{{ __('PDF') }}</th>
+                                    @if(!$showArchived)
+                                        <th>{{ __('PDF') }}</th>
+                                    @endif
+                                    <th>
+                                        @if(!$showArchived)
+                                            {{ __('Archiveer') }}
+                                        @else
+                                            {{ __('Activeer') }}
+                                        @endif
+                                    </th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -372,11 +386,25 @@
                                 @foreach($damages as $damage)
                                     <tr>
                                         <td>{{ $damage->title }}</td>
-                                        <td>{{ $damage->date }}</td>
-                                        <td><input type="checkbox"
-                                                   @if($damage->print_pdf) checked @endif
-                                                   wire:click="togglePdfPrint({{ $damage }})"
-                                                   wire:key="{{ $damage->id }}">
+                                        <td>{{ \Illuminate\Support\Carbon::parse($damage->date)->format('d-m-Y') }}</td>
+                                        @if(!$showArchived)
+                                            <td><input type="checkbox"
+                                                       @if($damage->situations()->where('damage_id', $damage->id)->where('situation_id', $situation->id)->pluck('print_pdf')->first() == 1) checked @endif
+                                                       wire:click="togglePdfPrint({{ $damage->id }})"
+                                                       wire:key="pdf_print-{{ $damage->id }}">
+                                            </td>
+                                        @endif
+                                        <td>
+                                            <button wire:click="archive({{ $damage->id }})"
+                                                    wire:key="archive-{{ $damage->id }}"
+                                                    class=" {{ $showArchived ? 'btn-common btn-sm border-0' : 'btn-dark btn' }}"
+                                            >
+                                            @if(!$showArchived)
+                                                <i class="fa fa-archive"></i>
+                                            @else
+                                                <i class="fa fa-refresh"></i>
+                                            @endif
+                                            </button>
                                         </td>
                                         <td class="edit">
                                             <a href="{{ route('damage.edit', [ $inspection, $damage]) }}"><i class="fa fa-pencil-alt text-dark"></i></a>
@@ -395,6 +423,17 @@
                             </div>
                         </div>
                     </div>
+                    <small>*{{ __('Bij een nieuwe beschrijving worden telkens alle schade gevallen gemarkeerd t.e.m. de vorige geregistreerde intrede. De schade voor deze intrede werd gearchiveerd.') }}</small>
+                    <br>
+                    <small>*{{ __('Tip: zorg dat je vorige intrede steeds een datum bevat.') }}</small>
+                    <br>
+                    <small style="font-weight: bold">
+                        @if($last_intrede->date)
+                            {{ __('Laatste intrede opgemaakt op:') }} {{ \Illuminate\Support\Carbon::parse($last_intrede->date)->format('d-m-Y') }}
+                        @else
+                            {{ __('Er werd geen datum geselecteerd voor de (vorige) intrede.') }}
+                        @endif
+                    </small>
                 @else
                 <p>{{ __('Er werd geen schade opgenomen.') }}</p>
                 @endif

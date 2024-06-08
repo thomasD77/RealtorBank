@@ -53,32 +53,9 @@
 
         @include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::Techniques->value ])
 
-        @if($item->damages)
-                @foreach($item->damages as $damage)
-                    @if($damage->print_pdf)
-                        <table class="table">
-                            <tr class="damages">
-                                <th>{{ $item->technique->title }} >> {{ __('Schade') }}</th>
-                                <th>{{ $damage->title }}</th>
-                            </tr>
+        @include('inspections.sections.damages' , [ 'damages' => $item->damages, 'title' => $item->technique->title ])
 
-                            <tr class="row--text--list">
-                                <th>{{ __('Datum') }}</th>
-                                <th>{{ $damage->date }}</th>
-                            </tr>
-                            <tr class="row--text--list">
-                                <th>{{ __('Beschrijving') }}</th>
-                                <th>{{ $damage->description }}</th>
-                            </tr>
-                        </table>
-
-                        @include('inspections.sections.media' , [ 'folder' => 'damages' , 'item' => $damage ])
-
-                    @endif
-                @endforeach
-            @endif
-
-    @endforeach
+        @endforeach
     </section>
 @endif
 

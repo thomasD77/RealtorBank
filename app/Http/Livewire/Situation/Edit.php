@@ -6,11 +6,13 @@ use App\Models\Address;
 use App\Models\Category;
 use App\Models\Contract;
 use App\Models\Damage;
+use App\Models\DamagesSituation;
 use App\Models\Inspection;
 use App\Models\Owner;
 use App\Models\RentalClaim;
 use App\Models\Situation;
 use App\Models\Tenant;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -64,6 +66,10 @@ class Edit extends Component
     public $mediaName = 'MediaSituation';
 
     public $pdfs;
+
+    public $showArchived = false;
+
+    public $last_intrede;
 
     use WithFileUploads;
     use WithPagination;
@@ -131,6 +137,15 @@ class Edit extends Component
             ->latest()
             ->get();
         $this->pdfs = $pdfs;
+
+        // Get the latest INTREDE
+        $last_intrede = Situation::query()
+            ->where('intrede', 1)
+            ->where('inspection_id', $inspection->id)
+            ->orderBy('date', 'desc')
+            ->first();
+
+        $this->last_intrede = $last_intrede;
     }
 
     public function deletePDF($pdf)
@@ -245,8 +260,14 @@ class Edit extends Component
 
     public function deleteSituation()
     {
+        $damages = $this->situation->damages()->where('situation_id', $this->situation->id)->get();
+        foreach ($damages as $damage){
+            $this->situation->damages()->detach($damage->id);
+        }
+
         $situation = $this->situation;
         $situation->delete();
+
 
         return redirect()->route('situation.index', $this->inspection);
     }
@@ -283,20 +304,77 @@ class Edit extends Component
 
     public function togglePdfPrint(Damage $damage)
     {
-        if($damage['print_pdf']){
-            $damage['print_pdf'] = 0;
-        }else {
-            $damage['print_pdf'] = 1;
+        $pivotRecord = $this->situation->damages()->where('damage_id', $damage->id)->first();
+
+        if ($pivotRecord) {
+            $this->situation->damages()->detach($damage->id);
+        } else {
+            $this->situation->damages()->attach($damage->id, [
+                'print_pdf' => 1,
+                'archived' => 0
+            ]);
         }
-        $damage->update();
+
+        $this->situation->refresh();
+    }
+
+    public function archive(Damage $damage)
+    {
+        $pivotRecord = $this->situation->damages()->where('damage_id', $damage->id)->first();
+
+        if ($pivotRecord && $pivotRecord->pivot->print_pdf) {
+
+            $this->situation->damages()->updateExistingPivot($damage->id, [
+                'print_pdf' => 0,
+                'archived' => 1
+            ]);
+
+        } elseif($pivotRecord && !$pivotRecord->pivot->print_pdf) {
+
+            $this->situation->damages()->detach($damage->id);
+
+        } else {
+
+            $this->situation->damages()->attach($damage->id, [
+                'print_pdf' => 0,
+                'archived' => 1
+            ]);
+        }
+    }
+
+    public function toggleArchived()
+    {
+        $this->showArchived = !$this->showArchived;
     }
 
     public function render()
     {
-        $damages = Damage::query()
+        // First get the right damages (ID)
+        $damageIds = Damage::query()
             ->where('inspection_id', $this->inspection->id)
-            ->orderBy('date', 'desc')
-            ->simplePaginate(10);
+            ->pluck('id');
+
+        $pivotArchivedIds = DamagesSituation::where('archived', 1)
+            ->where('situation_id', $this->situation->id)
+            ->whereIn('damage_id', $damageIds)
+            ->pluck('damage_id');
+
+        // Get all the damages from the pivot table that are archived
+        if ($this->showArchived) {
+            // Get al the damages again, but now we have filtered for archived
+            $damages = Damage::query()
+                ->where('inspection_id', $this->inspection->id)
+                ->whereIn('id', $pivotArchivedIds)
+                ->orderBy('date', 'desc')
+                ->simplePaginate(10);
+
+        } else {
+            $damages = Damage::query()
+                ->where('inspection_id', $this->inspection->id)
+                ->whereNotIn('id', $pivotArchivedIds)
+                ->orderBy('date', 'desc')
+                ->simplePaginate(10);
+        }
 
         return view('livewire.situation.edit', [
             'damages' => $damages

@@ -41,7 +41,7 @@
 
 @if($room->generalArea->damages)
     @foreach($room->generalArea->damages as $damage)
-        @if($damage->print_pdf)
+        @if($damage->situations()->where('damage_id', $damage->id)->where('situation_id', $situation->id)->pluck('print_pdf')->first() == 1)
             <table class="table">
                 <tr class="damages">
                     <th>{{ $room->floor->title }} | {{ __('Overzicht') }} | {{ __('Schade') }}</th>

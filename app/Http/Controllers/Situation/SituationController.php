@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\GeneratePDF;
 use App\Models\Contract;
 use App\Models\Damage;
+use App\Models\DamagesSituation;
 use App\Models\Document;
 use App\Models\Floor;
 use App\Models\Inspection;
@@ -49,6 +50,49 @@ class SituationController extends Controller
         $situation->created_at = now();
         $situation->updated_at = now();
         $situation->save();
+
+        // Get the latest INTREDE
+        $last_intrede = Situation::query()
+            ->where('intrede', 1)
+            ->where('inspection_id', $inspection->id)
+            ->orderBy('date', 'desc')
+            ->first();
+
+        if ($last_intrede) {
+            // Get all the damages AFTER the latest INTREDE
+            if($last_intrede->date){
+                $damages = Damage::query()
+                    ->where('inspection_id', $inspection->id)
+                    ->where('date', '>=', $last_intrede->date)
+                    ->get();
+
+                // Mark for PDF print
+                foreach ($damages as $damage){
+                    $situation->damages()->attach($damage->id, [
+                        'print_pdf' => 1,
+                        'archived' => 0
+                    ]);
+                }
+            }
+        }
+
+        if ($last_intrede) {
+            // Get all the damages BEFORE the latest INTREDE
+            if($last_intrede->date){
+                $damages = Damage::query()
+                    ->where('inspection_id', $inspection->id)
+                    ->where('date', '<', $last_intrede->date)
+                    ->get();
+
+                // Archive the damages
+                foreach ($damages as $damage){
+                    $situation->damages()->attach($damage->id, [
+                        'print_pdf' => 0,
+                        'archived' => 1
+                    ]);
+                }
+            }
+        }
 
         $contract = new Contract();
         $contract->inspection_id = $inspection->id;

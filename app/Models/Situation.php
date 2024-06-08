@@ -28,6 +28,11 @@ class Situation extends Model
         return $this->hasOne(Address::class, 'situation_id');
     }
 
+    public function damages()
+    {
+        return $this->belongsToMany(Damage::class, 'damages_situations')->withPivot('print_pdf', 'archived');
+    }
+
     public function media()
     {
         return $this->hasMany(MediaSituation::class, 'situation_id');
