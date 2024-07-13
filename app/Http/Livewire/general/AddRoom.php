@@ -230,6 +230,7 @@ class AddRoom extends Component
             $extraArea->conform_id = $newArea->conform_id;
             $extraArea->inspection_id = $newArea->inspection_id;
             $extraArea->floor_id = $newArea->floor_id;
+            $extraArea->sidebar_count = $newArea->sidebar_count;
 
             $extraArea->material = $newArea->material;
             $extraArea->color = $newArea->color;

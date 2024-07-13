@@ -65,6 +65,13 @@
     </ul>
 
     <h6 class="mb20 text-md-right">{{ $inspection->title }} | {{ $room->title }} | <strong>{{ $basicArea->area->title }}</strong></h6>
+
+    <livewire:basic.delete-area
+        :Inspection="$inspection"
+        :Room="$room"
+        :Area="$area"
+        :basicArea="$basicArea"
+    />
 </div>
 
 @endsection

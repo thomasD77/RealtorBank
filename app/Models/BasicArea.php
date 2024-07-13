@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class BasicArea extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $guarded = [];
 
