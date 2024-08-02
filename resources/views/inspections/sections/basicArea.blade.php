@@ -1,4 +1,4 @@
-@foreach(\App\Models\BasicArea::where('room_id', $room->id)->orderBy('order')->get() as $item)
+@foreach(\App\Models\BasicArea::where('room_id', $room->id)->orderBy('order')->latest()->get() as $item)
     @if($item->material || $item->color || $item->plinth ||
         $item->analysis || $item->type || $item->handle ||
         $item->lists || $item->key || $item->doorPump ||
@@ -11,7 +11,7 @@
             @if($item->analysis)
                 <table class="table">
                     <tr class="row--head--list">
-                        <th>{{ $room->floor->title }} | {{ $item->room->title }} | {{  $item->area->title }}</th>
+                        <th>{{ $room->floor->title }} | {{ $item->room->title }} | {{ $item->sidebar_count }}. {{  $item->area->title }}</th>
                         <th></th>
                     </tr>
                 @if($item->material)
