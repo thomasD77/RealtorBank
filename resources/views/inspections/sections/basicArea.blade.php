@@ -1,4 +1,4 @@
-@foreach(\App\Models\BasicArea::where('room_id', $room->id)->orderBy('order')->latest()->get() as $item)
+@foreach(\App\Models\BasicArea::where('room_id', $room->id)->orderBy('order')->get() as $item)
     @if($item->material || $item->color || $item->plinth ||
         $item->analysis || $item->type || $item->handle ||
         $item->lists || $item->key || $item->doorPump ||
