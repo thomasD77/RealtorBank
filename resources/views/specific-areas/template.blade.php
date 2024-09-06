@@ -45,6 +45,7 @@
 
             <livewire:general.rename-specific
                 :Inspection="$inspection"
+                :specificArea="$specificArea"
                 :specific="$specific"
             />
 

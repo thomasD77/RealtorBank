@@ -221,7 +221,7 @@ class Inspection extends Model
          *
          */
         // By time this list will get bigger and bigger, just take the first 50
-        $specifics = Specific::take(50)->get();
+        $specifics = Specific::all();
 
         foreach ($rooms as $room){
             $specificsToInsert = [];

@@ -17,15 +17,12 @@ class RenameSpecific extends Component
 
     public $title;
 
-    public function mount(Inspection $inspection, Specific $specific)
+    public function mount(Inspection $inspection, Specific $specific, SpecificArea $specificArea)
     {
         $this->inspection = $inspection;
         $this->specific = $specific;
+        $this->specificArea = $specificArea;
         $this->title = $this->specific->title;
-
-        $this->specificArea = SpecificArea::where('inspection_id', $this->inspection->id)
-            ->where('specific_id', $this->specific->id)
-            ->first();
     }
 
     public function submitTitle(){
@@ -39,10 +36,6 @@ class RenameSpecific extends Component
         // Connect new specific
         $this->specificArea->specific_id = $newSpecific->id;
         $this->specificArea->update();
-
-        $this->specificArea = SpecificArea::where('inspection_id', $this->inspection->id)
-            ->where('specific_id', $newSpecific->id)
-            ->first();
 
         $this->specific = $newSpecific;
 
