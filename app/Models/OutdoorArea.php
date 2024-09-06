@@ -216,7 +216,20 @@ class OutdoorArea extends Model
         ];
     }
 
+    public static function getCanopyLights() :array
+    {
+        return $data = [
+            'Aanwezig',
+            'Niet aanwezig',
+        ];
+    }
 
-
+    public static function getCanopySwitch() :array
+    {
+        return $data = [
+            'Manueel',
+            'Elektrisch',
+        ];
+    }
 
 }

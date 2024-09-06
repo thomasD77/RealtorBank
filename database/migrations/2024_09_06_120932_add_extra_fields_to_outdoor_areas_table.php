@@ -14,15 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('outdoor_areas', function (Blueprint $table) {
-            $table->string('plinth')->nullable();
-            $table->string('plaster')->nullable();
-            $table->string('ventilationGrille')->nullable();
-            $table->string('glazing')->nullable();
-            $table->string('rollerShutter')->nullable();
-            $table->string('windowDecoration')->nullable();
-            $table->string('hor')->nullable();
-            $table->string('fallProtection')->nullable();
-            $table->string('construction')->nullable();
+            $table->string('canopyLight')->nullable();
+            $table->string('canopySwitch')->nullable();
         });
     }
 

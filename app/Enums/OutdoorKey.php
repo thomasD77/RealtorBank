@@ -32,4 +32,8 @@ enum OutdoorKey : string
     case Lighting = 'lighting';
 
     case Handrail = 'handrail';
+
+    case Canopy = 'canopy';
+
+    case CanopyApp = 'canopyApp';
 }

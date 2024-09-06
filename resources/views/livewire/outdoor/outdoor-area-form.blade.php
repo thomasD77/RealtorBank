@@ -355,6 +355,15 @@
             />
         @break
 
+        @case(\App\Enums\OutdoorKey::Canopy->value)
+            <livewire:outdoor.elements.canopylight
+                :dynamicArea="$outdoorArea"
+            />
+
+            <livewire:outdoor.elements.canopyswitch
+                :dynamicArea="$outdoorArea"
+            />
+        @break
 
     @endswitch
 </div>

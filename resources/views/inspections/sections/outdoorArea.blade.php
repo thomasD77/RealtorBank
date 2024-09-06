@@ -10,7 +10,7 @@
         $item->mailbox || $item->peephole || $item->window ||
         $item->doorBel || $item->dorpel || $item->analysis || $item->extra || $item->plinth
         || $item->plaster || $item->ventilationGrille || $item->glazing || $item->rollerShutter || $item->windowDecoration
-        || $item->hor || $item->fallProtection || $item->construction)
+        || $item->hor || $item->fallProtection || $item->construction || $item->canopyLight || $item->canopySwitch)
         <section>
             <table class="table">
                 <tr class="row--head--list">
@@ -255,6 +255,18 @@
                     <tr class="row--text--list">
                         <th>{{ __('Opbouw') }}</th>
                         <th>{{ $item->construction }}</th>
+                    </tr>
+                @endif
+                @if($item->canopyLight)
+                    <tr class="row--text--list">
+                        <th>{{ __('Luifel verlichting') }}</th>
+                        <th>{{ $item->canopyLight }}</th>
+                    </tr>
+                @endif
+                @if($item->canopySwitch)
+                    <tr class="row--text--list">
+                        <th>{{ __('Luifel bediening') }}</th>
+                        <th>{{ $item->canopySwitch }}</th>
                     </tr>
                 @endif
                 @if($item->analysis)
