@@ -39,6 +39,8 @@
     </table>
 @endif
 
+@include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::General->value, 'item' => $room->generalArea ])
+
 @if($room->generalArea->damages)
     @foreach($room->generalArea->damages as $damage)
         @if($damage->situations()->where('damage_id', $damage->id)->where('situation_id', $situation->id)->pluck('print_pdf')->first() == 1)
@@ -57,11 +59,13 @@
                     <th>{{ $damage->description }}</th>
                 </tr>
             </table>
+
+            @include('inspections.sections.media' , [ 'folder' => 'damages' , 'item' => $damage ])
+            
         @endif
     @endforeach
 @endif
 
-@include('inspections.sections.media' , [ 'folder' => \App\Enums\ImageStorageDirectory::General->value, 'item' => $room->generalArea ])
 
 
 
