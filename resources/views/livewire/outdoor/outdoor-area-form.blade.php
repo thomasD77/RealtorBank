@@ -365,5 +365,26 @@
             />
         @break
 
+        @case(\App\Enums\OutdoorKey::StorageCupboard->value)
+            <livewire:outdoor.elements.cupboardtypes
+                :dynamicArea="$outdoorArea"
+            />
+            <livewire:outdoor.elements.shelves
+                :dynamicArea="$outdoorArea"
+            />
+            <livewire:outdoor.elements.doors
+                :dynamicArea="$outdoorArea"
+            />
+            <livewire:outdoor.elements.drawers
+                :dynamicArea="$outdoorArea"
+            />
+            <livewire:outdoor.elements.rod
+                :dynamicArea="$outdoorArea"
+            />
+            <livewire:outdoor.elements.handlecount
+                :dynamicArea="$outdoorArea"
+            />
+        @break
+
     @endswitch
 </div>

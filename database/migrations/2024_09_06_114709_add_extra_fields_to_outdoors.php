@@ -21,6 +21,8 @@ return new class extends Migration
             $outdoors = [
                 [ 'Luifel', 'canopy', RoomKey::AppTerrace],
                 [ 'Luifel', 'canopy', RoomKey::Terrace],
+                [ 'Berging-Kast', 'storageCupboard', RoomKey::Terrace],
+                [ 'Berging-Kast', 'storageCupboard', RoomKey::AppTerrace],
             ];
 
             $outdoorsToInsert = [];

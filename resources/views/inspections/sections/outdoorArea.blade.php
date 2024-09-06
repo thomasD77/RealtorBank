@@ -10,7 +10,9 @@
         $item->mailbox || $item->peephole || $item->window ||
         $item->doorBel || $item->dorpel || $item->analysis || $item->extra || $item->plinth
         || $item->plaster || $item->ventilationGrille || $item->glazing || $item->rollerShutter || $item->windowDecoration
-        || $item->hor || $item->fallProtection || $item->construction || $item->canopyLight || $item->canopySwitch)
+        || $item->hor || $item->fallProtection || $item->construction || $item->canopyLight || $item->canopySwitch
+        || $item->cupboard_model || $item->cupboard_doors || $item->cupboard_drawers || $item->cupboard_handle || $item->cupboard_rod
+        || $item->cupboard_shelves)
         <section>
             <table class="table">
                 <tr class="row--head--list">
@@ -267,6 +269,42 @@
                     <tr class="row--text--list">
                         <th>{{ __('Luifel bediening') }}</th>
                         <th>{{ $item->canopySwitch }}</th>
+                    </tr>
+                @endif
+                @if($item->cupboard_model)
+                    <tr class="row--text--list">
+                        <th>{{ __('Model') }}</th>
+                        <th>{{ $item->cupboard_model }}</th>
+                    </tr>
+                @endif
+                @if($item->cupboard_doors)
+                    <tr class="row--text--list">
+                        <th>{{ __('Deuren') }}</th>
+                        <th>{{ $item->cupboard_doors }}</th>
+                    </tr>
+                @endif
+                @if($item->cupboard_drawers)
+                    <tr class="row--text--list">
+                        <th>{{ __('Lades') }}</th>
+                        <th>{{ $item->cupboard_drawers }}</th>
+                    </tr>
+                @endif
+                @if($item->cupboard_handle)
+                    <tr class="row--text--list">
+                        <th>{{ __('Klinken') }}</th>
+                        <th>{{ $item->cupboard_handle }}</th>
+                    </tr>
+                @endif
+                @if($item->cupboard_rod)
+                    <tr class="row--text--list">
+                        <th>{{ __('Roede') }}</th>
+                        <th>{{ $item->cupboard_rod }}</th>
+                    </tr>
+                @endif
+                @if($item->cupboard_shelves)
+                    <tr class="row--text--list">
+                        <th>{{ __('Legplanken') }}</th>
+                        <th>{{ $item->cupboard_shelves }}</th>
                     </tr>
                 @endif
                 @if($item->analysis)

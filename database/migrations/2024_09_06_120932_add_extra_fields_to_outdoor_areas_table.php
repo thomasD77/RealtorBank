@@ -16,6 +16,13 @@ return new class extends Migration
         Schema::table('outdoor_areas', function (Blueprint $table) {
             $table->string('canopyLight')->nullable();
             $table->string('canopySwitch')->nullable();
+
+            $table->string('cupboard_model')->nullable();
+            $table->string('cupboard_doors')->nullable();
+            $table->string('cupboard_drawers')->nullable();
+            $table->string('cupboard_handle')->nullable();
+            $table->string('cupboard_rod')->nullable();
+            $table->string('cupboard_shelves')->nullable();
         });
     }
 
