@@ -44,7 +44,7 @@
         @if($damage->situations()->where('damage_id', $damage->id)->where('situation_id', $situation->id)->pluck('print_pdf')->first() == 1)
             <table class="table">
                 <tr class="damages">
-                    <th>{{ $room->floor->title }} | {{ __('Overzicht') }} | {{ __('Schade') }}</th>
+                    <th>{{ $room->floor->title }} | {{ $room->title }} | {{ __('Overzicht') }} | {{ __('Schade') }}</th>
                     <th>{{ $damage->title }}</th>
                 </tr>
 
