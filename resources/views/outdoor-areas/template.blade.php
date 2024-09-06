@@ -6,6 +6,12 @@
         <h6 class="mb20 text-md-right">{{ $inspection->title }} | {{ __('Exterieur') }} | <strong>{{ $outdoorArea->outdoor->title }}</strong></h6>
         <h3 class="uppercase">{{ __('Exterieur') }}</h3>
 
+        <livewire:outdoor.add-outdoor
+            :Inspection="$inspection"
+            :outdoor="$outdoor"
+            :outdoorArea="$outdoorArea"
+        />
+
         @if (session()->has('successDeleteDamage'))
             <div class="btn btn-success flash_message">
                 {{ session('successDeleteDamage') }}
@@ -35,6 +41,11 @@
             <livewire:damage.index
                 :dynamicArea="$outdoorArea"
                 :Inspection="$inspection"
+            />
+
+            <livewire:general.rename-outdoor
+                :Inspection="$inspection"
+                :outdoor="$outdoor"
             />
 
             <livewire:outdoor.elements.media
