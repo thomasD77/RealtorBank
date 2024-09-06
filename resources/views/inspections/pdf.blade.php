@@ -14,9 +14,9 @@
     @if($inspection->address->zip || $inspection->address->city), {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
 </header>
 
-{{--        @include('inspections.sections.inspection-information')--}}
+        @include('inspections.sections.inspection-information')
 
-{{--        @include('inspections.sections.intro')--}}
+        @include('inspections.sections.intro')
 
             @include('inspections.rooms.basement' , ['rooms' => $basementParam ])
             @include('inspections.rooms.groundFloor' , ['rooms' => $groundFloorParam ])
@@ -28,15 +28,15 @@
             @include('inspections.rooms.outHouseInParam' , ['rooms' => $outHouseInParam ])
             @include('inspections.rooms.outHouseExParam' , ['rooms' => $outHouseExParam ])
 
-{{--        @include('inspections.sections.techniques')--}}
+        @include('inspections.sections.techniques')
 
-{{--        @include('inspections.sections.keys')--}}
+        @include('inspections.sections.keys')
 
-{{--        @include('inspections.sections.meters')--}}
+        @include('inspections.sections.meters')
 
-{{--        @include('inspections.sections.documents')--}}
+        @include('inspections.sections.documents')
 
-{{--        @include('inspections.sections.consensus')--}}
+        @include('inspections.sections.consensus')
 
 <footer>
     {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : ""  }} | {{ __('EstateMetrics') }} | &copy; {{ now()->format('Y') }}
