@@ -220,8 +220,8 @@ class Inspection extends Model
          * Specifics
          *
          */
-        // By time this list will get bigger and bigger, just take the first 50
-        $specifics = Specific::all();
+        // The first 72 records are the original ones. The rest is duplicated.
+        $specifics = Specific::take(72)->get();
 
         foreach ($rooms as $room){
             $specificsToInsert = [];
