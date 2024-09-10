@@ -1,6 +1,30 @@
 <div>
+    @include('pricing.pricing_css')
+
+    <!-- Dropdown voor de categorieën -->
+    <div class="custom-dropdown mb-4">
+        <button class="custom-dropdown-btn" id="dropdownButton">
+            @if ($selectedCategory)
+                {{ $pricingCategories->firstWhere('id', $selectedCategory)->title ?? 'Selecteer een categorie' }}
+            @else
+                Selecteer een categorie
+            @endif
+        </button>
+        <div class="custom-dropdown-content" scrol id="dropdownMenu">
+            @foreach($pricingCategories as $category)
+                <div>
+                    <a href="#" class="@if($selectedCategory === $category->id) active @endif"
+                       wire:click.prevent="selectCategory({{ $category->id }})">
+                        {{ $category->title }}
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
     @foreach($pricingCategories as $category)
-        <div class="dashborad-box py-5 rounded">
+        @if($selectedCategory === $category->id)
+            <div class="dashborad-box py-5 rounded">
             <div class="row">
                 <div class="col-10">
                     <h3 class="">{{ $category->title }}</h3>
@@ -11,29 +35,12 @@
                     @endif--}}
                 </div>
                 <div class="col-2 text-right">
-                    <button wire:click="addPricing({{$category->id}})" class="btn-sm btn-common" style="border:none"><i class="fa fa-plus"></i>{{ $category->title }}</button>
+                    <button wire:click="addPricing({{$category->id}})" class="btn-sm btn-common" style="border:none; z-index: 10"><i class="fa fa-plus"></i>{{ $category->title }}</button>
                 </div>
             </div>
 
             <hr>
             <div class="section-inforamation">
-                <style>
-                    table {
-                        width: 100%;
-                        border-collapse: collapse;
-                    }
-                    th, td {
-                        border: 1px solid #ddd;
-                        padding: 8px;
-                    }
-                    th {
-                        background-color: #f2f2f2;
-                        text-align: left;
-                    }
-                    tr:nth-child(even) {
-                        background-color: #f9f9f9;
-                    }
-                </style>
                 <table>
                     <thead>
                     <tr>
@@ -70,6 +77,7 @@
                 </table>
             </div>
         </div>
+        @endif
     @endforeach
 
     <!-- Modal -->
@@ -145,5 +153,7 @@
         </div>
     @endif
 </div>
+
+@include('pricing.pricing_script')
 
 

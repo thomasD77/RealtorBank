@@ -26,6 +26,7 @@ class Index extends Component
     public $cost_piece;
 
     public $activeTab = 'select'; // Active tab, default to 'select'
+    public $selectedCategory; // Geselecteerde categorie ID
 
     public function mount()
     {
@@ -38,6 +39,16 @@ class Index extends Component
         // Laad de pricing categories en subcategories
         $this->pricingCategories = CategoryPricing::with('pricings.subCategoryPricing')->get();
         $this->subCategories = SubCategoryPricing::all();
+
+        // Standaard de eerste categorie selecteren als er geen geselecteerde categorie is
+        if (!$this->selectedCategory) {
+            $this->selectedCategory = $this->pricingCategories->first()->id ?? null;
+        }    }
+
+    // Methode om de geselecteerde categorie te veranderen
+    public function selectCategory($categoryId)
+    {
+        $this->selectedCategory = $categoryId;
     }
 
     public function loadSubCategories($categoryId)
