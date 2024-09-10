@@ -28,3 +28,8 @@
         <i class="fa fa-lock mx-2"></i>{{ __('Wachtwoord') }}
     </a>
 </li>
+<li>
+    <a href="{{ route('pricing') }}">
+        <i class="fa fa-money-bill mx-2"></i>{{ __('Prijzen') }}
+    </a>
+</li>

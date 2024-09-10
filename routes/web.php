@@ -59,6 +59,9 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::view('/update', 'profile.update')
         ->name('update.password');
 
+    Route::view('/pricing', 'pricing.index')
+        ->name('pricing');
+
     Route::view('/elements', 'ui-elements')
         ->name('elements');
 
