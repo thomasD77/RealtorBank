@@ -7,10 +7,12 @@ use App\Http\Controllers\Situation\SituationController;
 use App\Models\Contract;
 use App\Models\Damage;
 use App\Models\Document;
+use App\Models\Floor;
 use App\Models\Inspection;
 use App\Models\Key;
 use App\Models\Meter;
 use App\Models\RentalClaim;
+use App\Models\Room;
 use App\Models\Situation;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +36,7 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/technique/{inspection}/{technique}', [DashboardController::class, 'technique'])->name('area.technique');
     Route::get('/outdoor/{inspection}/{outdoor}', [DashboardController::class, 'outdoor'])->name('area.outdoor');
     Route::get('/general/{inspection}/{room}/', [DashboardController::class, 'general'])->name('area.general');
+    Route::get('/calculation/{inspection}/{floor}/{room}', [DashboardController::class, 'calculations'])->name('calculations');
 
     Route::get('/create/inspection', [InspectionController::class, 'create'])->name('create.inspection');
     Route::get('/generate/inspection/{inspection}/{situation}', [SituationController::class, 'genereatePDF'])->name('generate.inspection');

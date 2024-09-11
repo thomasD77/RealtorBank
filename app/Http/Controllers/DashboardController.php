@@ -7,6 +7,7 @@ use App\Models\BasicArea;
 use App\Models\Conform;
 use App\Models\ConformArea;
 use App\Models\Contract;
+use App\Models\Floor;
 use App\Models\Inspection;
 use App\Models\Outdoor;
 use App\Models\OutdoorArea;
@@ -163,6 +164,15 @@ class DashboardController extends Controller
     {
         return view('general.general', [
             'inspection' => $inspection,
+            'room' => $room,
+        ]);
+    }
+
+    public function calculations(Inspection $inspection, Floor $floor, Room $room ): View
+    {
+        return view('calculations.index', [
+            'inspection' => $inspection,
+            'floor' => $floor,
             'room' => $room,
         ]);
     }
