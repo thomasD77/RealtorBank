@@ -19,6 +19,11 @@ class Calculation extends Model
         return $this->belongsTo(SubCategoryPricing::class, 'sub_category_pricing_id');
     }
 
+    public function pricing()
+    {
+        return $this->belongsTo(Pricing::class, 'pricing_id');
+    }
+
     public function room()
     {
         return $this->belongsTo(Room::class, 'room_id');

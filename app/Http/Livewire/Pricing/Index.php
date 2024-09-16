@@ -43,7 +43,8 @@ class Index extends Component
         // Standaard de eerste categorie selecteren als er geen geselecteerde categorie is
         if (!$this->selectedCategory) {
             $this->selectedCategory = $this->pricingCategories->first()->id ?? null;
-        }    }
+        }
+    }
 
     // Methode om de geselecteerde categorie te veranderen
     public function selectCategory($categoryId)

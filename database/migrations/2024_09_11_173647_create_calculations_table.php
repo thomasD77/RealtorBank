@@ -24,12 +24,12 @@ return new class extends Migration
             $table->unsignedInteger('room_id')
                 ->index();
 
-            $table->unsignedBigInteger('category_pricing_id')->index();
-            $table->unsignedBigInteger('sub_category_pricing_id')->index();
+            $table->unsignedBigInteger('pricing_id')->index();
 
             $table->decimal('count', 10, 2)->nullable();
             $table->decimal('total', 10, 2)->nullable();
             $table->decimal('vetustate', 10, 2)->nullable();
+            $table->decimal('tax', 10, 2)->nullable();
 
             $table->integer('approved')->nullable();
 
