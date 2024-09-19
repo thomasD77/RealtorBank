@@ -9,6 +9,13 @@ class Calculation extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['floor_id', 'room_id', 'inspection_id'];
+
+    public function subCalculations()
+    {
+        return $this->hasMany(SubCalculation::class);
+    }
+
     public function categoryPricing()
     {
         return $this->belongsTo(CategoryPricing::class, 'category_pricing_id');

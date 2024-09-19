@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('calculations', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedInteger('inspection_id')
                 ->index();
 
@@ -23,15 +24,6 @@ return new class extends Migration
 
             $table->unsignedInteger('room_id')
                 ->index();
-
-            $table->unsignedBigInteger('pricing_id')->index();
-
-            $table->decimal('count', 10, 2)->nullable();
-            $table->decimal('total', 10, 2)->nullable();
-            $table->decimal('vetustate', 10, 2)->nullable();
-            $table->decimal('tax', 10, 2)->nullable();
-
-            $table->integer('approved')->nullable();
 
             $table->timestamps();
         });

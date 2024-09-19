@@ -16,6 +16,6 @@ class CategoryPricing extends Model
 
     public function subcategories()
     {
-        return $this->hasMany(SubCategoryPricing::class, 'sub_category_pricing_id');
+        return $this->hasMany(SubCategoryPricing::class, 'category_pricing_id');
     }
 }
