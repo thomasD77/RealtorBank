@@ -30,7 +30,6 @@ class Index extends Component
     public $selectedCategoryName;
     public $selectedSubCategoryName;
     public $subCalculationIdBeingDeleted;
-    public $groupedSubCalculations = [];
 
     public $showForm = null;
 
@@ -58,8 +57,6 @@ class Index extends Component
             ->where('floor_id', $this->floor->id)
             ->where('room_id', $this->room->id)
             ->first();
-
-        $this->groupSubCalculations();
 
         $this->loadData();
     }
@@ -135,7 +132,7 @@ class Index extends Component
             'count' => 'required|numeric',
             'tax' => 'required|numeric',
             'total' => 'required|numeric',
-            //'approved' => 'nullable|integer',
+            'approved' => 'nullable|integer',
         ]);
 
         // Maak een nieuwe SubCalculation aan
@@ -155,6 +152,9 @@ class Index extends Component
 
         // Reset de form velden en maak het formulier onzichtbaar
         $this->resetInputFields();
+
+        // Update groupedSubCalculations
+        $this->loadSubCalculations();
 
         // Optioneel: Succesbericht toevoegen
         session()->flash('message', 'SubCalculation succesvol toegevoegd.');
@@ -231,8 +231,7 @@ class Index extends Component
         $subCalculation = SubCalculation::findOrFail($this->subCalculationIdBeingDeleted);
         $subCalculation->delete();
 
-        $this->calculation->refresh();
-        $this->groupSubCalculations();
+        $this->calculation->refresh(); // Ververs de calculation met de nieuwe data
 
         $this->dispatchBrowserEvent('hide-delete-confirmation');
 
@@ -240,31 +239,29 @@ class Index extends Component
         session()->flash('message', 'SubCalculation succesvol verwijderd.');
     }
 
-    public function groupSubCalculations()
+    public function loadSubCalculations()
     {
         if ($this->calculation) {
             $this->groupedSubCalculations = $this->calculation->subCalculations()
                 ->with('subCategory')
                 ->get()
-                ->groupBy('category_pricing_id')
-                ->map(function ($group) {
-                    return $group->map(function ($subCalculation) {
-                        return [
-                            'id' => $subCalculation->id,
-                            'subCategory' => $subCalculation->subCategory->title ?? 'Onbekende SubCategorie',
-                            'description' => $subCalculation->description,
-                            'tax' => $subCalculation->tax,
-                            'total' => $subCalculation->total,
-                            'approved' => $subCalculation->approved,
-                        ];
-                    });
+                ->map(function ($subCalculation) {
+                    return [
+                        'id' => $subCalculation->id,
+                        'subCategory' => $subCalculation->subCategory->title ?? 'Onbekende SubCategorie',
+                        'description' => $subCalculation->description,
+                        'tax' => $subCalculation->tax,
+                        'total' => $subCalculation->total,
+                        'approved' => $subCalculation->approved,
+                    ];
                 })->toArray();
         }
     }
 
+
     public function render()
     {
-        $this->groupSubCalculations();
+        $this->loadSubCalculations();
         return view('livewire.calculations.index');
     }
 }
