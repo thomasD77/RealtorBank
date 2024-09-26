@@ -1,30 +1,19 @@
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Category Dropdown
-        var categoryButton = document.getElementById('categoryDropdownButton');
-        var categoryMenu = document.getElementById('categoryDropdownMenu');
+    // Get the dropdown elements
+    var dropdownButton = document.getElementById('dropdownButton');
+    var dropdownMenu = document.getElementById('dropdownMenu');
 
-        categoryButton.addEventListener('click', function(event) {
-            event.stopPropagation(); // Prevent the click event from bubbling up
-            categoryMenu.classList.toggle('show');
-            subcategoryMenu.classList.remove('show'); // Ensure other dropdown is closed
-        });
-
-        // Subcategory Dropdown
-        var subcategoryButton = document.getElementById('subcategoryDropdownButton');
-        var subcategoryMenu = document.getElementById('subcategoryDropdownMenu');
-
-        subcategoryButton.addEventListener('click', function(event) {
-            event.stopPropagation(); // Prevent the click event from bubbling up
-            subcategoryMenu.classList.toggle('show');
-            categoryMenu.classList.remove('show'); // Ensure other dropdown is closed
-        });
-
-        // Close dropdowns if the user clicks outside of them
-        window.addEventListener('click', function() {
-            categoryMenu.classList.remove('show');
-            subcategoryMenu.classList.remove('show');
-        });
+    // Toggle the visibility of the dropdown when the button is clicked
+    dropdownButton.addEventListener('click', function() {
+        dropdownMenu.classList.toggle('show');
     });
 
+    // Close the dropdown if the user clicks outside of it
+    window.addEventListener('click', function(event) {
+        if (!event.target.matches('#dropdownButton')) {
+            if (dropdownMenu.classList.contains('show')) {
+                dropdownMenu.classList.remove('show');
+            }
+        }
+    });
 </script>
