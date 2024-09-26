@@ -29,13 +29,15 @@ class Index extends Component
 
     public $selectedCategoryName;
     public $selectedSubCategoryName;
+    public $subCalculationIdBeingDeleted;
+    public $groupedSubCalculations = [];
 
     public $showForm = null;
 
     public $count;
     public $tax = 21; // Standaard BTW-percentage
     public $total;
-    public $approved;
+    public $approved = 1;
 
     public Inspection $inspection;
     public Room $room;
@@ -51,23 +53,26 @@ class Index extends Component
         $this->floor = $floor;
         $this->room = $room;
 
-        $this->loadData();
-
-        $this->calculation = Calculation::query()
+        $this->calculation = Calculation::with('subCalculations.subCategory')
             ->where('inspection_id', $this->inspection->id)
             ->where('floor_id', $this->floor->id)
             ->where('room_id', $this->room->id)
             ->first();
+
+        $this->groupSubCalculations();
+
+        $this->loadData();
     }
 
     public function loadData()
     {
         $this->pricingCategories = CategoryPricing::with('pricings.subCategoryPricing')->get();
         $this->subCategories = SubCategoryPricing::all();
-
-        /*if (!$this->selectedCategory) {
-            $this->selectedCategory = $this->pricingCategories->first()->id ?? null;
-        }*/
+        $this->calculation = Calculation::with('subCalculations.subCategory')
+            ->where('inspection_id', $this->inspection->id)
+            ->where('floor_id', $this->floor->id)
+            ->where('room_id', $this->room->id)
+            ->first();
     }
 
     public function selectCategory($categoryId)
@@ -118,6 +123,7 @@ class Index extends Component
 
     public function saveSubCalculation()
     {
+
         // Validatie van de invoer
         $this->validate([
             'selectedCategory' => 'required',
@@ -144,7 +150,7 @@ class Index extends Component
         $subCalculation->count = $this->count;
         $subCalculation->tax = $this->tax;
         $subCalculation->total = $this->total;
-        $subCalculation->approved = $this->approved; // Zorg ervoor dat dit wordt opgeslagen
+        $subCalculation->approved = $this->approved;
         $subCalculation->save();
 
         // Reset de form velden en maak het formulier onzichtbaar
@@ -192,11 +198,73 @@ class Index extends Component
         $this->total = round($subtotal + ($subtotal * ($this->tax / 100)), 2);
     }
 
+    public function editSubCalculation($id)
+    {
+        $subCalculation = SubCalculation::findOrFail($id);
+
+        // Vul de form properties met de gegevens van de geselecteerde SubCalculation
+        $this->editingPricingId = $subCalculation->id;
+        $this->selectedCategory = $subCalculation->category_pricing_id;
+        $this->selectedSubCategory = $subCalculation->sub_category_pricing_id;
+        $this->description = $subCalculation->description;
+        $this->cost_square_meter = $subCalculation->cost_square_meter;
+        $this->cost_hour = $subCalculation->cost_hour;
+        $this->cost_piece = $subCalculation->cost_piece;
+        $this->count = $subCalculation->count;
+        $this->tax = $subCalculation->tax;
+        $this->total = $subCalculation->total;
+        $this->approved = $subCalculation->approved;
+
+        // Zorg ervoor dat het formulier zichtbaar is
+        $this->showForm = true;
+    }
 
 
+    public function confirmDelete($id)
+    {
+        $this->subCalculationIdBeingDeleted = $id;
+        $this->dispatchBrowserEvent('show-delete-confirmation');
+    }
+
+    public function deleteSubCalculation()
+    {
+        $subCalculation = SubCalculation::findOrFail($this->subCalculationIdBeingDeleted);
+        $subCalculation->delete();
+
+        $this->calculation->refresh();
+        $this->groupSubCalculations();
+
+        $this->dispatchBrowserEvent('hide-delete-confirmation');
+
+        $this->subCalculationIdBeingDeleted = null;
+        session()->flash('message', 'SubCalculation succesvol verwijderd.');
+    }
+
+    public function groupSubCalculations()
+    {
+        if ($this->calculation) {
+            $this->groupedSubCalculations = $this->calculation->subCalculations()
+                ->with('subCategory')
+                ->get()
+                ->groupBy('category_pricing_id')
+                ->map(function ($group) {
+                    return $group->map(function ($subCalculation) {
+                        return [
+                            'id' => $subCalculation->id,
+                            'subCategory' => $subCalculation->subCategory->title ?? 'Onbekende SubCategorie',
+                            'description' => $subCalculation->description,
+                            'tax' => $subCalculation->tax,
+                            'total' => $subCalculation->total,
+                            'approved' => $subCalculation->approved,
+                        ];
+                    });
+                })->toArray();
+        }
+    }
 
     public function render()
     {
+        $this->groupSubCalculations();
         return view('livewire.calculations.index');
     }
 }

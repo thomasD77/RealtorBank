@@ -2,7 +2,7 @@
     @if($calculation)
         @include('livewire.calculations.calculation_css')
         <!-- Dropdown voor de categorieën -->
-        <div class="custom-dropdown" @if($selectedCategory === null) style="margin-bottom: 500px" @endif>
+        <div class="custom-dropdown" @if($selectedCategory === null) style="margin-bottom: 300px" @endif>
             <button class="custom-dropdown-btn" id="dropdownButton">
                 @if ($selectedCategory)
                     {{ $pricingCategories->firstWhere('id', $selectedCategory)->title ?? 'Selecteer een categorie' }}
@@ -53,8 +53,8 @@
                                     <td @if($pricing->cost_hour === NULL) class="bg-secondary" @endif>{{ $pricing->cost_hour }}</td>
                                     <td @if($pricing->cost_piece === NULL) class="bg-secondary" @endif>{{ $pricing->cost_piece }}</td>
                                     <td class="edit text-center">
-                                        <a style="cursor: pointer" wire:click="edit({{ $pricing->id }})">
-                                            <i class="fa fa-rocket text-danger"></i>
+                                        <a class="" style="cursor: pointer" wire:click="edit({{ $pricing->id }})">
+                                            <i class="fa fa-rocket text-dark"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -151,7 +151,7 @@
         </div>
         @endif
 
-        
+        @include('livewire.calculations.calculation_table')
 
         @include('livewire.calculations.calculation_script')
     @else

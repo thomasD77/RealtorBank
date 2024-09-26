@@ -16,4 +16,14 @@
             }
         }
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        window.addEventListener('show-delete-confirmation', event => {
+            $('#deleteConfirmationModal').modal('show');
+        });
+
+        window.addEventListener('hide-delete-confirmation', event => {
+            $('#deleteConfirmationModal').modal('hide');
+        });
+    });
 </script>

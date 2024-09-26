@@ -15,4 +15,10 @@ class SubCalculation extends Model
     {
         return $this->belongsTo(Calculation::class);
     }
+
+    public function subCategory()
+    {
+        return $this->belongsTo(SubCategoryPricing::class, 'sub_category_pricing_id');
+    }
+
 }

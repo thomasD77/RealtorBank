@@ -84,5 +84,38 @@
         margin-bottom: 200px;
     }
 
+    .table th, .table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .card-header {
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+
+    .table h5 {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .text-center .fa {
+        font-size: 1.2rem;
+    }
+
+    .text-success {
+        color: #28a745 !important;
+    }
+
+    .text-danger {
+        color: #dc3545 !important;
+    }
+
+    .btn-sm {
+        padding: 5px 10px;
+    }
+
+
 
 </style>
