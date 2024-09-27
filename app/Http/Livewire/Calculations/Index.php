@@ -243,18 +243,31 @@ class Index extends Component
     {
         if ($this->calculation) {
             $this->groupedSubCalculations = $this->calculation->subCalculations()
-                ->with('subCategory')
+                ->with('subCategory.categoryPricing')
                 ->get()
-                ->map(function ($subCalculation) {
+                ->groupBy('subCategory.categoryPricing.title')
+                ->map(function ($subCalculations, $categoryTitle) {
+                    $totalSum = $subCalculations->sum('total');
                     return [
-                        'id' => $subCalculation->id,
-                        'subCategory' => $subCalculation->subCategory->title ?? 'Onbekende SubCategorie',
-                        'description' => $subCalculation->description,
-                        'tax' => $subCalculation->tax,
-                        'total' => $subCalculation->total,
-                        'approved' => $subCalculation->approved,
+                        'category' => $categoryTitle,
+                        'totalSum' => $totalSum,
+                        'subCalculations' => $subCalculations->map(function ($subCalculation) {
+                            return [
+                                'id' => $subCalculation->id,
+                                'subCategory' => $subCalculation->subCategory->title ?? 'Onbekende SubCategorie',
+                                'description' => $subCalculation->description,
+                                'tax' => $subCalculation->tax,
+                                'total' => $subCalculation->total,
+                                'approved' => $subCalculation->approved,
+                            ];
+                        })->toArray(),
                     ];
                 })->toArray();
+
+            // Calculate the overall total sum for all categories
+            $this->overallTotalSum = array_reduce($this->groupedSubCalculations, function ($carry, $categoryData) {
+                return $carry + $categoryData['totalSum'];
+            }, 0);
         }
     }
 

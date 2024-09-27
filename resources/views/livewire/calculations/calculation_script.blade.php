@@ -1,21 +1,4 @@
 <script>
-    // Get the dropdown elements
-    var dropdownButton = document.getElementById('dropdownButton');
-    var dropdownMenu = document.getElementById('dropdownMenu');
-
-    // Toggle the visibility of the dropdown when the button is clicked
-    dropdownButton.addEventListener('click', function() {
-        dropdownMenu.classList.toggle('show');
-    });
-
-    // Close the dropdown if the user clicks outside of it
-    window.addEventListener('click', function(event) {
-        if (!event.target.matches('#dropdownButton')) {
-            if (dropdownMenu.classList.contains('show')) {
-                dropdownMenu.classList.remove('show');
-            }
-        }
-    });
 
     document.addEventListener('DOMContentLoaded', function () {
         window.addEventListener('show-delete-confirmation', event => {
@@ -26,4 +9,34 @@
             $('#deleteConfirmationModal').modal('hide');
         });
     });
+
+    document.addEventListener('livewire:load', function () {
+        // Herinitialiseer de dropdown functionaliteit na Livewire DOM update
+        Livewire.hook('message.processed', (message, component) => {
+            initializeDropdown();
+        });
+
+        // Initialiseer de dropdown functionaliteit bij de eerste keer laden
+        initializeDropdown();
+
+        function initializeDropdown() {
+            var dropdownButton = document.getElementById('dropdownButton');
+            var dropdownMenu = document.getElementById('dropdownMenu');
+
+            if (dropdownButton && dropdownMenu) {
+                dropdownButton.addEventListener('click', function() {
+                    dropdownMenu.classList.toggle('show');
+                });
+
+                window.addEventListener('click', function(event) {
+                    if (!event.target.matches('#dropdownButton')) {
+                        if (dropdownMenu.classList.contains('show')) {
+                            dropdownMenu.classList.remove('show');
+                        }
+                    }
+                });
+            }
+        }
+    });
+
 </script>

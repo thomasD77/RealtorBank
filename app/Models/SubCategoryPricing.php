@@ -18,4 +18,9 @@ class SubCategoryPricing extends Model
     {
         return $this->belongsTo(CategoryPricing::class, 'category_pricing_id');
     }
+
+    public function categoryPricing()
+    {
+        return $this->belongsTo(CategoryPricing::class, 'category_pricing_id');
+    }
 }

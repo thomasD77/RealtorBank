@@ -2,7 +2,7 @@
     @if($calculation)
         @include('livewire.calculations.calculation_css')
         <!-- Dropdown voor de categorieën -->
-        <div class="custom-dropdown" @if($selectedCategory === null) style="margin-bottom: 300px" @endif>
+        <div class="custom-dropdown" wire:ignore.self>
             <button class="custom-dropdown-btn" id="dropdownButton">
                 @if ($selectedCategory)
                     {{ $pricingCategories->firstWhere('id', $selectedCategory)->title ?? 'Selecteer een categorie' }}
@@ -70,7 +70,7 @@
             <div class="card">
             <div class="card-header bg-dark my-3"></div>
             <div class="card-body ">
-                <form class="row">
+                <form wire:submit.prevent="saveSubCalculation" class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="selectedCategory">{{ __('Categorie') }}</label>
@@ -84,7 +84,7 @@
                             <label for="description">{{ __('Beschrijving') }}</label>
                             <input type="text" class="form-control" id="description" wire:model="description">
                         </div>
-                        <button wire:click="saveSubCalculation" type="submit" class="btn btn-dark">{{ __('Save') }}</button>
+                        <button type="submit" class="btn btn-dark">{{ __('Save') }}</button>
                     </div>
                     <div class="col-md-6">
                         @if($selectedCategoryName)
