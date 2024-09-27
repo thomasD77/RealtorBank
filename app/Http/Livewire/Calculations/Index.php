@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Calculations;
 
 use App\Models\Calculation;
+use App\Models\Category;
 use App\Models\CategoryPricing;
 use App\Models\Floor;
 use App\Models\Inspection;
@@ -19,8 +20,14 @@ class Index extends Component
     public $pricingCategories;
     public $subCategories = [];
     public $calculation;
+    public $vetustateAmount;
+    public $finalTotal;
+
+    public $overallNetTotal;
+
 
     public $selectedCategory = null;
+    public $selectedCategoryId = null;
     public $selectedSubCategory;
     public $description;
     public $cost_square_meter;
@@ -252,12 +259,16 @@ class Index extends Component
                 ->groupBy('subCategory.categoryPricing.title')
                 ->map(function ($subCalculations, $categoryTitle) {
                     $totalSum = $subCalculations->sum('total');
-                    $categoryId = $subCalculations->first()->subCategory->categoryPricing->id; // Assuming categoryPricing has an ID
+                    $vetustatePercentage = $subCalculations->first()->vetustate ?? 0; // Aannemende dat hetzelfde vetustate percentage geldt voor alle subcalculaties in een categorie
+                    $vetustateAmount = $totalSum * ($vetustatePercentage / 100);
+                    $finalTotal = $totalSum - $vetustateAmount;
 
                     return [
-                        'id' => $categoryId, // Include the ID here
                         'category' => $categoryTitle,
                         'totalSum' => $totalSum,
+                        'vetustatePercentage' => $vetustatePercentage,
+                        'vetustateAmount' => $vetustateAmount,
+                        'finalTotal' => $finalTotal,
                         'subCalculations' => $subCalculations->map(function ($subCalculation) {
                             return [
                                 'id' => $subCalculation->id,
@@ -271,17 +282,35 @@ class Index extends Component
                     ];
                 })->toArray();
 
-            // Calculate the overall total sum for all categories
+            // Bereken het totale bruto som van alle categorieën (zonder aftrek van vetustate)
             $this->overallTotalSum = array_reduce($this->groupedSubCalculations, function ($carry, $categoryData) {
                 return $carry + $categoryData['totalSum'];
+            }, 0);
+
+            // Bereken het netto eindtotaal door de finale totalen (na vetustate) per categorie op te tellen
+            $this->overallNetTotal = array_reduce($this->groupedSubCalculations, function ($carry, $categoryData) {
+                return $carry + $categoryData['finalTotal'];
             }, 0);
         }
     }
 
+
+    public function calculateVetustate()
+    {
+        // Assuming vetustate percentage is consistent across all subCalculations or based on the first one
+        $firstSubCalculation = $this->calculation->subCalculations()->first();
+        $this->vetustatePercentage = $firstSubCalculation ? $firstSubCalculation->vetustate : 0;
+
+        // Calculate the total vetustate amount
+        $this->vetustateAmount = $this->overallTotalSum * $this->vetustatePercentage / 100;
+
+        // Calculate the final total after subtracting the vetustate amount
+        $this->finalTotal = $this->overallTotalSum - $this->vetustateAmount;
+    }
+
     public function editVetustate($category)
     {
-        //$this->selectedCategory = $category;
-
+        $this->selectedCategoryId = CategoryPricing::where('title', $category)->select('id')->first();
         // You should load the existing percentage value here if needed
         $this->vetustatePercentage = 0; // Or load the current percentage from your data
 
@@ -291,20 +320,28 @@ class Index extends Component
 
     public function updateVetustate()
     {
-        // Validate the input
+        // Validate the input to ensure it's a valid percentage
         $this->validate([
             'vetustatePercentage' => 'required|numeric|min:0|max:100',
         ]);
 
-        // Update logic for vetustatePercentage for the selected category
-        // For example:
-        // $this->groupedSubCalculations[$this->selectedCategory]['vetustate'] = $this->vetustatePercentage;
+        $subCalculations = SubCalculation::query()
+            ->where('calculation_id', $this->calculation->id)
+            ->where('category_pricing_id', $this->selectedCategoryId['id'])
+            ->get();
 
-        // Hide the modal
+        foreach ($subCalculations as $sub){
+            $sub->vetustate = $this->vetustatePercentage;
+            $sub->save();
+        }
+
+        // Hide the modal after updating
         $this->dispatchBrowserEvent('hide-edit-vetustate');
 
-        // Optionally, you can also trigger a refresh or save the updated data to the database
+        // Optionally, reload the sub-calculations to reflect the changes in the view
+        $this->loadSubCalculations();
     }
+
 
 
     public function render()
