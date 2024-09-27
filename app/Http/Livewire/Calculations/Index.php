@@ -42,6 +42,10 @@ class Index extends Component
     public Room $room;
     public Floor $floor;
 
+    public $groupedSubCalculations;
+    public $overallTotalSum;
+    public $vetustatePercentage;
+
 
     // Houdt de te bewerken Pricing ID bij
     public $editingPricingId = null;
@@ -248,7 +252,10 @@ class Index extends Component
                 ->groupBy('subCategory.categoryPricing.title')
                 ->map(function ($subCalculations, $categoryTitle) {
                     $totalSum = $subCalculations->sum('total');
+                    $categoryId = $subCalculations->first()->subCategory->categoryPricing->id; // Assuming categoryPricing has an ID
+
                     return [
+                        'id' => $categoryId, // Include the ID here
                         'category' => $categoryTitle,
                         'totalSum' => $totalSum,
                         'subCalculations' => $subCalculations->map(function ($subCalculation) {
@@ -269,6 +276,34 @@ class Index extends Component
                 return $carry + $categoryData['totalSum'];
             }, 0);
         }
+    }
+
+    public function editVetustate($category)
+    {
+        //$this->selectedCategory = $category;
+
+        // You should load the existing percentage value here if needed
+        $this->vetustatePercentage = 0; // Or load the current percentage from your data
+
+        // Trigger the event to open the modal
+        $this->dispatchBrowserEvent('show-edit-vetustate');
+    }
+
+    public function updateVetustate()
+    {
+        // Validate the input
+        $this->validate([
+            'vetustatePercentage' => 'required|numeric|min:0|max:100',
+        ]);
+
+        // Update logic for vetustatePercentage for the selected category
+        // For example:
+        // $this->groupedSubCalculations[$this->selectedCategory]['vetustate'] = $this->vetustatePercentage;
+
+        // Hide the modal
+        $this->dispatchBrowserEvent('hide-edit-vetustate');
+
+        // Optionally, you can also trigger a refresh or save the updated data to the database
     }
 
 

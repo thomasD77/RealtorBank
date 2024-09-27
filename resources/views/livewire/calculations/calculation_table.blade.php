@@ -1,4 +1,5 @@
 <div>
+    <!-- Existing code -->
     <div class="card mt-5">
         <div class="card-header bg-dark">
             <h4 class="text-white">{{ __('Prijsbestek') }}</h4>
@@ -18,7 +19,12 @@
                     </thead>
                     <tbody>
                     @foreach($groupedSubCalculations as $categoryData)
-                        <tr class="bg-light font-weight-bold">
+                        <tr class="bg-light font-weight-bold" wire:key="category-{{ Str::slug($categoryData['category']) }}">
+                            <td>
+                                <button wire:click="editVetustate('{{ $categoryData['category'] }}')" class="btn btn-sm btn-warning">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                            </td>
                             <td colspan="7" class="text-center py-3">{{ $categoryData['category'] }}</td>
                         </tr>
                         @foreach($categoryData['subCalculations'] as $subCalculation)
@@ -39,15 +45,10 @@
                                 </td>
                                 <td class="text-right">{{ $subCalculation['tax'] }}%</td>
                                 <td class="text-right">{{ number_format($subCalculation['total'], 2, ',', '.') }} €</td>
-
                             </tr>
                         @endforeach
-                        <!-- Total sum row for each category -->
-                        <tr class="font-weight-bold">
-                            <td colspan="5" class="text-right" style="font-size: 12px">{{ __('Totaal') }}:</td>
-                            <td class="text-right">{{ number_format($categoryData['totalSum'], 2, ',', '.') }} €</td>
-                        </tr>
                     @endforeach
+
                     <!-- Overall total sum row -->
                     <tr class="font-weight-bold bg-dark text-white">
                         <td colspan="5" class="text-right">{{ __('Totaal') }}:</td>
@@ -58,6 +59,31 @@
             @else
                 <p class="text-center">{{ __('Geen subcalculaties gevonden.') }}</p>
             @endif
+        </div>
+    </div>
+
+    <!-- Edit Vetustate Modal -->
+    <div class="modal fade" id="editVetustateModal" tabindex="-1" role="dialog" aria-labelledby="editVetustateModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="editVetustateModalLabel">{{ __('Bewerk Vetustate Percentage') }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="vetustatePercentage">{{ __('Vetustate Percentage') }}</label>
+                        <input type="number" wire:model="vetustatePercentage" class="form-control" id="vetustatePercentage" placeholder="Voer percentage in">
+                        @error('vetustatePercentage') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Annuleren') }}</button>
+                    <button type="button" wire:click="updateVetustate" class="btn btn-primary">{{ __('Opslaan') }}</button>
+                </div>
+            </div>
         </div>
     </div>
 
