@@ -13,6 +13,7 @@ use App\Models\Key;
 use App\Models\Meter;
 use App\Models\RentalClaim;
 use App\Models\Room;
+use App\Models\Invoice;
 use App\Models\Situation;
 use Illuminate\Support\Facades\Route;
 
@@ -76,6 +77,12 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
         return view('situation.index', compact('inspection'));
     })->name('situation.index')
         ->can('hasAccessCheckUser','inspection');
+
+    Route::get('invoice/edit/{inspection}/{situation}/{invoice}', function (Inspection $inspection, Situation $situation, Invoice $invoice) {
+        return view('invoice.edit', compact('inspection', 'situation', 'invoice'));
+    })->name('invoice.edit')
+        ->can('hasAccessCheckUser','inspection');
+
 
     Route::get('/situation/edit/{inspection}/{situation}', function (Inspection $inspection, Situation $situation) {
         return view('situation.edit', compact('inspection', 'situation'));

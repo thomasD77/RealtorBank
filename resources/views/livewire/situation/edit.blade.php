@@ -463,9 +463,9 @@
                                             <tr>
                                                 <td>{{ $invoice->title }}</td>
                                                 <td>{{ $invoice->date }}</td>
-                                                {{--<td class="edit">
-                                                    <a href="{{ route('rentalClaim.edit', [ $inspection, $claim ]) }}"><i class="fa fa-pencil-alt text-dark"></i></a>
-                                                </td>--}}
+                                                <td class="edit">
+                                                    <a href="{{ route('invoice.edit', [ $inspection, $situation, $invoice ]) }}"><i class="fa fa-pencil-alt text-dark"></i></a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
