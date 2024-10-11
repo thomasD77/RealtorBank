@@ -473,8 +473,10 @@
                             </div>
                         </div>
                     @else
-                        <small>*{{ __('Er werden nog geen offertes aangemaakt voor deze uittrede.') }}</small>
+                        <small>*{{ __('Er werden nog geen offertes aangemaakt voor deze uittrede.') }} <br></small>
                     @endif
+                        <small style="font-weight: bold">*{{ __('Let op! Check zeker of je alle gewenste schade hebt gemarkeerd. Enkel actief gemarkeerde schade wordt opgenomen in de Offerte.') }}</small>
+
                 </div>
             </div>
         @endif

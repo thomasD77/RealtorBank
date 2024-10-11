@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Invoice;
 
 use App\Models\Inspection;
 use App\Models\Invoice;
+use App\Models\InvoiceDamage;
 use App\Models\Situation;
 use Livewire\Component;
 
@@ -16,6 +17,9 @@ class Edit extends Component
     public $title;
     public $date;
     public $remarks;
+
+    public $invoiceDamages;
+
     public function mount(Inspection $inspection, Situation $situation, Invoice $invoice)
     {
         $this->inspection = $inspection;
@@ -25,7 +29,31 @@ class Edit extends Component
         $this->title = $this->invoice->title;
         $this->date = $this->invoice->date;
         $this->remarks = $this->invoice->remarks;
+
+        $this->invoiceDamages = InvoiceDamage::query()
+            ->with([
+                'basicArea.floor',
+                'basicArea.area',
+                'basicArea.room',
+                'specificArea.floor',
+                'specificArea.specific',
+                'specificArea.room',
+                'conformArea.floor',
+                'conformArea.conform',
+                'conformArea.room',
+                'general.floor',
+                'general.room',
+                'techniqueArea.technique',
+                'outdoorArea.floor',
+                'outdoorArea.outdoor',
+                'outdoorArea.room'
+            ])
+            ->where('invoice_id', $this->invoice->id)
+            ->where('inspection_id', $this->inspection->id)
+            ->where('damage_print_pdf', 1)
+            ->get();
     }
+
 
     public function invoiceSubmit()
     {

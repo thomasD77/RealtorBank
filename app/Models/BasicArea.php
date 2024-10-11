@@ -15,12 +15,17 @@ class BasicArea extends Model
 
     public function area()
     {
-        return $this->belongsTo(Area::class);
+        return $this->belongsTo(Area::class, 'area_id');
     }
 
     public function room()
     {
-        return $this->belongsTo(Room::class);
+        return $this->belongsTo(Room::class, 'room_id');
+    }
+
+    public function floor()
+    {
+        return $this->belongsTo(Floor::class, 'floor_id');
     }
 
     public function media()

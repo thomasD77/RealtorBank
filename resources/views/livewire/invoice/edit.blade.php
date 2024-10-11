@@ -39,9 +39,77 @@
         </div>
     </div>
 
+    <div class="single-add-property">
+        <h3>{{ __('Offerte regels') }}</h3>
+        <div class="property-form-group">
+            @if($invoiceDamages && $invoiceDamages->isNotEmpty())
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>{{ __('Locatie') }}</th>
+                        <th>{{ __('Titel') }}</th>
+                        <th>{{ __('Datum') }}</th>
+                        <th>{{ __('Beschrijving') }}</th>
+                        <th>{{ __('Goedgekeurd') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($invoiceDamages as $damage)
+                        <tr>
+                            @if($damage->basicArea)
+                                <td>
+                                    {{ $damage->basicArea->floor->title ?? '-' }} >>
+                                    {{ $damage->basicArea->room->title ?? '-' }} >>
+                                    {{ $damage->basicArea->area->title ?? '-' }}
+                                </td>
+                            @elseif($damage->general)
+                                <td>
+                                    {{ $damage->general->floor->title ?? '-' }} >>
+                                    {{ $damage->general->room->title ?? '-' }}
+                                </td>
+                            @elseif($damage->specificArea)
+                                <td>
+                                    {{ $damage->specificArea->floor->title ?? '-' }} >>
+                                    {{ $damage->specificArea->room->title ?? '-' }} >>
+                                    {{ $damage->specificArea->specific->title ?? '-' }}
+                                </td>
+
+                            @elseif($damage->conformArea)
+                                <td>
+                                    {{ $damage->conformArea->floor->title ?? '-' }} >>
+                                    {{ $damage->conformArea->room->title ?? '-' }} >>
+                                    {{ $damage->conformArea->conform->title ?? '-' }}
+                                </td>
+                            @elseif($damage->techniqueArea)
+                                <td>
+                                    {{ $damage->techniqueArea->technique->title ?? '-' }}
+                                </td>
+
+                            @elseif($damage->outdoorArea)
+                                <td>
+                                    {{ $damage->outdoorArea->room->title ?? '-' }} >>
+                                    {{ $damage->outdoorArea->outdoor->title ?? '-' }}
+                                </td>
+                            @endif
+
+                            <!-- Schade informatie -->
+                            <td>{{ $damage->damage_title ?? '-' }}</td>
+                            <td>{{ $damage->damage_date ? $damage->damage_date : '-' }}</td>
+                            <td>{{ $damage->damage_description ?? '-' }}</td>
+
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @else
+                <p>{{ __('Geen offerte beschikbaar.') }}</p>
+            @endif
+        </div>
+    </div>
+
 
     <div class="single-add-property">
-        <h3>{{ __('Offerte verwijderen') }}</h3>
+        <h3>{{ __('Verwijderen') }}</h3>
         <div class="property-form-group">
             <!-- Button trigger modal -->
             <div class="text-right">

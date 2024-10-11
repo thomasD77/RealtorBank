@@ -21,6 +21,11 @@ class General extends Model
         return $this->belongsTo(Room::class);
     }
 
+    public function floor()
+    {
+        return $this->belongsTo(Floor::class, 'floor_id');
+    }
+
     public function damages()
     {
         return $this->hasMany(Damage::class, 'general_id');

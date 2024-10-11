@@ -11,14 +11,19 @@ class SpecificArea extends Model
 
     protected $guarded = [];
 
-    public function specific()
+    public function floor()
     {
-        return $this->belongsTo(Specific::class);
+        return $this->belongsTo(Floor::class, 'floor_id');
     }
 
     public function room()
     {
-        return $this->belongsTo(Room::class);
+        return $this->belongsTo(Room::class, 'room_id');
+    }
+
+    public function specific()
+    {
+        return $this->belongsTo(Specific::class, 'specific_id');
     }
 
     public function media()

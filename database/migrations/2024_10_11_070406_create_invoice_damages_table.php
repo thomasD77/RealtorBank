@@ -17,6 +17,14 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('inspection_id')->index();
+
+            $table->unsignedBigInteger('basic_id')->nullable()->index();
+            $table->unsignedBigInteger('specific_id')->nullable()->index();
+            $table->unsignedBigInteger('conform_id')->nullable()->index();
+            $table->unsignedBigInteger('general_id')->nullable()->index();
+            $table->unsignedBigInteger('technique_id')->nullable()->index();
+            $table->unsignedBigInteger('outdoor_id')->nullable()->index();
+
             $table->unsignedBigInteger('invoice_id')->index();
             $table->unsignedBigInteger('damage_id')->index();
             $table->string('damage_title')->nullable();

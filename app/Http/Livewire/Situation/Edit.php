@@ -374,11 +374,19 @@ class Edit extends Component
             return;
         }
 
-        $invoiceDamage = new InvoiceDamage();
         foreach ($damages as $damage){
+            $invoiceDamage = new InvoiceDamage();
+
             $invoiceDamage->invoice_id = $invoice->id;
 
             $invoiceDamage->inspection_id = $damage->inspection_id;
+            $invoiceDamage->basic_id = $damage->basic_id;
+            $invoiceDamage->specific_id = $damage->specific_id;
+            $invoiceDamage->conform_id = $damage->conform_id;
+            $invoiceDamage->general_id = $damage->general_id;
+            $invoiceDamage->technique_id = $damage->technique_id;
+            $invoiceDamage->outdoor_id = $damage->outdoor_id;
+
             $invoiceDamage->damage_id = $damage->id;
             $invoiceDamage->damage_title = $damage->title;
             $invoiceDamage->damage_date = $damage->date;
@@ -394,8 +402,9 @@ class Edit extends Component
          return;
         }
 
-        $invoiceCalculation = new InvoiceCalculation();
         foreach ($calculations as $calculation){
+            $invoiceCalculation = new InvoiceCalculation();
+
             $invoiceCalculation->inspection_id = $calculation->inspection_id;
             $invoiceCalculation->damage_id = $calculation->damage_id;
             $invoiceCalculation->save();
@@ -414,8 +423,9 @@ class Edit extends Component
             return;
         }
 
-        $invoiceSubCalculation = new InvoiceSubCalculation();
         foreach ($SubCalculations as $subCalculation){
+            $invoiceSubCalculation = new InvoiceSubCalculation();
+
             $subCalculation->invoice_id = $invoice->id;
 
             $invoiceSubCalculation->invoice_calculation_id = $subCalculation->calculation_id;
