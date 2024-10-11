@@ -167,13 +167,4 @@ class DashboardController extends Controller
             'room' => $room,
         ]);
     }
-
-    public function calculations(Inspection $inspection, Floor $floor, Room $room ): View
-    {
-        return view('calculations.index', [
-            'inspection' => $inspection,
-            'floor' => $floor,
-            'room' => $room,
-        ]);
-    }
 }

@@ -36,7 +36,6 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/technique/{inspection}/{technique}', [DashboardController::class, 'technique'])->name('area.technique');
     Route::get('/outdoor/{inspection}/{outdoor}', [DashboardController::class, 'outdoor'])->name('area.outdoor');
     Route::get('/general/{inspection}/{room}/', [DashboardController::class, 'general'])->name('area.general');
-    Route::get('/calculation/{inspection}/{floor}/{room}', [DashboardController::class, 'calculations'])->name('calculations');
 
     Route::get('/create/inspection', [InspectionController::class, 'create'])->name('create.inspection');
     Route::get('/generate/inspection/{inspection}/{situation}', [SituationController::class, 'genereatePDF'])->name('generate.inspection');

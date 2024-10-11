@@ -68,11 +68,6 @@
                                                     <i class="fa fa-flag text-info" aria-hidden="true"></i>{{ __('Overzicht') }}
                                                 </a>
                                             </li>
-                                            <li class="pt-3 pt-lg-0">
-                                                <a href="{{ route('calculations',  [$inspection, $room->floor, $room]) }}">
-                                                    <i class="fa fa-calculator text-success" aria-hidden="true"></i>{{ __('Calculatie') }}
-                                                </a>
-                                            </li>
                                             {{-- Basic--}}
                                             @if($activeTemplate == \App\Enums\TemplateKey::Basic->value || $activeTemplate == null)
                                                 <li>
