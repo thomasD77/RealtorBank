@@ -247,44 +247,35 @@ class Index extends Component
     public function loadSubCalculations()
     {
         if ($this->calculation) {
+            // Haal alle subcalculaties op zonder groepering
             $this->groupedSubCalculations = $this->calculation->subCalculations()
                 ->with('subCategory.categoryPricing')
                 ->get()
-                ->groupBy('subCategory.categoryPricing.title')
-                ->map(function ($subCalculations, $categoryTitle) {
-                    $totalSum = $subCalculations->sum('total');
-                    $vetustatePercentage = $subCalculations->first()->vetustate ?? 0; // Aannemende dat hetzelfde vetustate percentage geldt voor alle subcalculaties in een categorie
-                    $vetustateAmount = $totalSum * ($vetustatePercentage / 100);
-                    $finalTotal = $totalSum - $vetustateAmount;
+                ->map(function ($subCalculation) {
+                    $total = $subCalculation->total;
+                    $vetustatePercentage = $subCalculation->vetustate ?? 0;
+                    $vetustateAmount = $total * ($vetustatePercentage / 100);
+                    $finalTotal = $total - $vetustateAmount;
 
                     return [
-                        'category' => $categoryTitle,
-                        'totalSum' => $totalSum,
+                        'id' => $subCalculation->id,
+                        'category' => $subCalculation->subCategory->categoryPricing->title ?? 'Onbekende Categorie',
+                        'subCategory' => $subCalculation->subCategory->title ?? 'Onbekende SubCategorie',
+                        'description' => $subCalculation->description,
+                        'tax' => $subCalculation->tax,
+                        'total' => $total,
                         'vetustatePercentage' => $vetustatePercentage,
                         'vetustateAmount' => $vetustateAmount,
                         'finalTotal' => $finalTotal,
-                        'subCalculations' => $subCalculations->map(function ($subCalculation) {
-                            return [
-                                'id' => $subCalculation->id,
-                                'subCategory' => $subCalculation->subCategory->title ?? 'Onbekende SubCategorie',
-                                'description' => $subCalculation->description,
-                                'tax' => $subCalculation->tax,
-                                'total' => $subCalculation->total,
-                                'approved' => $subCalculation->approved,
-                            ];
-                        })->toArray(),
+                        'approved' => $subCalculation->approved,
                     ];
                 })->toArray();
 
-            // Bereken het totale bruto som van alle categorieën (zonder aftrek van vetustate)
-            $this->overallTotalSum = array_reduce($this->groupedSubCalculations, function ($carry, $categoryData) {
-                return $carry + $categoryData['totalSum'];
-            }, 0);
+            // Bereken het totale bruto som van alle subcalculaties
+            $this->overallTotalSum = array_sum(array_column($this->groupedSubCalculations, 'total'));
 
-            // Bereken het netto eindtotaal door de finale totalen (na vetustate) per categorie op te tellen
-            $this->overallNetTotal = array_reduce($this->groupedSubCalculations, function ($carry, $categoryData) {
-                return $carry + $categoryData['finalTotal'];
-            }, 0);
+            // Bereken het netto eindtotaal door de finale totalen (na vetustate) op te tellen
+            $this->overallNetTotal = array_sum(array_column($this->groupedSubCalculations, 'finalTotal'));
         }
     }
 
