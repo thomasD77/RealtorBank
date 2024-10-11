@@ -12,7 +12,7 @@
                         <th style="width: 20%">{{ __('Categorie') }}</th>
                         <th style="width: 20%">{{ __('SubCategorie') }}</th>
                         <th style="width: 30%">{{ __('Beschrijving') }}</th>
-                        <th style="width: 10%" class="text-center">{{ __('Goedgekeurd') }}</th>
+                        <th style="width: 10%" class="text-center">{{ __('€ / goedgekeurd') }}</th>
                         <th style="width: 10%" class="text-right">{{ __('BTW (%)') }}</th>
                         <th style="width: 10%" class="text-right">{{ __('Totaal (€)') }}</th>
                     </tr>
@@ -31,6 +31,8 @@
                             <td class="text-center">
                                 @if($subCalculation['approved'])
                                     <i class="fa fa-check text-success"></i>
+                                @elseif($subCalculation['approved'] === null)
+                                    <i class="fa fa-question text-dark"></i>
                                 @else
                                     <i class="fa fa-times text-danger"></i>
                                 @endif
@@ -46,7 +48,10 @@
                         <td class="text-right">{{ number_format($overallTotalSum, 2, ',', '.') }} €</td>
                     </tr>
                     <tr class="font-weight-bold bg-light">
-                        <td colspan="6" class="text-right">{{ __('Vetustate') }} ({{ $vetustatePercentage }}%):</td>
+                        <td colspan="1" class="text-center">
+                            <button wire:click="editVetustate" class="btn btn-warning mt-3"> <i class="fa fa-percent"></i></button>
+                        </td>
+                        <td colspan="5" class="text-right">{{ __('Vetustate') }} ({{ $vetustatePercentage }}%):</td>
                         <td class="text-right">-{{ number_format($vetustateAmount, 2, ',', '.') }} €</td>
                     </tr>
                     <tr class="font-weight-bold bg-light">
@@ -55,9 +60,6 @@
                     </tr>
                     </tbody>
                 </table>
-
-                <!-- Knop om Vetustate te bewerken -->
-                <button wire:click="editVetustate" class="btn btn-warning mt-3">{{ __('Wijzig Vetustate') }}</button>
             @else
                 <p class="text-center">{{ __('Geen subcalculaties gevonden.') }}</p>
             @endif

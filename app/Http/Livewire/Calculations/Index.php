@@ -42,7 +42,6 @@ class Index extends Component
     public $count;
     public $tax = 21; // Standaard BTW-percentage
     public $total;
-    public $approved = 1;
 
     public Inspection $inspection;
     public Damage $damage;
@@ -137,7 +136,6 @@ class Index extends Component
             'count' => 'required|numeric',
             'tax' => 'required|numeric',
             'total' => 'required|numeric',
-            'approved' => 'nullable|integer',
         ]);
 
         // Maak een nieuwe SubCalculation aan
@@ -152,7 +150,6 @@ class Index extends Component
         $subCalculation->count = $this->count;
         $subCalculation->tax = $this->tax;
         $subCalculation->total = $this->total;
-        $subCalculation->approved = $this->approved;
         $subCalculation->save();
 
         // Reset de form velden en maak het formulier onzichtbaar
@@ -177,7 +174,6 @@ class Index extends Component
         $this->count = null;
         $this->tax = 21;
         $this->total = null;
-        $this->approved = null;
         $this->showForm = null;
     }
 
@@ -218,7 +214,6 @@ class Index extends Component
         $this->count = $subCalculation->count;
         $this->tax = $subCalculation->tax;
         $this->total = $subCalculation->total;
-        $this->approved = $subCalculation->approved;
 
         // Zorg ervoor dat het formulier zichtbaar is
         $this->showForm = true;
@@ -279,23 +274,8 @@ class Index extends Component
         }
     }
 
-
-    public function calculateVetustate()
+    public function editVetustate()
     {
-        // Assuming vetustate percentage is consistent across all subCalculations or based on the first one
-        $firstSubCalculation = $this->calculation->subCalculations()->first();
-        $this->vetustatePercentage = $firstSubCalculation ? $firstSubCalculation->vetustate : 0;
-
-        // Calculate the total vetustate amount
-        $this->vetustateAmount = $this->overallTotalSum * $this->vetustatePercentage / 100;
-
-        // Calculate the final total after subtracting the vetustate amount
-        $this->finalTotal = $this->overallTotalSum - $this->vetustateAmount;
-    }
-
-    public function editVetustate($category)
-    {
-        $this->selectedCategoryId = CategoryPricing::where('title', $category)->select('id')->first();
         // You should load the existing percentage value here if needed
         $this->vetustatePercentage = 0; // Or load the current percentage from your data
 
@@ -305,28 +285,34 @@ class Index extends Component
 
     public function updateVetustate()
     {
-        // Validate the input to ensure it's a valid percentage
+        // Valideer het vetustate-percentage
         $this->validate([
             'vetustatePercentage' => 'required|numeric|min:0|max:100',
         ]);
 
-        $subCalculations = SubCalculation::query()
-            ->where('calculation_id', $this->calculation->id)
-            ->where('category_pricing_id', $this->selectedCategoryId['id'])
-            ->get();
+        // Pas de vetustate toe op alle subcalculaties die bij deze calculation horen
+        $subCalculations = $this->calculation->subCalculations;
 
-        foreach ($subCalculations as $sub){
+        foreach ($subCalculations as $sub) {
             $sub->vetustate = $this->vetustatePercentage;
             $sub->save();
         }
 
-        // Hide the modal after updating
-        $this->dispatchBrowserEvent('hide-edit-vetustate');
+        // Werk de berekeningen bij na het toepassen van de vetustate
+        $this->calculateVetustate();
 
-        // Optionally, reload the sub-calculations to reflect the changes in the view
-        $this->loadSubCalculations();
+        // Sluit het modal
+        $this->dispatchBrowserEvent('hide-edit-vetustate');
     }
 
+    public function calculateVetustate()
+    {
+        // Bereken de totale vetustate-waarde voor alle subcalculaties
+        $this->vetustateAmount = $this->overallTotalSum * ($this->vetustatePercentage / 100);
+
+        // Bereken het eindtotaal na aftrek van vetustate
+        $this->finalTotal = $this->overallTotalSum - $this->vetustateAmount;
+    }
 
 
     public function render()

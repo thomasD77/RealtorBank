@@ -130,13 +130,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="approved">{{ __('Goedgekeurd') }}</label>
-                                        <select class="form-control" id="approved" wire:model="approved">
-                                            <option value="1">{{ __('Ja') }}</option>
-                                            <option value="0">{{ __('Nee') }}</option>
-                                        </select>
-                                    </div>
+
                                 </div>
                             </div>
 
