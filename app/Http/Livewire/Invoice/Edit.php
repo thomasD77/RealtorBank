@@ -76,6 +76,18 @@ class Edit extends Component
         return redirect()->route('situation.edit', [$this->inspection, $this->situation]);
     }
 
+    public function toggleApproval($damageId)
+    {
+        $damage = InvoiceDamage::find($damageId);
+
+        if ($damage) {
+            // Toggle the approval status
+            $damage->approved = !$damage->approved;
+            $damage->save();
+        }
+    }
+
+
     public function render()
     {
         return view('livewire.invoice.edit');

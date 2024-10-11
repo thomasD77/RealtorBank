@@ -1,4 +1,29 @@
 <div>
+    <style>
+        /* Table column styles */
+        .table th, .table td {
+            vertical-align: top;
+            padding: 8px;
+        }
+
+        /* Fixed width for the "Locatie" column */
+        .location-column {
+            width: 250px; /* Adjust this width as needed */
+            word-wrap: break-word; /* Ensures long text wraps within the cell */
+            text-align: left; /* Aligns text to the left */
+        }
+
+        /* To ensure the table layout remains consistent */
+        .table {
+            table-layout: fixed; /* Forces fixed column widths */
+            width: 100%; /* Occupies full width */
+        }
+
+        /* Optional: style for alignment and spacing between rows */
+        .table td, .table th {
+            border: 1px solid #ddd;
+        }
+    </style>
     <div class="single-add-property">
         <a href="{{ route('situation.edit', [$inspection->id, $situation->id]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
         <h3>{{ $title }}</h3>
@@ -46,7 +71,7 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
-                        <th>{{ __('Locatie') }}</th>
+                        <th class="location-column">{{ __('Locatie') }}</th>
                         <th>{{ __('Titel') }}</th>
                         <th>{{ __('Datum') }}</th>
                         <th>{{ __('Beschrijving') }}</th>
@@ -56,51 +81,41 @@
                     <tbody>
                     @foreach($invoiceDamages as $damage)
                         <tr>
-                            @if($damage->basicArea)
-                                <td>
+                            <td class="location-column">
+                                @if($damage->basicArea)
                                     {{ $damage->basicArea->floor->title ?? '-' }} >>
                                     {{ $damage->basicArea->room->title ?? '-' }} >>
                                     {{ $damage->basicArea->area->title ?? '-' }}
-                                </td>
-                            @elseif($damage->general)
-                                <td>
-                                    {{ $damage->general->floor->title ?? '-' }} >>
+                                @elseif($damage->general)
+                                    {{ $damage->general->room->floor->title ?? '-' }} >>
                                     {{ $damage->general->room->title ?? '-' }}
-                                </td>
-                            @elseif($damage->specificArea)
-                                <td>
-                                    {{ $damage->specificArea->floor->title ?? '-' }} >>
+                                @elseif($damage->specificArea)
+                                    {{ $damage->specificArea->room->floor->title ?? '-' }} >>
                                     {{ $damage->specificArea->room->title ?? '-' }} >>
                                     {{ $damage->specificArea->specific->title ?? '-' }}
-                                </td>
-
-                            @elseif($damage->conformArea)
-                                <td>
+                                @elseif($damage->conformArea)
                                     {{ $damage->conformArea->floor->title ?? '-' }} >>
                                     {{ $damage->conformArea->room->title ?? '-' }} >>
                                     {{ $damage->conformArea->conform->title ?? '-' }}
-                                </td>
-                            @elseif($damage->techniqueArea)
-                                <td>
+                                @elseif($damage->techniqueArea)
                                     {{ $damage->techniqueArea->technique->title ?? '-' }}
-                                </td>
-
-                            @elseif($damage->outdoorArea)
-                                <td>
+                                @elseif($damage->outdoorArea)
                                     {{ $damage->outdoorArea->room->title ?? '-' }} >>
                                     {{ $damage->outdoorArea->outdoor->title ?? '-' }}
-                                </td>
-                            @endif
-
-                            <!-- Schade informatie -->
+                                @endif
+                            </td>
                             <td>{{ $damage->damage_title ?? '-' }}</td>
                             <td>{{ $damage->damage_date ? $damage->damage_date : '-' }}</td>
                             <td>{{ $damage->damage_description ?? '-' }}</td>
-
+                            <td class="text-center">
+                                <input type="checkbox" wire:click="toggleApproval({{ $damage->id }})" {{ $damage->approved ? 'checked' : '' }}>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+
+
             @else
                 <p>{{ __('Geen offerte beschikbaar.') }}</p>
             @endif
