@@ -110,8 +110,13 @@
         </div>
     </div>
 
+    <livewire:calculations.index
+        :Inspection="$inspection"
+        :Damage="$damage"
+    />
+
     <div class="single-add-property">
-        <h3>{{ __('Verwijderen') }}</h3>
+        <h3>{{ __('Schade verwijderen') }}</h3>
         <div class="property-form-group">
             <!-- Button trigger modal -->
             <div class="text-right">

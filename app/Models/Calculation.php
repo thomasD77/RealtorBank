@@ -9,7 +9,7 @@ class Calculation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['floor_id', 'room_id', 'inspection_id'];
+    protected $fillable = ['damage_id', 'inspection_id'];
 
     public function subCalculations()
     {
@@ -31,13 +31,8 @@ class Calculation extends Model
         return $this->belongsTo(Pricing::class, 'pricing_id');
     }
 
-    public function room()
+    public function damage()
     {
-        return $this->belongsTo(Room::class, 'room_id');
-    }
-
-    public function floor()
-    {
-        return $this->belongsTo(Floor::class, 'floor_id');
+        return $this->belongsTo(Damage::class);
     }
 }

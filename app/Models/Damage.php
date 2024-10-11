@@ -22,4 +22,9 @@ class Damage extends Model
     {
         return $this->hasMany(MediaDamages::class, 'damage_id');
     }
+
+    public function calculations()
+    {
+        return $this->hasMany(Calculation::class);
+    }
 }

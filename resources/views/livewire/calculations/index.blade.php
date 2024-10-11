@@ -156,7 +156,7 @@
         @include('livewire.calculations.calculation_script')
     @else
         <div class="single-add-property">
-            <h3 class="uppercase">{{ __('Algemene gegevens') }}</h3>
+            <h3 class="uppercase">{{ __('Calculator') }}</h3>
             <button wire:click="addCalculation" class="btn btn-common mb-3"><i class="fa fa-plus mr-1"></i>{{ __('Calculatie') }}</button>
         </div>
     @endif

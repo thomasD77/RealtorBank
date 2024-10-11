@@ -5,10 +5,9 @@ namespace App\Http\Livewire\Calculations;
 use App\Models\Calculation;
 use App\Models\Category;
 use App\Models\CategoryPricing;
-use App\Models\Floor;
+use App\Models\Damage;
 use App\Models\Inspection;
 use App\Models\Pricing;
-use App\Models\Room;
 use App\Models\SubCategoryPricing;
 use App\Models\SubCalculation;
 use Livewire\Component;
@@ -46,8 +45,7 @@ class Index extends Component
     public $approved = 1;
 
     public Inspection $inspection;
-    public Room $room;
-    public Floor $floor;
+    public Damage $damage;
 
     public $groupedSubCalculations;
     public $overallTotalSum;
@@ -57,16 +55,14 @@ class Index extends Component
     // Houdt de te bewerken Pricing ID bij
     public $editingPricingId = null;
 
-    public function mount(Inspection $inspection, Room $room, Floor $floor)
+    public function mount(Inspection $inspection, Damage $damage)
     {
         $this->inspection = $inspection;
-        $this->floor = $floor;
-        $this->room = $room;
+        $this->damage = $damage;
 
         $this->calculation = Calculation::with('subCalculations.subCategory')
             ->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', $this->floor->id)
-            ->where('room_id', $this->room->id)
+            ->where('damage_id', $this->damage->id)
             ->first();
 
         $this->loadData();
@@ -78,8 +74,7 @@ class Index extends Component
         $this->subCategories = SubCategoryPricing::all();
         $this->calculation = Calculation::with('subCalculations.subCategory')
             ->where('inspection_id', $this->inspection->id)
-            ->where('floor_id', $this->floor->id)
-            ->where('room_id', $this->room->id)
+            ->where('damage_id', $this->damage->id)
             ->first();
     }
 
@@ -123,8 +118,7 @@ class Index extends Component
     {
         $calculation = new Calculation();
         $calculation->inspection_id = $this->inspection->id;
-        $calculation->floor_id = $this->floor->id;
-        $calculation->room_id = $this->room->id;
+        $calculation->damage_id = $this->damage->id;
         $calculation->save();
         $this->calculation = $calculation;
     }
