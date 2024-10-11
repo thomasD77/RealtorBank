@@ -9,7 +9,7 @@ class SubCalculation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['vetustate', 'subCategory', 'description', 'tax', 'total', 'approved'];
+    protected $fillable = ['vetustate', 'subCategory', 'description', 'tax', 'total'];
 
     public function calculation()
     {

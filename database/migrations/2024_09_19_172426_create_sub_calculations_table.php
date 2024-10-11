@@ -30,7 +30,6 @@ return new class extends Migration
             $table->decimal('total', 10, 2)->nullable();
             $table->decimal('vetustate', 10, 2)->nullable();
             $table->decimal('tax', 10, 2)->nullable();
-            $table->integer('approved')->nullable();
 
             $table->timestamps();
         });
