@@ -9,7 +9,14 @@ class Invoice extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['inspection_id', 'situation_id'];
+    protected $fillable = [
+        'title',
+        'date',
+        'remarks',
+        'total',
+        'inspection_id',
+        'situation_id'
+    ];
 
     public function inspection()
     {
@@ -19,5 +26,13 @@ class Invoice extends Model
     public function situation()
     {
         return $this->belongsTo(Situation::class);
+    }
+
+    /**
+     * Relatie met InvoiceDamage model.
+     */
+    public function invoiceDamages()
+    {
+        return $this->hasMany(InvoiceDamage::class);
     }
 }

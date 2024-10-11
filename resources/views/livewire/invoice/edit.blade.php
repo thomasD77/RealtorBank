@@ -40,7 +40,6 @@
     </div>
 
 
-
     <div class="single-add-property">
         <h3>{{ __('Offerte verwijderen') }}</h3>
         <div class="property-form-group">

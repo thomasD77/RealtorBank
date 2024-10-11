@@ -3,15 +3,20 @@
 namespace App\Http\Livewire\Situation;
 
 use App\Models\Address;
+use App\Models\Calculation;
 use App\Models\Category;
 use App\Models\Contract;
 use App\Models\Damage;
 use App\Models\DamagesSituation;
 use App\Models\Inspection;
 use App\Models\Invoice;
+use App\Models\InvoiceCalculation;
+use App\Models\InvoiceDamage;
+use App\Models\InvoiceSubCalculation;
 use App\Models\Owner;
 use App\Models\RentalClaim;
 use App\Models\Situation;
+use App\Models\SubCalculation;
 use App\Models\Tenant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -354,12 +359,79 @@ class Edit extends Component
 
     public function addInvoice()
     {
+        // First create new invoice
         $invoice = new Invoice();
         $invoice->inspection_id = $this->inspection->id;
         $invoice->situation_id = $this->situation->id;
         $invoice->title = 'Default';
         $invoice->date = today();
         $invoice->save();
+
+        // Print damage on Invoice
+        $damages = Damage::where('inspection_id', $this->inspection->id)->get();
+
+        if(!$damages){
+            return;
+        }
+
+        $invoiceDamage = new InvoiceDamage();
+        foreach ($damages as $damage){
+            $invoiceDamage->invoice_id = $invoice->id;
+
+            $invoiceDamage->inspection_id = $damage->inspection_id;
+            $invoiceDamage->damage_id = $damage->id;
+            $invoiceDamage->damage_title = $damage->title;
+            $invoiceDamage->damage_date = $damage->date;
+            $invoiceDamage->damage_description = $damage->description;
+            $invoiceDamage->damage_print_pdf = $damage->print_pdf;
+            $invoiceDamage->save();
+        }
+
+        // Print all the existing calculations with the invoice damages
+        $calculations = Calculation::where('inspection_id', $this->inspection->id)->get();
+
+        if(!$calculations){
+         return;
+        }
+
+        $invoiceCalculation = new InvoiceCalculation();
+        foreach ($calculations as $calculation){
+            $invoiceCalculation->inspection_id = $calculation->inspection_id;
+            $invoiceCalculation->damage_id = $calculation->damage_id;
+            $invoiceCalculation->save();
+        }
+
+        // Print all the existing sub-calculations with invoice
+        $calculationIds = Calculation::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->pluck('id');
+
+        $SubCalculations = SubCalculation::query()
+            ->whereIn('calculation_id', $calculationIds)
+            ->get();
+
+        if(!$SubCalculations){
+            return;
+        }
+
+        $invoiceSubCalculation = new InvoiceSubCalculation();
+        foreach ($SubCalculations as $subCalculation){
+            $subCalculation->invoice_id = $invoice->id;
+
+            $invoiceSubCalculation->invoice_calculation_id = $subCalculation->calculation_id;
+            $invoiceSubCalculation->invoice_category_pricing_id = $subCalculation->category_pricing_id;
+            $invoiceSubCalculation->invoice_sub_category_pricing_id = $subCalculation->sub_category_pricing_id;
+
+            $invoiceSubCalculation->invoice_description = $subCalculation->description;
+            $invoiceSubCalculation->invoice_cost_square_meter = $subCalculation->cost_square_meter;
+            $invoiceSubCalculation->invoice_cost_hour = $subCalculation->cost_hour;
+            $invoiceSubCalculation->invoice_cost_piece = $subCalculation->cost_piece;
+            $invoiceSubCalculation->invoice_count = $subCalculation->count;
+            $invoiceSubCalculation->invoice_total = $subCalculation->total;
+            $invoiceSubCalculation->invoice_vetustate = $subCalculation->vetustate;
+            $invoiceSubCalculation->invoice_tax = $subCalculation->tax;
+            $invoiceSubCalculation->save();
+        }
 
         $this->invoices = Invoice::where('situation_id', $this->situation->id)->get();
     }

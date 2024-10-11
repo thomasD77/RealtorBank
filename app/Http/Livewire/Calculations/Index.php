@@ -262,7 +262,6 @@ class Index extends Component
                         'vetustatePercentage' => $vetustatePercentage,
                         'vetustateAmount' => $vetustateAmount,
                         'finalTotal' => $finalTotal,
-                        'approved' => $subCalculation->approved,
                     ];
                 })->toArray();
 
