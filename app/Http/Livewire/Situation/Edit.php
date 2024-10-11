@@ -8,6 +8,7 @@ use App\Models\Contract;
 use App\Models\Damage;
 use App\Models\DamagesSituation;
 use App\Models\Inspection;
+use App\Models\Invoice;
 use App\Models\Owner;
 use App\Models\RentalClaim;
 use App\Models\Situation;
@@ -70,6 +71,8 @@ class Edit extends Component
     public $showArchived = false;
 
     public $last_intrede;
+
+    public $invoices;
 
     use WithFileUploads;
     use WithPagination;
@@ -146,6 +149,8 @@ class Edit extends Component
             ->first();
 
         $this->last_intrede = $last_intrede;
+
+        $this->invoices = Invoice::where('situation_id', $this->situation->id)->get();
     }
 
     public function deletePDF($pdf)
@@ -345,6 +350,18 @@ class Edit extends Component
     public function toggleArchived()
     {
         $this->showArchived = !$this->showArchived;
+    }
+
+    public function addInvoice()
+    {
+        $invoice = new Invoice();
+        $invoice->inspection_id = $this->inspection->id;
+        $invoice->situation_id = $this->situation->id;
+        $invoice->title = 'Default';
+        $invoice->date = today();
+        $invoice->save();
+
+        $this->invoices = Invoice::where('situation_id', $this->situation->id)->get();
     }
 
     public function render()
