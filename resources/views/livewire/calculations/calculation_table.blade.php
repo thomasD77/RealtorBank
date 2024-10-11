@@ -5,14 +5,13 @@
         </div>
         <div class="card-body">
             @if(!empty($groupedSubCalculations))
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered w-100">
                     <thead>
                     <tr class="font-weight-bold">
                         <th style="width: 10%" class="text-center">{{ __('Acties') }}</th>
-                        <th style="width: 20%">{{ __('Categorie') }}</th>
-                        <th style="width: 20%">{{ __('SubCategorie') }}</th>
+                        <th style="width: 25%">{{ __('Categorie') }}</th>
+                        <th style="width: 25%">{{ __('SubCategorie') }}</th>
                         <th style="width: 30%">{{ __('Beschrijving') }}</th>
-                        <th style="width: 10%" class="text-center">{{ __('€ / goedgekeurd') }}</th>
                         <th style="width: 10%" class="text-right">{{ __('BTW (%)') }}</th>
                         <th style="width: 10%" class="text-right">{{ __('Totaal (€)') }}</th>
                     </tr>
@@ -28,15 +27,6 @@
                             <td>{{ $subCalculation['category'] }}</td>
                             <td>{{ $subCalculation['subCategory'] }}</td>
                             <td>{{ $subCalculation['description'] }}</td>
-                            <td class="text-center">
-                                @if($subCalculation['approved'])
-                                    <i class="fa fa-check text-success"></i>
-                                @elseif($subCalculation['approved'] === null)
-                                    <i class="fa fa-question text-dark"></i>
-                                @else
-                                    <i class="fa fa-times text-danger"></i>
-                                @endif
-                            </td>
                             <td class="text-right">{{ $subCalculation['tax'] }}%</td>
                             <td class="text-right">{{ number_format($subCalculation['total'], 2, ',', '.') }} €</td>
                         </tr>
@@ -44,18 +34,18 @@
 
                     <!-- Totaal, Vetustate, en Eindtotaal -->
                     <tr class="font-weight-bold bg-light">
-                        <td colspan="6" class="text-right">{{ __('TOTAAL') }}:</td>
+                        <td colspan="5" class="text-right">{{ __('TOTAAL') }}:</td>
                         <td class="text-right">{{ number_format($overallTotalSum, 2, ',', '.') }} €</td>
                     </tr>
                     <tr class="font-weight-bold bg-light">
                         <td colspan="1" class="text-center">
                             <button wire:click="editVetustate" class="btn btn-warning mt-3"> <i class="fa fa-percent"></i></button>
                         </td>
-                        <td colspan="5" class="text-right">{{ __('Vetustate') }} ({{ $vetustatePercentage }}%):</td>
+                        <td colspan="4" class="text-right">{{ __('Vetustate') }} ({{ $vetustatePercentage }}%):</td>
                         <td class="text-right">-{{ number_format($vetustateAmount, 2, ',', '.') }} €</td>
                     </tr>
                     <tr class="font-weight-bold bg-light">
-                        <td colspan="6" class="text-right">{{ __('Totaal na Vetustate') }}:</td>
+                        <td colspan="5" class="text-right">{{ __('Totaal na Vetustate') }}:</td>
                         <td class="text-right">{{ number_format($finalTotal, 2, ',', '.') }} €</td>
                     </tr>
                     </tbody>
