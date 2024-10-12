@@ -25,6 +25,6 @@ class Damage extends Model
 
     public function calculations()
     {
-        return $this->hasMany(Calculation::class);
+        return $this->hasMany(Calculation::class, 'damage_id');
     }
 }

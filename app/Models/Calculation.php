@@ -9,11 +9,23 @@ class Calculation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['damage_id', 'inspection_id'];
+    protected $fillable = [
+        'damage_id',
+        'category_pricing_id',
+        'sub_category_pricing_id',
+        'description',
+        'cost_square_meter',
+        'cost_hour',
+        'cost_piece',
+        'count',
+        'total',
+        'vetustate',
+        'tax',
+    ];
 
-    public function subCalculations()
+    public function damage()
     {
-        return $this->hasMany(SubCalculation::class);
+        return $this->belongsTo(Damage::class);
     }
 
     public function categoryPricing()
@@ -24,15 +36,5 @@ class Calculation extends Model
     public function subCategoryPricing()
     {
         return $this->belongsTo(SubCategoryPricing::class, 'sub_category_pricing_id');
-    }
-
-    public function pricing()
-    {
-        return $this->belongsTo(Pricing::class, 'pricing_id');
-    }
-
-    public function damage()
-    {
-        return $this->belongsTo(Damage::class);
     }
 }
