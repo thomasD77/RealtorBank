@@ -143,6 +143,26 @@
     </div>
 
     <div class="single-add-property">
+        <h3>{{ __('Akkoord') }}</h3>
+        <div class="property-form-group row">
+            <div class="col-md-6">
+                <div class="text-left">
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-trash mx-2"></i> {{ __('Akkoord Schade') }}
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="text-right">
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-trash mx-2"></i> {{ __('Akkoord Schade & Prijzen') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="single-add-property">
         <h3>{{ __('Verwijderen') }}</h3>
         <div class="property-form-group">
             <!-- Button trigger modal -->
@@ -178,3 +198,5 @@
         </div>
 
     </div>
+
+</div>
