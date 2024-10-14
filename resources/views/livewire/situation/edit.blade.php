@@ -443,11 +443,11 @@
         @if($situation->intrede == 0 && $damages->isNotEmpty())
             <div class="single-add-property">
                 <div class="d-flex justify-content-end">
-                    <button wire:click="addInvoice" class="btn-sm btn-common mb-3" style="border: none"><i class="fa fa-plus mr-1"></i>{{ __('Offerte') }}</button>
+                    <button wire:click="addQuote" class="btn-sm btn-common mb-3" style="border: none"><i class="fa fa-plus mr-1"></i>{{ __('Offerte') }}</button>
                 </div>
                 <h3>{{ __('Offerte') }}</h3>
                 <div class="property-form-group">
-                    @if($invoices->isNotEmpty())
+                    @if($quotes->isNotEmpty())
                         <div class="section-body listing-table">
                             <div class="table-responsive">
                                 <table class="table table-striped">
@@ -459,12 +459,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($invoices as $invoice)
+                                        @foreach($quotes as $quote)
                                             <tr>
-                                                <td>{{ $invoice->title }}</td>
-                                                <td>{{ $invoice->date }}</td>
+                                                <td>{{ $quote->title }}</td>
+                                                <td>{{ $quote->date }}</td>
                                                 <td class="edit">
-                                                    <a href="{{ route('invoice.edit', [ $inspection, $situation, $invoice ]) }}"><i class="fa fa-pencil-alt text-dark"></i></a>
+                                                    <a href="{{ route('quote.edit', [ $inspection, $situation, $quote ]) }}"><i class="fa fa-pencil-alt text-dark"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -11,6 +11,7 @@ use App\Models\Floor;
 use App\Models\Inspection;
 use App\Models\Key;
 use App\Models\Meter;
+use App\Models\Quote;
 use App\Models\RentalClaim;
 use App\Models\Room;
 use App\Models\Invoice;
@@ -78,9 +79,9 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     })->name('situation.index')
         ->can('hasAccessCheckUser','inspection');
 
-    Route::get('invoice/edit/{inspection}/{situation}/{invoice}', function (Inspection $inspection, Situation $situation, Invoice $invoice) {
-        return view('invoice.edit', compact('inspection', 'situation', 'invoice'));
-    })->name('invoice.edit')
+    Route::get('quote/edit/{inspection}/{situation}/{quote}', function (Inspection $inspection, Situation $situation, Quote $quote) {
+        return view('quote.edit', compact('inspection', 'situation', 'quote'));
+    })->name('quote.edit')
         ->can('hasAccessCheckUser','inspection');
 
 

@@ -9,16 +9,15 @@ use App\Models\Contract;
 use App\Models\Damage;
 use App\Models\DamagesSituation;
 use App\Models\Inspection;
-use App\Models\Invoice;
-use App\Models\InvoiceCalculation;
-use App\Models\InvoiceDamage;
-use App\Models\InvoiceSubCalculation;
 use App\Models\Owner;
+use App\Models\Quote;
+use App\Models\QuoteCalculation;
+use App\Models\QuoteDamage;
+use App\Models\QuoteSubCalculation;
 use App\Models\RentalClaim;
 use App\Models\Situation;
 use App\Models\SubCalculation;
 use App\Models\Tenant;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -77,7 +76,7 @@ class Edit extends Component
 
     public $last_intrede;
 
-    public $invoices;
+    public $quotes;
 
     use WithFileUploads;
     use WithPagination;
@@ -155,7 +154,7 @@ class Edit extends Component
 
         $this->last_intrede = $last_intrede;
 
-        $this->invoices = Invoice::where('situation_id', $this->situation->id)->get();
+        $this->quotes = Quote::where('situation_id', $this->situation->id)->get();
     }
 
     public function deletePDF($pdf)
@@ -357,61 +356,74 @@ class Edit extends Component
         $this->showArchived = !$this->showArchived;
     }
 
-    public function addInvoice()
+    public function addQuote()
     {
-        // First create new invoice
-        $invoice = new Invoice();
-        $invoice->inspection_id = $this->inspection->id;
-        $invoice->situation_id = $this->situation->id;
-        $invoice->title = 'Default';
-        $invoice->date = today();
-        $invoice->save();
+        // First create new quote
+        $quote = new Quote();
+        $quote->inspection_id = $this->inspection->id;
+        $quote->situation_id = $this->situation->id;
+        $quote->title = 'Default';
+        $quote->date = today();
+        $quote->save();
 
-        // Print damage on Invoice
-        $damages = Damage::where('inspection_id', $this->inspection->id)->get();
+        // Print damage on quote
+        $damageIds = DamagesSituation::query()
+            ->where('situation_id', $this->situation->id)
+            ->where('print_pdf', 1)
+            ->pluck('damage_id');
+
+        $damages = Damage::whereIn('id', $damageIds)->get();
 
         if(!$damages){
             return;
         }
 
         foreach ($damages as $damage){
-            $invoiceDamage = new InvoiceDamage();
+            $quoteDamage = new QuoteDamage();
 
-            $invoiceDamage->invoice_id = $invoice->id;
+            $quoteDamage->quote_id = $quote->id;
+            $quoteDamage->damage_id = $damage->id;
 
-            $invoiceDamage->inspection_id = $damage->inspection_id;
-            $invoiceDamage->basic_id = $damage->basic_id;
-            $invoiceDamage->specific_id = $damage->specific_id;
-            $invoiceDamage->conform_id = $damage->conform_id;
-            $invoiceDamage->general_id = $damage->general_id;
-            $invoiceDamage->technique_id = $damage->technique_id;
-            $invoiceDamage->outdoor_id = $damage->outdoor_id;
+            $quoteDamage->inspection_id = $damage->inspection_id;
+            $quoteDamage->basic_id = $damage->basic_id;
+            $quoteDamage->specific_id = $damage->specific_id;
+            $quoteDamage->conform_id = $damage->conform_id;
+            $quoteDamage->general_id = $damage->general_id;
+            $quoteDamage->technique_id = $damage->technique_id;
+            $quoteDamage->outdoor_id = $damage->outdoor_id;
 
-            $invoiceDamage->damage_id = $damage->id;
-            $invoiceDamage->damage_title = $damage->title;
-            $invoiceDamage->damage_date = $damage->date;
-            $invoiceDamage->damage_description = $damage->description;
-            $invoiceDamage->damage_print_pdf = $damage->print_pdf;
-            $invoiceDamage->save();
+            $quoteDamage->damage_title = $damage->title;
+            $quoteDamage->damage_date = $damage->date;
+            $quoteDamage->damage_description = $damage->description;
+            $quoteDamage->damage_print_pdf = $damage->print_pdf;
+            $quoteDamage->save();
         }
 
-        // Print all the existing calculations with the invoice damages
-        $calculations = Calculation::where('inspection_id', $this->inspection->id)->get();
+        // Print all the existing calculations with the quote damages
+        $calculations = Calculation::query()
+            ->whereIn('damage_id', $damageIds)
+            ->where('inspection_id', $this->inspection->id)
+            ->get();
 
         if(!$calculations){
          return;
         }
 
         foreach ($calculations as $calculation){
-            $invoiceCalculation = new InvoiceCalculation();
+            $quoteCalculation = new QuoteCalculation();
 
-            $invoiceCalculation->inspection_id = $calculation->inspection_id;
-            $invoiceCalculation->damage_id = $calculation->damage_id;
-            $invoiceCalculation->save();
+            $quoteCalculation->inspection_id = $calculation->inspection_id;
+            $quoteCalculation->quote_damage_id = $calculation->damage_id;
+            $quoteCalculation->quote_brutto_total = $calculation->brutto_total;
+            $quoteCalculation->quote_vetustate = $calculation->vetustate;
+            $quoteCalculation->quote_vetustate_amount = $calculation->vetustate_amount;
+            $quoteCalculation->quote_final_total = $calculation->final_total;
+            $quoteCalculation->save();
         }
 
-        // Print all the existing sub-calculations with invoice
+        // Print all the existing sub-calculations with quote
         $calculationIds = Calculation::query()
+            ->whereIn('damage_id', $damageIds)
             ->where('inspection_id', $this->inspection->id)
             ->pluck('id');
 
@@ -424,26 +436,23 @@ class Edit extends Component
         }
 
         foreach ($SubCalculations as $subCalculation){
-            $invoiceSubCalculation = new InvoiceSubCalculation();
+            $quoteSubCalculation = new QuoteSubCalculation();
 
-            $subCalculation->invoice_id = $invoice->id;
+            $quoteSubCalculation->quote_calculation_id = $subCalculation->calculation_id;
+            $quoteSubCalculation->category_pricing_id = $subCalculation->category_pricing_id;
+            $quoteSubCalculation->sub_category_pricing_id = $subCalculation->sub_category_pricing_id;
 
-            $invoiceSubCalculation->invoice_calculation_id = $subCalculation->calculation_id;
-            $invoiceSubCalculation->invoice_category_pricing_id = $subCalculation->category_pricing_id;
-            $invoiceSubCalculation->invoice_sub_category_pricing_id = $subCalculation->sub_category_pricing_id;
-
-            $invoiceSubCalculation->invoice_description = $subCalculation->description;
-            $invoiceSubCalculation->invoice_cost_square_meter = $subCalculation->cost_square_meter;
-            $invoiceSubCalculation->invoice_cost_hour = $subCalculation->cost_hour;
-            $invoiceSubCalculation->invoice_cost_piece = $subCalculation->cost_piece;
-            $invoiceSubCalculation->invoice_count = $subCalculation->count;
-            $invoiceSubCalculation->invoice_total = $subCalculation->total;
-            $invoiceSubCalculation->invoice_vetustate = $subCalculation->vetustate;
-            $invoiceSubCalculation->invoice_tax = $subCalculation->tax;
-            $invoiceSubCalculation->save();
+            $quoteSubCalculation->quote_description = $subCalculation->description;
+            $quoteSubCalculation->quote_cost_square_meter = $subCalculation->cost_square_meter;
+            $quoteSubCalculation->quote_cost_hour = $subCalculation->cost_hour;
+            $quoteSubCalculation->quote_cost_piece = $subCalculation->cost_piece;
+            $quoteSubCalculation->quote_count = $subCalculation->count;
+            $quoteSubCalculation->quote_total = $subCalculation->total;
+            $quoteSubCalculation->quote_tax = $subCalculation->tax;
+            $quoteSubCalculation->save();
         }
 
-        $this->invoices = Invoice::where('situation_id', $this->situation->id)->get();
+        $this->quotes = Quote::where('situation_id', $this->situation->id)->get();
     }
 
     public function render()

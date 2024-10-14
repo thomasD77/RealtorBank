@@ -2,10 +2,10 @@
 
 @section('content')
 
-    <livewire:invoice.edit
+    <livewire:quote.edit
         :inspection="$inspection"
         :situation="$situation"
-        :invoice="$invoice"
+        :quote="$quote"
     />
 
 @endsection

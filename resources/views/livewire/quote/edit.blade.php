@@ -29,7 +29,7 @@
         <h3>{{ $title }}</h3>
         <div class="property-form-group">
 
-            <form wire:submit.prevent="invoiceSubmit">
+            <form wire:submit.prevent="quoteSubmit">
                 <div class="row">
                     <div class="col-lg-6 col-md-12">
                         <p>
@@ -40,7 +40,7 @@
                     <div class="col-lg-6 col-md-12">
                         <p>
                             <label for="date">{{ __('Datum') }}</label>
-                            <input type="date" wire:model="date" id="date">
+                            <input type="date" wire:model="date" id="date" disabled>
                         </p>
                     </div>
                     <div class="col-12">
@@ -67,19 +67,19 @@
     <div class="single-add-property">
         <h3>{{ __('Offerte regels') }}</h3>
         <div class="property-form-group">
-            @if($invoiceDamages && $invoiceDamages->isNotEmpty())
+            @if($quoteDamages && $quoteDamages->isNotEmpty())
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
                         <th class="location-column">{{ __('Locatie') }}</th>
-                        <th>{{ __('Titel') }}</th>
                         <th>{{ __('Datum') }}</th>
+                        <th>{{ __('Titel') }}</th>
                         <th>{{ __('Beschrijving') }}</th>
                         <th>{{ __('Goedgekeurd') }}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($invoiceDamages as $damage)
+                    @foreach($quoteDamages as $damage)
                         <tr>
                             <td class="location-column">
                                 @if($damage->basicArea)
@@ -104,8 +104,8 @@
                                     {{ $damage->outdoorArea->outdoor->title ?? '-' }}
                                 @endif
                             </td>
-                            <td>{{ $damage->damage_title ?? '-' }}</td>
                             <td>{{ $damage->damage_date ? $damage->damage_date : '-' }}</td>
+                            <td>{{ $damage->damage_title ?? '-' }}</td>
                             <td>{{ $damage->damage_description ?? '-' }}</td>
                             <td class="text-center">
                                 <input type="checkbox" wire:click="toggleApproval({{ $damage->id }})" {{ $damage->approved ? 'checked' : '' }}>
@@ -145,7 +145,7 @@
                         </div>
                         <div class="modal-body">
                             <p>{{ __('Ben je zeker om deze offerte te verwijderen?') }}</p>
-                            <form wire:submit.prevent="deleteInvoice">
+                            <form wire:submit.prevent="deleteQuote">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <button type="submit" class="btn btn-dark">{{ __('Verwijderen') }}</button>

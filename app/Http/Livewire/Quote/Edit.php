@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Invoice;
+namespace App\Http\Livewire\Quote;
 
+use App\Models\Damage;
 use App\Models\Inspection;
 use App\Models\Invoice;
 use App\Models\InvoiceDamage;
+use App\Models\Quote;
+use App\Models\QuoteDamage;
 use App\Models\Situation;
 use Livewire\Component;
 
@@ -12,25 +15,25 @@ class Edit extends Component
 {
     public Inspection $inspection;
     public Situation $situation;
-    public Invoice $invoice;
+    public Damage $damage;
 
     public $title;
     public $date;
     public $remarks;
 
-    public $invoiceDamages;
+    public $quoteDamages;
 
-    public function mount(Inspection $inspection, Situation $situation, Invoice $invoice)
+    public function mount(Inspection $inspection, Situation $situation, Quote $quote)
     {
         $this->inspection = $inspection;
         $this->situation = $situation;
-        $this->invoice = $invoice;
+        $this->quote = $quote;
 
-        $this->title = $this->invoice->title;
-        $this->date = $this->invoice->date;
-        $this->remarks = $this->invoice->remarks;
+        $this->title = $this->quote->title;
+        $this->date = $this->quote->date;
+        $this->remarks = $this->quote->remarks;
 
-        $this->invoiceDamages = InvoiceDamage::query()
+        $this->quoteDamages = QuoteDamage::query()
             ->with([
                 'basicArea.floor',
                 'basicArea.area',
@@ -48,37 +51,33 @@ class Edit extends Component
                 'outdoorArea.outdoor',
                 'outdoorArea.room'
             ])
-            ->where('invoice_id', $this->invoice->id)
+            ->where('quote_id', $this->quote->id)
             ->where('inspection_id', $this->inspection->id)
             ->where('damage_print_pdf', 1)
             ->get();
     }
 
-
-    public function invoiceSubmit()
+    public function quoteSubmit()
     {
-        $this->invoice->title = $this->title;
-        $this->invoice->remarks = $this->remarks;
-        if($this->invoice){
-            $this->invoice->date = $this->date;
+        $this->quote->title = $this->title;
+        $this->quote->remarks = $this->remarks;
+        if($this->quote){
+            $this->quote->date = $this->date;
         }
-        $this->invoice->update();
-        session()->flash('success', 'success!');
+        $this->quote->update();
     }
 
-    public function deleteInvoice()
+    public function deleteQuote()
     {
-        $invoice = $this->invoice;
-        $invoice->delete();
-
-        session()->flash('successDeleteInvoice', 'Offerte werd verwijderd!');
+        $quote = $this->quote;
+        $quote->delete();
 
         return redirect()->route('situation.edit', [$this->inspection, $this->situation]);
     }
 
     public function toggleApproval($damageId)
     {
-        $damage = InvoiceDamage::find($damageId);
+        $damage = QuoteDamage::find($damageId);
 
         if ($damage) {
             // Toggle the approval status
@@ -87,9 +86,8 @@ class Edit extends Component
         }
     }
 
-
     public function render()
     {
-        return view('livewire.invoice.edit');
+        return view('livewire.quote.edit');
     }
 }
