@@ -7,7 +7,9 @@ use App\Models\Inspection;
 use App\Models\Invoice;
 use App\Models\InvoiceDamage;
 use App\Models\Quote;
+use App\Models\QuoteCalculation;
 use App\Models\QuoteDamage;
+use App\Models\QuoteSubCalculation;
 use App\Models\Situation;
 use Livewire\Component;
 
@@ -76,6 +78,25 @@ class Edit extends Component
 
     public function deleteQuote()
     {
+        // Delete all sub calculations for this quote
+        $quoteSubCalculations = QuoteSubCalculation::where('quote_id', $this->quote->id)->get();
+        foreach ($quoteSubCalculations as $subLine){
+            $subLine->delete();
+        }
+
+        // Delete all calculations for this quote
+        $quoteCalculations = QuoteCalculation::where('quote_id', $this->quote->id)->get();
+        foreach ($quoteCalculations as $subLine){
+            $subLine->delete();
+        }
+
+        // Delete all quote damages for this quote
+        $quoteDamagIds = QuoteDamage::where('quote_id', $this->quote->id)->get();
+        foreach ($quoteDamagIds as $subLine){
+            $subLine->delete();
+        }
+
+        // Delete actual quote
         $quote = $this->quote;
         $quote->delete();
 
