@@ -72,7 +72,7 @@
     </div>
 
     <div class="single-add-property">
-        <h3>{{ __('Offerte regels') }}</h3>
+        <h3>{{ __('Schade & prijzen') }}</h3>
         <div class="property-form-group">
             @if($quoteDamages && $quoteDamages->isNotEmpty())
                 <table class="table table-striped table-bordered">
