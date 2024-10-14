@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('inspection_id')->index();
             $table->unsignedBigInteger('quote_damage_id')->index();
+            $table->unsignedBigInteger('quote_id')->index();
 
             $table->decimal('quote_brutto_total', 10, 2)->nullable();
             $table->decimal('quote_vetustate', 10, 2)->nullable();
