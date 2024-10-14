@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('quote_calculations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('inspection_id')->index();
+            $table->unsignedBigInteger('quote_cal_id')->index();
             $table->unsignedBigInteger('quote_damage_id')->index();
             $table->unsignedBigInteger('quote_id')->index();
 

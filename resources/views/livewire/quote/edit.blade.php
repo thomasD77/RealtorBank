@@ -78,7 +78,7 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
-                        <th class="location-column">{{ __('Locatie') }}</th>
+                        <th class="location-column">{{ __('Schade') }}</th>
                         <th class="title-column">{{ __('Titel') }}</th>
                         <th class="description-column">{{ __('Beschrijving') }}</th>
                         <th class="approved-column text-center" style="font-size: 12px">{{ __('Akkoord') }}</th>
@@ -89,27 +89,29 @@
                         <tr>
                             <td class="location-column">
                                 <strong>{{ $damage->damage_date ? $damage->damage_date : '-' }}</strong><br>
-                                @if($damage->basicArea)
-                                    {{ $damage->basicArea->floor->title ?? '-' }} >>
-                                    {{ $damage->basicArea->room->title ?? '-' }} >>
-                                    {{ $damage->basicArea->area->title ?? '-' }}
-                                @elseif($damage->general)
-                                    {{ $damage->general->room->floor->title ?? '-' }} >>
-                                    {{ $damage->general->room->title ?? '-' }}
-                                @elseif($damage->specificArea)
-                                    {{ $damage->specificArea->room->floor->title ?? '-' }} >>
-                                    {{ $damage->specificArea->room->title ?? '-' }} >>
-                                    {{ $damage->specificArea->specific->title ?? '-' }}
-                                @elseif($damage->conformArea)
-                                    {{ $damage->conformArea->floor->title ?? '-' }} >>
-                                    {{ $damage->conformArea->room->title ?? '-' }} >>
-                                    {{ $damage->conformArea->conform->title ?? '-' }}
-                                @elseif($damage->techniqueArea)
-                                    {{ $damage->techniqueArea->technique->title ?? '-' }}
-                                @elseif($damage->outdoorArea)
-                                    {{ $damage->outdoorArea->room->title ?? '-' }} >>
-                                    {{ $damage->outdoorArea->outdoor->title ?? '-' }}
-                                @endif
+                                <p style="text-decoration: underline">
+                                    @if($damage->basicArea)
+                                        {{ $damage->basicArea->floor->title ?? '-' }} >>
+                                        {{ $damage->basicArea->room->title ?? '-' }} >>
+                                        {{ $damage->basicArea->area->title ?? '-' }}
+                                    @elseif($damage->general)
+                                        {{ $damage->general->room->floor->title ?? '-' }} >>
+                                        {{ $damage->general->room->title ?? '-' }}
+                                    @elseif($damage->specificArea)
+                                        {{ $damage->specificArea->room->floor->title ?? '-' }} >>
+                                        {{ $damage->specificArea->room->title ?? '-' }} >>
+                                        {{ $damage->specificArea->specific->title ?? '-' }}
+                                    @elseif($damage->conformArea)
+                                        {{ $damage->conformArea->floor->title ?? '-' }} >>
+                                        {{ $damage->conformArea->room->title ?? '-' }} >>
+                                        {{ $damage->conformArea->conform->title ?? '-' }}
+                                    @elseif($damage->techniqueArea)
+                                        {{ $damage->techniqueArea->technique->title ?? '-' }}
+                                    @elseif($damage->outdoorArea)
+                                        {{ $damage->outdoorArea->room->title ?? '-' }} >>
+                                        {{ $damage->outdoorArea->outdoor->title ?? '-' }}
+                                    @endif
+                                </p>
 
                                 @include('livewire.quote.calculations')
 

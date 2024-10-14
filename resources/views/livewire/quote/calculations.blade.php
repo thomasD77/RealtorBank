@@ -15,6 +15,7 @@
                 <th colspan="4" class="text-center font-weight-bold">{{ __('Prijzen') }}</th>
             </tr>
             <tr>
+                <th class="approved-column text-center" style="font-size: 12px">{{ __('Akkoord') }}</th>
                 <th>{{ __('SubCategorie') }}</th>
                 <th>{{ __('Beschrijving') }}</th>
                 <th>{{ __('Tax') }}</th>
@@ -23,9 +24,11 @@
         </thead>
         <tbody>
         @foreach($damage->quoteCalculations->where('quote_id', $quote->id) as $calculation)
-
-            @foreach($calculation->quoteSubCalculations as $subCalculation)
+            @foreach($calculation->quoteSubCalculations->where('quote_id', $quote->id) as $subCalculation)
                 <tr>
+                    <td class="approved-column text-center">
+                        <input type="checkbox" wire:click="toggleSubCalculationApproval({{ $subCalculation->id }})" {{ $subCalculation->approved ? 'checked' : '' }}>
+                    </td>
                     <td>{{ $subCalculation->subCategoryPricing->title }}</td>
                     <td>{{ $subCalculation->quote_description }}</td>
                     <td>{{ $subCalculation->quote_tax }}%</td>
@@ -35,11 +38,11 @@
             @if($loop->first)
                 <tfoot>
                     <tr>
-                        <td colspan="3" class="text-right font-weight-bold">{{ __('Totaal') }}:</td>
+                        <td colspan="4" class="text-right font-weight-bold">{{ __('Totaal') }}:</td>
                         <td class="font-weight-bold">{{ number_format($calculation->quote_brutto_total, 2, ',', '.') }} €</td>
                     </tr>
                     <tr>
-                        <td colspan="3" class="text-right font-weight-bold">{{ __('Vetustate') }}
+                        <td colspan="4" class="text-right font-weight-bold">{{ __('Vetustate') }}
                             @if($calculation->quote_vetustate != 0)
                             <small>{{ number_format($calculation->quote_vetustate, 2, ',', '.') }} %</small>
                             @endif
@@ -49,7 +52,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3" class="text-right font-weight-bold">{{ __('Eindtotaal') }}:</td>
+                        <td colspan="4" class="text-right font-weight-bold">{{ __('Eindtotaal') }}:</td>
                         <td class="font-weight-bold">{{ number_format($calculation->quote_final_total, 2, ',', '.') }} €</td>
                     </tr>
                 </tfoot>

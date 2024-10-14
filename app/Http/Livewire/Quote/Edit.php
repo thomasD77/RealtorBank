@@ -16,6 +16,7 @@ class Edit extends Component
     public Inspection $inspection;
     public Situation $situation;
     public Damage $damage;
+    public Quote $quote;
 
     public $title;
     public $date;
@@ -53,6 +54,12 @@ class Edit extends Component
             ])
             ->where('quote_id', $this->quote->id)
             ->where('inspection_id', $this->inspection->id)
+            ->orderBy('basic_id')
+            ->orderBy('specific_id')
+            ->orderBy('conform_id')
+            ->orderBy('general_id')
+            ->orderBy('technique_id')
+            ->orderBy('outdoor_id')
             ->where('damage_print_pdf', 1)
             ->get();
     }
@@ -83,6 +90,17 @@ class Edit extends Component
             // Toggle the approval status
             $damage->approved = !$damage->approved;
             $damage->save();
+        }
+    }
+
+    public function toggleSubCalculationApproval($subCalculationId)
+    {
+        $subCalculation = QuoteSubCalculation::find($subCalculationId);
+
+        if ($subCalculation) {
+            // Toggle the approval status
+            $subCalculation->approved = !$subCalculation->approved;
+            $subCalculation->save();
         }
     }
 

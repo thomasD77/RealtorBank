@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('quote_calculation_id')->index();
+            $table->unsignedBigInteger('quote_id')->index();
 
             $table->unsignedBigInteger('category_pricing_id')->index();
             $table->unsignedBigInteger('sub_category_pricing_id')->index();
@@ -28,6 +29,8 @@ return new class extends Migration
             $table->decimal('quote_count', 10, 2)->nullable();
             $table->decimal('quote_total', 10, 2)->nullable();
             $table->decimal('quote_tax', 10, 2)->nullable();
+
+            $table->integer('approved')->nullable();
 
             $table->timestamps();
         });

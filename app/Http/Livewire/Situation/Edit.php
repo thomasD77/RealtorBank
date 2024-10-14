@@ -413,7 +413,9 @@ class Edit extends Component
             $quoteCalculation = new QuoteCalculation();
 
             $quoteCalculation->inspection_id = $calculation->inspection_id;
+            $quoteCalculation->quote_cal_id = $calculation->id;
             $quoteCalculation->quote_damage_id = $calculation->damage_id;
+            $quoteCalculation->quote_id = $quote->id;
             $quoteCalculation->quote_brutto_total = $calculation->brutto_total;
             $quoteCalculation->quote_vetustate = $calculation->vetustate;
             $quoteCalculation->quote_vetustate_amount = $calculation->vetustate_amount;
@@ -441,6 +443,7 @@ class Edit extends Component
             $quoteSubCalculation->quote_calculation_id = $subCalculation->calculation_id;
             $quoteSubCalculation->category_pricing_id = $subCalculation->category_pricing_id;
             $quoteSubCalculation->sub_category_pricing_id = $subCalculation->sub_category_pricing_id;
+            $quoteSubCalculation->quote_id = $quote->id;
 
             $quoteSubCalculation->quote_description = $subCalculation->description;
             $quoteSubCalculation->quote_cost_square_meter = $subCalculation->cost_square_meter;

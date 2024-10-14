@@ -31,7 +31,7 @@ class QuoteCalculation extends Model
      */
     public function quoteSubCalculations()
     {
-        return $this->hasMany(QuoteSubCalculation::class, 'quote_calculation_id', 'id');
+        return $this->hasMany(QuoteSubCalculation::class, 'quote_calculation_id', 'quote_cal_id');
     }
 
     /**
