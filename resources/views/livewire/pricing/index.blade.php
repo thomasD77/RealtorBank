@@ -86,6 +86,36 @@
         @endif
     @endforeach
 
+    <div class="d-flex justify-content-end mb-4">
+        <hr>
+        <button class="btn btn-dark" wire:click="$set('addCategoryModalOpen', true)">
+            {{ __('+ Nieuwe categorie') }}
+        </button>
+    </div>
+    @if($addCategoryModalOpen)
+        <div class="modal fade show" style="display: block;" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Nieuwe Categorie Toevoegen</h5>
+                        <button type="button" class="btn-close" wire:click="$set('addCategoryModalOpen', false)"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="newCategoryTitle" class="form-label">Categorie Titel</label>
+                            <input type="text" class="form-control" id="newCategoryTitle" wire:model="newCategoryTitle">
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-dark" wire:click="saveCategory">Opslaan</button>
+                            <button type="button" class="btn btn-secondary" wire:click="$set('addCategoryModalOpen', false)">Annuleren</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+
     <!-- Modal -->
     @if($modalOpen)
         <div class="modal fade show" style="display: block;" tabindex="-1">

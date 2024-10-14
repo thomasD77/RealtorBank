@@ -28,6 +28,10 @@ class Index extends Component
     public $activeTab = 'select'; // Active tab, default to 'select'
     public $selectedCategory; // Geselecteerde categorie ID
 
+    public $addCategoryModalOpen = false;
+    public $newCategoryTitle;
+
+
     public function mount()
     {
         // Laad de pricing categories
@@ -176,6 +180,22 @@ class Index extends Component
                 }
             }
         }
+    }
+
+    public function saveCategory()
+    {
+        $this->validate([
+            'newCategoryTitle' => 'required|string|max:255',
+        ]);
+
+        $category = new CategoryPricing();
+        $category->title = $this->newCategoryTitle;
+        $category->save();
+
+        // Reset de modal, sluit deze en laad opnieuw de data
+        $this->addCategoryModalOpen = false;
+        $this->newCategoryTitle = '';
+        $this->loadData();
     }
 
     public function render()
