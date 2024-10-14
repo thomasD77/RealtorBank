@@ -25,6 +25,7 @@ class Edit extends Component
     public $remarks;
 
     public $quoteDamages;
+    public $quoteTotal;
 
     public function mount(Inspection $inspection, Situation $situation, Quote $quote)
     {
@@ -64,6 +65,8 @@ class Edit extends Component
             ->orderBy('outdoor_id')
             ->where('damage_print_pdf', 1)
             ->get();
+
+        $this->quoteTotal = QuoteCalculation::where('quote_id', $this->quote->id)->sum('quote_final_total');
     }
 
     public function quoteSubmit()

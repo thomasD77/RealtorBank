@@ -78,15 +78,20 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
-                        <th class="location-column">{{ __('Schade') }}</th>
+                        <th class="approved-column text-center" style="font-size: 12px">{{ __('Akkoord') }}</th>
                         <th class="title-column">{{ __('Titel') }}</th>
                         <th class="description-column">{{ __('Beschrijving') }}</th>
-                        <th class="approved-column text-center" style="font-size: 12px">{{ __('Akkoord') }}</th>
+                        <th class="location-column">{{ __('Schade') }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($quoteDamages as $damage)
                         <tr>
+                            <td class="approved-column text-center">
+                                <input type="checkbox" wire:click="toggleApproval({{ $damage->id }})" {{ $damage->approved ? 'checked' : '' }}>
+                            </td>
+                            <td class="title-column">{{ $damage->damage_title ?? '-' }}</td>
+                            <td class="description-column">{{ $damage->damage_description ?? '-' }}</td>
                             <td class="location-column">
                                 <strong>{{ $damage->damage_date ? $damage->damage_date : '-' }}</strong><br>
                                 <p style="text-decoration: underline">
@@ -116,14 +121,20 @@
                                 @include('livewire.quote.calculations')
 
                             </td>
-                            <td class="title-column">{{ $damage->damage_title ?? '-' }}</td>
-                            <td class="description-column">{{ $damage->damage_description ?? '-' }}</td>
-                            <td class="approved-column text-center">
-                                <input type="checkbox" wire:click="toggleApproval({{ $damage->id }})" {{ $damage->approved ? 'checked' : '' }}>
-                            </td>
                         </tr>
                     @endforeach
                     </tbody>
+                    <tfoot>
+                    <tr class="py-4">
+                        <td colspan="3" class="text-right font-weight-bold">{{ __('Totaal') }}: <br>
+                            <small>*{{ __('Totaal van alle opgemaakte prijzen incl. de vetustate.') }} <br></small>
+                        </td>
+                        <td class="font-weight-bold text-right">{{ number_format($quoteTotal, 2, ',', '.') }} €
+                            <br>
+                            <small>*{{ __('incl. btw') }} <br></small>
+                        </td>
+                    </tr>
+                    </tfoot>
                 </table>
             @else
                 <p>{{ __('Geen offerte beschikbaar.') }}</p>
