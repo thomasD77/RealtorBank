@@ -27,6 +27,14 @@ class QuoteCalculation extends Model
     }
 
     /**
+     * Relatie met QuoteSubCalculation model.
+     */
+    public function quoteSubCalculations()
+    {
+        return $this->hasMany(QuoteSubCalculation::class, 'quote_calculation_id', 'id');
+    }
+
+    /**
      * Relatie met Damage model.
      */
     public function damage()

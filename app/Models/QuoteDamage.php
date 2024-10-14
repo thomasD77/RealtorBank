@@ -31,6 +31,11 @@ class QuoteDamage extends Model
         return $this->belongsTo(Quote::class, 'quote_id');
     }
 
+    public function quoteCalculations()
+    {
+        return $this->hasMany(QuoteCalculation::class, 'quote_damage_id', 'damage_id');
+    }
+
     /**
      * Relatie met Inspection model.
      */
