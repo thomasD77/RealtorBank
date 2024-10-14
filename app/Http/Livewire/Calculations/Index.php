@@ -14,20 +14,15 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    public $categorySuccessMessages = [];
-
     public $pricingCategories;
     public $subCategories = [];
+    public $selectedCategory = null;
+    public $selectedSubCategory;
+
     public $calculation;
     public $vetustateAmount;
     public $finalTotal;
 
-    public $overallNetTotal;
-
-
-    public $selectedCategory = null;
-    public $selectedCategoryId = null;
-    public $selectedSubCategory;
     public $description;
     public $cost_square_meter;
     public $cost_hour;
@@ -42,6 +37,8 @@ class Index extends Component
     public $count;
     public $tax = 21; // Standaard BTW-percentage
     public $total;
+
+    public $bruttoTotal;
 
     public Inspection $inspection;
     public Damage $damage;
@@ -75,6 +72,13 @@ class Index extends Component
             ->where('inspection_id', $this->inspection->id)
             ->where('damage_id', $this->damage->id)
             ->first();
+
+        if($this->calculation){
+            $this->bruttoTotal = $this->calculation->brutto_total;
+            $this->vetustatePercentage = $this->calculation->vetustate ?? 0;
+            $this->vetustateAmount = $this->calculation->vetustate_amount;
+            $this->finalTotal = $this->calculation->final_total;
+        }
     }
 
     public function selectCategory($categoryId)
@@ -158,6 +162,8 @@ class Index extends Component
         // Update groupedSubCalculations
         $this->loadSubCalculations();
 
+        $this->calculateBruttoTotal();
+
         // Optioneel: Succesbericht toevoegen
         session()->flash('message', 'SubCalculation succesvol toegevoegd.');
     }
@@ -199,7 +205,7 @@ class Index extends Component
         $this->total = round($subtotal + ($subtotal * ($this->tax / 100)), 2);
     }
 
-    public function editSubCalculation($id)
+    /*public function editSubCalculation($id)
     {
         $subCalculation = SubCalculation::findOrFail($id);
 
@@ -217,7 +223,7 @@ class Index extends Component
 
         // Zorg ervoor dat het formulier zichtbaar is
         $this->showForm = true;
-    }
+    }*/
 
 
     public function confirmDelete($id)
@@ -247,30 +253,30 @@ class Index extends Component
                 ->with('subCategory.categoryPricing')
                 ->get()
                 ->map(function ($subCalculation) {
-                    $total = $subCalculation->total;
-                    $vetustatePercentage = $subCalculation->vetustate ?? 0;
-                    $vetustateAmount = $total * ($vetustatePercentage / 100);
-                    $finalTotal = $total - $vetustateAmount;
-
                     return [
                         'id' => $subCalculation->id,
                         'category' => $subCalculation->subCategory->categoryPricing->title ?? 'Onbekende Categorie',
                         'subCategory' => $subCalculation->subCategory->title ?? 'Onbekende SubCategorie',
                         'description' => $subCalculation->description,
                         'tax' => $subCalculation->tax,
-                        'total' => $total,
-                        'vetustatePercentage' => $vetustatePercentage,
-                        'vetustateAmount' => $vetustateAmount,
-                        'finalTotal' => $finalTotal,
+                        'total' => $subCalculation->total,
                     ];
                 })->toArray();
 
-            // Bereken het totale bruto som van alle subcalculaties
-            $this->overallTotalSum = array_sum(array_column($this->groupedSubCalculations, 'total'));
-
-            // Bereken het netto eindtotaal door de finale totalen (na vetustate) op te tellen
-            $this->overallNetTotal = array_sum(array_column($this->groupedSubCalculations, 'finalTotal'));
         }
+    }
+
+    public function calculateBruttoTotal()
+    {
+        $subCalculationsTotal = SubCalculation::query()
+            ->where('calculation_id', $this->calculation->id)
+            ->sum('total');
+
+        $this->calculation->brutto_total = $subCalculationsTotal;
+        $this->calculation->save();
+        $this->bruttoTotal = $this->calculation->brutto_total;
+
+        $this->updateVetustate();
     }
 
     public function editVetustate()
@@ -290,12 +296,8 @@ class Index extends Component
         ]);
 
         // Pas de vetustate toe op alle subcalculaties die bij deze calculation horen
-        $subCalculations = $this->calculation->subCalculations;
-
-        foreach ($subCalculations as $sub) {
-            $sub->vetustate = $this->vetustatePercentage;
-            $sub->save();
-        }
+        $this->calculation->vetustate = $this->vetustatePercentage;
+        $this->calculation->save();
 
         // Werk de berekeningen bij na het toepassen van de vetustate
         $this->calculateVetustate();
@@ -307,10 +309,14 @@ class Index extends Component
     public function calculateVetustate()
     {
         // Bereken de totale vetustate-waarde voor alle subcalculaties
-        $this->vetustateAmount = $this->overallTotalSum * ($this->vetustatePercentage / 100);
+        $this->vetustateAmount = $this->bruttoTotal * ($this->vetustatePercentage / 100);
+        $this->calculation->vetustate_amount = $this->vetustateAmount;
+        $this->calculation->save();
 
         // Bereken het eindtotaal na aftrek van vetustate
-        $this->finalTotal = $this->overallTotalSum - $this->vetustateAmount;
+        $this->finalTotal = $this->bruttoTotal - $this->vetustateAmount;
+        $this->calculation->final_total = $this->finalTotal;
+        $this->calculation->save();
     }
 
 

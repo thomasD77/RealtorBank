@@ -25,10 +25,8 @@ return new class extends Migration
             $table->decimal('cost_square_meter', 10, 2)->nullable();
             $table->decimal('cost_hour', 10, 2)->nullable();
             $table->decimal('cost_piece', 10, 2)->nullable();
-
             $table->decimal('count', 10, 2)->nullable();
             $table->decimal('total', 10, 2)->nullable();
-            $table->decimal('vetustate', 10, 2)->nullable();
             $table->decimal('tax', 10, 2)->nullable();
 
             $table->timestamps();

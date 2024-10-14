@@ -22,6 +22,11 @@ return new class extends Migration
             $table->unsignedInteger('damage_id')
                 ->index();
 
+            $table->decimal('brutto_total', 10, 2)->nullable();
+            $table->decimal('vetustate', 10, 2)->nullable();
+            $table->decimal('vetustate_amount', 10, 2)->nullable();
+            $table->decimal('final_total', 10, 2)->nullable();
+
             $table->timestamps();
         });
     }

@@ -35,7 +35,7 @@
                     <!-- Totaal, Vetustate, en Eindtotaal -->
                     <tr class="font-weight-bold bg-light">
                         <td colspan="5" class="text-right">{{ __('TOTAAL') }}:</td>
-                        <td class="text-right">{{ number_format($overallTotalSum, 2, ',', '.') }} €</td>
+                        <td class="text-right">{{ number_format($bruttoTotal, 2, ',', '.') }} €</td>
                     </tr>
                     <tr class="font-weight-bold bg-light">
                         <td colspan="1" class="text-center">
