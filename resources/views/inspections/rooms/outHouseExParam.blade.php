@@ -2,6 +2,10 @@
 
     @include('inspections.sections.general')
 
-    @include('inspections.sections.outdoorArea')
+    @include('inspections.sections.basicArea')
+
+    @include('inspections.sections.specificArea')
+
+    @include('inspections.sections.conformArea')
 
 @endforeach
