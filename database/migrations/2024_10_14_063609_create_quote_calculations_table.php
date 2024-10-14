@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('quote_calculations', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->date('date')->nullable();
-            $table->text('remarks')->nullable();
-            $table->decimal('total', 10, 2)->nullable();
-            $table->decimal('total', 10, 2)->nullable();
-
             $table->unsignedBigInteger('inspection_id')->index();
-            $table->unsignedBigInteger('situation_id')->index();
+            $table->unsignedBigInteger('quote_damage_id')->index();
+
+            $table->decimal('quote_brutto_total', 10, 2)->nullable();
+            $table->decimal('quote_vetustate', 10, 2)->nullable();
+            $table->decimal('quote_vetustate_amount', 10, 2)->nullable();
+            $table->decimal('quote_final_total', 10, 2)->nullable();
+
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('quote_calculations');
     }
 };
