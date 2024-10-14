@@ -14,42 +14,39 @@ use Livewire\Component;
 
 class Index extends Component
 {
+    // Load models
+    public Inspection $inspection;
+    public Damage $damage;
+
+    // Category / SubCategory / Pricing variables
     public $pricingCategories;
     public $subCategories = [];
     public $selectedCategory = null;
     public $selectedSubCategory;
+    public $selectedCategoryName;
+    public $selectedSubCategoryName;
+    public $subCalculationIdBeingDeleted;
+    public $editingPricingId = null;
 
+    // Calculation variables
     public $calculation;
     public $vetustateAmount;
     public $finalTotal;
+    public $bruttoTotal;
+    public $vetustatePercentage;
 
+    // SubCalculation variables
     public $description;
     public $cost_square_meter;
     public $cost_hour;
     public $cost_piece;
-
-    public $selectedCategoryName;
-    public $selectedSubCategoryName;
-    public $subCalculationIdBeingDeleted;
-
-    public $showForm = null;
-
     public $count;
     public $tax = 21; // Standaard BTW-percentage
     public $total;
 
-    public $bruttoTotal;
-
-    public Inspection $inspection;
-    public Damage $damage;
-
     public $groupedSubCalculations;
-    public $overallTotalSum;
-    public $vetustatePercentage;
 
-
-    // Houdt de te bewerken Pricing ID bij
-    public $editingPricingId = null;
+    public $showForm = null;
 
     public function mount(Inspection $inspection, Damage $damage)
     {
@@ -128,7 +125,6 @@ class Index extends Component
 
     public function saveSubCalculation()
     {
-
         // Validatie van de invoer
         $this->validate([
             'selectedCategory' => 'required',
@@ -162,10 +158,8 @@ class Index extends Component
         // Update groupedSubCalculations
         $this->loadSubCalculations();
 
+        // Update Calculations
         $this->calculateBruttoTotal();
-
-        // Optioneel: Succesbericht toevoegen
-        session()->flash('message', 'SubCalculation succesvol toegevoegd.');
     }
 
     private function resetInputFields()
@@ -205,27 +199,6 @@ class Index extends Component
         $this->total = round($subtotal + ($subtotal * ($this->tax / 100)), 2);
     }
 
-    /*public function editSubCalculation($id)
-    {
-        $subCalculation = SubCalculation::findOrFail($id);
-
-        // Vul de form properties met de gegevens van de geselecteerde SubCalculation
-        $this->editingPricingId = $subCalculation->id;
-        $this->selectedCategory = $subCalculation->category_pricing_id;
-        $this->selectedSubCategory = $subCalculation->sub_category_pricing_id;
-        $this->description = $subCalculation->description;
-        $this->cost_square_meter = $subCalculation->cost_square_meter;
-        $this->cost_hour = $subCalculation->cost_hour;
-        $this->cost_piece = $subCalculation->cost_piece;
-        $this->count = $subCalculation->count;
-        $this->tax = $subCalculation->tax;
-        $this->total = $subCalculation->total;
-
-        // Zorg ervoor dat het formulier zichtbaar is
-        $this->showForm = true;
-    }*/
-
-
     public function confirmDelete($id)
     {
         $this->subCalculationIdBeingDeleted = $id;
@@ -240,6 +213,11 @@ class Index extends Component
         $this->calculation->refresh(); // Ververs de calculation met de nieuwe data
 
         $this->dispatchBrowserEvent('hide-delete-confirmation');
+
+        // Update Calculations
+        $this->calculateBruttoTotal();
+
+        $this->updateVetustate();
 
         $this->subCalculationIdBeingDeleted = null;
         session()->flash('message', 'SubCalculation succesvol verwijderd.');
@@ -318,7 +296,6 @@ class Index extends Component
         $this->calculation->final_total = $this->finalTotal;
         $this->calculation->save();
     }
-
 
     public function render()
     {
