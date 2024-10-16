@@ -1,30 +1,9 @@
 <div>
     <div class="single-add-property">
-{{--
-        <a class="breadcrumb-link" href="{{ route('situation.edit', [$inspection, $claim->situation->id]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('beschrijvingen') }}</strong></p></a>
---}}
+        <a class="breadcrumb-link" href="{{ route('quote.edit', [$inspection, $agreement->situation->id, $quote]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('Offerte') }}</strong></p></a>
 
         <h3>{{ __('Akkoord schade offerte') }}</h3>
 
-        {{--<form action="{{ route('toggle.agreement') }}" method="post">
-            @csrf
-            <input type="hidden" name="quote" value="{{ $quote->id }}">
-            <button class="btn btn-dark">
-            @if($lock)
-                {{ __('Openen') }}
-            @else
-                {{ __('Sluiten') }}
-            @endif
-            </button>
-            @if($lock)
-                <p class="text-muted">
-                    {{ __('*Een contract kan alleen aangepast worden wanneer je deze opent.') }}
-                    {{ __('Dit kan door op deze knop te klikken.') }}
-                </p>
-            @else
-                <p class="text-muted mt-1">{{ __('*Om een contract te printen moet deze eerst gesloten worden. Druk op deze knop om alle gegevens vast te zetten.') }}</p>
-            @endif
-        </form>--}}
         @if (session()->has('successTenant'))
             <div class="btn btn-success flash_message">
                 {{ session('successTenant') }}
@@ -204,9 +183,7 @@
                     <input type="hidden" name="agreement" value="{{ $agreement->id }}">
                     @csrf
                     <div class="col-md-11">
-{{--
                         <label class="py-3" for="">{{ __('Handtekening') }} {{ $agreement->situation->owner ? $agreement->situation->owner->name : "" }} </label>
---}}
                         <br/>
                         <div id="sig" style="touch-action: none;"></div>
                         <br/>
@@ -312,20 +289,18 @@
                                 <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $agreement->signature_owner) }}">
                             @endif
                         </div>
-
                     </div>
                 </section>
-
             </div>
 
             <div class="single-add-property">
                 <h3>{{ __('Contract printen') }}</h3>
-                <a href="{{ route('print.agreement', [$inspection, $situation, $agreement]) }}" class="btn btn-dark">{{ __('Printen') }}</a>
+                <a href="{{ route('print.agreement', [$inspection, $situation, $quote, $agreement]) }}" class="btn btn-dark">{{ __('Printen') }}</a>
             </div>
 
         </div>
     </div>
 </div>
-</div>
+
 
 

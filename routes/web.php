@@ -52,7 +52,7 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::post('/toggle/claim', [SituationController::class, 'toggleClaim'])->name('toggle.claim');
     Route::get('/print/claim/{inspection}/{claim}/{situation}', [SituationController::class, 'printClaim'])->name('print.claim');
 
-    Route::post('/print/agreement/{inspection}/{situation}/{agreement}', [SituationController::class, 'printAgreement'])->name('print.agreement');
+    Route::get('/print/agreement/{inspection}/{situation}/{quote}/{agreement}', [SituationController::class, 'printAgreement'])->name('print.agreement');
     Route::get('/create/agreement/{inspection}/{situation}/{quote}', [SituationController::class, 'createAgreement'])->name('agreement.create');
 
     Route::view('/inspections', 'inspections.index')

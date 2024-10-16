@@ -19,6 +19,7 @@ use App\Models\MediaStore;
 use App\Models\Meter;
 use App\Models\Owner;
 use App\Models\Quote;
+use App\Models\QuoteDamage;
 use App\Models\RentalClaim;
 use App\Models\Room;
 use App\Models\Situation;
@@ -475,6 +476,49 @@ class SituationController extends Controller
         $agreement->save();
 
         return view('agreement.create', compact('inspection', 'situation', 'quote', 'agreement'));
+    }
+
+    public function printAgreement(Inspection $inspection, Situation $situation, Quote $quote, Agreement $agreement)
+    {
+        $damages = QuoteDamage::query()
+            ->with([
+                'basicArea.floor',
+                'basicArea.area',
+                'basicArea.room',
+                'specificArea.floor',
+                'specificArea.specific',
+                'specificArea.room',
+                'conformArea.floor',
+                'conformArea.conform',
+                'conformArea.room',
+                'general.floor',
+                'general.room',
+                'techniqueArea.technique',
+                'outdoorArea.floor',
+                'outdoorArea.outdoor',
+                'outdoorArea.room'
+            ])
+            ->where('quote_id', $quote->id)
+            ->where('inspection_id', $inspection->id)
+            ->orderBy('basic_id')
+            ->orderBy('specific_id')
+            ->orderBy('conform_id')
+            ->orderBy('general_id')
+            ->orderBy('technique_id')
+            ->orderBy('outdoor_id')
+            ->where('damage_print_pdf', 1)
+            ->where('approved', 1)
+            ->get();
+
+        $pdf = Pdf::loadView('agreement.pdf', [
+            'inspection' => $inspection,
+            'quote' => $quote,
+            'situation' => $situation,
+            'damages' => $damages,
+            'agreement' => $agreement,
+        ]);
+
+        return $pdf->download('Akkoord-' . '#' . $inspection->id . '-' . $agreement->id . '.pdf');
     }
 
 }
