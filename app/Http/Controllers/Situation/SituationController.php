@@ -521,4 +521,59 @@ class SituationController extends Controller
         return $pdf->download('Akkoord-' . '#' . $inspection->id . '-' . $agreement->id . '.pdf');
     }
 
+    public function signatureAgreement(Request $request)
+    {
+        $folderPath = public_path('assets/signatures/');
+
+        if(!File::isDirectory($folderPath)){
+            File::makeDirectory($folderPath, 0777, true, true);
+        }
+
+        $image_parts = explode(";base64,", $request->signed);
+
+        //Check when signature is empty
+        if($image_parts[0] == ''){
+            return redirect()->back();
+        }
+
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+
+        $file = $folderPath . 'signature-' . time() . '.'.$image_type;
+        file_put_contents($file, $image_base64);
+
+        $agreement = Agreement::find($request->agreement);
+        $name = 'signature-' . time() . '.'.$image_type;
+
+        if($request->tenant){
+            File::delete('assets/signatures/' . $agreement->signature_tenant);
+
+            $agreement->signature_tenant = $name;
+            $agreement->update();
+            Session::flash('successTenant', 'Handtekening werd succesvol opgeslagen.');
+
+
+        }
+
+        elseif($request->user){
+            $user = Auth()->user();
+            File::delete('assets/signatures/' . $user->signature);
+
+            $user->signature = $name;
+            $user->update();
+            Session::flash('success', 'Handtekening werd succesvol opgeslagen.');
+        }
+
+        else {
+            File::delete('assets/signatures/' . $agreement->signature_realtor);
+
+            $agreement->signature_owner = $name;
+            $agreement->update();
+            Session::flash('success', 'Handtekening werd succesvol opgeslagen.');
+        }
+
+        return redirect()->back();
+    }
+
 }

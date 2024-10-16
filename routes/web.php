@@ -46,14 +46,14 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::post('/create/signature/', [SituationController::class, 'signature'])->name('create.signature');
     Route::post('/toggle/contract', [SituationController::class, 'toggleContract'])->name('toggle.contract');
     Route::get('/print/contract/{inspection}/{contract}/{situation}', [SituationController::class, 'printContract'])->name('print.contract');
-
     Route::post('/create/signature/claim', [SituationController::class, 'signatureClaim'])->name('create.signature.claim');
-    Route::post('/create/signature/agreement', [SituationController::class, 'signatureAgreement'])->name('create.signature.agreement');
     Route::post('/toggle/claim', [SituationController::class, 'toggleClaim'])->name('toggle.claim');
     Route::get('/print/claim/{inspection}/{claim}/{situation}', [SituationController::class, 'printClaim'])->name('print.claim');
 
     Route::get('/print/agreement/{inspection}/{situation}/{quote}/{agreement}', [SituationController::class, 'printAgreement'])->name('print.agreement');
     Route::get('/create/agreement/{inspection}/{situation}/{quote}', [SituationController::class, 'createAgreement'])->name('agreement.create');
+    Route::post('/create/signature/agreement', [SituationController::class, 'signatureAgreement'])->name('create.signature.agreement');
+
 
     Route::view('/inspections', 'inspections.index')
         ->name('inspections.index');
