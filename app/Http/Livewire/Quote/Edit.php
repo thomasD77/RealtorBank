@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Quote;
 
+use App\Models\Agreement;
 use App\Models\Damage;
 use App\Models\Inspection;
 use App\Models\Invoice;
@@ -26,6 +27,7 @@ class Edit extends Component
 
     public $quoteDamages;
     public $quoteTotal;
+    public $agreements;
 
     public function mount(Inspection $inspection, Situation $situation, Quote $quote)
     {
@@ -64,6 +66,12 @@ class Edit extends Component
             ->orderBy('technique_id')
             ->orderBy('outdoor_id')
             ->where('damage_print_pdf', 1)
+            ->get();
+
+        $this->agreements = Agreement::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->where('situation_id', $this->situation->id)
+            ->where('quote_id', $this->quote->id)
             ->get();
 
         $this->quoteTotal = QuoteCalculation::where('quote_id', $this->quote->id)->sum('quote_final_total');

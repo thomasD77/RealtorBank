@@ -163,6 +163,35 @@
                 </div>
             </div>
         </div>
+
+        <table class="table table-bordered mt-5">
+            <thead>
+            <tr>
+                <th>{{ __('Titel') }}</th>
+                <th>{{ __('Datum') }}</th>
+                <th>{{ __('Status') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            @forelse($agreements as $agreement)
+                <tr>
+                    <td>{{ $agreement->title }}</td>
+                    <td>{{ $agreement->date }}</td>
+                    <td>
+                        @if($agreement->pricing)
+                            <span class="badge badge-success">{{ __('Document: schade & prijs') }}</span>
+                        @else
+                            <span class="badge badge-warning">{{ __('Document: schade') }}</span>
+                        @endif
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="12" class="text-center">{{ __('Geen documenten gevonden.') }}</td>
+                </tr>
+            @endforelse
+            </tbody>
+        </table>
     </div>
 
     <div class="single-add-property">
