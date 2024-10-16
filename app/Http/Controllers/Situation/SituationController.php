@@ -6,6 +6,7 @@ use App\Enums\FloorKey;
 use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Jobs\GeneratePDF;
+use App\Models\Agreement;
 use App\Models\Contract;
 use App\Models\Damage;
 use App\Models\DamagesSituation;
@@ -17,12 +18,14 @@ use App\Models\MediaProfiles;
 use App\Models\MediaStore;
 use App\Models\Meter;
 use App\Models\Owner;
+use App\Models\Quote;
 use App\Models\RentalClaim;
 use App\Models\Room;
 use App\Models\Situation;
 use App\Models\TechniqueArea;
 use App\Models\Tenant;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
@@ -458,6 +461,20 @@ class SituationController extends Controller
         ]);
 
         return $pdf->download('huurschade-' . '#' . $inspection->id . '-' . $claim->id . '.pdf');
+    }
+
+    public function createAgreement(Inspection $inspection, Situation $situation, Quote $quote)
+    {
+        $agreement = new Agreement();
+        $agreement->inspection_id = $inspection->id;
+        $agreement->situation_id = $situation->id;
+        $agreement->quote_id = $quote->id;
+        $agreement->date = now();
+        $agreement->title = 'Default';
+        $agreement->pricing = 0;
+        $agreement->save();
+
+        return view('agreement.create', compact('inspection', 'situation', 'quote', 'agreement'));
     }
 
 }
