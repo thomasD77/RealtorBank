@@ -531,13 +531,15 @@ class SituationController extends Controller
 
         $pdf = Pdf::loadView('agreement.pdf', [
             'damages' => $damages,
-            'inspection' => $inspection
+            'inspection' => $inspection,
+            'situation' => $situation,
+            'agreement' => $agreement
         ] );
 
         $pdf->save($path  . $fileName);
 
 
-        return $pdf->download('akkoord-' . '#' . $inspection->id . '-' . $agreement->id . '.pdf');
+        return $pdf->stream('akkoord-' . '#' . $inspection->id . '-' . $agreement->id . '.pdf');
     }
 
     public function signatureAgreement(Request $request)
