@@ -147,7 +147,7 @@
         <div class="property-form-group row">
             <div class="col-md-6">
                 <div class="text-left">
-                    <a href="{{ route('agreement.create', [$inspection, $situation, $quote]) }}">
+                    <a href="{{ route('agreement.create', [$inspection, $situation, $quote, 'pricing' => false]) }}">
                         <button type="button" class="btn btn-dark">
                             <i class="fa fa-rocket mx-2"></i> {{ __('Akkoord Schade') }}
                         </button>
@@ -157,9 +157,11 @@
             </div>
             <div class="col-md-6">
                 <div class="text-right">
-                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
-                        <i class="fa fa-rocket mx-2"></i> {{ __('Akkoord Schade & Prijzen') }}
-                    </button>
+                    <a href="{{ route('agreement.create', [$inspection, $situation, $quote, 'pricing' => true]) }}">
+                        <button type="button" class="btn btn-dark">
+                            <i class="fa fa-rocket mx-2"></i> {{ __('Akkoord Schade & prijzen') }}
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>

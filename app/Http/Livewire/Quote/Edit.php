@@ -76,6 +76,12 @@ class Edit extends Component
             ->get();
 
         $this->quoteTotal = QuoteCalculation::where('quote_id', $this->quote->id)->sum('quote_final_total');
+        $quoteIds = QuoteCalculation::where('quote_id', $quote->id)->pluck('id');
+        $subsTotal = QuoteSubCalculation::query()
+            ->where('quote_id', $quote->id)
+            ->whereIn('quote_calculation_id', $quoteIds)
+            ->where('approved', 1)
+            ->sum('quote_total');
     }
 
     public function quoteSubmit()

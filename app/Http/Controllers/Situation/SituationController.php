@@ -19,7 +19,9 @@ use App\Models\MediaStore;
 use App\Models\Meter;
 use App\Models\Owner;
 use App\Models\Quote;
+use App\Models\QuoteCalculation;
 use App\Models\QuoteDamage;
+use App\Models\QuoteSubCalculation;
 use App\Models\RentalClaim;
 use App\Models\Room;
 use App\Models\Situation;
@@ -464,15 +466,20 @@ class SituationController extends Controller
         return $pdf->download('huurschade-' . '#' . $inspection->id . '-' . $claim->id . '.pdf');
     }
 
-    public function createAgreement(Inspection $inspection, Situation $situation, Quote $quote)
+    public function createAgreement(Inspection $inspection, Situation $situation, Quote $quote, Request $request)
     {
         $agreement = new Agreement();
+
         $agreement->inspection_id = $inspection->id;
         $agreement->situation_id = $situation->id;
         $agreement->quote_id = $quote->id;
         $agreement->date = now();
         $agreement->title = 'Default';
-        $agreement->pricing = 0;
+        if($request->query()['pricing']){
+            $agreement->pricing = 1;
+        }else {
+            $agreement->pricing = 0;
+        }
         $agreement->save();
 
         return view('agreement.create', compact('inspection', 'situation', 'quote', 'agreement'));
@@ -529,11 +536,20 @@ class SituationController extends Controller
             ->where('approved', 1)
             ->get();
 
+        $quoteIds = QuoteCalculation::where('quote_id', $quote->id)->pluck('id');
+        $subsTotal = QuoteSubCalculation::query()
+            ->where('quote_id', $quote->id)
+            ->whererIn('quote_calculation_id', $quoteIds)
+            ->where('approved', 1)
+            ->sum('quote_total');
+
+
         $pdf = Pdf::loadView('agreement.pdf', [
             'damages' => $damages,
             'inspection' => $inspection,
             'situation' => $situation,
-            'agreement' => $agreement
+            'agreement' => $agreement,
+            'subsTotal' => $subsTotal
         ] );
 
         $pdf->save($path  . $fileName);

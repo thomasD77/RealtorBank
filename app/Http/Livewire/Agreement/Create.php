@@ -3,11 +3,13 @@
 namespace App\Http\Livewire\Agreement;
 
 use App\Models\Agreement;
+use App\Models\Calculation;
 use App\Models\Damage;
 use App\Models\Inspection;
 use App\Models\Quote;
 use App\Models\QuoteCalculation;
 use App\Models\QuoteDamage;
+use App\Models\QuoteSubCalculation;
 use App\Models\Situation;
 use Livewire\Component;
 
@@ -22,6 +24,7 @@ class Create extends Component
     public $damages;
     public $date;
     public $lock;
+    public $subsTotal;
 
     public function mount(Inspection $inspection, Situation $situation, Quote $quote, Agreement $agreement)
     {
@@ -59,6 +62,20 @@ class Create extends Component
             ->where('damage_print_pdf', 1)
             ->where('approved', 1)
             ->get();
+
+        $quoteIds = Calculation::where('inspection_id', $this->inspection->id)->pluck('id');
+        $subs = QuoteSubCalculation::query()
+            ->where('quote_id', $this->quote->id)
+            ->whereIn('quote_calculation_id', $quoteIds)
+            ->where('approved', 1)
+            ->get();
+
+        foreach ($subs as $sub){
+            $vetustate = $sub->calculation->vetustate;
+            $quoteTotal = $sub->quote_total;
+            $newAmount = $quoteTotal - ($quoteTotal * ($vetustate / 100));
+            $this->subsTotal += $newAmount;
+        }
     }
 
     public function changeDate()

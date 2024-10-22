@@ -2,7 +2,11 @@
     <div class="single-add-property">
         <a class="breadcrumb-link" href="{{ route('quote.edit', [$inspection, $agreement->situation->id, $quote]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('Offerte') }}</strong></p></a>
 
-        <h3>{{ __('Akkoord schade offerte') }}</h3>
+        @if($agreement->pricing)
+            <h3>{{ __('Akkoord schade offerte & prijzen') }}</h3>
+        @else
+            <h3>{{ __('Akkoord schade offerte') }}</h3>
+        @endif
 
         @if (session()->has('successTenant'))
             <div class="btn btn-success flash_message">
@@ -249,7 +253,11 @@
                 <div class="row p-5 the-five">
 
                     <div class="text-center w-100 my-4">
-                        <h3>{{ __('Akkoord schade ') }}</h3>
+                        @if($agreement->pricing)
+                            <h3>{{ __('Akkoord schade & prijzen') }}</h3>
+                        @else
+                            <h3>{{ __('Akkoord schade') }}</h3>
+                        @endif
                     </div>
 
                     <div class="my-5 w-100">
@@ -257,14 +265,16 @@
                             <table class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th class="location-column">{{ __('Locatie') }}</th>
                                     <th class="title-column">{{ __('Titel') }}</th>
                                     <th class="description-column">{{ __('Beschrijving') }}</th>
+                                    <th class="location-column">{{ __('Locatie') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($damages as $damage)
                                     <tr>
+                                        <td class="title-column">{{ $damage->damage_title ?? '-' }}</td>
+                                        <td class="description-column">{{ $damage->damage_description ?? '-' }}</td>
                                         <td class="location-column">
                                             <strong>{{ $damage->damage_date ? $damage->damage_date : '-' }}</strong><br>
                                             <p style="text-decoration: underline">
@@ -291,25 +301,23 @@
                                                 @endif
                                             </p>
 
-                                            {{--@include('livewire.quote.calculations')--}}
+                                            @include('livewire.agreement.calculations')
 
                                         </td>
-                                        <td class="title-column">{{ $damage->damage_title ?? '-' }}</td>
-                                        <td class="description-column">{{ $damage->damage_description ?? '-' }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
-                                {{--<tfoot>
+                                <tfoot>
                                 <tr class="py-4">
                                     <td colspan="3" class="text-right font-weight-bold">{{ __('Totaal') }}: <br>
                                         <small>*{{ __('Totaal van alle opgemaakte prijzen incl. de vetustate.') }} <br></small>
                                     </td>
-                                    <td class="font-weight-bold text-right">{{ number_format($quoteTotal, 2, ',', '.') }} €
+                                    <td class="font-weight-bold text-right">{{ number_format($subsTotal, 2, ',', '.') }} €
                                         <br>
                                         <small>*{{ __('incl. btw') }} <br></small>
                                     </td>
                                 </tr>
-                                </tfoot>--}}
+                                </tfoot>
                             </table>
                         @else
                             <p>{{ __('Geen schades geselecteerd.') }}</p>

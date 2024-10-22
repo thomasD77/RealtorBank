@@ -27,9 +27,9 @@ class QuoteSubCalculation extends Model
     /**
      * Relatie met InvoiceCalculation model.
      */
-    public function quoteCalculation()
+    public function calculation()
     {
-        return $this->belongsTo(QuoteCalculation::class, 'quote_calculation_id');
+        return $this->belongsTo(Calculation::class, 'quote_calculation_id');
     }
 
     /**
