@@ -153,6 +153,36 @@
             }
         }
 
+        /* Table layout and column widths */
+        .table {
+            table-layout: fixed; /* Forces fixed column widths */
+            width: 100%; /* Full width of the container */
+            border-collapse: collapse; /* Removes spacing between table cells */
+        }
+
+        /* Styling table headers and cells */
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            vertical-align: top;
+            text-align: left;
+            word-wrap: break-word; /* Ensures text wraps within cells */
+        }
+
+        /* Specific column widths */
+        .location-column {
+            width: 50%; /* Adjusts the width of the first column */
+        }
+        .title-column{
+            width: 20%; /* Equal width for the remaining columns */
+        }
+        .description-column{
+            width: 20%; /* Equal width for the remaining columns */
+        }
+        .approved-column {
+            width: 5%; /* Equal width for the remaining columns */
+        }
+
     </style>
 
 
@@ -223,36 +253,67 @@
                     </div>
 
                     <div class="my-5 w-100">
-                        @if($damages->isNotEmpty())
-                            @foreach($damages as $damage)
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <h6>Naam:</h6>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5>{{ $damage->damage_title }}</h5>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <h6>Datum:</h6>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5>{{ $damage->damage_date }}</h5>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <h6>Beschrijving:</h6>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <h5>{{ $damage->damage_description }}</h5>
-                                    </div>
-                                </div>
-                                <hr class="mb-5">
-                            @endforeach
-                    </div>
-                    @else
-                        <p>{{ __('Er zijn is geen schade gevonden of actief gemarkeerd om in dit contract te printen.') }}</p>
-                    @endif
+                        @if($damages && $damages->isNotEmpty())
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th class="location-column">{{ __('Locatie') }}</th>
+                                    <th class="title-column">{{ __('Titel') }}</th>
+                                    <th class="description-column">{{ __('Beschrijving') }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($damages as $damage)
+                                    <tr>
+                                        <td class="location-column">
+                                            <strong>{{ $damage->damage_date ? $damage->damage_date : '-' }}</strong><br>
+                                            <p style="text-decoration: underline">
+                                                @if($damage->basicArea)
+                                                    {{ $damage->basicArea->floor->title ?? '-' }} >>
+                                                    {{ $damage->basicArea->room->title ?? '-' }} >>
+                                                    {{ $damage->basicArea->area->title ?? '-' }}
+                                                @elseif($damage->general)
+                                                    {{ $damage->general->room->floor->title ?? '-' }} >>
+                                                    {{ $damage->general->room->title ?? '-' }}
+                                                @elseif($damage->specificArea)
+                                                    {{ $damage->specificArea->room->floor->title ?? '-' }} >>
+                                                    {{ $damage->specificArea->room->title ?? '-' }} >>
+                                                    {{ $damage->specificArea->specific->title ?? '-' }}
+                                                @elseif($damage->conformArea)
+                                                    {{ $damage->conformArea->floor->title ?? '-' }} >>
+                                                    {{ $damage->conformArea->room->title ?? '-' }} >>
+                                                    {{ $damage->conformArea->conform->title ?? '-' }}
+                                                @elseif($damage->techniqueArea)
+                                                    {{ $damage->techniqueArea->technique->title ?? '-' }}
+                                                @elseif($damage->outdoorArea)
+                                                    {{ $damage->outdoorArea->room->title ?? '-' }} >>
+                                                    {{ $damage->outdoorArea->outdoor->title ?? '-' }}
+                                                @endif
+                                            </p>
+
+                                            {{--@include('livewire.quote.calculations')--}}
+
+                                        </td>
+                                        <td class="title-column">{{ $damage->damage_title ?? '-' }}</td>
+                                        <td class="description-column">{{ $damage->damage_description ?? '-' }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                                {{--<tfoot>
+                                <tr class="py-4">
+                                    <td colspan="3" class="text-right font-weight-bold">{{ __('Totaal') }}: <br>
+                                        <small>*{{ __('Totaal van alle opgemaakte prijzen incl. de vetustate.') }} <br></small>
+                                    </td>
+                                    <td class="font-weight-bold text-right">{{ number_format($quoteTotal, 2, ',', '.') }} €
+                                        <br>
+                                        <small>*{{ __('incl. btw') }} <br></small>
+                                    </td>
+                                </tr>
+                                </tfoot>--}}
+                            </table>
+                        @else
+                            <p>{{ __('Geen schades geselecteerd.') }}</p>
+                        @endif
 
                 </div>
 
@@ -294,7 +355,7 @@
             </div>
 
             <div class="single-add-property">
-                <h3>{{ __('Contract printen') }}</h3>
+                <h3>{{ __('Akkoord printen') }}</h3>
                 <a href="{{ route('print.agreement', [$inspection, $situation, $quote, $agreement]) }}" class="btn btn-dark">{{ __('Printen') }}</a>
             </div>
 
