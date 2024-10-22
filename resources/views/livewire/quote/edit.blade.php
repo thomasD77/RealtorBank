@@ -176,12 +176,16 @@
             @forelse($agreements as $agreement)
                 <tr>
                     <td>{{ $agreement->title }}</td>
-                    <td>{{ $agreement->date }}</td>
+                    <td>{{ $agreement->created_at->format('d-m-Y') }}</td>
                     <td>
                         @if($agreement->pricing)
-                            <span class="badge badge-success">{{ __('Document: schade & prijs') }}</span>
+                            <a target="_blank" href="{{ asset('assets/agreements/pdf/' . $agreement->file_original) }}">
+                                <span class="badge badge-success">{{ __('Document: schade & prijs') }}</span>
+                            </a>
                         @else
-                            <span class="badge badge-warning">{{ __('Document: schade') }}</span>
+                            <a target="_blank" href="{{ asset('assets/agreements/pdf/' . $agreement->file_original) }}">
+                                <span class="badge badge-warning">{{ __('Document: schade') }}</span>
+                            </a>
                         @endif
                     </td>
                 </tr>

@@ -7,6 +7,7 @@ use App\Models\Damage;
 use App\Models\Inspection;
 use App\Models\Invoice;
 use App\Models\InvoiceDamage;
+use App\Models\PDF;
 use App\Models\Quote;
 use App\Models\QuoteCalculation;
 use App\Models\QuoteDamage;
@@ -68,7 +69,7 @@ class Edit extends Component
             ->where('damage_print_pdf', 1)
             ->get();
 
-        $this->agreements = Agreement::query()
+        $this->agreements = PDF::query()
             ->where('inspection_id', $this->inspection->id)
             ->where('situation_id', $this->situation->id)
             ->where('quote_id', $this->quote->id)

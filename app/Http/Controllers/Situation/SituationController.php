@@ -480,6 +480,25 @@ class SituationController extends Controller
 
     public function printAgreement(Inspection $inspection, Situation $situation, Quote $quote, Agreement $agreement)
     {
+        $rawFileName = time(). '-AKKOORD-' . $inspection->id . '-schade.pdf';
+        $cleanFileName = Str::limit($inspection->title, 20, '...') . '-' . now()->format('d-m-Y') . '-akkoord_schade.pdf';
+        $fileName = MediaStore::getValidFilename($rawFileName);
+
+        $pdfStore = new \App\Models\PDF();
+        $pdfStore->inspection_id = $inspection->id;
+        $pdfStore->situation_id = $situation->id;
+        $pdfStore->title = $cleanFileName;
+        $pdfStore->file_original = $fileName;
+        $pdfStore->status = 'complete';
+        $pdfStore->quote_id = $quote->id;
+        $pdfStore->pricing = $agreement->pricing;
+        $pdfStore->save();
+
+        $path = public_path('assets/agreements/pdf/');
+        if(!File::isDirectory($path)){
+            File::makeDirectory($path, 0777, true, true);
+        }
+
         $damages = QuoteDamage::query()
             ->with([
                 'basicArea.floor',
@@ -511,14 +530,14 @@ class SituationController extends Controller
             ->get();
 
         $pdf = Pdf::loadView('agreement.pdf', [
-            'inspection' => $inspection,
-            'quote' => $quote,
-            'situation' => $situation,
             'damages' => $damages,
-            'agreement' => $agreement,
-        ]);
+            'inspection' => $inspection
+        ] );
 
-        return $pdf->download('Akkoord-' . '#' . $inspection->id . '-' . $agreement->id . '.pdf');
+        $pdf->save($path  . $fileName);
+
+
+        return $pdf->download('akkoord-' . '#' . $inspection->id . '-' . $agreement->id . '.pdf');
     }
 
     public function signatureAgreement(Request $request)
