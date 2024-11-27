@@ -590,21 +590,6 @@ class SituationController extends Controller
         return redirect()->route('quote.edit', compact('inspection', 'situation', 'quote'));
     }
 
-    public function createAgreementWithPricing(Inspection $inspection, Situation $situation, Quote $quote)
-    {
-        $agreement = new Agreement();
-
-        $agreement->inspection_id = $inspection->id;
-        $agreement->situation_id = $situation->id;
-        $agreement->quote_id = $quote->id;
-        $agreement->date = now();
-        $agreement->title = 'Default';
-        $agreement->pricing = 1;
-        $agreement->save();
-
-        return view('agreement.create', compact('inspection', 'situation', 'quote', 'agreement'));
-    }
-
     public function printAgreementWithPricing(Inspection $inspection, Situation $situation, Quote $quote, Agreement $agreement)
     {
         $rawFileName = time(). '-AKKOORD-' . $inspection->id . '-schade.pdf';

@@ -26,6 +26,7 @@ class EditWithPricing extends Component
     public $subsTotal;
     public $remarks;
     public $adjustedTotal;
+    public $total;
 
     public function mount(Inspection $inspection, Situation $situation, Quote $quote, Agreement $agreement)
     {
@@ -35,6 +36,7 @@ class EditWithPricing extends Component
         $this->agreement = $agreement;
         $this->remarks = $agreement->remarks;
         $this->adjustedTotal = $agreement->adjusted_total;
+        $this->total = $agreement->total;
 
         $this->damages = QuoteDamage::query()
             ->with([
@@ -85,20 +87,29 @@ class EditWithPricing extends Component
     {
         if ($this->agreement) {
             $this->agreement->remarks = $this->remarks;
-            $this->agreement->save();
+            $this->agreement->update();
         }
+
+        $this->remarks = $this->agreement->remarks;
     }
 
     public function updateAdjustedTotal()
     {
         if ($this->agreement) {
-            $this->agreement->adjusted_total = $this->adjustedTotal;
-            $this->agreement->save();
+            $adjusted_total = $this->adjustedTotal;
+            $subTotal = $this->subsTotal;
+            $total = $subTotal - $adjusted_total;
+
+            $this->agreement->adjusted_total = $adjusted_total;
+            $this->agreement->total = $total;
+            $this->agreement->update();
         }
+        $this->adjustedTotal = $this->agreement->adjusted_total;
+        $this->total = $this->agreement->total;
     }
 
     public function render()
     {
-        return view('livewire.agreement.create-with-pricing');
+        return view('livewire.agreement.edit-with-pricing');
     }
 }

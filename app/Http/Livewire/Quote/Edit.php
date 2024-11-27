@@ -143,7 +143,7 @@ class Edit extends Component
         }
     }
 
-    public function createAgreement()
+    public function createAgreement($value)
     {
         $agreement = new Agreement();
 
@@ -151,8 +151,13 @@ class Edit extends Component
         $agreement->situation_id = $this->situation->id;
         $agreement->quote_id = $this->quote->id;
         $agreement->date = now();
-        $agreement->title = 'Akkoord_schade_' . now();
-        $agreement->pricing = 0;
+        if($value = "pricing"){
+            $agreement->pricing = 1;
+            $agreement->title = 'Akkoord_schade_prijzen_' . now();
+        }else{
+            $agreement->pricing = 0;
+            $agreement->title = 'Akkoord_schade_' . now();
+        }
         $agreement->save();
 
         $this->agreements = Agreement::query()

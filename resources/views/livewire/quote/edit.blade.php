@@ -147,18 +147,16 @@
         <div class="property-form-group row">
             <div class="col-md-6">
                 <div class="text-left">
-                    <button wire:click="createAgreement" type="button" class="btn btn-dark">
+                    <button wire:click="createAgreement('noPricing')" type="button" class="btn btn-dark">
                         <i class="fa fa-rocket mx-2"></i> {{ __('Akkoord Schade') }}
                     </button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="text-right">
-                    <a href="{{ route('agreement.createWithPricing', [$inspection, $situation, $quote]) }}">
-                        <button type="button" class="btn btn-dark">
-                            <i class="fa fa-rocket mx-2"></i> {{ __('Akkoord Schade & prijzen') }}
-                        </button>
-                    </a>
+                    <button wire:click="createAgreement('pricing')" type="button" class="btn btn-dark">
+                        <i class="fa fa-rocket mx-2"></i> {{ __('Akkoord Schade & prijzen') }}
+                    </button>
                 </div>
             </div>
         </div>
