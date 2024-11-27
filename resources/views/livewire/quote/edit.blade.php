@@ -147,7 +147,7 @@
         <div class="property-form-group row">
             <div class="col-md-6">
                 <div class="text-left">
-                    <a href="{{ route('agreement.create', [$inspection, $situation, $quote, 'pricing' => false]) }}">
+                    <a href="{{ route('agreement.create', [$inspection, $situation, $quote]) }}">
                         <button type="button" class="btn btn-dark">
                             <i class="fa fa-rocket mx-2"></i> {{ __('Akkoord Schade') }}
                         </button>
@@ -157,7 +157,7 @@
             </div>
             <div class="col-md-6">
                 <div class="text-right">
-                    <a href="{{ route('agreement.create', [$inspection, $situation, $quote, 'pricing' => true]) }}">
+                    <a href="{{ route('agreement.create', [$inspection, $situation, $quote]) }}">
                         <button type="button" class="btn btn-dark">
                             <i class="fa fa-rocket mx-2"></i> {{ __('Akkoord Schade & prijzen') }}
                         </button>

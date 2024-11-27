@@ -466,7 +466,62 @@ class SituationController extends Controller
         return $pdf->download('huurschade-' . '#' . $inspection->id . '-' . $claim->id . '.pdf');
     }
 
-    public function createAgreement(Inspection $inspection, Situation $situation, Quote $quote, Request $request)
+    public function signatureAgreement(Request $request)
+    {
+        $folderPath = public_path('assets/signatures/');
+
+        if(!File::isDirectory($folderPath)){
+            File::makeDirectory($folderPath, 0777, true, true);
+        }
+
+        $image_parts = explode(";base64,", $request->signed);
+
+        //Check when signature is empty
+        if($image_parts[0] == ''){
+            return redirect()->back();
+        }
+
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+
+        $file = $folderPath . 'signature-' . time() . '.'.$image_type;
+        file_put_contents($file, $image_base64);
+
+        $agreement = Agreement::find($request->agreement);
+        $name = 'signature-' . time() . '.'.$image_type;
+
+        if($request->tenant){
+            File::delete('assets/signatures/' . $agreement->signature_tenant);
+
+            $agreement->signature_tenant = $name;
+            $agreement->update();
+            Session::flash('successTenant', 'Handtekening werd succesvol opgeslagen.');
+
+
+        }
+
+        elseif($request->user){
+            $user = Auth()->user();
+            File::delete('assets/signatures/' . $user->signature);
+
+            $user->signature = $name;
+            $user->update();
+            Session::flash('success', 'Handtekening werd succesvol opgeslagen.');
+        }
+
+        else {
+            File::delete('assets/signatures/' . $agreement->signature_realtor);
+
+            $agreement->signature_owner = $name;
+            $agreement->update();
+            Session::flash('success', 'Handtekening werd succesvol opgeslagen.');
+        }
+
+        return redirect()->back();
+    }
+
+    public function createAgreement(Inspection $inspection, Situation $situation, Quote $quote)
     {
         $agreement = new Agreement();
 
@@ -475,11 +530,7 @@ class SituationController extends Controller
         $agreement->quote_id = $quote->id;
         $agreement->date = now();
         $agreement->title = 'Default';
-        if($request->query()['pricing']){
-            $agreement->pricing = 1;
-        }else {
-            $agreement->pricing = 0;
-        }
+        $agreement->pricing = 0;
         $agreement->save();
 
         return view('agreement.create', compact('inspection', 'situation', 'quote', 'agreement'));
@@ -536,81 +587,89 @@ class SituationController extends Controller
             ->where('approved', 1)
             ->get();
 
-        $quoteIds = QuoteCalculation::where('quote_id', $quote->id)->pluck('id');
-        $subsTotal = QuoteSubCalculation::query()
-            ->where('quote_id', $quote->id)
-            ->whererIn('quote_calculation_id', $quoteIds)
-            ->where('approved', 1)
-            ->sum('quote_total');
-
-
         $pdf = Pdf::loadView('agreement.pdf', [
             'damages' => $damages,
             'inspection' => $inspection,
             'situation' => $situation,
             'agreement' => $agreement,
-            'subsTotal' => $subsTotal
         ] );
 
         $pdf->save($path  . $fileName);
 
-
         return $pdf->stream('akkoord-' . '#' . $inspection->id . '-' . $agreement->id . '.pdf');
     }
 
-    public function signatureAgreement(Request $request)
-    {
-        $folderPath = public_path('assets/signatures/');
-
-        if(!File::isDirectory($folderPath)){
-            File::makeDirectory($folderPath, 0777, true, true);
-        }
-
-        $image_parts = explode(";base64,", $request->signed);
-
-        //Check when signature is empty
-        if($image_parts[0] == ''){
-            return redirect()->back();
-        }
-
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $image_type = $image_type_aux[1];
-        $image_base64 = base64_decode($image_parts[1]);
-
-        $file = $folderPath . 'signature-' . time() . '.'.$image_type;
-        file_put_contents($file, $image_base64);
-
-        $agreement = Agreement::find($request->agreement);
-        $name = 'signature-' . time() . '.'.$image_type;
-
-        if($request->tenant){
-            File::delete('assets/signatures/' . $agreement->signature_tenant);
-
-            $agreement->signature_tenant = $name;
-            $agreement->update();
-            Session::flash('successTenant', 'Handtekening werd succesvol opgeslagen.');
-
-
-        }
-
-        elseif($request->user){
-            $user = Auth()->user();
-            File::delete('assets/signatures/' . $user->signature);
-
-            $user->signature = $name;
-            $user->update();
-            Session::flash('success', 'Handtekening werd succesvol opgeslagen.');
-        }
-
-        else {
-            File::delete('assets/signatures/' . $agreement->signature_realtor);
-
-            $agreement->signature_owner = $name;
-            $agreement->update();
-            Session::flash('success', 'Handtekening werd succesvol opgeslagen.');
-        }
-
-        return redirect()->back();
-    }
+//    public function printAgreement(Inspection $inspection, Situation $situation, Quote $quote, Agreement $agreement)
+//    {
+//        $rawFileName = time(). '-AKKOORD-' . $inspection->id . '-schade.pdf';
+//        $cleanFileName = Str::limit($inspection->title, 20, '...') . '-' . now()->format('d-m-Y') . '-akkoord_schade.pdf';
+//        $fileName = MediaStore::getValidFilename($rawFileName);
+//
+//        $pdfStore = new \App\Models\PDF();
+//        $pdfStore->inspection_id = $inspection->id;
+//        $pdfStore->situation_id = $situation->id;
+//        $pdfStore->title = $cleanFileName;
+//        $pdfStore->file_original = $fileName;
+//        $pdfStore->status = 'complete';
+//        $pdfStore->quote_id = $quote->id;
+//        $pdfStore->pricing = $agreement->pricing;
+//        $pdfStore->save();
+//
+//        $path = public_path('assets/agreements/pdf/');
+//        if(!File::isDirectory($path)){
+//            File::makeDirectory($path, 0777, true, true);
+//        }
+//
+//        $damages = QuoteDamage::query()
+//            ->with([
+//                'basicArea.floor',
+//                'basicArea.area',
+//                'basicArea.room',
+//                'specificArea.floor',
+//                'specificArea.specific',
+//                'specificArea.room',
+//                'conformArea.floor',
+//                'conformArea.conform',
+//                'conformArea.room',
+//                'general.floor',
+//                'general.room',
+//                'techniqueArea.technique',
+//                'outdoorArea.floor',
+//                'outdoorArea.outdoor',
+//                'outdoorArea.room'
+//            ])
+//            ->where('quote_id', $quote->id)
+//            ->where('inspection_id', $inspection->id)
+//            ->orderBy('basic_id')
+//            ->orderBy('specific_id')
+//            ->orderBy('conform_id')
+//            ->orderBy('general_id')
+//            ->orderBy('technique_id')
+//            ->orderBy('outdoor_id')
+//            ->where('damage_print_pdf', 1)
+//            ->where('approved', 1)
+//            ->get();
+//
+//        $quoteIds = QuoteCalculation::where('quote_id', $quote->id)->pluck('id');
+//        $subsTotal = QuoteSubCalculation::query()
+//            ->where('quote_id', $quote->id)
+//            ->whererIn('quote_calculation_id', $quoteIds)
+//            ->where('approved', 1)
+//            ->sum('quote_total');
+//
+//
+//        $pdf = Pdf::loadView('agreement.pdf', [
+//            'damages' => $damages,
+//            'inspection' => $inspection,
+//            'situation' => $situation,
+//            'agreement' => $agreement,
+//            'subsTotal' => $subsTotal
+//        ] );
+//
+//        $pdf->save($path  . $fileName);
+//
+//
+//        return $pdf->stream('akkoord-' . '#' . $inspection->id . '-' . $agreement->id . '.pdf');
+//    }
 
 }
