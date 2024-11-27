@@ -86,7 +86,7 @@
 
     .table th, .table td {
         vertical-align: middle;
-        text-align: center;
+        text-align: left;
     }
 
     .card-header {

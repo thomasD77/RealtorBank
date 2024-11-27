@@ -187,11 +187,11 @@ class Index extends Component
     {
         $cost = 0;
 
-        if ($this->cost_square_meter !== null) {
+        if ($this->cost_square_meter != "") {
             $cost = $this->cost_square_meter;
-        } elseif ($this->cost_hour !== null) {
+        } elseif ($this->cost_hour != "") {
             $cost = $this->cost_hour;
-        } elseif ($this->cost_piece !== null) {
+        } elseif ($this->cost_piece != "") {
             $cost = $this->cost_piece;
         }
 

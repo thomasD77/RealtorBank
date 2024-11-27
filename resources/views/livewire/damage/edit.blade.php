@@ -124,8 +124,6 @@
                     <i class="fa fa-trash mx-2"></i> {{ __('Delete') }}
                 </button>
             </div>
-
-
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -137,11 +135,11 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>{{ __('Ben je zeker om deze schade te verwijderen?') }}</p>
+                            <p>{{ __('Ben je zeker om deze schade te wissen?') }}</p>
                             <form wire:submit.prevent="deleteDamage">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn btn-dark">Verwijderen</button>
+                                        <button type="submit" class="btn btn-dark">{{ __('Verwijderen') }}</button>
                                     </div>
                                 </div>
                             </form>
