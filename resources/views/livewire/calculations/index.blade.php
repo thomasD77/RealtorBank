@@ -1,6 +1,8 @@
 <div>
     @if($calculation)
+
         @include('livewire.calculations.calculation_css')
+
         <!-- Dropdown voor de categorieën -->
         <div class="custom-dropdown" wire:ignore.self>
             <button class="custom-dropdown-btn" id="dropdownButton">
