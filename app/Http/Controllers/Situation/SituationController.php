@@ -599,77 +599,92 @@ class SituationController extends Controller
         return $pdf->stream('akkoord-' . '#' . $inspection->id . '-' . $agreement->id . '.pdf');
     }
 
-//    public function printAgreement(Inspection $inspection, Situation $situation, Quote $quote, Agreement $agreement)
-//    {
-//        $rawFileName = time(). '-AKKOORD-' . $inspection->id . '-schade.pdf';
-//        $cleanFileName = Str::limit($inspection->title, 20, '...') . '-' . now()->format('d-m-Y') . '-akkoord_schade.pdf';
-//        $fileName = MediaStore::getValidFilename($rawFileName);
-//
-//        $pdfStore = new \App\Models\PDF();
-//        $pdfStore->inspection_id = $inspection->id;
-//        $pdfStore->situation_id = $situation->id;
-//        $pdfStore->title = $cleanFileName;
-//        $pdfStore->file_original = $fileName;
-//        $pdfStore->status = 'complete';
-//        $pdfStore->quote_id = $quote->id;
-//        $pdfStore->pricing = $agreement->pricing;
-//        $pdfStore->save();
-//
-//        $path = public_path('assets/agreements/pdf/');
-//        if(!File::isDirectory($path)){
-//            File::makeDirectory($path, 0777, true, true);
-//        }
-//
-//        $damages = QuoteDamage::query()
-//            ->with([
-//                'basicArea.floor',
-//                'basicArea.area',
-//                'basicArea.room',
-//                'specificArea.floor',
-//                'specificArea.specific',
-//                'specificArea.room',
-//                'conformArea.floor',
-//                'conformArea.conform',
-//                'conformArea.room',
-//                'general.floor',
-//                'general.room',
-//                'techniqueArea.technique',
-//                'outdoorArea.floor',
-//                'outdoorArea.outdoor',
-//                'outdoorArea.room'
-//            ])
-//            ->where('quote_id', $quote->id)
-//            ->where('inspection_id', $inspection->id)
-//            ->orderBy('basic_id')
-//            ->orderBy('specific_id')
-//            ->orderBy('conform_id')
-//            ->orderBy('general_id')
-//            ->orderBy('technique_id')
-//            ->orderBy('outdoor_id')
-//            ->where('damage_print_pdf', 1)
-//            ->where('approved', 1)
-//            ->get();
-//
-//        $quoteIds = QuoteCalculation::where('quote_id', $quote->id)->pluck('id');
-//        $subsTotal = QuoteSubCalculation::query()
-//            ->where('quote_id', $quote->id)
-//            ->whererIn('quote_calculation_id', $quoteIds)
-//            ->where('approved', 1)
-//            ->sum('quote_total');
-//
-//
-//        $pdf = Pdf::loadView('agreement.pdf', [
-//            'damages' => $damages,
-//            'inspection' => $inspection,
-//            'situation' => $situation,
-//            'agreement' => $agreement,
-//            'subsTotal' => $subsTotal
-//        ] );
-//
-//        $pdf->save($path  . $fileName);
-//
-//
-//        return $pdf->stream('akkoord-' . '#' . $inspection->id . '-' . $agreement->id . '.pdf');
-//    }
+    public function createAgreementWithPricing(Inspection $inspection, Situation $situation, Quote $quote)
+    {
+        $agreement = new Agreement();
+
+        $agreement->inspection_id = $inspection->id;
+        $agreement->situation_id = $situation->id;
+        $agreement->quote_id = $quote->id;
+        $agreement->date = now();
+        $agreement->title = 'Default';
+        $agreement->pricing = 1;
+        $agreement->save();
+
+        return view('agreement.create', compact('inspection', 'situation', 'quote', 'agreement'));
+    }
+
+    public function printAgreementWithPricing(Inspection $inspection, Situation $situation, Quote $quote, Agreement $agreement)
+    {
+        $rawFileName = time(). '-AKKOORD-' . $inspection->id . '-schade.pdf';
+        $cleanFileName = Str::limit($inspection->title, 20, '...') . '-' . now()->format('d-m-Y') . '-akkoord_schade.pdf';
+        $fileName = MediaStore::getValidFilename($rawFileName);
+
+        $pdfStore = new \App\Models\PDF();
+        $pdfStore->inspection_id = $inspection->id;
+        $pdfStore->situation_id = $situation->id;
+        $pdfStore->title = $cleanFileName;
+        $pdfStore->file_original = $fileName;
+        $pdfStore->status = 'complete';
+        $pdfStore->quote_id = $quote->id;
+        $pdfStore->pricing = $agreement->pricing;
+        $pdfStore->save();
+
+        $path = public_path('assets/agreements/pdf/');
+        if(!File::isDirectory($path)){
+            File::makeDirectory($path, 0777, true, true);
+        }
+
+        $damages = QuoteDamage::query()
+            ->with([
+                'basicArea.floor',
+                'basicArea.area',
+                'basicArea.room',
+                'specificArea.floor',
+                'specificArea.specific',
+                'specificArea.room',
+                'conformArea.floor',
+                'conformArea.conform',
+                'conformArea.room',
+                'general.floor',
+                'general.room',
+                'techniqueArea.technique',
+                'outdoorArea.floor',
+                'outdoorArea.outdoor',
+                'outdoorArea.room'
+            ])
+            ->where('quote_id', $quote->id)
+            ->where('inspection_id', $inspection->id)
+            ->orderBy('basic_id')
+            ->orderBy('specific_id')
+            ->orderBy('conform_id')
+            ->orderBy('general_id')
+            ->orderBy('technique_id')
+            ->orderBy('outdoor_id')
+            ->where('damage_print_pdf', 1)
+            ->where('approved', 1)
+            ->get();
+
+        $quoteIds = QuoteCalculation::where('quote_id', $quote->id)->pluck('id');
+        $subsTotal = QuoteSubCalculation::query()
+            ->where('quote_id', $quote->id)
+            ->whererIn('quote_calculation_id', $quoteIds)
+            ->where('approved', 1)
+            ->sum('quote_total');
+
+
+        $pdf = Pdf::loadView('agreement.pdf', [
+            'damages' => $damages,
+            'inspection' => $inspection,
+            'situation' => $situation,
+            'agreement' => $agreement,
+            'subsTotal' => $subsTotal
+        ] );
+
+        $pdf->save($path  . $fileName);
+
+
+        return $pdf->stream('akkoord-' . '#' . $inspection->id . '-' . $agreement->id . '.pdf');
+    }
 
 }

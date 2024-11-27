@@ -52,6 +52,8 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
 
     Route::get('/print/agreement/{inspection}/{situation}/{quote}/{agreement}}', [SituationController::class, 'printAgreement'])->name('print.agreement');
     Route::get('/create/agreement/{inspection}/{situation}/{quote}', [SituationController::class, 'createAgreement'])->name('agreement.create');
+    Route::get('/print/agreement/{inspection}/{situation}/{quote}/{agreement}/pricing', [SituationController::class, 'printAgreementWithPricing'])->name('print.agreementWithPricing');
+    Route::get('/create/agreement/{inspection}/{situation}/{quote}/pricing', [SituationController::class, 'createAgreementWithPricing'])->name('agreement.createWithPricing');
     Route::post('/create/signature/agreement', [SituationController::class, 'signatureAgreement'])->name('create.signature.agreement');
 
 
