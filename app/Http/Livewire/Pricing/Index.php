@@ -30,6 +30,7 @@ class Index extends Component
 
     public $addCategoryModalOpen = false;
     public $newCategoryTitle;
+    public $showFlashMessage = true;
 
 
     public function mount()
@@ -121,6 +122,9 @@ class Index extends Component
 
         // Haal de data opnieuw op om de tabel te updaten
         $this->loadData();
+
+        // Stel een flash message in
+        session()->flash('success', 'Prijs succesvol aangepast!');
     }
 
     public function setActiveTab($tab)
@@ -168,15 +172,15 @@ class Index extends Component
             $categoryId = $pricing->category_pricing_id; // Stel de categorie-ID vast
             $pricing->delete();
 
+            // Stel een flash message in
+            session()->flash('success', 'Prijs succesvol verwijderd.');
+
             // Verwijder het record uit de lokale state voor die specifieke categorie
             foreach ($this->pricingCategories as $category) {
                 if ($category->id === $categoryId) {
                     $category->pricings = $category->pricings->filter(function ($item) use ($pricingId) {
                         return $item->id !== $pricingId;
                     });
-
-                    // Stel het succesbericht in voor de betreffende categorie
-                   /* $this->categorySuccessMessages[$categoryId] = 'Prijs succesvol verwijderd.';*/
                 }
             }
         }
@@ -185,7 +189,7 @@ class Index extends Component
     public function saveCategory()
     {
         $this->validate([
-            'newCategoryTitle' => 'required|string|max:255',
+            'newCategoryTitle' => 'required|string|max:255|unique:category_pricings,title',
         ]);
 
         $category = new CategoryPricing();
@@ -196,6 +200,13 @@ class Index extends Component
         $this->addCategoryModalOpen = false;
         $this->newCategoryTitle = '';
         $this->loadData();
+
+        // Stel een flash message in
+        session()->flash('success', 'Prijs succesvol toegevoegd!');
+    }
+    public function closeFlashMessage()
+    {
+        $this->showFlashMessage = false;
     }
 
     public function render()
