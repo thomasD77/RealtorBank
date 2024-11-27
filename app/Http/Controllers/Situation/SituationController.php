@@ -521,19 +521,9 @@ class SituationController extends Controller
         return redirect()->back();
     }
 
-    public function createAgreement(Inspection $inspection, Situation $situation, Quote $quote)
+    public function editAgreement(Inspection $inspection, Situation $situation, Quote $quote, Agreement $agreement)
     {
-        $agreement = new Agreement();
-
-        $agreement->inspection_id = $inspection->id;
-        $agreement->situation_id = $situation->id;
-        $agreement->quote_id = $quote->id;
-        $agreement->date = now();
-        $agreement->title = 'Default';
-        $agreement->pricing = 0;
-        $agreement->save();
-
-        return view('agreement.create', compact('inspection', 'situation', 'quote', 'agreement'));
+        return view('agreement.edit', compact('inspection', 'situation', 'quote', 'agreement'));
     }
 
     public function printAgreement(Inspection $inspection, Situation $situation, Quote $quote, Agreement $agreement)
@@ -545,10 +535,11 @@ class SituationController extends Controller
         $pdfStore = new \App\Models\PDF();
         $pdfStore->inspection_id = $inspection->id;
         $pdfStore->situation_id = $situation->id;
+        $pdfStore->agreement_id = $agreement->id;
+        $pdfStore->quote_id = $quote->id;
         $pdfStore->title = $cleanFileName;
         $pdfStore->file_original = $fileName;
         $pdfStore->status = 'complete';
-        $pdfStore->quote_id = $quote->id;
         $pdfStore->pricing = $agreement->pricing;
         $pdfStore->save();
 
@@ -596,7 +587,7 @@ class SituationController extends Controller
 
         $pdf->save($path  . $fileName);
 
-        return $pdf->stream('akkoord-' . '#' . $inspection->id . '-' . $agreement->id . '.pdf');
+        return redirect()->route('quote.edit', compact('inspection', 'situation', 'quote'));
     }
 
     public function createAgreementWithPricing(Inspection $inspection, Situation $situation, Quote $quote)

@@ -12,7 +12,7 @@ use App\Models\QuoteSubCalculation;
 use App\Models\Situation;
 use Livewire\Component;
 
-class CreateWithPricing extends Component
+class EditWithPricing extends Component
 {
     public Inspection $inspection;
     public Situation $situation;
@@ -24,6 +24,8 @@ class CreateWithPricing extends Component
     public $date;
     public $lock;
     public $subsTotal;
+    public $remarks;
+    public $adjustedTotal;
 
     public function mount(Inspection $inspection, Situation $situation, Quote $quote, Agreement $agreement)
     {
@@ -31,6 +33,8 @@ class CreateWithPricing extends Component
         $this->situation = $situation;
         $this->quote = $quote;
         $this->agreement = $agreement;
+        $this->remarks = $agreement->remarks;
+        $this->adjustedTotal = $agreement->adjusted_total;
 
         $this->damages = QuoteDamage::query()
             ->with([
@@ -77,12 +81,19 @@ class CreateWithPricing extends Component
         }
     }
 
-    public function changeDate()
+    public function changeRemarks()
     {
-        if($this->date){
-            $claim =  $this->claim;
-            $claim->date = $this->date;
-            $claim->update();
+        if ($this->agreement) {
+            $this->agreement->remarks = $this->remarks;
+            $this->agreement->save();
+        }
+    }
+
+    public function updateAdjustedTotal()
+    {
+        if ($this->agreement) {
+            $this->agreement->adjusted_total = $this->adjustedTotal;
+            $this->agreement->save();
         }
     }
 

@@ -3,14 +3,14 @@
 @section('content')
 
     @if($agreement->pricing)
-        <livewire:agreement.create-with-pricing
+        <livewire:agreement.edit-with-pricing
             :inspection="$inspection"
             :situation="$situation"
             :quote="$quote"
             :agreement="$agreement"
         />
     @else
-        <livewire:agreement.create
+        <livewire:agreement.edit
             :inspection="$inspection"
             :situation="$situation"
             :quote="$quote"

@@ -43,7 +43,7 @@ class MediaStore extends Model
             }
         }
 
-        //Create a job QUEUE when there are to many files in general or with the .HEIC format
+        //Edit a job QUEUE when there are to many files in general or with the .HEIC format
         if($countHEIC >= 2 || count($mediaItems) >= 5){
             $mediaPaths = [];
             foreach ($mediaItems as $media ){
@@ -67,7 +67,7 @@ class MediaStore extends Model
 
             $mediaStore = new $mediaStore;
 
-            //Create variables
+            //Edit variables
             $name = time(). $media->getClientOriginalName();
             $name = MediaStore::getValidFilename($name);
 
@@ -96,7 +96,7 @@ class MediaStore extends Model
                 $newMedia = $media->storeAs('assets/images/' . $folder , $name);
             }
 
-            //Create variables
+            //Edit variables
             $myImage = Image::make(public_path('assets/images/' . $folder . '/' . $name));
             $imageHasOrientation = $myImage->exif('Orientation');
 

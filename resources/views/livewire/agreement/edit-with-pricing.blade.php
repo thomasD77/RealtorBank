@@ -147,6 +147,34 @@
                                         <small>*{{ __('incl. btw') }} <br></small>
                                     </td>
                                 </tr>
+                                <tr class="py-4">
+                                    <td colspan="1" class="text-right font-weight-bold">{{ __('Notities') }}: <br>
+                                        <small>*{{ __('Extra notities die in rekening moeten worden gebracht.') }} <br></small>
+                                    </td>
+                                    <td colspan="3" class="font-weight-bold text-right">
+                                    <textarea
+                                        wire:change="changeRemarks"
+                                        wire:model.defer="remarks"
+                                        placeholder="{{ $remarks ?? 'Type your remarks here...' }}"
+                                        class="w-full p-2 border rounded"
+                                    ></textarea>
+                                    </td>
+                                </tr>
+                                <tr class="py-4">
+                                    <td colspan="1" class="text-right font-weight-bold">{{ __('Aangepaste Totaal') }}: <br>
+                                        <small>*{{ __('Totaalbedrag na aanpassing.') }} <br></small>
+                                    </td>
+                                    <td colspan="3" class="font-weight-bold text-right">
+                                        <input
+                                            type="number"
+                                            step="0.01"
+                                            wire:change="updateAdjustedTotal"
+                                            wire:model.defer="adjustedTotal"
+                                            placeholder="{{ $adjustedTotal ?? 'Voer totaalbedrag in...' }}"
+                                            class="w-full p-2 border rounded"
+                                        />
+                                    </td>
+                                </tr>
                                 </tfoot>
                             </table>
                         @else

@@ -32,6 +32,11 @@ class Agreement extends Model
         return $this->belongsTo(Situation::class);
     }
 
+    public function pdf()
+    {
+        return $this->hasOne(PDF::class, 'agreement_id');
+    }
+
     public function quote()
     {
         return $this->belongsTo(Quote::class);

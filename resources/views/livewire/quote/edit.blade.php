@@ -147,12 +147,9 @@
         <div class="property-form-group row">
             <div class="col-md-6">
                 <div class="text-left">
-                    <a href="{{ route('agreement.create', [$inspection, $situation, $quote]) }}">
-                        <button type="button" class="btn btn-dark">
-                            <i class="fa fa-rocket mx-2"></i> {{ __('Akkoord Schade') }}
-                        </button>
-                    </a>
-
+                    <button wire:click="createAgreement" type="button" class="btn btn-dark">
+                        <i class="fa fa-rocket mx-2"></i> {{ __('Akkoord Schade') }}
+                    </button>
                 </div>
             </div>
             <div class="col-md-6">
@@ -172,6 +169,7 @@
                 <th>{{ __('Titel') }}</th>
                 <th>{{ __('Datum') }}</th>
                 <th>{{ __('Status') }}</th>
+                <th>{{ __('PDF') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -179,17 +177,32 @@
                 <tr>
                     <td>{{ $agreement->title }}</td>
                     <td>{{ $agreement->created_at->format('d-m-Y') }}</td>
-                    <td>
-                        @if($agreement->pricing)
-                            <a target="_blank" href="{{ asset('assets/agreements/pdf/' . $agreement->file_original) }}">
-                                <span class="badge badge-success">{{ __('Document: schade & prijs') }}</span>
+                    @if(!isset($agreement->pdf))
+                        <td class="edit text-center">
+                            <a href="{{ route('agreement.edit',[$inspection, $situation, $quote, $agreement]) }}">
+                                <i class="fa fa-pencil-alt text-dark"></i>
                             </a>
-                        @else
-                            <a target="_blank" href="{{ asset('assets/agreements/pdf/' . $agreement->file_original) }}">
-                                <span class="badge badge-warning">{{ __('Document: schade') }}</span>
-                            </a>
-                        @endif
-                    </td>
+                        </td>
+                    @else
+                        <td class="text-center">
+                            <i class="fa fa-stop text-danger"></i>
+                        </td>
+                    @endif
+                    @if(isset($agreement->pdf))
+                        <td>
+                            @if($agreement->pricing)
+                                <a target="_blank" href="{{ asset('assets/agreements/pdf/' . $agreement->pdf->file_original) }}">
+                                    <span class="badge badge-success">{{ __('Document: schade & prijs') }}</span>
+                                </a>
+                            @else
+                                <a target="_blank" href="{{ asset('assets/agreements/pdf/' . $agreement->pdf->file_original) }}">
+                                    <span class="badge badge-warning">{{ __('Document: schade') }}</span>
+                                </a>
+                            @endif
+                        </td>
+                    @else
+                        <td>{{ __('blanco') }}</td>
+                    @endif
                 </tr>
             @empty
                 <tr>

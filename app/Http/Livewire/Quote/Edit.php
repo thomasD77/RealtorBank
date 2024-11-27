@@ -69,7 +69,7 @@ class Edit extends Component
             ->where('damage_print_pdf', 1)
             ->get();
 
-        $this->agreements = PDF::query()
+        $this->agreements = Agreement::query()
             ->where('inspection_id', $this->inspection->id)
             ->where('situation_id', $this->situation->id)
             ->where('quote_id', $this->quote->id)
@@ -141,6 +141,25 @@ class Edit extends Component
             $subCalculation->approved = !$subCalculation->approved;
             $subCalculation->save();
         }
+    }
+
+    public function createAgreement()
+    {
+        $agreement = new Agreement();
+
+        $agreement->inspection_id = $this->inspection->id;
+        $agreement->situation_id = $this->situation->id;
+        $agreement->quote_id = $this->quote->id;
+        $agreement->date = now();
+        $agreement->title = 'Akkoord_schade_' . now();
+        $agreement->pricing = 0;
+        $agreement->save();
+
+        $this->agreements = Agreement::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->where('situation_id', $this->situation->id)
+            ->where('quote_id', $this->quote->id)
+            ->get();
     }
 
     public function render()

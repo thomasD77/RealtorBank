@@ -13,7 +13,7 @@ use App\Models\QuoteSubCalculation;
 use App\Models\Situation;
 use Livewire\Component;
 
-class Create extends Component
+class Edit extends Component
 {
     public Inspection $inspection;
     public Situation $situation;
@@ -89,6 +89,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.agreement.create');
+        return view('livewire.agreement.edit');
     }
 }
