@@ -233,7 +233,7 @@
 
                 <div class="single-add-property">
                     <h3>{{ __('Akkoord printen') }}</h3>
-                    <a href="{{ route('print.agreement', [$inspection, $situation, $quote, $agreement]) }}" class="btn btn-dark">{{ __('Printen') }}</a>
+                    <a href="{{ route('print.agreementWithPricing', [$inspection, $situation, $quote, $agreement]) }}" class="btn btn-dark">{{ __('Printen') }}</a>
                 </div>
 
             </div>

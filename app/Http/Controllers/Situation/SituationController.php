@@ -7,6 +7,7 @@ use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Jobs\GeneratePDF;
 use App\Models\Agreement;
+use App\Models\Calculation;
 use App\Models\Contract;
 use App\Models\Damage;
 use App\Models\DamagesSituation;
@@ -641,19 +642,28 @@ class SituationController extends Controller
             ->where('approved', 1)
             ->get();
 
-        $quoteIds = QuoteCalculation::where('quote_id', $quote->id)->pluck('id');
-        $subsTotal = QuoteSubCalculation::query()
+        $quoteIds = Calculation::where('inspection_id', $inspection->id)->pluck('id');
+        $subs = QuoteSubCalculation::query()
             ->where('quote_id', $quote->id)
-            ->whererIn('quote_calculation_id', $quoteIds)
+            ->whereIn('quote_calculation_id', $quoteIds)
             ->where('approved', 1)
-            ->sum('quote_total');
+            ->get();
 
+        $subsTotal = 0;
+        foreach ($subs as $sub){
+            $vetustate = $sub->calculation->vetustate;
+            $quoteTotal = $sub->quote_total;
+            $newAmount = $quoteTotal - ($quoteTotal * ($vetustate / 100));
+            $subsTotal += $newAmount;
+        }
 
-        $pdf = Pdf::loadView('agreement.pdf', [
+        $pdf = Pdf::loadView('agreement.pdf-with-pricing', [
             'damages' => $damages,
+            'quote' => $quote,
             'inspection' => $inspection,
             'situation' => $situation,
             'agreement' => $agreement,
+            'subs' => $subs,
             'subsTotal' => $subsTotal
         ] );
 
@@ -661,6 +671,7 @@ class SituationController extends Controller
 
 
         return $pdf->stream('akkoord-' . '#' . $inspection->id . '-' . $agreement->id . '.pdf');
+        //return redirect()->route('quote.edit', compact('inspection', 'situation', 'quote'));
     }
 
 }
