@@ -7,13 +7,13 @@
         <div class="row">
             <div class="col-lg-4">
                 <!-- Dropdown voor de categorieën -->
-                <div class="custom-dropdown mb-3" wire:ignore.self>
-                    <button class="custom-dropdown-btn justify-content-between d-flex align-items-center" id="dropdownButton">
+                <div class="custom-dropdown" wire:ignore.self>
+                    <button class="custom-dropdown-btn justify-content-between d-flex align-items-center" style="font-size: 1rem" id="dropdownButton">
                         @if ($selectedCategory)
-                            {{ $pricingCategories->firstWhere('id', $selectedCategory)->title ?? 'Selecteer een categorie' }}
+                            {{ $pricingCategories->firstWhere('id', $selectedCategory)->title ? 'Geselecteerd : ' . $pricingCategories->firstWhere('id', $selectedCategory)->title  : 'Selecteer een categorie' }}
                             <i class="fa fa-info"></i>
                         @else
-                            {{ __('Selecteer een categorie') }}
+                            <span style="font-style: italic">{{ __('Selecteer een categorie') }}</span>
                             <i class="fa fa-arrow-down"></i>
                         @endif
                     </button>
@@ -40,7 +40,7 @@
 
         @foreach($pricingCategories as $category)
             @if($selectedCategory === $category->id)
-                <div class=" rounded">
+                <div>
                     <div class="section-inforamation">
                         <table>
                             <thead>
@@ -62,8 +62,8 @@
                                     <td @if($pricing->cost_hour === NULL) class="bg-secondary" @endif>{{ $pricing->cost_hour }}</td>
                                     <td @if($pricing->cost_piece === NULL) class="bg-secondary" @endif>{{ $pricing->cost_piece }}</td>
                                     <td class="edit text-center">
-                                        <a class="" style="cursor: pointer" wire:click="edit({{ $pricing->id }})">
-                                            <i class="fa fa-rocket text-success"></i>
+                                        <a class="btn btn-sm btn-success" wire:click="edit({{ $pricing->id }})">
+                                            <i class="fa fa-rocket"></i>
                                         </a>
                                     </td>
                                 </tr>
