@@ -145,7 +145,7 @@
     /* Styling table headers and cells */
     .table th, .table td {
         border: 1px solid #ddd;
-        padding: 8px;
+        padding: 15px;
         vertical-align: top;
         text-align: left;
         word-wrap: break-word; /* Ensures text wraps within cells */
@@ -153,13 +153,13 @@
 
     /* Specific column widths */
     .location-column {
-        width: 50%; /* Adjusts the width of the first column */
+        width: 20%; /* Adjusts the width of the first column */
     }
     .title-column{
         width: 20%; /* Equal width for the remaining columns */
     }
     .description-column{
-        width: 20%; /* Equal width for the remaining columns */
+        width: 50%; /* Equal width for the remaining columns */
     }
     .approved-column {
         width: 5%; /* Equal width for the remaining columns */

@@ -44,14 +44,14 @@
 
     <div class="single-add-property">
         <h3>{{ __('Schade & prijzen') }}</h3>
-        <div class="property-form-group">
+        <div class="property-form-group row">
             @if($quoteDamages && $quoteDamages->isNotEmpty())
                 @foreach($quoteDamages as $damage)
                     <div class="damage-container">
                         {{-- Header met bg-dark --}}
                         <div class="damage-header bg-dark text-white">
                             <strong>{{ __('Schade:') }}</strong> {{ $damage->damage_title ?? '-' }}
-                            <span class="damage-date">{{ $damage->damage_date ? $damage->damage_date : '-' }}</span>
+                            <span class="damage-date">{{ $damage->damage_date ? \Illuminate\Support\Carbon::parse($damage->damage_date)->format('d-m-Y') : '-' }}</span>
                         </div>
 
                         {{-- Schade Details --}}
@@ -111,72 +111,72 @@
     <div class="single-add-property">
         <h3>{{ __('Akkoord') }}</h3>
         <div class="property-form-group row">
-            <div class="col-md-6">
+            <div class="col-md-6 px-0">
                 <div class="text-left">
-                    <button wire:click="createAgreement('noPricing')" type="button" class="btn btn-dark">
+                    <button wire:click="createAgreement(0)" type="button" class="btn btn-dark">
                         <i class="fa fa-rocket mx-2"></i> {{ __('Akkoord Schade') }}
                     </button>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 px-0">
                 <div class="text-right">
-                    <button wire:click="createAgreement('pricing')" type="button" class="btn btn-dark">
+                    <button wire:click="createAgreement(1)" type="button" class="btn btn-dark">
                         <i class="fa fa-rocket mx-2"></i> {{ __('Akkoord Schade & prijzen') }}
                     </button>
                 </div>
             </div>
-        </div>
 
-        @if($agreements->isNotEmpty())
-            <table class="table table-bordered mt-5">
-            <thead>
-            <tr>
-                <th>{{ __('Titel') }}</th>
-                <th>{{ __('Datum') }}</th>
-                <th>{{ __('Status') }}</th>
-                <th>{{ __('PDF') }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($agreements as $agreement)
-                <tr>
-                    <td>{{ $agreement->title }}</td>
-                    <td>{{ $agreement->created_at->format('d-m-Y') }}</td>
-                    @if(!isset($agreement->pdf))
-                        <td class="edit text-center">
-                            <a href="{{ route('agreement.edit',[$inspection, $situation, $quote, $agreement]) }}">
-                                <i class="fa fa-pencil-alt text-dark"></i>
-                            </a>
-                        </td>
-                    @else
-                        <td class="text-center">
-                            <i class="fa fa-stop text-danger"></i>
-                        </td>
-                    @endif
-                    @if(isset($agreement->pdf))
-                        <td>
-                            @if($agreement->pricing)
-                                <a target="_blank" href="{{ asset('assets/agreements/pdf/' . $agreement->pdf->file_original) }}">
-                                    <span class="badge badge-success">{{ __('Document: schade & prijs') }}</span>
-                                </a>
+            @if($agreements->isNotEmpty())
+                <table class="table table-bordered mt-5">
+                    <thead>
+                    <tr>
+                        <th>{{ __('Titel') }}</th>
+                        <th>{{ __('Datum') }}</th>
+                        <th>{{ __('Status') }}</th>
+                        <th>{{ __('PDF') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($agreements as $agreement)
+                        <tr>
+                            <td>{{ $agreement->title }}</td>
+                            <td>{{ $agreement->created_at->format('d-m-Y') }}</td>
+                            @if(!isset($agreement->pdf))
+                                <td class="edit text-center">
+                                    <a href="{{ route('agreement.edit',[$inspection, $situation, $quote, $agreement]) }}">
+                                        <i class="fa fa-pencil-alt text-dark"></i>
+                                    </a>
+                                </td>
                             @else
-                                <a target="_blank" href="{{ asset('assets/agreements/pdf/' . $agreement->pdf->file_original) }}">
-                                    <span class="badge badge-warning">{{ __('Document: schade') }}</span>
-                                </a>
+                                <td class="text-center">
+                                    <i class="fa fa-check-circle text-success p-2"></i>
+                                </td>
                             @endif
-                        </td>
-                    @else
-                        <td>{{ __('blanco') }}</td>
-                    @endif
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-        @else
-            <div class="text-center my-3">
-                <p>{{ __('Geen documenten gevonden.') }}</p>
-            </div>
-        @endif
+                            @if(isset($agreement->pdf))
+                                <td>
+                                    @if($agreement->pricing)
+                                        <a target="_blank" href="{{ asset('assets/agreements/pdf/' . $agreement->pdf->file_original) }}">
+                                            <span class="badge badge-dark p-2">{{ __('Document: schade & prijs') }}</span>
+                                        </a>
+                                    @else
+                                        <a target="_blank" href="{{ asset('assets/agreements/pdf/' . $agreement->pdf->file_original) }}">
+                                            <span class="badge badge-dark p-2">{{ __('Document: schade') }}</span>
+                                        </a>
+                                    @endif
+                                </td>
+                            @else
+                                <td style="font-style: italic">{{ __('blanco') }}</td>
+                            @endif
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @else
+                <div class="text-center my-3">
+                    <p>{{ __('Geen documenten gevonden.') }}</p>
+                </div>
+            @endif
+        </div>
     </div>
 
     <div class="single-add-property">
@@ -213,7 +213,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 </div>

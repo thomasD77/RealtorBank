@@ -68,26 +68,34 @@
     <div class="invoice mb-0">
         <div class="card border-0">
             <div class="card-body p-0">
-                <div class="row p-5 the-five">
+                <hr class="mt-5">
+                <div class="row pt-5 the-five">
                     <div class="col-md-6">
                         <!-- <img src="{{ asset('assets/images/logo.svg') }}" width="80" alt="Logo"> -->
                     </div>
 
-                    <div class="col-md-6 text-right">
+                    <div class="col-md-6 text-right px-5">
                         <p class="font-weight-bold mb-1">{{ __('Contract opgemaakt op') }}</p>
                         <p>{{ today()->format('d-m-Y')}}</p>
                     </div>
                 </div>
-
-                <hr>
 
                 <!-- Credentials authorized parties -->
                 <div class="row p-5 the-five">
 
                     <div class="text-center w-100 my-4">
 
-                        <h3>{{ __('Akkoord schade') }}</h3>
+                        <h3>{{ __('Akkoord Schade') }}</h3>
 
+                    </div>
+
+                    <div class="">
+                        <p>Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
+                            @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
+                            , eigendom van {{ $situation->owner ? $situation->owner->name : "" }}
+                            en verhuurd aan {{ $situation->tenant ? $situation->tenant->name : "" }}, werd een schade opmeting gedaan
+                            door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif
+                        </p>
                     </div>
 
                     <div class="my-5 w-100">
@@ -96,17 +104,19 @@
                                 <thead>
                                 <tr>
                                     <th class="title-column">{{ __('Titel') }}</th>
-                                    <th class="description-column">{{ __('Beschrijving') }}</th>
                                     <th class="location-column">{{ __('Locatie') }}</th>
+                                    <th class="description-column">{{ __('Beschrijving') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($damages as $damage)
                                     <tr>
-                                        <td class="title-column">{{ $damage->damage_title ?? '-' }}</td>
-                                        <td class="description-column">{{ $damage->damage_description ?? '-' }}</td>
+                                        <td class="title-column">
+                                            <small class="font-weight-bold">{{ $damage->damage_date ? \Illuminate\Support\Carbon::parse($damage->damage_date)->format('d-m-Y') : '-' }}</small>
+                                            <br>
+                                            {{ $damage->damage_title ?? '-' }}
+                                        </td>
                                         <td class="location-column">
-                                            <strong>{{ $damage->damage_date ? $damage->damage_date : '-' }}</strong><br>
                                             <p style="text-decoration: underline">
                                                 @if($damage->basicArea)
                                                     {{ $damage->basicArea->floor->title ?? '-' }} >>
@@ -130,8 +140,8 @@
                                                     {{ $damage->outdoorArea->outdoor->title ?? '-' }}
                                                 @endif
                                             </p>
-
                                         </td>
+                                        <td class="description-column">{{ $damage->damage_description ?? '-' }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -139,43 +149,28 @@
                         @else
                             <p>{{ __('Geen schades geselecteerd.') }}</p>
                         @endif
-
-                </div>
-
-                <div class="row p-5 the-five">
-                    <p>Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
-                        @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
-                        , eigendom van {{ $situation->owner ? $situation->owner->name : "" }}
-                        en verhuurd aan {{ $situation->tenant ? $situation->tenant->name : "" }}, werd een schade opmeting gedaan
-                        door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif
-                    </p>
-                </div>
+                    </div>
 
                 <!-- Signatures -->
-
-                    <div class="signature row p-5 the-five w-100">
-                        <div class="col-12">
-                            <p>{{ __('Datum') }}: {{ today()->format('d-m-Y')}}</p>
-                        </div>
-
-                        <div class="col-md-6 ">
-                            <strong>{{ __('HUURDERS') }}</strong><br>
-                            <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                            <p>{{  $agreement->situation->tenant ? $agreement->situation->tenant->name : "" }}</p>
-                            @if($agreement->signature_tenant)
-                                <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $agreement->signature_tenant) }}">
-                            @endif
-                        </div>
-
-                        <div class="col-md-6 text-right">
-                            <strong>{{ __('VERHUURDERS') }}</strong><br>
-                            <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
-                            <p>{{  $agreement->situation->owner ? $agreement->situation->owner->name : "" }}</p>
-                            @if($agreement->signature_owner)
-                                <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $agreement->signature_owner) }}">
-                            @endif
-                        </div>
+                <div class="signature row p-5 the-five w-100">
+                    <div class="col-md-6 ">
+                        <strong>{{ __('HUURDERS') }}</strong><br>
+                        <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                        <p>{{  $agreement->situation->tenant ? $agreement->situation->tenant->name : "" }}</p>
+                        @if($agreement->signature_tenant)
+                            <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $agreement->signature_tenant) }}">
+                        @endif
                     </div>
+
+                    <div class="col-md-6 text-right">
+                        <strong>{{ __('VERHUURDERS') }}</strong><br>
+                        <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
+                        <p>{{  $agreement->situation->owner ? $agreement->situation->owner->name : "" }}</p>
+                        @if($agreement->signature_owner)
+                            <img class="img-fluid" src="{{ asset('assets/signatures'. '/' . $agreement->signature_owner) }}">
+                        @endif
+                    </div>
+                </div>
 
             </div>
 

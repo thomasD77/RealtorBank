@@ -73,6 +73,7 @@ class Edit extends Component
             ->where('inspection_id', $this->inspection->id)
             ->where('situation_id', $this->situation->id)
             ->where('quote_id', $this->quote->id)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         $this->quoteTotal = QuoteCalculation::where('quote_id', $this->quote->id)->sum('quote_final_total');
@@ -152,19 +153,22 @@ class Edit extends Component
         $agreement->situation_id = $this->situation->id;
         $agreement->quote_id = $this->quote->id;
         $agreement->date = now();
-        if($value = "pricing"){
+        if($value){
             $agreement->pricing = 1;
             $agreement->title = 'Akkoord_schade_prijzen_' . now();
         }else{
             $agreement->pricing = 0;
             $agreement->title = 'Akkoord_schade_' . now();
         }
+        $agreement->adjusted_total = 0;
+        $agreement->total = 0;
         $agreement->save();
 
         $this->agreements = Agreement::query()
             ->where('inspection_id', $this->inspection->id)
             ->where('situation_id', $this->situation->id)
             ->where('quote_id', $this->quote->id)
+            ->orderBy('created_at', 'desc')
             ->get();
     }
 

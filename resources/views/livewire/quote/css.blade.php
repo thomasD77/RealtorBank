@@ -48,7 +48,7 @@
 
     /* Column widths */
     .title-column {
-        width: 30%; /* Breder voor de titel */
+        width: 20%; /* Breder voor de titel */
     }
 
     .location-column {
@@ -56,7 +56,7 @@
     }
 
     .description-column {
-        width: 65%; /* Plaatst beschrijving aan het einde */
+        width: 75%; /* Plaatst beschrijving aan het einde */
     }
 
     .approved-column {
