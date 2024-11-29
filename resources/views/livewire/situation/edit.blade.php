@@ -462,7 +462,7 @@
                                         @foreach($quotes as $quote)
                                             <tr>
                                                 <td>{{ $quote->title }}</td>
-                                                <td>{{ $quote->date }}</td>
+                                                <td>{{ \Illuminate\Support\Carbon::parse($quote->date)->format('d-m-Y') }}</td>
                                                 <td class="edit">
                                                     <a href="{{ route('quote.edit', [ $inspection, $situation, $quote ]) }}"><i class="fa fa-pencil-alt text-dark"></i></a>
                                                 </td>

@@ -92,6 +92,7 @@ class Edit extends Component
             $this->quote->date = $this->date;
         }
         $this->quote->update();
+        session()->flash('success', 'success!');
     }
 
     public function deleteQuote()

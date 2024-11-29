@@ -1,35 +1,6 @@
 <div>
-    <style>
-        /* Table layout and column widths */
-        .table {
-            table-layout: fixed; /* Forces fixed column widths */
-            width: 100%; /* Full width of the container */
-            border-collapse: collapse; /* Removes spacing between table cells */
-        }
 
-        /* Styling table headers and cells */
-        .table th, .table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            vertical-align: top;
-            text-align: left;
-            word-wrap: break-word; /* Ensures text wraps within cells */
-        }
-
-        /* Specific column widths */
-        .location-column {
-            width: 50%; /* Adjusts the width of the first column */
-        }
-        .title-column{
-            width: 20%; /* Equal width for the remaining columns */
-        }
-        .description-column{
-            width: 20%; /* Equal width for the remaining columns */
-        }
-        .approved-column {
-            width: 5%; /* Equal width for the remaining columns */
-        }
-    </style>
+    @include('livewire.quote.css')
 
     <div class="single-add-property">
         <a href="{{ route('situation.edit', [$inspection->id, $situation->id]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
@@ -75,26 +46,30 @@
         <h3>{{ __('Schade & prijzen') }}</h3>
         <div class="property-form-group">
             @if($quoteDamages && $quoteDamages->isNotEmpty())
-                <table class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th class="approved-column text-center" style="font-size: 12px">{{ __('Akkoord') }}</th>
-                        <th class="title-column">{{ __('Titel') }}</th>
-                        <th class="description-column">{{ __('Beschrijving') }}</th>
-                        <th class="location-column">{{ __('Schade') }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($quoteDamages as $damage)
-                        <tr>
-                            <td class="approved-column text-center">
-                                <input type="checkbox" wire:click="toggleApproval({{ $damage->id }})" {{ $damage->approved ? 'checked' : '' }}>
-                            </td>
-                            <td class="title-column">{{ $damage->damage_title ?? '-' }}</td>
-                            <td class="description-column">{{ $damage->damage_description ?? '-' }}</td>
-                            <td class="location-column">
-                                <strong>{{ $damage->damage_date ? $damage->damage_date : '-' }}</strong><br>
-                                <p style="text-decoration: underline">
+                @foreach($quoteDamages as $damage)
+                    <div class="damage-container">
+                        {{-- Header met bg-dark --}}
+                        <div class="damage-header bg-dark text-white">
+                            <strong>{{ __('Schade:') }}</strong> {{ $damage->damage_title ?? '-' }}
+                            <span class="damage-date">{{ $damage->damage_date ? $damage->damage_date : '-' }}</span>
+                        </div>
+
+                        {{-- Schade Details --}}
+                        <table class="table damage-table">
+                            <thead>
+                            <tr>
+                                <th class="approved-column text-center">{{ __('Akkoord') }}</th>
+                                <th class="location-column">{{ __('Locatie') }}</th>
+                                <th class="title-column">{{ __('Titel') }}</th>
+                                <th class="description-column">{{ __('Beschrijving') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="approved-column text-center">
+                                    <input type="checkbox" wire:click="toggleApproval({{ $damage->id }})" {{ $damage->approved ? 'checked' : '' }}>
+                                </td>
+                                <td style="text-decoration: underline">
                                     @if($damage->basicArea)
                                         {{ $damage->basicArea->floor->title ?? '-' }} >>
                                         {{ $damage->basicArea->room->title ?? '-' }} >>
@@ -116,26 +91,17 @@
                                         {{ $damage->outdoorArea->room->title ?? '-' }} >>
                                         {{ $damage->outdoorArea->outdoor->title ?? '-' }}
                                     @endif
-                                </p>
+                                </td>
+                                <td>{{ $damage->damage_title ?? '-' }}</td>
+                                <td>{{ $damage->damage_description ?? '-' }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-                                @include('livewire.quote.calculations')
+                        @include('livewire.quote.calculations')
 
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                    <tfoot>
-                    <tr class="py-4">
-                        <td colspan="3" class="text-right font-weight-bold">{{ __('Totaal') }}: <br>
-                            <small>*{{ __('Totaal van alle opgemaakte prijzen incl. de vetustate.') }} <br></small>
-                        </td>
-                        <td class="font-weight-bold text-right">{{ number_format($quoteTotal, 2, ',', '.') }} €
-                            <br>
-                            <small>*{{ __('incl. btw') }} <br></small>
-                        </td>
-                    </tr>
-                    </tfoot>
-                </table>
+                    </div>
+                @endforeach
             @else
                 <p>{{ __('Geen offerte beschikbaar.') }}</p>
             @endif
@@ -161,7 +127,8 @@
             </div>
         </div>
 
-        <table class="table table-bordered mt-5">
+        @if($agreements->isNotEmpty())
+            <table class="table table-bordered mt-5">
             <thead>
             <tr>
                 <th>{{ __('Titel') }}</th>
@@ -171,7 +138,7 @@
             </tr>
             </thead>
             <tbody>
-            @forelse($agreements as $agreement)
+            @foreach($agreements as $agreement)
                 <tr>
                     <td>{{ $agreement->title }}</td>
                     <td>{{ $agreement->created_at->format('d-m-Y') }}</td>
@@ -202,13 +169,14 @@
                         <td>{{ __('blanco') }}</td>
                     @endif
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="12" class="text-center">{{ __('Geen documenten gevonden.') }}</td>
-                </tr>
-            @endforelse
+            @endforeach
             </tbody>
         </table>
+        @else
+            <div class="text-center my-3">
+                <p>{{ __('Geen documenten gevonden.') }}</p>
+            </div>
+        @endif
     </div>
 
     <div class="single-add-property">

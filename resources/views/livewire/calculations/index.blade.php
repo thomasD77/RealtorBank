@@ -1,6 +1,6 @@
 <div class="single-add-property">
-    <h3>{{ __('Offerte') }}</h3>
     @if($calculation)
+        <h3>{{ __('Offerte') }}</h3>
 
         @include('livewire.calculations.calculation_css')
 

@@ -455,7 +455,7 @@ class Edit extends Component
             $quoteSubCalculation->save();
         }
 
-        $this->quotes = Quote::where('situation_id', $this->situation->id)->get();
+        $this->quotes = Quote::where('situation_id', $this->situation->id)->orderBy('created_by', 'desc')->get();
     }
 
     public function render()
