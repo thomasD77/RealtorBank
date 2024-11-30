@@ -30,7 +30,7 @@ return new class extends Migration
             $table->decimal('quote_total', 10, 2)->nullable();
             $table->decimal('quote_tax', 10, 2)->nullable();
 
-            $table->integer('approved')->nullable();
+            $table->integer('approved')->default(1)->nullable();
 
             $table->timestamps();
         });

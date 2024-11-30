@@ -30,6 +30,8 @@ class Edit extends Component
     public $quoteTotal;
     public $agreements;
 
+    public $subTotal;
+
     public function mount(Inspection $inspection, Situation $situation, Quote $quote)
     {
         $this->inspection = $inspection;
@@ -137,13 +139,34 @@ class Edit extends Component
     public function toggleSubCalculationApproval($subCalculationId)
     {
         $subCalculation = QuoteSubCalculation::find($subCalculationId);
-
         if ($subCalculation) {
-            // Toggle the approval status
+            $quote_calculation = QuoteCalculation::where('quote_cal_id', $subCalculation->quote_calculation_id)
+                ->where('quote_id', $this->quote->id)
+                ->first();
+
+            // Huidige status controleren vóór toggle
+            $wasApproved = $subCalculation->approved;
+
+            // Toggle de status
             $subCalculation->approved = !$subCalculation->approved;
             $subCalculation->save();
+
+            // Berekening aanpassen afhankelijk van de toggle-status
+            $newAmount = $quote_calculation->quote_brutto_total;
+
+            if ($wasApproved) {
+                // Als het eerder goedgekeurd was, trek de waarde af
+                $newAmount -= $subCalculation->quote_total;
+            } else {
+                // Als het eerder niet goedgekeurd was, tel de waarde op
+                $newAmount += $subCalculation->quote_total;
+            }
+
+            $quote_calculation->quote_brutto_total = $newAmount;
+            $quote_calculation->save();
         }
     }
+
 
     public function createAgreement($value)
     {
