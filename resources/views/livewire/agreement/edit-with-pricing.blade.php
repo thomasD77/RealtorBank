@@ -1,12 +1,12 @@
 <div>
 
-    @include('livewire.agreement.css')
+    @include('livewire.agreement.css-with-pricing')
 
     {{--Header with title--}}
     <div class="single-add-property">
         <a class="breadcrumb-link" href="{{ route('quote.edit', [$inspection, $agreement->situation->id, $quote]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('Offerte') }}</strong></p></a>
 
-        <h3>{{ __('Akkoord schade & prijzen offerte') }}</h3>
+        <h3>{{ __('Akkoord schade & prijzen') }}</h3>
 
         @if (session()->has('successTenant'))
             <div class="btn btn-success flash_message">
@@ -85,29 +85,31 @@
                 <div class="row p-5 the-five">
 
                     <div class="text-center w-100 my-4">
-
                         <h3>{{ __('Akkoord schade & prijzen') }}</h3>
-
                     </div>
 
-                    <div class="my-5 w-100">
+                    <div class="my-4 w-100">
                         @if($damages && $damages->isNotEmpty())
-                            <table class="table table-striped table-bordered">
-                                <thead>
-                                <tr>
-                                    <th class="title-column">{{ __('Titel') }}</th>
-                                    <th class="description-column">{{ __('Beschrijving') }}</th>
-                                    <th class="location-column">{{ __('Locatie') }}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($damages as $damage)
-                                    <tr>
-                                        <td class="title-column">{{ $damage->damage_title ?? '-' }}</td>
-                                        <td class="description-column">{{ $damage->damage_description ?? '-' }}</td>
-                                        <td class="location-column">
-                                            <strong>{{ $damage->damage_date ? $damage->damage_date : '-' }}</strong><br>
-                                            <p style="text-decoration: underline">
+                            @foreach($damages as $damage)
+                                <div class="damage-container">
+                                    <!-- Header -->
+                                    <div class="damage-header">
+                                        <span>{{ __('Schade') }}: {{ $damage->damage_title ?? '-' }}</span>
+                                        <span class="damage-date">{{ $damage->damage_date ? \Illuminate\Support\Carbon::parse($damage->damage_date)->format('d-m-Y') : '-' }}</span>
+                                    </div>
+
+                                    <!-- Damage Details -->
+                                    <table class="table damage-table">
+                                        <thead>
+                                        <tr>
+                                            <th class="location-column">{{ __('Locatie') }}</th>
+                                            <th class="title-column">{{ __('Titel') }}</th>
+                                            <th class="description-column">{{ __('Beschrijving') }}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
                                                 @if($damage->basicArea)
                                                     {{ $damage->basicArea->floor->title ?? '-' }} >>
                                                     {{ $damage->basicArea->room->title ?? '-' }} >>
@@ -115,101 +117,82 @@
                                                 @elseif($damage->general)
                                                     {{ $damage->general->room->floor->title ?? '-' }} >>
                                                     {{ $damage->general->room->title ?? '-' }}
-                                                @elseif($damage->specificArea)
-                                                    {{ $damage->specificArea->room->floor->title ?? '-' }} >>
-                                                    {{ $damage->specificArea->room->title ?? '-' }} >>
-                                                    {{ $damage->specificArea->specific->title ?? '-' }}
-                                                @elseif($damage->conformArea)
-                                                    {{ $damage->conformArea->floor->title ?? '-' }} >>
-                                                    {{ $damage->conformArea->room->title ?? '-' }} >>
-                                                    {{ $damage->conformArea->conform->title ?? '-' }}
-                                                @elseif($damage->techniqueArea)
-                                                    {{ $damage->techniqueArea->technique->title ?? '-' }}
-                                                @elseif($damage->outdoorArea)
-                                                    {{ $damage->outdoorArea->room->title ?? '-' }} >>
-                                                    {{ $damage->outdoorArea->outdoor->title ?? '-' }}
                                                 @endif
-                                            </p>
+                                            </td>
+                                            <td>{{ $damage->damage_title ?? '-' }}</td>
+                                            <td>{{ $damage->damage_description ?? '-' }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
 
-                                            @include('livewire.agreement.calculations')
-
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                                <tfoot>
-                                <tr class="py-4">
-                                    <td colspan="3" class="text-right font-weight-bold">{{ __('Sub-Totaal') }}: <br>
-                                        <small>*{{ __('Totaal van alle opgemaakte prijzen incl. de vetustate.') }} <br></small>
-                                    </td>
-                                    <td class="font-weight-bold text-right">{{ number_format($subsTotal, 2, ',', '.') }} €
-                                        <br>
-                                        <small>*{{ __('incl. btw') }} <br></small>
-                                    </td>
-                                </tr>
-                                <tr class="py-4">
-                                    <td colspan="3" class="text-right font-weight-bold">{{ __('Gecorrigeerd totaal') }}: <br>
-                                        <small>*{{ __('Geef een bedrag in, geen percentage.') }} <br></small>
-                                    </td>
-                                    <td class="font-weight-bold text-right" style="width: 100px; background-color: yellow">
-                                        {{ __('€') }}
-                                        <input
-                                            type="number"
-                                            step="0.01"
-                                            wire:change="updateAdjustedTotal"
-                                            wire:model.defer="adjustedTotal"
-                                            placeholder="{{ $adjustedTotal ?? 'Voer bedrag in...' }}"
-                                            class="p-2 border rounded"
-                                            style="width: 100px; background-color: yellow"
-                                        />
-                                    </td>
-                                </tr>
-                                <tr class="py-4">
-                                    <td colspan="3" class="text-right font-weight-bold">{{ __('Totaal') }}: <br>
-                                        <small>*{{ __('Totaal van alle opgemaakte prijzen incl. de vetustate & gecorigeerd bedrag.') }} <br></small>
-                                    </td>
-                                    <td class="font-weight-bold text-right">{{ number_format($total, 2, ',', '.') }} €
-                                        <br>
-                                        <small>*{{ __('incl. btw') }} <br></small>
-                                    </td>
-                                </tr>
-                                <tr class="py-4">
-                                    <td colspan="1" class="text-right font-weight-bold">{{ __('Notities') }}: <br>
-                                        <small>*{{ __('Extra notities die in rekening moeten worden gebracht.') }} <br></small>
-                                    </td>
-                                    <td colspan="3" class="font-weight-bold text-right">
-                                    <textarea
-                                        wire:change="changeRemarks"
-                                        wire:model.defer="remarks"
-                                        placeholder="{{ $remarks ?? 'Type your remarks here...' }}"
-                                        class="w-full p-2 border rounded"
-                                    ></textarea>
-                                    </td>
-                                </tr>
-                                </tfoot>
-                            </table>
+                                    <!-- Calculations -->
+                                    @if($damage->quoteCalculations)
+                                        <div class="damage-header" style="background-color: #9d9d9d">
+                                            <span>{{ __('Calculatie :') }} {{ $damage->damage_title ?? '-' }}</span>
+                                            <span class="damage-date">{{ $damage->damage_date ? \Illuminate\Support\Carbon::parse($damage->damage_date)->format('d-m-Y') : '-' }}</span>
+                                        </div>
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th class="title-column">{{ __('Categorie') }}</th>
+                                                <th class="description-column">{{ __('Beschrijving') }}</th>
+                                                <th class="tax-column text-right">{{ __('BTW') }}</th>
+                                                <th class="total-column text-right">{{ __('Totaal') }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($damage->quoteCalculations->where('quote_id', $quote->id) as $calculation)
+                                                @foreach($calculation->quoteSubCalculations->where('quote_id', $quote->id) as $subCalculation)
+                                                    <tr>
+                                                        <td>{{ $subCalculation->subCategoryPricing->title }}</td>
+                                                        <td>{{ $subCalculation->quote_description }}</td>
+                                                        <td class="text-right">{{ round($subCalculation->quote_tax) }}%</td>
+                                                        <td class="text-right">{{ number_format($subCalculation->quote_total, 2, ',', '.') }} €</td>
+                                                    </tr>
+                                                @endforeach
+                                                @if($loop->first)
+                                                    <!-- Summary -->
+                                                    <tr>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr class="calculation-summary">
+                                                        <td colspan="3">{{ __('Subtotaal') }}</td>
+                                                        <td class="text-right">{{ number_format($calculation->quote_brutto_total, 2, ',', '.') }} €</td>
+                                                    </tr>
+                                                    <tr class="calculation-summary">
+                                                        <td colspan="3">{{ __('Vetustate') }}</td>
+                                                        <td class="text-right">
+                                                            <small>{{ number_format($calculation->quote_vetustate, 2, ',', '.') }} %</small>
+                                                            {{ $calculation->quote_vetustate != 0 ? number_format($calculation->quote_vetustate_amount, 2, ',', '.') . ' €' : 'Geen' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="calculation-summary">
+                                                        <td colspan="3">{{ __('Totaal') }}</td>
+                                                        <td class="text-right">{{ number_format($calculation->quote_final_total, 2, ',', '.') }} €</td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    @endif
+                                </div>
+                            @endforeach
                         @else
                             <p>{{ __('Geen schades geselecteerd.') }}</p>
                         @endif
-
                     </div>
 
-                    <div class="row p-5 the-five">
-                        <p>Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
-                            @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
-                            , eigendom van {{ $situation->owner ? $situation->owner->name : "" }}
-                            en verhuurd aan {{ $situation->tenant ? $situation->tenant->name : "" }}, werd een schade opmeting gedaan
-                            door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif
-                        </p>
-                    </div>
+                    <p>Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
+                        @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
+                        , eigendom van {{ $situation->owner ? $situation->owner->name : "" }}
+                        en verhuurd aan {{ $situation->tenant ? $situation->tenant->name : "" }}, werd een schade opmeting gedaan
+                        door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif
+                    </p>
+
+                    <p class="w-100 mt-4">{{ __('Datum opgemaakt') }}: {{ today()->format('d-m-Y')}}</p>
 
                     <!-- Signatures -->
-
-                    <div class="signature row p-5 the-five w-100">
-                        <div class="col-12">
-                            <p>{{ __('Datum') }}: {{ today()->format('d-m-Y')}}</p>
-                        </div>
-
+                    <div class="signature row w-100">
                         <div class="col-md-6 ">
                             <strong>{{ __('HUURDERS') }}</strong><br>
                             <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
