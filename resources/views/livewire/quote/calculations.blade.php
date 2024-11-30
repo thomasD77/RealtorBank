@@ -5,10 +5,10 @@
             <thead>
             <tr>
                 <th></th>
-                <th class="approved-column text-center">{{ __('Akkoord') }}</th>
-                <th>{{ __('SubCategorie') }}</th>
-                <th>{{ __('Beschrijving') }}</th>
-                <th>{{ __('Btw') }}</th>
+                <th class="approved-column-two text-center">{{ __('Akkoord') }}</th>
+                <th class="title-column-two">{{ __('(Sub)categorie)') }}</th>
+                <th class="description-column-two">{{ __('Beschrijving') }}</th>
+                <th class="tax-column-two">{{ __('Btw') }}</th>
                 <th class="text-right">{{ __('Totaal') }}</th>
             </tr>
             </thead>

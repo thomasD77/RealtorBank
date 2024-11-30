@@ -127,7 +127,7 @@
             </div>
 
             @if($agreements->isNotEmpty())
-                <table class="table table-bordered mt-5">
+                <table class="table table-striped table-bordered mt-5">
                     <thead>
                     <tr>
                         <th>{{ __('Titel') }}</th>
@@ -172,8 +172,8 @@
                     </tbody>
                 </table>
             @else
-                <div class="text-center my-3">
-                    <p>{{ __('Geen documenten gevonden.') }}</p>
+                <div class="my-3 w-100">
+                    <p class="text-center">{{ __('Geen documenten gevonden.') }}</p>
                 </div>
             @endif
         </div>

@@ -59,8 +59,20 @@
         width: 75%; /* Plaatst beschrijving aan het einde */
     }
 
-    .approved-column {
+    .approved-column-two {
         width: 5%; /* Kleinste kolom voor checkbox */
+    }
+
+    .title-column-two {
+        width: 33.5%; /* Breder voor de titel */
+    }
+
+    .tax-column-two {
+        width: 20%; /* Breder voor locatie details */
+    }
+
+    .description-column-two {
+        width: 26%; /* Plaatst beschrijving aan het einde */
     }
 
     /* Calculation container styling */

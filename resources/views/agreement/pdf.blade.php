@@ -1,41 +1,13 @@
 <html>
-    <style>
-        /* Table layout and column widths */
-        .table {
-            table-layout: fixed; /* Forces fixed column widths */
-            width: 100%; /* Full width of the container */
-            border-collapse: collapse; /* Removes spacing between table cells */
-        }
-
-        /* Styling table headers and cells */
-        .table th, .table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            vertical-align: top;
-            text-align: left;
-            word-wrap: break-word; /* Ensures text wraps within cells */
-        }
-
-        /* Specific column widths */
-        .location-column {
-            width: 50%; /* Adjusts the width of the first column */
-        }
-        .title-column{
-            width: 20%; /* Equal width for the remaining columns */
-        }
-        .description-column{
-            width: 20%; /* Equal width for the remaining columns */
-        }
-        .approved-column {
-            width: 5%; /* Equal width for the remaining columns */
-        }
-    </style>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>{{ __('Akkoord schade') }}</title>
+
+        @include('agreement.css')
+
     </head>
     <body>
         <header style="margin-bottom: 3rem">
@@ -43,12 +15,12 @@
             @if($inspection->address->zip || $inspection->address->city), {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
         </header>
 
-        <div style="text-align: center; margin-top: 10px">
-            <h2>{{ __('AKKOORD ') }} <br> {{ __('SCHADE ') }}</h2>
+        <div style="text-align: center; margin-top: 10px; margin-bottom: 0">
+            <h2>{{ __('AKKOORD ') }} {{ __('SCHADE ') }}</h2>
         </div>
 
         @if($damages && $damages->isNotEmpty())
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered" style="margin-top: 5px; padding-top: 5px">
                 <thead>
                 <tr>
                     <th class="location-column">{{ __('Locatie') }}</th>
@@ -105,27 +77,27 @@
                 </tr>
                 </tfoot>--}}
             </table>
+            <div class="col-12">
+                <p>Opgemaakt op: {{ today()->format('d-m-Y')}}</p>
+            </div>
         @else
             <p>{{ __('Geen schades geselecteerd.') }}</p>
         @endif
 
-        <div class="row p-5 the-five">
-            <p>Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
-                @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
-                , eigendom van {{ $situation->owner ? $situation->owner->name : "" }}
-                en verhuurd aan {{ $situation->tenant ? $situation->tenant->name : "" }}, werd een schade opmeting gedaan
-                door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif
-            </p>
-        </div>
-
         <!-- Signatures -->
-        <section class="signature">
-            <div class="row p-5 the-five">
-                <div class="col-12">
-                    <p>{{ today()->format('d-m-Y')}}</p>
-                </div>
+        <section class="signature" style="margin-top: 25px; margin-bottom: 8px;">
 
-                <div class="col-md-6 ">
+            <div class="row">
+                <p>Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
+                    @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
+                    , eigendom van {{ $situation->owner ? $situation->owner->name : "" }}
+                    en verhuurd aan {{ $situation->tenant ? $situation->tenant->name : "" }}, werd een schade opmeting gedaan
+                    door {{ $inspection->user ? $inspection->user->firstName : "" }} {{ $inspection->user ? $inspection->user->lastName : "" }} @if($inspection->user->companyName)voor {{ $inspection->user->companyName }}@endif
+                </p>
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+                <div class="column">
                     <strong>{{ __('HUURDERS') }}</strong><br>
                     <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
                     <p>{{  $agreement->situation->tenant ? $agreement->situation->tenant->name : "" }}</p>
@@ -134,7 +106,7 @@
                     @endif
                 </div>
 
-                <div class="col-md-6 text-right">
+                <div class="column-half text-right">
                     <strong>{{ __('VERHUURDERS') }}</strong><br>
                     <span class="mt-0" style="font-style: italic; font-size: 10px">gelezen en goedgekeurd</span>
                     <p>{{  $agreement->situation->owner ? $agreement->situation->owner->name : "" }}</p>

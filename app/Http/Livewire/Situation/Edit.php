@@ -154,7 +154,7 @@ class Edit extends Component
 
         $this->last_intrede = $last_intrede;
 
-        $this->quotes = Quote::where('situation_id', $this->situation->id)->get();
+        $this->quotes = Quote::where('situation_id', $this->situation->id)->orderby('created_at', 'desc')->get();
     }
 
     public function deletePDF($pdf)
@@ -455,7 +455,7 @@ class Edit extends Component
             $quoteSubCalculation->save();
         }
 
-        $this->quotes = Quote::where('situation_id', $this->situation->id)->orderBy('created_by', 'desc')->get();
+        $this->quotes = Quote::where('situation_id', $this->situation->id)->orderby('created_at', 'desc')->get();
     }
 
     public function render()
