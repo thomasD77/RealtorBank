@@ -158,18 +158,20 @@ class Edit extends Component
             $subCalculation->approved = !$subCalculation->approved;
             $subCalculation->save();
 
-            // Berekening aanpassen afhankelijk van de toggle-status
-            $newAmount = $quote_calculation->quote_brutto_total;
+            $newAmountSubTotal = QuoteSubCalculation::query()
+                ->where('quote_calculation_id', $subCalculation->quote_calculation_id)
+                ->where('quote_id', $this->quote->id)
+                ->where('approved', 1)
+                ->sum('quote_total');
 
-            if ($wasApproved) {
-                // Als het eerder goedgekeurd was, trek de waarde af
-                $newAmount -= $subCalculation->quote_total;
-            } else {
-                // Als het eerder niet goedgekeurd was, tel de waarde op
-                $newAmount += $subCalculation->quote_total;
-            }
 
-            $quote_calculation->quote_brutto_total = $newAmount;
+            $vetustateAmount = $newAmountSubTotal * ($quote_calculation->quote_vetustate / 100);
+            $quote_calculation->quote_brutto_total = $newAmountSubTotal;
+            $quote_calculation->quote_vetustate_amount = $vetustateAmount;
+            
+            $finalTotal = $newAmountSubTotal - $quote_calculation->quote_vetustate_amount;
+            $quote_calculation->quote_final_total = $finalTotal;
+
             $quote_calculation->save();
         }
 
