@@ -28,14 +28,14 @@
                             <td>{{ $subCalculation['subCategory'] }}</td>
                             <td>{{ $subCalculation['description'] }}</td>
                             <td class="text-right">{{ round($subCalculation['tax']) }}%</td>
-                            <td class="text-right">{{ number_format($subCalculation['total'], 2, ',', '.') }} €</td>
+                            <td class="text-right">&euro; {{ number_format($subCalculation['total'], 2, ',', '.') }}</td>
                         </tr>
                     @endforeach
 
                     <!-- Totaal, Vetustate, en Eindtotaal -->
                     <tr class="font-weight-bold bg-light">
                         <td colspan="5" class="text-right">{{ __('Subtotaal') }} :</td>
-                        <td class="text-right">{{ number_format($bruttoTotal, 2, ',', '.') }} €</td>
+                        <td class="text-right">&euro; {{ number_format($bruttoTotal, 2, ',', '.') }}</td>
                     </tr>
                     <tr class="font-weight-bold bg-light">
                         <td colspan="1" class="text-center">
@@ -46,7 +46,7 @@
                             <br>
                             <small>({{ $vetustatePercentage }}%) </small>
                         </td>
-                        <td class="text-right">- {{ number_format($vetustateAmount, 2, ',', '.') }} €</td>
+                        <td class="text-right">- &euro; {{ number_format($vetustateAmount, 2, ',', '.') }}</td>
                     </tr>
                     <tr class="font-weight-bold bg-light">
                         <td colspan="5" class="text-right">
@@ -54,7 +54,7 @@
                             <br>
                             <small>{{ __('(incl. Vetustate)') }}</small>
                         </td>
-                        <td class="text-right">{{ number_format($finalTotal, 2, ',', '.') }} €</td>
+                        <td class="text-right">&euro; {{ number_format($finalTotal, 2, ',', '.') }}</td>
                     </tr>
                     </tbody>
                 </table>

@@ -24,7 +24,7 @@
                         <td>{{ $subCalculation->quote_description }}</td>
                         <td>{{ round($subCalculation->quote_tax) }}%</td>
                         <td class="text-right" @if(!$subCalculation->approved) style="text-decoration: line-through" @endif>
-                            {{ number_format($subCalculation->quote_total, 2, ',', '.') }} €
+                            &euro; {{ number_format($subCalculation->quote_total, 2, ',', '.') }}
                         </td>
                     </tr>
                 @endforeach
@@ -35,19 +35,19 @@
                             <span class="summary-label">{{ __('Subtotaal') }}:</span>
                         </td>
                         <td class="text-right font-weight-bold">
-                            <span class="summary-value">{{ number_format($calculation->quote_brutto_total, 2, ',', '.') }} €</span>
+                            <span class="summary-value">&euro; {{ number_format($calculation->quote_brutto_total, 2, ',', '.') }}</span>
                         </td>
                     </tr>
                     <tr class="calculation-summary">
                         <td colspan="5" class="text-right font-weight-bold">
                             <span class="summary-label">{{ __('Vetustate') }}:</span>
+                            <br>
+                            <small>{{ number_format($calculation->quote_vetustate, 2, ',', '.') }} %</small>
                         </td>
                         <td class="text-right font-weight-bold">
                             <span class="summary-value">
-                                {{ $calculation->quote_vetustate != 0 ? number_format($calculation->quote_vetustate_amount, 2, ',', '.') . ' €' : __('Geen') }}
+                                {{ $calculation->quote_vetustate != 0 ? '€ ' . number_format($calculation->quote_vetustate_amount, 2, ',', '.') : __('0') }}
                             </span>
-                            <br>
-                            <small>{{ number_format($calculation->quote_vetustate, 2, ',', '.') }} %</small>
                         </td>
                     </tr>
                     <tr class="calculation-summary final-total">
@@ -55,8 +55,7 @@
                             <span class="summary-label">{{ __('Totaal') }}:</span>
                         </td>
                         <td class="text-right font-weight-bold">
-                            <span class="summary-value">
-                                {{ number_format($calculation->quote_final_total, 2, ',', '.') }} €</span>
+                            <span class="summary-value">&euro; {{ number_format($calculation->quote_final_total, 2, ',', '.') }}</span>
                         </td>
                     </tr>
                 @endif
