@@ -187,6 +187,7 @@ class Edit extends Component
         $agreement->situation_id = $this->situation->id;
         $agreement->quote_id = $this->quote->id;
         $agreement->date = now();
+
         if($value){
             $agreement->pricing = 1;
             $agreement->title = 'Akkoord_schade_prijzen_' . now();
@@ -194,8 +195,14 @@ class Edit extends Component
             $agreement->pricing = 0;
             $agreement->title = 'Akkoord_schade_' . now();
         }
+
+        $damageIds = QuoteDamage::where('quote_id', $this->quote->id)->pluck('damage_id');
+        $calculationsSum = QuoteCalculation::query()
+            ->where('quote_id', $this->quote->id)
+            ->whereIn('quote_damage_id', $damageIds)->sum('quote_final_total');
+
         $agreement->adjusted_total = 0;
-        $agreement->total = 0;
+        $agreement->total = $calculationsSum;
         $agreement->save();
 
         $this->agreements = Agreement::query()

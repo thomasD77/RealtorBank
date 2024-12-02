@@ -206,7 +206,7 @@
                                 </td>
                             </tr>
                             <tr class="summary-row">
-                                <td colspan="3" class="label-cell">{{ __('Correctie bedrag') }}:</td>
+                                <td colspan="3" class="label-cell">{{ __('Correctie bedrag (€)') }}:</td>
                                 <td class="value-cell">
                                     <input
                                         type="number"
