@@ -88,10 +88,10 @@
                         <h3>{{ __('Akkoord schade & prijzen') }}</h3>
                     </div>
 
-                    <div class="my-4 w-100">
+                    <div class="w-100">
                         @if($damages && $damages->isNotEmpty())
                             @foreach($damages as $damage)
-                                <div class="damage-container">
+                                <div class="damage-container mb-5">
                                     <!-- Header -->
                                     <div class="damage-header">
                                         <span>{{ __('Schade') }}: {{ $damage->damage_title ?? '-' }}</span>
@@ -146,8 +146,8 @@
                                                     <tr>
                                                         <td>{{ $subCalculation->subCategoryPricing->title }}</td>
                                                         <td>{{ $subCalculation->quote_description }}</td>
-                                                        <td class="text-right">{{ round($subCalculation->quote_tax) }}%</td>
-                                                        <td class="text-right">{{ number_format($subCalculation->quote_total, 2, ',', '.') }} €</td>
+                                                        <td class="text-right">{{ round($subCalculation->quote_tax) }} %</td>
+                                                        <td class="text-right">&euro; {{ number_format($subCalculation->quote_total, 2, ',', '.') }}</td>
                                                     </tr>
                                                 @endforeach
                                                 @if($loop->first)
@@ -157,18 +157,19 @@
                                                     </tr>
                                                     <tr class="calculation-summary">
                                                         <td colspan="3">{{ __('Subtotaal') }}</td>
-                                                        <td class="text-right">{{ number_format($calculation->quote_brutto_total, 2, ',', '.') }} €</td>
+                                                        <td class="text-right">&euro; {{ number_format($calculation->quote_brutto_total, 2, ',', '.') }}</td>
                                                     </tr>
                                                     <tr class="calculation-summary">
-                                                        <td colspan="3">{{ __('Vetustate') }}</td>
-                                                        <td class="text-right">
+                                                        <td colspan="3">{{ __('Vetustate') }} <br>
                                                             <small>{{ number_format($calculation->quote_vetustate, 2, ',', '.') }} %</small>
-                                                            {{ $calculation->quote_vetustate != 0 ? number_format($calculation->quote_vetustate_amount, 2, ',', '.') . ' €' : 'Geen' }}
+                                                        </td>
+                                                        <td class="text-right">
+                                                            {{ $calculation->quote_vetustate != 0 ? '€ ' . number_format($calculation->quote_vetustate_amount, 2, ',', '.') : '0' }}
                                                         </td>
                                                     </tr>
                                                     <tr class="calculation-summary">
                                                         <td colspan="3">{{ __('Totaal') }}</td>
-                                                        <td class="text-right">{{ number_format($calculation->quote_final_total, 2, ',', '.') }} €</td>
+                                                        <td class="text-right">&euro; {{ number_format($calculation->quote_final_total, 2, ',', '.') }}</td>
                                                     </tr>
                                                 @endif
                                             @endforeach
@@ -180,59 +181,54 @@
                         @else
                             <p>{{ __('Geen schades geselecteerd.') }}</p>
                         @endif
+                    </div>
+
+                    <div class="w-100">
+                        <strong class="mb-1 mt-3">{{ __('Notities') }}:</strong>
+                        <textarea
+                            wire:change="changeRemarks"
+                            wire:model.defer="remarks"
+                            placeholder="{{ $remarks ?? 'Opmerkingen over deze berekeningen schrijf je hier...' }}"
+                            class="remarks-field"
+                        ></textarea>
+                    </div>
+
+                    <table class="summary-table mt-0">
                         <tfoot>
-                            <tr class="py-4">
-                                <td colspan="3" class="text-right font-weight-bold">{{ __('Sub-Totaal') }}: <br>
-                                    <small>*{{ __('Totaal van alle opgemaakte prijzen incl. de vetustate.') }} <br></small>
-                                </td>
-                                <td class="font-weight-bold text-right">{{ number_format($subsTotal, 2, ',', '.') }} €
-                                    <br>
-                                    <small>*{{ __('incl. btw') }} <br></small>
+                        <div class="damage-header bg-dark w-100">
+                            <span>{{ __('Totaal Offerte') }}</span>
+                        </div>
+                            <tr class="summary-row">
+                                <td colspan="3" class="label-cell">{{ __('Subtotaal') }}:</td>
+                                <td class="value-cell">
+                                    &euro; {{ number_format($subsTotal, 2, ',', '.') }}<br>
+                                    <small>*{{ __('incl. btw') }}</small>
                                 </td>
                             </tr>
-                            <tr class="py-4">
-                                <td colspan="3" class="text-right font-weight-bold">{{ __('Gecorrigeerd totaal') }}: <br>
-                                    <small>*{{ __('Geef een bedrag in, geen percentage.') }} <br></small>
-                                </td>
-                                <td class="font-weight-bold text-right" style="width: 100px; background-color: yellow">
-                                    {{ __('€') }}
+                            <tr class="summary-row">
+                                <td colspan="3" class="label-cell">{{ __('Correctie bedrag') }}:</td>
+                                <td class="value-cell">
                                     <input
                                         type="number"
                                         step="0.01"
                                         wire:change="updateAdjustedTotal"
                                         wire:model.defer="adjustedTotal"
                                         placeholder="{{ $adjustedTotal ?? 'Voer bedrag in...' }}"
-                                        class="p-2 border rounded"
-                                        style="width: 100px; background-color: yellow"
+                                        class="highlighted-input"
                                     />
                                 </td>
                             </tr>
-                            <tr class="py-4">
-                                <td colspan="3" class="text-right font-weight-bold">{{ __('Totaal') }}: <br>
-                                    <small>*{{ __('Totaal van alle opgemaakte prijzen incl. de vetustate & gecorigeerd bedrag.') }} <br></small>
-                                </td>
-                                <td class="font-weight-bold text-right">{{ number_format($total, 2, ',', '.') }} €
-                                    <br>
-                                    <small>*{{ __('incl. btw') }} <br></small>
-                                </td>
-                            </tr>
-                            <tr class="py-4">
-                                <td colspan="1" class="text-right font-weight-bold">{{ __('Notities') }}: <br>
-                                    <small>*{{ __('Extra notities die in rekening moeten worden gebracht.') }} <br></small>
-                                </td>
-                                <td colspan="3" class="font-weight-bold text-right">
-                                    <textarea
-                                        wire:change="changeRemarks"
-                                        wire:model.defer="remarks"
-                                        placeholder="{{ $remarks ?? 'Type your remarks here...' }}"
-                                        class="w-full p-2 border rounded"
-                                    ></textarea>
+                            <tr class="summary-row">
+                                <td colspan="3" class="label-cell">{{ __('Totaal') }}:</td>
+                                <td class="value-cell">
+                                    &euro; {{ number_format($total, 2, ',', '.') }}<br>
+                                    <small>*{{ __('incl. btw') }}</small>
                                 </td>
                             </tr>
                         </tfoot>
-                    </div>
+                    </table>
 
-                    <p>Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
+                    <p class="mt-5">Voor het pand te {{  $inspection->address->address }}, @if($inspection->address->postBus) {{  $inspection->address->postBus }}, @endif
                         @if($inspection->address->zip || $inspection->address->city) {{  $inspection->address->zip }} {{  $inspection->address->city }} @endif
                         , eigendom van {{ $situation->owner ? $situation->owner->name : "" }}
                         en verhuurd aan {{ $situation->tenant ? $situation->tenant->name : "" }}, werd een schade opmeting gedaan

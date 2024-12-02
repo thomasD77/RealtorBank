@@ -168,7 +168,7 @@ class Edit extends Component
             $vetustateAmount = $newAmountSubTotal * ($quote_calculation->quote_vetustate / 100);
             $quote_calculation->quote_brutto_total = $newAmountSubTotal;
             $quote_calculation->quote_vetustate_amount = $vetustateAmount;
-            
+
             $finalTotal = $newAmountSubTotal - $quote_calculation->quote_vetustate_amount;
             $quote_calculation->quote_final_total = $finalTotal;
 

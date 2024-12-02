@@ -104,5 +104,80 @@
         font-weight: bold; /* Eventueel aanpasbaar voor stijl */
     }
 
+    /* General Table Styling */
+    .summary-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-size: 14px;
+        background-color: #f9f9f9;
+    }
+
+    .summary-table tfoot {
+        background-color: #f7f7f7;
+        font-weight: bold;
+        border-top: 2px solid #ddd;
+    }
+
+    .summary-table td {
+        padding: 10px;
+        vertical-align: middle;
+        text-align: left;
+    }
+
+    .summary-table .label-cell {
+        text-align: right;
+        padding-right: 15px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .summary-table .value-cell {
+        text-align: right;
+        font-size: 16px;
+        font-weight: bold;
+        width: 150px;
+    }
+
+    /* Input Styling */
+    .summary-table .highlighted-input {
+        width: 120px;
+        padding: 5px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: yellow;
+        text-align: right;
+    }
+
+    /* Textarea Styling */
+    .summary-table .remarks-field {
+        width: 100%;
+        height: 80px;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+        background-color: #fff;
+    }
+
+    /* Small Notes Styling */
+    .summary-table small {
+        font-style: italic;
+        font-size: 12px;
+        color: #666;
+    }
+
+    /* Focus Styling */
+    .summary-table input:focus,
+    .summary-table textarea:focus {
+        background-color: #f0f8ff;
+        outline: none;
+        border-color: #80bdff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+    }
+
+
 
 </style>
