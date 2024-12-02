@@ -38,6 +38,11 @@ class Edit extends Component
         $this->situation = $situation;
         $this->quote = $quote;
 
+        $this->loadData();
+    }
+
+    public function loadData()
+    {
         $this->title = $this->quote->title;
         $this->date = $this->quote->date;
         $this->remarks = $this->quote->remarks;
@@ -79,9 +84,9 @@ class Edit extends Component
             ->get();
 
         $this->quoteTotal = QuoteCalculation::where('quote_id', $this->quote->id)->sum('quote_final_total');
-        $quoteIds = QuoteCalculation::where('quote_id', $quote->id)->pluck('id');
+        $quoteIds = QuoteCalculation::where('quote_id', $this->quote->id)->pluck('id');
         $subsTotal = QuoteSubCalculation::query()
-            ->where('quote_id', $quote->id)
+            ->where('quote_id', $this->quote->id)
             ->whereIn('quote_calculation_id', $quoteIds)
             ->where('approved', 1)
             ->sum('quote_total');
@@ -134,6 +139,8 @@ class Edit extends Component
             $damage->approved = !$damage->approved;
             $damage->save();
         }
+
+        $this->loadData();
     }
 
     public function toggleSubCalculationApproval($subCalculationId)
@@ -165,6 +172,8 @@ class Edit extends Component
             $quote_calculation->quote_brutto_total = $newAmount;
             $quote_calculation->save();
         }
+
+        $this->loadData();
     }
 
 

@@ -1,5 +1,5 @@
 {{-- Calculations --}}
-@if($damage->quoteCalculations)
+@if($damage->quoteCalculations && $damage->approved)
     <div class="calculation-container">
         <table class="calculation-table">
             <thead>
@@ -23,7 +23,9 @@
                         <td>{{ $subCalculation->subCategoryPricing->title }}</td>
                         <td>{{ $subCalculation->quote_description }}</td>
                         <td>{{ round($subCalculation->quote_tax) }}%</td>
-                        <td class="text-right">{{ number_format($subCalculation->quote_total, 2, ',', '.') }} €</td>
+                        <td class="text-right" @if(!$subCalculation->approved) style="text-decoration: line-through" @endif>
+                            {{ number_format($subCalculation->quote_total, 2, ',', '.') }} €
+                        </td>
                     </tr>
                 @endforeach
                 @if($loop->first)
@@ -53,7 +55,8 @@
                             <span class="summary-label">{{ __('Totaal') }}:</span>
                         </td>
                         <td class="text-right font-weight-bold">
-                            <span class="summary-value">{{ number_format($calculation->quote_final_total, 2, ',', '.') }} €</span>
+                            <span class="summary-value">
+                                {{ number_format($calculation->quote_final_total, 2, ',', '.') }} €</span>
                         </td>
                     </tr>
                 @endif
