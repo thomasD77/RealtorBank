@@ -26,7 +26,7 @@ return new class extends Migration
             $table->date('date')->nullable();
 
             $table->text('remarks')->nullable();
-            $table->decimal('adjusted_amount', 10, 2)->nullable();
+            $table->decimal('adjusted_total', 10, 2)->nullable();
             $table->decimal('total', 10, 2)->nullable();
 
             $table->string('signature_tenant')->nullable();

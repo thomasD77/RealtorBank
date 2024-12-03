@@ -31,6 +31,7 @@ class Edit extends Component
     public $agreements;
 
     public $subTotal;
+    public $showFlashMessage = true;
 
     public function mount(Inspection $inspection, Situation $situation, Quote $quote)
     {
@@ -211,6 +212,17 @@ class Edit extends Component
             ->where('quote_id', $this->quote->id)
             ->orderBy('created_at', 'desc')
             ->get();
+
+        if($value){
+            session()->flash('agreement', 'Akkoord: Schade & Prijzen succesvol aangemaakt.');
+        }else{
+            session()->flash('agreement', 'Akkoord: Schade succesvol aangemaakt.');
+        }
+    }
+
+    public function closeFlashMessage()
+    {
+        $this->showFlashMessage = false;
     }
 
     public function render()

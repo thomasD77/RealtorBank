@@ -6,7 +6,6 @@
         <a href="{{ route('situation.edit', [$inspection->id, $situation->id]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
         <h3>{{ $title }}</h3>
         <div class="property-form-group">
-
             <form wire:submit.prevent="quoteSubmit">
                 <div class="row">
                     <div class="col-lg-6 col-md-12">
@@ -124,6 +123,14 @@
                         <i class="fa fa-rocket mx-2"></i> {{ __('Akkoord Schade & prijzen') }}
                     </button>
                 </div>
+            </div>
+            <div class="mt-4 w-100">
+                @if (session('agreement') && $showFlashMessage)
+                    <div class="alert alert-warning alert-dismissible fade show d-flex justify-content-between align-items-center w-100" role="alert">
+                        <span>{{ session('agreement') }}</span>
+                        <button class=" btn-close text-right mr-0" wire:click="closeFlashMessage" aria-label="Close">x</button>
+                    </div>
+                @endif
             </div>
 
             @if($agreements->isNotEmpty())

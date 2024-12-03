@@ -124,7 +124,7 @@
                         <div class="d-flex justify-content-between">
                             <button type="button" class="btn btn-secondary" wire:click="$set('addCategoryModalOpen', false)">
                                 {{ __('Annuleren') }}</button>
-                            <button type="button" class="btn btn-dark" wire:click="saveCategory">{{__('Save')}}</button>
+                            <button type="button" class="btn btn-dark" wire:click="saveCategory">{{__('save')}}</button>
                         </div>
                     </div>
                 </div>
@@ -166,7 +166,9 @@
                                             wire:model="selectedSubcategoryId">
                                         <option value="">{{ __('Selecteer een (sub)categorie') }}</option>
                                         @foreach($subCategories as $subcategory)
-                                            <option value="{{ $subcategory->id }}">{{ $subcategory->title }}</option>
+                                            @if($subcategory->title != 'new')
+                                                <option value="{{ $subcategory->id }}">{{ $subcategory->id }}. {{ $subcategory->title }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -218,7 +220,7 @@
                                 <button type="button" class="btn btn-secondary"
                                         wire:click="$set('modalOpen', false)">{{ __('Annuleren') }}</button>
                                 <button type="button" class="btn btn-dark"
-                                        wire:click="save">{{ __('Save') }}</button>
+                                        wire:click="save">{{ __('save') }}</button>
                             </div>
                         </div>
                     </div>

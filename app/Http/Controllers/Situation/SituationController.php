@@ -593,13 +593,14 @@ class SituationController extends Controller
 
     public function printAgreementWithPricing(Inspection $inspection, Situation $situation, Quote $quote, Agreement $agreement)
     {
-        $rawFileName = time(). '-AKKOORD-' . $inspection->id . '-schade.pdf';
+        $rawFileName = time(). '-AKKOORD-' . $inspection->id . '-schade-prijzen.pdf';
         $cleanFileName = Str::limit($inspection->title, 20, '...') . '-' . now()->format('d-m-Y') . '-akkoord_schade.pdf';
         $fileName = MediaStore::getValidFilename($rawFileName);
 
         $pdfStore = new \App\Models\PDF();
         $pdfStore->inspection_id = $inspection->id;
         $pdfStore->situation_id = $situation->id;
+        $pdfStore->agreement_id = $agreement->id;
         $pdfStore->title = $cleanFileName;
         $pdfStore->file_original = $fileName;
         $pdfStore->status = 'complete';
@@ -669,9 +670,8 @@ class SituationController extends Controller
 
         $pdf->save($path  . $fileName);
 
-
-        return $pdf->stream('akkoord-' . '#' . $inspection->id . '-' . $agreement->id . '.pdf');
-        //return redirect()->route('quote.edit', compact('inspection', 'situation', 'quote'));
+        //return $pdf->stream('akkoord-' . '#' . $inspection->id . '-' . $agreement->id . '.pdf');
+        return redirect()->route('quote.edit', compact('inspection', 'situation', 'quote'));
     }
 
 }

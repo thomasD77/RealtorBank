@@ -26,6 +26,8 @@ class Edit extends Component
     public $lock;
     public $subsTotal;
 
+    public $showFlashMessage = true;
+
     public function mount(Inspection $inspection, Situation $situation, Quote $quote, Agreement $agreement)
     {
         $this->inspection = $inspection;
@@ -85,6 +87,11 @@ class Edit extends Component
             $claim->date = $this->date;
             $claim->update();
         }
+    }
+
+    public function closeFlashMessage()
+    {
+        $this->showFlashMessage = false;
     }
 
     public function render()

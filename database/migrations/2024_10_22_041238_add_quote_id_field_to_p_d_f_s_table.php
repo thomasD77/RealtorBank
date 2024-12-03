@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::table('p_d_f_s', function (Blueprint $table) {
             $table->unsignedBigInteger('quote_id')->nullable()->default(0)->index();
+            $table->unsignedBigInteger('agreement_id')->nullable()->default(0)->index();
             $table->integer('pricing')->nullable()->index();
         });
     }
