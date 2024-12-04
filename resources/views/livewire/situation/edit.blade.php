@@ -450,45 +450,47 @@
             </div>
         </div>
 
-        @if($situation->intrede == 0 && $damages->isNotEmpty())
-            <div class="single-add-property">
-                <div class="d-flex justify-content-end">
-                    <button wire:click="addQuote" class="btn-sm btn-common mb-3" style="border: none"><i class="fa fa-plus mr-1"></i>{{ __('Offerte') }}</button>
-                </div>
-                <h3>{{ __('Offerte') }}</h3>
-                <div class="property-form-group">
-                    @if($quotes->isNotEmpty())
-                        <div class="section-body listing-table">
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>{{ __('Titel') }}</th>
-                                        <th>{{ __('Datum') }}</th>
-                                        <th>{{ __('Actie') }}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($quotes as $quote)
-                                            <tr>
-                                                <td>{{ $quote->title }}</td>
-                                                <td>{{ \Illuminate\Support\Carbon::parse($quote->date)->format('d-m-Y') }}</td>
-                                                <td class="edit">
-                                                    <a href="{{ route('quote.edit', [ $inspection, $situation, $quote ]) }}"><i class="fa fa-pencil-alt text-dark"></i></a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+        @if(Auth::user()->id != 2)
+            @if($situation->intrede == 0 && $damages->isNotEmpty())
+                <div class="single-add-property">
+                    <div class="d-flex justify-content-end">
+                        <button wire:click="addQuote" class="btn-sm btn-common mb-3" style="border: none"><i class="fa fa-plus mr-1"></i>{{ __('Offerte') }}</button>
+                    </div>
+                    <h3>{{ __('Offerte') }}</h3>
+                    <div class="property-form-group">
+                        @if($quotes->isNotEmpty())
+                            <div class="section-body listing-table">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>{{ __('Titel') }}</th>
+                                            <th>{{ __('Datum') }}</th>
+                                            <th>{{ __('Actie') }}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($quotes as $quote)
+                                                <tr>
+                                                    <td>{{ $quote->title }}</td>
+                                                    <td>{{ \Illuminate\Support\Carbon::parse($quote->date)->format('d-m-Y') }}</td>
+                                                    <td class="edit">
+                                                        <a href="{{ route('quote.edit', [ $inspection, $situation, $quote ]) }}"><i class="fa fa-pencil-alt text-dark"></i></a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                    @else
-                        <small>*{{ __('Er werden nog geen offertes aangemaakt voor deze uittrede.') }} <br></small>
-                    @endif
-                        <small style="font-weight: bold">*{{ __('Let op! Check zeker of je alle gewenste schade hebt gemarkeerd. Enkel actief gemarkeerde schade wordt opgenomen in de Offerte.') }}</small>
+                        @else
+                            <small>*{{ __('Er werden nog geen offertes aangemaakt voor deze uittrede.') }} <br></small>
+                        @endif
+                            <small style="font-weight: bold">*{{ __('Let op! Check zeker of je alle gewenste schade hebt gemarkeerd. Enkel actief gemarkeerde schade wordt opgenomen in de Offerte.') }}</small>
 
+                    </div>
                 </div>
-            </div>
+            @endif
         @endif
 
         @if($situation->intrede == 0 && $damages->isNotEmpty()  || $situation->intrede == 3 && $damages->isNotEmpty() )

@@ -123,10 +123,12 @@
         </div>
     </div>
 
-    <livewire:calculations.index
-        :Inspection="$inspection"
-        :Damage="$damage"
-    />
+    @if(Auth::user()->id != 2)
+        <livewire:calculations.index
+            :Inspection="$inspection"
+            :Damage="$damage"
+        />
+    @endif
 
     <div class="single-add-property">
         <h3>{{ __('Schade verwijderen') }}</h3>
