@@ -1,6 +1,16 @@
 <div>
+    <div class="block-content">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-alt push d-flex justify-content-end mb-0 mt-3">
+                <li class="breadcrumb-item text-right">
+                    <a href="{{ route('situation.index', $inspection) }}">
+                        <i class="fa fa-arrow-left fa-long-arrow-alt-left"></i> {{ __('Terug naar... Beschrijvingen') }}
+                    </a>
+                </li>
+            </ol>
+        </nav>
+    </div>
     <div class="single-add-property">
-        <a href="{{ route('situation.index', $inspection) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
         @if (session()->has('successPDF'))
             <div class="btn btn-success flash_message mb-3">
                 {{ session('successPDF') }}

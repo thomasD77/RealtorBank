@@ -59,21 +59,22 @@
         width: 75%; /* Plaatst beschrijving aan het einde */
     }
 
-    .approved-column-two {
-        width: 5%; /* Kleinste kolom voor checkbox */
-    }
-
     .title-column-two {
-        width: 33.5%; /* Breder voor de titel */
+        width: 32% !important; /* Breder voor de titel */
     }
 
-    .tax-column-two {
-        width: 20%; /* Breder voor locatie details */
+
+    .total-column-two {
+        width: 20% !important; /* Breder voor kleinere schermen */
     }
 
-    .description-column-two {
-        width: 26%; /* Plaatst beschrijving aan het einde */
+    /* Voor grotere schermen */
+    @media (min-width: 1024px) {
+        .total-column-two {
+            width: 15% !important; /* Smaller voor grotere schermen */
+        }
     }
+
 
     /* Calculation container styling */
     .calculation-container {

@@ -155,7 +155,7 @@
     }
 
     .total-column {
-        width: 10%;
+        width: 20%;
         text-align: right;
     }
     .tax-column {

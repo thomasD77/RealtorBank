@@ -8,8 +8,8 @@
                 <th class="approved-column-two text-center">{{ __('Akkoord') }}</th>
                 <th class="title-column-two">{{ __('(Sub)categorie)') }}</th>
                 <th class="description-column-two">{{ __('Beschrijving') }}</th>
-                <th class="tax-column-two">{{ __('Btw') }}</th>
-                <th class="text-right">{{ __('Totaal') }}</th>
+                <th class="tax-column-two text-right">{{ __('Btw') }}</th>
+                <th class="total-column-two text-right">{{ __('Totaal') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -22,7 +22,7 @@
                         </td>
                         <td>{{ $subCalculation->subCategoryPricing->title }}</td>
                         <td>{{ $subCalculation->quote_description }}</td>
-                        <td>{{ round($subCalculation->quote_tax) }}%</td>
+                        <td class="text-right">{{ round($subCalculation->quote_tax) }}%</td>
                         <td class="text-right" @if(!$subCalculation->approved) style="text-decoration: line-through" @endif>
                             &euro; {{ number_format($subCalculation->quote_total, 2, ',', '.') }}
                         </td>

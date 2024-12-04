@@ -1,9 +1,20 @@
 <div>
 
     @include('livewire.quote.css')
+    <div class="block-content">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-alt push d-flex justify-content-end mb-0 mt-3">
+                <li class="breadcrumb-item text-right">
+                    <a href="{{ route('situation.edit', [$inspection->id, $situation->id]) }}">
+                        <i class="fa fa-arrow-left fa-long-arrow-alt-left"></i> {{ __('Terug naar... Beschrijving') }}
+                    </a>
+                </li>
+            </ol>
+        </nav>
+    </div>
 
     <div class="single-add-property">
-        <a href="{{ route('situation.edit', [$inspection->id, $situation->id]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
+
         <h3>{{ $title }}</h3>
         <div class="property-form-group">
             <form wire:submit.prevent="quoteSubmit">

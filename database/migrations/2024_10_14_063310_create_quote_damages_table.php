@@ -33,7 +33,7 @@ return new class extends Migration
             $table->text('damage_description')->nullable();
             $table->boolean('damage_print_pdf')->default(0);
 
-            $table->integer('approved')->nullable();
+            $table->integer('approved')->default(1)->nullable();
 
             $table->timestamps();
         });

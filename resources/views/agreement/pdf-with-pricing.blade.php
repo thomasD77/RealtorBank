@@ -71,7 +71,7 @@
                                     <th class="title-column">{{ __('Categorie') }}</th>
                                     <th class="description-column">{{ __('Beschrijving') }}</th>
                                     <th class="tax-column text-right">{{ __('BTW') }}</th>
-                                    <th class="total-column text-right">{{ __('Totaal') }}</th>
+                                    <th class="total-column text-right" style="text-align: right">{{ __('Totaal') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

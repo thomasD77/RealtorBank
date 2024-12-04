@@ -26,10 +26,6 @@
         width: 40%;
     }
 
-    .total-column {
-        width: 10%;
-        text-align: right;
-    }
     .tax-column {
         width: 10%;
         text-align: right;
@@ -176,6 +172,17 @@
         outline: none;
         border-color: #80bdff;
         box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+    }
+
+    .total-column {
+        width: 20% !important; /* Breder voor kleinere schermen */
+    }
+
+    /* Voor grotere schermen */
+    @media (min-width: 1024px) {
+        .total-column {
+            width: 15% !important; /* Smaller voor grotere schermen */
+        }
     }
 
 
