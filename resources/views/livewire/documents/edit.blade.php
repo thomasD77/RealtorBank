@@ -1,6 +1,16 @@
 <div>
+    <div class="block-content">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-alt push d-flex justify-content-end mb-0 mt-3">
+                <li class="breadcrumb-item text-right">
+                    <a href="{{ route('documents.index', $inspection) }}">
+                        <i class="fa fa-arrow-left fa-long-arrow-alt-left"></i> {{ __('Terug naar... Documenten') }}
+                    </a>
+                </li>
+            </ol>
+        </nav>
+    </div>
     <div class="single-add-property">
-        <a href="{{ route('documents.index', $inspection) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
         <h3>{{ __('Document') }}</h3>
         <div class="property-form-group">
             <form wire:submit.prevent="documentSubmit">

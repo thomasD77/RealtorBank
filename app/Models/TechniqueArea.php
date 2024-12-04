@@ -16,6 +16,11 @@ class TechniqueArea extends Model
         return $this->belongsTo(Technique::class, 'technique_id');
     }
 
+    public function floor()
+    {
+        return $this->belongsTo(Floor::class, 'floor_id');
+    }
+
     public function media()
     {
         return $this->hasMany(MediaTechnique::class, 'technique_id');

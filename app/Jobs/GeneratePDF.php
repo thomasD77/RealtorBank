@@ -39,7 +39,7 @@ class GeneratePDF implements ShouldQueue
     public \App\Models\PDF $pdfStore;
 
     /**
-     * Create a new job instance.
+     * Edit a new job instance.
      *
      * @return void
      */

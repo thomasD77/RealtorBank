@@ -50,7 +50,7 @@ return new class extends Migration
         DB::table('users')->insert([
             'firstName'=>'Thomas',
             'lastName'=>'Demeulenaere',
-            'email'=>'info@innova-webcreations.be',
+            'email'=>'info@innova.partners',
             'email_verified_at'=>Carbon::now()->format('Y-m-d H:i:s'),
             'password'=>bcrypt('@Skatemovies777'),
             'created_at'=>Carbon::now()->format('Y-m-d H:i:s'),

@@ -7,6 +7,7 @@ use App\Models\BasicArea;
 use App\Models\Conform;
 use App\Models\ConformArea;
 use App\Models\Contract;
+use App\Models\Floor;
 use App\Models\Inspection;
 use App\Models\Outdoor;
 use App\Models\OutdoorArea;

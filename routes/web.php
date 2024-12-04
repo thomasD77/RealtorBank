@@ -7,10 +7,14 @@ use App\Http\Controllers\Situation\SituationController;
 use App\Models\Contract;
 use App\Models\Damage;
 use App\Models\Document;
+use App\Models\Floor;
 use App\Models\Inspection;
 use App\Models\Key;
 use App\Models\Meter;
+use App\Models\Quote;
 use App\Models\RentalClaim;
+use App\Models\Room;
+use App\Models\Invoice;
 use App\Models\Situation;
 use Illuminate\Support\Facades\Route;
 
@@ -42,10 +46,15 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::post('/create/signature/', [SituationController::class, 'signature'])->name('create.signature');
     Route::post('/toggle/contract', [SituationController::class, 'toggleContract'])->name('toggle.contract');
     Route::get('/print/contract/{inspection}/{contract}/{situation}', [SituationController::class, 'printContract'])->name('print.contract');
-
     Route::post('/create/signature/claim', [SituationController::class, 'signatureClaim'])->name('create.signature.claim');
     Route::post('/toggle/claim', [SituationController::class, 'toggleClaim'])->name('toggle.claim');
     Route::get('/print/claim/{inspection}/{claim}/{situation}', [SituationController::class, 'printClaim'])->name('print.claim');
+
+    Route::get('/edit/agreement/{inspection}/{situation}/{quote}/{agreement}', [SituationController::class, 'editAgreement'])->name('agreement.edit');
+    Route::get('/print/agreement/{inspection}/{situation}/{quote}/{agreement}}', [SituationController::class, 'printAgreement'])->name('print.agreement');
+    Route::get('/print/agreement/{inspection}/{situation}/{quote}/{agreement}/pricing', [SituationController::class, 'printAgreementWithPricing'])->name('print.agreementWithPricing');
+    Route::post('/create/signature/agreement', [SituationController::class, 'signatureAgreement'])->name('create.signature.agreement');
+
 
     Route::view('/inspections', 'inspections.index')
         ->name('inspections.index');
@@ -59,6 +68,9 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::view('/update', 'profile.update')
         ->name('update.password');
 
+    Route::view('/pricing', 'pricing.index')
+        ->name('pricing');
+
     Route::view('/elements', 'ui-elements')
         ->name('elements');
 
@@ -70,6 +82,11 @@ Route::group(['middleware'=>[ 'auth', 'verified']], function() {
     Route::get('/situation/{inspection}', function (Inspection $inspection) {
         return view('situation.index', compact('inspection'));
     })->name('situation.index')
+        ->can('hasAccessCheckUser','inspection');
+
+    Route::get('quote/edit/{inspection}/{situation}/{quote}', function (Inspection $inspection, Situation $situation, Quote $quote) {
+        return view('quote.edit', compact('inspection', 'situation', 'quote'));
+    })->name('quote.edit')
         ->can('hasAccessCheckUser','inspection');
 
     Route::get('/situation/edit/{inspection}/{situation}', function (Inspection $inspection, Situation $situation) {

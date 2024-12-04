@@ -22,6 +22,11 @@ class ConformArea extends Model
         return $this->belongsTo(Room::class);
     }
 
+    public function floor()
+    {
+        return $this->belongsTo(Floor::class, 'floor_id');
+    }
+
     public function media()
     {
         return $this->hasMany(MediaConform::class, 'conform_id');

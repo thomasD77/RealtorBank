@@ -25,7 +25,7 @@ class UploadLargeImageFiles implements ShouldQueue
     public $mediaModel;
 
     /**
-     * Create a new job instance.
+     * Edit a new job instance.
      *
      * @return void
      */
@@ -53,7 +53,7 @@ class UploadLargeImageFiles implements ShouldQueue
             $className = "App\Models\\" . $this->mediaModel;
             $mediaModel = new $className();
 
-            //Create variables
+            //Edit variables
             $name = time(). $media['path']['name'];
             $name = MediaStore::getValidFilename($name);
 

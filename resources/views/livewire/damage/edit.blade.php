@@ -1,15 +1,28 @@
 <div>
+    <div class="block-content">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-alt push d-flex justify-content-end mb-0 mt-3">
+                <li class="breadcrumb-item text-right">
+                    @if($dynamicArea)
+                        @if(!$dynamicArea->technique_id)
+                            <a href="{{ route('area.' . $urlParam, [ $inspection, $dynamicArea->room, $dynamicArea->$urlParamHelper]) }}">
+                                <i class="fa fa-arrow-left fa-long-arrow-alt-left"></i> {{ __('Terug naar... Overzicht') }}
+                            </a>
+                        @else
+                            <a href="{{ route('area.' . $urlParam, [ $inspection, $dynamicArea->$urlParamHelper]) }}">
+                                <i class="fa fa-arrow-left fa-long-arrow-alt-left"></i> {{ __('Terug naar... Overzicht') }}
+                            </a>
+                        @endif
+                    @else
+                        <a href="{{ route('inspection.edit', $inspection->id) }}">
+                            <i class="fa fa-arrow-left fa-long-arrow-alt-left"></i> {{ __('Terug naar... Overzicht') }}
+                        </a>
+                    @endif
+                </li>
+            </ol>
+        </nav>
+    </div>
     <div class="single-add-property">
-        @if($dynamicArea)
-            @if(!$dynamicArea->technique_id)
-                <a href="{{ route('area.' . $urlParam, [ $inspection, $dynamicArea->room, $dynamicArea->$urlParamHelper]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
-            @else
-                <a href="{{ route('area.' . $urlParam, [ $inspection, $dynamicArea->$urlParamHelper]) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
-            @endif
-        @else
-            <a href="{{ route('inspection.edit', $inspection->id) }}"><p class="breadcrumb-title text-md-right text-dark"><strong><< {{ __('overzicht') }}</strong></p></a>
-        @endif
-
         <h3>{{ $title }}</h3>
         <div class="property-form-group">
 
@@ -24,7 +37,7 @@
                     <div class="col-lg-6 col-md-12">
                         <p>
                             <label for="date">{{ __('Datum') }}</label>
-                            <input type="date" wire:model="date" id="date">
+                            <input type="date" wire:model="date" id="date" disabled>
                         </p>
                     </div>
                     <div class="col-12">
@@ -110,8 +123,15 @@
         </div>
     </div>
 
+    @if(Auth::user()->id != 2)
+        <livewire:calculations.index
+            :Inspection="$inspection"
+            :Damage="$damage"
+        />
+    @endif
+
     <div class="single-add-property">
-        <h3>{{ __('Verwijderen') }}</h3>
+        <h3>{{ __('Schade verwijderen') }}</h3>
         <div class="property-form-group">
             <!-- Button trigger modal -->
             <div class="text-right">
@@ -119,8 +139,6 @@
                     <i class="fa fa-trash mx-2"></i> {{ __('Delete') }}
                 </button>
             </div>
-
-
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -132,11 +150,11 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>{{ __('Ben je zeker om deze schade te verwijderen?') }}</p>
+                            <p>{{ __('Ben je zeker om deze schade te wissen?') }}</p>
                             <form wire:submit.prevent="deleteDamage">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn btn-dark">Verwijderen</button>
+                                        <button type="submit" class="btn btn-dark">{{ __('Verwijderen') }}</button>
                                     </div>
                                 </div>
                             </form>
