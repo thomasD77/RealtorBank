@@ -115,4 +115,40 @@
     .btn-sm {
         padding: 5px 10px;
     }
+
+    /* Breedte instellingen voor de tabelkolommen */
+    .acties {
+        width: 5%;
+    }
+
+    .categorie {
+        width: 20%;
+    }
+
+    .subcategorie {
+        width: 25%;
+    }
+
+    .beschrijving {
+        width: 20%;
+    }
+
+    .btw {
+        width: 5%;
+    }
+
+    .totaal {
+        width: 20%;
+    }
+
+    /* Voor grotere schermen */
+    @media (min-width: 1024px) {
+        .totaal {
+            width: 10%;
+        }
+        .beschrijving {
+            width: 30%;
+        }
+    }
+
 </style>

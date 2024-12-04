@@ -14,6 +14,7 @@
             <div class="col-12">
                 <h3>{{'Estatemetrics : Prijzen per Categorie'}}</h3>
                 <small style="letter-spacing: -0.5px">{{ __('Selecteer een gewenste categorie. Voeg op maat gemaakte parameters toe. Deze kunnen overal in de PB gebruikt worden. Dit telkens onder de toegevoegde schade. Er kan een custom categorie aangemaakt worden naar wens. Let op! Een custom categorie kan niet worden gewist. Contacteer hiervoor de beheerder.') }}</small>
+                <br><br><strong><small><strong>{{ __('Belangrijk! Vermeld steeds prijzen excl. btw!') }}</strong></small></strong>
                 <hr>
             </div>
         <!-- Dropdown voor de categorieën -->

@@ -57,7 +57,7 @@
         <div class="property-form-group row">
             @if($quoteDamages && $quoteDamages->isNotEmpty())
                 @foreach($quoteDamages as $damage)
-                    <div class="damage-container">
+                    <div class="damage-container w-100">
                         {{-- Header met bg-dark --}}
                         <div class="damage-header bg-dark text-white">
                             <strong>{{ __('Schade:') }}</strong> {{ $damage->damage_title ?? '-' }}

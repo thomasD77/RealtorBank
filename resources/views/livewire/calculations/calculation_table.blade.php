@@ -7,14 +7,14 @@
             @if(!empty($groupedSubCalculations))
                 <table class="table table-striped table-bordered w-100">
                     <thead>
-                    <tr class="font-weight-bold">
-                        <th style="width: 5%" class="text-center">{{ __('Acties') }}</th>
-                        <th style="width: 25%" >{{ __('Categorie') }}</th>
-                        <th style="width: 25%" >{{ __('(Sub)Categorie') }}</th>
-                        <th style="width: 30%" >{{ __('Beschrijving') }}</th>
-                        <th style="width: 5%" class="text-right">{{ __('BTW') }}</th>
-                        <th style="width: 20%" class="text-right">{{ __('Totaal') }} <br> <small>({{__('incl. btw')}})</small></th>
-                    </tr>
+                        <tr class="font-weight-bold">
+                            <th class="text-center acties" style="width: 5%">{{ __('Acties') }}</th>
+                            <th class="categorie" >{{ __('Categorie') }}</th>
+                            <th class="subcategorie" >{{ __('(Sub)Categorie') }}</th>
+                            <th class="beschrijving" >{{ __('Beschrijving') }}</th>
+                            <th class="btw text-right" >{{ __('BTW') }}</th>
+                            <th class="totaal text-right">{{ __('Totaal') }} <br> <small>({{__('incl. btw')}})</small></th>
+                        </tr>
                     </thead>
                     <tbody>
                     @foreach($groupedSubCalculations as $subCalculation)
