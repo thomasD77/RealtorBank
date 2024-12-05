@@ -53,6 +53,8 @@
                     <tr class="calculation-summary final-total">
                         <td colspan="5" class="text-right font-weight-bold">
                             <span class="summary-label">{{ __('Totaal') }}:</span>
+                            <br>
+                            <small>{{ __('incl. btw.') }}</small>
                         </td>
                         <td class="text-right font-weight-bold">
                             <span class="summary-value">&euro; {{ number_format($calculation->quote_final_total, 2, ',', '.') }}</span>

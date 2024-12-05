@@ -143,7 +143,8 @@
                 </td>
             </tr>
             <tr class="summary-row">
-                <td colspan="3" class="label-cell">{{ __('Totaal') }}:</td>
+                <td colspan="3" class="label-cell">{{ __('Totaal') }}:
+                </td>
                 <td class="value-cell">
                     &euro; {{ number_format($agreement->total, 2, ',', '.') }}<br>
                     <small>*{{ __('incl. btw') }}</small>

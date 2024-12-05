@@ -4,39 +4,41 @@
 
         @include('livewire.calculations.calculation_css')
 
-        <div class="row">
-            <div class="col-lg-4">
-                <!-- Dropdown voor de categorieën -->
-                <div class="custom-dropdown" wire:ignore.self>
-                    <button class="custom-dropdown-btn justify-content-between d-flex align-items-center" style="font-size: 1rem" id="dropdownButton">
-                        @if ($selectedCategory)
-                            {{ $pricingCategories->firstWhere('id', $selectedCategory)->title ? 'Geselecteerd : ' . $pricingCategories->firstWhere('id', $selectedCategory)->title  : 'Selecteer een categorie' }}
-                            <i class="fa fa-info"></i>
-                        @else
-                            <span style="font-style: italic">{{ __('Selecteer een categorie') }}</span>
-                            <i class="fa fa-arrow-down"></i>
-                        @endif
-                    </button>
-                    <div class="custom-dropdown-content" id="dropdownMenu">
-                        <!-- Optie om de categorie te deselecteren -->
-                        <div>
-                            <a href="#" class=""
+        <ul class="accordion accordion-1 one-open" style="cursor: pointer">
+            <li>
+                <div class="bg-dark text-white rounded px-4 py-2 justify-content-between d-flex align-items-center">
+                    @if ($selectedCategory)
+                        <span class="text-success justify-content-between d-flex align-items-center">
+                            <i class="fa fa-info mr-2"></i>
+                             {{ $pricingCategories->firstWhere('id', $selectedCategory)->title }}
+                        </span>
+
+                    @else
+                        <span style="font-size: 1rem">{{ __('Selecteer een categorie') }}</span>
+                        <i class="fa fa-arrow-down"></i>
+                    @endif
+                </div>
+                <div class="content px-4 " style="overflow-y: scroll">
+                    <div class="row py-4">
+                        <div class="col-md-4 mb-2">
+                            <a class="text-dark"
                                wire:click.prevent="selectCategory(null)">
                                 {{ __('Geen categorie') }}
                             </a>
                         </div>
                         @foreach($pricingCategories as $category)
-                            <div class="mb-1">
-                                <a href="#" class="@if($selectedCategory === $category->id) active @endif"
+                            <div class="col-md-4 mb-2">
+                                <a class="@if($selectedCategory === $category->id) text-success font-weight-bold @else text-dark @endif "
                                    wire:click.prevent="selectCategory({{ $category->id }})">
                                     {{ $category->title }}
                                 </a>
                             </div>
                         @endforeach
                     </div>
+
                 </div>
-            </div>
-        </div>
+            </li>
+        </ul>
 
         @foreach($pricingCategories as $category)
             @if($selectedCategory === $category->id)
@@ -189,7 +191,7 @@
     @else
         <div class="single-add-property">
             <h3 class="uppercase">{{ __('Calculator') }}</h3>
-            <button wire:click="addCalculation" class="btn btn-common mb-3"><i class="fa fa-plus mr-1"></i>{{ __('Calculatie') }}</button>
+            <button wire:click="addCalculation" onclick="setTimeout(() => location.reload(), 50)" class="btn btn-common mb-3"><i class="fa fa-plus mr-1"></i>{{ __('Calculatie') }}</button>
         </div>
     @endif
 </div>

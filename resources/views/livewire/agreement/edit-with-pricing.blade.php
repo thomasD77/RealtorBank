@@ -168,7 +168,10 @@
                                                         </td>
                                                     </tr>
                                                     <tr class="calculation-summary">
-                                                        <td colspan="3">{{ __('Totaal') }}</td>
+                                                        <td colspan="3">{{ __('Totaal') }}
+                                                            <br>
+                                                            <small>{{ __('incl. btw.') }}</small>
+                                                        </td>
                                                         <td class="text-right">&euro; {{ number_format($calculation->quote_final_total, 2, ',', '.') }}</td>
                                                     </tr>
                                                 @endif

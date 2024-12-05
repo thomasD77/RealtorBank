@@ -37,7 +37,7 @@
                     <div class="col-lg-6 col-md-12">
                         <p>
                             <label for="date">{{ __('Datum') }}</label>
-                            <input type="date" wire:model="date" id="date" disabled>
+                            <input type="date" wire:model="date" id="date">
                         </p>
                     </div>
                     <div class="col-12">
