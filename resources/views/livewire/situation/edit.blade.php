@@ -450,8 +450,7 @@
             </div>
         </div>
 
-        @if(Auth::user()->id != 2)
-            @if($situation->intrede == 0 && $damages->isNotEmpty())
+        @if($situation->intrede == 0 && $damages->isNotEmpty())
                 <div class="single-add-property">
                     <div class="d-flex justify-content-end">
                         <button wire:click="addQuote" class="btn-sm btn-common mb-3" style="border: none"><i class="fa fa-plus mr-1"></i>{{ __('Offerte') }}</button>
@@ -491,7 +490,6 @@
                     </div>
                 </div>
             @endif
-        @endif
 
         @if($situation->intrede == 0 && $damages->isNotEmpty()  || $situation->intrede == 3 && $damages->isNotEmpty() )
             <div class="single-add-property">
