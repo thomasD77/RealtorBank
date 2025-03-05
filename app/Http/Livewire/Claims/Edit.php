@@ -6,6 +6,7 @@ use App\Models\Damage;
 use App\Models\Inspection;
 use App\Models\RentalClaim;
 use App\Models\Situation;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Edit extends Component
@@ -27,12 +28,17 @@ class Edit extends Component
         $this->situation = Situation::find($claim->situation_id);
         $this->claim = $claim;
 
-        $this->damages = Damage::query()
-            ->where('inspection_id', $this->inspection->id)
+        // Haal alle damage_id's op die aan de situatie gekoppeld zijn en print_pdf = 1 hebben
+        $damageIds = DB::table('damages_situations')
+            ->where('situation_id', $this->situation->id)
             ->where('print_pdf', 1)
-            ->orderBy('date', 'desc')
-            ->get();
+            ->pluck('damage_id'); // Haalt alleen de ID's op
 
+        // Haal alle Damage records op met de gevonden damage_id's
+        $this->damages = Damage::whereIn('id', $damageIds)
+            ->orderByDesc('date') // Sorteer op datum (nieuwste eerst)
+            ->get();
+        
         // Addendum is always a document added to the latest 'INTREDE'
         $this->relation_intrede = Situation::where('inspection_id', $this->inspection->id)
             ->where('intrede', 1)
