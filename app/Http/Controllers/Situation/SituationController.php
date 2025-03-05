@@ -31,6 +31,7 @@ use App\Models\Tenant;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -451,10 +452,15 @@ class SituationController extends Controller
 
     public function printClaim(Inspection $inspection, RentalClaim $claim, Situation $situation)
     {
-        $damages = Damage::query()
-            ->where('inspection_id', $inspection->id)
+        // Haal alle damage_id's op die aan de situatie gekoppeld zijn en print_pdf = 1 hebben
+        $damageIds = DB::table('damages_situations')
+            ->where('situation_id', $situation->id)
             ->where('print_pdf', 1)
-            ->orderBy('date', 'desc')
+            ->pluck('damage_id'); // Haalt alleen de ID's op
+
+        // Haal alle Damage records op met de gevonden damage_id's
+        $damages = Damage::whereIn('id', $damageIds)
+            ->orderByDesc('date') // Sorteer op datum (nieuwste eerst)
             ->get();
 
         $pdf = Pdf::loadView('claims.pdf', [
