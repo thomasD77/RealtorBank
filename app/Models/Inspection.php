@@ -221,7 +221,7 @@ class Inspection extends Model
          *
          */
         // The first 72 records are the original ones. The rest is duplicated.
-        $specifics = Specific::take(72)->get();
+        $specifics = Specific::where('original', 1)->get();
 
         foreach ($rooms as $room){
             $specificsToInsert = [];
