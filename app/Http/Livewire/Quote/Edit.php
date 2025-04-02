@@ -139,6 +139,20 @@ class Edit extends Component
             // Toggle the approval status
             $damage->approved = !$damage->approved;
             $damage->save();
+
+
+            foreach ($damage->quoteCalculations as $calculation) {
+                $subs = QuoteSubCalculation::query()
+                    ->where('quote_calculation_id', $calculation->quote_cal_id)
+                    ->where('quote_id', $damage->quote->id)
+                    ->get();
+
+                foreach ($subs as $item){
+                    $item->approved = 0;
+                    $item->update();
+                }
+            }
+
         }
 
         $this->loadData();
@@ -197,7 +211,11 @@ class Edit extends Component
             $agreement->title = 'Akkoord_schade_' . now();
         }
 
-        $damageIds = QuoteDamage::where('quote_id', $this->quote->id)->pluck('damage_id');
+        $damageIds = QuoteDamage::query()
+            ->where('quote_id', $this->quote->id)
+            ->where('approved', 1)
+            ->pluck('damage_id');
+
         $calculationsSum = QuoteCalculation::query()
             ->where('quote_id', $this->quote->id)
             ->whereIn('quote_damage_id', $damageIds)->sum('quote_final_total');
