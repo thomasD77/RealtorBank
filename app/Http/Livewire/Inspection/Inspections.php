@@ -16,6 +16,14 @@ class Inspections extends Component
 {
     use WithPagination;
 
+    public $search = '';
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+
     public function addInspection()
     {
         Inspection::createInspection();
@@ -25,6 +33,9 @@ class Inspections extends Component
     {
         $inspections = Inspection::query()
             ->where('user_id', Auth::id())
+            ->when($this->search, fn($query) =>
+            $query->where('title', 'like', '%' . $this->search . '%')
+            )
             ->with('media')
             ->latest()
             ->simplePaginate(9);

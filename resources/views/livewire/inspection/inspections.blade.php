@@ -1,7 +1,12 @@
 <div>
     <div class="my-properties">
-        <div class="text-right">
-            <button wire:click="addInspection" class="btn btn-common mb-3"><i class="fa fa-plus mr-2"></i>{{ __('Inspectie') }}</button>
+        <div class="row">
+            <div class="form-group mb-3 col-md-8 mb-0">
+                <input type="text" class="form-control" placeholder="{{ __('Zoek hier plaatsbeschrijving...') }}" wire:model.debounce.300ms="search">
+            </div>
+            <div class="col-md-4 text-right">
+                <button wire:click="addInspection" class="btn btn-common mb-3"><i class="fa fa-plus mr-2"></i>{{ __('Inspectie') }}</button>
+            </div>
         </div>
         <table class="table-responsive">
             <thead>
