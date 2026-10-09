@@ -394,14 +394,25 @@
                                 </thead>
                                 <tbody>
                                 @foreach($damages as $damage)
+                                    <tr wire:key="damage-row-{{ $situation->id }}-{{ $damage->id }}">
                                     <tr>
                                         <td>{{ $damage->title }}</td>
                                         <td>{{ \Illuminate\Support\Carbon::parse($damage->date)->format('d-m-Y') }}</td>
                                         @if(!$showArchived)
-                                            <td><input type="checkbox"
-                                                       @if($damage->situations()->where('damage_id', $damage->id)->where('situation_id', $situation->id)->pluck('print_pdf')->first() == 1) checked @endif
-                                                       wire:click="togglePdfPrint({{ $damage->id }})"
-                                                       wire:key="pdf_print-{{ $damage->id }}">
+                                            <td>
+                                                <input
+                                                    type="checkbox"
+                                                    wire:key="pdf-print-{{ $situation->id }}-{{ $damage->id }}"
+                                                    wire:change="setPdfPrint({{ $damage->id }}, $event.target.checked)"
+                                                    wire:loading.attr="disabled"
+                                                    wire:target="setPdfPrint"
+                                                    @if(
+                                                        $damage->situations()
+                                                            ->where('situation_id', $situation->id)
+                                                            ->wherePivot('print_pdf', 1)
+                                                            ->exists()
+                                                    ) checked @endif
+                                                >
                                             </td>
                                         @endif
                                         <td>
@@ -532,8 +543,21 @@
             <h3>{{ __('PDF genereren')  }}</h3>
 
             <div class="property-form-group">
-                <a href="{{ route('generate.inspection', [$inspection, $situation]) }}" class="btn btn-dark mb-3"><i class="fa fa-file-pdf mr-2"></i>{{ __('PDF SYNC') }}</a>
+                <div>
+                    <a
+                        href="{{ route('generate.inspection', [$inspection, $situation]) }}"
+                        class="btn btn-dark mb-3"
+                        wire:loading.class="disabled"
+                        wire:target="setPdfPrint"
+                    >
+                        <i class="fa fa-file-pdf mr-2"></i>
+                        {{ __('PDF SYNC') }}
+                    </a>
 
+                    <span wire:loading wire:target="setPdfPrint" class="ml-2">
+        Schadeselectie opslaan...
+                    </span>
+                </div>
                 @if($pdfs->isNotEmpty())
                     <div class="section-body listing-table">
                         <div class="table-responsive">
