@@ -311,16 +311,29 @@ class Edit extends Component
         $this->files = MediaSituation::where('situation_id', $this->situation->id)->get();
     }
 
-    public function togglePdfPrint(Damage $damage)
+    public function setPdfPrint($damageId, $checked)
     {
-        $pivotRecord = $this->situation->damages()->where('damage_id', $damage->id)->first();
+        $damage = Damage::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->findOrFail($damageId);
+
+        $checked = filter_var($checked, FILTER_VALIDATE_BOOLEAN);
+
+        $relation = $this->situation->damages();
+
+        $pivotRecord = $relation
+            ->where('damages.id', $damage->id)
+            ->first();
 
         if ($pivotRecord) {
-            $this->situation->damages()->detach($damage->id);
+            $relation->updateExistingPivot($damage->id, [
+                'print_pdf' => $checked ? 1 : 0,
+                'archived' => 0,
+            ]);
         } else {
-            $this->situation->damages()->attach($damage->id, [
-                'print_pdf' => 1,
-                'archived' => 0
+            $relation->attach($damage->id, [
+                'print_pdf' => $checked ? 1 : 0,
+                'archived' => 0,
             ]);
         }
 
@@ -477,6 +490,7 @@ class Edit extends Component
                 ->where('inspection_id', $this->inspection->id)
                 ->whereIn('id', $pivotArchivedIds)
                 ->orderBy('date', 'desc')
+                ->orderBy('id', 'desc')
                 ->simplePaginate(10);
 
         } else {
@@ -484,6 +498,7 @@ class Edit extends Component
                 ->where('inspection_id', $this->inspection->id)
                 ->whereNotIn('id', $pivotArchivedIds)
                 ->orderBy('date', 'desc')
+                ->orderBy('id', 'desc')
                 ->simplePaginate(10);
         }
 
