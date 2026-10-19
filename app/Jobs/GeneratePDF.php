@@ -31,6 +31,10 @@ use Illuminate\Support\Facades\Storage;
 class GeneratePDF implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    public $timeout = 300;
+    public $tries = 1;
+    public $failOnTimeout = true;
+
     public Inspection $inspection;
     public Situation $situation;
     public User $user;
