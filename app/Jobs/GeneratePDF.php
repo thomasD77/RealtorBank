@@ -60,6 +60,8 @@ class GeneratePDF implements ShouldQueue
      */
     public function handle()
     {
+        $this->pdfStore->status = Status::Processing->value;
+        $this->pdfStore->save();
         //
         $documents = Document::query()
             ->whereNotNull('title')
@@ -252,5 +254,18 @@ class GeneratePDF implements ShouldQueue
 
         $this->pdfStore->status = Status::Rendered->value;
         $this->pdfStore->update();
+    }
+
+    public function failed(\Throwable $exception): void
+    {
+        \App\Models\PDF::whereKey($this->pdfStore->id)->update([
+            'status' => Status::Failed->value,
+        ]);
+
+        \Illuminate\Support\Facades\Log::error('PDF generation failed', [
+            'pdf_id' => $this->pdfStore->id,
+            'inspection_id' => $this->inspection->id,
+            'exception' => $exception->getMessage(),
+        ]);
     }
 }
