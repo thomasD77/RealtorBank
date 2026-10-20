@@ -6,7 +6,7 @@
                     <div class="column img--cover"
                          style="
                         background-color: rgb(228,229,233);
-                        background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $item->media[$i]->file_crop) }}');
+                        background-image: url('{{ 'file://' . public_path('assets/images/' . $folder . '/crop/' . $item->media[$i]->file_crop) }}');
                         background-position: center;
                         background-repeat: no-repeat;
                         background-size: contain; height: 150px;
@@ -15,7 +15,7 @@
                 @else
                     <div class="column img--cover"
                          style="
-                         background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $item->media[$i]->file_crop) }}');
+                         background-image: url('{{ 'file://' . public_path('assets/images/' . $folder . '/crop/' . $item->media[$i]->file_crop) }}');
                          background-position: center;
                          background-size: cover; height: 150px
                          ">
@@ -30,7 +30,7 @@
                     <div class="column img--cover"
                         style="
                         background-color: rgb(228,229,233);
-                        background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $item->media[$i]->file_crop) }}');
+                        background-image: url('{{ 'file://' . public_path('assets/images/' . $folder . '/crop/' . $item->media[$i]->file_crop) }}');
                         background-position: center;
                         background-repeat: no-repeat;
                         background-size: contain; height: 150px;
@@ -39,7 +39,7 @@
                 @else
                     <div class="column img--cover"
                          style="
-                         background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $item->media[$i]->file_crop) }}');
+                         background-image: url('{{ 'file://' . public_path('assets/images/' . $folder . '/crop/' . $item->media[$i]->file_crop) }}');
                          background-position: center;
                          background-size: cover; height: 150px
                          ">
@@ -54,7 +54,7 @@
                     <div class="column img--cover"
                              style="
                         background-color: rgb(228,229,233);
-                        background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $item->media[$i]->file_crop) }}');
+                        background-image: url('{{ 'file://' . public_path('assets/images/' . $folder . '/crop/' . $item->media[$i]->file_crop) }}');
                         background-position: center;
                         background-repeat: no-repeat;
                         background-size: contain; height: 150px;
@@ -63,7 +63,7 @@
                 @else
                     <div class="column img--cover"
                          style="
-                         background-image: url('{{ asset('assets/images/' . $folder . '/crop' . '/' . $item->media[$i]->file_crop) }}');
+                         background-image: url('{{ 'file://' . public_path('assets/images/' . $folder . '/crop/' . $item->media[$i]->file_crop) }}');
                          background-position: center;
                          background-size: cover; height: 150px
                          ">
