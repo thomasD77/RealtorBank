@@ -11,7 +11,7 @@ foreach (['remote', 'local'] as $mode) {
   $html = '<html><body>';
   foreach ($images as $path) {
     $url = $mode === 'local' ? 'file://' . $path : asset('assets/images/basic/crop/' . basename($path));
-    $html .= '<div style="width:220px;height:150px;background-size:contain;background-repeat:no-repeat;background-image:url(&quot;' . htmlspecialchars($url, ENT_QUOTES) . '&quot;)"></div>';
+    $html .= '<div style="width:220px;height:150px;background-size:contain;background-repeat:no-repeat;background-image:url(' . htmlspecialchars($url, ENT_QUOTES) . ')"></div>';
   }
   $html .= '</body></html>';
   $start = microtime(true);
