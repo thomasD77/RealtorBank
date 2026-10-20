@@ -395,7 +395,6 @@
                                 <tbody>
                                 @foreach($damages as $damage)
                                     <tr wire:key="damage-row-{{ $situation->id }}-{{ $damage->id }}">
-                                    <tr>
                                         <td>{{ $damage->title }}</td>
                                         <td>{{ \Illuminate\Support\Carbon::parse($damage->date)->format('d-m-Y') }}</td>
                                         @if(!$showArchived)
@@ -559,7 +558,7 @@
                     </span>
                 </div>
                 @if($pdfs->isNotEmpty())
-                    <div class="section-body listing-table">
+                    <div class="section-body listing-table" wire:poll.10s="refreshPdfStatuses">
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
@@ -575,11 +574,17 @@
                                     <tr>
                                         <td>{{ $pdf->title }}</td>
                                         <td>
-                                            @if($pdf->status == \App\Enums\Status::Pending->value)
-                                                <span class="badge badge-pill bg-warning px-3 py-2 text-white">{{ $pdf->status }}</span>
-                                            @else
-                                                <a class="mx-4" target="_blank" href="{{ asset('assets/inspections/pdf/' . $pdf->file_original) }}"><i class="fa fa-file-pdf text-dark"></i></a>
-                                            @endif
+                                            @if($pdf->status === 'pending')
+    <span class="badge badge-pill bg-warning px-3 py-2 text-white">In wachtrij</span>
+@elseif($pdf->status === 'processing')
+    <span class="badge badge-pill bg-info px-3 py-2 text-white">PDF wordt aangemaakt</span>
+@elseif(in_array($pdf->status, ['rendered', 'complete'], true))
+    <a class="mx-4" target="_blank" href="{{ asset('assets/inspections/pdf/' . $pdf->file_original) }}" title="PDF downloaden"><i class="fa fa-file-pdf text-dark"></i></a>
+@elseif($pdf->status === 'failed')
+    <span class="badge badge-pill bg-danger px-3 py-2 text-white">PDF-generatie mislukt</span>
+@else
+    <span class="badge badge-pill bg-secondary px-3 py-2 text-white">{{ $pdf->status }}</span>
+@endif
                                         </td>
                                         <td>{{ $pdf->created_at->format('d-m-Y -  H:i:s') }}</td>
                                         <td class="edit">
