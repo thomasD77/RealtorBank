@@ -157,6 +157,15 @@ class Edit extends Component
         $this->quotes = Quote::where('situation_id', $this->situation->id)->orderby('created_at', 'desc')->get();
     }
 
+    public function refreshPdfStatuses()
+    {
+        $this->pdfs = \App\Models\PDF::query()
+            ->where('inspection_id', $this->inspection->id)
+            ->where('situation_id', $this->situation->id)
+            ->latest()
+            ->get();
+    }
+
     public function deletePDF($pdf)
     {
         $pdf = \App\Models\PDF::find($pdf);

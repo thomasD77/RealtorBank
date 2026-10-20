@@ -75,10 +75,16 @@
                             <tr>
                                 <td>{{ $pdf->title }} {{ $pdf->id }}</td>
                                 <td>
-                                    @if($pdf->status == \App\Enums\Status::Pending->value)
-                                        <span class="badge badge-pill bg-warning px-3 py-2 text-white">{{ $pdf->status }}</span>
-                                    @else
+                                    @if($pdf->status === \App\Enums\Status::Pending->value)
+                                        <span class="badge badge-pill bg-warning px-3 py-2 text-white">In wachtrij</span>
+                                    @elseif($pdf->status === \App\Enums\Status::Processing->value)
+                                        <span class="badge badge-pill bg-info px-3 py-2 text-white">PDF wordt aangemaakt</span>
+                                    @elseif($pdf->status === \App\Enums\Status::Failed->value)
+                                        <span class="badge badge-pill bg-danger px-3 py-2 text-white">PDF-generatie mislukt</span>
+                                    @elseif(in_array($pdf->status, ['rendered', 'complete'], true))
                                         <a class="mx-4" target="_blank" href="{{ asset('assets/inspections/pdf/' . $pdf->file_original) }}"><i class="fa fa-file-pdf text-dark"></i></a>
+                                    @else
+                                        <span class="badge badge-pill bg-secondary px-3 py-2 text-white">{{ $pdf->status }}</span>
                                     @endif
                                 </td>
                                 <td>{{ $pdf->created_at->format('d-m-Y -  H:i:s') }}</td>

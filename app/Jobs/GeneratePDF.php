@@ -26,11 +26,16 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class GeneratePDF implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    public $timeout = 300;
+    public $tries = 1;
+    public $failOnTimeout = true;
+
     public Inspection $inspection;
     public Situation $situation;
     public User $user;
@@ -60,48 +65,70 @@ class GeneratePDF implements ShouldQueue
      */
     public function handle()
     {
+        $startedAt = microtime(true);
+        $checkpoint = $startedAt;
+        $logTiming = function (string $stage) use (&$checkpoint, $startedAt): void {
+            $now = microtime(true);
+            Log::info('PDF generation timing', [
+                'pdf_id' => $this->pdfStore->id,
+                'inspection_id' => $this->inspection->id,
+                'stage' => $stage,
+                'stage_seconds' => round($now - $checkpoint, 3),
+                'total_seconds' => round($now - $startedAt, 3),
+                'peak_memory_mb' => round(memory_get_peak_usage(true) / 1048576, 1),
+            ]);
+            $checkpoint = $now;
+        };
+
+        $this->pdfStore->status = Status::Processing->value;
+        $this->pdfStore->save();
         //
         $documents = Document::query()
-            ->whereNotNull('title')
-            ->orWhereNotNull('reference')
-            ->orWhereNotNull('date')
-            ->orHas('media', '>', 0)
+            ->where('inspection_id', $this->inspection->id)
+            ->where(function ($query) {
+                $query->whereNotNull('title')
+                    ->orWhereNotNull('reference')
+                    ->orWhereNotNull('date')
+                    ->orHas('media', '>', 0);
+            })
             ->orderBy('title', 'asc')
             ->get();
-        $documents = $documents->where('inspection_id', $this->inspection->id);
 
         $meters = Meter::query()
-            ->whereNotNull('reference')
-            ->orWhereNotNull('EAN')
-            ->orWhereNotNull('date')
-            ->orHas('media', '>', 0)
             ->where('inspection_id', $this->inspection->id)
+            ->where(function ($query) {
+                $query->whereNotNull('reference')
+                    ->orWhereNotNull('EAN')
+                    ->orWhereNotNull('date')
+                    ->orHas('media', '>', 0);
+            })
             ->orderBy('title', 'asc')
             ->get();
-        $meters = $meters->where('inspection_id', $this->inspection->id);
 
         $keys = Key::query()
-            ->whereNotNull('type')
-            ->orWhereNotNull('count')
-            ->orWhereNotNull('extra')
-            ->orHas('media', '>', 0)
             ->where('inspection_id', $this->inspection->id)
+            ->where(function ($query) {
+                $query->whereNotNull('type')
+                    ->orWhereNotNull('count')
+                    ->orWhereNotNull('extra')
+                    ->orHas('media', '>', 0);
+            })
             ->orderBy('title', 'asc')
             ->get();
-        $keys = $keys->where('inspection_id', $this->inspection->id);
 
         $techniqueArea = TechniqueArea::query()
-            ->whereNotNull('type')
-            ->orWhereNotNull('analysis')
-            ->orWhereNotNull('fuel')
-            ->orWhereNotNull('brand')
-            ->orWhereNotNull('model')
-            ->orWhereNotNull('count')
-            ->orWhereNotNull('extra')
-            ->orHas('media', '>', 0)
             ->where('inspection_id', $this->inspection->id)
+            ->where(function ($query) {
+                $query->whereNotNull('type')
+                    ->orWhereNotNull('analysis')
+                    ->orWhereNotNull('fuel')
+                    ->orWhereNotNull('brand')
+                    ->orWhereNotNull('model')
+                    ->orWhereNotNull('count')
+                    ->orWhereNotNull('extra')
+                    ->orHas('media', '>', 0);
+            })
             ->get();
-        $techniqueArea = $techniqueArea->where('inspection_id', $this->inspection->id);
 
         $rooms = Room::query()
             ->where('inspection_id', $this->inspection->id)
@@ -221,6 +248,8 @@ class GeneratePDF implements ShouldQueue
             ->whereNull('technique_id')
             ->get();
 
+        $logTiming('database_and_data_loading');
+
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $inspection,
             'basementParam' => $basementParam,
@@ -243,14 +272,35 @@ class GeneratePDF implements ShouldQueue
             'insp_damages' => $insp_damages,
         ]);
 
+        $logTiming('pdf_view_preparation');
+
         $path = public_path('assets/inspections/pdf/');
         if(!File::isDirectory($path)){
             File::makeDirectory($path, 0777, true, true);
         }
 
-        $pdf->save($path  . $this->fileName);
+        $pdfContent = $pdf->output();
+        $logTiming('pdf_render');
+
+        File::put($path . $this->fileName, $pdfContent);
+        unset($pdfContent);
+        $logTiming('pdf_file_save');
 
         $this->pdfStore->status = Status::Rendered->value;
         $this->pdfStore->update();
+        $logTiming('status_update');
+    }
+
+    public function failed(\Throwable $exception): void
+    {
+        \App\Models\PDF::whereKey($this->pdfStore->id)->update([
+            'status' => Status::Failed->value,
+        ]);
+
+        \Illuminate\Support\Facades\Log::error('PDF generation failed', [
+            'pdf_id' => $this->pdfStore->id,
+            'inspection_id' => $this->inspection->id,
+            'exception' => $exception->getMessage(),
+        ]);
     }
 }
