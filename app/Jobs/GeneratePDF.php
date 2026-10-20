@@ -279,8 +279,12 @@ class GeneratePDF implements ShouldQueue
             File::makeDirectory($path, 0777, true, true);
         }
 
-        $pdf->save($path  . $this->fileName);
-        $logTiming('pdf_render_and_save');
+        $pdfContent = $pdf->output();
+        $logTiming('pdf_render');
+
+        File::put($path . $this->fileName, $pdfContent);
+        unset($pdfContent);
+        $logTiming('pdf_file_save');
 
         $this->pdfStore->status = Status::Rendered->value;
         $this->pdfStore->update();
