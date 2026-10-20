@@ -26,6 +26,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class GeneratePDF implements ShouldQueue
@@ -64,6 +65,21 @@ class GeneratePDF implements ShouldQueue
      */
     public function handle()
     {
+        $startedAt = microtime(true);
+        $checkpoint = $startedAt;
+        $logTiming = function (string $stage) use (&$checkpoint, $startedAt): void {
+            $now = microtime(true);
+            Log::info('PDF generation timing', [
+                'pdf_id' => $this->pdfStore->id,
+                'inspection_id' => $this->inspection->id,
+                'stage' => $stage,
+                'stage_seconds' => round($now - $checkpoint, 3),
+                'total_seconds' => round($now - $startedAt, 3),
+                'peak_memory_mb' => round(memory_get_peak_usage(true) / 1048576, 1),
+            ]);
+            $checkpoint = $now;
+        };
+
         $this->pdfStore->status = Status::Processing->value;
         $this->pdfStore->save();
         //
@@ -232,6 +248,8 @@ class GeneratePDF implements ShouldQueue
             ->whereNull('technique_id')
             ->get();
 
+        $logTiming('database_and_data_loading');
+
         $pdf = Pdf::loadView('inspections.pdf', [
             'inspection' => $inspection,
             'basementParam' => $basementParam,
@@ -254,15 +272,19 @@ class GeneratePDF implements ShouldQueue
             'insp_damages' => $insp_damages,
         ]);
 
+        $logTiming('pdf_view_preparation');
+
         $path = public_path('assets/inspections/pdf/');
         if(!File::isDirectory($path)){
             File::makeDirectory($path, 0777, true, true);
         }
 
         $pdf->save($path  . $this->fileName);
+        $logTiming('pdf_render_and_save');
 
         $this->pdfStore->status = Status::Rendered->value;
         $this->pdfStore->update();
+        $logTiming('status_update');
     }
 
     public function failed(\Throwable $exception): void
