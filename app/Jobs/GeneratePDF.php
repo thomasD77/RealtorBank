@@ -68,46 +68,51 @@ class GeneratePDF implements ShouldQueue
         $this->pdfStore->save();
         //
         $documents = Document::query()
-            ->whereNotNull('title')
-            ->orWhereNotNull('reference')
-            ->orWhereNotNull('date')
-            ->orHas('media', '>', 0)
+            ->where('inspection_id', $this->inspection->id)
+            ->where(function ($query) {
+                $query->whereNotNull('title')
+                    ->orWhereNotNull('reference')
+                    ->orWhereNotNull('date')
+                    ->orHas('media', '>', 0);
+            })
             ->orderBy('title', 'asc')
             ->get();
-        $documents = $documents->where('inspection_id', $this->inspection->id);
 
         $meters = Meter::query()
-            ->whereNotNull('reference')
-            ->orWhereNotNull('EAN')
-            ->orWhereNotNull('date')
-            ->orHas('media', '>', 0)
             ->where('inspection_id', $this->inspection->id)
+            ->where(function ($query) {
+                $query->whereNotNull('reference')
+                    ->orWhereNotNull('EAN')
+                    ->orWhereNotNull('date')
+                    ->orHas('media', '>', 0);
+            })
             ->orderBy('title', 'asc')
             ->get();
-        $meters = $meters->where('inspection_id', $this->inspection->id);
 
         $keys = Key::query()
-            ->whereNotNull('type')
-            ->orWhereNotNull('count')
-            ->orWhereNotNull('extra')
-            ->orHas('media', '>', 0)
             ->where('inspection_id', $this->inspection->id)
+            ->where(function ($query) {
+                $query->whereNotNull('type')
+                    ->orWhereNotNull('count')
+                    ->orWhereNotNull('extra')
+                    ->orHas('media', '>', 0);
+            })
             ->orderBy('title', 'asc')
             ->get();
-        $keys = $keys->where('inspection_id', $this->inspection->id);
 
         $techniqueArea = TechniqueArea::query()
-            ->whereNotNull('type')
-            ->orWhereNotNull('analysis')
-            ->orWhereNotNull('fuel')
-            ->orWhereNotNull('brand')
-            ->orWhereNotNull('model')
-            ->orWhereNotNull('count')
-            ->orWhereNotNull('extra')
-            ->orHas('media', '>', 0)
             ->where('inspection_id', $this->inspection->id)
+            ->where(function ($query) {
+                $query->whereNotNull('type')
+                    ->orWhereNotNull('analysis')
+                    ->orWhereNotNull('fuel')
+                    ->orWhereNotNull('brand')
+                    ->orWhereNotNull('model')
+                    ->orWhereNotNull('count')
+                    ->orWhereNotNull('extra')
+                    ->orHas('media', '>', 0);
+            })
             ->get();
-        $techniqueArea = $techniqueArea->where('inspection_id', $this->inspection->id);
 
         $rooms = Room::query()
             ->where('inspection_id', $this->inspection->id)
